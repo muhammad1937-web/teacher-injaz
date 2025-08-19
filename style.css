@@ -1,0 +1,90 @@
+/* الخط العام والخلفية */
+body {
+    font-family: 'Tahoma', sans-serif;
+    background-color: #f4f6f9;
+    color: #333;
+    margin: 0;
+    padding: 0 15px;
+    direction: rtl;
+  }
+  
+  /* ترويسة الموقع */
+  header {
+    background-color: #4a90e2;
+    color: white;
+    text-align: center;
+    padding: 30px 15px;
+    margin-bottom: 25px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 28px;
+  }
+  
+  header p {
+    font-size: 18px;
+    margin-top: 10px;
+  }
+  
+  /* البطاقات */
+  .card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    padding: 20px 25px;
+    margin-bottom: 25px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+  }
+  
+  /* عنوان كل قسم */
+  .card h2 {
+    font-size: 22px;
+    color: #0d47a1;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+  
+  /* قائمة الروابط الفرعية */
+  .card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .card ul li {
+    margin-bottom: 10px;
+  }
+  
+  /* تنسيق الروابط داخل الأقسام */
+  .card ul li a {
+    text-decoration: none;
+    color: #1565c0;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .card ul li a:hover {
+    background-color: #e3f2fd;
+    color: #0d47a1;
+    font-weight: bold;
+  }
+  
+  /* أيقونات داخل الروابط */
+  .card ul li i {
+    font-size: 16px;
+  }
+  

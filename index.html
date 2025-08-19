@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>ملف إنجاز المعلم</title>
+  <meta name="description" content="موقع تعليمي يقدم محتوى تعليمي للطلاب ويوثق الإنجازات المهنية للمعلم">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --primary-100: #f3e8ff;
+      --primary-200: #d5b8ff;
+      --primary-300: #b58fff;
+      --primary-400: #9a69e6;
+      --primary-500: #7a43cc;
+      --primary-600: #5e3399;
+      --text-dark: #2c2c3a;
+      --text-light: #5a527f;
+      --light-bg: #faf7ff;
+      --green-100: #e8f5e9;
+      --green-200: #c8e6c9;
+      --green-300: #a5d6a7;
+      --green-400: #81c784;
+      --green-text: #2e7d32;
+    }
+
+    /* نظام الطبقات */
+    .overlay-container {
+      display: none;
+    }
+    
+    /* أنماط الشعار */
+    .logo-header {
+      background-color: #ffffff;
+      padding: 15px 0;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      position: relative;
+      z-index: 1000;
+    }
+    
+    .logo-header img {
+      height: 70px;
+      width: auto;
+      transition: transform 0.3s ease;
+    }
+    
+    .logo-header img:hover {
+      transform: scale(1.05);
+    }
+
+    /* شريط الإشعارات المعدل */
+    .notification-bar {
+      background: rgba(200, 230, 201, 0.25);
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(165, 214, 167, 0.3);
+      color: var(--primary-600);
+      padding: 10px 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .notification-container {
+      display: inline-block;
+      white-space: nowrap;
+      padding-left: 100%;
+      animation: scroll 20s linear infinite;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .notification-container i {
+      margin-left: 10px;
+      margin-right: 8px;
+      color: var(--primary-400);
+      animation: ring 4s 0.7s ease-in-out infinite;
+      transform-origin: 50% 4px;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    @keyframes ring {
+      0% { transform: rotate(0); }
+      1% { transform: rotate(30deg); }
+      3% { transform: rotate(-28deg); }
+      5% { transform: rotate(34deg); }
+      7% { transform: rotate(-32deg); }
+      9% { transform: rotate(30deg); }
+      11% { transform: rotate(-28deg); }
+      13% { transform: rotate(26deg); }
+      15% { transform: rotate(-24deg); }
+      17% { transform: rotate(22deg); }
+      19% { transform: rotate(-20deg); }
+      21% { transform: rotate(18deg); }
+      23% { transform: rotate(-16deg); }
+      25% { transform: rotate(14deg); }
+      27% { transform: rotate(-12deg); }
+      29% { transform: rotate(10deg); }
+      31% { transform: rotate(-8deg); }
+      33% { transform: rotate(6deg); }
+      35% { transform: rotate(-4deg); }
+      37% { transform: rotate(2deg); }
+      39% { transform: rotate(-1deg); }
+      41% { transform: rotate(1deg); }
+      43% { transform: rotate(0); }
+      100% { transform: rotate(0); }
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+      font-weight: 400;
+      min-height: 100vh;
+      padding-bottom: 3rem;
+    }
+
+    header {
+      background: var(--primary-500);
+      color: white;
+      text-align: center;
+      padding: 2rem 1rem;
+      position: relative;
+      border-bottom-left-radius: 25px;
+      border-bottom-right-radius: 25px;
+      box-shadow: 0 5px 15px rgba(122, 67, 204, 0.5);
+      margin-bottom: 1.5rem;
+      user-select: none;
+    }
+
+    header h1,
+    header p,
+    .card-title,
+    .section-title,
+    .google-form-header {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: block;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    header p {
+      font-size: 1rem;
+      opacity: 0.9;
+      max-width: 800px;
+      margin: 0 auto;
+      font-weight: 400;
+      letter-spacing: 0.6px;
+    }
+
+    .compact-date {
+      background: rgba(255, 255, 255, 0.15);
+      display: inline-block;
+      padding: 6px 12px;
+      border-radius: 20px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .compact-date .separator {
+      margin: 0 8px;
+      opacity: 0.7;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem 3rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      justify-content: center;
+    }
+
+    .section-card {
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(122, 67, 204, 0.12);
+      padding: 1.5rem 1.5rem 1rem;
+      width: 320px;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+      transition: all 0.3s ease;
+      cursor: default;
+      height: auto;
+    }
+
+    .section-card:hover {
+      box-shadow: 0 15px 40px rgba(122, 67, 204, 0.3);
+      transform: translateY(-5px);
+    }
+
+    .section-title {
+      font-size: 1.5rem;
+      color: var(--primary-600);
+      margin-bottom: 1.2rem;
+      padding-right: 0.8rem;
+      font-weight: 600;
+      position: relative;
+      letter-spacing: 0.8px;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+
+    .section-title::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      right: 0;
+      width: 60px;
+      height: 4px;
+      background: var(--primary-400);
+      border-radius: 4px;
+      box-shadow: 0 0 8px var(--primary-400);
+    }
+
+    .section-icon {
+      font-size: 1.3rem;
+      color: var(--primary-300);
+      opacity: 0.4;
+      transition: opacity 0.3s ease;
+      user-select: none;
+    }
+
+    .section-title:hover .section-icon {
+      opacity: 0.7;
+    }
+
+    .cards-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+
+    .card {
+      background: var(--primary-100);
+      border-radius: 14px;
+      padding: 1rem 1.3rem;
+      box-shadow: 0 3px 10px rgba(122, 67, 204, 0.1);
+      border: 1.5px solid var(--primary-200);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(15px);
+      animation: fadeSlideUp 0.5s forwards ease;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      user-select: text;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 20px rgba(165, 214, 167, 0.2);
+      border-color: var(--green-300);
+      background: #e9dbff;
+    }
+
+    .card-icon {
+      font-size: 1.6rem;
+      color: var(--primary-300);
+      min-width: 36px;
+      text-align: center;
+      transition: all 0.3s ease;
+      opacity: 0.95;
+      user-select: none;
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.15);
+      color: var(--primary-400);
+      opacity: 1;
+    }
+
+    .card-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      transition: color 0.3s ease;
+      word-break: break-word;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card:hover .card-title {
+      color: var(--primary-600);
+    }
+
+    .nowrap-text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-title .external-icon {
+      font-size: 0.7em;
+      color: var(--primary-400);
+      margin-right: 5px;
+      opacity: 0.7;
+      transition: all 0.3s;
+    }
+
+    .card:hover .external-icon {
+      opacity: 1;
+      color: var(--primary-600);
+    }
+
+    .back-to-top {
+      position: fixed;
+      bottom: 25px;
+      left: 25px;
+      background: var(--primary-500);
+      color: white;
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 15px rgba(122, 67, 204, 0.5);
+      z-index: 100;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      user-select: none;
+    }
+
+    .back-to-top:hover {
+      background: var(--primary-600);
+      transform: scale(1.1);
+      border-radius: 50%;
+      box-shadow: 0 8px 22px rgba(94, 51, 153, 0.75);
+    }
+
+    @keyframes fadeSlideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .google-form-container {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 1.5rem;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 8px 20px rgba(122, 67, 204, 0.12);
+    }
+    
+    .google-form-header {
+      color: var(--primary-600);
+      text-align: center;
+      margin-bottom: 1.5rem;
+      font-size: 1.5rem;
+      position: relative;
+    }
+    
+    .google-form-header::after {
+      content: "";
+      position: absolute;
+      bottom: -10px;
+      right: 50%;
+      transform: translateX(50%);
+      width: 60px;
+      height: 4px;
+      background: var(--primary-400);
+      border-radius: 4px;
+    }
+    
+    .google-form-footer {
+      text-align: center;
+      margin-top: 1rem;
+      color: var(--text-light);
+      font-size: 0.9rem;
+    }
+
+    /* زر الإجابات المعدل */
+    .answers-link {
+      display: block;
+      text-align: center;
+      margin: 20px auto;
+      padding: 12px 20px;
+      background-color: var(--green-300);
+      color: var(--green-text);
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 600;
+      width: fit-content;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(165, 214, 167, 0.3);
+      border: 1.5px solid rgba(129, 199, 132, 0.5); /* الإطار الثابت الجديد */
+    }
+
+    .answers-link:hover {
+      background-color: var(--green-400);
+      color: #1b5e20;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(129, 199, 132, 0.4);
+    }
+
+    .answers-link i {
+      margin-left: 8px;
+      color: inherit;
+    }
+
+    /* تحسينات الجوال الأساسية (لا تحذف) */
+    @media (max-width: 1100px) {
+      .container {
+        justify-content: flex-start;
+        gap: 1.2rem;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .container {
+        justify-content: center;
+      }
+
+      .section-card {
+        width: 280px;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .section-card {
+        width: 95% !important;
+        padding: 1.2rem 1.2rem 0.8rem !important;
+        margin: 0 auto 1rem !important;
+      }
+      
+      .card {
+        padding: 0.8rem !important;
+      }
+      
+      .google-form-container {
+        width: 95% !important;
+        padding: 1rem !important;
+      }
+      
+      .google-form-container iframe {
+        height: 600px !important;
+      }
+
+      .logo-header img {
+        height: 50px;
+      }
+
+      .cards-container {
+        gap: 0.8rem;
+        margin-top: 0.3rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      header {
+        padding: 1.2rem 1rem;
+        border-bottom-left-radius: 15px;
+        border-bottom-right-radius: 15px;
+      }
+
+      header h1 {
+        font-size: 1.3rem !important;
+        margin-bottom: 0.3rem !important;
+      }
+      
+      header p {
+        font-size: 0.8rem !important;
+        line-height: 1.4 !important;
+        margin-bottom: 0.5rem;
+      }
+
+      .compact-date {
+        font-size: 0.7rem !important;
+        padding: 3px 6px !important;
+        white-space: nowrap;
+      }
+      
+      .compact-date .separator {
+        margin: 0 4px !important;
+      }
+
+      .section-title {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+      }
+
+      .card {
+        padding: 0.8rem 1rem;
+        border-radius: 12px;
+      }
+
+      .card-icon {
+        font-size: 1.4rem;
+        min-width: 30px;
+      }
+
+      .card-title {
+        font-size: 0.95rem !important;
+      }
+
+      .back-to-top {
+        width: 48px;
+        height: 48px;
+        border-radius: 14px;
+      }
+
+      .logo-header {
+        padding: 10px 0;
+      }
+      
+      .logo-header img {
+        height: 40px;
+      }
+
+      .notification-bar {
+        font-size: 0.8rem;
+        padding: 8px 0;
+      }
+      
+      .notification-container {
+        animation: scroll 12s linear infinite;
+      }
+
+      .answers-link {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+      }
+    }
+
+    /* تحسين إضافي لزر الإجابات على الجوال */
+    @media (max-width: 768px) {
+      .answers-link {
+        transform: none;
+        border-width: 1.5px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- قسم الشعار -->
+<div class="logo-header">
+  <img src="images/logo.png" alt="شعار الموقع التعليمي">
+</div>
+
+<!-- شريط الإشعارات المعدل -->
+<div class="notification-bar">
+  <div class="notification-container">
+    <i class="fas fa-bell"></i>
+    <span id="notificationContent">جاري تحميل الإشعارات...</span>
+  </div>
+</div>
+
+<header>
+  <h1> واجهة المعلم الرقمي </h1>
+  <p> أ. محمد حمدان الغامدي </p>
+  <p>نافذة لتوثيق الجهود المهنية ونشر المحتوى التعليمي للطلاب</p>
+  <!-- قسم التاريخ والوقت المضغوط -->
+  <div class="compact-date" dir="rtl">
+    <span id="hijri-date"></span> 
+    <span class="separator">•</span>
+    <span id="gregorian-date"></span>
+    <span class="separator">•</span>
+    <span id="live-time"></span>
+  </div>
+</header>
+
+<div class="container">
+  <!-- معلومات عامة -->
+  <section class="section-card">
+    <h2 class="section-title">
+      <i class="fas fa-info-circle section-icon"></i>
+      معلومات عامة
+    </h2>
+    <div class="cards-container">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/qws2/%D8%A3%D9%87%D8%AF%D8%A7%D9%81-%D8%B3%D9%8A%D8%A7%D8%B3%D8%A9-%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A8%D8%A7%D9%84%D9%85%D9%85%D9%84%D9%83%D8%A9?authuser=1">
+        <i class="fas fa-bullseye card-icon"></i>
+        <h3 class="card-title">أهداف التعليم</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/afsw/%D9%85%D9%8A%D8%AB%D8%A7%D9%82-%D8%A3%D8%AE%D9%84%D8%A7%D9%82%D9%8A%D8%A7%D8%AA-%D9%85%D9%87%D9%86%D8%A9-%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85?authuser=1">
+        <i class="fas fa-scroll card-icon"></i>
+        <h3 class="card-title">ميثاق مهنة التعليم</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/werzz/%D8%A7%D9%84%D8%A3%D9%87%D8%AF%D8%A7%D9%81-%D8%A7%D9%84%D9%88%D8%B8%D9%8A%D9%81%D9%8A%D8%A9?authuser=1">
+        <i class="fas fa-bullhorn card-icon"></i>
+        <h3 class="card-title">الأهداف الوظيفية</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/wsffew/%D8%B1%D8%A4%D9%8A%D8%A9-%D9%88%D8%B1%D8%B3%D8%A7%D9%84%D8%A9-%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%85?authuser=1">
+        <i class="fas fa-eye card-icon"></i>
+        <h3 class="card-title">رؤية ورسالة المعلم</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.25s;" data-url="https://sites.google.com/view/retgv3/%D8%B1%D8%A4%D9%8A%D8%A9-%D9%88%D8%B1%D8%B3%D8%A7%D9%84%D8%A9-%D8%A7%D9%84%D9%85%D8%AF%D8%B1%D8%B3%D8%A9?authuser=1">
+        <i class="fas fa-school card-icon"></i>
+        <h3 class="card-title">رؤية ورسالة المدرسة</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.3s;" data-url="https://sites.google.com/view/ererwq6/%D9%85%D9%87%D8%A7%D9%85-%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%85-%D9%88%D9%88%D8%A7%D8%AC%D8%A8%D8%A7%D8%AA%D8%A9?authuser=1">
+        <i class="fas fa-tasks card-icon"></i>
+        <h3 class="card-title">مهام المعلم وواجباته</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.35s;" data-url="https://sites.google.com/view/we3rt/%D8%A7%D9%84%D8%B3%D9%8A%D8%B1%D8%A9-%D8%A7%D9%84%D8%B0%D8%A7%D8%AA%D9%8A%D8%A9-%D9%84%D9%84%D9%85%D8%B9%D9%84%D9%85?authuser=1">
+        <i class="fas fa-user card-icon"></i>
+        <h3 class="card-title">السيرة الذاتية</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.4s;" data-url="https://sites.google.com/view/3534rf/%D8%A7%D9%84%D9%85%D8%A4%D9%87%D9%84-%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A-%D9%88%D8%A7%D9%84%D8%AE%D8%A8%D8%B1%D8%A7%D8%AA?authuser=1">
+        <i class="fas fa-graduation-cap card-icon"></i>
+        <h3 class="card-title">المؤهل والخبرات</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- التنمية المهنية -->
+  <section class="section-card">
+    <h2 class="section-title">
+      <i class="fas fa-briefcase section-icon"></i>
+      التنمية المهنية
+    </h2>
+    <div class="cards-container">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/aser2w/%D8%A7%D9%84%D8%AF%D9%88%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9?authuser=1">
+        <i class="fas fa-chalkboard-teacher card-icon"></i>
+        <h3 class="card-title">الدورات التدريبية</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/erfedf43/%D8%A7%D9%84%D8%A7%D9%86%D8%AC%D8%A7%D8%B2%D8%A7%D8%AA?authuser=1">
+        <i class="fas fa-award card-icon"></i>
+        <h3 class="card-title">الإنجازات</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- التطوير المهني -->
+  <section class="section-card">
+    <h2 class="section-title">
+      <i class="fas fa-sync-alt section-icon"></i>
+      التطوير المهني
+    </h2>
+    <div class="cards-container">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/edsww2/%D8%AA%D8%A8%D8%A7%D8%AF%D9%84-%D8%A7%D9%84%D8%B2%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA?authuser=1">
+        <i class="fas fa-exchange-alt card-icon"></i>
+        <h3 class="card-title">تبادل الزيارات</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/wafe23/%D8%A7%D9%84%D9%85%D8%AC%D8%AA%D9%85%D8%B9%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D9%87%D9%86%D9%8A%D8%A9?authuser=1">
+        <i class="fas fa-users-cog card-icon"></i>
+        <h3 class="card-title">المجتمعات المهنية</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- التكريم والجوائز -->
+  <section class="section-card">
+    <h2 class="section-title">
+      <i class="fas fa-award section-icon"></i>
+      التكريم والجوائز
+    </h2>
+    <div class="cards-container">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sf56/%D8%A7%D9%84%D8%AA%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D8%A6%D8%B2?authuser=1">
+        <i class="fas fa-trophy card-icon"></i>
+        <h3 class="card-title">التكريم والجوائز</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- العمل التعليمي -->
+  <section class="section-card">
+    <h2 class="section-title">
+      <i class="fas fa-chalkboard section-icon"></i>
+      العمل التعليمي
+    </h2>
+    <div class="cards-container">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sa32sa2/%D8%A3%D9%87%D8%AF%D8%A7%D9%81-%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A7%D9%84%D9%85%D8%A7%D8%AF%D8%A9?authuser=1">
+        <i class="fas fa-bullseye card-icon"></i>
+        <h3 class="card-title">أهداف تعليم المادة</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/sacsd/%D8%AC%D8%AF%D9%88%D9%84-%D8%A7%D9%84%D8%AD%D8%B5%D8%B5?authuser=1">
+        <i class="fas fa-calendar-alt card-icon"></i>
+        <h3 class="card-title">جدول الحصص</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/erferx/%D8%AA%D9%88%D8%B2%D9%8A%D8%B9-%D8%A7%D9%84%D9%85%D9%86%D9%87%D8%AC?authuser=1">
+        <i class="fas fa-book card-icon"></i>
+        <h3 class="card-title">توزيع المنهج</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/sdf6664rf/%D8%A7%D9%84%D8%AE%D8%B7%D8%A9-%D8%A7%D9%84%D8%A3%D8%B3%D8%A8%D9%88%D8%B9%D9%8A%D8%A9?authuser=1">
+        <i class="fas fa-calendar-week card-icon"></i>
+        <h3 class="card-title">الخطة الزمنية</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.25s;" data-url="https://sites.google.com/view/dfgtte2/%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1-%D8%A7%D9%84%D9%85%D9%86%D8%B5%D8%A9?authuser=1">
+        <i class="fas fa-chalkboard card-icon"></i>
+        <h3 class="card-title">تحضير المنصة</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.3s;" data-url="https://sites.google.com/view/dvfdg78/%D8%A7%D9%84%D9%88%D8%A7%D8%AC%D8%A8%D8%A7%D8%AA?authuser=1">
+        <i class="fas fa-tasks card-icon"></i>
+        <h3 class="card-title">الواجبات</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.35s;" data-url="https://sites.google.com/view/dfgu55/%D8%B9%D8%B1%D9%88%D8%B6-%D8%AA%D9%82%D8%AF%D9%8A%D9%85%D9%8A%D8%A9?authuser=1">
+        <i class="fas fa-file-powerpoint card-icon"></i>
+        <h3 class="card-title">عروض تقديمية</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.4s;" data-url="https://sites.google.com/view/sdgvt6/%D8%A3%D9%88%D8%B1%D8%A7%D9%82-%D8%A7%D9%84%D8%B9%D9%85%D9%84?authuser=1">
+        <i class="fas fa-file-alt card-icon"></i>
+        <h3 class="card-title">أوراق العمل</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.45s;" data-url="https://sites.google.com/view/dvfdg33/%D8%A7%D8%B3%D8%AA%D8%B1%D8%A7%D8%AA%D9%8A%D8%AC%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%B3?authuser=1">
+        <i class="fas fa-lightbulb card-icon"></i>
+        <h3 class="card-title">استراتيجيات التدريس</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.5s;" data-url="https://sites.google.com/view/dfg6654e/%D8%AA%D9%81%D8%A7%D8%B9%D9%84%D8%A7%D8%AA-%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8">
+        <i class="fas fa-comments card-icon"></i>
+        <h3 class="card-title">تفاعلات الطلاب</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.55s;" data-url="https://sites.google.com/view/fghhny8/%D9%85%D8%B4%D8%A7%D8%B1%D9%8A%D8%B9-steam?authuser=1">
+        <i class="fas fa-atom card-icon"></i>
+        <h3 class="card-title">STEM</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.6s;" data-url="https://sites.google.com/view/kjjhhjkl6/%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D8%A7%D8%AA?authuser=1">
+        <i class="fas fa-medal card-icon"></i>
+        <h3 class="card-title">المسابقات</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.65s;" data-url="https://sites.google.com/view/sdsgdfsb6/%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA-%D8%A8%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8-%D8%A7%D9%84%D9%85%D8%AA%D9%81%D9%88%D9%82%D9%8A%D9%86-%D9%88%D8%A8%D8%B1%D8%A7%D9%85%D8%AC%D9%87%D9%86-%D8%A7%D9%84%D8%A7%D8%AB%D8%B1%D8%A7%D8%A6%D9%8A%D8%A9?authuser=1">
+        <i class="fas fa-school card-icon"></i>
+        <h3 class="card-title">البيئة التعليمية</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.7s;" data-url="https://sites.google.com/view/sdergrt7/%D8%AF%D9%85%D8%AC-%D8%A7%D9%84%D8%AA%D9%82%D9%86%D9%8A%D8%A9-%D9%81%D9%8A-%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85">
+        <i class="fas fa-laptop-code card-icon"></i>
+        <h3 class="card-title">التقنية والتعليم</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- تقويم الطلاب -->
+  <section class="section-card">
+    <h2 class="section-title">
+      <i class="fas fa-clipboard-list section-icon"></i>
+      تقويم الطلاب
+    </h2>
+    <div class="cards-container">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/ghgv54/%D8%B3%D8%AC%D9%84%D8%A7%D8%AA-%D9%85%D8%AA%D8%A7%D8%A8%D8%B9%D8%A9-%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8?authuser=1">
+        <i class="fas fa-chart-line card-icon"></i>
+        <h3 class="card-title">سجلات المتابعة</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/edsfvd45/%D8%A7%D9%84%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1%D8%A7%D8%AA?authuser=1">
+        <i class="fas fa-check-circle card-icon"></i>
+        <h3 class="card-title">الاختبارات</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/sdfcdrt66/%D8%AA%D8%AD%D9%84%D9%8A%D9%84-%D9%86%D8%AA%D8%A7%D8%A6%D8%AC-%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8?authuser=1">
+        <i class="fas fa-chart-pie card-icon"></i>
+        <h3 class="card-title">تحليل النتائج</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/sdfdrttr4/%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA-%D8%A8%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8-%D8%A7%D9%84%D9%85%D8%AA%D9%81%D9%88%D9%82%D9%8A%D9%86-%D9%88%D8%A8%D8%B1%D8%A7%D9%85%D8%AC%D9%87%D9%85-%D8%A7%D9%84%D8%A7%D8%AB%D8%B1%D8%A7%D8%A6%D9%8A%D8%A9?authuser=1&read_current=1">
+        <i class="fas fa-user-graduate card-icon"></i>
+        <h3 class="card-title">الطلاب المتفوقين</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.25s;" data-url="https://sites.google.com/view/drhfbtrh55/%D8%A8%D9%8A%D8%A7%D9%86-%D8%A8%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8-%D8%A7%D9%84%D8%B6%D8%B9%D8%A7%D9%81-%D9%88%D8%A8%D8%B1%D8%A7%D9%85%D8%AC%D9%87%D9%85-%D8%A7%D9%84%D8%B9%D9%84%D8%A7%D8%AC%D9%8A%D8%A9?authuser=1">
+        <i class="fas fa-user-friends card-icon"></i>
+        <h3 class="card-title">الطلاب الضعاف</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- مكتبة الطالب -->
+  <section class="section-card">
+    <h2 class="section-title">
+      <i class="fas fa-book-open section-icon"></i>
+      مكتبة الطالب
+    </h2>
+    <div class="cards-container">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/dvdf55/%D8%A7%D9%84%D8%A3%D9%88%D9%84-%D8%AB%D8%A7%D9%86%D9%88%D9%8A">
+        <i class="fas fa-book card-icon"></i>
+        <h3 class="card-title nowrap-text">الأول ثانوي</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/dgvgrhbht76/%D8%A7%D9%84%D8%A3%D9%88%D9%84-%D8%AB%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
+        <i class="fas fa-book card-icon"></i>
+        <h3 class="card-title nowrap-text">الثاني ثانوي</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/regf78/%D8%A7%D9%84%D8%A3%D9%88%D9%84-%D8%AB%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
+        <i class="fas fa-book card-icon"></i>
+        <h3 class="card-title nowrap-text">الثالث ثانوي</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- الاثراء التقني -->
+  <section class="section-card">
+    <h2 class="section-title">
+      <i class="fas fa-laptop-code section-icon"></i>
+      الاثراء التقني
+    </h2>
+    <div class="cards-container">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sdfgbdh77/%D9%83%D8%AA%D8%A8-%D8%A7%D9%84%D8%AA%D9%82%D9%86%D9%8A%D8%A9">
+        <i class="fas fa-book card-icon"></i>
+        <h3 class="card-title">كتب التقنية</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/sdfgdf6/%D8%A7%D9%86%D9%81%D9%88%D8%AC%D8%B1%D8%A7%D9%81%D9%8A%D9%83?authuser=1">
+        <i class="fas fa-image card-icon"></i>
+        <h3 class="card-title">إنفوجرافيك</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/sdfh77/%D9%81%D9%8A%D8%AF%D9%8A%D9%88%D9%87%D8%A7%D8%AA-%D9%85%D8%AE%D8%AA%D8%B5%D8%B1%D8%A9?authuser=1">
+        <i class="fas fa-video card-icon"></i>
+        <h3 class="card-title">فيديوهات قصيرة</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- التواصل -->
+  <section class="section-card">
+    <h2 class="section-title">
+      <i class="fas fa-comments section-icon"></i>
+      التواصل
+    </h2>
+    <div class="cards-container">
+      <div class="card" style="animation-delay: 0.05s;" onclick="window.location.href='mailto:mfh713623@gmail.com'">
+        <i class="fas fa-envelope card-icon"></i>
+        <h3 class="card-title nowrap-text">البريد الإلكتروني</h3>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- قسم الاستفسارات -->
+<div class="google-form-container">
+  <h2 class="google-form-header">
+    <i class="fas fa-comments section-icon"></i>  الاستفسارات التعليمية
+  </h2>
+  
+  <iframe 
+    src="https://docs.google.com/forms/d/e/1FAIpQLScP82hCVuCxuIl_FBXQpZJyGbR6kWGVEuT2Y6oKNPm2TfIwcA/viewform?embedded=true" 
+    width="100%" 
+    height="700" 
+    frameborder="0" 
+    marginheight="0" 
+    marginwidth="0"
+    style="border: 2px solid var(--primary-400); border-radius: 12px;"
+    title="نموذج استفسارات الطلاب">
+    جاري التحميل...
+  </iframe>
+  <a href="https://docs.google.com/spreadsheets/d/14FqkF7e83_KW_Gd48G2OlRLIJYuaKYTPndo-qb5DjKo/edit?usp=sharing" class="answers-link" target="_blank">
+    <i class="fas fa-external-link-alt"></i> إجابة المعلم على الاستفسارات   
+  </a>
+  <div class="google-form-footer">
+    <small><i class="fas fa-info-circle"></i> سيتم الرد على استفسارك خلال مدة قصيرة   </small>
+  </div>
+</div>
+
+<!-- زر العودة للأعلى -->
+<button class="back-to-top" title="العودة للأعلى" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+  <i class="fas fa-arrow-up"></i>
+</button>
+
+<script>
+  // دالة تحديث التاريخ والوقت
+  function updateCompactDate() {
+    const hijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', {
+      day: 'numeric',
+      month: 'long'
+    }).format(new Date());
+    
+    const gregorian = new Intl.DateTimeFormat('ar-EG', {
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric'
+    }).format(new Date());
+    
+    const time = new Date().toLocaleTimeString('ar-EG', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+    
+    document.getElementById('hijri-date').textContent = hijri;
+    document.getElementById('gregorian-date').textContent = gregorian;
+    document.getElementById('live-time').textContent = time;
+  }
+
+  // جلب الإشعار من ملف GitHub
+  function fetchNotification() {
+    const notificationUrl = 'https://raw.githubusercontent.com/muhammad1937-web/teacher-injaz/8df4643585673098b72aa53b821d12c229c47514/notification.txt';
+    const notificationContent = document.getElementById('notificationContent');
+    
+    const timestamp = new Date().getTime();
+    const urlWithTimestamp = `${notificationUrl}?t=${timestamp}`;
+    
+    fetch(urlWithTimestamp)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('فشل جلب الإشعار');
+        }
+        return response.text();
+      })
+      .then(text => {
+        if (text.trim()) {
+          notificationContent.textContent = text;
+        } else {
+          notificationContent.textContent = "مرحباً بكم في واجهة المعلم الرقمي .. أ.محمد حمدان الغامدي        ";
+        }
+      })
+      .catch(error => {
+        console.error('حدث خطأ:', error);
+        notificationContent.textContent = "مرحباً بكم في واجهة المعلم الرقمي .. أ.محمد حمدان الغامدي  ";
+      });
+  }
+
+  // فتح الروابط في نافذة جديدة مع إضافة أيقونة
+  document.querySelectorAll('.card[data-url]').forEach(card => {
+    const externalIcon = document.createElement('i');
+    externalIcon.className = 'fas fa-external-link-alt external-icon';
+    card.querySelector('.card-title').appendChild(externalIcon);
+    
+    card.addEventListener('click', function(e) {
+      if (this.dataset.url) {
+        window.open(this.dataset.url, '_blank', 'noopener,noreferrer');
+      }
+    });
+  });
+
+  // التحديث كل ثانية للوقت
+  updateCompactDate();
+  setInterval(updateCompactDate, 1000);
+
+  // تحديث الإشعار كل 5 دقائق
+  fetchNotification();
+  setInterval(fetchNotification, 5 * 60 * 1000);
+
+  // إعادة تشغيل التحريك عند تغيير المحتوى
+  const observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      if (mutation.type === 'characterData' || mutation.type === 'childList') {
+        const content = document.getElementById('notificationContent');
+        content.style.animation = 'none';
+        void content.offsetWidth;
+        content.style.animation = null;
+      }
+    });
+  });
+
+  observer.observe(document.getElementById('notificationContent'), {
+    characterData: true,
+    childList: true,
+    subtree: true
+  });
+</script>
+
+</body>
+</html>
