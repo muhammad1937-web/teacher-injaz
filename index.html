@@ -50,24 +50,26 @@
       transform: scale(1.05);
     }
 
-    /* شريط الإشعارات المعدل */
+    /* شريط الإشعارات المعدل - الإصلاح هنا */
     .notification-bar {
       background: rgba(200, 230, 201, 0.25);
       backdrop-filter: blur(5px);
       border: 1px solid rgba(165, 214, 167, 0.3);
       color: var(--primary-600);
-      padding: 10px 0;
+      padding: 12px 0;
       overflow: hidden;
       position: relative;
+      width: 100%;
     }
 
     .notification-container {
       display: inline-block;
       white-space: nowrap;
-      padding-left: 100%;
-      animation: scroll 20s linear infinite;
+      padding-right: 100%;
+      animation: scroll 40s linear infinite;
       overflow: hidden;
       text-overflow: ellipsis;
+      box-sizing: content-box;
     }
 
     .notification-container i {
@@ -79,8 +81,18 @@
     }
 
     @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-100%); }
+      0% { 
+        transform: translateX(100%); 
+      }
+      5% {
+        transform: translateX(100%);
+      }
+      95% {
+        transform: translateX(-100%);
+      }
+      100% { 
+        transform: translateX(-100%);
+      }
     }
 
     @keyframes ring {
@@ -483,6 +495,10 @@
         gap: 0.8rem;
         margin-top: 0.3rem;
       }
+      
+      .notification-container {
+        animation: scroll 30s linear infinite;
+      }
     }
 
     @media (max-width: 480px) {
@@ -552,7 +568,7 @@
       }
       
       .notification-container {
-        animation: scroll 12s linear infinite;
+        animation: scroll 25s linear infinite;
       }
 
       .answers-link {
@@ -635,7 +651,7 @@
         <i class="fas fa-user card-icon"></i>
         <h3 class="card-title">السيرة الذاتية</h3>
       </div>
-      <div class="card" style="animation-delay: 0.4s;" data-url="https://sites.google.com/view/3534rf/%D8%A7%D9%84%D9%85%D8%A4%D9%87%D9%84-%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A-%D9%88%D8%A7%D9%84%D8%AE%D8%A8%D8%B1%D8%A7%D8%AA?authuser=1">
+      <div class="card" style="animation-delay: 0.4s;" data-url="https://sites.google.com/view/3534rf/%D8%A7%D9%84%D9%85%D8%A4%D9%87%D9%84-%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A-%D9%88%D8%A7%D9%84%D8%AB%D8%AE%D8%A8%D8%B1%D8%A7%D8%AA?authuser=1">
         <i class="fas fa-graduation-cap card-icon"></i>
         <h3 class="card-title">المؤهل والخبرات</h3>
       </div>
@@ -769,7 +785,7 @@
         <i class="fas fa-chart-line card-icon"></i>
         <h3 class="card-title">سجلات المتابعة</h3>
       </div>
-      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/edsfvd45/%D8%A7%D9%84%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1%D8%A7%D8%AA?authuser=1">
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/edsfvd45/%D8%A7%D9%84%D8%A7%D8%AE%D8%AA%D8%A7%D8%B1%D8%A7%D8%AA?authuser=1">
         <i class="fas fa-check-circle card-icon"></i>
         <h3 class="card-title">الاختبارات</h3>
       </div>
@@ -777,11 +793,11 @@
         <i class="fas fa-chart-pie card-icon"></i>
         <h3 class="card-title">تحليل النتائج</h3>
       </div>
-      <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/sdfdrttr4/%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA-%D8%A8%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8-%D8%A7%D9%84%D9%85%D8%AA%D9%81%D9%88%D9%82%D9%8A%D9%86-%D9%88%D8%A8%D8%B1%D8%A7%D9%85%D8%AC%D9%87%D9%85-%D8%A7%D9%84%D8%A7%D8%AB%D8%B1%D8%A7%D8%A6%D9%8A%D8%A9?authuser=1&read_current=1">
+      <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/sdfdrttr4/%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA-%D8%A8%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8-%D8%A7%D9%84%D9%85%D8%AA%D9%81%D9%88%D9%82%D9%8A%D9%86-%D9%88%D8%A8%D8%B1%D8%A7%D9%85%D8%AC%D9%87%D9%86-%D8%A7%D9%84%D8%A7%D8%AB%D8%B1%D8%A7%D8%A6%D9%8A%D8%A9?authuser=1&read_current=1">
         <i class="fas fa-user-graduate card-icon"></i>
         <h3 class="card-title">الطلاب المتفوقين</h3>
       </div>
-      <div class="card" style="animation-delay: 0.25s;" data-url="https://sites.google.com/view/drhfbtrh55/%D8%A8%D9%8A%D8%A7%D9%86-%D8%A8%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8-%D8%A7%D9%84%D8%B6%D8%B9%D8%A7%D9%81-%D9%88%D8%A8%D8%B1%D8%A7%D9%85%D8%AC%D9%87%D9%85-%D8%A7%D9%84%D8%B9%D9%84%D8%A7%D8%AC%D9%8A%D8%A9?authuser=1">
+      <div class="card" style="animation-delay: 0.25s;" data-url="https://sites.google.com/view/drhfbtrh55/%D8%A8%D9%8A%D8%A7%D9%86-%D8%A8%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8-%D8%A7%D9%84%D8%B6%D8%B9%D8%A7%D9%81-%D9%88%D8%A8%D8%B1%D8%A7%D9%85%D8%AC%D9%87%D9%86-%D8%A7%D9%84%D8%B9%D9%84%D8%A7%D8%AC%D9%8A%D8%A9?authuser=1">
         <i class="fas fa-user-friends card-icon"></i>
         <h3 class="card-title">الطلاب الضعاف</h3>
       </div>
@@ -919,14 +935,40 @@
       .then(text => {
         if (text.trim()) {
           notificationContent.textContent = text;
+          
+          // ضبط سرعة الحركة بناءً على طول النص
+          adjustScrollSpeed(text.length);
         } else {
-          notificationContent.textContent = "مرحباً بكم في واجهة المعلم الرقمي .. أ.محمد حمدان الغامدي        ";
+          notificationContent.textContent = "مرحباً بكم في واجهة المعلم الرقمي .. أ.محمد حمدان الغامدي";
+          adjustScrollSpeed(50); // طول افتراضي
         }
       })
       .catch(error => {
         console.error('حدث خطأ:', error);
-        notificationContent.textContent = "مرحباً بكم في واجهة المعلم الرقمي .. أ.محمد حمدان الغامدي  ";
+        notificationContent.textContent = "مرحباً بكم في واجهة المعلم الرقمي .. أ.محمد حمدان الغامدي";
+        adjustScrollSpeed(50); // طول افتراضي
       });
+  }
+
+  // ضبط سرعة الحركة بناءً على طول النص
+  function adjustScrollSpeed(textLength) {
+    const container = document.querySelector('.notification-container');
+    const baseDuration = 40; // ثانية أساسية للنص القصير
+    const additionalTimePerChar = 0.1; // وقت إضافي لكل حرف
+    
+    // حساب المدة بناءً على طول النص
+    let duration = baseDuration + (textLength * additionalTimePerChar);
+    
+    // تحديد حد أقصى للمدة
+    duration = Math.min(duration, 120); // لا تزيد عن 120 ثانية
+    
+    // تطبيق المدة الجديدة
+    container.style.animationDuration = `${duration}s`;
+    
+    // إعادة تشغيل التحريك
+    container.style.animation = 'none';
+    void container.offsetWidth;
+    container.style.animation = `scroll ${duration}s linear infinite`;
   }
 
   // فتح الروابط في نافذة جديدة مع إضافة أيقونة
@@ -955,9 +997,7 @@
     mutations.forEach(function(mutation) {
       if (mutation.type === 'characterData' || mutation.type === 'childList') {
         const content = document.getElementById('notificationContent');
-        content.style.animation = 'none';
-        void content.offsetWidth;
-        content.style.animation = null;
+        adjustScrollSpeed(content.textContent.length);
       }
     });
   });
@@ -970,5 +1010,4 @@
 </script>
 
 </body>
-
 </html>
