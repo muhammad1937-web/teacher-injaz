@@ -15,6 +15,8 @@
       --primary-400: #9a69e6;
       --primary-500: #7a43cc;
       --primary-600: #5e3399;
+      --primary-soft-1: #7B68EE;
+      --primary-soft-2: #E6E6FA;
       --text-dark: #2c2c3a;
       --text-light: #5a527f;
       --light-bg: #faf7ff;
@@ -32,34 +34,36 @@
     
     /* أنماط الشعار */
     .logo-header {
-      background-color: #ffffff;
+      background: linear-gradient(to left, #ffffff, #f9f5ff);
       padding: 15px 0;
       text-align: center;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 2px 15px rgba(122, 67, 204, 0.15);
       position: relative;
       z-index: 1000;
+      border-bottom: 2px solid #7a43cc;
     }
     
     .logo-header img {
       height: 70px;
       width: auto;
-      transition: transform 0.3s ease;
+      transition: all 0.3s ease;
+      filter: drop-shadow(0 2px 4px rgba(122, 67, 204, 0.3));
     }
     
     .logo-header img:hover {
       transform: scale(1.05);
+      filter: drop-shadow(0 3px 6px rgba(122, 67, 204, 0.4));
     }
 
-    /* شريط الإشعارات المعدل - الإصلاح هنا */
+    /* شريط الإشعارات المعدل */
     .notification-bar {
-      background: rgba(200, 230, 201, 0.25);
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(165, 214, 167, 0.3);
-      color: var(--primary-600);
+      background: linear-gradient(to left, #7a43cc, #9a69e6);
+      color: white;
       padding: 12px 0;
       overflow: hidden;
       position: relative;
       width: 100%;
+      box-shadow: 0 2px 10px rgba(122, 67, 204, 0.2);
     }
 
     .notification-container {
@@ -75,7 +79,7 @@
     .notification-container i {
       margin-left: 10px;
       margin-right: 8px;
-      color: var(--primary-400);
+      color: #ffffff;
       animation: ring 4s 0.7s ease-in-out infinite;
       transform-origin: 50% 4px;
     }
@@ -114,7 +118,7 @@
       29% { transform: rotate(10deg); }
       31% { transform: rotate(-8deg); }
       33% { transform: rotate(6deg); }
-      35% { transform: rotate(-4deg); }
+     35% { transform: rotate(-4deg); }
       37% { transform: rotate(2deg); }
       39% { transform: rotate(-1deg); }
       41% { transform: rotate(1deg); }
@@ -137,19 +141,36 @@
       font-weight: 400;
       min-height: 100vh;
       padding-bottom: 3rem;
+      background-image: 
+        radial-gradient(circle at 90% 10%, rgba(122, 67, 204, 0.03) 0%, transparent 20%),
+        radial-gradient(circle at 10% 90%, rgba(122, 67, 204, 0.03) 0%, transparent 20%);
     }
 
     header {
-      background: var(--primary-500);
+      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-soft-1) 100%);
       color: white;
       text-align: center;
-      padding: 2rem 1rem;
+      padding: 2.5rem 1rem;
       position: relative;
       border-bottom-left-radius: 25px;
       border-bottom-right-radius: 25px;
-      box-shadow: 0 5px 15px rgba(122, 67, 204, 0.5);
-      margin-bottom: 1.5rem;
+      box-shadow: 0 8px 25px rgba(122, 67, 204, 0.4);
+      margin-bottom: 2rem;
       user-select: none;
+      overflow: hidden;
+    }
+
+    header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.2) 0%, transparent 20%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 30%);
+      pointer-events: none;
     }
 
     header h1,
@@ -164,161 +185,224 @@
     }
 
     header h1 {
-      font-size: 1.8rem;
-      margin-bottom: 0.5rem;
-      font-weight: 600;
+      font-size: 2rem;
+      margin-bottom: 0.8rem;
+      font-weight: 700;
       letter-spacing: -0.5px;
-      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      position: relative;
     }
 
     header p {
-      font-size: 1rem;
-      opacity: 0.9;
+      font-size: 1.1rem;
+      opacity: 0.95;
       max-width: 800px;
       margin: 0 auto;
       font-weight: 400;
       letter-spacing: 0.6px;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     }
 
     .compact-date {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.2);
       display: inline-block;
-      padding: 6px 12px;
-      border-radius: 20px;
-      margin-top: 10px;
-      font-size: 0.9rem;
+      padding: 8px 16px;
+      border-radius: 25px;
+      margin-top: 15px;
+      font-size: 0.95rem;
       backdrop-filter: blur(5px);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
 
     .compact-date .separator {
-      margin: 0 8px;
-      opacity: 0.7;
+      margin: 0 10px;
+      opacity: 0.8;
     }
 
     .container {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 1rem 3rem;
+      padding: 0 1.5rem 3rem;
       display: flex;
       flex-wrap: wrap;
-      gap: 1.8rem;
+      gap: 2rem;
       justify-content: center;
     }
 
     .section-card {
-      background: white;
+      background: linear-gradient(to bottom, #ffffff, #faf7ff);
       border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(122, 67, 204, 0.12);
-      padding: 1.5rem 1.5rem 1rem;
-      width: 320px;
+      box-shadow: 0 10px 25px rgba(122, 67, 204, 0.15);
+      padding: 1.8rem 1.8rem 1.2rem;
+      width: 340px;
       display: flex;
       flex-direction: column;
       user-select: none;
       transition: all 0.3s ease;
       cursor: default;
       height: auto;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(122, 67, 204, 0.1);
+    }
+
+    /* إضافة الشريط العلوي الأنيق باللون الأساسي للبطاقات الكبيرة فقط */
+    .section-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 5px;
+      background: linear-gradient(90deg, var(--primary-500) 0%, rgba(122, 67, 204, 0.5) 100%);
+      border-radius: 2px 2px 0 0;
+      transition: height 0.3s ease;
+    }
+
+    .section-card:hover::before {
+      height: 6px;
+      background: linear-gradient(90deg, var(--primary-500) 0%, var(--primary-400) 100%);
     }
 
     .section-card:hover {
-      box-shadow: 0 15px 40px rgba(122, 67, 204, 0.3);
-      transform: translateY(-5px);
+      box-shadow: 0 15px 35px rgba(122, 67, 204, 0.25);
+      transform: translateY(-7px);
+      border-color: rgba(122, 67, 204, 0.2);
     }
 
     .section-title {
-      font-size: 1.5rem;
-      color: var(--primary-600);
-      margin-bottom: 1.2rem;
+      font-size: 1.6rem;
+      color: var(--primary-500);
+      margin-bottom: 1.5rem;
       padding-right: 0.8rem;
-      font-weight: 600;
+      font-weight: 700;
       position: relative;
-      letter-spacing: 0.8px;
+      letter-spacing: 0.5px;
       user-select: none;
       display: flex;
       align-items: center;
-      gap: 0.6rem;
+      gap: 0.8rem;
+      text-shadow: 0 1px 2px rgba(122, 67, 204, 0.1);
     }
 
     .section-title::after {
       content: "";
       position: absolute;
-      bottom: -10px;
+      bottom: -12px;
       right: 0;
-      width: 60px;
+      width: 70px;
       height: 4px;
-      background: var(--primary-400);
+      background: var(--primary-500);
       border-radius: 4px;
-      box-shadow: 0 0 8px var(--primary-400);
+      box-shadow: 0 0 10px var(--primary-soft-1);
+      transition: width 0.3s ease;
     }
 
+    .section-card:hover .section-title::after {
+      width: 90px;
+    }
+
+    /* تعديل أيقونات الأقسام */
     .section-icon {
-      font-size: 1.3rem;
-      color: var(--primary-300);
-      opacity: 0.4;
-      transition: opacity 0.3s ease;
+      font-size: 1.5rem;
+      color: var(--primary-500);
+      opacity: 0.8;
+      transition: all 0.3s ease;
       user-select: none;
+      background: rgba(122, 67, 204, 0.1);
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
     }
 
     .section-title:hover .section-icon {
-      opacity: 0.7;
+      opacity: 1;
+      transform: scale(1.1) rotate(5deg);
+      background: rgba(122, 67, 204, 0.15);
+      box-shadow: 0 0 15px rgba(122, 67, 204, 0.2);
     }
 
     .cards-container {
       display: flex;
       flex-direction: column;
-      gap: 1rem;
-      margin-top: 0.5rem;
+      gap: 1.2rem;
+      margin-top: 0.8rem;
     }
 
     .card {
-      background: var(--primary-100);
-      border-radius: 14px;
-      padding: 1rem 1.3rem;
-      box-shadow: 0 3px 10px rgba(122, 67, 204, 0.1);
-      border: 1.5px solid var(--primary-200);
+      background: linear-gradient(to right, var(--primary-soft-2), #f5f1ff);
+      border-radius: 16px;
+      padding: 1.2rem 1.5rem;
+      box-shadow: 0 4px 12px rgba(122, 67, 204, 0.1);
+      border: 1.5px solid rgba(122, 67, 204, 0.15);
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: 1.2rem;
       cursor: pointer;
       opacity: 0;
       transform: translateY(15px);
       animation: fadeSlideUp 0.5s forwards ease;
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       user-select: text;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(to right, rgba(122, 67, 204, 0.03), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
     }
 
     .card:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 8px 20px rgba(165, 214, 167, 0.2);
-      border-color: var(--green-300);
-      background: #e9dbff;
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(122, 67, 204, 0.25);
+      border-color: var(--primary-400);
+      background: linear-gradient(to right, #ece2ff, #e6d9ff);
     }
 
-    .card-icon {
-      font-size: 1.6rem;
-      color: var(--primary-300);
-      min-width: 36px;
-      text-align: center;
-      transition: all 0.3s ease;
-      opacity: 0.95;
-      user-select: none;
-    }
-
-    .card:hover .card-icon {
-      transform: scale(1.15);
-      color: var(--primary-400);
+    .card:hover::before {
       opacity: 1;
     }
 
+    .card-icon {
+      font-size: 1.7rem;
+      color: var(--primary-500);
+      min-width: 40px;
+      text-align: center;
+      transition: all 0.3s ease;
+      opacity: 0.9;
+      user-select: none;
+      text-shadow: 0 1px 2px rgba(122, 67, 204, 0.2);
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.2) rotate(5deg);
+      color: var(--primary-600);
+      opacity: 1;
+      text-shadow: 0 2px 4px rgba(122, 67, 204, 0.3);
+    }
+
     .card-title {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       font-weight: 600;
       color: var(--text-dark);
       transition: color 0.3s ease;
       word-break: break-word;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
+      position: relative;
     }
 
     .card:hover .card-title {
@@ -332,31 +416,32 @@
     }
 
     .card-title .external-icon {
-      font-size: 0.7em;
-      color: var(--primary-400);
+      font-size: 0.75em;
+      color: var(--primary-500);
       margin-right: 5px;
-      opacity: 0.7;
+      opacity: 0.8;
       transition: all 0.3s;
     }
 
     .card:hover .external-icon {
       opacity: 1;
       color: var(--primary-600);
+      transform: translateX(3px);
     }
 
     .back-to-top {
       position: fixed;
-      bottom: 25px;
-      left: 25px;
+      bottom: 30px;
+      left: 30px;
       background: var(--primary-500);
       color: white;
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
+      width: 55px;
+      height: 55px;
+      border-radius: 18px;
       display: flex;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 6px 15px rgba(122, 67, 204, 0.5);
+      box-shadow: 0 6px 20px rgba(122, 67, 204, 0.5);
       z-index: 100;
       border: none;
       cursor: pointer;
@@ -366,9 +451,9 @@
 
     .back-to-top:hover {
       background: var(--primary-600);
-      transform: scale(1.1);
+      transform: scale(1.1) translateY(-5px);
       border-radius: 50%;
-      box-shadow: 0 8px 22px rgba(94, 51, 153, 0.75);
+      box-shadow: 0 8px 25px rgba(122, 67, 204, 0.7);
     }
 
     @keyframes fadeSlideUp {
@@ -379,75 +464,104 @@
     }
 
     .google-form-container {
-      max-width: 800px;
-      margin: 2rem auto;
-      padding: 1.5rem;
-      background: white;
+      max-width: 850px;
+      margin: 3rem auto;
+      padding: 2rem;
+      background: linear-gradient(to bottom, #ffffff, #faf7ff);
       border-radius: 20px;
-      box-shadow: 0 8px 20px rgba(122, 67, 204, 0.12);
+      box-shadow: 0 10px 25px rgba(122, 67, 204, 0.15);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(122, 67, 204, 0.1);
+    }
+
+    /* إضافة الشريط العلوي للنموذج */
+    .google-form-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 5px;
+      background: var(--primary-500);
+      border-radius: 2px 2px 0 0;
     }
     
     .google-form-header {
-      color: var(--primary-600);
+      color: var(--primary-500);
       text-align: center;
-      margin-bottom: 1.5rem;
-      font-size: 1.5rem;
+      margin-bottom: 1.8rem;
+      font-size: 1.6rem;
       position: relative;
+      font-weight: 700;
     }
     
     .google-form-header::after {
       content: "";
       position: absolute;
-      bottom: -10px;
+      bottom: -12px;
       right: 50%;
       transform: translateX(50%);
-      width: 60px;
+      width: 70px;
       height: 4px;
-      background: var(--primary-400);
+      background: var(--primary-500);
       border-radius: 4px;
+      box-shadow: 0 0 10px var(--primary-soft-1);
     }
     
     .google-form-footer {
       text-align: center;
-      margin-top: 1rem;
+      margin-top: 1.5rem;
       color: var(--text-light);
-      font-size: 0.9rem;
+      font-size: 0.95rem;
     }
 
     /* زر الإجابات المعدل */
     .answers-link {
       display: block;
       text-align: center;
-      margin: 20px auto;
-      padding: 12px 20px;
-      background-color: var(--green-300);
-      color: var(--green-text);
-      border-radius: 30px;
+      margin: 25px auto;
+      padding: 14px 25px;
+      background: linear-gradient(to right, var(--primary-500), var(--primary-400));
+      color: white;
+      border-radius: 35px;
       text-decoration: none;
-      font-weight: 600;
+      font-weight: 700;
       width: fit-content;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(165, 214, 167, 0.3);
-      border: 1.5px solid rgba(129, 199, 132, 0.5); /* الإطار الثابت الجديد */
+      box-shadow: 0 5px 15px rgba(122, 67, 204, 0.4);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .answers-link::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.3);
     }
 
     .answers-link:hover {
-      background-color: var(--green-400);
-      color: #1b5e20;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(129, 199, 132, 0.4);
+      background: linear-gradient(to right, var(--primary-600), var(--primary-500));
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(122, 67, 204, 0.5);
     }
 
     .answers-link i {
-      margin-left: 8px;
+      margin-left: 10px;
       color: inherit;
     }
 
-    /* تحسينات الجوال الأساسية (لا تحذف) */
+    /* تحسينات الجوال الأساسية */
     @media (max-width: 1100px) {
       .container {
         justify-content: flex-start;
-        gap: 1.2rem;
+        gap: 1.5rem;
       }
     }
 
@@ -457,7 +571,7 @@
       }
 
       .section-card {
-        width: 280px;
+        width: 300px;
       }
     }
 
@@ -465,22 +579,22 @@
       .container {
         flex-direction: column;
         align-items: center;
-        gap: 1rem;
+        gap: 1.2rem;
       }
 
       .section-card {
         width: 95% !important;
-        padding: 1.2rem 1.2rem 0.8rem !important;
-        margin: 0 auto 1rem !important;
+        padding: 1.5rem 1.5rem 1rem !important;
+        margin: 0 auto 1.2rem !important;
       }
       
       .card {
-        padding: 0.8rem !important;
+        padding: 1rem !important;
       }
       
       .google-form-container {
         width: 95% !important;
-        padding: 1rem !important;
+        padding: 1.5rem !important;
       }
       
       .google-form-container iframe {
@@ -488,12 +602,12 @@
       }
 
       .logo-header img {
-        height: 50px;
+        height: 55px;
       }
 
       .cards-container {
-        gap: 0.8rem;
-        margin-top: 0.3rem;
+        gap: 1rem;
+        margin-top: 0.5rem;
       }
       
       .notification-container {
@@ -503,68 +617,76 @@
 
     @media (max-width: 480px) {
       header {
-        padding: 1.2rem 1rem;
-        border-bottom-left-radius: 15px;
-        border-bottom-right-radius: 15px;
+        padding: 1.5rem 1rem;
+        border-bottom-left-radius: 20px;
+        border-bottom-right-radius: 20px;
       }
 
       header h1 {
-        font-size: 1.3rem !important;
-        margin-bottom: 0.3rem !important;
+        font-size: 1.5rem !important;
+        margin-bottom: 0.5rem !important;
       }
       
       header p {
-        font-size: 0.8rem !important;
-        line-height: 1.4 !important;
-        margin-bottom: 0.5rem;
+        font-size: 0.95rem !important;
+        line-height: 1.5 !important;
+        margin-bottom: 0.8rem;
       }
 
       .compact-date {
-        font-size: 0.7rem !important;
-        padding: 3px 6px !important;
+        font-size: 0.8rem !important;
+        padding: 6px 12px !important;
         white-space: nowrap;
       }
       
       .compact-date .separator {
-        margin: 0 4px !important;
+        margin: 0 6px !important;
       }
 
       .section-title {
-        font-size: 1.3rem;
-        margin-bottom: 1rem;
-      }
-
-      .card {
-        padding: 0.8rem 1rem;
-        border-radius: 12px;
-      }
-
-      .card-icon {
         font-size: 1.4rem;
-        min-width: 30px;
+        margin-bottom: 1.2rem;
       }
 
-      .card-title {
-        font-size: 0.95rem !important;
-      }
-
-      .back-to-top {
-        width: 48px;
-        height: 48px;
-        border-radius: 14px;
-      }
-
-      .logo-header {
-        padding: 10px 0;
-      }
-      
-      .logo-header img {
+      .section-icon {
+        font-size: 1.3rem;
+        width: 40px;
         height: 40px;
       }
 
+      .card {
+        padding: 1rem !important;
+        border-radius: 14px;
+      }
+
+      .card-icon {
+        font-size: 1.5rem;
+        min-width: 35px;
+      }
+
+      .card-title {
+        font-size: 1.05rem !important;
+      }
+
+      .back-to-top {
+        width: 50px;
+        height: 50px;
+        border-radius: 16px;
+        bottom: 20px;
+        left: 20px;
+      }
+
+      .logo-header {
+        padding: 12px 0;
+      }
+      
+      .logo-header img {
+        height: 45px;
+      }
+
       .notification-bar {
-        font-size: 0.8rem;
-        padding: 8px 0;
+        font-size: 0.85rem;
+        padding: 10px 0;
       }
       
       .notification-container {
@@ -572,8 +694,8 @@
       }
 
       .answers-link {
-        padding: 10px 16px;
-        font-size: 0.9rem;
+        padding: 12px 20px;
+        font-size: 0.95rem;
       }
     }
 
@@ -581,7 +703,32 @@
     @media (max-width: 768px) {
       .answers-link {
         transform: none;
-        border-width: 1.5px;
+        border-width: 2px;
+      }
+    }
+
+    /* تحسينات للهواتف ذات الشاشات الصغيرة جداً */
+    @media (max-width: 360px) {
+      .section-title {
+        font-size: 1.3rem;
+      }
+      
+      .section-icon {
+        font-size: 1.2rem;
+        width: 38px;
+        height: 38px;
+      }
+      
+      .card {
+        padding: 0.9rem !important;
+      }
+      
+      .card-icon {
+        font-size: 1.4rem;
+      }
+      
+      .container {
+        padding: 0 1rem 2rem;
       }
     }
   </style>
@@ -651,7 +798,7 @@
         <i class="fas fa-user card-icon"></i>
         <h3 class="card-title">السيرة الذاتية</h3>
       </div>
-      <div class="card" style="animation-delay: 0.4s;" data-url="https://2u.pw/qBgUB">
+      <div class="card" style="animation-delay: 0.4s;" data-url="https://sites.google.com/view/3534rf/%D8%A7%D9%84%D9%85%D8%A4%D9%87%D9%84-%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A-%D9%88%D8%A7%D9%84%D8%AC%D8%AE%D8%A8%D8%B1%D8%A7%D8%AA?authuser=1">
         <i class="fas fa-graduation-cap card-icon"></i>
         <h3 class="card-title">المؤهل والخبرات</h3>
       </div>
@@ -665,11 +812,11 @@
       التنمية المهنية
     </h2>
     <div class="cards-container">
-      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/aser2w/%D8%A7%D9%84%D8%AF%D9%88%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9?authuser=1">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/aser2w/%D8%A7%D9%84%D8%الد%D9%88%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9?authuser=1">
         <i class="fas fa-chalkboard-teacher card-icon"></i>
         <h3 class="card-title">الدورات التدريبية</h3>
       </div>
-      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/erfedf43/%D8%A7%D9%84%D8%A7%D9%86%D8%AC%D8%A7%D8%B2%D8%A7%D8%AA?authuser=1">
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/erfedf43/%D8%A7%D9%86%D8%AC%D8%A7%D8%B2%D8%A7%D8%AA?authuser=1">
         <i class="fas fa-award card-icon"></i>
         <h3 class="card-title">الإنجازات</h3>
       </div>
@@ -687,7 +834,7 @@
         <i class="fas fa-exchange-alt card-icon"></i>
         <h3 class="card-title">تبادل الزيارات</h3>
       </div>
-      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/wafe23/%D8%A7%D9%84%D9%85%D8%AC%D8%AA%D9%85%D8%B9%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D9%87%D9%86%D9%8A%D8%A9?authuser=1">
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/wafe23/%D8%A7%D9%84%D9%85%D8%AC%D8%AA%D9%85%D8%B9%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D9%95%D9%86%D9%8A%D8%A9?authuser=1">
         <i class="fas fa-users-cog card-icon"></i>
         <h3 class="card-title">المجتمعات المهنية</h3>
       </div>
@@ -739,19 +886,19 @@
         <i class="fas fa-tasks card-icon"></i>
         <h3 class="card-title">الواجبات</h3>
       </div>
-      <div class="card" style="animation-delay: 0.35s;" data-url="https://sites.google.com/view/dfgu55/%D8%B9%D8%B1%D9%88%D8%B6-%D8%AA%D9%82%D8%AF%D9%8A%D9%85%D9%8A%D8%A9?authuser=1">
+      <div class="card" style="animation-delay: 0.35s;" data-url="https://sites.google.com/view/dfgu55/%D8%B9%D8%B1%D9%88%D8%B6-%D8%AA%D9%8A%D9%85%D9%8A%D8%A9?authuser=1">
         <i class="fas fa-file-powerpoint card-icon"></i>
         <h3 class="card-title">عروض تقديمية</h3>
       </div>
-      <div class="card" style="animation-delay: 0.4s;" data-url="https://sites.google.com/view/sdgvt6/%D8%A3%D9%88%D8%B1%D8%A7%D9%82-%D8%A7%D9%84%D8%B9%D9%85%D9%84?authuser=1">
+      <div class="card" style="animation-delay: 0.4s;" data-url="https://sites.google.com/view/sdgvt6/%D8%A7%D9%88%D8%B1%D8%A7%D9%82-%D8%A7%D9%84%D8%B9%D9%85%D9%84?authuser=1">
         <i class="fas fa-file-alt card-icon"></i>
         <h3 class="card-title">أوراق العمل</h3>
       </div>
-      <div class="card" style="animation-delay: 0.45s;" data-url="https://sites.google.com/view/dvfdg33/%D8%A7%D8%B3%D8%AA%D8%B1%D8%A7%D8%AA%D9%8A%D8%AC%D9%8A%D8%A7%D8%AA-%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%B3?authuser=1">
+      <div class="card" style="animation-delay: 0.45s;" data-url="https://sites.google.com/view/dvfdg33/%D8%A7%D8%B3%D8%AA%D8%B1%D8%A7%D8%AA%D9%8A%D8%AC%D9%8A%D8%A7%D8%AA-%D8%AA%D8%AF%D8%B1%D9%8A%D8%B3?authuser=1">
         <i class="fas fa-lightbulb card-icon"></i>
         <h3 class="card-title">استراتيجيات التدريس</h3>
       </div>
-      <div class="card" style="animation-delay: 0.5s;" data-url="https://sites.google.com/view/dfg6654e/%D8%AA%D9%81%D8%A7%D8%B9%D9%84%D8%A7%D8%AA-%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8">
+      <div class="card" style="animation-delay: 0.5s;" data-url="https://sites.google.com/view/dfg6654e/%D8%AA%D9%81%D8%A7%D8%B9%D9%84%D8%A7%D8%AA-%D8%B7%D9%84%D8%A7%D8%A8">
         <i class="fas fa-comments card-icon"></i>
         <h3 class="card-title">تفاعلات الطلاب</h3>
       </div>
@@ -763,11 +910,11 @@
         <i class="fas fa-medal card-icon"></i>
         <h3 class="card-title">المسابقات</h3>
       </div>
-      <div class="card" style="animation-delay: 0.65s;" data-url="https://2u.pw/lukd2">
+      <div class="card" style="animation-delay: 0.65s;" data-url="https://sites.google.com/view/sdsgdfsb6/%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA-%D8%B7%D9%84%D8%A7%D8%A8-%D9%85%D8%AA%D9%81%D9%88%D9%82%D9%8A%D9%86-%D8%A8%D8%B1%D8%A7%D9%85%D8%AC-%D8%A7%D8%AB%D8%B1%D8%A7%D8%A6%D9%8A%D8%A9?authuser=1">
         <i class="fas fa-school card-icon"></i>
         <h3 class="card-title">البيئة التعليمية</h3>
       </div>
-      <div class="card" style="animation-delay: 0.7s;" data-url="https://sites.google.com/view/sdergrt7/%D8%AF%D9%85%D8%AC-%D8%A7%D9%84%D8%AA%D9%82%D9%86%D9%8A%D8%A9-%D9%81%D9%8A-%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85">
+      <div class="card" style="animation-delay: 0.7s;" data-url="https://sites.google.com/view/sdergrt7/%D8%AF%D9%85%D8%AC-%D8%AA%D9%82%D9%86%D9%8A%D8%A9-%D9%81%D9%8A-%D8%AA%D8%B9%D9%84%D9%8A%D9%85">
         <i class="fas fa-laptop-code card-icon"></i>
         <h3 class="card-title">التقنية والتعليم</h3>
       </div>
@@ -781,23 +928,23 @@
       تقويم الطلاب
     </h2>
     <div class="cards-container">
-      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/ghgv54/%D8%B3%D8%AC%D9%84%D8%A7%D8%AA-%D9%85%D8%AA%D8%A7%D8%A8%D8%B9%D8%A9-%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8?authuser=1">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/ghgv54/%D8%B3%D8%AC%D9%84%D8%A7%D8%AA-%D9%85%D8%AA%D8%A7%D8%A8%D8%B9%D8%A9-%D8%B7%D9%84%D8%A7%D8%A8?authuser=1">
         <i class="fas fa-chart-line card-icon"></i>
         <h3 class="card-title">سجلات المتابعة</h3>
       </div>
-      <div class="card" style="animation-delay: 0.1s;" data-url="https://2u.pw/WRQws">
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/edsfvd45/%D8%A7%D8%AE%D8%AA%D8%A7%D8%B1%D8%A7%D8%AA?authuser=1">
         <i class="fas fa-check-circle card-icon"></i>
         <h3 class="card-title">الاختبارات</h3>
       </div>
-      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/sdfcdrt66/%D8%AA%D8%AD%D9%84%D9%8A%D9%84-%D9%86%D8%AA%D8%A7%D8%A6%D8%AC-%D8%A7%D9%84%D8%B7%D9%84%D8%A7%D8%A8?authuser=1">
+      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/sdfcdrt66/%D8%AA%D8%AD%D9%84%D9%8A%D9%84-%D9%86%D8%AA%D8%A7%D8%A6%D8%AC-%D8%B7%D9%84%D8%A7%D8%A8?authuser=1">
         <i class="fas fa-chart-pie card-icon"></i>
         <h3 class="card-title">تحليل النتائج</h3>
       </div>
-      <div class="card" style="animation-delay: 0.2s;" data-url="https://2u.pw/kOtVp">
+      <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/sdfdrttr4/%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA-%D8%B7%D9%84%D8%A7%D8%A8-%D9%85%D8%AA%D9%88%D9%82%D9%8A%D9%86-%D8%A8%D8%B1%D8%A7%D9%85%D8%AC-%D8%A7%D8%AB%D8%B1%D8%A7%D8%A6%D9%8A%D8%A9?authuser=1&read_current=1">
         <i class="fas fa-user-graduate card-icon"></i>
         <h3 class="card-title">الطلاب المتفوقين</h3>
       </div>
-      <div class="card" style="animation-delay: 0.25s;" data-url="https://2u.pw/YNoFA">
+      <div class="card" style="animation-delay: 0.25s;" data-url="https://sites.google.com/view/drhfbtrh55/%D8%A8%D9%8A%D8%A7%D9%86-%D8%B7%D9%84%D8%A7%D8%A8-%D8%B6%D8%B9%D8%A7%D9%81-%D8%A8%D8%B1%D8%A7%D9%85%D8%AC-%D8%B9%D9%84%D8%A7%D8%AC%D9%8A%D8%A9?authuser=1">
         <i class="fas fa-user-friends card-icon"></i>
         <h3 class="card-title">الطلاب الضعاف</h3>
       </div>
@@ -811,15 +958,15 @@
       مكتبة الطالب
     </h2>
     <div class="cards-container">
-      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/dvdf55/%D8%A7%D9%84%D8%A3%D9%88%D9%84-%D8%AB%D8%A7%D9%86%D9%88%D9%8A">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/dvdf55/%D8%A3%D9%88%D9%84-%D8%AB%D8%A7%D9%86%D9%88%D9%8A">
         <i class="fas fa-book card-icon"></i>
         <h3 class="card-title nowrap-text">الأول ثانوي</h3>
       </div>
-      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/dgvgrhbht76/%D8%A7%D9%84%D8%A3%D9%88%D9%84-%D8%AB%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/dgvgrhbht76/%D8%A3%D9%88%D9%84-%D8%AB%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
         <i class="fas fa-book card-icon"></i>
         <h3 class="card-title nowrap-text">الثاني ثانوي</h3>
       </div>
-      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/regf78/%D8%A7%D9%84%D8%A3%D9%88%D9%84-%D8%AB%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
+      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/regf78/%D8%A3%D9%88%D9%84-%D8%AB%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
         <i class="fas fa-book card-icon"></i>
         <h3 class="card-title nowrap-text">الثالث ثانوي</h3>
       </div>
@@ -833,7 +980,7 @@
       الاثراء التقني
     </h2>
     <div class="cards-container">
-      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sdfgbdh77/%D9%83%D8%AA%D8%A8-%D8%A7%D9%84%D8%AA%D9%82%D9%86%D9%8A%D8%A9">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sdfgbdh77/%D9%83%D8%AA%D8%A8-%D8%AA%D9%82%D9%86%D9%8A%D8%A9">
         <i class="fas fa-book card-icon"></i>
         <h3 class="card-title">كتب التقنية</h3>
       </div>
@@ -876,7 +1023,7 @@
     frameborder="0" 
     marginheight="0" 
     marginwidth="0"
-    style="border: 2px solid var(--primary-400); border-radius: 12px;"
+    style="border: 2px solid var(--primary-soft-1); border-radius: 12px;"
     title="نموذج استفسارات الطلاب">
     جاري التحميل...
   </iframe>
@@ -1011,5 +1158,3 @@
 
 </body>
 </html>
-
-
