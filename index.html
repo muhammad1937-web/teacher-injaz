@@ -6,7 +6,7 @@
   <title>ملف إنجاز المعلم</title>
   <meta name="description" content="موقع تعليمي يقدم محتوى تعليمي للطلاب ويوثق الإنجازات المهنية للمعلم">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     :root {
       --primary-100: #f3e8ff;
@@ -17,6 +17,8 @@
       --primary-600: #5e3399;
       --primary-soft-1: #7B68EE;
       --primary-soft-2: #E6E6FA;
+      --header-color: #6A5ACD;
+      --notification-color: #E6E6FA;
       --text-dark: #2c2c3a;
       --text-light: #5a527f;
       --light-bg: #faf7ff;
@@ -25,6 +27,7 @@
       --green-300: #a5d6a7;
       --green-400: #81c784;
       --green-text: #2e7d32;
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
     /* نظام الطبقات */
@@ -32,7 +35,7 @@
       display: none;
     }
     
-    /* أنماط الشعار */
+    /* أنماط الشعار المحسنة */
     .logo-header {
       background: linear-gradient(to left, #ffffff, #f9f5ff);
       padding: 15px 0;
@@ -40,13 +43,13 @@
       box-shadow: 0 2px 15px rgba(122, 67, 204, 0.15);
       position: relative;
       z-index: 1000;
-      border-bottom: 2px solid #7a43cc;
+      border-bottom: 2px solid var(--header-color);
     }
     
     .logo-header img {
-      height: 70px;
+      height: 80px;
       width: auto;
-      transition: all 0.3s ease;
+      transition: var(--transition);
       filter: drop-shadow(0 2px 4px rgba(122, 67, 204, 0.3));
     }
     
@@ -55,15 +58,16 @@
       filter: drop-shadow(0 3px 6px rgba(122, 67, 204, 0.4));
     }
 
-    /* شريط الإشعارات المعدل */
+    /* شريط الإشعارات المعدل - اللون الجديد #E6E6FA */
     .notification-bar {
-      background: linear-gradient(to left, #7a43cc, #9a69e6);
-      color: white;
+      background: var(--notification-color);
+      color: #2c2c3a;
       padding: 12px 0;
       overflow: hidden;
       position: relative;
       width: 100%;
       box-shadow: 0 2px 10px rgba(122, 67, 204, 0.2);
+      border-bottom: 1px solid rgba(106, 90, 205, 0.2);
     }
 
     .notification-container {
@@ -79,7 +83,7 @@
     .notification-container i {
       margin-left: 10px;
       margin-right: 8px;
-      color: #ffffff;
+      color: var(--header-color);
       animation: ring 4s 0.7s ease-in-out infinite;
       transform-origin: 50% 4px;
     }
@@ -146,16 +150,17 @@
         radial-gradient(circle at 10% 90%, rgba(122, 67, 204, 0.03) 0%, transparent 20%);
     }
 
+    /* الهيدر المعدل - اللون الجديد #6A5ACD بدون تدرج */
     header {
-      background: linear-gradient(135deg, var(--primary-500) 0%, var(--primary-soft-1) 100%);
+      background: var(--header-color);
       color: white;
       text-align: center;
-      padding: 2.5rem 1rem;
+      padding: 2.8rem 1rem;
       position: relative;
       border-bottom-left-radius: 25px;
       border-bottom-right-radius: 25px;
-      box-shadow: 0 8px 25px rgba(122, 67, 204, 0.4);
-      margin-bottom: 2rem;
+      box-shadow: 0 8px 25px rgba(106, 90, 205, 0.4);
+      margin-bottom: 2.5rem;
       user-select: none;
       overflow: hidden;
     }
@@ -185,16 +190,16 @@
     }
 
     header h1 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       margin-bottom: 0.8rem;
-      font-weight: 700;
+      font-weight: 800;
       letter-spacing: -0.5px;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
       position: relative;
     }
 
     header p {
-      font-size: 1.1rem;
+      font-size: 1.15rem;
       opacity: 0.95;
       max-width: 800px;
       margin: 0 auto;
@@ -204,15 +209,21 @@
     }
 
     .compact-date {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.25);
       display: inline-block;
-      padding: 8px 16px;
+      padding: 10px 18px;
       border-radius: 25px;
-      margin-top: 15px;
+      margin-top: 18px;
       font-size: 0.95rem;
       backdrop-filter: blur(5px);
       border: 1px solid rgba(255, 255, 255, 0.3);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+    }
+
+    .compact-date:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-2px);
     }
 
     .compact-date .separator {
@@ -234,12 +245,12 @@
       background: linear-gradient(to bottom, #ffffff, #faf7ff);
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(122, 67, 204, 0.15);
-      padding: 1.8rem 1.8rem 1.2rem;
-      width: 340px;
+      padding: 2rem 2rem 1.5rem;
+      width: 350px;
       display: flex;
       flex-direction: column;
       user-select: none;
-      transition: all 0.3s ease;
+      transition: var(--transition);
       cursor: default;
       height: auto;
       position: relative;
@@ -272,7 +283,7 @@
     }
 
     .section-title {
-      font-size: 1.6rem;
+      font-size: 1.65rem;
       color: var(--primary-500);
       margin-bottom: 1.5rem;
       padding-right: 0.8rem;
@@ -308,7 +319,7 @@
       font-size: 1.5rem;
       color: var(--primary-500);
       opacity: 0.8;
-      transition: all 0.3s ease;
+      transition: var(--transition);
       user-select: none;
       background: rgba(122, 67, 204, 0.1);
       width: 45px;
@@ -346,7 +357,7 @@
       opacity: 0;
       transform: translateY(15px);
       animation: fadeSlideUp 0.5s forwards ease;
-      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      transition: var(--transition);
       user-select: text;
       position: relative;
       overflow: hidden;
@@ -380,7 +391,7 @@
       color: var(--primary-500);
       min-width: 40px;
       text-align: center;
-      transition: all 0.3s ease;
+      transition: var(--transition);
       opacity: 0.9;
       user-select: none;
       text-shadow: 0 1px 2px rgba(122, 67, 204, 0.2);
@@ -420,7 +431,7 @@
       color: var(--primary-500);
       margin-right: 5px;
       opacity: 0.8;
-      transition: all 0.3s;
+      transition: var(--transition);
     }
 
     .card:hover .external-icon {
@@ -445,8 +456,15 @@
       z-index: 100;
       border: none;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: var(--transition);
       user-select: none;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .back-to-top.show {
+      opacity: 1;
+      visibility: visible;
     }
 
     .back-to-top:hover {
@@ -466,7 +484,7 @@
     .google-form-container {
       max-width: 850px;
       margin: 3rem auto;
-      padding: 2rem;
+      padding: 2.5rem;
       background: linear-gradient(to bottom, #ffffff, #faf7ff);
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(122, 67, 204, 0.15);
@@ -528,7 +546,7 @@
       text-decoration: none;
       font-weight: 700;
       width: fit-content;
-      transition: all 0.3s ease;
+      transition: var(--transition);
       box-shadow: 0 5px 15px rgba(122, 67, 204, 0.4);
       border: 2px solid rgba(255, 255, 255, 0.3);
       position: relative;
@@ -557,6 +575,18 @@
       color: inherit;
     }
 
+    /* تأثيرات دخول المحتوى */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* تحسينات الجوال الأساسية */
     @media (max-width: 1100px) {
       .container {
@@ -571,7 +601,7 @@
       }
 
       .section-card {
-        width: 300px;
+        width: 320px;
       }
     }
 
@@ -602,7 +632,7 @@
       }
 
       .logo-header img {
-        height: 55px;
+        height: 60px;
       }
 
       .cards-container {
@@ -617,25 +647,25 @@
 
     @media (max-width: 480px) {
       header {
-        padding: 1.5rem 1rem;
+        padding: 1.8rem 1rem;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
       }
 
       header h1 {
-        font-size: 1.5rem !important;
+        font-size: 1.7rem !important;
         margin-bottom: 0.5rem !important;
       }
       
       header p {
-        font-size: 0.95rem !important;
+        font-size: 1rem !important;
         line-height: 1.5 !important;
         margin-bottom: 0.8rem;
       }
 
       .compact-date {
-        font-size: 0.8rem !important;
-        padding: 6px 12px !important;
+        font-size: 0.85rem !important;
+        padding: 8px 14px !important;
         white-space: nowrap;
       }
       
@@ -681,7 +711,7 @@
       }
       
       .logo-header img {
-        height: 45px;
+        height: 50px;
       }
 
       .notification-bar {
@@ -736,19 +766,19 @@
 <body>
 
 <!-- قسم الشعار -->
-<div class="logo-header">
+<div class="logo-header fade-in">
   <img src="images/logo.png" alt="شعار الموقع التعليمي">
 </div>
 
 <!-- شريط الإشعارات المعدل -->
-<div class="notification-bar">
+<div class="notification-bar fade-in">
   <div class="notification-container">
     <i class="fas fa-bell"></i>
     <span id="notificationContent">جاري تحميل الإشعارات...</span>
   </div>
 </div>
 
-<header>
+<header class="fade-in">
   <h1> واجهة المعلم الرقمي </h1>
   <p> أ. محمد حمدان الغامدي </p>
   <p>نافذة لتوثيق الجهود المهنية ونشر المحتوى التعليمي للطلاب</p>
@@ -764,7 +794,7 @@
 
 <div class="container">
   <!-- معلومات عامة -->
-  <section class="section-card">
+  <section class="section-card fade-in">
     <h2 class="section-title">
       <i class="fas fa-info-circle section-icon"></i>
       معلومات عامة
@@ -798,7 +828,7 @@
         <i class="fas fa-user card-icon"></i>
         <h3 class="card-title">السيرة الذاتية</h3>
       </div>
-      <div class="card" style="animation-delay: 0.4s;" data-url="https://sites.google.com/view/3534rf/%D8%A7%D9%84%D9%85%D8%A4%D9%87%D9%84-%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A-%D9%88%D8%A7%D9%84%D8%AC%D8%AE%D8%A8%D8%B1%D8%A7%D8%AA?authuser=1">
+      <div class="card" style="animation-delay: 0.4s;" data-url="https://sites.google.com/view/3534rf/%D8%A7%D9%84%D9%85%D8%A4%D9%87%D9%84-%D8%A7%D9%84%D8%B9%D9%84%D9%85%D9%8A-%D9%88%D8%A7%D9%84%D8%الج%D8%AE%D8%A8%D8%B1%D8%A7%D8%AA?authuser=1">
         <i class="fas fa-graduation-cap card-icon"></i>
         <h3 class="card-title">المؤهل والخبرات</h3>
       </div>
@@ -806,13 +836,13 @@
   </section>
 
   <!-- التنمية المهنية -->
-  <section class="section-card">
+  <section class="section-card fade-in">
     <h2 class="section-title">
       <i class="fas fa-briefcase section-icon"></i>
       التنمية المهنية
     </h2>
     <div class="cards-container">
-      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/aser2w/%D8%A7%D9%84%D8%الد%D9%88%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%D9%8A%D8%A9?authuser=1">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/aser2w/%D8%A7%D9%84%D8%AF%D9%88%D8%B1%D8%A7%D8%AA-%D8%A7%D9%84%D8%AA%D8%AF%D9%8A%D8%B1%D9%8A%D8%A9?authuser=1">
         <i class="fas fa-chalkboard-teacher card-icon"></i>
         <h3 class="card-title">الدورات التدريبية</h3>
       </div>
@@ -824,7 +854,7 @@
   </section>
 
   <!-- التطوير المهني -->
-  <section class="section-card">
+  <section class="section-card fade-in">
     <h2 class="section-title">
       <i class="fas fa-sync-alt section-icon"></i>
       التطوير المهني
@@ -834,7 +864,7 @@
         <i class="fas fa-exchange-alt card-icon"></i>
         <h3 class="card-title">تبادل الزيارات</h3>
       </div>
-      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/wafe23/%D8%A7%D9%84%D9%85%D8%AC%D8%AA%D9%85%D8%B9%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D9%95%D9%86%D9%8A%D8%A9?authuser=1">
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/wafe23/%D8%A7%D9%84%D9%85%D8%AC%D8%AA%D9%85%D8%B9%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D9%87%D9%86%D9%8A%D8%A9?authuser=1">
         <i class="fas fa-users-cog card-icon"></i>
         <h3 class="card-title">المجتمعات المهنية</h3>
       </div>
@@ -842,7 +872,7 @@
   </section>
 
   <!-- التكريم والجوائز -->
-  <section class="section-card">
+  <section class="section-card fade-in">
     <h2 class="section-title">
       <i class="fas fa-award section-icon"></i>
       التكريم والجوائز
@@ -856,7 +886,7 @@
   </section>
 
   <!-- العمل التعليمي -->
-  <section class="section-card">
+  <section class="section-card fade-in">
     <h2 class="section-title">
       <i class="fas fa-chalkboard section-icon"></i>
       العمل التعليمي
@@ -874,7 +904,7 @@
         <i class="fas fa-book card-icon"></i>
         <h3 class="card-title">توزيع المنهج</h3>
       </div>
-      <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/sdf6664rf/%D8%A7%D9%84%D8%AE%D8%B7%D8%A9-%D8%A7%D9%84%D8%A3%D8%B3%D8%A8%D9%88%D8%B9%D9%8A%D8%A9?authuser=1">
+      <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/sdf6664rf/%D8%A7%D9%84%D8%AE%D8%B7%D8%A9-%D8%A7%D9%84%D8%B2%D9%85%D9%86%D9%8A%D8%A9?authuser=1">
         <i class="fas fa-calendar-week card-icon"></i>
         <h3 class="card-title">الخطة الزمنية</h3>
       </div>
@@ -886,7 +916,7 @@
         <i class="fas fa-tasks card-icon"></i>
         <h3 class="card-title">الواجبات</h3>
       </div>
-      <div class="card" style="animation-delay: 0.35s;" data-url="https://sites.google.com/view/dfgu55/%D8%B9%D8%B1%D9%88%D8%B6-%D8%AA%D9%8A%D9%85%D9%8A%D8%A9?authuser=1">
+      <div class="card" style="animation-delay: 0.35s;" data-url="https://sites.google.com/view/dfgu55/%D8%B9%D8%B1%D9%88%D8%B6-%D8%AA%D9%82%D8%AF%D9%8A%D9%85%D9%8A%D8%A9?authuser=1">
         <i class="fas fa-file-powerpoint card-icon"></i>
         <h3 class="card-title">عروض تقديمية</h3>
       </div>
@@ -894,7 +924,7 @@
         <i class="fas fa-file-alt card-icon"></i>
         <h3 class="card-title">أوراق العمل</h3>
       </div>
-      <div class="card" style="animation-delay: 0.45s;" data-url="https://sites.google.com/view/dvfdg33/%D8%A7%D8%B3%D8%AA%D8%B1%D8%A7%D8%AA%D9%8A%D8%AC%D9%8A%D8%A7%D8%AA-%D8%AA%D8%AF%D8%B1%D9%8A%D8%B3?authuser=1">
+      <div class="card" style="animation-delay: 0.45s;" data-url="https://sites.google.com/view/dvfdg33/%D8%A7%D8%B3%D8%AA%D8%B1%D8%A7%D8%AA%D9%8A%D8%AC%D9%8A%D8%A7%D8%AA-%D8%AA%D8%AF%D8%B1%D9%8A%D8%B9?authuser=1">
         <i class="fas fa-lightbulb card-icon"></i>
         <h3 class="card-title">استراتيجيات التدريس</h3>
       </div>
@@ -922,7 +952,7 @@
   </section>
 
   <!-- تقويم الطلاب -->
-  <section class="section-card">
+  <section class="section-card fade-in">
     <h2 class="section-title">
       <i class="fas fa-clipboard-list section-icon"></i>
       تقويم الطلاب
@@ -932,7 +962,7 @@
         <i class="fas fa-chart-line card-icon"></i>
         <h3 class="card-title">سجلات المتابعة</h3>
       </div>
-      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/edsfvd45/%D8%A7%D8%AE%D8%AA%D8%A7%D8%B1%D8%A7%D8%AA?authuser=1">
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/edsfvd45/%D8%A7%D8%AE%D8%AA%D8%A8%D8%A7%D8%B1%D8%A7%D8%AA?authuser=1">
         <i class="fas fa-check-circle card-icon"></i>
         <h3 class="card-title">الاختبارات</h3>
       </div>
@@ -940,7 +970,7 @@
         <i class="fas fa-chart-pie card-icon"></i>
         <h3 class="card-title">تحليل النتائج</h3>
       </div>
-      <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/sdfdrttr4/%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA-%D8%B7%D9%84%D8%A7%D8%A8-%D9%85%D8%AA%D9%88%D9%82%D9%8A%D9%86-%D8%A8%D8%B1%D8%A7%D9%85%D8%AC-%D8%A7%D8%AB%D8%B1%D8%A7%D8%A6%D9%8A%D8%A9?authuser=1&read_current=1">
+      <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/sdfdrttr4/%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA-%D8%B7%D9%84%D8%A7%D8%A8-%D9%85%D8%AA%D9%81%D9%88%D9%82%D9%8A%D9%86-%D8%A8%D8%B1%D8%A7%D9%85%D8%AC-%D8%A7%D8%AB%D8%B1%D8%A7%D8%A6%D9%8A%D8%A9?authuser=1&read_current=1">
         <i class="fas fa-user-graduate card-icon"></i>
         <h3 class="card-title">الطلاب المتفوقين</h3>
       </div>
@@ -952,7 +982,7 @@
   </section>
 
   <!-- مكتبة الطالب -->
-  <section class="section-card">
+  <section class="section-card fade-in">
     <h2 class="section-title">
       <i class="fas fa-book-open section-icon"></i>
       مكتبة الطالب
@@ -962,11 +992,11 @@
         <i class="fas fa-book card-icon"></i>
         <h3 class="card-title nowrap-text">الأول ثانوي</h3>
       </div>
-      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/dgvgrhbht76/%D8%A3%D9%88%D9%84-%D8%AB%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/dgvgrhbht76/%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%AB%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
         <i class="fas fa-book card-icon"></i>
         <h3 class="card-title nowrap-text">الثاني ثانوي</h3>
       </div>
-      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/regf78/%D8%A3%D9%88%D9%84-%D8%AB%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
+      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/regf78/%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB-%D8%AB%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
         <i class="fas fa-book card-icon"></i>
         <h3 class="card-title nowrap-text">الثالث ثانوي</h3>
       </div>
@@ -974,7 +1004,7 @@
   </section>
 
   <!-- الاثراء التقني -->
-  <section class="section-card">
+  <section class="section-card fade-in">
     <h2 class="section-title">
       <i class="fas fa-laptop-code section-icon"></i>
       الاثراء التقني
@@ -996,7 +1026,7 @@
   </section>
 
   <!-- التواصل -->
-  <section class="section-card">
+  <section class="section-card fade-in">
     <h2 class="section-title">
       <i class="fas fa-comments section-icon"></i>
       التواصل
@@ -1011,7 +1041,7 @@
 </div>
 
 <!-- قسم الاستفسارات -->
-<div class="google-form-container">
+<div class="google-form-container fade-in">
   <h2 class="google-form-header">
     <i class="fas fa-comments section-icon"></i>  الاستفسارات التعليمية
   </h2>
@@ -1153,6 +1183,40 @@
     characterData: true,
     childList: true,
     subtree: true
+  });
+
+  // تأثيرات الظهور عند التمرير
+  function checkFadeElements() {
+    const fadeElements = document.querySelectorAll('.fade-in');
+    fadeElements.forEach(el => {
+      const elementTop = el.getBoundingClientRect().top;
+      const elementVisible = 150;
+      if (elementTop < window.innerHeight - elementVisible) {
+        el.classList.add('visible');
+      }
+    });
+  }
+
+  // التحكم في زر العودة للأعلى
+  function toggleBackToTop() {
+    const backToTop = document.querySelector('.back-to-top');
+    if (window.scrollY > 300) {
+      backToTop.classList.add('show');
+    } else {
+      backToTop.classList.remove('show');
+    }
+  }
+
+  // إضافة مستمعي الأحداث
+  window.addEventListener('scroll', () => {
+    checkFadeElements();
+    toggleBackToTop();
+  });
+
+  // التحقق من العناصر عند تحميل الصفحة
+  window.addEventListener('load', () => {
+    checkFadeElements();
+    toggleBackToTop();
   });
 </script>
 
