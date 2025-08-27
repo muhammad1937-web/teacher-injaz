@@ -214,7 +214,7 @@
     .compact-date {
       background: rgba(255, 255, 255, 0.25);
       display: inline-block;
-      padding: 6px 14px; /* تم تقليل الحجم قليلاً */
+      padding: 6px 14px; /* تم تقليل الحديد قليلاً */
       border-radius: 25px;
       margin-top: 10px; /* تم تقليل المسافة من الأعلى */
       font-size: 0.9rem;
@@ -417,6 +417,12 @@
       align-items: center;
       gap: 10px;
       position: relative;
+      /* تحسينات جديدة للعرض الأفقي */
+      overflow: visible;
+      white-space: normal;
+      text-overflow: clip;
+      flex: 1;
+      min-width: 0; /* يسمح بتقلص العنصر عند الحاجة */
     }
 
     .card:hover .card-title {
@@ -435,6 +441,8 @@
       margin-right: 5px;
       opacity: 0.8;
       transition: var(--transition);
+      /* تأكد من ظهور الأيقونة في جميع الأحوال */
+      flex-shrink: 0;
     }
 
     .card:hover .external-icon {
@@ -776,11 +784,104 @@
         padding: 6px 0; /* تم تقليل الارتفاع أكثر للشاشات الصغيرة */
       }
     }
+    
     /* إلغاء التموج الأبيض في الهيدر */
-header::before {
-  content: none !important;
-  background: none !important;
-}
+    header::before {
+      content: none !important;
+      background: none !important;
+    }
+
+    /* تحسينات خاصة للعرض الأفقي (landscape) */
+    @media (max-width: 900px) and (orientation: landscape) {
+      .container {
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
+      }
+      
+      .section-card {
+        width: calc(50% - 1rem) !important;
+        min-height: auto;
+        padding: 1.2rem 1rem 1rem !important;
+      }
+      
+      .card-title {
+        font-size: 1rem !important;
+        white-space: normal;
+        overflow: visible;
+        text-overflow: clip;
+        line-height: 1.4;
+      }
+      
+      .card {
+        padding: 0.8rem 1rem !important;
+        min-height: 60px;
+      }
+      
+      .card-icon {
+        font-size: 1.3rem;
+        min-width: 30px;
+      }
+      
+      .cards-container {
+        gap: 0.8rem;
+      }
+      
+      .section-title {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+      }
+      
+      .section-icon {
+        width: 35px;
+        height: 35px;
+        font-size: 1.2rem;
+      }
+      
+      .google-form-container {
+        padding: 1.5rem !important;
+      }
+      
+      .google-form-container iframe {
+        height: 400px !important;
+      }
+    }
+    
+    /* تحسينات إضافية للعرض الأفقي على شاشات صغيرة */
+    @media (max-width: 700px) and (orientation: landscape) {
+      .section-card {
+        width: 100% !important;
+      }
+      
+      header {
+        padding: 0.8rem;
+      }
+      
+      header h1 {
+        font-size: 1.3rem !important;
+      }
+      
+      header p {
+        font-size: 0.8rem !important;
+      }
+      
+      .compact-date {
+        font-size: 0.75rem !important;
+        padding: 4px 8px !important;
+      }
+    }
+    
+    /* تحسينات للعرض الأفقي على أجهزة iPad */
+    @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+      .container {
+        gap: 1.5rem;
+      }
+      
+      .section-card {
+        width: calc(33.333% - 1.5rem) !important;
+      }
+    }
 
   </style>
 </head>
@@ -1013,7 +1114,7 @@ header::before {
         <i class="fas fa-book card-icon"></i>
         <h3 class="card-title nowrap-text">الأول ثانوي</h3>
       </div>
-      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/dgvgrhbht76/%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%ث%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/dgvgrhbht76/%D8%A7%D9%84%D8%ث%D8%A7%D9%86%D9%8A-%D8%AB%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
         <i class="fas fa-book card-icon"></i>
         <h3 class="card-title nowrap-text">الثاني ثانوي</h3>
       </div>
@@ -1243,4 +1344,3 @@ header::before {
 
 </body>
 </html>
-
