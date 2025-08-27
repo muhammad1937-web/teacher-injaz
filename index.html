@@ -58,16 +58,17 @@
       filter: drop-shadow(0 3px 6px rgba(122, 67, 204, 0.4));
     }
 
-    /* شريط الإشعارات المعدل - اللون الجديد #E6E6FA */
+    /* شريط الإشعارات المعدل - تم تقليل الارتفاع بشكل كبير */
     .notification-bar {
       background: var(--notification-color);
       color: #2c2c3a;
-      padding: 12px 0;
+      padding: 8px 0; /* تم تقليل من 12px */
       overflow: hidden;
       position: relative;
       width: 100%;
       box-shadow: 0 2px 10px rgba(122, 67, 204, 0.2);
       border-bottom: 1px solid rgba(106, 90, 205, 0.2);
+      font-size: 0.9rem; /* تم تقليل حجم الخط */
     }
 
     .notification-container {
@@ -81,11 +82,12 @@
     }
 
     .notification-container i {
-      margin-left: 10px;
-      margin-right: 8px;
+      margin-left: 8px; /* تم تقليل المسافة */
+      margin-right: 6px; /* تم تقليل المسافة */
       color: var(--header-color);
       animation: ring 4s 0.7s ease-in-out infinite;
       transform-origin: 50% 4px;
+      font-size: 0.9rem; /* تم تقليل حجم الأيقونة */
     }
 
     @keyframes scroll {
@@ -717,8 +719,14 @@
       }
 
       .notification-bar {
-        font-size: 0.85rem;
-        padding: 10px 0;
+        font-size: 0.8rem; /* تم تقليل حجم الخط للجوال */
+        padding: 7px 0; /* تم تقليل الارتفاع للجوال */
+      }
+      
+      .notification-container i {
+        font-size: 0.8rem; /* تم تقليل حجم الأيقونة للجوال */
+        margin-left: 6px;
+        margin-right: 4px;
       }
       
       .notification-container {
@@ -762,6 +770,11 @@
       .container {
         padding: 0 1rem 2rem;
       }
+      
+      .notification-bar {
+        font-size: 0.75rem; /* تم تقليل حجم الخط أكثر للشاشات الصغيرة */
+        padding: 6px 0; /* تم تقليل الارتفاع أكثر للشاشات الصغيرة */
+      }
     }
   </style>
 </head>
@@ -772,7 +785,7 @@
   <img src="images/logo.png" alt="شعار الموقع التعليمي">
 </div>
 
-<!-- شريط الإشعارات المعدل -->
+<!-- شريط الإشعارات المعدل - تم تقليل ارتفاعه -->
 <div class="notification-bar fade-in">
   <div class="notification-container">
     <i class="fas fa-bell"></i>
@@ -994,11 +1007,11 @@
         <i class="fas fa-book card-icon"></i>
         <h3 class="card-title nowrap-text">الأول ثانوي</h3>
       </div>
-      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/dgvgrhbht76/%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%AB%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/dgvgrhbht76/%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%ث%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
         <i class="fas fa-book card-icon"></i>
         <h3 class="card-title nowrap-text">الثاني ثانوي</h3>
       </div>
-      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/regf78/%D8%A7%D9%84%D8%ث%D8%A7%D9%84%D8%AB-%D8%AB%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
+      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/regf78/%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB-%D8%AB%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
         <i class="fas fa-book card-icon"></i>
         <h3 class="card-title nowrap-text">الثالث ثانوي</h3>
       </div>
