@@ -150,17 +150,17 @@
         radial-gradient(circle at 10% 90%, rgba(122, 67, 204, 0.03) 0%, transparent 20%);
     }
 
-    /* الهيدر المعدل - اللون الجديد #6A5ACD بدون تدرج */
+    /* الهيدر المعدل - تم تقليل الارتفاع بشكل كبير */
     header {
       background: var(--header-color);
       color: white;
       text-align: center;
-      padding: 1.8rem 1rem; /* تم تقليل الارتفاع من 2.8rem */
+      padding: 1.2rem 1rem; /* تم تقليل الارتفاع بشكل كبير من 2.8rem */
       position: relative;
       border-bottom-left-radius: 25px;
       border-bottom-right-radius: 25px;
       box-shadow: 0 8px 25px rgba(106, 90, 205, 0.4);
-      margin-bottom: 2.5rem;
+      margin-bottom: 2rem; /* تم تقليل المسافة السفلية */
       user-select: none;
       overflow: hidden;
     }
@@ -190,8 +190,8 @@
     }
 
     header h1 {
-      font-size: 1.8rem; /* تم تصغير الحجم من 2.2rem */
-      margin-bottom: 0.6rem; /* تم تقليل المسافة */
+      font-size: 1.6rem; /* تم تصغير الحجم من 2.2rem */
+      margin-bottom: 0.5rem; /* تم تقليل المسافة */
       font-weight: 800;
       letter-spacing: -0.5px;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -199,7 +199,7 @@
     }
 
     header p {
-      font-size: 1rem; /* تم تصغير الحجم من 1.15rem */
+      font-size: 0.95rem; /* تم تصغير الحجم من 1.15rem */
       opacity: 0.95;
       max-width: 800px;
       margin: 0 auto;
@@ -212,10 +212,10 @@
     .compact-date {
       background: rgba(255, 255, 255, 0.25);
       display: inline-block;
-      padding: 8px 16px; /* تم تقليل الحجم قليلاً */
+      padding: 6px 14px; /* تم تقليل الحجم قليلاً */
       border-radius: 25px;
-      margin-top: 15px; /* تم تقليل المسافة من الأعلى */
-      font-size: 0.95rem;
+      margin-top: 10px; /* تم تقليل المسافة من الأعلى */
+      font-size: 0.9rem;
       backdrop-filter: blur(5px);
       border: 1px solid rgba(255, 255, 255, 0.3);
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
@@ -228,7 +228,7 @@
     }
 
     .compact-date .separator {
-      margin: 0 10px;
+      margin: 0 8px;
       opacity: 0.8;
     }
 
@@ -451,7 +451,7 @@
       height: 55px;
       border-radius: 18px;
       display: flex;
-      align-items: center;
+      align-items:  center;
       justify-content: center;
       box-shadow: 0 6px 20px rgba(122, 67, 204, 0.5);
       z-index: 100;
@@ -648,31 +648,31 @@
 
     @media (max-width: 480px) {
       header {
-        padding: 1.5rem 1rem; /* تم تعديل الحجم للجوال */
+        padding: 1rem 0.8rem; /* تم تعديل الحجم للجوال */
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
       }
 
       header h1 {
-        font-size: 1.5rem !important; /* تم تعديل الحجم للجوال */
+        font-size: 1.4rem !important; /* تم تعديل الحجم للجوال */
         margin-bottom: 0.4rem !important;
       }
       
       header p {
-        font-size: 0.9rem !important; /* تم تعديل الحجم للجوال */
+        font-size: 0.85rem !important; /* تم تعديل الحجم للجوال */
         line-height: 1.5 !important;
-        margin-bottom: 0.6rem;
+        margin-bottom: 0.4rem;
       }
 
       .compact-date {
-        font-size: 0.85rem !important;
-        padding: 6px 12px !important; /* تم تعديل الحجم للجوال */
+        font-size: 0.8rem !important;
+        padding: 5px 10px !important; /* تم تعديل الحجم للجوال */
         white-space: nowrap;
-        margin-top: 10px; /* تم تقليل المسافة من الأعلى */
+        margin-top: 8px; /* تم تقليل المسافة من الأعلى */
       }
       
       .compact-date .separator {
-        margin: 0 6px !important;
+        margin: 0 5px !important;
       }
 
       .section-title {
@@ -972,7 +972,7 @@
         <i class="fas fa-chart-pie card-icon"></i>
         <h3 class="card-title">تحليل النتائج</h3>
       </div>
-      <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/sdfdrttr4/%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA-%D8%B7%D9%84%D8%A7%D8%A8-%D9%85%D8%AA%D9%81%D9%88%D9%82%D9%8A%D9%86-%D8%A8%D8%B1%D8%A7%D9%85%D8%AC-%D8%A7%D8%AB%D8%B1%D8%A7%D8%A6%D9%8A%D8%A9?authuser=1&read_current=1">
+      <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/sdfdrttr4/%D8%A8%D9%8A%D8%A7%D9%86%D8%A7%D8%AA-%D8%B7%D9%84%D8%A7%D8%A8-%D9%85%D8%AA%D9%81%D9%88%D9%82%D9%8A%D9%86-%D8%A8%D8%B1%D8%A7%D9%85%D8%AC-%D8%AC%D8%AB%D8%B1%D8%A7%D8%A6%D9%8A%D8%A9?authuser=1&read_current=1">
         <i class="fas fa-user-graduate card-icon"></i>
         <h3 class="card-title">الطلاب المتفوقين</h3>
       </div>
@@ -994,11 +994,11 @@
         <i class="fas fa-book card-icon"></i>
         <h3 class="card-title nowrap-text">الأول ثانوي</h3>
       </div>
-      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/dgvgrhbht76/%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%ث%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/dgvgrhbht76/%D8%A7%D9%84%D8%AB%D8%A7%D9%86%D9%8A-%D8%AB%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
         <i class="fas fa-book card-icon"></i>
         <h3 class="card-title nowrap-text">الثاني ثانوي</h3>
       </div>
-      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/regf78/%D8%A7%D9%84%D8%AB%D8%A7%D9%84%D8%AB-%D8%AB%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
+      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/regf78/%D8%A7%D9%84%D8%ث%D8%A7%D9%84%D8%AB-%D8%AB%D8%A7%D9%86%D9%88%D9%8A?authuser=1">
         <i class="fas fa-book card-icon"></i>
         <h3 class="card-title nowrap-text">الثالث ثانوي</h3>
       </div>
@@ -1124,7 +1124,7 @@
       })
       .catch(error => {
         console.error('حدث خطأ:', error);
-        notificationContent.textContent = "مرحباً بكم في واجهة المعلم الرقمي .. أ.محمد حمدان الغامди";
+        notificationContent.textContent = "مرحباً بكم في واجهة المعلم الرقمي .. أ.محمد حمدان الغامدي";
         adjustScrollSpeed(50); // طول افتراضي
       });
   }
@@ -1224,4 +1224,3 @@
 
 </body>
 </html>
-
