@@ -71,15 +71,15 @@
       font-size: 0.9rem; /* تم تقليل حجم الخط */
     }
 
-    .notification-container {
-      display: inline-block;
-      white-space: nowrap;
-      padding-right: 100%;
-      animation: scroll 40s linear infinite;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      box-sizing: content-box;
-    }
+   .notification-container {
+  display: inline-block;
+  white-space: nowrap;
+  padding-right: 100%;
+  animation: scroll 20s linear infinite; /* تم تغيير من 40s إلى 20s */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  box-sizing: content-box;
+}
 
     .notification-container i {
       margin-left: 8px; /* تم تقليل المسافة */
@@ -1243,26 +1243,27 @@
       });
   }
 
+ 
   // ضبط سرعة الحركة بناءً على طول النص
-  function adjustScrollSpeed(textLength) {
-    const container = document.querySelector('.notification-container');
-    const baseDuration = 40; // ثانية أساسية للنص القصير
-    const additionalTimePerChar = 0.1; // وقت إضافي لكل حرف
-    
-    // حساب المدة بناءً على طول النص
-    let duration = baseDuration + (textLength * additionalTimePerChar);
-    
-    // تحديد حد أقصى للمدة
-    duration = Math.min(duration, 120); // لا تزيد عن 120 ثانية
-    
-    // تطبيق المدة الجديدة
-    container.style.animationDuration = `${duration}s`;
-    
-    // إعادة تشغيل التحريك
-    container.style.animation = 'none';
-    void container.offsetWidth;
-    container.style.animation = `scroll ${duration}s linear infinite`;
-  }
+function adjustScrollSpeed(textLength) {
+  const container = document.querySelector('.notification-container');
+  const baseDuration = 20; // تم تغيير من 40 إلى 20 ثانية أساسية للنص القصير
+  const additionalTimePerChar = 0.05; // تم تغيير من 0.1 إلى 0.05 وقت إضافي لكل حرف
+  
+  // حساب المدة بناءً على طول النص
+  let duration = baseDuration + (textLength * additionalTimePerChar);
+  
+  // تحديد حد أقصى للمدة
+  duration = Math.min(duration, 60); // تم تغيير من 120 إلى 60 ثانية (لا تزيد عن 60 ثانية)
+  
+  // تطبيق المدة الجديدة
+  container.style.animationDuration = `${duration}s`;
+  
+  // إعادة تشغيل التحريك
+  container.style.animation = 'none';
+  void container.offsetWidth;
+  container.style.animation = `scroll ${duration}s linear infinite`;
+}
 
   // فتح الروابط في نافذة جديدة مع إضافة أيقونة
   document.querySelectorAll('.card[data-url]').forEach(card => {
@@ -1338,6 +1339,7 @@
 
 </body>
 </html>
+
 
 
 
