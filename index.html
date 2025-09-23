@@ -876,7 +876,144 @@
         width: calc(33.333% - 1.5rem) !important;
       }
     }
+/* شريط البحث الجديد */
+.search-container {
+  max-width: 500px;
+  margin: 0 auto 2rem;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1001;
+}
 
+.search-box {
+  position: relative;
+  width: 100%;
+}
+
+.search-input {
+  width: 100%;
+  padding: 12px 50px 12px 20px;
+  border: 2px solid rgba(122, 67, 204, 0.2);
+  border-radius: 30px;
+  font-size: 1rem;
+  font-family: 'Tajawal', sans-serif;
+  background: white;
+  box-shadow: 0 4px 15px rgba(122, 67, 204, 0.1);
+  transition: var(--transition);
+  outline: none;
+  position: relative;
+  z-index: 1002;
+}
+
+.search-input:focus {
+  border-color: var(--primary-500);
+  box-shadow: 0 6px 20px rgba(122, 67, 204, 0.2);
+  padding-right: 55px;
+}
+
+.search-button {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: var(--primary-500);
+  color: white;
+  border: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  z-index: 1003;
+}
+
+.search-button:hover {
+  background: var(--primary-600);
+  transform: translateY(-50%) scale(1.05);
+}
+
+.search-results {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(122, 67, 204, 0.3);
+  margin-top: 5px;
+  z-index: 10000;
+  max-height: 300px;
+  overflow-y: auto;
+  display: none;
+}
+
+.search-result-item {
+  padding: 12px 20px;
+  border-bottom: 1px solid rgba(122, 67, 204, 0.1);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background: var(--primary-soft-2);
+}
+
+.search-result-item i {
+  color: var(--primary-500);
+  font-size: 0.9rem;
+}
+
+.search-result-item span {
+  flex: 1;
+}
+
+.no-results {
+  padding: 15px 20px;
+  text-align: center;
+  color: var(--text-light);
+}
+
+@media (max-width: 700px) {
+  .search-container {
+    padding: 0 1rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  .search-input {
+    padding: 10px 45px 10px 15px;
+    font-size: 0.95rem;
+  }
+  
+  .search-button {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .search-input {
+    font-size: 0.9rem;
+  }
+  
+  .search-results {
+    max-height: 250px;
+  }
+  
+  .search-result-item {
+    padding: 10px 15px;
+    font-size: 0.9rem;
+  }
+}
   </style>
 </head>
 <body>
@@ -907,7 +1044,16 @@
     <span id="live-time"></span>
   </div>
 </header>
-
+<!-- شريط البحث الجديد -->
+<div class="search-container fade-in">
+  <div class="search-box">
+    <input type="text" class="search-input" placeholder="ابحث في المحتوى التعليمي..." id="searchInput">
+    <button class="search-button" id="searchButton">
+      <i class="fas fa-search"></i>
+    </button>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
 <div class="container">
   <!-- معلومات عامة -->
   <section class="section-card fade-in">
@@ -1335,10 +1481,93 @@ function adjustScrollSpeed(textLength) {
     checkFadeElements();
     toggleBackToTop();
   });
+  // وظائف البحث
+function initSearch() {
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    const searchResults = document.getElementById('searchResults');
+    
+    // جمع جميع عناصر البحث
+    const searchableItems = Array.from(document.querySelectorAll('.card'));
+    
+    // دالة البحث
+    function performSearch() {
+      const searchTerm = searchInput.value.trim().toLowerCase();
+      
+      if (searchTerm.length < 2) {
+        searchResults.style.display = 'none';
+        return;
+      }
+      
+      // تصفية العناصر بناءً على نص البحث
+      const filteredItems = searchableItems.filter(item => {
+        const title = item.querySelector('.card-title').textContent.toLowerCase();
+        return title.includes(searchTerm);
+      });
+      
+      // عرض النتائج
+      displayResults(filteredItems, searchTerm);
+    }
+    
+    // عرض النتائج
+    function displayResults(items, searchTerm) {
+      searchResults.innerHTML = '';
+      
+      if (items.length === 0) {
+        searchResults.innerHTML = '<div class="no-results">لا توجد نتائج مطابقة</div>';
+      } else {
+        items.forEach(item => {
+          const title = item.querySelector('.card-title').textContent;
+          const resultItem = document.createElement('div');
+          resultItem.className = 'search-result-item';
+          resultItem.innerHTML = `
+            <i class="fas fa-external-link-alt"></i>
+            <span>${title}</span>
+          `;
+          
+          resultItem.addEventListener('click', () => {
+            if (item.dataset.url) {
+              window.open(item.dataset.url, '_blank', 'noopener,noreferrer');
+            } else if (item.onclick) {
+              item.onclick();
+            }
+            searchResults.style.display = 'none';
+            searchInput.value = '';
+          });
+          
+          searchResults.appendChild(resultItem);
+        });
+      }
+      
+      searchResults.style.display = 'block';
+    }
+    
+    // إضافة مستمعي الأحداث
+    searchInput.addEventListener('input', performSearch);
+    searchButton.addEventListener('click', performSearch);
+    
+    // إخفاء نتائج البحث عند النقر خارجها
+    document.addEventListener('click', (e) => {
+      if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+        searchResults.style.display = 'none';
+      }
+    });
+    
+    // البحث عند الضغط على Enter
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        performSearch();
+      }
+    });
+  }
+
+// تهيئة البحث عند تحميل الصفحة
+initSearch();
 </script>
 
 </body>
 </html>
+
 
 
 
