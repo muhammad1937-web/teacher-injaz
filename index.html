@@ -1334,28 +1334,34 @@
 
 <script>
   // دالة تحديث التاريخ والوقت
-  function updateCompactDate() {
+ // دالة تحديث التاريخ والوقت
+function updateCompactDate() {
+    const now = new Date();
+    
+    // حل بسيط: طرح يوم واحد من التاريخ
+    const correctedDate = new Date(now);
+    correctedDate.setDate(correctedDate.getDate() - 1); // طرح يوم واحد
+    
     const hijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', {
-      day: 'numeric',
-      month: 'long'
-    }).format(new Date());
+        day: 'numeric',
+        month: 'long'
+    }).format(correctedDate);
     
     const gregorian = new Intl.DateTimeFormat('ar-EG', {
-      day: 'numeric',
-      month: 'numeric',
-      year: 'numeric'
-    }).format(new Date());
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric'
+    }).format(now);
     
     const time = new Date().toLocaleTimeString('ar-EG', {
-      hour: '2-digit',
-      minute: '2-digit'
+        hour: '2-digit',
+        minute: '2-digit'
     });
     
     document.getElementById('hijri-date').textContent = hijri;
     document.getElementById('gregorian-date').textContent = gregorian;
     document.getElementById('live-time').textContent = time;
-  }
-
+}
   // جلب الإشعار من ملف GitHub
   function fetchNotification() {
     const notificationUrl = 'https://raw.githubusercontent.com/muhammad1937-web/teacher-injaz/refs/heads/main/notification.txt';
@@ -1567,6 +1573,7 @@ initSearch();
 
 </body>
 </html>
+
 
 
 
