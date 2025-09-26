@@ -1038,6 +1038,31 @@
     padding: 5px 10px !important;
   }
 }
+    @media (max-width: 480px) {
+  .responsive-header {
+    height: 200px !important;
+    object-position: center 25% !important; /* تركيز أعلى للجوال */
+  }
+  
+  .compact-date {
+    font-size: 0.8rem !important;
+    padding: 6px 15px !important;
+    bottom: 10px !important;
+    max-width: 300px !important;
+  }
+}
+
+@media (max-width: 360px) {
+  .responsive-header {
+    height: 180px !important;
+    object-position: center 20% !important;
+  }
+  
+  .compact-date {
+    font-size: 0.75rem !important;
+    padding: 5px 12px !important;
+  }
+}
   </style>
 </head>
 <body>
@@ -1056,18 +1081,23 @@
 </div>
 
 <!-- الهيدر المعدل ليتناسب مع أبعاد 1500x250 -->
-<header class="fade-in" style="background: transparent; box-shadow: none; padding: 0; position: relative; overflow: hidden;">
-    <img src="images/hh.png" alt="واجهة المعلم الرقمي - أ. محمد حمدان الغامدي" class="responsive-header" style="width: 100%; height: auto; object-fit: contain; display: block;">
-    <!-- قسم التاريخ والوقت مصغر -->
-    <div style="text-align: center; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 350px; z-index: 2;">
-        <div class="compact-date" dir="rtl" style="background: #d6cdeb; color: #000000; border: 2px solid #632cde; padding: 8px 15px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); font-weight: 600; font-size: 0.9rem;">
-            <span id="hijri-date"></span>
-            <span class="separator" style="color: #632cde; margin: 0 8px; font-weight: bold;">•</span>
-            <span id="gregorian-date"></span>
-            <span class="separator" style="color: #632cde; margin: 0 8px; font-weight: bold;">•</span>
-            <span id="live-time"></span>
-        </div>
+<!-- الهيدر مع قص ذكي والوقت في الأسفل -->
+<header class="fade-in" style="background: transparent; box-shadow: none; padding: 0; position: relative; margin: 0;">
+  <div style="position: relative; overflow: hidden; border-bottom-left-radius: 25px; border-bottom-right-radius: 25px; box-shadow: 0 8px 25px rgba(106, 90, 205, 0.4);">
+    <img src="images/hh.png" alt="واجهة المعلم الرقمي - أ. محمد حمدان الغامدي" 
+         class="responsive-header" style="width: 100%; height: 250px; object-fit: cover; object-position: center 30%; display: block;">
+    
+    <!-- الوقت والتاريخ في الأسفل -->
+    <div style="position: absolute; bottom: 15px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 350px; z-index: 2;">
+      <div class="compact-date" dir="rtl" style="background: #d6cdeb; color: #000000; border: 2px solid #632cde; padding: 8px 20px; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.15); font-weight: 600; font-size: 0.9rem; text-align: center;">
+        <span id="hijri-date"></span> 
+        <span class="separator" style="color: #632cde; margin: 0 8px; font-weight: bold;">•</span>
+        <span id="gregorian-date"></span>
+        <span class="separator" style="color: #632cde; margin: 0 8px; font-weight: bold;">•</span>
+        <span id="live-time"></span>
+      </div>
     </div>
+  </div>
 </header>
 
 <!-- شريط البحث الجديد -->
@@ -1599,6 +1629,7 @@ initSearch();
 
 </body>
 </html>
+
 
 
 
