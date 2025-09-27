@@ -1069,6 +1069,18 @@
       font-size: 0.64rem; /* أصغر قليلاً أكثر */
   }
 }
+/* الهيدر في الوضع الأفقي */
+@media screen and (max-height: 500px) and (orientation: landscape) {
+  header img.responsive-header {
+    height: 160px !important;   /* زود الطول ليبان أوضح */
+    max-height: 160px !important;
+  }
+
+  .compact-date {
+    font-size: 0.9rem !important;  /* خليه أكبر شوية */
+    padding: 4px 10px !important;  /* عشان ما يضيق */
+  }
+}
 
   </style>
 </head>
@@ -1100,7 +1112,7 @@
       <div class="compact-date" dir="rtl" 
            style="background: #d6cdeb; color: #5D3FD3; padding: 2px 6px !important; border-radius: 10px; 
                   box-shadow: 0 1px 4px rgba(0,0,0,0.12); font-weight: 400; font-size: 0.55rem !important; 
-                  text-align: center; backdrop-filter: blur(5px);">
+                  text-align: center; backdrop-filter: blur(5px);  border: 0.5px solid rgba(93, 63, 211, 0.3);">
         <span id="hijri-date"></span> 
         <span class="separator" style="color: #7A43CC; margin: 0 4px; opacity: 0.7;">•</span>
         <span id="gregorian-date"></span>
@@ -1640,6 +1652,7 @@ initSearch();
 
 </body>
 </html>
+
 
 
 
