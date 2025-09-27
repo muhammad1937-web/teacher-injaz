@@ -1081,6 +1081,23 @@
     padding: 4px 10px !important;  /* عشان ما يضيق */
   }
 }
+/* الهيدر العام */
+#header {
+    height: 200px;           /* ارتفاع مناسب للوضع العمودي */
+    width: 100%;
+    background-image: url('your-header-image.jpg');
+    background-size: cover;   /* تغطية كاملة بدون تشويه */
+    background-position: center; /* إبقاء الجزء المهم في المنتصف */
+}
+
+/* للهاتف بالوضع الأفقي */
+@media only screen and (max-width: 767px) and (orientation: landscape) {
+    #header {
+        height: 200px;       /* نفس ارتفاع الوضع العمودي */
+        background-size: cover;
+        background-position: center;
+    }
+}
 
   </style>
 </head>
@@ -1652,6 +1669,7 @@ initSearch();
 
 </body>
 </html>
+
 
 
 
