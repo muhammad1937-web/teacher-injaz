@@ -1109,7 +1109,189 @@
     object-fit: cover;
     object-position: center;
 }
+/* أنماط قسم الذكاء الاصطناعي */
+.ai-assistant-container {
+  max-width: 800px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+  background: linear-gradient(135deg, #ffffff 0%, #f8f5ff 100%);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(122, 67, 204, 0.2);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(122, 67, 204, 0.15);
+}
 
+.ai-assistant-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #4285f4 0%, #34a853 33%, #fbbc05 66%, #ea4335 100%);
+  border-radius: 2px 2px 0 0;
+}
+
+.ai-header {
+  color: var(--primary-500);
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 1.7rem;
+  position: relative;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.ai-header::after {
+  content: "";
+  position: absolute;
+  bottom: -12px;
+  right: 50%;
+  transform: translateX(50%);
+  width: 80px;
+  height: 4px;
+  background: var(--primary-500);
+  border-radius: 4px;
+  box-shadow: 0 0 10px var(--primary-soft-1);
+}
+
+.ai-icon {
+  font-size: 2rem;
+  background: linear-gradient(135deg, #4285f4, #34a853, #fbbc05, #ea4335);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+.ai-description {
+  text-align: center;
+  color: var(--text-light);
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+.ai-chat-container {
+  background: white;
+  border-radius: 15px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(122, 67, 204, 0.1);
+  border: 1px solid rgba(122, 67, 204, 0.1);
+  margin-bottom: 1.5rem;
+}
+
+.ai-messages {
+  height: 300px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  background: var(--light-bg);
+  border-radius: 10px;
+  border: 1px solid rgba(122, 67, 204, 0.1);
+}
+
+.message {
+  margin-bottom: 1rem;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  max-width: 85%;
+  word-wrap: break-word;
+}
+
+.user-message {
+  background: var(--primary-soft-2);
+  margin-right: auto;
+  border-bottom-right-radius: 4px;
+}
+
+.ai-message {
+  background: white;
+  margin-left: auto;
+  border: 1px solid rgba(122, 67, 204, 0.1);
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 2px 8px rgba(122, 67, 204, 0.1);
+}
+
+.ai-input-group {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.ai-input {
+  flex: 1;
+  padding: 12px 15px;
+  border: 2px solid rgba(122, 67, 204, 0.2);
+  border-radius: 25px;
+  font-size: 1rem;
+  font-family: 'Tajawal', sans-serif;
+  background: white;
+  transition: var(--transition);
+  outline: none;
+}
+
+.ai-input:focus {
+  border-color: var(--primary-500);
+  box-shadow: 0 0 0 3px rgba(122, 67, 204, 0.1);
+}
+
+.ai-send-btn {
+  background: var(--primary-500);
+  color: white;
+  border: none;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--transition);
+  font-size: 1.2rem;
+}
+
+.ai-send-btn:hover {
+  background: var(--primary-600);
+  transform: scale(1.05);
+}
+
+.ai-send-btn:disabled {
+  background: var(--text-light);
+  cursor: not-allowed;
+  transform: none;
+}
+
+.ai-loading {
+  display: none;
+  text-align: center;
+  color: var(--text-light);
+  font-style: italic;
+}
+
+.ai-disclaimer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin-top: 1rem;
+  padding: 1rem;
+  background: var(--green-100);
+  border-radius: 10px;
+  border: 1px solid var(--green-200);
+}
+
+.ai-disclaimer i {
+  color: var(--green-text);
+  margin-left: 0.5rem;
+}
   </style>
 </head>
 <body>
@@ -1408,7 +1590,41 @@
     </div>
   </section>
 </div>
-
+<!-- قسم مساعد الذكاء الاصطناعي -->
+<div class="ai-assistant-container fade-in">
+  <h2 class="ai-header">
+    <i class="fas fa-robot ai-icon"></i>
+    مساعد الذكاء الاصطناعي  
+  </h2>
+  
+  <p class="ai-description">
+    اسأل عن أي موضوع في التقنية الرقمية أو غيرها من المواضيع 
+  </p>
+  
+  <div class="ai-chat-container">
+    <div class="ai-messages" id="aiMessages">
+      <div class="message ai-message">
+        <strong>   مـرحبا ومسـهلا  :</strong>  أنا مساعد الذكاء الاصطناعي .. كيف أقدر اخدمك ؟
+      </div>
+    </div>
+    
+    <div class="ai-input-group">
+      <input type="text" class="ai-input" id="aiInput" placeholder="أكتب سؤالك هنا..." maxlength="500">
+      <button class="ai-send-btn" id="aiSendBtn">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+    
+    <div class="ai-loading" id="aiLoading">
+      <i class="fas fa-spinner fa-spin"></i> جاري معالجة سؤالك...
+    </div>
+  </div>
+  
+  <div class="ai-disclaimer">
+    <i class="fas fa-info-circle"></i>
+    ملاحظة: الإجابات تعتمد على المعرفة العامة للذكاء الاصطناعي وقد تحتاج لمراجعة المعلم للتأكد من دقتها
+  </div>
+</div>
 <!-- قسم الاستفسارات -->
 <div class="google-form-container fade-in">
   <h2 class="google-form-header">
@@ -1676,32 +1892,127 @@ function initSearch() {
 
 // تهيئة البحث عند تحميل الصفحة
 initSearch();
+// مساعد الذكاء الاصطناعي Gemini
+function initAIAssistant() {
+    const aiMessages = document.getElementById('aiMessages');
+    const aiInput = document.getElementById('aiInput');
+    const aiSendBtn = document.getElementById('aiSendBtn');
+    const aiLoading = document.getElementById('aiLoading');
+
+    // رابط الخادم الوسيط
+    const API_URL = '/api/gemini';
+
+    // زر مسح المحادثة
+    function addClearButton() {
+        const clearBtn = document.createElement('button');
+        clearBtn.innerHTML = '<i class="fas fa-trash"></i> مسح المحادثة';
+        clearBtn.style.cssText = `
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            transition: all 0.3s;
+        `;
+        clearBtn.onclick = clearConversation;
+        
+        aiMessages.parentNode.insertBefore(clearBtn, aiMessages);
+    }
+
+    // مسح المحادثة
+    function clearConversation() {
+        aiMessages.innerHTML = `
+            <div class="message ai-message">
+                <strong>مساعد التقنية:</strong> مرحباً! أنا مساعد الذكاء الاصطناعي الخاص بالتقنية الرقمية. كيف يمكنني مساعدتك في مواضيع البرمجة، الشبكات، الأمن السيبراني أو أي موضوع تقني آخر؟
+            </div>
+        `;
+    }
+
+    async function sendMessage() {
+        const message = aiInput.value.trim();
+        if (!message) return;
+
+        addMessage(message, 'user');
+        aiInput.value = '';
+        aiSendBtn.disabled = true;
+        aiLoading.style.display = 'block';
+
+        try {
+            const response = await fetch(API_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    contents: [{
+                        parts: [{
+                            text: `أنت مساعد خبير في التقنية الرقمية والبرمجة. أجِب باللغة العربية الفصحى. 
+                            السؤال: ${message}
+                            
+                            قدم إجابة واضحة ومفيدة في مجال التقنية الرقمية، البرمجة، الشبكات، الأمن السيبراني، قواعد البيانات، وغيرها من المواضيع التقنية.`
+                        }]
+                    }]
+                })
+            });
+
+            if (!response.ok) {
+                throw new Error('فشل في الاتصال بالخدمة');
+            }
+
+            const data = await response.json();
+            
+            if (data.candidates && data.candidates[0].content.parts[0].text) {
+                const aiResponse = data.candidates[0].content.parts[0].text;
+                addMessage(aiResponse, 'ai');
+            } else {
+                throw new Error('لم يتم الحصول على إجابة');
+            }
+
+        } catch (error) {
+            console.error('Error:', error);
+            addMessage('عذراً، حدث خطأ في الاتصال. تأكد من اتصال الإنترنت وحاول مرة أخرى.', 'ai');
+        } finally {
+            aiLoading.style.display = 'none';
+            aiSendBtn.disabled = false;
+        }
+    }
+
+    function addMessage(text, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}-message`;
+        
+        if (sender === 'user') {
+            messageDiv.innerHTML = `<strong>أنت:</strong> ${text}`;
+        } else {
+            const formattedText = text.replace(/\n/g, '<br>');
+            messageDiv.innerHTML = `<strong>مساعد التقنية:</strong> ${formattedText}`;
+        }
+        
+        aiMessages.appendChild(messageDiv);
+        aiMessages.scrollTop = aiMessages.scrollHeight;
+    }
+
+    // إضافة زر المسح
+    addClearButton();
+
+    // إضافة مستمعي الأحداث
+    aiSendBtn.addEventListener('click', sendMessage);
+    aiInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
+    aiInput.addEventListener('input', () => {
+        aiSendBtn.disabled = !aiInput.value.trim();
+    });
+}
+
+// تهيئة المساعد عند تحميل الصفحة
+document.addEventListener('DOMContentLoaded', initAIAssistant);
 </script>
 
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
