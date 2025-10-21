@@ -1931,7 +1931,7 @@ function initAIAssistant() {
         `;
     }
 
-    async function sendMessage() {
+       async function sendMessage() {
         const message = aiInput.value.trim();
         if (!message) return;
 
@@ -1940,6 +1940,10 @@ function initAIAssistant() {
         aiSendBtn.disabled = true;
         aiLoading.style.display = 'block';
 
+        // --- بداية التعديل ---
+        // تأكد من أن الرابط كامل وصحيح
+        const API_URL = '/api/gemini'; 
+
         try {
             const response = await fetch(API_URL, {
                 method: 'POST',
@@ -1947,17 +1951,20 @@ function initAIAssistant() {
                 body: JSON.stringify({
                     contents: [{
                         parts: [{
-                            text: `أنت مساعد خبير في التقنية الرقمية والبرمجة. أجِب باللغة العربية الفصحى. 
-                            السؤال: ${message}
-                            
-                            قدم إجابة واضحة ومفيدة في مجال التقنية الرقمية، البرمجة، الشبكات، الأمن السيبراني، قواعد البيانات، وغيرها من المواضيع التقنية.`
+                            text: message // نرسل الرسالة مباشرة
                         }]
                     }]
                 })
             });
 
+            // سنقوم بتسجيل حالة الاستجابة في المتصفح لتشخيص المشكلة
+            console.log('Response Status:', response.status);
+
             if (!response.ok) {
-                throw new Error('فشل في الاتصال بالخدمة');
+                // سنقرأ رسالة الخطأ من الخادم ونعرضها
+                const errorData = await response.json();
+                console.error('Error from server:', errorData);
+                throw new Error(errorData.error || 'فشل في الاتصال بالخدمة');
             }
 
             const data = await response.json();
@@ -1966,17 +1973,25 @@ function initAIAssistant() {
                 const aiResponse = data.candidates[0].content.parts[0].text;
                 addMessage(aiResponse, 'ai');
             } else {
+                 // إذا كانت الاستجابة من Gemini تحتوي على خطأ (مثل مشكلة في الفوترة)
+                if (data.error) {
+                    console.error('Error from Gemini:', data.error.message);
+                    throw new Error(data.error.message);
+                }
                 throw new Error('لم يتم الحصول على إجابة');
             }
 
         } catch (error) {
-            console.error('Error:', error);
-            addMessage('عذراً، حدث خطأ في الاتصال. تأكد من اتصال الإنترنت وحاول مرة أخرى.', 'ai');
+            console.error('Catch Block Error:', error);
+            // سنعرض رسالة خطأ أكثر تفصيلاً
+            addMessage(`عذراً، حدث خطأ: ${error.message}`, 'ai');
         } finally {
             aiLoading.style.display = 'none';
             aiSendBtn.disabled = false;
         }
+        // --- نهاية التعديل ---
     }
+
 
     function addMessage(text, sender) {
         const messageDiv = document.createElement('div');
@@ -2016,3 +2031,4 @@ document.addEventListener('DOMContentLoaded', initAIAssistant);
 
 </body>
 </html>
+
