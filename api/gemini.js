@@ -10,37 +10,33 @@ export default async function handler(req, res) {
     }
 
     const apiKey = process.env.GEMINI_API_KEY;
-    const projectId = 'teacher-portfolio-3f782'; // لقد أضفت معرّف المشروع هنا
-
     if (!apiKey) {
       console.error('GEMINI_API_KEY is not set');
       return res.status(500).json({ error: 'Server configuration error' });
     }
 
-    // --- التغيير الرئيسي هنا ---
-    // تم التبديل إلى نقطة نهاية Vertex AI الأكثر استقراراً
-    const url = `https://us-central1-aiplatform.googleapis.com/v1/projects/${projectId}/locations/us-central1/publishers/google/models/gemini-pro:streamGenerateContent`;
+    // --- العودة إلى الواجهة الأصلية مع تصحيح الرابط ---
+    // هذا هو المسار الصحيح والمستقر لنموذج gemini-pro
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
 
     const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        // Vertex AI تتطلب رمز مصادقة مختلف
-        'Authorization': `Bearer ${apiKey}`,
       },
+      // هنا نرسل الطلب كما هو بدون تعديل
       body: JSON.stringify(userMessage ),
     });
 
     if (!response.ok) {
-      const errorBody = await response.text(); // أحياناً الخطأ يكون نصياً وليس JSON
-      console.error('Error from Vertex AI API:', errorBody);
-      return res.status(response.status).json({ error: 'Failed to get response from AI', details: errorBody });
+      const errorBody = await response.json();
+      console.error('Error from Gemini API:', errorBody);
+      // أضفت تفاصيل الخطأ من Google مباشرة للرسالة
+      return res.status(response.status).json({ error: 'Failed to get response from AI', details: errorBody.error.message });
     }
 
-    // بما أننا نستخدم streamGenerateContent، نحتاج إلى معالجة الاستجابة بشكل مختلف قليلاً
-    // للتبسيط الآن، سنعيد أول جزء من الرد فقط
     const data = await response.json();
-    res.status(200).json(data[0]); // Vertex AI stream ترد بمصفوفة
+    res.status(200).json(data);
 
   } catch (error) {
     console.error('Internal Server Error:', error);
