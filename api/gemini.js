@@ -1,52 +1,43 @@
 export default async function handler(req, res) {
-  // السماح بطلبات POST فقط
   if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'Only POST requests are allowed' });
+    return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
   try {
-    // 1. اقرأ محتوى الطلب (body) الذي يرسله موقعك
-    const requestBody = req.body;
-
-    // 2. استخدم مفتاح API من متغيرات البيئة
-    const apiKey = process.env.GEMINI_API_KEY;
-    
-    if (!apiKey) {
-      console.error("GEMINI_API_KEY is not set in Vercel environment variables.");
-      return res.status(500).json({ error: "API key is not configured on the server." });
+    const userMessage = req.body;
+    if (!userMessage) {
+      return res.status(400).json({ error: 'Request body is missing' });
     }
 
-    // 3. بناء الرابط الصحيح
-    // انتبه: الرابط يستخدم "v1beta" وهو ما يتوافق مع مفاتيح AI Studio
-    const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+    const apiKey = process.env.GEMINI_API_KEY;
+    if (!apiKey) {
+      // لا تعرض الخطأ للمستخدم النهائي، فقط للتسجيل في Vercel
+      console.error('GEMINI_API_KEY is not set');
+      return res.status(500).json({ error: 'Server configuration error' });
+    }
 
-    // 4. أرسل الطلب إلى Gemini
-    const apiResponse = await fetch(endpoint, {
+    // استخدمنا gemini-pro لأنه نموذج مستقر ومدعوم
+    const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent?key=${apiKey}`;
+
+    const response = await fetch(url, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(requestBody ), // مرر requestBody مباشرة
+      body: JSON.stringify(userMessage ),
     });
 
-    // 5. تحليل الاستجابة من Gemini
-    const data = await apiResponse.json();
-
-    // 6. التحقق من وجود خطأ في استجابة Gemini نفسها
-    if (data.error) {
-      console.error('Error from Gemini API:', data.error);
-      // أعد إرسال رسالة الخطأ من جوجل كما هي لتشخيص المشكلة
-      return res.status(data.error.code || 500).json({ 
-        error: `Error from Gemini: ${data.error.message}`,
-        details: data.error.details 
-      });
+    if (!response.ok) {
+      const errorBody = await response.json();
+      console.error('Error from Gemini API:', errorBody);
+      return res.status(response.status).json({ error: 'Failed to get response from AI', details: errorBody });
     }
-    
-    // 7. إذا نجح كل شيء، أرسل الرد إلى موقعك
+
+    const data = await response.json();
     res.status(200).json(data);
 
   } catch (error) {
-    console.error('Critical error in serverless function:', error);
-    res.status(500).json({ error: 'An internal server error occurred.', details: error.message });
+    console.error('Internal Server Error:', error);
+    res.status(500).json({ error: 'An internal server error occurred.' });
   }
 }
