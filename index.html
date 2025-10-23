@@ -1594,7 +1594,7 @@
 <div class="ai-assistant-container fade-in">
   <h2 class="ai-header">
     <i class="fas fa-robot ai-icon"></i>
-    مساعد الذكاء الاصطناعي  
+     الذكاء الاصطناعي  
   </h2>
   
   <p class="ai-description">
@@ -1604,7 +1604,7 @@
   <div class="ai-chat-container">
     <div class="ai-messages" id="aiMessages">
       <div class="message ai-message">
-        <strong>   مـرحبا ومسـهلا  :</strong>  أنا مساعد الذكاء الاصطناعي .. كيف أقدر اخدمك ؟
+        <strong>   مرحباً بك   :</strong>  أنا المساعد الرقمي للأستاذ محمد الغامدي، وشريكك في رحلة التعلم، تفضل بطرح سؤالك.
       </div>
     </div>
     
@@ -1926,7 +1926,7 @@ function initAIAssistant() {
     function clearConversation() {
         aiMessages.innerHTML = `
             <div class="message ai-message">
-                <strong>مساعد التقنية:</strong> مرحباً! أنا مساعد الذكاء الاصطناعي الخاص بالتقنية الرقمية. كيف يمكنني مساعدتك في مواضيع البرمجة، الشبكات، الأمن السيبراني أو أي موضوع تقني آخر؟
+                <strong> الذكاء الاصطناعي:</strong> مرحباً! كيف يمكنني مساعدتك في مواضيع التقنية الرقمية أو أي موضوع آخر؟
             </div>
         `;
     }
@@ -2001,7 +2001,7 @@ function initAIAssistant() {
             messageDiv.innerHTML = `<strong>أنت:</strong> ${text}`;
         } else {
             const formattedText = text.replace(/\n/g, '<br>');
-            messageDiv.innerHTML = `<strong>مساعد التقنية:</strong> ${formattedText}`;
+            messageDiv.innerHTML = `<strong>الذكاء الاصطناعي:</strong> ${formattedText}`;
         }
         
         aiMessages.appendChild(messageDiv);
@@ -2031,4 +2031,5 @@ document.addEventListener('DOMContentLoaded', initAIAssistant);
 
 </body>
 </html>
+
 
