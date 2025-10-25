@@ -205,18 +205,53 @@
       margin-bottom: 0.5rem; /* تم إضافة مسافة أسفل */
     }
 
-    .compact-date {
-      background: rgba(255, 255, 255, 0.25);
-      display: inline-block;
-      padding: 6px 14px; /* تم تقليل الحديد قليلاً */
-      border-radius: 25px;
-      margin-top: 10px; /* تم تقليل المسافة من الأعلى */
-      font-size: 0.9rem;
-      backdrop-filter: blur(5px);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-      transition: var(--transition);
-    }
+.compact-date {
+	      background: rgba(255, 255, 255, 0.25);
+	      display: inline-block;
+	      padding: 6px 14px; /* تم تقليل الحديد قليلاً */
+	      border-radius: 25px;
+	      margin-top: 10px; /* تم تقليل المسافة من الأعلى */
+	      font-size: 0.9rem;
+	      backdrop-filter: blur(5px);
+	      border: 1px solid rgba(255, 255, 255, 0.3);
+	      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	      transition: var(--transition);
+	    }
+	
+	    /* تنسيق جديد للوقت والتاريخ في موقعه الجديد */
+	    .compact-date.new-position {
+	      background: #e6e8fb; /* لون خلفية فاتح وجميل */
+	      color: var(--text-dark); /* لون النص الداكن */
+	      padding: 8px 18px; /* زيادة حجم البادينغ */
+	      border-radius: 25px; /* شكل دائري */
+	      font-size: 0.9rem; /* حجم خط مناسب */
+	      font-weight: 700;
+	      box-shadow: 0 4px 15px rgba(122, 67, 204, 0.2); /* ظل مميز */
+	      border: 1px solid rgba(93, 63, 211, 0.1); /* حدود خفيفة */
+	      /* إزالة التنسيقات المطلقة */
+	      position: static;
+	      transform: none;
+	      margin: 0 auto;
+	    }
+	    
+	    .compact-date.new-position:hover {
+	      transform: translateY(-3px);
+	      box-shadow: 0 6px 20px rgba(122, 67, 204, 0.3);
+	    }
+	
+	    /* تعديل تنسيق الوقت والتاريخ الأصلي داخل الهيدر (إذا كان لا يزال موجوداً في مكان آخر) */
+	    .compact-date {
+	      background: rgba(255, 255, 255, 0.25);
+	      display: inline-block;
+	      padding: 6px 14px;
+	      border-radius: 25px;
+	      margin-top: 10px;
+	      font-size: 0.9rem;
+	      backdrop-filter: blur(5px);
+	      border: 1px solid rgba(255, 255, 255, 0.3);
+	      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+	      transition: var(--transition);
+	    }
 
     .compact-date:hover {
       background: rgba(255, 255, 255, 0.3);
@@ -1065,10 +1100,13 @@
 }
 /* تصغير أكبر قليلاً للتاريخ والوقت على الجوال */
 @media (max-width: 768px) {
-  #hijri-date, #gregorian-date, #live-time {
-      font-size: 0.64rem; /* أصغر قليلاً أكثر */
-  }
-}
+	  #hijri-date, #gregorian-date, #live-time {
+	      font-size: 0.75rem; /* حجم مناسب للجوال في موقعه الجديد */
+	  }
+	  .compact-date.new-position {
+	      padding: 6px 15px;
+	  }
+	}
 /* الهيدر في الوضع الأفقي */
 @media screen and (max-height: 500px) and (orientation: landscape) {
   header img.responsive-header {
@@ -1299,31 +1337,30 @@
 </div>
 
 <!-- الهيدر المعدل ليتناسب مع أبعاد 1500x250 -->
-<!-- الهيدر مع قص ذكي والوقت في الأسفل -->
+<!-- الهيدر مع قص ذكي -->
 <header class="fade-in" style="background: transparent; box-shadow: none; padding: 0; position: relative; margin: 0;">
   <div style="position: relative; overflow: hidden; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0 6px 20px rgba(106, 90, 205, 0.4);">
     <img src="images/tr.png" alt="واجهة المعلم الرقمي - أ. محمد حمدان الغامدي" 
          class="responsive-header" 
          style="width: 100%; height: 100px !important; max-height: 100px !important; object-fit: cover; object-position: center 30%; display: block;">
     
-    <!-- الوقت والتاريخ بدون إطار -->
-    <div style="position: absolute; bottom: 6px; left: 50%; transform: translateX(-50%); width: 90%; max-width: 350px; z-index: 2;">
-      <div class="compact-date" dir="rtl" 
-           style="background: #e6e8fb; color: #000000; padding: 2px 6px !important; border-radius: 10px; 
-                  box-shadow: 0 1px 4px rgba(0,0,0,0.12); font-weight: 800; font-size: 0.55rem !important; 
-                  text-align: center; backdrop-filter: blur(5px);  border: 0.5px solid rgba(93, 63, 211, 0.3); border: none;">
-        <span id="hijri-date"></span> 
-        <span class="separator" style="color: #7A43CC; margin: 0 4px; opacity: 0.7;">•</span>
-        <span id="gregorian-date"></span>
-        <span class="separator" style="color: #7A43CC; margin: 0 4px; opacity: 0.7;">•</span>
-        <span id="live-time"></span>
-      </div>
-    </div>
+
   </div>
 </header>
 
+<!-- الوقت والتاريخ الجديد فوق خانة البحث -->
+<div class="date-time-container fade-in" style="text-align: center; margin-bottom: 10px; margin-top: 20px;">
+  <div class="compact-date new-position" dir="rtl">
+    <span id="hijri-date"></span> 
+    <span class="separator" style="color: #7A43CC; margin: 0 4px; opacity: 0.7;">•</span>
+    <span id="gregorian-date"></span>
+    <span class="separator" style="color: #7A43CC; margin: 0 4px; opacity: 0.7;">•</span>
+    <span id="live-time"></span>
+  </div>
+</div>
+
 <!-- شريط البحث الجديد -->
-<div class="search-container fade-in" style="margin-top: 20px !important;">
+<div class="search-container fade-in" style="margin-top: 0px !important;">
   <div class="search-box">
     <input type="text" class="search-input" placeholder="ابحث في المحتوى التعليمي..." id="searchInput">
     <button class="search-button" id="searchButton">
@@ -2023,10 +2060,3 @@ document.addEventListener('DOMContentLoaded', initAIAssistant);
 
 </body>
 </html>
-
-
-
-
-
-
-
