@@ -8,6 +8,108 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
+    /* ========================================= */
+/*   تنسيقات الهيدر التقني الجديد والمتحرك   */
+/* ========================================= */
+
+.tech-header {
+  background: linear-gradient(135deg, #5D3FD3 0%, #7B68EE 100%);
+  color: white;
+  text-align: center;
+  padding: 2.5rem 1rem;
+  position: relative;
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  box-shadow: 0 8px 30px rgba(93, 63, 211, 0.5);
+  margin: 0;
+  overflow: hidden; /* ضروري لإخفاء الأيقونات الزائدة */
+  z-index: 1;
+}
+
+.tech-header .header-content {
+  position: relative;
+  z-index: 2; /* للتأكد من أن النص فوق الأيقونات */
+}
+
+.tech-header h1 {
+  font-size: 2rem;
+  font-weight: 800;
+  margin: 0;
+  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.tech-header h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 0.5rem 0;
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.tech-header p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0.25rem 0 0.75rem 0;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.tech-header span {
+  font-size: 0.9rem;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.8);
+  display: block;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.floating-icons {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+.floating-icons i {
+  color: rgba(255, 255, 255, 0.12);
+  position: absolute;
+  font-size: 2rem; /* حجم أصغر للأيقونات */
+  animation: float 15s infinite ease-in-out;
+}
+
+/* توزيع وتوقيت مختلف لكل أيقونة */
+.icon-1 { top: 15%; left: 10%; animation-delay: 0s; }
+.icon-2 { top: 25%; right: 12%; animation-delay: -3s; font-size: 2.5rem; }
+.icon-3 { top: 60%; left: 20%; animation-delay: -6s; }
+.icon-4 { bottom: 10%; right: 30%; animation-delay: -9s; font-size: 2.2rem; }
+.icon-5 { top: 75%; left: 45%; animation-delay: -12s; }
+.icon-6 { top: 5%; left: 50%; animation-delay: -14s; }
+
+/* حركة الطفو العشوائية */
+@keyframes float {
+  0% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-20px) rotate(15deg); }
+  100% { transform: translateY(0px) rotate(0deg); }
+}
+
+/* التوافق مع الشاشات الأصغر */
+@media (max-width: 768px) {
+  .tech-header { padding: 2rem 1rem; }
+  .tech-header h1 { font-size: 1.7rem; }
+  .tech-header h2 { font-size: 1.2rem; }
+  .tech-header p { font-size: 1rem; }
+  .tech-header span { font-size: 0.85rem; }
+  .floating-icons i { font-size: 1.5rem; }
+  .icon-2, .icon-4 { font-size: 1.8rem; }
+}
+
+/* إخفاء بعض الأيقونات في الوضع الأفقي للجوال لتجنب الازدحام */
+@media (max-width: 900px) and (orientation: landscape) {
+  .tech-header { padding: 1.5rem 1rem; }
+  .icon-4, .icon-5, .icon-6 { display: none; }
+}
+
     :root {
       --primary-100: #f3e8ff;
       --primary-200: #d5b8ff;
@@ -1370,6 +1472,27 @@
 .footer-copyright {
   font-size: 0.9rem;
 }
+/* هذا التنسيق يضمن أن وسم <p> داخل الهيدر يتوسط بشكل صحيح على جميع الشاشات */
+  header p {
+  /* لضمان أن العنصر يأخذ عرضاً كاملاً ليتمكن من التوسيط */
+  display: block !important; 
+  /* توسيط العنصر ذي العرض المحدد (max-width) */
+  margin: 0 auto !important;
+  /* لضمان توسيط النص داخله أيضاً */
+  text-align: center !important;
+}
+/* تحسين ظل النص للعناوين في الهيدر */
+header h1 {
+  text-shadow: 
+    0 0 5px rgba(255, 255, 255, 0.7), 
+    0 4px 8px rgba(0, 0, 0, 0.6);
+}
+
+header p {
+  text-shadow: 
+    0 0 3px rgba(255, 255, 255, 0.5), 
+    0 2px 4px rgba(0, 0, 0, 0.4);
+}
 
   </style>
 </head>
@@ -1388,17 +1511,27 @@
   </div>
 </div>
 
-<!-- الهيدر المعدل ليتناسب مع أبعاد 1500x250 -->
-<!-- الهيدر مع قص ذكي -->
-<header class="fade-in" style="background: transparent; box-shadow: none; padding: 0; position: relative; margin: 0;">
-  <div style="position: relative; overflow: hidden; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; box-shadow: 0 6px 20px rgba(106, 90, 205, 0.4);">
-    <img src="images/tr.png" alt="واجهة المعلم الرقمي - أ. محمد حمدان الغامدي" 
-         class="responsive-header" 
-         style="width: 100%; height: 100px !important; max-height: 100px !important; object-fit: cover; object-position: center 30%; display: block;">
-    
-
+<!-- === بداية الهيدر الجديد والمحسّن === -->
+<header class="tech-header fade-in">
+  <div class="header-content">
+    <h1>واجهـة المعلـم الرقمـي</h1>
+    <h2>أ. محمد حمدان الغامدي</h2>
+    <p>معلم التقنية الرقمية</p>
+    <span> جهود مهنية ومحتوى تعليمي لجيل مبدع</span>
+  </div>
+  <div class="floating-icons">
+    <!-- أيقونات تقنية متحركة -->
+    <i class="fas fa-microchip icon-1"></i>
+    <i class="fas fa-brain icon-2"></i>
+    <i class="fas fa-code icon-3"></i>
+    <i class="fas fa-atom icon-4"></i>
+    <i class="fas fa-laptop-code icon-5"></i>
+    <i class="fas fa-network-wired icon-6"></i>
   </div>
 </header>
+<!-- === نهاية الهيدر الجديد والمحسّن === -->
+
+
 
 <!-- الوقت والتاريخ الجديد فوق خانة البحث -->
 <div class="date-time-container fade-in" style="text-align: center; margin-bottom: 10px; margin-top: 20px;">
