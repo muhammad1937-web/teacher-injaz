@@ -1493,6 +1493,14 @@ header p {
     0 0 3px rgba(255, 255, 255, 0.5), 
     0 2px 4px rgba(0, 0, 0, 0.4);
 }
+header {
+  /* ... */
+  border-bottom-left-radius: 0; /* إزالة الاستدارة الحالية */
+  border-bottom-right-radius: 0; /* إزالة الاستدارة الحالية */
+  
+  /* إضافة المسار المنحني */
+  clip-path: ellipse(100% 100% at 50% 0%); 
+}
 
   </style>
 </head>
@@ -2263,3 +2271,4 @@ document.addEventListener('DOMContentLoaded', initAIAssistant);
 
 </body>
 </html>
+
