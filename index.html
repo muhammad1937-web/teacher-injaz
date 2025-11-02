@@ -117,9 +117,9 @@
       --primary-400: #9a69e6;
       --primary-500: #7a43cc;
       --primary-600: #5e3399;
-      --primary-soft-1: #7B68EE;
-      --primary-soft-2: #E6E6FA;
-      --header-color: #5D3FD3;
+    --header-color: #0077B6; /* أزرق تقني عميق */
+    --primary-soft-2: #E6E6FA;
+      --primary-soft-1: #00B4D8; /* أزرق سماوي فاتح */
       --notification-color: #E6E6FA;
       --text-dark: #2c2c3a;
       --text-light: #5a527f;
@@ -252,14 +252,14 @@
 
     /* الهيدر المعدل - تم تقليل الارتفاع بشكل كبير */
     header {
-      background: var(--header-color);
+      background: linear-gradient(135deg, #0077B6 0%, #00B4D8 100%);
       color: white;
       text-align: center;
-      padding: 1.2rem 1rem; /* تم تقليل الارتفاع بشكل كبير من 2.8rem */
+      padding: 0.5rem 1rem !important;/* تم تقليل الارتفاع بشكل كبير من 2.8rem */
       position: relative;
       border-bottom-left-radius: 25px;
       border-bottom-right-radius: 25px;
-      box-shadow: 0 8px 25px rgba(106, 90, 205, 0.4);
+      box-shadow: 0 8px 25px rgba(0, 119, 182, 0.4);
       margin-bottom: 2rem; /* تم تقليل المسافة السفلية */
       user-select: none;
       overflow: hidden;
@@ -291,7 +291,7 @@
 
     header h1 {
       font-size: 1.6rem; /* تم تصغير الحجم من 2.2rem */
-      margin-bottom: 0.5rem; /* تم تقليل المسافة */
+      margin-bottom: 0 !important; /* تم تقليل المسافة */
       font-weight: 800;
       letter-spacing: -0.5px;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -305,8 +305,8 @@
       margin: 0 auto;
       font-weight: 400;
       letter-spacing: 0.6px;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-      margin-bottom: 0.5rem; /* تم إضافة مسافة أسفل */
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);/* تم إضافة مسافة أسفل */
+      margin-bottom: 0 !important;
     }
 
 .compact-date {
@@ -1493,7 +1493,8 @@ header p {
     0 0 3px rgba(255, 255, 255, 0.5), 
     0 2px 4px rgba(0, 0, 0, 0.4);
 }
-	  
+
+
   </style>
 </head>
 <body>
@@ -1520,14 +1521,15 @@ header p {
     <span> جهود مهنية ومحتوى تعليمي لجيل مبدع</span>
   </div>
   <div class="floating-icons">
-    <!-- أيقونات تقنية متحركة -->
-    <i class="fas fa-microchip icon-1"></i>
-    <i class="fas fa-brain icon-2"></i>
-    <i class="fas fa-code icon-3"></i>
-    <i class="fas fa-atom icon-4"></i>
-    <i class="fas fa-laptop-code icon-5"></i>
-    <i class="fas fa-network-wired icon-6"></i>
+    <!-- الأيقونات التقنية الجديدة -->
+    <i class="fas fa-code icon-1"></i>
+    <i class="fas fa-robot icon-2"></i>
+    <i class="fas fa-laptop-code icon-3"></i>
+    <i class="fas fa-network-wired icon-4"></i>
+    <i class="fas fa-book-open icon-5"></i>
+    <i class="fas fa-chart-bar icon-6"></i>
   </div>
+  
 </header>
 <!-- === نهاية الهيدر الجديد والمحسّن === -->
 
@@ -1856,7 +1858,7 @@ header p {
   </iframe>
 <a href="https://docs.google.com/spreadsheets/d/14FqkF7e83_KW_Gd48G2OlRLIJYuaKYTPndo-qb5DjKo/edit?usp=sharing" 
    target="_blank"
-   style="display: block; text-align: center; margin: 25px auto; padding: 14px 25px; background: var(--primary-500); color: white; border-radius: 35px; text-decoration: none; font-weight: 700; width: fit-content; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: 0 5px 15px rgba(122, 67, 204, 0.4); border: none;">
+   style="display: block; text-align: center; margin: 25px auto; padding: 14px 25px; background: var(--primary-500); color: white; border-radius: 35px; text-decoration: none; font-weight: 700; width: fit-content; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: none; border: none;">
     <i class="fas fa-external-link-alt"></i> إجابة المعلم على الاستفسارات   
 </a>
   <div class="google-form-footer">
@@ -2263,4 +2265,3 @@ document.addEventListener('DOMContentLoaded', initAIAssistant);
 
 </body>
 </html>
-
