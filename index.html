@@ -71,20 +71,27 @@
   pointer-events: none;
 }
 
+/* 1. التنسيق العام للأيقونات */
 .floating-icons i {
-  color: rgba(255, 255, 255, 0.12);
+  color: rgba(255, 255, 255, 0.12); /* شفافية خفيفة */
   position: absolute;
-  font-size: 2rem; /* حجم أصغر للأيقونات */
-  animation: float 15s infinite ease-in-out;
+  font-size: 2rem; /* حجم مناسب */
+  animation: float 15s infinite ease-in-out; /* إعادة الحركة */
 }
 
-/* توزيع وتوقيت مختلف لكل أيقونة */
-.icon-1 { top: 15%; left: 10%; animation-delay: 0s; }
-.icon-2 { top: 25%; right: 12%; animation-delay: -3s; font-size: 2.5rem; }
-.icon-3 { top: 60%; left: 20%; animation-delay: -6s; }
-.icon-4 { bottom: 10%; right: 30%; animation-delay: -9s; font-size: 2.2rem; }
-.icon-5 { top: 75%; left: 45%; animation-delay: -12s; }
-.icon-6 { top: 5%; left: 50%; animation-delay: -14s; }
+/* 2. تحديد مواقع الأيقونات على الأطراف */
+
+/* أيقونات الجانب الأيمن */
+.icon-1 { top: 15%; right: 5%; animation-delay: 0s; }
+.icon-2 { top: 60%; right: 10%; animation-delay: -5s; }
+.icon-3 { top: 40%; right: 20%; animation-delay: -10s; } /* تم التعديل من 15% إلى 20% */
+
+/* أيقونات الجانب الأيسر */
+.icon-4 { top: 15%; left: 5%; animation-delay: -2s; }
+.icon-5 { top: 60%; left: 10%; animation-delay: -7s; }
+.icon-6 { top: 40%; left: 20%; animation-delay: -12s; } /* تم التعديل من 15% إلى 20% */
+
+
 
 /* حركة الطفو العشوائية */
 @keyframes float {
@@ -117,7 +124,7 @@
       --primary-400: #9a69e6;
       --primary-500: #7a43cc;
       --primary-600: #5e3399;
-    --header-color: #0077B6; /* أزرق تقني عميق */
+    --header-color:  #5D3FD3; /* أزرق تقني عميق */
     --primary-soft-2: #E6E6FA;
       --primary-soft-1: #00B4D8; /* أزرق سماوي فاتح */
       --notification-color: #E6E6FA;
@@ -1521,14 +1528,17 @@ header p {
     <span> جهود مهنية ومحتوى تعليمي لجيل مبدع</span>
   </div>
   <div class="floating-icons">
-    <!-- الأيقونات التقنية الجديدة -->
+    <!-- أيقونات الجانب الأيمن (كما هي) -->
     <i class="fas fa-code icon-1"></i>
     <i class="fas fa-robot icon-2"></i>
     <i class="fas fa-laptop-code icon-3"></i>
-    <i class="fas fa-network-wired icon-4"></i>
-    <i class="fas fa-book-open icon-5"></i>
-    <i class="fas fa-chart-bar icon-6"></i>
+    
+    <!-- أيقونات الجانب الأيسر (الجديدة) -->
+    <i class="fas fa-microchip icon-4"></i>     <!-- معالج -->
+    <i class="fas fa-mouse icon-5"></i>         <!-- شكل الفأرة (الماوس) -->
+    <i class="fas fa-hdd icon-6"></i>           <!-- قرص صلب/تخزين -->
   </div>
+  
   
 </header>
 <!-- === نهاية الهيدر الجديد والمحسّن === -->
