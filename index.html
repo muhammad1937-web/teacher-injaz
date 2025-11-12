@@ -1882,6 +1882,12 @@ header p {
 </button>
 
 <script>
+	// إزالة أي علامة تجزئة (#) من الرابط لمنع التمرير التلقائي
+if (window.location.hash) {
+    // نستخدم replaceState لتغيير الرابط دون إعادة تحميل الصفحة
+    history.replaceState(null, null, window.location.pathname);
+}
+
   // دالة تحديث التاريخ والوقت
  // دالة تحديث التاريخ والوقت
 function updateCompactDate() {
@@ -2282,6 +2288,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 </body>
 </html>
+
 
 
 
