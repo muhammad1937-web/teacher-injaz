@@ -2253,6 +2253,11 @@ function initAIAssistant() {
 
 // تهيئة المساعد عند تحميل الصفحة
 document.addEventListener('DOMContentLoaded', initAIAssistant);
+// فرض التمرير إلى أعلى الصفحة بعد تحميلها بالكامل
+window.onload = function() {
+    window.scrollTo(0, 0);
+};
+	
 </script>
 <!-- ================================================== -->
 <!--                  تذييل الصفحـة (Footer)                 -->
@@ -2275,4 +2280,5 @@ document.addEventListener('DOMContentLoaded', initAIAssistant);
 
 </body>
 </html>
+
 
