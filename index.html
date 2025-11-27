@@ -384,7 +384,7 @@
       user-select: none;
       transition: var(--transition);
       cursor: default;
-      height: auto;
+     
       position: relative;
       overflow: hidden;
       border: 1px solid rgba(122, 67, 204, 0.1);
@@ -527,20 +527,26 @@
     /*   تعديلات الحجم للقوالب المغلقة          */
     /* ========================================= */
     .cards-container {
-      display: flex;
-      flex-direction: column;
-      gap: 1.2rem;
-      margin-top: 0.8rem;
-      max-height: 500px;
-      overflow: hidden;
-      transition: max-height 0.5s ease, padding 0.3s ease;
-    }
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin-top: 0.8rem;
+  overflow: hidden; /* تغيير مهم: لم نعد نحتاج للتمرير العمودي هنا */
+  transition: max-height 0.7s ease-in-out; /* حركة أكثر سلاسة */
+  
+  /* الخدعة هنا: نعطي ارتفاعاً أقصى كبيراً جداً ليسمح للمحتوى بالتمدد كما يشاء */
+  max-height: 2000px; /* <--- هذا هو مفتاح الحل */
+}
 
-    .cards-container.collapsed {
-      max-height: 0;
-      padding: 0;
-      margin-top: 0;
-    }
+
+
+.cards-container.collapsed {
+  max-height: 0; /* عند الإغلاق، الارتفاع الأقصى صفر */
+  margin-top: 0;
+  overflow: hidden; /* ضروري لإخفاء المحتوى تماماً */
+}
+
+
 
     .card {
       background: linear-gradient(to right, var(--primary-soft-2), var(--primary-100));
@@ -2405,25 +2411,37 @@
 
   // الوظيفة الجديدة: طي القوالب عند التحميل
   function initCardToggles() {
-    const toggleButtons = document.querySelectorAll('.toggle-cards');
+  const toggleButtons = document.querySelectorAll('.toggle-cards');
+  
+  toggleButtons.forEach(button => {
+    const targetId = button.getAttribute('data-target');
+    const cardsContainer = document.getElementById(targetId);
     
-    toggleButtons.forEach(button => {
-      const targetId = button.getAttribute('data-target');
-      const cardsContainer = document.getElementById(targetId);
-      
-      if (cardsContainer) {
-        // إغلاق جميع القوالب عند التحميل
-        cardsContainer.classList.add('collapsed');
-        button.classList.add('collapsed');
+    if (cardsContainer) {
+      // --- بداية الإضافة ---
+      // اجعل كل البطاقات مغلقة عند تحميل الصفحة
+      cardsContainer.classList.add('collapsed');
+      button.classList.add('collapsed');
+      // --- نهاية الإضافة ---
 
-        // إضافة حدث النقر
-        button.addEventListener('click', () => {
-          cardsContainer.classList.toggle('collapsed');
-          button.classList.toggle('collapsed');
-        });
-      }
-    });
-  }
+      // إضافة حدث النقر للفتح والإغلاق
+      button.addEventListener('click', () => {
+        cardsContainer.classList.toggle('collapsed');
+        button.classList.toggle('collapsed');
+
+        // تعديل بسيط لتحسين تجربة الفتح
+        if (!cardsContainer.classList.contains('collapsed')) {
+            cardsContainer.style.paddingTop = '0.8rem'; // إعادة الهامش العلوي عند الفتح
+            cardsContainer.style.paddingBottom = '0.8rem';
+        } else {
+            cardsContainer.style.paddingTop = '0';
+            cardsContainer.style.paddingBottom = '0';
+        }
+      });
+    }
+  });
+}
+
 
   // تهيئة جميع الوظائف الجديدة
   document.addEventListener('DOMContentLoaded', function() {
