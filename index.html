@@ -3,119 +3,95 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>واجهـة المعلـم الرقمـي  </title>
-  <meta name="description" content="موقع أ.محمد الغامدي - توثيق الجهود المهنية ونشر المحتوى التعليمي للطلاب.        ">
+  <title>واجهـة المعلـم الرقمـي</title>
+  <meta name="description" content="موقع أ.محمد الغامدي - توثيق الجهود المهنية ونشر المحتوى التعليمي للطلاب.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     /* ========================================= */
-/*   تنسيقات الهيدر التقني الجديد والمتحرك   */
-/* ========================================= */
+    /*   تنسيقات الهيدر التقني الجديد والمتحرك   */
+    /* ========================================= */
 
-.tech-header {
-  background: linear-gradient(135deg, #5D3FD3 0%, #7B68EE 100%);
-  color: white;
-  text-align: center;
-  padding: 2.5rem 1rem;
-  position: relative;
-  border-bottom-left-radius: 25px;
-  border-bottom-right-radius: 25px;
-  box-shadow: 0 8px 30px rgba(93, 63, 211, 0.5);
-  margin: 0;
-  overflow: hidden; /* ضروري لإخفاء الأيقونات الزائدة */
-  z-index: 1;
-}
+    .tech-header {
+      background: linear-gradient(135deg, #5D3FD3 0%, #7B68EE 100%);
+      color: white;
+      text-align: center;
+      padding: 2.5rem 1rem;
+      position: relative;
+      border-bottom-left-radius: 25px;
+      border-bottom-right-radius: 25px;
+      box-shadow: 0 8px 30px rgba(93, 63, 211, 0.5);
+      margin: 0;
+      overflow: hidden;
+      z-index: 1;
+    }
 
-.tech-header .header-content {
-  position: relative;
-  z-index: 2; /* للتأكد من أن النص فوق الأيقونات */
-}
+    .tech-header .header-content {
+      position: relative;
+      z-index: 2;
+    }
 
-.tech-header h1 {
-  font-size: 2rem;
-  font-weight: 800;
-  margin: 0;
-  text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
-}
+    .tech-header h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin: 0;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    }
 
-.tech-header h2 {
-  font-size: 1.4rem;
-  font-weight: 700;
-  margin: 0.5rem 0;
-  color: rgba(255, 255, 255, 0.95);
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-}
+    .tech-header h2 {
+      font-size: 1.4rem;
+      font-weight: 700;
+      margin: 0.5rem 0;
+      color: rgba(255, 255, 255, 0.95);
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
 
-.tech-header p {
-  font-size: 1.1rem;
-  font-weight: 500;
-  margin: 0.25rem 0 0.75rem 0;
-  color: rgba(255, 255, 255, 0.9);
-}
+    .tech-header p {
+      font-size: 1.1rem;
+      font-weight: 500;
+      margin: 0.25rem 0 0.75rem 0;
+      color: rgba(255, 255, 255, 0.9);
+    }
 
-.tech-header span {
-  font-size: 0.9rem;
-  font-weight: 400;
-  color: rgba(255, 255, 255, 0.8);
-  display: block;
-  max-width: 600px;
-  margin: 0 auto;
-}
+    .tech-header span {
+      font-size: 0.9rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.8);
+      display: block;
+      max-width: 600px;
+      margin: 0 auto;
+    }
 
-.floating-icons {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-}
+    .floating-icons {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
 
-/* 1. التنسيق العام للأيقونات */
-.floating-icons i {
-  color: rgba(255, 255, 255, 0.12); /* شفافية خفيفة */
-  position: absolute;
-  font-size: 2rem; /* حجم مناسب */
-  animation: float 15s infinite ease-in-out; /* إعادة الحركة */
-}
+    .floating-icons i {
+      color: rgba(255, 255, 255, 0.12);
+      position: absolute;
+      font-size: 2rem;
+      animation: float 15s infinite ease-in-out;
+    }
 
-/* 2. تحديد مواقع الأيقونات على الأطراف */
+    .icon-1 { top: 15%; right: 5%; animation-delay: 0s; }
+    .icon-2 { top: 60%; right: 10%; animation-delay: -5s; }
+    .icon-3 { top: 40%; right: 20%; animation-delay: -10s; }
+    .icon-4 { top: 15%; left: 5%; animation-delay: -2s; }
+    .icon-5 { top: 60%; left: 10%; animation-delay: -7s; }
+    .icon-6 { top: 40%; left: 20%; animation-delay: -12s; }
 
-/* أيقونات الجانب الأيمن */
-.icon-1 { top: 15%; right: 5%; animation-delay: 0s; }
-.icon-2 { top: 60%; right: 10%; animation-delay: -5s; }
-.icon-3 { top: 40%; right: 20%; animation-delay: -10s; } /* تم التعديل من 15% إلى 20% */
+    @keyframes float {
+      0% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(15deg); }
+      100% { transform: translateY(0px) rotate(0deg); }
+    }
 
-/* أيقونات الجانب الأيسر */
-.icon-4 { top: 15%; left: 5%; animation-delay: -2s; }
-.icon-5 { top: 60%; left: 10%; animation-delay: -7s; }
-.icon-6 { top: 40%; left: 20%; animation-delay: -12s; } /* تم التعديل من 15% إلى 20% */
-
-
-
-/* حركة الطفو العشوائية */
-@keyframes float {
-  0% { transform: translateY(0px) rotate(0deg); }
-  50% { transform: translateY(-20px) rotate(15deg); }
-  100% { transform: translateY(0px) rotate(0deg); }
-}
-
-/* التوافق مع الشاشات الأصغر */
-@media (max-width: 768px) {
-  .tech-header { padding: 2rem 1rem; }
-  .tech-header h1 { font-size: 1.7rem; }
-  .tech-header h2 { font-size: 1.2rem; }
-  .tech-header p { font-size: 1rem; }
-  .tech-header span { font-size: 0.85rem; }
-  .floating-icons i { font-size: 1.5rem; }
-  .icon-2, .icon-4 { font-size: 1.8rem; }
-}
-
-/* إخفاء بعض الأيقونات في الوضع الأفقي للجوال لتجنب الازدحام */
-@media (max-width: 900px) and (orientation: landscape) {
-  .tech-header { padding: 1.5rem 1rem; }
-}
-
+    /* متغيرات الألوان للوضع النهاري */
     :root {
       --primary-100: #f3e8ff;
       --primary-200: #d5b8ff;
@@ -123,9 +99,9 @@
       --primary-400: #9a69e6;
       --primary-500: #7a43cc;
       --primary-600: #5e3399;
-    --header-color:  #5D3FD3; /* أزرق تقني عميق */
-    --primary-soft-2: #E6E6FA;
-      --primary-soft-1: #00B4D8; /* أزرق سماوي فاتح */
+      --header-color:  #5D3FD3;
+      --primary-soft-2: #E6E6FA;
+      --primary-soft-1: #00B4D8;
       --notification-color: #E6E6FA;
       --text-dark: #2c2c3a;
       --text-light: #5a527f;
@@ -136,6 +112,40 @@
       --green-400: #81c784;
       --green-text: #2e7d32;
       --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --card-bg: linear-gradient(to bottom, #ffffff, #faf7ff);
+      --card-hover-bg: linear-gradient(to right, #ece2ff, #e6d9ff);
+      --body-bg: #faf7ff;
+      --body-bg-image: radial-gradient(circle at 90% 10%, rgba(122, 67, 204, 0.03) 0%, transparent 20%),
+        radial-gradient(circle at 10% 90%, rgba(122, 67, 204, 0.03) 0%, transparent 20%);
+      --toggle-btn-bg: rgba(255, 255, 255, 0.8);
+    }
+
+    /* متغيرات الألوان للوضع الليلي */
+    body.dark-mode {
+      --primary-100: #2a1a4a;
+      --primary-200: #3d2a5c;
+      --primary-300: #4f3a6e;
+      --primary-400: #614a80;
+      --primary-500: #735a92;
+      --primary-600: #856aa4;
+      --header-color: #5D3FD3;
+      --primary-soft-2: #2a1a4a;
+      --primary-soft-1: #00B4D8;
+      --notification-color: #2a1a4a;
+      --text-dark: #e0e0e0;
+      --text-light: #b0b0b0;
+      --light-bg: #1a1a2e;
+      --green-100: #1a3a1a;
+      --green-200: #2a4a2a;
+      --green-300: #3a5a3a;
+      --green-400: #4a6a4a;
+      --green-text: #81c784;
+      --card-bg: linear-gradient(to bottom, #2d2d44, #252536);
+      --card-hover-bg: linear-gradient(to right, #3a2a5c, #352a54);
+      --body-bg: #1a1a2e;
+      --body-bg-image: radial-gradient(circle at 90% 10%, rgba(93, 63, 211, 0.1) 0%, transparent 20%),
+        radial-gradient(circle at 10% 90%, rgba(93, 63, 211, 0.1) 0%, transparent 20%);
+      --toggle-btn-bg: rgba(42, 26, 74, 0.8);
     }
 
     /* نظام الطبقات */
@@ -143,9 +153,9 @@
       display: none;
     }
     
-    /* أنماط الشعار المحسنة */
+    /* أنماط الشعار المحسنة - خلفية بيضاء كاملة */
     .logo-header {
-      background: linear-gradient(to left, #ffffff, #f9f5ff);
+      background: #ffffff;
       padding: 15px 0;
       text-align: center;
       box-shadow: 0 2px 15px rgba(122, 67, 204, 0.15);
@@ -166,48 +176,46 @@
       filter: drop-shadow(0 3px 6px rgba(122, 67, 204, 0.4));
     }
 
-    /* شريط الإشعارات المعدل - تم تقليل الارتفاع بشكل كبير */
-/* شريط الإشعارات المعدل - تم تغيير اللون فقط */
-.notification-bar {
-  background: #e6e8fb; /* <-- هذا هو التغيير الوحيد */
-  color: #2c2c3a;
-  padding: 8px 0;
-  overflow: hidden;
-  position: relative;
-  width: 100%;
-  box-shadow: 0 2px 10px rgba(122, 67, 204, 0.2);
-  border-bottom: 1px solid rgba(106, 90, 205, 0.2);
-  font-size: 0.9rem;
-}
+    /* شريط الإشعارات المعدل */
+    .notification-bar {
+      background: var(--notification-color);
+      color: var(--text-dark);
+      padding: 8px 0;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      box-shadow: 0 2px 10px rgba(122, 67, 204, 0.2);
+      border-bottom: 1px solid rgba(106, 90, 205, 0.2);
+      font-size: 0.9rem;
+    }
 
-
-   .notification-container {
-  display: inline-block;
-  white-space: nowrap;
-  padding-right: 100%;
-  animation: scroll 20s linear infinite; /* تم تغيير من 40s إلى 20s */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  box-sizing: content-box;
-}
+    .notification-container {
+      display: inline-block;
+      white-space: nowrap;
+      padding-right: 100%;
+      animation: scroll 20s linear infinite;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      box-sizing: content-box;
+    }
 
     .notification-container i {
-      margin-left: 8px; /* تم تقليل المسافة */
-      margin-right: 6px; /* تم تقليل المسافة */
+      margin-left: 8px;
+      margin-right: 6px;
       color: var(--header-color);
       animation: ring 4s 0.7s ease-in-out infinite;
       transform-origin: 50% 4px;
-      font-size: 0.9rem; /* تم تقليل حجم الأيقونة */
+      font-size: 0.9rem;
     }
 
     @keyframes scroll {
-  0% { 
-    transform: translateX(0); 
-  }
-  100% { 
-    transform: translateX(100%);
-  }
-}
+      0% { 
+        transform: translateX(0); 
+      }
+      100% { 
+        transform: translateX(100%);
+      }
+    }
 
     @keyframes ring {
       0% { transform: rotate(0); }
@@ -228,7 +236,7 @@
       29% { transform: rotate(10deg); }
       31% { transform: rotate(-8deg); }
       33% { transform: rotate(6deg); }
-     35% { transform: rotate(-4deg); }
+      35% { transform: rotate(-4deg); }
       37% { transform: rotate(2deg); }
       39% { transform: rotate(-1deg); }
       41% { transform: rotate(1deg); }
@@ -245,28 +253,27 @@
 
     body {
       font-family: 'Tajawal', sans-serif;
-      background-color: var(--light-bg);
+      background-color: var(--body-bg);
       color: var(--text-dark);
       line-height: 1.6;
       font-weight: 400;
       min-height: 100vh;
       padding-bottom: 3rem;
-      background-image: 
-        radial-gradient(circle at 90% 10%, rgba(122, 67, 204, 0.03) 0%, transparent 20%),
-        radial-gradient(circle at 10% 90%, rgba(122, 67, 204, 0.03) 0%, transparent 20%);
+      background-image: var(--body-bg-image);
+      transition: background-color 0.5s ease, color 0.5s ease;
     }
 
-    /* الهيدر المعدل - تم تقليل الارتفاع بشكل كبير */
+    /* الهيدر المعدل */
     header {
       background: linear-gradient(135deg, #0077B6 0%, #00B4D8 100%);
       color: white;
       text-align: center;
-      padding: 0.5rem 1rem !important;/* تم تقليل الارتفاع بشكل كبير من 2.8rem */
+      padding: 0.5rem 1rem !important;
       position: relative;
       border-bottom-left-radius: 25px;
       border-bottom-right-radius: 25px;
       box-shadow: 0 8px 25px rgba(0, 119, 182, 0.4);
-      margin-bottom: 2rem; /* تم تقليل المسافة السفلية */
+      margin-bottom: 2rem;
       user-select: none;
       overflow: hidden;
     }
@@ -296,8 +303,8 @@
     }
 
     header h1 {
-      font-size: 1.6rem; /* تم تصغير الحجم من 2.2rem */
-      margin-bottom: 0 !important; /* تم تقليل المسافة */
+      font-size: 1.6rem;
+      margin-bottom: 0 !important;
       font-weight: 800;
       letter-spacing: -0.5px;
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
@@ -305,67 +312,47 @@
     }
 
     header p {
-      font-size: 0.95rem; /* تم تصغير الحجم من 1.15rem */
+      font-size: 0.95rem;
       opacity: 0.95;
       max-width: 800px;
       margin: 0 auto;
       font-weight: 400;
       letter-spacing: 0.6px;
-      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);/* تم إضافة مسافة أسفل */
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
       margin-bottom: 0 !important;
     }
 
-.compact-date {
-	      background: rgba(255, 255, 255, 0.25);
-	      display: inline-block;
-	      padding: 6px 14px; /* تم تقليل الحديد قليلاً */
-	      border-radius: 25px;
-	      margin-top: 10px; /* تم تقليل المسافة من الأعلى */
-	      font-size: 0.9rem;
-	      backdrop-filter: blur(5px);
-	      border: 1px solid rgba(255, 255, 255, 0.3);
-	      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-	      transition: var(--transition);
-	    }
-	
-	    /* تنسيق جديد للوقت والتاريخ في موقعه الجديد */
-	    .compact-date.new-position {
-	      background: #e6e8fb; /* لون خلفية فاتح وجميل */
-	      color: var(--text-dark); /* لون النص الداكن */
-	      padding: 8px 18px; /* زيادة حجم البادينغ */
-	      border-radius: 25px; /* شكل دائري */
-	      font-size: 0.9rem; /* حجم خط مناسب */
-	      font-weight: 700;
-	      box-shadow: 0 4px 15px rgba(122, 67, 204, 0.2); /* ظل مميز */
-	      border: 1px solid rgba(93, 63, 211, 0.1); /* حدود خفيفة */
-	      /* إزالة التنسيقات المطلقة */
-	      position: static;
-	      transform: none;
-	      margin: 0 auto;
-	    }
-	    
-	    .compact-date.new-position:hover {
-	      transform: translateY(-3px);
-	      box-shadow: 0 6px 20px rgba(122, 67, 204, 0.3);
-	    }
-	
-	    /* تعديل تنسيق الوقت والتاريخ الأصلي داخل الهيدر (إذا كان لا يزال موجوداً في مكان آخر) */
-	    .compact-date {
-	      background: rgba(255, 255, 255, 0.25);
-	      display: inline-block;
-	      padding: 6px 14px;
-	      border-radius: 25px;
-	      margin-top: 10px;
-	      font-size: 0.9rem;
-	      backdrop-filter: blur(5px);
-	      border: 1px solid rgba(255, 255, 255, 0.3);
-	      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-	      transition: var(--transition);
-	    }
+    .compact-date {
+      background: rgba(255, 255, 255, 0.25);
+      display: inline-block;
+      padding: 6px 14px;
+      border-radius: 25px;
+      margin-top: 10px;
+      font-size: 0.9rem;
+      backdrop-filter: blur(5px);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      transition: var(--transition);
+    }
 
-    .compact-date:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: translateY(-2px);
+    /* تنسيق جديد للوقت والتاريخ في موقعه الجديد */
+    .compact-date.new-position {
+      background: var(--notification-color);
+      color: var(--text-dark);
+      padding: 8px 18px;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(122, 67, 204, 0.2);
+      border: 1px solid rgba(93, 63, 211, 0.1);
+      position: static;
+      transform: none;
+      margin: 0 auto;
+    }
+    
+    .compact-date.new-position:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(122, 67, 204, 0.3);
     }
 
     .compact-date .separator {
@@ -383,8 +370,11 @@
       justify-content: center;
     }
 
+    /* ========================================= */
+    /*     تعديلات حجم البطاقات المطلوبة        */
+    /* ========================================= */
     .section-card {
-      background: linear-gradient(to bottom, #ffffff, #faf7ff);
+      background: var(--card-bg);
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(122, 67, 204, 0.15);
       padding: 2rem 2rem 1.5rem;
@@ -398,6 +388,7 @@
       position: relative;
       overflow: hidden;
       border: 1px solid rgba(122, 67, 204, 0.1);
+      /* إزالة الارتفاع الثابت لجعل الحجم طبيعي */
     }
 
     /* إضافة الشريط العلوي الأنيق باللون الأساسي للبطاقات الكبيرة فقط */
@@ -424,6 +415,9 @@
       border-color: rgba(122, 67, 204, 0.2);
     }
 
+    /* ========================================= */
+    /*   زر طي وفرد البطاقات (تصميم جديد شفاف)  */
+    /* ========================================= */
     .section-title {
       font-size: 1.65rem;
       color: var(--primary-500);
@@ -435,8 +429,81 @@
       user-select: none;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 0.8rem;
       text-shadow: 0 1px 2px rgba(122, 67, 204, 0.1);
+    }
+
+    /* تعديل العنصر الذي يحمل العنوان والأيقونة */
+    .title-container {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex: 1;
+    }
+
+    /* ========================================= */
+    /*   إزالة الخلفيات الشفافة للأيقونات       */
+    /* ========================================= */
+    .section-icon {
+      font-size: 1.5rem;
+      color: var(--primary-500);
+      opacity: 0.8;
+      transition: var(--transition);
+      user-select: none;
+      /* إزالة الخلفية الشفافة */
+      background: none;
+      width: auto;
+      height: auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 0;
+    }
+
+    .section-title:hover .section-icon {
+      opacity: 1;
+      transform: scale(1.1) rotate(5deg);
+      background: none;
+      box-shadow: none;
+    }
+
+    .toggle-cards {
+      background: transparent;
+      color: var(--primary-500);
+      border: 1px solid rgba(122, 67, 204, 0.3);
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 15px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .toggle-cards:hover {
+      background: rgba(122, 67, 204, 0.1);
+      color: var(--primary-600);
+      transform: scale(1.1);
+      box-shadow: 0 3px 10px rgba(122, 67, 204, 0.2);
+    }
+
+    .toggle-cards i {
+      transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+
+    .toggle-cards.collapsed i {
+      transform: rotate(180deg);
+    }
+
+    .toggle-cards.collapsed {
+      background: rgba(122, 67, 204, 0.1);
+      color: var(--primary-600);
     }
 
     .section-title::after {
@@ -456,38 +523,27 @@
       width: 90px;
     }
 
-    /* تعديل أيقونات الأقسام */
-    .section-icon {
-      font-size: 1.5rem;
-      color: var(--primary-500);
-      opacity: 0.8;
-      transition: var(--transition);
-      user-select: none;
-      background: rgba(122, 67, 204, 0.1);
-      width: 45px;
-      height: 45px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-    }
-
-    .section-title:hover .section-icon {
-      opacity: 1;
-      transform: scale(1.1) rotate(5deg);
-      background: rgba(122, 67, 204, 0.15);
-      box-shadow: 0 0 15px rgba(122, 67, 204, 0.2);
-    }
-
+    /* ========================================= */
+    /*   تعديلات الحجم للقوالب المغلقة          */
+    /* ========================================= */
     .cards-container {
       display: flex;
       flex-direction: column;
       gap: 1.2rem;
       margin-top: 0.8rem;
+      max-height: 500px;
+      overflow: hidden;
+      transition: max-height 0.5s ease, padding 0.3s ease;
+    }
+
+    .cards-container.collapsed {
+      max-height: 0;
+      padding: 0;
+      margin-top: 0;
     }
 
     .card {
-      background: linear-gradient(to right, var(--primary-soft-2), #f5f1ff);
+      background: linear-gradient(to right, var(--primary-soft-2), var(--primary-100));
       border-radius: 16px;
       padding: 1.2rem 1.5rem;
       box-shadow: 0 4px 12px rgba(122, 67, 204, 0.1);
@@ -521,7 +577,7 @@
       transform: translateY(-5px);
       box-shadow: 0 8px 20px rgba(122, 67, 204, 0.25);
       border-color: var(--primary-400);
-      background: linear-gradient(to right, #ece2ff, #e6d9ff);
+      background: var(--card-hover-bg);
     }
 
     .card:hover::before {
@@ -556,12 +612,11 @@
       align-items: center;
       gap: 10px;
       position: relative;
-      /* تحسينات جديدة للعرض الأفقي */
       overflow: visible;
       white-space: normal;
       text-overflow: clip;
       flex: 1;
-      min-width: 0; /* يسمح بتقلص العنصر عند الحاجة */
+      min-width: 0;
     }
 
     .card:hover .card-title {
@@ -580,7 +635,6 @@
       margin-right: 5px;
       opacity: 0.8;
       transition: var(--transition);
-      /* تأكد من ظهور الأيقونة في جميع الأحوال */
       flex-shrink: 0;
     }
 
@@ -588,40 +642,6 @@
       opacity: 1;
       color: var(--primary-600);
       transform: translateX(3px);
-    }
-
-    .back-to-top {
-      position: fixed;
-      bottom: 30px;
-      left: 30px;
-      background: var(--primary-500);
-      color: white;
-      width: 55px;
-      height: 55px;
-      border-radius: 18px;
-      display: flex;
-      align-items:  center;
-      justify-content: center;
-      box-shadow: 0 6px 20px rgba(122, 67, 204, 0.5);
-      z-index: 100;
-      border: none;
-      cursor: pointer;
-      transition: var(--transition);
-      user-select: none;
-      opacity: 0;
-      visibility: hidden;
-    }
-
-    .back-to-top.show {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .back-to-top:hover {
-      background: var(--primary-600);
-      transform: scale(1.1) translateY(-5px);
-      border-radius: 50%;
-      box-shadow: 0 8px 25px rgba(122, 67, 204, 0.7);
     }
 
     @keyframes fadeSlideUp {
@@ -635,7 +655,7 @@
       max-width: 850px;
       margin: 3rem auto;
       padding: 2.5rem;
-      background: linear-gradient(to bottom, #ffffff, #faf7ff);
+      background: var(--card-bg);
       border-radius: 20px;
       box-shadow: 0 10px 25px rgba(122, 67, 204, 0.15);
       position: relative;
@@ -643,7 +663,6 @@
       border: 1px solid rgba(122, 67, 204, 0.1);
     }
 
-    /* إضافة الشريط العلوي للنموذج */
     .google-form-container::before {
       content: '';
       position: absolute;
@@ -684,7 +703,6 @@
       font-size: 0.95rem;
     }
 
-    /* زر الإجابات المعدل */
     .answers-link {
       display: block;
       text-align: center;
@@ -725,7 +743,6 @@
       color: inherit;
     }
 
-    /* تأثيرات دخول المحتوى */
     .fade-in {
       opacity: 0;
       transform: translateY(20px);
@@ -735,6 +752,41 @@
     .fade-in.visible {
       opacity: 1;
       transform: translateY(0);
+    }
+
+    /* ========================================= */
+    /*   زر تبديل الوضع الليلي - ثابت في الهيدر  */
+    /* ========================================= */
+    .theme-toggle {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      backdrop-filter: blur(10px);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 1000;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      background: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    body.dark-mode .theme-toggle {
+      background: rgba(0, 0, 0, 0.2);
+      color: #f0f0f0;
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     /* تحسينات الجوال الأساسية */
@@ -797,27 +849,27 @@
 
     @media (max-width: 480px) {
       header {
-        padding: 1rem 0.8rem; /* تم تعديل الحجم للجوال */
+        padding: 1rem 0.8rem;
         border-bottom-left-radius: 20px;
         border-bottom-right-radius: 20px;
       }
 
       header h1 {
-        font-size: 1.4rem !important; /* تم تعديل الحجم للجوال */
+        font-size: 1.4rem !important;
         margin-bottom: 0.4rem !important;
       }
       
       header p {
-        font-size: 0.85rem !important; /* تم تعديل الحجم للجوال */
+        font-size: 0.85rem !important;
         line-height: 1.5 !important;
         margin-bottom: 0.4rem;
       }
 
       .compact-date {
         font-size: 0.8rem !important;
-        padding: 5px 10px !important; /* تم تعديل الحجم للجوال */
+        padding: 5px 10px !important;
         white-space: nowrap;
-        margin-top: 8px; /* تم تقليل المسافة من الأعلى */
+        margin-top: 8px;
       }
       
       .compact-date .separator {
@@ -831,8 +883,6 @@
 
       .section-icon {
         font-size: 1.3rem;
-        width: 40px;
-        height: 40px;
       }
 
       .card {
@@ -849,14 +899,6 @@
         font-size: 1.05rem !important;
       }
 
-      .back-to-top {
-        width: 50px;
-        height: 50px;
-        border-radius: 16px;
-        bottom: 20px;
-        left: 20px;
-      }
-
       .logo-header {
         padding: 12px 0;
       }
@@ -866,12 +908,12 @@
       }
 
       .notification-bar {
-        font-size: 0.8rem; /* تم تقليل حجم الخط للجوال */
-        padding: 7px 0; /* تم تقليل الارتفاع للجوال */
+        font-size: 0.8rem;
+        padding: 7px 0;
       }
       
       .notification-container i {
-        font-size: 0.8rem; /* تم تقليل حجم الأيقونة للجوال */
+        font-size: 0.8rem;
         margin-left: 6px;
         margin-right: 4px;
       }
@@ -883,6 +925,12 @@
       .answers-link {
         padding: 12px 20px;
         font-size: 0.95rem;
+      }
+
+      .toggle-cards {
+        width: 32px;
+        height: 32px;
+        font-size: 0.9rem;
       }
     }
 
@@ -902,8 +950,6 @@
       
       .section-icon {
         font-size: 1.2rem;
-        width: 38px;
-        height: 38px;
       }
       
       .card {
@@ -919,8 +965,8 @@
       }
       
       .notification-bar {
-        font-size: 0.75rem; /* تم تقليل حجم الخط أكثر للشاشات الصغيرة */
-        padding: 6px 0; /* تم تقليل الارتفاع أكثر للشاشات الصغيرة */
+        font-size: 0.75rem;
+        padding: 6px 0;
       }
     }
     
@@ -973,8 +1019,6 @@
       }
       
       .section-icon {
-        width: 35px;
-        height: 35px;
         font-size: 1.2rem;
       }
       
@@ -1021,489 +1065,522 @@
         width: calc(33.333% - 1.5rem) !important;
       }
     }
-/* شريط البحث الجديد */
-.search-container {
-  max-width: 500px;
-  margin: 0 auto 2rem;
-  padding: 0 1.5rem;
-  position: relative;
-  z-index: 1001;
-}
+    /* شريط البحث الجديد */
+    .search-container {
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1001;
+    }
 
-.search-box {
-  position: relative;
-  width: 100%;
-}
+    .search-box {
+      position: relative;
+      width: 100%;
+    }
 
-.search-input {
-  width: 100%;
-  padding: 12px 50px 12px 20px;
-  border: 2px solid rgba(122, 67, 204, 0.2);
-  border-radius: 30px;
-  font-size: 1rem;
-  font-family: 'Tajawal', sans-serif;
-  background: white;
-  box-shadow: 0 4px 15px rgba(122, 67, 204, 0.1);
-  transition: var(--transition);
-  outline: none;
-  position: relative;
-  z-index: 1002;
-}
+    .search-input {
+      width: 100%;
+      padding: 12px 50px 12px 20px;
+      border: 2px solid rgba(122, 67, 204, 0.2);
+      border-radius: 30px;
+      font-size: 1rem;
+      font-family: 'Tajawal', sans-serif;
+      background: var(--light-bg);
+      color: var(--text-dark);
+      box-shadow: 0 4px 15px rgba(122, 67, 204, 0.1);
+      transition: var(--transition);
+      outline: none;
+      position: relative;
+      z-index: 1002;
+    }
 
-.search-input:focus {
-  border-color: var(--primary-500);
-  box-shadow: 0 6px 20px rgba(122, 67, 204, 0.2);
-  padding-right: 55px;
-}
+    .search-input:focus {
+      border-color: var(--primary-500);
+      box-shadow: 0 6px 20px rgba(122, 67, 204, 0.2);
+      padding-right: 55px;
+    }
 
-.search-button {
-  position: absolute;
-  left: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: var(--primary-500);
-  color: white;
-  border: none;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: var(--transition);
-  z-index: 1003;
-}
+    .search-button {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--primary-500);
+      color: white;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      z-index: 1003;
+    }
 
-.search-button:hover {
-  background: var(--primary-600);
-  transform: translateY(-50%) scale(1.05);
-}
+    .search-button:hover {
+      background: var(--primary-600);
+      transform: translateY(-50%) scale(1.05);
+    }
 
-.search-results {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: white;
-  border-radius: 15px;
-  box-shadow: 0 10px 25px rgba(122, 67, 204, 0.3);
-  margin-top: 5px;
-  z-index: 10000;
-  max-height: 300px;
-  overflow-y: auto;
-  display: none;
-}
+    .search-results {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--light-bg);
+      color: var(--text-dark);
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(122, 67, 204, 0.3);
+      margin-top: 5px;
+      z-index: 10000;
+      max-height: 300px;
+      overflow-y: auto;
+      display: none;
+    }
 
-.search-result-item {
-  padding: 12px 20px;
-  border-bottom: 1px solid rgba(122, 67, 204, 0.1);
-  cursor: pointer;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+    .search-result-item {
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(122, 67, 204, 0.1);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-.search-result-item:last-child {
-  border-bottom: none;
-}
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
 
-.search-result-item:hover {
-  background: var(--primary-soft-2);
-}
+    .search-result-item:hover {
+      background: var(--primary-soft-2);
+    }
 
-.search-result-item i {
-  color: var(--primary-500);
-  font-size: 0.9rem;
-}
+    .search-result-item i {
+      color: var(--primary-500);
+      font-size: 0.9rem;
+    }
 
-.search-result-item span {
-  flex: 1;
-}
+    .search-result-item span {
+      flex: 1;
+    }
 
-.no-results {
-  padding: 15px 20px;
-  text-align: center;
-  color: var(--text-light);
-}
+    .no-results {
+      padding: 15px 20px;
+      text-align: center;
+      color: var(--text-light);
+    }
 
-@media (max-width: 700px) {
-  .search-container {
-    padding: 0 1rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .search-input {
-    padding: 10px 45px 10px 15px;
-    font-size: 0.95rem;
-  }
-  
-  .search-button {
-    width: 32px;
-    height: 32px;
-  }
-}
+    @media (max-width: 700px) {
+      .search-container {
+        padding: 0 1rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .search-input {
+        padding: 10px 45px 10px 15px;
+        font-size: 0.95rem;
+      }
+      
+      .search-button {
+        width: 32px;
+        height: 32px;
+      }
+    }
 
-@media (max-width: 480px) {
-  .search-input {
-    font-size: 0.9rem;
-  }
-  
-  .search-results {
-    max-height: 250px;
-  }
-  
-  .search-result-item {
-    padding: 10px 15px;
-    font-size: 0.9rem;
-  }
-}
     @media (max-width: 480px) {
-  .responsive-header {
-    height: 200px !important; /* أقل قليلاً للجوال */
-    min-height: 200px;
-  }
-  
-  .compact-date {
-    font-size: 0.8rem !important;
-    padding: 6px 12px !important;
-    max-width: 300px !important;
-    bottom: 15px !important;
-  }
-}
-
-@media (max-width: 360px) {
-  .responsive-header {
-    height: 180px !important;
-  }
-  
-  .compact-date {
-    font-size: 0.75rem !important;
-    padding: 5px 10px !important;
-  }
-}
+      .search-input {
+        font-size: 0.9rem;
+      }
+      
+      .search-results {
+        max-height: 250px;
+      }
+      
+      .search-result-item {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+      }
+    }
     @media (max-width: 480px) {
-  .responsive-header {
-    height: 200px !important;
-    object-position: center 25% !important; /* تركيز أعلى للجوال */
-  }
-  
-  .compact-date {
-    font-size: 0.8rem !important;
-    padding: 6px 15px !important;
-    bottom: 10px !important;
-    max-width: 300px !important;
-  }
-}
+      .responsive-header {
+        height: 200px !important;
+        min-height: 200px;
+      }
+      
+      .compact-date {
+        font-size: 0.8rem !important;
+        padding: 6px 12px !important;
+        max-width: 300px !important;
+        bottom: 15px !important;
+      }
+    }
 
-@media (max-width: 360px) {
-  .responsive-header {
-    height: 180px !important;
-    object-position: center 20% !important;
-  }
-  
-  .compact-date {
-    font-size: 0.75rem !important;
-    padding: 5px 12px !important;
-  }
-}
-/* تصغير أكبر قليلاً للتاريخ والوقت على الجوال */
-@media (max-width: 768px) {
-	  #hijri-date, #gregorian-date, #live-time {
-	      font-size: 0.75rem; /* حجم مناسب للجوال في موقعه الجديد */
-	  }
-	  .compact-date.new-position {
-	      padding: 6px 15px;
-	  }
-	}
-/* الهيدر في الوضع الأفقي */
-@media screen and (max-height: 500px) and (orientation: landscape) {
-  header img.responsive-header {
-    height: 160px !important;   /* زود الطول ليبان أوضح */
-    max-height: 160px !important;
-  }
+    @media (max-width: 360px) {
+      .responsive-header {
+        height: 180px !important;
+      }
+      
+      .compact-date {
+        font-size: 0.75rem !important;
+        padding: 5px 10px !important;
+      }
+    }
+    @media (max-width: 480px) {
+      .responsive-header {
+        height: 200px !important;
+        object-position: center 25% !important;
+      }
+      
+      .compact-date {
+        font-size: 0.8rem !important;
+        padding: 6px 15px !important;
+        bottom: 10px !important;
+        max-width: 300px !important;
+      }
+    }
 
-  .compact-date {
-    font-size: 0.9rem !important;  /* خليه أكبر شوية */
-    padding: 4px 10px !important;  /* عشان ما يضيق */
-  }
-}
-/* الهيدر العام */
-#header {
-    height: 200px;           /* ارتفاع مناسب للوضع العمودي */
-    width: 100%;
-    background-image: url('your-header-image.jpg');
-    background-size: cover;   /* تغطية كاملة بدون تشويه */
-    background-position: center; /* إبقاء الجزء المهم في المنتصف */
-}
+    @media (max-width: 360px) {
+      .responsive-header {
+        height: 180px !important;
+        object-position: center 20% !important;
+      }
+      
+      .compact-date {
+        font-size: 0.75rem !important;
+        padding: 5px 12px !important;
+      }
+    }
+    /* تصغير أكبر قليلاً للتاريخ والوقت على الجوال */
+    @media (max-width: 768px) {
+      #hijri-date, #gregorian-date, #live-time {
+        font-size: 0.75rem;
+      }
+      .compact-date.new-position {
+        padding: 6px 15px;
+      }
+    }
+    /* الهيدر في الوضع الأفقي */
+    @media screen and (max-height: 500px) and (orientation: landscape) {
+      header img.responsive-header {
+        height: 160px !important;
+        max-height: 160px !important;
+      }
 
-/* للهاتف بالوضع الأفقي */
-@media only screen and (max-width: 767px) and (orientation: landscape) {
+      .compact-date {
+        font-size: 0.9rem !important;
+        padding: 4px 10px !important;
+      }
+    }
+    /* الهيدر العام */
     #header {
-        height: 200px;       /* نفس ارتفاع الوضع العمودي */
+      height: 200px;
+      width: 100%;
+      background-image: url('your-header-image.jpg');
+      background-size: cover;
+      background-position: center;
+    }
+
+    /* للهاتف بالوضع الأفقي */
+    @media only screen and (max-width: 767px) and (orientation: landscape) {
+      #header {
+        height: 200px;
         background-size: cover;
         background-position: center;
+      }
     }
-}
-#header {
-    height: 200px; /* ثابت لكل الوضعيات */
-    overflow: hidden;
-}
+    #header {
+      height: 200px;
+      overflow: hidden;
+    }
 
-#header img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-}
-/* أنماط قسم الذكاء الاصطناعي */
-.ai-assistant-container {
-  max-width: 800px;
-  margin: 3rem auto;
-  padding: 2.5rem;
-  background: linear-gradient(135deg, #ffffff 0%, #f8f5ff 100%);
-  border-radius: 20px;
-  box-shadow: 0 10px 30px rgba(122, 67, 204, 0.2);
-  position: relative;
-  overflow: hidden;
-  border: 1px solid rgba(122, 67, 204, 0.15);
-}
+    #header img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    /* أنماط قسم الذكاء الاصطناعي */
+    .ai-assistant-container {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 2.5rem;
+      background: var(--card-bg);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(122, 67, 204, 0.2);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(122, 67, 204, 0.15);
+    }
 
-.ai-assistant-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 5px;
-  background: linear-gradient(90deg, #4285f4 0%, #34a853 33%, #fbbc05 66%, #ea4335 100%);
-  border-radius: 2px 2px 0 0;
-}
+    .ai-assistant-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #4285f4 0%, #34a853 33%, #fbbc05 66%, #ea4335 100%);
+      border-radius: 2px 2px 0 0;
+    }
 
-.ai-header {
-  color: var(--primary-500);
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 1.7rem;
-  position: relative;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 1rem;
-}
+    .ai-header {
+      color: var(--primary-500);
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.7rem;
+      position: relative;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
 
+    .ai-icon {
+      font-size: 2rem;
+      background: linear-gradient(135deg, #4285f4, #34a853, #fbbc05, #ea4335);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: pulse 2s infinite;
+    }
 
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
 
-.ai-icon {
-  font-size: 2rem;
-  background: linear-gradient(135deg, #4285f4, #34a853, #fbbc05, #ea4335);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: pulse 2s infinite;
-}
+    .ai-description {
+      text-align: center;
+      color: var(--text-light);
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+    .ai-chat-container {
+      background: var(--light-bg);
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(122, 67, 204, 0.1);
+      border: 1px solid rgba(122, 67, 204, 0.1);
+      margin-bottom: 1.5rem;
+    }
 
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.1); }
-  100% { transform: scale(1); }
-}
+    .ai-messages {
+      height: 300px;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: var(--light-bg);
+      border-radius: 10px;
+      border: 1px solid rgba(122, 67, 204, 0.1);
+    }
 
-.ai-description {
-  text-align: center;
-  color: var(--text-light);
-  margin-bottom: 2rem;
-  font-size: 1.1rem;
-  line-height: 1.6;
-}
-.ai-chat-container {
-  background: white;
-  border-radius: 15px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 15px rgba(122, 67, 204, 0.1);
-  border: 1px solid rgba(122, 67, 204, 0.1);
-  margin-bottom: 1.5rem;
-}
+    .message {
+      margin-bottom: 1rem;
+      padding: 0.8rem 1rem;
+      border-radius: 12px;
+      max-width: 85%;
+      word-wrap: break-word;
+    }
 
-.ai-messages {
-  height: 300px;
-  overflow-y: auto;
-  margin-bottom: 1rem;
-  padding: 1rem;
-  background: var(--light-bg);
-  border-radius: 10px;
-  border: 1px solid rgba(122, 67, 204, 0.1);
-}
+    .user-message {
+      background: var(--primary-soft-2);
+      margin-right: auto;
+      border-bottom-right-radius: 4px;
+    }
 
-.message {
-  margin-bottom: 1rem;
-  padding: 0.8rem 1rem;
-  border-radius: 12px;
-  max-width: 85%;
-  word-wrap: break-word;
-}
+    .ai-message {
+      background: var(--light-bg);
+      margin-left: auto;
+      border: 1px solid rgba(122, 67, 204, 0.1);
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 2px 8px rgba(122, 67, 204, 0.1);
+    }
 
-.user-message {
-  background: var(--primary-soft-2);
-  margin-right: auto;
-  border-bottom-right-radius: 4px;
-}
+    .ai-input-group {
+      display: flex;
+      gap: 0.5rem;
+    }
 
-.ai-message {
-  background: white;
-  margin-left: auto;
-  border: 1px solid rgba(122, 67, 204, 0.1);
-  border-bottom-left-radius: 4px;
-  box-shadow: 0 2px 8px rgba(122, 67, 204, 0.1);
-}
+    .ai-input {
+      flex: 1;
+      padding: 12px 15px;
+      border: 2px solid rgba(122, 67, 204, 0.2);
+      border-radius: 25px;
+      font-size: 1rem;
+      font-family: 'Tajawal', sans-serif;
+      background: var(--light-bg);
+      color: var(--text-dark);
+      transition: var(--transition);
+      outline: none;
+    }
 
-.ai-input-group {
-  display: flex;
-  gap: 0.5rem;
-}
+    .ai-input:focus {
+      border-color: var(--primary-500);
+      box-shadow: 0 0 0 3px rgba(122, 67, 204, 0.1);
+    }
 
-.ai-input {
-  flex: 1;
-  padding: 12px 15px;
-  border: 2px solid rgba(122, 67, 204, 0.2);
-  border-radius: 25px;
-  font-size: 1rem;
-  font-family: 'Tajawal', sans-serif;
-  background: white;
-  transition: var(--transition);
-  outline: none;
-}
+    .ai-send-btn {
+      background: var(--primary-500);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      font-size: 1.2rem;
+    }
 
-.ai-input:focus {
-  border-color: var(--primary-500);
-  box-shadow: 0 0 0 3px rgba(122, 67, 204, 0.1);
-}
+    .ai-send-btn:hover {
+      background: var(--primary-600);
+      transform: scale(1.05);
+    }
 
-.ai-send-btn {
-  background: var(--primary-500);
-  color: white;
-  border: none;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: var(--transition);
-  font-size: 1.2rem;
-}
+    .ai-send-btn:disabled {
+      background: var(--text-light);
+      cursor: not-allowed;
+      transform: none;
+    }
 
-.ai-send-btn:hover {
-  background: var(--primary-600);
-  transform: scale(1.05);
-}
+    .ai-loading {
+      display: none;
+      text-align: center;
+      color: var(--text-light);
+      font-style: italic;
+    }
 
-.ai-send-btn:disabled {
-  background: var(--text-light);
-  cursor: not-allowed;
-  transform: none;
-}
+    .ai-disclaimer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-top: 1rem;
+      padding: 1rem;
+      background: var(--green-100);
+      border-radius: 10px;
+      border: 1px solid var(--green-200);
+    }
 
-.ai-loading {
-  display: none;
-  text-align: center;
-  color: var(--text-light);
-  font-style: italic;
-}
+    .ai-disclaimer i {
+      color: var(--green-text);
+      margin-left: 0.5rem;
+    }
+    /* ================================================== */
+    /*              تنسيقات تذييل الصفحـة (Footer)             */
+    /* ================================================== */
+    .site-footer {
+      background: var(--light-bg);
+      color: var(--text-light);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      margin-top: 3rem;
+      border-top: 1px solid rgba(122, 67, 204, 0.1);
+    }
 
-.ai-disclaimer {
-  text-align: center;
-  font-size: 0.85rem;
-  color: var(--text-light);
-  margin-top: 1rem;
-  padding: 1rem;
-  background: var(--green-100);
-  border-radius: 10px;
-  border: 1px solid var(--green-200);
-}
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
 
-.ai-disclaimer i {
-  color: var(--green-text);
-  margin-left: 0.5rem;
-}
-/* ================================================== */
-/*              تنسيقات تذييل الصفحـة (Footer)             */
-/* ================================================== */
-.site-footer {
-  background: #f0f0f7; /* لون خلفية هادئ ومختلف قليلاً عن الجسم */
-  color: var(--text-light);
-  padding: 2rem 1.5rem;
-  text-align: center;
-  margin-top: 3rem; /* مسافة علوية لفصله عن المحتوى */
-  border-top: 1px solid rgba(122, 67, 204, 0.1);
-}
+    .footer-links {
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
 
-.footer-content {
-  max-width: 1200px;
-  margin: 0 auto;
-}
+    .footer-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
 
-.footer-links {
-  margin-bottom: 1.5rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 2rem; /* مسافة بين الروابط */
-  flex-wrap: wrap; /* للسماح بالالتفاف على الشاشات الصغيرة */
-}
+    .footer-link:hover {
+      color: var(--primary-500);
+      transform: translateY(-2px);
+    }
 
-.footer-link {
-  color: var(--text-dark);
-  text-decoration: none;
-  font-weight: 600;
-  font-size: 1rem;
-  transition: var(--transition);
-  display: flex;
-  align-items: center;
-  gap: 0.5rem; /* مسافة بين الأيقونة والنص */
-}
+    .footer-link i {
+      color: var(--primary-500);
+    }
 
-.footer-link:hover {
-  color: var(--primary-500);
-  transform: translateY(-2px);
-}
+    .footer-copyright {
+      font-size: 0.9rem;
+    }
+    /* هذا التنسيق يضمن أن وسم <p> داخل الهيدر يتوسط بشكل صحيح على جميع الشاشات */
+    header p {
+      display: block !important;
+      margin: 0 auto !important;
+      text-align: center !important;
+    }
+    /* تحسين ظل النص للعناوين في الهيدر */
+    header h1 {
+      text-shadow: 
+        0 0 5px rgba(255, 255, 255, 0.7), 
+        0 4px 8px rgba(0, 0, 0, 0.6);
+    }
 
-.footer-link i {
-  color: var(--primary-500);
-}
+    header p {
+      text-shadow: 
+        0 0 3px rgba(255, 255, 255, 0.5), 
+        0 2px 4px rgba(0, 0, 0, 0.4);
+    }
 
-.footer-copyright {
-  font-size: 0.9rem;
-}
-/* هذا التنسيق يضمن أن وسم <p> داخل الهيدر يتوسط بشكل صحيح على جميع الشاشات */
-  header p {
-  /* لضمان أن العنصر يأخذ عرضاً كاملاً ليتمكن من التوسيط */
-  display: block !important; 
-  /* توسيط العنصر ذي العرض المحدد (max-width) */
-  margin: 0 auto !important;
-  /* لضمان توسيط النص داخله أيضاً */
-  text-align: center !important;
-}
-/* تحسين ظل النص للعناوين في الهيدر */
-header h1 {
-  text-shadow: 
-    0 0 5px rgba(255, 255, 255, 0.7), 
-    0 4px 8px rgba(0, 0, 0, 0.6);
-}
+    /* الصورة الشخصية في الهيدر */
+    .profile-image {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      border: 4px solid rgba(255, 255, 255, 0.3);
+      margin: 0 auto 1rem;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
 
-header p {
-  text-shadow: 
-    0 0 3px rgba(255, 255, 255, 0.5), 
-    0 2px 4px rgba(0, 0, 0, 0.4);
-}
+    .profile-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
 
-
+    .profile-placeholder {
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #5D3FD3 0%, #7B68EE 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 2.5rem;
+    }
   </style>
 </head>
 <body>
+
+<!-- زر تبديل الوضع الليلي -->
+<button class="theme-toggle" id="themeToggle">
+  <i class="fas fa-moon"></i>
+</button>
 
 <!-- قسم الشعار -->
 <div class="logo-header fade-in">
@@ -1521,6 +1598,15 @@ header p {
 <!-- === بداية الهيدر الجديد والمحسّن === -->
 <header class="tech-header fade-in">
   <div class="header-content">
+    <!-- الصورة الشخصية -->
+    <div class="profile-image">
+      <div class="profile-placeholder">
+        <i class="fas fa-user"></i>
+      </div>
+      <!-- يمكنك استبدال هذا العنصر بالصورة الحقيقية لاحقاً -->
+      <!-- <img src="images/your-photo.jpg" alt="صورة أ. محمد الغامدي"> -->
+    </div>
+    
     <h1>واجهـة المعلـم الرقمـي</h1>
     <h2>أ. محمد حمدان الغامدي</h2>
     <p>معلم التقنية الرقمية</p>
@@ -1537,20 +1623,16 @@ header p {
     <i class="fas fa-mouse icon-5"></i>         <!-- شكل الفأرة (الماوس) -->
     <i class="fas fa-hdd icon-6"></i>           <!-- قرص صلب/تخزين -->
   </div>
-  
-  
 </header>
 <!-- === نهاية الهيدر الجديد والمحسّن === -->
-
-
 
 <!-- الوقت والتاريخ الجديد فوق خانة البحث -->
 <div class="date-time-container fade-in" style="text-align: center; margin-bottom: 10px; margin-top: 20px;">
   <div class="compact-date new-position" dir="rtl">
     <i class="fas fa-calendar-alt" style="color: var(--primary-500); margin-left: 5px;"></i><span id="hijri-date"></span> 
-    <span class="separator" style="color: #7A43CC; margin: 0 4px; opacity: 0.7;">•</span>
+    <span class="separator" style="color: var(--primary-500); margin: 0 4px; opacity: 0.7;">•</span>
     <span id="gregorian-date"></span>
-    <span class="separator" style="color: #7A43CC; margin: 0 4px; opacity: 0.7;">•</span>
+    <span class="separator" style="color: var(--primary-500); margin: 0 4px; opacity: 0.7;">•</span>
     <i class="fas fa-clock" style="color: var(--primary-500); margin-left: 5px;"></i><span id="live-time"></span>
   </div>
 </div>
@@ -1565,14 +1647,20 @@ header p {
     <div class="search-results" id="searchResults"></div>
   </div>
 </div>
+
 <div class="container">
   <!-- معلومات عامة -->
   <section class="section-card fade-in">
-    <h2 class="section-title">
-      <i class="fas fa-info-circle section-icon"></i>
-      معلومات عامة
-    </h2>
-    <div class="cards-container">
+    <div class="section-title">
+      <div class="title-container">
+        <i class="fas fa-info-circle section-icon"></i>
+        <span>معلومات عامة</span>
+      </div>
+      <button class="toggle-cards" data-target="info-cards" title="طي/فتح">
+        <i class="fas fa-chevron-up"></i>
+      </button>
+    </div>
+    <div class="cards-container collapsed" id="info-cards">
       <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/qws2/%D8%A3%D9%87%D8%AF%D8%A7%D9%81-%D8%B3%D9%8A%D8%A7%D8%B3%D8%A9-%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A8%D8%A7%D9%84%D9%85%D9%85%D9%84%D9%83%D8%A9?authuser=1">
         <i class="fas fa-bullseye card-icon"></i>
         <h3 class="card-title">أهداف التعليم</h3>
@@ -1610,11 +1698,16 @@ header p {
 
   <!-- التنمية المهنية -->
   <section class="section-card fade-in">
-    <h2 class="section-title">
-      <i class="fas fa-briefcase section-icon"></i>
-      التنمية المهنية
-    </h2>
-    <div class="cards-container">
+    <div class="section-title">
+      <div class="title-container">
+        <i class="fas fa-briefcase section-icon"></i>
+        <span>التنمية المهنية</span>
+      </div>
+      <button class="toggle-cards" data-target="dev-cards" title="طي/فتح">
+        <i class="fas fa-chevron-up"></i>
+      </button>
+    </div>
+    <div class="cards-container collapsed" id="dev-cards">
       <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/aser2w/home?authuser=1">
         <i class="fas fa-chalkboard-teacher card-icon"></i>
         <h3 class="card-title">الدورات التدريبية</h3>
@@ -1628,11 +1721,16 @@ header p {
 
   <!-- التطوير المهني -->
   <section class="section-card fade-in">
-    <h2 class="section-title">
-      <i class="fas fa-sync-alt section-icon"></i>
-      التطوير المهني
-    </h2>
-    <div class="cards-container">
+    <div class="section-title">
+      <div class="title-container">
+        <i class="fas fa-sync-alt section-icon"></i>
+        <span>التطوير المهني</span>
+      </div>
+      <button class="toggle-cards" data-target="pro-cards" title="طي/فتح">
+        <i class="fas fa-chevron-up"></i>
+      </button>
+    </div>
+    <div class="cards-container collapsed" id="pro-cards">
       <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/edsww2/%D8%AA%D8%A8%D8%A7%D8%AF%D9%84-%D8%A7%D9%84%D8%B2%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA?authuser=1">
         <i class="fas fa-exchange-alt card-icon"></i>
         <h3 class="card-title">تبادل الزيارات</h3>
@@ -1646,10 +1744,12 @@ header p {
 
   <!-- التكريم والجوائز -->
   <section class="section-card fade-in">
-    <h2 class="section-title">
-      <i class="fas fa-award section-icon"></i>
-      التكريم والجوائز
-    </h2>
+    <div class="section-title">
+      <div class="title-container">
+        <i class="fas fa-award section-icon"></i>
+        <span>التكريم والجوائز</span>
+      </div>
+    </div>
     <div class="cards-container">
       <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sf56/%D8%A7%D9%84%D8%AA%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D8%A6%D8%B2?authuser=1">
         <i class="fas fa-trophy card-icon"></i>
@@ -1660,11 +1760,16 @@ header p {
 
   <!-- العمل التعليمي -->
   <section class="section-card fade-in">
-    <h2 class="section-title">
-      <i class="fas fa-chalkboard section-icon"></i>
-      العمل التعليمي
-    </h2>
-    <div class="cards-container">
+    <div class="section-title">
+      <div class="title-container">
+        <i class="fas fa-chalkboard section-icon"></i>
+        <span>العمل التعليمي</span>
+      </div>
+      <button class="toggle-cards" data-target="edu-cards" title="طي/فتح">
+        <i class="fas fa-chevron-up"></i>
+      </button>
+    </div>
+    <div class="cards-container collapsed" id="edu-cards">
       <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sa32sa2/%D8%A3%D9%87%D8%AF%D8%A7%D9%81-%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A7%D9%84%D9%85%D8%A7%D8%AF%D8%A9?authuser=1">
         <i class="fas fa-bullseye card-icon"></i>
         <h3 class="card-title">أهداف تعليم المادة</h3>
@@ -1726,11 +1831,16 @@ header p {
 
   <!-- تقويم الطلاب -->
   <section class="section-card fade-in">
-    <h2 class="section-title">
-      <i class="fas fa-clipboard-list section-icon"></i>
-      تقويم الطلاب
-    </h2>
-    <div class="cards-container">
+    <div class="section-title">
+      <div class="title-container">
+        <i class="fas fa-clipboard-list section-icon"></i>
+        <span>تقويم الطلاب</span>
+      </div>
+      <button class="toggle-cards" data-target="eval-cards" title="طي/فتح">
+        <i class="fas fa-chevron-up"></i>
+      </button>
+    </div>
+    <div class="cards-container collapsed" id="eval-cards">
       <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/ghgv54/q?authuser=1">
         <i class="fas fa-chart-line card-icon"></i>
         <h3 class="card-title">سجلات المتابعة</h3>
@@ -1756,10 +1866,12 @@ header p {
 
   <!-- مكتبة الطالب -->
   <section class="section-card fade-in">
-    <h2 class="section-title">
-      <i class="fas fa-user-graduate section-icon"></i>
-      مكتبة الطالب
-    </h2>
+    <div class="section-title">
+      <div class="title-container">
+        <i class="fas fa-user-graduate section-icon"></i>
+        <span>مكتبة الطالب</span>
+      </div>
+    </div>
     <div class="cards-container">
       <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/dvdf55/ss?authuser=1">
         <i class="fas fa-book card-icon"></i>
@@ -1778,10 +1890,12 @@ header p {
 
   <!-- الاثراء التقني -->
   <section class="section-card fade-in">
-    <h2 class="section-title">
-      <i class="fas fa-laptop-code section-icon"></i>
-      الاثراء التقني
-    </h2>
+    <div class="section-title">
+      <div class="title-container">
+        <i class="fas fa-laptop-code section-icon"></i>
+        <span>الاثراء التقني</span>
+      </div>
+    </div>
     <div class="cards-container">
       <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sdfgbdh77/wc?authuser=1">
         <i class="fas fa-code card-icon"></i>
@@ -1800,10 +1914,12 @@ header p {
 
   <!-- التواصل -->
   <section class="section-card fade-in">
-    <h2 class="section-title">
-      <i class="fas fa-comments section-icon"></i>
-      التواصل
-    </h2>
+    <div class="section-title">
+      <div class="title-container">
+        <i class="fas fa-comments section-icon"></i>
+        <span>التواصل</span>
+      </div>
+    </div>
     <div class="cards-container">
       <div class="card" style="animation-delay: 0.05s;" onclick="window.location.href='mailto:mfh713623@gmail.com'">
         <i class="fas fa-envelope card-icon"></i>
@@ -1812,12 +1928,13 @@ header p {
     </div>
   </section>
 </div>
+
 <!-- قسم مساعد الذكاء الاصطناعي -->
 <div id="ai-assistant-section" class="ai-assistant-container fade-in">
-<h2 class="ai-header" style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
-  <i class="fas fa-robot ai-icon" style="margin-top: 0; align-self: center;"></i>
-  <span>الذكاء الاصطناعي</span>
-</h2>
+  <h2 class="ai-header" style="display: flex; align-items: center; justify-content: center; gap: 1rem;">
+    <i class="fas fa-robot ai-icon" style="margin-top: 0; align-self: center;"></i>
+    <span>الذكاء الاصطناعي</span>
+  </h2>
   
   <p class="ai-description">
     اسأل عن أي موضوع في التقنية الرقمية أو غيرها من المواضيع 
@@ -1847,6 +1964,7 @@ header p {
     ملاحظة: الإجابات تعتمد على المعرفة العامة للذكاء الاصطناعي وقد تحتاج لمراجعة المعلم للتأكد من دقتها
   </div>
 </div>
+
 <!-- قسم الاستفسارات -->
 <div class="google-form-container fade-in">
   <h2 class="google-form-header" style="display: flex; align-items: center; gap: 0.8rem;">
@@ -1865,57 +1983,70 @@ header p {
     title="نموذج استفسارات الطلاب">
     جاري التحميل...
   </iframe>
-<a href="https://docs.google.com/spreadsheets/d/14FqkF7e83_KW_Gd48G2OlRLIJYuaKYTPndo-qb5DjKo/edit?usp=sharing" 
-   target="_blank"
-   style="display: block; text-align: center; margin: 25px auto; padding: 14px 25px; background: var(--primary-500); color: white; border-radius: 35px; text-decoration: none; font-weight: 700; width: fit-content; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: none; border: none;">
-    <i class="fas fa-external-link-alt"></i> إجابة المعلم على الاستفسارات   
-</a>
+  <a href="https://docs.google.com/spreadsheets/d/14FqkF7e83_KW_Gd48G2OlRLIJYuaKYTPndo-qb5DjKo/edit?usp=sharing" 
+     target="_blank"
+     style="display: block; text-align: center; margin: 25px auto; padding: 14px 25px; background: var(--primary-500); color: white; border-radius: 35px; text-decoration: none; font-weight: 700; width: fit-content; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: none; border: none;">
+      <i class="fas fa-external-link-alt"></i> إجابة المعلم على الاستفسارات   
+  </a>
   <div class="google-form-footer">
     <small><i class="fas fa-info-circle"></i> سيتم الرد على استفسارك خلال مدة قصيرة   </small>
   </div>
 </div>
 
-<!-- زر العودة للأعلى -->
-<button class="back-to-top" title="العودة للأعلى" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
-  <i class="fas fa-arrow-up"></i>
-</button>
+<!-- ================================================== -->
+<!--                  تذييل الصفحـة (Footer)                 -->
+<!-- ================================================== -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-links">
+      <a href="mailto:mfh713623@gmail.com" class="footer-link">
+        <i class="fas fa-envelope"></i> البريد الإلكتروني
+      </a>
+      <a href="#ai-assistant-section" class="footer-link">
+        <i class="fas fa-robot"></i> مساعد الذكاء الاصطناعي
+      </a>
+    </div>
+    <div class="footer-copyright">
+      © 2026 جميع الحقوق محفوظة | واجهة المعلم الرقمي - أ. محمد الغامدي
+    </div>
+  </div>
+</footer>
 
 <script>
-	// إزالة أي علامة تجزئة (#) من الرابط لمنع التمرير التلقائي
-if (window.location.hash) {
-    // نستخدم replaceState لتغيير الرابط دون إعادة تحميل الصفحة
+  // إزالة أي علامة تجزئة (#) من الرابط لمنع التمرير التلقائي
+  if (window.location.hash) {
     history.replaceState(null, null, window.location.pathname);
-}
+  }
 
   // دالة تحديث التاريخ والوقت
- // دالة تحديث التاريخ والوقت
-function updateCompactDate() {
+  function updateCompactDate() {
     const now = new Date();
     
     // حل بسيط: طرح يوم واحد من التاريخ
     const correctedDate = new Date(now);
-    correctedDate.setDate(correctedDate.getDate() - 1); // طرح يوم واحد
+    correctedDate.setDate(correctedDate.getDate() - 1);
     
     const hijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', {
-        day: 'numeric',
-        month: 'long'
+      day: 'numeric',
+      month: 'long'
     }).format(correctedDate);
     
     const gregorian = new Intl.DateTimeFormat('ar-EG', {
-        day: 'numeric',
-        month: 'numeric',
-        year: 'numeric'
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric'
     }).format(now);
     
     const time = new Date().toLocaleTimeString('ar-EG', {
-        hour: '2-digit',
-        minute: '2-digit'
+      hour: '2-digit',
+      minute: '2-digit'
     });
     
     document.getElementById('hijri-date').textContent = hijri;
     document.getElementById('gregorian-date').textContent = gregorian;
     document.getElementById('live-time').textContent = time;
-}
+  }
+
   // جلب الإشعار من ملف GitHub
   function fetchNotification() {
     const notificationUrl = 'https://raw.githubusercontent.com/muhammad1937-web/teacher-injaz/refs/heads/main/notification.txt';
@@ -1939,37 +2070,32 @@ function updateCompactDate() {
           adjustScrollSpeed(text.length);
         } else {
           notificationContent.textContent = "مرحباً بكم في واجهة المعلم الرقمي .. أ.محمد حمدان الغامدي";
-          adjustScrollSpeed(50); // طول افتراضي
+          adjustScrollSpeed(50);
         }
       })
       .catch(error => {
         console.error('حدث خطأ:', error);
         notificationContent.textContent = "مرحباً بكم في واجهة المعلم الرقمي .. أ.محمد حمدان الغامدي";
-        adjustScrollSpeed(50); // طول افتراضي
+        adjustScrollSpeed(50);
       });
   }
 
- 
   // ضبط سرعة الحركة بناءً على طول النص
-function adjustScrollSpeed(textLength) {
-  const container = document.querySelector('.notification-container');
-  const baseDuration = 20; // تم تغيير من 40 إلى 20 ثانية أساسية للنص القصير
-  const additionalTimePerChar = 0.05; // تم تغيير من 0.1 إلى 0.05 وقت إضافي لكل حرف
-  
-  // حساب المدة بناءً على طول النص
-  let duration = baseDuration + (textLength * additionalTimePerChar);
-  
-  // تحديد حد أقصى للمدة
-  duration = Math.min(duration, 60); // تم تغيير من 120 إلى 60 ثانية (لا تزيد عن 60 ثانية)
-  
-  // تطبيق المدة الجديدة
-  container.style.animationDuration = `${duration}s`;
-  
-  // إعادة تشغيل التحريك
-  container.style.animation = 'none';
-  void container.offsetWidth;
-  container.style.animation = `scroll ${duration}s linear infinite`;
-}
+  function adjustScrollSpeed(textLength) {
+    const container = document.querySelector('.notification-container');
+    const baseDuration = 20;
+    const additionalTimePerChar = 0.05;
+    
+    let duration = baseDuration + (textLength * additionalTimePerChar);
+    duration = Math.min(duration, 60);
+    
+    container.style.animationDuration = `${duration}s`;
+    
+    // إعادة تشغيل التحريك
+    container.style.animation = 'none';
+    void container.offsetWidth;
+    container.style.animation = `scroll ${duration}s linear infinite`;
+  }
 
   // فتح الروابط في نافذة جديدة مع إضافة أيقونة
   document.querySelectorAll('.card[data-url]').forEach(card => {
@@ -2020,29 +2146,18 @@ function adjustScrollSpeed(textLength) {
     });
   }
 
-  // التحكم في زر العودة للأعلى
-  function toggleBackToTop() {
-    const backToTop = document.querySelector('.back-to-top');
-    if (window.scrollY > 300) {
-      backToTop.classList.add('show');
-    } else {
-      backToTop.classList.remove('show');
-    }
-  }
-
   // إضافة مستمعي الأحداث
   window.addEventListener('scroll', () => {
     checkFadeElements();
-    toggleBackToTop();
   });
 
   // التحقق من العناصر عند تحميل الصفحة
   window.addEventListener('load', () => {
     checkFadeElements();
-    toggleBackToTop();
   });
+
   // وظائف البحث
-function initSearch() {
+  function initSearch() {
     const searchInput = document.getElementById('searchInput');
     const searchButton = document.getElementById('searchButton');
     const searchResults = document.getElementById('searchResults');
@@ -2121,10 +2236,11 @@ function initSearch() {
     });
   }
 
-// تهيئة البحث عند تحميل الصفحة
-initSearch();
-// مساعد الذكاء الاصطناعي Gemini
-function initAIAssistant() {
+  // تهيئة البحث عند تحميل الصفحة
+  initSearch();
+
+  // مساعد الذكاء الاصطناعي Gemini
+  function initAIAssistant() {
     const aiMessages = document.getElementById('aiMessages');
     const aiInput = document.getElementById('aiInput');
     const aiSendBtn = document.getElementById('aiSendBtn');
@@ -2135,108 +2251,100 @@ function initAIAssistant() {
 
     // زر مسح المحادثة
     function addClearButton() {
-        const clearBtn = document.createElement('button');
-        clearBtn.innerHTML = '<i class="fas fa-trash"></i> مسح المحادثة';
-        clearBtn.style.cssText = `
-            background: #ff4757;
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            transition: all 0.3s;
-        `;
-        clearBtn.onclick = clearConversation;
-        
-        aiMessages.parentNode.insertBefore(clearBtn, aiMessages);
+      const clearBtn = document.createElement('button');
+      clearBtn.innerHTML = '<i class="fas fa-trash"></i> مسح المحادثة';
+      clearBtn.style.cssText = `
+        background: #ff4757;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.9rem;
+        margin-bottom: 10px;
+        transition: all 0.3s;
+      `;
+      clearBtn.onclick = clearConversation;
+      
+      aiMessages.parentNode.insertBefore(clearBtn, aiMessages);
     }
 
     // مسح المحادثة
     function clearConversation() {
-        aiMessages.innerHTML = `
-            <div class="message ai-message">
-                <strong> الذكاء الاصطناعي:</strong> مرحباً! كيف يمكنني مساعدتك في مواضيع التقنية الرقمية أو أي موضوع آخر؟
-            </div>
-        `;
+      aiMessages.innerHTML = `
+        <div class="message ai-message">
+          <strong> الذكاء الاصطناعي:</strong> مرحباً! كيف يمكنني مساعدتك في مواضيع التقنية الرقمية أو أي موضوع آخر؟
+        </div>
+      `;
     }
 
-       async function sendMessage() {
-        const message = aiInput.value.trim();
-        if (!message) return;
+    async function sendMessage() {
+      const message = aiInput.value.trim();
+      if (!message) return;
 
-        addMessage(message, 'user');
-        aiInput.value = '';
-        aiSendBtn.disabled = true;
-        aiLoading.style.display = 'block';
+      addMessage(message, 'user');
+      aiInput.value = '';
+      aiSendBtn.disabled = true;
+      aiLoading.style.display = 'block';
 
-        // --- بداية التعديل ---
-        // تأكد من أن الرابط كامل وصحيح
-        const API_URL = '/api/gemini'; 
+      const API_URL = '/api/gemini'; 
 
-        try {
-            const response = await fetch(API_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    contents: [{
-                        parts: [{
-                            text: message // نرسل الرسالة مباشرة
-                        }]
-                    }]
-                })
-            });
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{
+              parts: [{
+                text: message
+              }]
+            }]
+          })
+        });
 
-            // سنقوم بتسجيل حالة الاستجابة في المتصفح لتشخيص المشكلة
-            console.log('Response Status:', response.status);
+        console.log('Response Status:', response.status);
 
-            if (!response.ok) {
-                // سنقرأ رسالة الخطأ من الخادم ونعرضها
-                const errorData = await response.json();
-                console.error('Error from server:', errorData);
-                throw new Error(errorData.error || 'فشل في الاتصال بالخدمة');
-            }
-
-            const data = await response.json();
-            
-            if (data.candidates && data.candidates[0].content.parts[0].text) {
-                const aiResponse = data.candidates[0].content.parts[0].text;
-                addMessage(aiResponse, 'ai');
-            } else {
-                 // إذا كانت الاستجابة من Gemini تحتوي على خطأ (مثل مشكلة في الفوترة)
-                if (data.error) {
-                    console.error('Error from Gemini:', data.error.message);
-                    throw new Error(data.error.message);
-                }
-                throw new Error('لم يتم الحصول على إجابة');
-            }
-
-        } catch (error) {
-            console.error('Catch Block Error:', error);
-            // سنعرض رسالة خطأ أكثر تفصيلاً
-            addMessage(`عذراً، حدث خطأ: ${error.message}`, 'ai');
-        } finally {
-            aiLoading.style.display = 'none';
-            aiSendBtn.disabled = false;
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error('Error from server:', errorData);
+          throw new Error(errorData.error || 'فشل في الاتصال بالخدمة');
         }
-        // --- نهاية التعديل ---
-    }
 
+        const data = await response.json();
+        
+        if (data.candidates && data.candidates[0].content.parts[0].text) {
+          const aiResponse = data.candidates[0].content.parts[0].text;
+          addMessage(aiResponse, 'ai');
+        } else {
+          if (data.error) {
+            console.error('Error from Gemini:', data.error.message);
+            throw new Error(data.error.message);
+          }
+          throw new Error('لم يتم الحصول على إجابة');
+        }
+
+      } catch (error) {
+        console.error('Catch Block Error:', error);
+        addMessage(`عذراً، حدث خطأ: ${error.message}`, 'ai');
+      } finally {
+        aiLoading.style.display = 'none';
+        aiSendBtn.disabled = false;
+      }
+    }
 
     function addMessage(text, sender) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${sender}-message`;
-        
-        if (sender === 'user') {
-            messageDiv.innerHTML = `<strong>أنت:</strong> ${text}`;
-        } else {
-            const formattedText = text.replace(/\n/g, '<br>');
-            messageDiv.innerHTML = `<strong>الذكاء الاصطناعي:</strong> ${formattedText}`;
-        }
-        
-        aiMessages.appendChild(messageDiv);
-        aiMessages.scrollTop = aiMessages.scrollHeight;
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${sender}-message`;
+      
+      if (sender === 'user') {
+        messageDiv.innerHTML = `<strong>أنت:</strong> ${text}`;
+      } else {
+        const formattedText = text.replace(/\n/g, '<br>');
+        messageDiv.innerHTML = `<strong>الذكاء الاصطناعي:</strong> ${formattedText}`;
+      }
+      
+      aiMessages.appendChild(messageDiv);
+      aiMessages.scrollTop = aiMessages.scrollHeight;
     }
 
     // إضافة زر المسح
@@ -2245,50 +2353,83 @@ function initAIAssistant() {
     // إضافة مستمعي الأحداث
     aiSendBtn.addEventListener('click', sendMessage);
     aiInput.addEventListener('keypress', (e) => {
-        if (e.key === 'Enter' && !e.shiftKey) {
-            e.preventDefault();
-            sendMessage();
-        }
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
     });
 
     aiInput.addEventListener('input', () => {
-        aiSendBtn.disabled = !aiInput.value.trim();
+      aiSendBtn.disabled = !aiInput.value.trim();
     });
-}
+  }
 
-// تهيئة المساعد عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', initAIAssistant);
-document.addEventListener('DOMContentLoaded', function() {
-    // نستخدم setTimeout لضمان أن هذا الكود يتم تنفيذه بعد أي كود آخر
-    // قد يكون تم تنفيذه عند تحميل الصفحة
+  // تهيئة المساعد عند تحميل الصفحة
+  document.addEventListener('DOMContentLoaded', initAIAssistant);
+
+  document.addEventListener('DOMContentLoaded', function() {
     setTimeout(function() {
-        window.scrollTo(0, 0);
-    }, 100); // تأخير بسيط (100 مللي ثانية)
-});	
-</script>
-<!-- ================================================== -->
-<!--                  تذييل الصفحـة (Footer)                 -->
-<!-- ================================================== -->
-<footer class="site-footer">
-  <div class="footer-content">
-    <div class="footer-links">
-      <a href="mailto:mfh713623@gmail.com" class="footer-link">
-        <i class="fas fa-envelope"></i> البريد الإلكتروني
-      </a>
-      <a href="#ai-assistant-section" class="footer-link">
-        <i class="fas fa-robot"></i> مساعد الذكاء الاصطناعي
-      </a>
-    </div>
-    <div class="footer-copyright">
-      © 2026 جميع الحقوق محفوظة | واجهة المعلم الرقمي - أ. محمد الغامدي
-    </div>
-  </div>
-</footer>
+      window.scrollTo(0, 0);
+    }, 100);
+  });
 
+  // =========================================
+  //    وظائف التحسينات الجديدة
+  // =========================================
+
+  // وظيفة تبديل الوضع الليلي والنهاري
+  function initThemeToggle() {
+    const themeToggle = document.getElementById('themeToggle');
+    const body = document.body;
+    
+    // التحقق من التفضيل المحفوظ
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      body.classList.add('dark-mode');
+      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+    
+    // إضافة مستمع الحدث
+    themeToggle.addEventListener('click', () => {
+      body.classList.toggle('dark-mode');
+      
+      if (body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+        themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+      } else {
+        localStorage.setItem('theme', 'light');
+        themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+      }
+    });
+  }
+
+  // الوظيفة الجديدة: طي القوالب عند التحميل
+  function initCardToggles() {
+    const toggleButtons = document.querySelectorAll('.toggle-cards');
+    
+    toggleButtons.forEach(button => {
+      const targetId = button.getAttribute('data-target');
+      const cardsContainer = document.getElementById(targetId);
+      
+      if (cardsContainer) {
+        // إغلاق جميع القوالب عند التحميل
+        cardsContainer.classList.add('collapsed');
+        button.classList.add('collapsed');
+
+        // إضافة حدث النقر
+        button.addEventListener('click', () => {
+          cardsContainer.classList.toggle('collapsed');
+          button.classList.toggle('collapsed');
+        });
+      }
+    });
+  }
+
+  // تهيئة جميع الوظائف الجديدة
+  document.addEventListener('DOMContentLoaded', function() {
+    initThemeToggle();
+    initCardToggles();
+  });
+</script>
 </body>
 </html>
-
-
-
-
-
