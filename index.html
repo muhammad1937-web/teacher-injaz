@@ -1605,13 +1605,11 @@
 <header class="tech-header fade-in">
   <div class="header-content">
     <!-- الصورة الشخصية -->
-    <div class="profile-image">
-      <div class="profile-placeholder">
-        <i class="fas fa-user"></i>
-      </div>
-      <!-- يمكنك استبدال هذا العنصر بالصورة الحقيقية لاحقاً -->
-      <!-- <img src="images/your-photo.jpg" alt="صورة أ. محمد الغامدي"> -->
-    </div>
+    <!-- الصورة الشخصية -->
+<div class="profile-image">
+  <img src="images/mh.jpeg" alt="صورة أ. محمد الغامدي">
+</div>
+
     
     <h1>واجهـة المعلـم الرقمـي</h1>
     <h2>أ. محمد حمدان الغامدي</h2>
@@ -1749,20 +1747,27 @@
   </section>
 
   <!-- التكريم والجوائز -->
-  <section class="section-card fade-in">
-    <div class="section-title">
-      <div class="title-container">
-        <i class="fas fa-award section-icon"></i>
-        <span>التكريم والجوائز</span>
-      </div>
+<section class="section-card fade-in">
+  <div class="section-title">
+    <div class="title-container">
+      <i class="fas fa-award section-icon"></i>
+      <span>التكريم والجوائز</span>
     </div>
-    <div class="cards-container">
-      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sf56/%D8%A7%D9%84%D8%AA%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D8%A6%D8%B2?authuser=1">
-        <i class="fas fa-trophy card-icon"></i>
-        <h3 class="card-title">التكريم والجوائز</h3>
-      </div>
+    <!-- === بداية الإضافة === -->
+    <button class="toggle-cards" data-target="awards-cards" title="طي/فتح">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+    <!-- === نهاية الإضافة === -->
+  </div>
+  <!-- لاحظ إضافة الـ id هنا -->
+  <div class="cards-container" id="awards-cards">
+    <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sf56/%D8%A7%D9%84%D8%AA%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D8%A6%D8%B2?authuser=1">
+      <i class="fas fa-trophy card-icon"></i>
+      <h3 class="card-title">التكريم والجوائز</h3>
     </div>
-  </section>
+  </div>
+</section>
+
 
   <!-- العمل التعليمي -->
   <section class="section-card fade-in">
@@ -1870,53 +1875,67 @@
     </div>
   </section>
 
-  <!-- مكتبة الطالب -->
-  <section class="section-card fade-in">
-    <div class="section-title">
-      <div class="title-container">
-        <i class="fas fa-user-graduate section-icon"></i>
-        <span>مكتبة الطالب</span>
-      </div>
+<!-- مكتبة الطالب -->
+<section class="section-card fade-in">
+  <div class="section-title">
+    <div class="title-container">
+      <i class="fas fa-user-graduate section-icon"></i>
+      <span>مكتبة الطالب</span>
     </div>
-    <div class="cards-container">
-      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/dvdf55/ss?authuser=1">
-        <i class="fas fa-book card-icon"></i>
-        <h3 class="card-title nowrap-text">الأول ثانوي</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/dgvgrhbht76/hj?authuser=1">
-        <i class="fas fa-book card-icon"></i>
-        <h3 class="card-title nowrap-text">الثاني ثانوي</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/regf78/ut?authuser=1">
-        <i class="fas fa-book card-icon"></i>
-        <h3 class="card-title nowrap-text">الثالث ثانوي</h3>
-      </div>
+    <!-- === بداية الإضافة === -->
+    <button class="toggle-cards" data-target="library-cards" title="طي/فتح">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+    <!-- === نهاية الإضافة === -->
+  </div>
+  <!-- لاحظ إضافة الـ id هنا -->
+  <div class="cards-container" id="library-cards">
+    <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/dvdf55/ss?authuser=1">
+      <i class="fas fa-book card-icon"></i>
+      <h3 class="card-title nowrap-text">الأول ثانوي</h3>
     </div>
-  </section>
+    <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/dgvgrhbht76/hj?authuser=1">
+      <i class="fas fa-book card-icon"></i>
+      <h3 class="card-title nowrap-text">الثاني ثانوي</h3>
+    </div>
+    <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/regf78/ut?authuser=1">
+      <i class="fas fa-book card-icon"></i>
+      <h3 class="card-title nowrap-text">الثالث ثانوي</h3>
+    </div>
+  </div>
+</section>
 
-  <!-- الاثراء التقني -->
-  <section class="section-card fade-in">
-    <div class="section-title">
-      <div class="title-container">
-        <i class="fas fa-laptop-code section-icon"></i>
-        <span>الاثراء التقني</span>
-      </div>
+
+ <!-- الاثراء التقني -->
+<section class="section-card fade-in">
+  <div class="section-title">
+    <div class="title-container">
+      <i class="fas fa-laptop-code section-icon"></i>
+      <span>الاثراء التقني</span>
     </div>
-    <div class="cards-container">
-      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sdfgbdh77/wc?authuser=1">
-        <i class="fas fa-code card-icon"></i>
-        <h3 class="card-title">كتب التقنية</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/sdfgdf6/vm?authuser=1">
-        <i class="fas fa-image card-icon"></i>
-        <h3 class="card-title">إنفوجرافيك</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/sdfh77/rt?authuser=1">
-        <i class="fas fa-video card-icon"></i>
-        <h3 class="card-title">فيديوهات قصيرة</h3>
-      </div>
+    <!-- === بداية الإضافة === -->
+    <button class="toggle-cards" data-target="tech-cards" title="طي/فتح">
+      <i class="fas fa-chevron-up"></i>
+    </button>
+    <!-- === نهاية الإضافة === -->
+  </div>
+  <!-- لاحظ إضافة الـ id هنا -->
+  <div class="cards-container" id="tech-cards">
+    <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sdfgbdh77/wc?authuser=1">
+      <i class="fas fa-code card-icon"></i>
+      <h3 class="card-title">كتب التقنية</h3>
     </div>
-  </section>
+    <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/sdfgdf6/vm?authuser=1">
+      <i class="fas fa-image card-icon"></i>
+      <h3 class="card-title">إنفوجرافيك</h3>
+    </div>
+    <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/sdfh77/rt?authuser=1">
+      <i class="fas fa-video card-icon"></i>
+      <h3 class="card-title">فيديوهات قصيرة</h3>
+    </div>
+  </div>
+</section>
+
 
   <!-- التواصل -->
   <section class="section-card fade-in">
