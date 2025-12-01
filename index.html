@@ -99,6 +99,7 @@
       --primary-400: #9a69e6;
       --primary-500: #7a43cc;
       --primary-600: #5e3399;
+      --accent-teal: #14b8a6; /* <-- هذا هو اللون الأخضر المشرق (Teal) */
       --header-color:  #5D3FD3;
       --primary-soft-2: #E6E6FA;
       --primary-soft-1: #00B4D8;
@@ -178,7 +179,7 @@
 
     /* شريط الإشعارات المعدل */
     .notification-bar {
-      background: var(--notification-color);
+      background: linear-gradient(90deg, #E9E4F0, #D3CCE3);
       color: var(--text-dark);
       padding: 8px 0;
       overflow: hidden;
@@ -447,7 +448,7 @@
     /* ========================================= */
     .section-icon {
       font-size: 1.5rem;
-      color: var(--primary-500);
+      color: var(--accent-teal);
       opacity: 0.8;
       transition: var(--transition);
       user-select: none;
@@ -513,7 +514,7 @@
       right: 0;
       width: 70px;
       height: 4px;
-      background: var(--primary-500);
+      background: var(--accent-teal);
       border-radius: 4px;
       box-shadow: 0 0 10px var(--primary-soft-1);
       transition: width 0.3s ease;
@@ -710,22 +711,23 @@
     }
 
     .answers-link {
-      display: block;
-      text-align: center;
-      margin: 25px auto;
-      padding: 14px 25px;
-      background: linear-gradient(to right, var(--primary-500), var(--primary-400));
-      color: white;
-      border-radius: 35px;
-      text-decoration: none;
-      font-weight: 700;
-      width: fit-content;
-      transition: var(--transition);
-      box-shadow: 0 5px 15px rgba(122, 67, 204, 0.4);
-      border: 2px solid rgba(255, 255, 255, 0.3);
-      position: relative;
-      overflow: hidden;
-    }
+  display: block;
+  text-align: center;
+  margin: 25px auto;
+  padding: 14px 25px;
+  background: var(--accent-teal) !important; /* <--- تمت إضافة !important هنا */
+  color: white !important; /* <--- إضافة احترازية للون النص */
+  border-radius: 35px;
+  text-decoration: none;
+  font-weight: 700;
+  width: fit-content;
+  transition: var(--transition);
+  box-shadow: 0 5px 15px rgba(20, 184, 166, 0.4);
+  border: none !important; /* <--- إلغاء أي حدود قديمة */
+  position: relative;
+  overflow: hidden;
+}
+
 
     .answers-link::before {
       content: '';
@@ -738,11 +740,13 @@
     }
 
     .answers-link:hover {
-      background: linear-gradient(to right, var(--primary-600), var(--primary-500));
-      color: white;
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(122, 67, 204, 0.5);
-    }
+  background: #0d9488 !important; /* <--- تمت إضافة !important هنا */
+  color: white !important;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(20, 184, 166, 0.5);
+}
+
+
 
     .answers-link i {
       margin-left: 10px;
@@ -1396,18 +1400,29 @@
     }
 
     .user-message {
-      background: var(--primary-soft-2);
-      margin-right: auto;
-      border-bottom-right-radius: 4px;
-    }
+  background: var(--card-bg); /* استخدام خلفية البطاقات يعطي تناسقاً */
+  color: var(--text-dark);
+  margin-right: auto;
+  border-bottom-right-radius: 4px;
+  border: 1px solid rgba(0, 0, 0, 0.05); /* حدود خفيفة جداً */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); /* ظل خفيف جداً */
+}
+
+/* تعديل بسيط للوضع الليلي */
+body.dark-mode .user-message {
+    border-color: rgba(255, 255, 255, 0.08);
+}
+
 
     .ai-message {
-      background: var(--light-bg);
-      margin-left: auto;
-      border: 1px solid rgba(122, 67, 204, 0.1);
-      border-bottom-left-radius: 4px;
-      box-shadow: 0 2px 8px rgba(122, 67, 204, 0.1);
-    }
+  background: #f4f0ff; /* لون بنفسجي فاتح جداً ومريح للعين */
+  color: var(--text-dark); /* التأكد من أن لون النص داكن وواضح */
+  margin-left: auto;
+  border: 1px solid rgba(122, 67, 204, 0.2); /* حدود أوضح قليلاً */
+  border-bottom-left-radius: 4px;
+  box-shadow: 0 3px 10px rgba(93, 63, 211, 0.1); /* ظل أنعم وأكثر انتشاراً */
+}
+
 
     .ai-input-group {
       display: flex;
@@ -1579,6 +1594,72 @@
       color: white;
       font-size: 2.5rem;
     }
+    /* === تعديل قوي لزر الإجابات باستخدام ID === */
+
+#answersBtn {
+  background: var(--accent-teal ) !important;
+  color: white !important;
+  box-shadow: 0 5px 15px rgba(20, 184, 166, 0.4) !important;
+  border: none !important;
+}
+
+#answersBtn:hover {
+  background: #0d9488 !important;
+  color: white !important;
+  box-shadow: 0 8px 20px rgba(20, 184, 166, 0.5) !important;
+}
+/* === تحسينات قسم الذكاء الاصطناعي (مؤشر الكتابة والرسوم المتحركة) === */
+
+/* 1. تنسيق مؤشر الكتابة (النقاط الثلاث) */
+.ai-typing-indicator {
+  display: flex;
+  align-items: center;
+  padding: 10px 15px;
+}
+
+.ai-typing-indicator .dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--primary-400);
+  margin: 0 3px;
+  animation: typing-bounce 1.4s infinite ease-in-out both;
+}
+
+.ai-typing-indicator .dot:nth-child(1) { animation-delay: -0.32s; }
+.ai-typing-indicator .dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typing-bounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1.0); }
+}
+
+/* 2. تأثير ظهور الرسائل الجديدة */
+.message {
+  /* ... خصائصك الحالية للرسالة ... */
+  transform: scale(0.95);
+  opacity: 0;
+  transform-origin: bottom left;
+  animation: pop-in 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+.user-message {
+  /* ... خصائصك الحالية لرسالة المستخدم ... */
+  transform-origin: bottom left; /* نقطة انطلاق الحركة من اليسار */
+}
+
+.ai-message {
+  /* ... خصائصك الحالية لرسالة الذكاء الاصطناعي ... */
+  transform-origin: bottom right; /* نقطة انطلاق الحركة من اليمين */
+}
+
+@keyframes pop-in {
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
   </style>
 </head>
 <body>
@@ -1937,21 +2018,7 @@
 </section>
 
 
-  <!-- التواصل -->
-  <section class="section-card fade-in">
-    <div class="section-title">
-      <div class="title-container">
-        <i class="fas fa-comments section-icon"></i>
-        <span>التواصل</span>
-      </div>
-    </div>
-    <div class="cards-container">
-      <div class="card" style="animation-delay: 0.05s;" onclick="window.location.href='mailto:mfh713623@gmail.com'">
-        <i class="fas fa-envelope card-icon"></i>
-        <h3 class="card-title nowrap-text">البريد الإلكتروني</h3>
-      </div>
-    </div>
-  </section>
+
 </div>
 
 <!-- قسم مساعد الذكاء الاصطناعي -->
@@ -1979,10 +2046,13 @@
       </button>
     </div>
     
-    <div class="ai-loading" id="aiLoading">
-      <i class="fas fa-spinner fa-spin"></i> جاري معالجة سؤالك...
-    </div>
-  </div>
+  <!-- تم تعديل هذا العنصر ليصبح مؤشر كتابة -->
+<div class="ai-typing-indicator" id="aiTypingIndicator" style="display: none;">
+  <div class="dot"></div>
+  <div class="dot"></div>
+  <div class="dot"></div>
+</div>
+
   
   <div class="ai-disclaimer">
     <i class="fas fa-info-circle"></i>
@@ -2010,6 +2080,7 @@
   </iframe>
   <a href="https://docs.google.com/spreadsheets/d/14FqkF7e83_KW_Gd48G2OlRLIJYuaKYTPndo-qb5DjKo/edit?usp=sharing" 
      target="_blank"
+     id="answersBtn"
      style="display: block; text-align: center; margin: 25px auto; padding: 14px 25px; background: var(--primary-500); color: white; border-radius: 35px; text-decoration: none; font-weight: 700; width: fit-content; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: none; border: none;">
       <i class="fas fa-external-link-alt"></i> إجابة المعلم على الاستفسارات   
   </a>
@@ -2024,9 +2095,12 @@
 <footer class="site-footer">
   <div class="footer-content">
     <div class="footer-links">
+      <!-- === بداية الإضافة === -->
       <a href="mailto:mfh713623@gmail.com" class="footer-link">
         <i class="fas fa-envelope"></i> البريد الإلكتروني
       </a>
+      <!-- === نهاية الإضافة === -->
+      
       <a href="#ai-assistant-section" class="footer-link">
         <i class="fas fa-robot"></i> مساعد الذكاء الاصطناعي
       </a>
@@ -2036,6 +2110,7 @@
     </div>
   </div>
 </footer>
+
 
 <script>
   // إزالة أي علامة تجزئة (#) من الرابط لمنع التمرير التلقائي
@@ -2304,58 +2379,61 @@
     }
 
     async function sendMessage() {
-      const message = aiInput.value.trim();
-      if (!message) return;
+  const message = aiInput.value.trim();
+  if (!message) return;
 
-      addMessage(message, 'user');
-      aiInput.value = '';
-      aiSendBtn.disabled = true;
-      aiLoading.style.display = 'block';
+  addMessage(message, 'user');
+  aiInput.value = '';
+  aiSendBtn.disabled = true;
 
-      const API_URL = '/api/gemini'; 
+  // --- بداية التعديل ---
+  const aiTypingIndicator = document.getElementById('aiTypingIndicator');
+  aiTypingIndicator.style.display = 'flex'; // إظهار مؤشر "الكتابة"
+  // --- نهاية التعديل ---
 
-      try {
-        const response = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{
-              parts: [{
-                text: message
-              }]
-            }]
-          })
-        });
+  const API_URL = '/api/gemini'; 
 
-        console.log('Response Status:', response.status);
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        contents: [{
+          parts: [{
+            text: message
+          }]
+        }]
+      })
+    });
 
-        if (!response.ok) {
-          const errorData = await response.json();
-          console.error('Error from server:', errorData);
-          throw new Error(errorData.error || 'فشل في الاتصال بالخدمة');
-        }
-
-        const data = await response.json();
-        
-        if (data.candidates && data.candidates[0].content.parts[0].text) {
-          const aiResponse = data.candidates[0].content.parts[0].text;
-          addMessage(aiResponse, 'ai');
-        } else {
-          if (data.error) {
-            console.error('Error from Gemini:', data.error.message);
-            throw new Error(data.error.message);
-          }
-          throw new Error('لم يتم الحصول على إجابة');
-        }
-
-      } catch (error) {
-        console.error('Catch Block Error:', error);
-        addMessage(`عذراً، حدث خطأ: ${error.message}`, 'ai');
-      } finally {
-        aiLoading.style.display = 'none';
-        aiSendBtn.disabled = false;
-      }
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.error || 'فشل في الاتصال بالخدمة');
     }
+
+    const data = await response.json();
+    
+    if (data.candidates && data.candidates[0].content.parts[0].text) {
+      const aiResponse = data.candidates[0].content.parts[0].text;
+      addMessage(aiResponse, 'ai');
+    } else {
+      if (data.error) {
+        throw new Error(data.error.message);
+      }
+      throw new Error('لم يتم الحصول على إجابة');
+    }
+
+  } catch (error) {
+    addMessage(`عذراً، حدث خطأ: ${error.message}`, 'ai');
+  } finally {
+    // --- بداية التعديل ---
+    aiTypingIndicator.style.display = 'none'; // إخفاء مؤشر "الكتابة" عند انتهاء كل شيء
+    aiSendBtn.disabled = false;
+    aiInput.focus(); // إعادة التركيز على مربع الإدخال
+    // --- نهاية التعديل ---
+  }
+}
+
 
     function addMessage(text, sender) {
       const messageDiv = document.createElement('div');
@@ -2470,4 +2548,3 @@
 </script>
 </body>
 </html>
-
