@@ -1659,6 +1659,194 @@ body.dark-mode .user-message {
     opacity: 1;
   }
 }
+/* === بداية تنسيقات قسم الاستفسارات الجديد === */
+
+/* 1. حاوية الأزرار الرئيسية */
+.inquiries-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem; /* مسافة بين الزرين */
+  padding: 2rem;
+  margin: 2rem auto;
+  flex-wrap: wrap; /* للسماح للزرين بالالتفاف على الجوال إذا لزم الأمر */
+}
+
+/* 2. التنسيق الأساسي المشترك للزرين */
+.inquiry-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem; /* مسافة بين الأيقونة والنص */
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  padding: 0.9rem 1.8rem;
+  border-radius: 50px; /* حواف دائرية بالكامل */
+  text-decoration: none;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap; /* لمنع التفاف النص */
+}
+
+.inquiry-btn i {
+  font-size: 1.2em; /* تكبير الأيقونة قليلاً */
+}
+
+/* 3. تصميم الزر الأساسي (اطرح استفساراً) */
+.inquiry-btn.primary {
+  background-color: var(--accent-teal); /* استخدام اللون الأخضر المميز */
+  color: white;
+  box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+}
+
+.inquiry-btn.primary:hover {
+  background-color: #0d9488; /* درجة أغمق عند التمرير */
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(20, 184, 166, 0.4);
+}
+
+/* 4. تصميم الزر الثانوي (عرض الإجابات) */
+.inquiry-btn.secondary {
+  background-color: transparent;
+  color: var(--accent-teal); /* لون النص أخضر */
+  border-color: var(--accent-teal); /* حدود خضراء */
+}
+
+.inquiry-btn.secondary:hover {
+  background-color: rgba(20, 184, 166, 0.1); /* خلفية خضراء شفافة عند التمرير */
+  transform: translateY(-3px);
+}
+
+/* 5. تنسيق النافذة المنبثقة (Modal) */
+
+/* الطبقة المعتمة التي تغطي الشاشة */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+/* صندوق المحتوى الفعلي للنافذة */
+.modal-content {
+  background: var(--body-bg);
+  padding: 2rem;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 700px; /* عرض أقصى للنافذة */
+  max-height: 90vh; /* ارتفاع أقصى للنافذة */
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  position: relative;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+/* حالة الظهور للنافذة */
+.modal-overlay.visible {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-overlay.visible .modal-content {
+  transform: scale(1);
+}
+
+/* زر الإغلاق (×) */
+.modal-close-btn {
+  position: absolute;
+  top: 1rem;
+  left: 1rem; /* تم وضعه في اليسار ليتناسب مع الواجهة العربية */
+  background: none;
+  border: none;
+  font-size: 2rem;
+  color: var(--text-light);
+  cursor: pointer;
+  line-height: 1;
+}
+
+/* هيدر النافذة المنبثقة */
+.modal-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  border-bottom: 1px solid rgba(122, 67, 204, 0.2);
+  padding-bottom: 1rem;
+}
+
+.modal-header h2 {
+  color: var(--primary-500);
+  font-size: 1.8rem;
+}
+
+.modal-header p {
+  color: var(--text-light);
+  font-size: 1rem;
+}
+
+/* نموذج جوجل المضمن داخل النافذة */
+.modal-content iframe {
+  flex-grow: 1; /* لجعل النموذج يملأ المساحة المتاحة */
+  border: none;
+}
+
+/* === نهاية تنسيقات قسم الاستفسارات الجديد === */
+/* === بداية تنسيقات زر نسخ رد الذكاء الاصطناعي === */
+
+/* 1. نجعل حاوية الرسالة قادرة على احتواء الزر */
+.ai-message {
+  position: relative; /* ضروري لتحديد موضع الزر */
+  padding-left: 45px; /* إضافة مساحة داخلية على اليسار لوضع الزر */
+}
+
+/* 2. تصميم زر النسخ نفسه */
+.copy-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px; /* تم وضعه في اليسار ليتناسب مع الواجهة العربية */
+  background: rgba(122, 67, 204, 0.15); /* خلفية بنفسجية شفافة */
+  color: var(--primary-500); /* لون الأيقونة بنفسجي */
+  border: none;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  opacity: 0.5; /* جعله شبه شفاف في البداية */
+  transition: opacity 0.3s ease, background-color 0.3s ease;
+}
+
+/* 3. إظهار الزر بوضوح عند تمرير الفأرة فوق الرسالة */
+.ai-message:hover .copy-btn {
+  opacity: 1;
+}
+
+/* 4. تغيير شكل الزر عند النقر عليه (لإعطاء تغذية راجعة) */
+.copy-btn:active {
+  transform: scale(0.95);
+}
+
+/* 5. (اختياري) تغيير الأيقونة بعد النسخ بنجاح */
+.copy-btn .fa-check {
+  color: #10b981; /* لون أخضر للنجاح */
+  font-size: 1.1rem;
+}
+
+/* === نهاية تنسيقات زر نسخ رد الذكاء الاصطناعي === */
 
   </style>
 </head>
@@ -2060,34 +2248,43 @@ body.dark-mode .user-message {
   </div>
 </div>
 
-<!-- قسم الاستفسارات -->
-<div class="google-form-container fade-in">
-  <h2 class="google-form-header" style="display: flex; align-items: center; gap: 0.8rem;">
-    <i class="fas fa-comment-dots section-icon"></i> 
-    <span>الاستفسارات التعليمية</span>
-  </h2>
-  
-  <iframe 
-    src="https://docs.google.com/forms/d/e/1FAIpQLScP82hCVuCxuIl_FBXQpZJyGbR6kWGVEuT2Y6oKNPm2TfIwcA/viewform?embedded=true" 
-    width="100%" 
-    height="700" 
-    frameborder="0" 
-    marginheight="0" 
-    marginwidth="0"
-    style="border: 2px solid var(--primary-soft-1); border-radius: 12px;"
-    title="نموذج استفسارات الطلاب">
-    جاري التحميل...
-  </iframe>
-  <a href="https://docs.google.com/spreadsheets/d/14FqkF7e83_KW_Gd48G2OlRLIJYuaKYTPndo-qb5DjKo/edit?usp=sharing" 
-     target="_blank"
-     id="answersBtn"
-     style="display: block; text-align: center; margin: 25px auto; padding: 14px 25px; background: var(--primary-500); color: white; border-radius: 35px; text-decoration: none; font-weight: 700; width: fit-content; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); box-shadow: none; border: none;">
-      <i class="fas fa-external-link-alt"></i> إجابة المعلم على الاستفسارات   
+<!-- === بداية قسم الاستفسارات الجديد (النموذج المنبثق) === -->
+
+<!-- 1. حاوية الأزرار الرئيسية -->
+<div class="inquiries-container fade-in">
+  <button id="openInquiryModalBtn" class="inquiry-btn primary">
+    <i class="fas fa-comment-dots"></i> اطرح استفساراً
+  </button>
+  <a href="https://docs.google.com/spreadsheets/d/14FqkF7e83_KW_Gd48G2OlRLIJYuaKYTPndo-qb5DjKo/edit?usp=sharing" target="_blank" class="inquiry-btn secondary">
+    <i class="fas fa-list-alt"></i> عرض إجابات المعلم
   </a>
-  <div class="google-form-footer">
-    <small><i class="fas fa-info-circle"></i> سيتم الرد على استفسارك خلال مدة قصيرة   </small>
+</div>
+
+<!-- 2. هيكل النافذة المنبثقة (ستكون مخفية في البداية ) -->
+<div id="inquiryModal" class="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <button id="closeInquiryModalBtn" class="modal-close-btn">&times;</button>
+    
+    <div class="modal-header">
+      <h2>الاستفسارات التعليمية</h2>
+      <p>هذا النموذج مخصص لاستفسارات الطلاب التعليمية</p>
+    </div>
+
+    <iframe 
+      src="https://docs.google.com/forms/d/e/1FAIpQLScP82hCVuCxuIl_FBXQpZJyGbR6kWGVEuT2Y6oKNPm2TfIwcA/viewform?embedded=true" 
+      width="100%" 
+      height="500" 
+      frameborder="0" 
+      marginheight="0" 
+      marginwidth="0"
+      title="نموذج استفسارات الطلاب">
+      جاري التحميل...
+    </iframe>
   </div>
 </div>
+
+<!-- === نهاية قسم الاستفسارات الجديد === -->
+
 
 <!-- ================================================== -->
 <!--                  تذييل الصفحـة (Footer)                 -->
@@ -2435,20 +2632,53 @@ body.dark-mode .user-message {
 }
 
 
-    function addMessage(text, sender) {
-      const messageDiv = document.createElement('div');
-      messageDiv.className = `message ${sender}-message`;
-      
-      if (sender === 'user') {
-        messageDiv.innerHTML = `<strong>أنت:</strong> ${text}`;
-      } else {
-        const formattedText = text.replace(/\n/g, '<br>');
-        messageDiv.innerHTML = `<strong>الذكاء الاصطناعي:</strong> ${formattedText}`;
-      }
-      
-      aiMessages.appendChild(messageDiv);
-      aiMessages.scrollTop = aiMessages.scrollHeight;
-    }
+function addMessage(text, sender) {
+  const messageDiv = document.createElement('div');
+  messageDiv.className = `message ${sender}-message`;
+  
+  if (sender === 'user') {
+    // رسالة المستخدم تبقى كما هي
+    messageDiv.innerHTML = `<strong>أنت:</strong> ${text}`;
+  } else {
+    // --- بداية قسم رسالة الذكاء الاصطناعي ---
+
+    // 1. ننشئ زر النسخ
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'copy-btn';
+    copyBtn.title = 'نسخ الرد';
+    copyBtn.innerHTML = "<i class='fas fa-copy'></i>";
+
+    // 2. نضيف وظيفة النسخ عند النقر على الزر
+    copyBtn.addEventListener('click', function() {
+      navigator.clipboard.writeText(text).then(() => {
+        copyBtn.innerHTML = "<i class='fas fa-check'></i>";
+        
+        setTimeout(() => {
+          copyBtn.innerHTML = "<i class='fas fa-copy'></i>";
+        }, 2000);
+      }).catch(err => {
+        console.error('فشل نسخ النص: ', err);
+      });
+    });
+
+    // 3. ننشئ حاوية للنص لضمان التنسيق الصحيح
+    const textContainer = document.createElement('div');
+    
+    // === هذا هو السطر الذي تم تصحيحه بشكل نهائي ===
+    const formattedText = text.replace(/\n/g, '');
+    textContainer.innerHTML = `<strong>الذكاء الاصطناعي:</strong>  
+${formattedText}`;
+
+    // 4. نضيف زر النسخ وحاوية النص إلى رسالة الذكاء الاصطناعي
+    messageDiv.appendChild(copyBtn);
+    messageDiv.appendChild(textContainer);
+    
+    // --- نهاية قسم رسالة الذكاء الاصطناعي ---
+  }
+  
+  aiMessages.appendChild(messageDiv);
+  aiMessages.scrollTop = aiMessages.scrollHeight;
+}
 
     // إضافة زر المسح
     addClearButton();
@@ -2545,6 +2775,59 @@ body.dark-mode .user-message {
     initThemeToggle();
     initCardToggles();
   });
+ // === بداية كود تشغيل نافذة الاستفسارات المنبثقة ===
+
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // 1. تحديد العناصر التي سنتعامل معها
+  const openModalBtn = document.getElementById('openInquiryModalBtn');
+  const closeModalBtn = document.getElementById('closeInquiryModalBtn');
+  const modalOverlay = document.getElementById('inquiryModal');
+
+  // 2. وظيفة لفتح النافذة المنبثقة
+  function openModal() {
+    if (modalOverlay) {
+      modalOverlay.style.display = 'flex'; // استخدام display بدلاً من class
+      setTimeout(() => { // تأخير بسيط للسماح بحدوث transition
+        modalOverlay.classList.add('visible');
+      }, 10);
+    }
+  }
+
+  // 3. وظيفة لإغلاق النافذة المنبثقة
+  function closeModal() {
+    if (modalOverlay) {
+      modalOverlay.classList.remove('visible');
+      // الانتظار حتى انتهاء تأثير الاختفاء ثم تغيير display
+      setTimeout(() => {
+        modalOverlay.style.display = 'none';
+      }, 300); // 300ms هو نفس مدة الـ transition في CSS
+    }
+  }
+
+  // 4. ربط الأحداث بالعناصر
+  if (openModalBtn) {
+    openModalBtn.addEventListener('click', openModal);
+  }
+
+  if (closeModalBtn) {
+    closeModalBtn.addEventListener('click', closeModal);
+  }
+
+  // 5. إغلاق النافذة عند النقر على الخلفية المعتمة
+  if (modalOverlay) {
+    modalOverlay.addEventListener('click', function(event) {
+      if (event.target === modalOverlay) {
+        closeModal();
+      }
+    });
+  }
+
+});
+
+// === نهاية كود تشغيل نافذة الاستفسارات المنبثقة ===
+
+
 </script>
 </body>
 </html>
