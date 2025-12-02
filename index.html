@@ -13,18 +13,42 @@
     /* ========================================= */
 
     .tech-header {
-      background: linear-gradient(135deg, #5D3FD3 0%, #7B68EE 100%);
-      color: white;
-      text-align: center;
-      padding: 2.5rem 1rem;
-      position: relative;
-      border-bottom-left-radius: 25px;
-      border-bottom-right-radius: 25px;
-      box-shadow: 0 8px 30px rgba(93, 63, 211, 0.5);
-      margin: 0;
-      overflow: hidden;
-      z-index: 1;
-    }
+  /* 1. تطبيق صورة الخلفية */
+  background-image: url('images/header-bg.jpg'); /* <-- تأكد من أن اسم الصورة صحيح */
+  background-size: cover; /* الخاصية السحرية لجعل الصورة متجاوبة */
+  background-position: center center; /* لتركيز الصورة في المنتصف */
+  
+  /* 2. الحفاظ على التنسيقات الأساسية */
+  color: white;
+  text-align: center;
+  padding: 2.5rem 1rem;
+  position: relative; /* ضروري لطبقة الـ Overlay */
+  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 25px;
+  box-shadow: 0 10px 30px rgba(93, 63, 211, 0.15);
+  margin: 0;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* 3. (مهم جداً) إضافة طبقة لونية شفافة فوق الصورة */
+.tech-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3); /* طبقة سوداء بشفافية 30% */
+  z-index: -1; /* وضع الطبقة خلف المحتوى ولكن فوق صورة الخلفية */
+}
+
+/* 4. التأكد من أن المحتوى يظهر فوق الطبقة الشفافة */
+.tech-header .header-content {
+  position: relative;
+  z-index: 2; /* هذا موجود لديك بالفعل ولكن نتأكد منه */
+}
+
 
     .tech-header .header-content {
       position: relative;
@@ -1876,7 +1900,7 @@ body.dark-mode .user-message {
     <!-- الصورة الشخصية -->
     <!-- الصورة الشخصية -->
 <div class="profile-image">
-  <img src="images/hh.jpeg" alt="صورة أ. محمد الغامدي">
+  <img src="images/mh.jpeg" alt="صورة أ. محمد الغامدي">
 </div>
 
     
@@ -2831,4 +2855,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
-
