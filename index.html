@@ -1870,6 +1870,158 @@ body.dark-mode .user-message {
 }
 
 /* === نهاية تنسيقات زر نسخ رد الذكاء الاصطناعي === */
+/* ============================================ */
+/* ==========  تنسيقات شريط التميز   ========== */
+/* ============================================ */
+
+/* حاوية الشريط الرئيسية */
+/* حاوية الشريط الرئيسية (النسخة النهائية المعدلة) */
+.fame-bar-section {
+  display: flex;
+  flex-direction: column; /* <--- التغيير الأهم: يجعل العناصر تترتب عمودياً */
+  align-items: center;   /* <--- يضمن توسيط كل العناصر أفقياً */
+  gap: 1.5rem;           /* <--- مسافة بين العنوان وقائمة الطلاب */
+  
+  
+  max-width: 900px;
+  margin: 2rem auto 3rem auto;
+
+}
+
+
+/* عنوان الشريط (قائمة التميز) */
+.fame-bar-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-600);
+}
+
+.fame-bar-title i {
+  font-size: 1.5rem;
+  color: #FFD700; /* لون ذهبي للوسام */
+}
+
+/* حاوية قائمة الطلاب */
+.students-list {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* عنصر الطالب الواحد (الصورة + التفاصيل) */
+.student-item {
+  position: relative; /* مهم جداً لتحديد موضع التفاصيل */
+  cursor: pointer;
+}
+
+/* صورة الطالب الدائرية */
+.student-item img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  object-fit: cover;
+  display: block; /* لإزالة أي مسافات إضافية تحت الصورة */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* صندوق معلومات الطالب (مخفي افتراضياً) */
+.student-info {
+  --info-box-bg: #4a2c7a;
+  
+  position: absolute;
+  top: 110%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--info-box-bg); /* <-- هذا هو السطر الصحيح الوحيد للخلفية */
+  color: white;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  width: 220px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1005;
+  
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+
+/* سهم صغير يشير للأسفل من صندوق المعلومات */
+.student-info::after {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 6px;
+  border-style: solid;
+  border-color: transparent transparent var(--info-box-bg) transparent;
+}
+
+
+.student-info h4 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.student-info p {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.9;
+}
+
+/* --- التفاعل عند التمرير (للكمبيوتر) أو النقر (للجوال) --- */
+.student-item:hover img,
+.student-item:focus img, /* للنقر على الجوال */
+.student-item:focus-within img { /* للنقر على الجوال */
+  transform: scale(1.15); /* تكبير الصورة */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.student-item:hover .student-info,
+.student-item:focus .student-info, /* للنقر على الجوال */
+.student-item:focus-within .student-info { /* للنقر على الجوال */
+  opacity: 1; /* إظهار صندوق المعلومات */
+  visibility: visible;
+}
+
+/* لجعل النقر يعمل على الجوال، نحتاج لإضافة tabindex */
+.student-item {
+    outline: none; /* لإخفاء الإطار الأزرق عند النقر */
+}
+/* ============================================ */
+/* === تحسينات شريط التميز لشاشة الجوال === */
+/* ============================================ */
+@media (max-width: 768px) {
+
+/* 1. تكبير حجم الصورة على الجوال */
+.student-item img {
+  width: 65px;
+  height: 65px;
+}
+
+/* 2. تعديل موضع صندوق المعلومات ليتناسب مع الحجم الجديد */
+.student-info {
+  top: 115%; /* زيادة المسافة قليلاً من الأعلى */
+}
+
+}
+/* ============================================ */
+/* === تنسيق النص الإرشادي لقائمة التميز === */
+/* ============================================ */
+.honors-subtitle {
+  margin: -1rem 0 0 0; /* تقليل المسافة العلوية لتقريبه من العنوان */
+  font-size: 0.9rem;
+  color: var(--text-light); /* لون رمادي فاتح ليكون هادئاً */
+  text-align: center;
+}
 
   </style>
 </head>
@@ -1933,6 +2085,49 @@ body.dark-mode .user-message {
     <div class="search-results" id="searchResults"></div>
   </div>
 </div>
+<!-- ============================================ -->
+<!-- ==========   شريط التميز البسيط   ========== -->
+<!-- ============================================ -->
+<section class="fame-bar-section">
+  <div class="fame-bar-title">
+    <i class="fas fa-award"></i>
+    <span>قائمة التميز</span>
+  </div>
+  <p class="honors-subtitle">   أنقر على الصور لمعرفة المزيد</p>
+  <div class="students-list">
+
+    <!-- الطالب الأول -->
+    <div class="student-item" tabindex="0">
+      <img src="images/mh.jpeg" alt="الطالب المتميز">
+      <div class="student-info">
+        <h4> محمد حمدان الغامدي</h4>
+        <p> حصل على درجة متميزة في الاختبار</p>
+      </div>
+    </div>
+
+    <!-- الطالب الثاني -->
+    <div class="student-item" tabindex="0">
+      <img src="images/student2.jpg" alt="الطالب المتميز">
+      <div class="student-info">
+        <h4>اسم الطالب الثاني</h4>
+        <p>تحقيق أعلى درجة في الاختبار.</p>
+      </div>
+    </div>
+
+    <!-- الطالب الثالث -->
+    <div class="student-item" tabindex="0">
+      <img src="images/student3.jpg" alt="الطالب المتميز">
+      <div class="student-info">
+        <h4>اسم الطالب الثالث</h4>
+        <p>مبادرة ومشاركة فعالة.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+<!-- ============================================ -->
+<!-- ========== نهاية شريط التميز البسيط ========== -->
+<!-- ============================================ -->
 
 <div class="container">
   <!-- معلومات عامة -->
@@ -2844,3 +3039,4 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
+
