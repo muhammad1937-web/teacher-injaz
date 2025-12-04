@@ -1934,7 +1934,7 @@ body.dark-mode .user-message {
   --info-box-bg: #4a2c7a;
   
   position: absolute;
-  top: 110%;
+  top: 130%;
   left: 50%;
   transform: translateX(-50%);
   background-color: var(--info-box-bg); /* <-- هذا هو السطر الصحيح الوحيد للخلفية */
@@ -2165,7 +2165,37 @@ w
   color: var(--text-light); /* لون رمادي فاتح ليكون هادئاً */
   text-align: center;
 }
+/* ============================================ */
+/* =  تعديل موقع النافذة لتنخفض أكثر  = */
+/* ============================================ */
 
+/* الحل الشامل لجميع النوافذ */
+.student-info {
+  top: 130% !important; /* زيادة المسافة من 110% إلى 130% */
+  margin-top: 10px !important; /* مسافة إضافية */
+}
+
+/* للسهم الصغير الذي يشير للصورة */
+.student-info::after {
+  bottom: 100% !important;
+}
+
+/* إذا كانت نافذة SweetAlert2 */
+.swal2-popup {
+  margin-top: 20px !important;
+}
+
+/* إذا كانت نافذة المودال */
+.modal-content {
+  margin-top: 30px !important;
+}
+
+/* تحسين للجوال */
+@media (max-width: 768px) {
+  .student-info {
+    top: 115% !important; /* أكثر انخفاضاً على الجوال */
+  }
+}
   </style>
 </head>
 <body>
@@ -3277,5 +3307,3 @@ document.addEventListener('DOMContentLoaded', function() {
 </script>
 </body>
 </html>
-
-
