@@ -1884,7 +1884,7 @@ body.dark-mode .user-message {
   
   
   max-width: 900px;
-  margin: 2rem auto 3rem auto;
+  margin: 2rem auto 6rem auto;
 
 }
 
@@ -1976,7 +1976,7 @@ body.dark-mode .user-message {
   font-size: 0.85rem;
   opacity: 0.9;
 }
-
+w
 /* --- التفاعل عند التمرير (للكمبيوتر) أو النقر (للجوال) --- */
 .student-item:hover img,
 .student-item:focus img, /* للنقر على الجوال */
@@ -2016,6 +2016,149 @@ body.dark-mode .user-message {
 /* ============================================ */
 /* === تنسيق النص الإرشادي لقائمة التميز === */
 /* ============================================ */
+.info-toggle-btn {
+  position: absolute;
+  bottom: -15px;
+  left: 50%;
+  transform: translateX(-50%);
+  
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: var(--accent-teal);
+  color: white;
+  border: 3px solid var(--light-bg);
+  border-bottom-color: transparent;
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  
+  font-size: 0.9rem;
+  font-weight: bold;
+  
+  box-shadow: 
+    0 4px 12px rgba(20, 184, 166, 0.4),
+    0 0 0 2px rgba(255, 255, 255, 0.8) inset;
+  
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 2;
+}
+
+/* تأثير التمرير (Hover) */
+.info-toggle-btn:hover {
+  background: #0d9488;
+  transform: translateX(-50%) scale(1.2) rotate(90deg);
+  box-shadow: 
+    0 6px 18px rgba(20, 184, 166, 0.6),
+    0 0 0 3px rgba(255, 255, 255, 0.9) inset;
+}
+
+/* تأثير النقر (Active) */
+.info-toggle-btn:active {
+  transform: translateX(-50%) scale(0.95);
+  box-shadow: 
+    0 2px 8px rgba(20, 184, 166, 0.3),
+    0 0 0 3px rgba(255, 255, 255, 0.9) inset;
+}
+
+/* حالة النافذة المفتوحة */
+.student-item.active .info-toggle-btn {
+  background: #ff6b6b;
+  transform: translateX(-50%) rotate(45deg);
+}
+
+.student-item.active .info-toggle-btn:hover {
+  background: #ff5252;
+  transform: translateX(-50%) rotate(135deg) scale(1.2);
+}
+
+/* تأثير بسيط للصورة عندما تكون النافذة مفتوحة */
+.student-item.active img {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(93, 63, 211, 0.3);
+}
+
+/* تحسينات للجوال */
+@media (max-width: 768px) {
+  .info-toggle-btn {
+    width: 35px;
+    height: 35px;
+    font-size: 1rem;
+    bottom: -17px;
+  }
+  
+  .info-toggle-btn:active {
+    transform: translateX(-50%) scale(0.9);
+  }
+}
+
+/* تأثير سلس لفتح وإغلاق النافذة */
+.student-info {
+  transition: 
+    opacity 0.4s ease,
+    visibility 0.4s ease,
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform: translateX(-50%) translateY(-10px);
+}
+
+.student-item.active .student-info {
+  transform: translateX(-50%) translateY(0);
+}
+
+/* تأثير تموج عند النقر على الزر */
+.info-toggle-btn::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.3s ease;
+}
+
+.info-toggle-btn:active::after {
+  transform: translate(-50%, -50%) scale(1.5);
+  opacity: 0;
+}
+
+/* تحسينات إضافية للصور */
+.student-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: 50%;
+  transition: transform 0.3s ease;
+}
+
+.student-image::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(45deg, 
+    rgba(93, 63, 211, 0.1) 0%,
+    transparent 50%,
+    rgba(20, 184, 166, 0.1) 100%);
+  border-radius: 50%;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.student-item:hover .student-image::before {
+  opacity: 1;
+}
+
+/* تأثير توهج للصور عند التمرير */
+.student-item:hover img {
+  filter: brightness(1.05);
+}
 .honors-subtitle {
   margin: -1rem 0 0 0; /* تقليل المسافة العلوية لتقريبه من العنوان */
   font-size: 0.9rem;
@@ -2097,29 +2240,58 @@ body.dark-mode .user-message {
   <div class="students-list">
 
     <!-- الطالب الأول -->
-    <div class="student-item" tabindex="0">
-      <img src="images/mh.jpeg" alt="الطالب المتميز">
+    <!-- عنصر الطالب (النسخة الجديدة مع الزر) -->
+    <div class="student-item">
+      <div class="student-image">
+        <img src="images/mh.jpeg" alt="الطالب المتميز">
+      </div>
+      
+      <!-- هذا الزر موجود بالفعل في كودك -->
+      <button class="info-toggle-btn" aria-label="إظهار المعلومات">
+        <i class="fas fa-plus"></i>
+      </button>
+      
       <div class="student-info">
-        <h4> محمد حمدان الغامدي</h4>
-        <p> حصل على درجة متميزة في الاختبار</p>
+        <h4 class="student-name">اسم الطالب الأول</h4>
+        <p class="student-reason">التميز في مشروع الوحدة الأولى.</p>
       </div>
     </div>
+
 
     <!-- الطالب الثاني -->
-    <div class="student-item" tabindex="0">
-      <img src="images/student2.jpg" alt="الطالب المتميز">
+    <!-- عنصر الطالب (النسخة الجديدة مع الزر) -->
+    <div class="student-item">
+      <div class="student-image">
+        <img src="images/mh.jpeg" alt="الطالب المتميز">
+      </div>
+      
+      <!-- هذا الزر موجود بالفعل في كودك -->
+      <button class="info-toggle-btn" aria-label="إظهار المعلومات">
+        <i class="fas fa-plus"></i>
+      </button>
+      
       <div class="student-info">
-        <h4>اسم الطالب الثاني</h4>
-        <p>تحقيق أعلى درجة في الاختبار.</p>
+        <h4 class="student-name">اسم الطالب الأول</h4>
+        <p class="student-reason">التميز في مشروع الوحدة الأولى.</p>
       </div>
     </div>
 
+
     <!-- الطالب الثالث -->
-    <div class="student-item" tabindex="0">
-      <img src="images/student3.jpg" alt="الطالب المتميز">
+    <!-- عنصر الطالب (النسخة الجديدة مع الزر) -->
+    <div class="student-item">
+      <div class="student-image">
+        <img src="images/mh.jpeg" alt="الطالب المتميز">
+      </div>
+      
+      <!-- هذا الزر موجود بالفعل في كودك -->
+      <button class="info-toggle-btn" aria-label="إظهار المعلومات">
+        <i class="fas fa-plus"></i>
+      </button>
+      
       <div class="student-info">
-        <h4>اسم الطالب الثالث</h4>
-        <p>مبادرة ومشاركة فعالة.</p>
+        <h4 class="student-name">اسم الطالب الأول</h4>
+        <p class="student-reason">التميز في مشروع الوحدة الأولى.</p>
       </div>
     </div>
 
@@ -3035,8 +3207,75 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // === نهاية كود تشغيل نافذة الاستفسارات المنبثقة ===
 
+// === كود تفعيل الأيقونات (+) في شريط التميز ===
 
+document.addEventListener('DOMContentLoaded', function() {
+  const studentItems = document.querySelectorAll('.student-item');
+  
+  studentItems.forEach(item => {
+    const toggleBtn = item.querySelector('.info-toggle-btn');
+    const studentInfo = item.querySelector('.student-info');
+    
+    if (toggleBtn && studentInfo) {
+      // فتح/إغلاق عند النقر على الزر
+      toggleBtn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        
+        // إغلاق جميع العناصر الأخرى
+        studentItems.forEach(otherItem => {
+          if (otherItem !== item && otherItem.classList.contains('active')) {
+            otherItem.classList.remove('active');
+          }
+        });
+        
+        // تبديل حالة العنصر الحالي
+        item.classList.toggle('active');
+        
+        // تغيير الأيقونة
+        if (item.classList.contains('active')) {
+          toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
+          toggleBtn.setAttribute('aria-label', 'إغلاق المعلومات');
+        } else {
+          toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
+          toggleBtn.setAttribute('aria-label', 'إظهار المعلومات');
+        }
+      });
+      
+      // إغلاق عند النقر خارج الصندوق
+      document.addEventListener('click', function(e) {
+        if (!item.contains(e.target) && item.classList.contains('active')) {
+          item.classList.remove('active');
+          toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
+          toggleBtn.setAttribute('aria-label', 'إظهار المعلومات');
+        }
+      });
+      
+      // إغلاق عند الضغط على زر Escape
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && item.classList.contains('active')) {
+          item.classList.remove('active');
+          toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
+          toggleBtn.setAttribute('aria-label', 'إظهار المعلومات');
+        }
+      });
+    }
+  });
+  
+  // إضافة تأثيرات للتمرير على الجوال
+  studentItems.forEach(item => {
+    item.addEventListener('touchstart', function() {
+      this.classList.add('touched');
+    }, { passive: true });
+    
+    item.addEventListener('touchend', function() {
+      setTimeout(() => {
+        this.classList.remove('touched');
+      }, 300);
+    }, { passive: true });
+  });
+});
 </script>
 </body>
 </html>
+
 
