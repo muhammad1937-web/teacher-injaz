@@ -136,7 +136,7 @@
     }
 
     /* ========================================= */
-    /*      الهيدر الجديد - تصميم مركز كامل    */
+    /*      الهيدر الجديد - تصميم مركز ومضغوط  */
     /* ========================================= */
     .tech-header {
       background-image: url('images/header-bg.jpg');
@@ -144,7 +144,7 @@
       background-position: center center;
       color: white;
       text-align: center;
-      padding: 3rem 1rem 2.5rem;
+      padding: 2.2rem 1rem 1.8rem;
       position: relative;
       border-bottom-left-radius: 25px;
       border-bottom-right-radius: 25px;
@@ -152,7 +152,7 @@
       margin: 0;
       overflow: hidden;
       z-index: 1;
-      min-height: 280px;
+      min-height: 220px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -169,7 +169,7 @@
       z-index: -1;
     }
 
-    /* تصميم جديد للهيدر - مركز كامل */
+    /* تصميم الهيدر - مركز كامل ومضغوط */
     .header-content {
       position: relative;
       z-index: 2;
@@ -179,17 +179,17 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      gap: 1.2rem;
+      gap: 0.8rem;
       width: 100%;
     }
 
-    /* الشعار في المنتصف فقط */
+    /* الشعار في المنتصف مع مسافة أقل */
     .header-logo {
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.3rem;
     }
 
     .header-logo img {
-      height: 90px;
+      height: 85px;
       width: auto;
       filter: brightness(0) invert(1);
       transition: transform 0.3s ease;
@@ -199,64 +199,40 @@
       transform: scale(1.05);
     }
 
-    /* خط فاصل أنيق */
-    .header-divider {
-      width: 80px;
-      height: 2px;
-      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6), transparent);
-      margin: 0.5rem 0 1rem 0;
-      position: relative;
-    }
+    /* تم إزالة الخط الفاصل تماماً */
 
-    .header-divider::after {
-      content: '●';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-      font-size: 0.8rem;
-      background: rgba(93, 63, 211, 0.7);
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* تحسينات النصوص */
+    /* تحسينات النصوص - مسافات مضغوطة */
     .header-text-content {
       text-align: center;
       width: 100%;
     }
 
     .tech-header h1 {
-      font-size: 2.4rem;
+      font-size: 2.2rem;
       font-weight: 800;
-      margin: 0 0 0.8rem 0;
+      margin: 0 0 0.6rem 0;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
       color: white;
       letter-spacing: -0.5px;
     }
 
     .tech-header h2 {
-      font-size: 1.7rem;
+      font-size: 1.6rem;
       font-weight: 700;
-      margin: 0 0 0.6rem 0;
+      margin: 0 0 0.4rem 0;
       color: rgba(255, 255, 255, 0.95);
       text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     }
 
     .tech-header p {
-      font-size: 1.3rem;
+      font-size: 1.2rem;
       font-weight: 600;
-      margin: 0 0 0.8rem 0;
+      margin: 0 0 0.5rem 0;
       color: rgba(255, 255, 255, 0.9);
     }
 
     .tech-header span {
-      font-size: 1.1rem;
+      font-size: 1.05rem;
       font-weight: 400;
       color: rgba(255, 255, 255, 0.85);
       display: block;
@@ -420,8 +396,8 @@
       align-items: center;
       gap: 1.2rem;
       max-width: 900px;
-      margin: 2rem auto 4.5rem auto;
-      padding: 2.2rem 2.5rem 1.8rem;
+      margin: 2rem auto 4rem auto;
+      padding: 2rem 2.5rem 1.8rem;
       border-radius: 20px;
       position: relative;
       overflow: hidden;
@@ -461,6 +437,14 @@
       text-align: center;
     }
 
+    .students-container {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .students-list {
       display: flex;
       align-items: center;
@@ -468,6 +452,60 @@
       width: 100%;
       justify-content: center;
       scroll-behavior: smooth;
+      padding: 0.5rem 0;
+    }
+
+    /* أزرار التنقل الجديدة - تم إزالة النقاط وإضافة الأسهم */
+    .slider-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: var(--primary-500);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      z-index: 10;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(122, 67, 204, 0.3);
+    }
+
+    .slider-nav:hover {
+      background: var(--primary-600);
+      transform: translateY(-50%) scale(1.1);
+      box-shadow: 0 6px 18px rgba(122, 67, 204, 0.4);
+    }
+
+    .slider-nav.prev {
+      right: -20px;
+    }
+
+    .slider-nav.next {
+      left: -20px;
+    }
+
+    .slider-nav i {
+      font-size: 1.2rem;
+    }
+
+    .slider-nav.prev i {
+      margin-left: 2px;
+    }
+
+    .slider-nav.next i {
+      margin-right: 2px;
+    }
+
+    /* إخفاء الأسهم على الجوال */
+    @media (max-width: 768px) {
+      .slider-nav {
+        display: none;
+      }
     }
 
     .student-item {
@@ -600,38 +638,8 @@
       color: rgba(255, 255, 255, 0.95);
     }
 
-    /* نقاط السلايدر - تم رفعها لأعلى */
-    .slider-indicators {
-      display: flex;
-      justify-content: center;
-      gap: 0.6rem;
-      margin-top: 0.8rem;
-      margin-bottom: 0;
-    }
-    
-    .slider-indicator {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(122, 67, 204, 0.2);
-      cursor: pointer;
-      transition: all 0.4s ease;
-      border: 1px solid transparent;
-    }
-    
-    .slider-indicator.active {
-      background: var(--primary-500);
-      transform: scale(1.1);
-      box-shadow: 0 0 8px rgba(122, 67, 204, 0.3);
-    }
-    
-    .slider-indicator:hover {
-      background: var(--primary-400);
-      transform: scale(1.05);
-    }
-
     /* ============================================ */
-    /* === سلايدر الجوال المحسن === */
+    /* === سلايدر الجوال المحسن - مسح مباشر === */
     /* ============================================ */
     @media (max-width: 768px) {
       .students-list {
@@ -645,6 +653,7 @@
         position: relative;
         justify-content: flex-start;
         scrollbar-width: none;
+        scroll-behavior: smooth;
       }
       
       .students-list::-webkit-scrollbar {
@@ -655,6 +664,10 @@
         flex: 0 0 100%;
         scroll-snap-align: center;
         padding: 0 2rem;
+        min-height: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
       }
       
       .student-image {
@@ -667,12 +680,13 @@
         width: 36px;
         height: 36px;
         font-size: 1rem;
+        margin-top: 0.5rem;
       }
       
       .student-info {
         width: 280px;
         position: fixed;
-        top: 22%;
+        top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) scale(0.9);
         z-index: 9999;
@@ -687,11 +701,14 @@
         display: none;
       }
       
-      .slider-indicators {
-        position: relative;
-        bottom: 0;
-        margin-top: 0.5rem;
-        margin-bottom: 0;
+      /* تحسين المسح على الجوال */
+      .students-list {
+        -webkit-overflow-scrolling: touch;
+        scroll-snap-type: x mandatory;
+      }
+      
+      .student-item {
+        scroll-snap-stop: always;
       }
       
       /* تقليل المسافة السفلية للقسم على الجوال */
@@ -1446,39 +1463,34 @@
     /* ========================================= */
     @media (max-width: 768px) {
       /* ========================================= */
-      /* تحسين الهيدر على الجوال */
+      /* تحسين الهيدر على الجوال - مضغوط أكثر */
       /* ========================================= */
       .tech-header {
-        padding: 2.5rem 1rem 2rem;
-        min-height: 240px;
+        padding: 1.8rem 1rem 1.5rem;
+        min-height: 190px;
       }
       
       .header-logo img {
-        height: 70px;
-      }
-      
-      .header-divider {
-        width: 60px;
-        margin: 0.3rem 0 0.8rem 0;
+        height: 65px;
       }
       
       .tech-header h1 {
-        font-size: 1.8rem;
-        margin-bottom: 0.6rem;
+        font-size: 1.7rem;
+        margin-bottom: 0.4rem;
       }
       
       .tech-header h2 {
-        font-size: 1.4rem;
-        margin-bottom: 0.5rem;
+        font-size: 1.3rem;
+        margin-bottom: 0.3rem;
       }
       
       .tech-header p {
         font-size: 1.1rem;
-        margin-bottom: 0.6rem;
+        margin-bottom: 0.4rem;
       }
       
       .tech-header span {
-        font-size: 1rem;
+        font-size: 0.95rem;
         padding: 0 0.5rem;
       }
       
@@ -1489,7 +1501,7 @@
       /* قسم التميز على الجوال */
       .fame-bar-section {
         padding: 1.5rem 1rem 1.2rem;
-        margin: 1rem auto 3rem;
+        margin: 1rem auto 2.5rem;
       }
       
       .fame-bar-title {
@@ -1593,13 +1605,7 @@
       }
       
       .student-info {
-        top: 22%;
-      }
-      
-      .slider-indicators {
-        position: relative;
-        bottom: 0;
-        margin-top: 0.8rem;
+        top: 50%;
       }
       
       /* زر العودة للأعلى على الجوال */
@@ -1615,33 +1621,32 @@
     @media (max-width: 480px) {
       /* تحسينات إضافية للشاشات الصغيرة جداً */
       .tech-header {
-        padding: 2rem 0.5rem 1.5rem;
-        min-height: 220px;
+        padding: 1.5rem 0.5rem 1.2rem;
+        min-height: 180px;
       }
       
       .header-logo img {
-        height: 60px;
-      }
-      
-      .header-divider {
-        width: 50px;
-        margin: 0.2rem 0 0.6rem 0;
+        height: 55px;
       }
       
       .tech-header h1 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
+        margin-bottom: 0.3rem;
       }
       
       .tech-header h2 {
         font-size: 1.2rem;
+        margin-bottom: 0.2rem;
       }
       
       .tech-header p {
         font-size: 1rem;
+        margin-bottom: 0.3rem;
       }
       
       .tech-header span {
         font-size: 0.9rem;
+        line-height: 1.4;
       }
       
       .compact-date.new-position {
@@ -1677,14 +1682,10 @@
         font-size: 0.85rem;
       }
       
-      .slider-indicator {
-        width: 7px;
-        height: 7px;
-      }
-      
       /* المزيد من التحسينات لقسم التميز */
       .fame-bar-section {
         margin-bottom: 2.5rem;
+        padding: 1.3rem 0.8rem 1.2rem;
       }
       
       /* زر العودة للأعلى */
@@ -1700,19 +1701,20 @@
     @media (min-width: 481px) and (max-width: 768px) {
       /* تحسينات للشاشات المتوسطة الصغيرة */
       .tech-header {
-        min-height: 250px;
+        min-height: 200px;
+        padding: 1.8rem 1rem 1.5rem;
       }
       
       .header-logo img {
-        height: 75px;
+        height: 70px;
       }
       
       .tech-header h1 {
-        font-size: 1.7rem;
+        font-size: 1.8rem;
       }
       
       .tech-header h2 {
-        font-size: 1.3rem;
+        font-size: 1.4rem;
       }
     }
 
@@ -1742,7 +1744,7 @@
   </div>
 </div>
 
-<!-- === الهيدر الجديد بالتصميم المركزي === -->
+<!-- === الهيدر الجديد بالتصميم المركزي المضغوط === -->
 <header class="tech-header fade-in">
   <div class="header-content">
     <!-- الشعار في المنتصف -->
@@ -1750,10 +1752,7 @@
       <img src="images/logo.png" alt="شعار واجهة المعلم الرقمي">
     </div>
     
-    <!-- خط فاصل أنيق -->
-    <div class="header-divider"></div>
-    
-    <!-- النصوص -->
+    <!-- النصوص - بدون خط فاصل -->
     <div class="header-text-content">
       <h1>واجهـة المعلـم الرقمـي</h1>
       <h2>أ. محمد حمدان الغامدي</h2>
@@ -1795,56 +1794,64 @@
   </div>
   <p class="honors-subtitle">انقر على الأيقونة تحت كل صورة لمعرفة المزيد</p>
   
-  <div class="students-list" id="studentsList">
-    <!-- الطالب الأول -->
-    <div class="student-item" data-index="0">
-      <div class="student-image">
-        <img src="images/mh.jpeg" alt="الطالب المتميز الأول">
+  <div class="students-container">
+    <!-- سهم التنقل الأيمن -->
+    <button class="slider-nav prev" id="prevBtn" aria-label="الصورة السابقة">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+    
+    <!-- قائمة الطلاب -->
+    <div class="students-list" id="studentsList">
+      <!-- الطالب الأول -->
+      <div class="student-item" data-index="0">
+        <div class="student-image">
+          <img src="images/mh.jpeg" alt="الطالب المتميز الأول">
+        </div>
+        <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب">
+          <i class="fas fa-plus"></i>
+        </button>
+        <div class="student-info">
+          <h4 class="student-name">الطالب المتميز الأول</h4>
+          <p class="student-reason">التميز في مشروع الوحدة الأولى وإبداع في التصميم</p>
+        </div>
       </div>
-      <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب">
-        <i class="fas fa-plus"></i>
-      </button>
-      <div class="student-info">
-        <h4 class="student-name">الطالب المتميز الأول</h4>
-        <p class="student-reason">التميز في مشروع الوحدة الأولى وإبداع في التصميم</p>
-      </div>
-    </div>
 
-    <!-- الطالب الثاني -->
-    <div class="student-item" data-index="1">
-      <div class="student-image">
-        <img src="images/mh.jpeg" alt="الطالب المتميز الثاني">
+      <!-- الطالب الثاني -->
+      <div class="student-item" data-index="1">
+        <div class="student-image">
+          <img src="images/mh.jpeg" alt="الطالب المتميز الثاني">
+        </div>
+        <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب">
+          <i class="fas fa-plus"></i>
+        </button>
+        <div class="student-info">
+          <h4 class="student-name">الطالب المتميز الثاني</h4>
+          <p class="student-reason">تفوق في الاختبارات العملية وابتكار حلول تقنية</p>
+        </div>
       </div>
-      <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب">
-        <i class="fas fa-plus"></i>
-      </button>
-      <div class="student-info">
-        <h4 class="student-name">الطالب المتميز الثاني</h4>
-        <p class="student-reason">تفوق في الاختبارات العملية وابتكار حلول تقنية</p>
-      </div>
-    </div>
 
-    <!-- الطالب الثالث -->
-    <div class="student-item" data-index="2">
-      <div class="student-image">
-        <img src="images/mh.jpeg" alt="الطالب المتميز الثالث">
-      </div>
-      <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب">
-        <i class="fas fa-plus"></i>
-      </button>
-      <div class="student-info">
-        <h4 class="student-name">الطالب المتميز الثالث</h4>
-        <p class="student-reason">مشاركة فعالة في الأنشطة الصفية ودعم الزملاء</p>
+      <!-- الطالب الثالث -->
+      <div class="student-item" data-index="2">
+        <div class="student-image">
+          <img src="images/mh.jpeg" alt="الطالب المتميز الثالث">
+        </div>
+        <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب">
+          <i class="fas fa-plus"></i>
+        </button>
+        <div class="student-info">
+          <h4 class="student-name">الطالب المتميز الثالث</h4>
+          <p class="student-reason">مشاركة فعالة في الأنشطة الصفية ودعم الزملاء</p>
+        </div>
       </div>
     </div>
+    
+    <!-- سهم التنقل الأيسر -->
+    <button class="slider-nav next" id="nextBtn" aria-label="الصورة التالية">
+      <i class="fas fa-chevron-left"></i>
+    </button>
   </div>
   
-  <!-- مؤشرات السلايدر (مرفوعة لأعلى) -->
-  <div class="slider-indicators" id="sliderIndicators">
-    <div class="slider-indicator active" data-index="0"></div>
-    <div class="slider-indicator" data-index="1"></div>
-    <div class="slider-indicator" data-index="2"></div>
-  </div>
+  <!-- تم إزالة النقاط الثلاثة تماماً -->
 </section>
 
 <!-- ========================================= -->
@@ -2361,48 +2368,42 @@
 
   function initHonorsSection() {
     const studentItems = document.querySelectorAll('.student-item');
-    const indicators = document.querySelectorAll('.slider-indicator');
     const studentsList = document.getElementById('studentsList');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
     
     let currentIndex = 0;
     let isMobile = window.innerWidth < 768;
     let startX = 0;
     let isDragging = false;
-
-    // وظيفة تحديث المؤشرات
-    function updateIndicators(index) {
-      indicators.forEach((indicator, i) => {
-        if (i === index) {
-          indicator.classList.add('active');
-        } else {
-          indicator.classList.remove('active');
-        }
-      });
-    }
+    let scrollTimeout;
 
     // وظيفة تمرير السلايدر إلى صورة معينة
     function scrollToStudent(index) {
-      if (!isMobile || index < 0 || index >= studentItems.length) return;
+      if (index < 0) index = 0;
+      if (index >= studentItems.length) index = studentItems.length - 1;
       
-      const studentItem = studentItems[index];
-      const scrollPosition = studentItem.offsetLeft - (studentsList.offsetWidth / 2) + (studentItem.offsetWidth / 2);
-      
-      studentsList.scrollTo({
-        left: scrollPosition,
-        behavior: 'smooth'
-      });
+      if (isMobile) {
+        const studentItem = studentItems[index];
+        const scrollPosition = studentItem.offsetLeft - (studentsList.offsetWidth / 2) + (studentItem.offsetWidth / 2);
+        
+        studentsList.scrollTo({
+          left: scrollPosition,
+          behavior: 'smooth'
+        });
+      }
       
       currentIndex = index;
-      updateIndicators(index);
     }
 
-    // تفعيل/تعطيل النصوص المنبثقة
+    // تفعيل/تعطيل النصوص المنبثقة مع إصلاح للجوال
     studentItems.forEach(item => {
       const toggleBtn = item.querySelector('.info-toggle-btn');
       const studentInfo = item.querySelector('.student-info');
       
       if (toggleBtn && studentInfo) {
-        toggleBtn.addEventListener('click', function(e) {
+        // إضافة حدث النقر لكل من الزر والنص المنبثق
+        const toggleInfo = function(e) {
           e.stopPropagation();
           
           // إغلاق جميع العناصر الأخرى
@@ -2428,7 +2429,16 @@
             toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
             toggleBtn.setAttribute('aria-label', 'إظهار المعلومات');
           }
-        });
+        };
+        
+        // إضافة الأحداث للجوال وسطح المكتب
+        toggleBtn.addEventListener('click', toggleInfo);
+        
+        // إضافة حدث اللمس للجوال
+        toggleBtn.addEventListener('touchstart', function(e) {
+          e.preventDefault();
+          toggleInfo(e);
+        }, { passive: false });
         
         // إغلاق عند النقر خارج الصندوق
         document.addEventListener('click', function(e) {
@@ -2450,12 +2460,39 @@
       }
     });
 
-    // إضافة أحداث السلايدر للجوال
+    // أحداث أزرار التنقل (للشاشات الكبيرة)
+    if (prevBtn && nextBtn) {
+      prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+          scrollToStudent(currentIndex - 1);
+        }
+      });
+      
+      nextBtn.addEventListener('click', () => {
+        if (currentIndex < studentItems.length - 1) {
+          scrollToStudent(currentIndex + 1);
+        }
+      });
+    }
+
+    // إضافة أحداث السلايدر للجوال مع تحسين دقة المسح
     if (isMobile) {
-      // أحداث اللمس للسلايدر
+      // أحداث اللمس للسلايدر - مسح مباشر
       studentsList.addEventListener('touchstart', function(e) {
         startX = e.touches[0].clientX;
         isDragging = true;
+        studentsList.style.scrollBehavior = 'auto'; // إزالة السلاسة أثناء السحب
+      }, { passive: true });
+
+      studentsList.addEventListener('touchmove', function(e) {
+        if (!isDragging) return;
+        
+        const currentX = e.touches[0].clientX;
+        const diffX = startX - currentX;
+        
+        // تحريك السلايدر مع الإصبع
+        studentsList.scrollLeft += diffX;
+        startX = currentX;
       }, { passive: true });
 
       studentsList.addEventListener('touchend', function(e) {
@@ -2463,7 +2500,7 @@
         
         const endX = e.changedTouches[0].clientX;
         const diffX = startX - endX;
-        const threshold = 50; // عتبة المسح
+        const threshold = 30; // عتبة مسح منخفضة لتحسين الدقة
         
         if (Math.abs(diffX) > threshold) {
           if (diffX > 0 && currentIndex < studentItems.length - 1) {
@@ -2472,21 +2509,20 @@
           } else if (diffX < 0 && currentIndex > 0) {
             // مسح لليمين - السابق
             scrollToStudent(currentIndex - 1);
+          } else {
+            // العودة للصورة الحالية
+            scrollToStudent(currentIndex);
           }
+        } else {
+          // إذا كانت الحركة صغيرة، العودة للصورة الحالية
+          scrollToStudent(currentIndex);
         }
         
         isDragging = false;
+        studentsList.style.scrollBehavior = 'smooth'; // إعادة السلاسة
       }, { passive: true });
 
-      // أحداث النقر على المؤشرات
-      indicators.forEach((indicator, index) => {
-        indicator.addEventListener('click', () => {
-          scrollToStudent(index);
-        });
-      });
-
-      // تحديث المؤشرات عند التمرير
-      let scrollTimeout;
+      // تحديث المؤشر عند التمرير
       studentsList.addEventListener('scroll', function() {
         clearTimeout(scrollTimeout);
         scrollTimeout = setTimeout(() => {
@@ -2496,7 +2532,6 @@
           
           if (newIndex >= 0 && newIndex < studentItems.length && newIndex !== currentIndex) {
             currentIndex = newIndex;
-            updateIndicators(newIndex);
           }
         }, 150);
       }, { passive: true });
@@ -2507,18 +2542,9 @@
       const newIsMobile = window.innerWidth < 768;
       if (newIsMobile !== isMobile) {
         isMobile = newIsMobile;
-        if (isMobile) {
-          // إعادة تعيين حالة السلايدر
-          updateIndicators(currentIndex);
-        }
+        // إعادة تعيين حالة السلايدر
+        scrollToStudent(currentIndex);
       }
-    });
-    
-    // إضافة حدث النقر على المؤشرات على جميع الشاشات
-    indicators.forEach((indicator, index) => {
-      indicator.addEventListener('click', () => {
-        updateIndicators(index);
-      });
     });
   }
 
