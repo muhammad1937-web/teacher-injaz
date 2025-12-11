@@ -1668,7 +1668,30 @@
     .student-item.active .student-info {
     transform: translateX(-50%) translateY(-130px) !important;
 }
+/* تأثير زجاجي خفي */
+.honors-subtitle {
+  padding: 9px 24px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: inline-block;
+  margin: 0 auto 15px;
+  font-weight: 500;
+  color: var(--text-dark); /* لون النص الداكن */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 
+    0 2px 10px rgba(122, 67, 204, 0.05),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+}
 
+.honors-subtitle:hover {
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 
+    0 3px 15px rgba(122, 67, 204, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+}
   </style>
 </head>
 <body>
@@ -2784,6 +2807,7 @@
 </script>
 </body>
 </html>
+
 
 
 
