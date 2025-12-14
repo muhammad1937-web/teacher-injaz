@@ -1718,7 +1718,6 @@
   position: relative;
   top: -3px; /* اضبط هذه القيمة: 1px, 2px, 3px */
 }
-    /* تأثير زجاجي خفي */
 .honors-subtitle {
   padding: 10px 25px;
   background: rgba(255, 255, 255, 0.25);
@@ -1745,6 +1744,174 @@
     inset 0 0 0 1px rgba(255, 255, 255, 0.8);
   transform: translateY(-2px);
 }
+/* ============================================ */
+/*      ====== قسم مشروع الأسبوع ======      */
+/* ============================================ */
+
+/* حاوية القسم الرئيسية - مشابهة لقسم التميز */
+.project-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  max-width: 900px;
+  margin: 2.5rem auto; /* مسافة مناسبة من الأقسام الأخرى */
+  padding: 1.5rem 1.8rem 1.8rem;
+  border-radius: 20px;
+  position: relative;
+  background: linear-gradient(
+    to bottom,
+    rgba(122, 67, 204, 0.05) 0%,
+    rgba(20, 184, 166, 0.03) 100%
+  );
+  box-shadow: 0 10px 25px rgba(122, 67, 204, 0.1);
+  border: 1px solid rgba(122, 67, 204, 0.1);
+}
+
+/* عنوان القسم */
+.project-section-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-600);
+  margin-bottom: 0.1rem;
+}
+
+.project-section-title i {
+  font-size: 1.5rem;
+  color: var(--gold-color); /* استخدام نفس لون أيقونة التميز */
+}
+
+/* العنوان الفرعي */
+.project-section-subtitle {
+  margin: 0 0 1.2rem 0;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  text-align: center;
+}
+
+/* حاوية المشاريع الأفقية */
+.projects-container {
+  display: flex;
+  align-items: flex-start; /* محاذاة العناصر من الأعلى */
+  justify-content: center;
+  gap: 2.5rem;
+  width: 100%;
+  flex-wrap: wrap; /* التفاف العناصر على الشاشات الصغيرة */
+  padding: 0.5rem 0;
+}
+
+/* عنصر المشروع الواحد */
+.project-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 140px; /* عرض مناسب لكل عنصر */
+}
+
+/* حاوية صورة المشروع */
+.project-image-container {
+  position: relative;
+  width: 120px; /* حجم الصورة */
+  height: 120px;
+  border-radius: 18px; /* الشكل المربع بحواف دائرية */
+  overflow: hidden;
+  border: 3px solid white;
+  box-shadow: 0 5px 18px rgba(0, 0, 0, 0.15);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.project-image-container:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.project-image-container img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* لضمان ملء الصورة للإطار */
+}
+
+/* أيقونة نوع المشروع */
+.project-type-icon {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* عنوان المشروع واسم الطالب */
+.project-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin: 0 0 0.25rem 0;
+}
+
+.project-student {
+  font-size: 0.85rem;
+  color: var(--text-light);
+  margin: 0 0 0.8rem 0;
+}
+
+/* منطقة التفاعل (الإعجاب والتصويت) */
+.project-interaction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+/* عداد الإعجاب */
+.project-likes {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text-light);
+  font-weight: 600;
+}
+
+.project-likes i {
+  font-size: 1.1rem;
+  color: #ff4757; /* لون القلب */
+}
+
+/* زر التصويت */
+.vote-button {
+  font-family: 'Tajawal', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  padding: 6px 20px;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: var(--accent-teal); /* استخدام اللون المتناسق */
+  color: white;
+  box-shadow: 0 4px 12px rgba(20, 184, 166, 0.2);
+}
+
+.vote-button:hover {
+  background-color: #0d9488; /* درجة أغمق عند التمرير */
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(20, 184, 166, 0.3);
+}
+
   </style>
 </head>
 <body>
@@ -1859,6 +2026,78 @@
   </div>
   
   <!-- تم إزالة النقاط الثلاثة تماماً -->
+</section>
+<!-- ============================================ -->
+<!--      ====== قسم مشروع الأسبوع ======      -->
+<!-- ============================================ -->
+<section class="project-section fade-in">
+  <div class="project-section-title">
+    <i class="fas fa-trophy"></i>
+    <span>صوّت لمشروع الأسبوع</span>
+  </div>
+  <p class="project-section-subtitle">امنح إعجابك للمشروع الذي يستحق الفوز هذا الأسبوع</p>
+  
+  <div class="projects-container">
+    <!-- المشروع الأول (مثال) -->
+    <div class="project-item" 
+         data-type="image" 
+         data-url="images/project1.jpg" 
+         data-form-url="https://docs.google.com/forms/d/e/YOUR_FORM_ID_1/viewform?usp=pp_url&entry.PROJECT_FIELD_ID=Project_A">
+      <div class="project-image-container">
+        <img src="images/project1_thumb.jpg" alt="مشروع تصميم انفوجرافيك">
+        <div class="project-type-icon"><i class="fas fa-paint-brush"></i></div>
+      </div>
+      <h4 class="project-title">تصميم انفوجرافيك</h4>
+      <p class="project-student">الطالب: أحمد العلي</p>
+      <div class="project-interaction">
+        <div class="project-likes">
+          <i class="far fa-heart"></i>
+          <span class="likes-count">0</span>
+        </div>
+        <button class="vote-button">صوّت</button>
+      </div>
+    </div>
+
+    <!-- المشروع الثاني (مثال ) -->
+    <div class="project-item" 
+         data-type="pdf" 
+         data-url="files/research.pdf"
+         data-form-url="https://docs.google.com/forms/d/e/YOUR_FORM_ID_2/viewform?usp=pp_url&entry.PROJECT_FIELD_ID=Project_B">
+      <div class="project-image-container">
+        <img src="images/project2_thumb.jpg" alt="مشروع بحث PDF">
+        <div class="project-type-icon"><i class="fas fa-file-pdf"></i></div>
+      </div>
+      <h4 class="project-title">بحث عن الأمن السيبراني</h4>
+      <p class="project-student">الطالبة: فاطمة الزهراني</p>
+      <div class="project-interaction">
+        <div class="project-likes">
+          <i class="far fa-heart"></i>
+          <span class="likes-count">0</span>
+        </div>
+        <button class="vote-button">صوّت</button>
+      </div>
+    </div>
+
+    <!-- المشروع الثالث (مثال ) -->
+    <div class="project-item" 
+         data-type="website" 
+         data-url="https://example.com"
+         data-form-url="https://docs.google.com/forms/d/e/YOUR_FORM_ID_3/viewform?usp=pp_url&entry.PROJECT_FIELD_ID=Project_C">
+      <div class="project-image-container">
+        <img src="images/project3_thumb.jpg" alt="مشروع موقع إلكتروني">
+        <div class="project-type-icon"><i class="fas fa-external-link-alt"></i></div>
+      </div>
+      <h4 class="project-title">موقع اليوم الوطني</h4>
+      <p class="project-student">الطالب: عبدالله الغامدي</p>
+      <div class="project-interaction">
+        <div class="project-likes">
+          <i class="far fa-heart"></i>
+          <span class="likes-count">0</span>
+        </div>
+        <button class="vote-button">صوّت</button>
+      </div>
+    </div>
+  </div>
 </section>
 
 <!-- ========================================= -->
@@ -2408,6 +2647,108 @@
               }
             }
           });
+// ============================================
+//   ====== وظائف قسم مشروع الأسبوع ======
+// ============================================
+
+function initProjectSection() {
+  // 1. إعداد الروابط والمتغيرات
+  const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTAcc48Gjbr-RZoGy32VclzBt9WHRDOIV4w2rmSNs7bW6OOXL53eUkJGd-tCy5b2PYj2amAN3gd3u9J/pub?output=csv';
+  const projectItems = document.querySelectorAll('.project-item' );
+
+  // 2. وظيفة جلب البيانات وتحديث العدادات
+  async function fetchAndupdateLikes() {
+    try {
+      // إضافة متغير عشوائي لمنع التخزين المؤقت (caching)
+      const response = await fetch(GOOGLE_SHEET_CSV_URL + '&_cache_buster=' + new Date().getTime());
+      if (!response.ok) {
+        console.error('فشل في جلب بيانات الأصوات.');
+        return;
+      }
+      
+      const csvText = await response.text();
+      const rows = csvText.split('\n').slice(1); // تجاهل الصف الأول (العناوين)
+
+      // إنشاء كائن لتخزين عدد الأصوات لكل مشروع
+      const voteCounts = {};
+
+      // المرور على كل صف في جدول البيانات
+      rows.forEach(row => {
+        const columns = row.split(',');
+        // العمود الثاني (B) هو الذي يحتوي على اسم المشروع المصوّت له
+        const votedProject = columns[1] ? columns[1].trim().replace(/"/g, '') : ''; 
+        
+        if (votedProject) {
+          if (voteCounts[votedProject]) {
+            voteCounts[votedProject]++;
+          } else {
+            voteCounts[votedProject] = 1;
+          }
+        }
+      });
+
+      // 3. تحديث العدادات على الصفحة
+      projectItems.forEach(item => {
+        const projectTitle = item.querySelector('.project-title').textContent.trim();
+        const likesCountSpan = item.querySelector('.likes-count');
+        
+        // تحديث الرقم إذا وجد المشروع في نتائج التصويت
+        if (voteCounts[projectTitle]) {
+          likesCountSpan.textContent = voteCounts[projectTitle];
+        } else {
+          likesCountSpan.textContent = '0'; // إذا لم يكن هناك أصوات
+        }
+      });
+
+    } catch (error) {
+      console.error('حدث خطأ أثناء تحديث الإعجابات:', error);
+    }
+  }
+
+  // 4. تفعيل أزرار التصويت وعرض المشاريع
+  projectItems.forEach(item => {
+    const imageContainer = item.querySelector('.project-image-container');
+    const voteButton = item.querySelector('.vote-button');
+    
+    const type = item.dataset.type;
+    const url = item.dataset.url;
+    const formUrl = item.dataset.formUrl;
+
+    // وظيفة النقر على صورة المشروع
+    if (imageContainer) {
+      imageContainer.addEventListener('click', () => {
+        if (!url) return;
+        if (type === 'website') {
+          window.open(url, '_blank');
+        } else {
+          // في المستقبل يمكننا تطوير هذا لعرض نافذة منبثقة
+          window.open(url, '_blank');
+        }
+      });
+    }
+
+    // وظيفة النقر على زر "صوّت"
+    if (voteButton) {
+      voteButton.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (!formUrl) return;
+        
+        const popupWidth = 600;
+        const popupHeight = 800;
+        const left = (window.screen.width / 2) - (popupWidth / 2);
+        const top = (window.screen.height / 2) - (popupHeight / 2);
+
+        window.open(formUrl, 'googleFormPopup', `width=${popupWidth},height=${popupHeight},top=${top},left=${left}`);
+      });
+    }
+  });
+
+  // 5. التشغيل الأولي وتعيين التحديث الدوري
+  fetchAndupdateLikes(); // تحديث فوري عند تحميل الصفحة
+  setInterval(fetchAndupdateLikes, 30000); // تحديث كل 30 ثانية
+}
+
+
           
           // إذا لم يكن العنصر نشطاً، فعّله
           if (!isActive) {
@@ -2847,6 +3188,7 @@
     initCardToggles();
     initInquiryModal();
     initHonorsSection(); // تم تحديث هذه الدالة
+    initProjectSection();
     initBackToTop();
     
     checkFadeElements();
@@ -2860,7 +3202,6 @@
 </script>
 </body>
 </html>
-
 
 
 
