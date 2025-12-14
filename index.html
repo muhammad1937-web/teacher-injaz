@@ -595,220 +595,8 @@
     }
 
     /* ============================================ */
-    /* ==========  قسم مواضيع التصويت  ========== */
-    /* ============================================ */
-    .voting-section {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.8rem;
-      max-width: 900px;
-      margin: 1.5rem auto 2.5rem auto;
-      padding: 1.5rem 1.8rem 1.3rem;
-      border-radius: 20px;
-      position: relative;
-      overflow: hidden;
-      background: linear-gradient(
-        to bottom,
-        rgba(122, 67, 204, 0.05) 0%,
-        rgba(20, 184, 166, 0.03) 100%
-      );
-      box-shadow: 0 10px 25px rgba(122, 67, 204, 0.1);
-      border: 1px solid rgba(122, 67, 204, 0.2);
-      transition: var(--transition);
-    }
-
-    .voting-section:hover {
-      box-shadow: 0 15px 35px rgba(122, 67, 204, 0.15);
-    }
-
-    .voting-header {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--primary-600);
-      margin-bottom: 0.1rem;
-    }
-
-    .voting-subtitle {
-      margin: 0 0 0.8rem 0;
-      font-size: 1rem;
-      color: var(--text-dark);
-      text-align: center;
-      background: var(--primary-100);
-      padding: 8px 16px;
-      border-radius: 12px;
-      border: 1px solid var(--primary-300);
-      box-shadow: 0 3px 10px rgba(122, 67, 204, 0.08);
-      display: inline-block;
-    }
-
-    .voting-options {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 1rem;
-      width: 100%;
-      margin-top: 0.5rem;
-    }
-
-    .voting-option {
-      background: white;
-      border-radius: 15px;
-      padding: 0.9rem 1.2rem;
-      min-width: 220px;
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      box-shadow: 0 4px 12px rgba(122, 67, 204, 0.1);
-      border: 1.5px solid rgba(122, 67, 204, 0.15);
-      transition: all 0.3s ease;
-    }
-
-    .voting-option:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 8px 20px rgba(122, 67, 204, 0.2);
-      border-color: var(--primary-400);
-    }
-
-    .option-info {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      flex: 1;
-    }
-
-    .option-icon {
-      font-size: 1.3rem;
-      color: var(--primary-500);
-      background: var(--primary-100);
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .option-name {
-      font-weight: 600;
-      color: var(--text-dark);
-      font-size: 1rem;
-    }
-
-    .vote-count {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-left: 1rem;
-    }
-
-    .count-number {
-      background: var(--primary-soft-2);
-      color: var(--primary-600);
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      min-width: 40px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .vote-icon {
-      color: #ff4757;
-      font-size: 1.1rem;
-      animation: heartbeat 1.5s infinite;
-    }
-
-    @keyframes heartbeat {
-      0% { transform: scale(1); }
-      5% { transform: scale(1.1); }
-      10% { transform: scale(1); }
-      15% { transform: scale(1.1); }
-      20% { transform: scale(1); }
-      100% { transform: scale(1); }
-    }
-
-    .vote-btn {
-      background: linear-gradient(to right, var(--primary-500), var(--accent-teal));
-      color: white;
-      border: none;
-      padding: 6px 15px;
-      border-radius: 20px;
-      font-family: 'Tajawal', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      margin-right: 0.8rem;
-    }
-
-    .vote-btn:hover {
-      transform: scale(1.05);
-      box-shadow: 0 4px 15px rgba(122, 67, 204, 0.3);
-    }
-
-    .vote-btn i {
-      font-size: 0.8rem;
-    }
-
-    .voting-footer {
-      margin-top: 1rem;
-      text-align: center;
-      color: var(--text-light);
-      font-size: 0.85rem;
-    }
-
-    .voting-footer i {
-      color: var(--accent-teal);
-      margin-left: 5px;
-    }
-
-    /* مؤشر التحميل */
-    .voting-loading {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 0.5rem;
-      padding: 2rem;
-      width: 100%;
-    }
-
-    .loading-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-      background: var(--primary-500);
-      animation: loading-bounce 1.4s infinite ease-in-out both;
-    }
-
-    .loading-dot:nth-child(1) { animation-delay: -0.32s; }
-    .loading-dot:nth-child(2) { animation-delay: -0.16s; }
-
-    @keyframes loading-bounce {
-      0%, 80%, 100% { transform: scale(0); }
-      40% { transform: scale(1.0); }
-    }
-
-    /* تأثير تحديث الأرقام */
-    .count-update {
-      animation: countUpdate 0.8s ease;
-    }
-
-    @keyframes countUpdate {
-      0% { transform: scale(1); }
-      50% { transform: scale(1.2); background: #FFD700; color: white; }
-      100% { transform: scale(1); }
-    }
-
     /* ===== تعديلات العرض على الجوال ===== */
+    /* ============================================ */
     @media (max-width: 768px) {
       .students-list {
         flex-wrap: wrap; /* السماح بالتفاف العناصر على الجوال */
@@ -869,42 +657,6 @@
       
       .honors-subtitle {
         margin-bottom: 0.6rem;
-      }
-      
-      /* تصميم الجوال لقسم التصويت */
-      .voting-section {
-        padding: 1.3rem 1rem 1.2rem;
-        margin: 1rem auto 2rem;
-      }
-      
-      .voting-options {
-        flex-direction: column;
-        gap: 0.8rem;
-      }
-      
-      .voting-option {
-        min-width: 100%;
-        padding: 0.8rem 1rem;
-      }
-      
-      .option-icon {
-        width: 32px;
-        height: 32px;
-        font-size: 1.1rem;
-      }
-      
-      .option-name {
-        font-size: 0.95rem;
-      }
-      
-      .vote-btn {
-        padding: 5px 12px;
-        font-size: 0.85rem;
-      }
-      
-      .count-number {
-        font-size: 0.9rem;
-        min-width: 35px;
       }
     }
 
@@ -1786,36 +1538,6 @@
         height: 45px;
         font-size: 1.2rem;
       }
-      
-      /* تحسينات إضافية لقسم التصويت على الجوال */
-      .voting-header {
-        font-size: 1rem;
-      }
-      
-      .voting-subtitle {
-        font-size: 0.9rem;
-        padding: 6px 12px;
-      }
-      
-      .voting-option {
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0.8rem;
-      }
-      
-      .option-info {
-        justify-content: flex-start;
-      }
-      
-      .vote-count {
-        margin-left: 0;
-        justify-content: center;
-      }
-      
-      .vote-btn {
-        margin-right: 0;
-        justify-content: center;
-      }
     }
 
     @media (max-width: 480px) {
@@ -1943,39 +1665,86 @@
         width: 320px;
       }
     }
-    
-    /* تأثير زجاجي خفي */
-    .honors-subtitle {
-      padding: 10px 25px;
-      background: rgba(255, 255, 255, 0.25);
-      border-radius: 18px;
-      border: 1px solid rgba(122, 67, 204, 0.1);
-      display: inline-block;
-      margin: 0 auto 15px;
-      font-weight: 500;
-      color: var(--text-dark);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 
-        0 3px 12px rgba(122, 67, 204, 0.08),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.6);
-      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
-      transition: all 0.3s ease;
-    }
-
-    .honors-subtitle:hover {
-      background: rgba(255, 255, 255, 0.35);
-      border-color: rgba(122, 67, 204, 0.2);
-      box-shadow: 
-        0 5px 18px rgba(122, 67, 204, 0.12),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
-      transform: translateY(-2px);
-    }
-    
-    /* تعديل النص المنبثق للتميز */
     .student-item.active .student-info {
-      transform: translateX(-50%) translateY(-130px) !important;
-    }
+    transform: translateX(-50%) translateY(-130px) !important;
+}
+/* تأثير زجاجي خفي */
+.honors-subtitle {
+  padding: 9px 24px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: inline-block;
+  margin: 0 auto 15px;
+  font-weight: 500;
+  color: var(--text-dark); /* لون النص الداكن */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 
+    0 2px 10px rgba(122, 67, 204, 0.05),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+}
+
+.honors-subtitle:hover {
+  background: rgba(255, 255, 255, 0.35);
+  box-shadow: 
+    0 3px 15px rgba(122, 67, 204, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.7);
+}
+    /* بديل أبسط */
+.honors-subtitle {
+  padding: 8px 16px;
+  background: var(--primary-100);
+  border-radius: 12px;
+  border: 1px solid var(--primary-300);
+  box-shadow: 0 3px 10px rgba(122, 67, 204, 0.08);
+  display: inline-block;
+  margin-bottom: 15px;
+}
+/* الخيار المتكامل */
+.fame-bar-title {
+  display: flex;
+  align-items: baseline; /* محاذاة حسب خط الأساس */
+  gap: 0.8rem;
+}
+
+.fame-bar-title i {
+  font-size: 1.6rem;
+}
+
+.fame-bar-title span {
+  font-size: 1.2rem;
+  position: relative;
+  top: -3px; /* اضبط هذه القيمة: 1px, 2px, 3px */
+}
+    /* تأثير زجاجي خفي */
+.honors-subtitle {
+  padding: 10px 25px;
+  background: rgba(255, 255, 255, 0.25);
+  border-radius: 18px;
+  border: 1px solid rgba(122, 67, 204, 0.1); /* ← تغيير طفيف هنا */
+  display: inline-block;
+  margin: 0 auto 15px;
+  font-weight: 500;
+  color: var(--text-dark);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 
+    0 3px 12px rgba(122, 67, 204, 0.08),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+  transition: all 0.3s ease;
+}
+
+.honors-subtitle:hover {
+  background: rgba(255, 255, 255, 0.35);
+  border-color: rgba(122, 67, 204, 0.2); /* ← تأثير عند التمرير */
+  box-shadow: 
+    0 5px 18px rgba(122, 67, 204, 0.12),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  transform: translateY(-2px);
+}
   </style>
 </head>
 <body>
@@ -2090,33 +1859,6 @@
   </div>
   
   <!-- تم إزالة النقاط الثلاثة تماماً -->
-</section>
-
-<!-- ============================================ -->
-<!-- ==========   قسم مواضيع التصويت   ========== -->
-<!-- ============================================ -->
-<section class="voting-section fade-in" style="margin-top: 2rem;">
-  <div class="voting-container">
-    <div class="voting-header">
-      <i class="fas fa-poll" style="color: #FFD700; margin-left: 8px;"></i>
-      <span>مواضيع التصويت</span>
-    </div>
-    
-    <p class="voting-subtitle" id="votingQuestion">جاري تحميل سؤال التصويت...</p>
-    
-    <div class="voting-options" id="votingOptions">
-      <!-- سيتم تعبئة الخيارات تلقائياً بواسطة JavaScript -->
-      <div class="voting-loading">
-        <div class="loading-dot"></div>
-        <div class="loading-dot"></div>
-        <div class="loading-dot"></div>
-      </div>
-    </div>
-    
-    <div class="voting-footer">
-      <small><i class="fas fa-sync-alt"></i> يتم تحديث النتائج تلقائياً كل 10 ثوانٍ</small>
-    </div>
-  </div>
 </section>
 
 <!-- ========================================= -->
@@ -2756,217 +2498,6 @@
   }
 
   // ============================================
-  // =====  دالة قسم مواضيع التصويت  =====
-  // ============================================
-
-  function initVotingSection() {
-    const votingQuestion = document.getElementById('votingQuestion');
-    const votingOptions = document.getElementById('votingOptions');
-    const FORM_URL = 'https://docs.google.com/forms/d/e/1FAIpQLScWA-VWccOVP6_w5Tpyptsmgi7TfLKOIb-AMwSnuyvbmZSnrA/viewform?usp=header';
-    const SHEET_ID = '1yerJFSeoJkHX1WfDzb5wBh_O4tMz2awuVKayrNa5kHs';
-    const API_KEY = 'AIzaSyDhp4bWl84eLwL15gTvOQKXJZ_6dS3Qf9E'; // مفتاح واجهة برمجة التطبيقات
-    
-    let currentData = null;
-    let updateInterval = null;
-    
-    // أيقونات متنوعة للخيارات
-    const optionIcons = ['📁', '💡', '🚀', '⭐', '🎯', '🏆', '✨', '🔧'];
-    
-    // دالة جلب البيانات من Google Sheets
-    async function fetchVotingData() {
-      try {
-        const range = 'Sheet1!A:C'; // نقرأ من الأعمدة A إلى C
-        const url = `https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/${range}?key=${API_KEY}`;
-        
-        const response = await fetch(url);
-        const data = await response.json();
-        
-        if (data.values && data.values.length > 0) {
-          processSheetData(data.values);
-        }
-      } catch (error) {
-        console.error('خطأ في جلب بيانات التصويت:', error);
-        showErrorMessage();
-      }
-    }
-    
-    // دالة معالجة بيانات الجدول
-    function processSheetData(rows) {
-      // الصف الأول يحتوي على العناوين (السؤال والخيارات)
-      const question = rows[0][0] || 'اختر أفضل مشروع';
-      const options = rows.slice(1); // باقي الصفوف هي الخيارات
-      
-      // تحديث السؤال
-      votingQuestion.textContent = `"${question}"`;
-      
-      // إذا كانت البيانات نفس السابقة، لا تقم بالتحديث
-      const dataString = JSON.stringify({ question, options });
-      if (dataString === JSON.stringify(currentData)) {
-        return;
-      }
-      
-      currentData = { question, options };
-      
-      // إنشاء عناصر الخيارات
-      votingOptions.innerHTML = '';
-      
-      options.forEach((row, index) => {
-        const optionName = row[0] || `الخيار ${index + 1}`;
-        const voteCount = parseInt(row[1]) || 0;
-        const percentage = row[2] || '0%';
-        
-        // إنشاء عنصر الخيار
-        const optionElement = document.createElement('div');
-        optionElement.className = 'voting-option';
-        optionElement.innerHTML = `
-          <div class="option-info">
-            <div class="option-icon">${optionIcons[index] || '📁'}</div>
-            <span class="option-name">${optionName}</span>
-          </div>
-          
-          <div class="vote-count">
-            <span class="count-number" data-count="${voteCount}">${voteCount}</span>
-            <i class="fas fa-heart vote-icon"></i>
-          </div>
-          
-          <button class="vote-btn" data-option="${optionName}">
-            <i class="fas fa-vote-yea"></i>
-            صوت
-          </button>
-        `;
-        
-        // إضافة حدث النقر على زر التصويت
-        const voteBtn = optionElement.querySelector('.vote-btn');
-        voteBtn.addEventListener('click', () => {
-          openVotingForm(optionName);
-        });
-        
-        votingOptions.appendChild(optionElement);
-      });
-      
-      // تشغيل تأثير تحديث الأرقام
-      animateCountUpdates();
-    }
-    
-    // دالة فتح نموذج التصويت
-    function openVotingForm(selectedOption) {
-      // نفتح النموذج في نافذة جديدة
-      window.open(FORM_URL, '_blank', 'width=800,height=600');
-      
-      // إظهار رسالة توجيهية
-      showVoteMessage(selectedOption);
-    }
-    
-    // دالة إظهار رسالة بعد التصويت
-    function showVoteMessage(option) {
-      const message = document.createElement('div');
-      message.className = 'vote-message';
-      message.innerHTML = `
-        <i class="fas fa-check-circle"></i>
-        <span>سيتم تحديث النتائج خلال 10 ثوانٍ. شكراً لتصويتك على "${option}"</span>
-      `;
-      
-      // أنماط الرسالة
-      message.style.cssText = `
-        position: fixed;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
-        background: linear-gradient(to right, var(--primary-500), var(--accent-teal));
-        color: white;
-        padding: 12px 24px;
-        border-radius: 25px;
-        box-shadow: 0 5px 20px rgba(122, 67, 204, 0.3);
-        z-index: 10000;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        font-family: 'Tajawal', sans-serif;
-        animation: slideDown 0.5s ease;
-      `;
-      
-      document.body.appendChild(message);
-      
-      // إزالة الرسالة بعد 5 ثوانٍ
-      setTimeout(() => {
-        message.style.animation = 'slideUp 0.5s ease';
-        setTimeout(() => {
-          if (message.parentNode) {
-            document.body.removeChild(message);
-          }
-        }, 500);
-      }, 5000);
-      
-      // إضافة أنيميشن للرسالة
-      const style = document.createElement('style');
-      style.textContent = `
-        @keyframes slideDown {
-          from { top: -100px; opacity: 0; }
-          to { top: 20px; opacity: 1; }
-        }
-        @keyframes slideUp {
-          from { top: 20px; opacity: 1; }
-          to { top: -100px; opacity: 0; }
-        }
-      `;
-      document.head.appendChild(style);
-    }
-    
-    // دالة تأثير تحديث الأرقام
-    function animateCountUpdates() {
-      const countElements = document.querySelectorAll('.count-number');
-      countElements.forEach(element => {
-        element.classList.add('count-update');
-        setTimeout(() => {
-          element.classList.remove('count-update');
-        }, 800);
-      });
-    }
-    
-    // دالة عرض رسالة الخطأ
-    function showErrorMessage() {
-      votingOptions.innerHTML = `
-        <div class="voting-error" style="text-align: center; padding: 2rem; color: var(--text-light);">
-          <i class="fas fa-exclamation-triangle" style="font-size: 2rem; color: #ff4757; margin-bottom: 1rem;"></i>
-          <p>عذراً، حدث خطأ في تحميل نتائج التصويت.</p>
-          <button onclick="location.reload()" style="
-            background: var(--primary-500);
-            color: white;
-            border: none;
-            padding: 8px 16px;
-            border-radius: 20px;
-            margin-top: 1rem;
-            cursor: pointer;
-            font-family: 'Tajawal', sans-serif;
-          ">
-            <i class="fas fa-redo"></i> إعادة المحاولة
-          </button>
-        </div>
-      `;
-    }
-    
-    // بدء جلب البيانات
-    fetchVotingData();
-    
-    // تحديث البيانات كل 10 ثوانٍ
-    updateInterval = setInterval(fetchVotingData, 10000);
-    
-    // تحديث فوري عند العودة للصفحة
-    document.addEventListener('visibilitychange', () => {
-      if (!document.hidden) {
-        fetchVotingData();
-      }
-    });
-    
-    // إيقاف التحديث عند إغلاق الصفحة
-    window.addEventListener('beforeunload', () => {
-      if (updateInterval) {
-        clearInterval(updateInterval);
-      }
-    });
-  }
-
-  // ============================================
   //         وظائف الظهور عند التمرير
   // ============================================
 
@@ -3315,8 +2846,7 @@
     initAIAssistant();
     initCardToggles();
     initInquiryModal();
-    initHonorsSection();
-    initVotingSection(); // تهيئة قسم التصويت الجديد
+    initHonorsSection(); // تم تحديث هذه الدالة
     initBackToTop();
     
     checkFadeElements();
@@ -3330,3 +2860,15 @@
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
