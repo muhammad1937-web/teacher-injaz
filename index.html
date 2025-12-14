@@ -1912,6 +1912,147 @@
   box-shadow: 0 6px 16px rgba(20, 184, 166, 0.3);
 }
 
+/* ============================================ */
+/*    نافذة منبثقة لعرض المشروع بالكامل       */
+/* ============================================ */
+.project-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10001;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.project-modal-content {
+  background: white;
+  border-radius: 20px;
+  width: 90%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  padding: 2rem;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.project-modal-overlay.visible {
+  opacity: 1;
+}
+
+.project-modal-overlay.visible .project-modal-content {
+  transform: scale(1);
+}
+
+.project-modal-close {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: #ff4757;
+  color: white;
+  border: none;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+}
+
+.project-modal-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--primary-200);
+}
+
+.project-modal-header h3 {
+  color: var(--primary-600);
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.project-modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.project-modal-body iframe {
+  width: 100%;
+  height: 500px;
+  border: none;
+  border-radius: 10px;
+}
+
+.project-modal-body img {
+  max-width: 100%;
+  max-height: 400px;
+  border-radius: 10px;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+}
+
+.project-modal-body .pdf-viewer {
+  width: 100%;
+  height: 500px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+}
+
+.project-modal-external-link {
+  display: inline-block;
+  padding: 10px 25px;
+  background: var(--primary-500);
+  color: white;
+  text-decoration: none;
+  border-radius: 25px;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.project-modal-external-link:hover {
+  background: var(--primary-600);
+  transform: translateY(-3px);
+}
+
+/* تأثير النقر على زر التصويت */
+.vote-button.clicked {
+  background-color: #2ecc71 !important;
+  transform: scale(0.95);
+}
+
+.vote-button.clicked::after {
+  content: ' ✓';
+}
+
+/* رسالة تنبيه عند التصويت */
+.vote-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #2ecc71;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 10002;
+  display: none;
+  align-items: center;
+  gap: 10px;
+}
+
   </style>
 </head>
 <body>
@@ -2027,6 +2168,7 @@
   
   <!-- تم إزالة النقاط الثلاثة تماماً -->
 </section>
+
 <!-- ============================================ -->
 <!--      ====== قسم مشروع الأسبوع ======      -->
 <!-- ============================================ -->
@@ -2035,13 +2177,15 @@
     <i class="fas fa-trophy"></i>
     <span>صوّت لمشروع الأسبوع</span>
   </div>
-  <p class="project-section-subtitle">امنح إعجابك للمشروع الذي يستحق الفوز هذا الأسبوع</p>
+  <p class="project-section-subtitle">انقر على الصورة لعرض المشروع أو اضغط على "صوّت" للتصويت</p>
   
   <div class="projects-container">
-    <!-- المشروع الأول (مثال) -->
+    <!-- المشروع الأول -->
     <div class="project-item" 
          data-type="image" 
          data-url="images/project1.jpg" 
+         data-title="تصميم انفوجرافيك"
+         data-student="الطالب: أحمد العلي"
          data-form-url="https://docs.google.com/forms/d/e/1FAIpQLSfMxwmcbyF6Um2aqTTGts5bg16yy5eAYfTaxDQ5Kk2GK9lbUQ/viewform?usp=pp_url&entry.622678742=%D8%AA%D8%B5%D9%85%D9%8A%D9%85+%D8%A7%D9%86%D9%81%D9%88%D8%AC%D8%B1%D8%A7%D9%81%D9%8A%D9%83">
       <div class="project-image-container">
         <img src="images/project1_thumb.jpg" alt="مشروع تصميم انفوجرافيك">
@@ -2058,11 +2202,13 @@
       </div>
     </div>
 
-    <!-- المشروع الثاني (مثال ) -->
+    <!-- المشروع الثاني -->
     <div class="project-item" 
          data-type="pdf" 
          data-url="files/research.pdf"
-         data-form-url="https://docs.google.com/forms/d/e/YOUR_FORM_ID_2/viewform?usp=pp_url&entry.PROJECT_FIELD_ID=Project_B">
+         data-title="بحث عن الأمن السيبراني"
+         data-student="الطالبة: فاطمة الزهراني"
+         data-form-url="https://docs.google.com/forms/d/e/1FAIpQLSfMxwmcbyF6Um2aqTTGts5bg16yy5eAYfTaxDQ5Kk2GK9lbUQ/viewform?usp=pp_url&entry.622678742=%D8%A8%D8%AD%D8%AB+%D8%B9%D9%86+%D8%A7%D9%84%D8%A3%D9%85%D9%86+%D8%A7%D9%84%D8%B3%D9%8A%D8%A8%D8%B1%D8%A7%D9%86%D9%8A">
       <div class="project-image-container">
         <img src="images/project2_thumb.jpg" alt="مشروع بحث PDF">
         <div class="project-type-icon"><i class="fas fa-file-pdf"></i></div>
@@ -2078,11 +2224,13 @@
       </div>
     </div>
 
-    <!-- المشروع الثالث (مثال ) -->
+    <!-- المشروع الثالث -->
     <div class="project-item" 
          data-type="website" 
          data-url="https://example.com"
-         data-form-url="https://docs.google.com/forms/d/e/YOUR_FORM_ID_3/viewform?usp=pp_url&entry.PROJECT_FIELD_ID=Project_C">
+         data-title="موقع اليوم الوطني"
+         data-student="الطالب: عبدالله الغامدي"
+         data-form-url="https://docs.google.com/forms/d/e/1FAIpQLSfMxwmcbyF6Um2aqTTGts5bg16yy5eAYfTaxDQ5Kk2GK9lbUQ/viewform?usp=pp_url&entry.622678742=%D9%85%D9%88%D9%82%D8%B9+%D8%A7%D9%84%D9%8A%D9%88%D9%85+%D8%A7%D9%84%D9%88%D8%B7%D9%86%D9%8A">
       <div class="project-image-container">
         <img src="images/project3_thumb.jpg" alt="مشروع موقع إلكتروني">
         <div class="project-type-icon"><i class="fas fa-external-link-alt"></i></div>
@@ -2099,6 +2247,26 @@
     </div>
   </div>
 </section>
+
+<!-- نافذة منبثقة لعرض المشروع -->
+<div id="projectModal" class="project-modal-overlay">
+  <div class="project-modal-content">
+    <button class="project-modal-close" id="closeProjectModal">&times;</button>
+    <div class="project-modal-header">
+      <h3 id="projectModalTitle"></h3>
+      <p id="projectModalStudent"></p>
+    </div>
+    <div class="project-modal-body" id="projectModalBody">
+      <!-- سيتم ملء المحتوى هنا ديناميكياً -->
+    </div>
+  </div>
+</div>
+
+<!-- رسالة تنبيه عند التصويت -->
+<div id="voteMessage" class="vote-message">
+  <i class="fas fa-check-circle"></i>
+  <span id="voteMessageText">تم التصويت بنجاح!</span>
+</div>
 
 <!-- ========================================= -->
 <!--            جميع القوالب التعليمية         -->
@@ -2647,108 +2815,6 @@
               }
             }
           });
-// ============================================
-//   ====== وظائف قسم مشروع الأسبوع ======
-// ============================================
-
-function initProjectSection() {
-  // 1. إعداد الروابط والمتغيرات
-  const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTAcc48Gjbr-RZoGy32VclzBt9WHRDOIV4w2rmSNs7bW6OOXL53eUkJGd-tCy5b2PYj2amAN3gd3u9J/pub?output=csv';
-  const projectItems = document.querySelectorAll('.project-item' );
-
-  // 2. وظيفة جلب البيانات وتحديث العدادات
-  async function fetchAndupdateLikes() {
-    try {
-      // إضافة متغير عشوائي لمنع التخزين المؤقت (caching)
-      const response = await fetch(GOOGLE_SHEET_CSV_URL + '&_cache_buster=' + new Date().getTime());
-      if (!response.ok) {
-        console.error('فشل في جلب بيانات الأصوات.');
-        return;
-      }
-      
-      const csvText = await response.text();
-      const rows = csvText.split('\n').slice(1); // تجاهل الصف الأول (العناوين)
-
-      // إنشاء كائن لتخزين عدد الأصوات لكل مشروع
-      const voteCounts = {};
-
-      // المرور على كل صف في جدول البيانات
-      rows.forEach(row => {
-        const columns = row.split(',');
-        // العمود الثاني (B) هو الذي يحتوي على اسم المشروع المصوّت له
-        const votedProject = columns[1] ? columns[1].trim().replace(/"/g, '') : ''; 
-        
-        if (votedProject) {
-          if (voteCounts[votedProject]) {
-            voteCounts[votedProject]++;
-          } else {
-            voteCounts[votedProject] = 1;
-          }
-        }
-      });
-
-      // 3. تحديث العدادات على الصفحة
-      projectItems.forEach(item => {
-        const projectTitle = item.querySelector('.project-title').textContent.trim();
-        const likesCountSpan = item.querySelector('.likes-count');
-        
-        // تحديث الرقم إذا وجد المشروع في نتائج التصويت
-        if (voteCounts[projectTitle]) {
-          likesCountSpan.textContent = voteCounts[projectTitle];
-        } else {
-          likesCountSpan.textContent = '0'; // إذا لم يكن هناك أصوات
-        }
-      });
-
-    } catch (error) {
-      console.error('حدث خطأ أثناء تحديث الإعجابات:', error);
-    }
-  }
-
-  // 4. تفعيل أزرار التصويت وعرض المشاريع
-  projectItems.forEach(item => {
-    const imageContainer = item.querySelector('.project-image-container');
-    const voteButton = item.querySelector('.vote-button');
-    
-    const type = item.dataset.type;
-    const url = item.dataset.url;
-    const formUrl = item.dataset.formUrl;
-
-    // وظيفة النقر على صورة المشروع
-    if (imageContainer) {
-      imageContainer.addEventListener('click', () => {
-        if (!url) return;
-        if (type === 'website') {
-          window.open(url, '_blank');
-        } else {
-          // في المستقبل يمكننا تطوير هذا لعرض نافذة منبثقة
-          window.open(url, '_blank');
-        }
-      });
-    }
-
-    // وظيفة النقر على زر "صوّت"
-    if (voteButton) {
-      voteButton.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (!formUrl) return;
-        
-        const popupWidth = 600;
-        const popupHeight = 800;
-        const left = (window.screen.width / 2) - (popupWidth / 2);
-        const top = (window.screen.height / 2) - (popupHeight / 2);
-
-        window.open(formUrl, 'googleFormPopup', `width=${popupWidth},height=${popupHeight},top=${top},left=${left}`);
-      });
-    }
-  });
-
-  // 5. التشغيل الأولي وتعيين التحديث الدوري
-  fetchAndupdateLikes(); // تحديث فوري عند تحميل الصفحة
-  setInterval(fetchAndupdateLikes, 30000); // تحديث كل 30 ثانية
-}
-
-
           
           // إذا لم يكن العنصر نشطاً، فعّله
           if (!isActive) {
@@ -2836,6 +2902,274 @@ function initProjectSection() {
       studentsList.style.webkitOverflowScrolling = 'auto';
       studentsList.style.scrollSnapType = 'none';
     }
+  }
+
+  // ============================================
+  //   ====== وظائف قسم مشروع الأسبوع ======
+  // ============================================
+
+  function initProjectSection() {
+    // 1. إعداد الروابط والمتغيرات
+    const GOOGLE_SHEET_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTAcc48Gjbr-RZoGy32VclzBt9WHRDOIV4w2rmSNs7bW6OOXL53eUkJGd-tCy5b2PYj2amAN3gd3u9J/pub?output=csv';
+    const projectItems = document.querySelectorAll('.project-item');
+    const projectModal = document.getElementById('projectModal');
+    const closeProjectModal = document.getElementById('closeProjectModal');
+    const projectModalTitle = document.getElementById('projectModalTitle');
+    const projectModalStudent = document.getElementById('projectModalStudent');
+    const projectModalBody = document.getElementById('projectModalBody');
+    const voteMessage = document.getElementById('voteMessage');
+    const voteMessageText = document.getElementById('voteMessageText');
+
+    // تخزين محلي للتصويتات لحل مشكلة التحديث البطيء
+    let localVotes = JSON.parse(localStorage.getItem('projectVotes')) || {};
+    
+    // 2. وظيفة جلب البيانات وتحديث العدادات
+    async function fetchAndUpdateLikes() {
+      try {
+        // إضافة متغير عشوائي لمنع التخزين المؤقت (caching)
+        const timestamp = new Date().getTime();
+        const response = await fetch(`${GOOGLE_SHEET_CSV_URL}&_cache_buster=${timestamp}`);
+        
+        if (!response.ok) {
+          console.error('فشل في جلب بيانات الأصوات.');
+          updateFromLocalStorage();
+          return;
+        }
+        
+        const csvText = await response.text();
+        console.log('CSV Response:', csvText); // لأغراض التصحيح
+        
+        const rows = csvText.split('\n').slice(1); // تجاهل الصف الأول (العناوين)
+
+        // إنشاء كائن لتخزين عدد الأصوات لكل مشروع
+        const voteCounts = {};
+
+        // المرور على كل صف في جدول البيانات
+        rows.forEach(row => {
+          if (row.trim() === '') return;
+          
+          const columns = row.split(',');
+          console.log('Row columns:', columns); // لأغراض التصحيح
+          
+          // العمود الأول (A) يحتوي على الوقت، والعمود الثاني (B) هو اسم المشروع
+          // نبحث عن اسم المشروع في جميع الأعمدة
+          let votedProject = '';
+          for (let i = 0; i < columns.length; i++) {
+            const cell = columns[i].trim().replace(/"/g, '');
+            // نبحث عن أسماء المشاريع المعروفة
+            if (cell.includes('تصميم انفوجرافيك') || 
+                cell.includes('بحث عن الأمن السيبراني') || 
+                cell.includes('موقع اليوم الوطني')) {
+              votedProject = cell;
+              break;
+            }
+          }
+          
+          if (votedProject) {
+            if (voteCounts[votedProject]) {
+              voteCounts[votedProject]++;
+            } else {
+              voteCounts[votedProject] = 1;
+            }
+          }
+        });
+
+        console.log('Vote counts from CSV:', voteCounts); // لأغراض التصحيح
+
+        // 3. تحديث العدادات على الصفحة
+        projectItems.forEach(item => {
+          const projectTitle = item.querySelector('.project-title').textContent.trim();
+          const likesCountSpan = item.querySelector('.likes-count');
+          
+          // حساب مجموع الأصوات: من CSV + من التخزين المحلي
+          let totalVotes = 0;
+          
+          if (voteCounts[projectTitle]) {
+            totalVotes += voteCounts[projectTitle];
+          }
+          
+          if (localVotes[projectTitle]) {
+            totalVotes += localVotes[projectTitle];
+          }
+          
+          // تحديث الرقم على الصفحة
+          likesCountSpan.textContent = totalVotes;
+        });
+
+      } catch (error) {
+        console.error('حدث خطأ أثناء تحديث الإعجابات:', error);
+        updateFromLocalStorage();
+      }
+    }
+
+    // تحديث من التخزين المحلي فقط
+    function updateFromLocalStorage() {
+      projectItems.forEach(item => {
+        const projectTitle = item.querySelector('.project-title').textContent.trim();
+        const likesCountSpan = item.querySelector('.likes-count');
+        
+        if (localVotes[projectTitle]) {
+          likesCountSpan.textContent = localVotes[projectTitle];
+        } else {
+          likesCountSpan.textContent = '0';
+        }
+      });
+    }
+
+    // 4. إضافة تصويت محلي
+    function addLocalVote(projectTitle) {
+      if (!localVotes[projectTitle]) {
+        localVotes[projectTitle] = 0;
+      }
+      localVotes[projectTitle]++;
+      localStorage.setItem('projectVotes', JSON.stringify(localVotes));
+      updateFromLocalStorage();
+    }
+
+    // 5. وظيفة عرض النافذة المنبثقة للمشروع
+    function openProjectModal(projectItem) {
+      const type = projectItem.dataset.type;
+      const url = projectItem.dataset.url;
+      const title = projectItem.querySelector('.project-title').textContent;
+      const student = projectItem.querySelector('.project-student').textContent;
+      
+      // تعيين العنوان والطالب في النافذة المنبثقة
+      projectModalTitle.textContent = title;
+      projectModalStudent.textContent = student;
+      
+      // إنشاء محتوى النافذة المنبثقة بناءً على نوع المشروع
+      let contentHTML = '';
+      
+      switch(type) {
+        case 'image':
+          contentHTML = `
+            <img src="${url}" alt="${title}" style="max-width: 100%; max-height: 500px; border-radius: 10px;">
+          `;
+          break;
+          
+        case 'pdf':
+          contentHTML = `
+            <iframe src="${url}" class="pdf-viewer" title="عرض PDF"></iframe>
+            <a href="${url}" target="_blank" class="project-modal-external-link">
+              <i class="fas fa-external-link-alt"></i> فتح PDF في نافذة جديدة
+            </a>
+          `;
+          break;
+          
+        case 'website':
+          contentHTML = `
+            <iframe src="${url}" width="100%" height="500px" style="border-radius: 10px;"></iframe>
+            <a href="${url}" target="_blank" class="project-modal-external-link">
+              <i class="fas fa-external-link-alt"></i> زيارة الموقع
+            </a>
+          `;
+          break;
+          
+        default:
+          contentHTML = `<p>نوع المشروع غير معروف</p>`;
+      }
+      
+      projectModalBody.innerHTML = contentHTML;
+      projectModal.style.display = 'flex';
+      
+      // إضافة تأثير ظهور
+      setTimeout(() => {
+        projectModal.classList.add('visible');
+      }, 10);
+    }
+
+    // 6. إغلاق النافذة المنبثقة
+    function closeModal() {
+      projectModal.classList.remove('visible');
+      setTimeout(() => {
+        projectModal.style.display = 'none';
+      }, 300);
+    }
+
+    // 7. عرض رسالة التصويت
+    function showVoteMessage(projectTitle) {
+      voteMessageText.textContent = `تم التصويت لـ "${projectTitle}" بنجاح!`;
+      voteMessage.style.display = 'flex';
+      
+      setTimeout(() => {
+        voteMessage.style.display = 'none';
+      }, 3000);
+    }
+
+    // 8. تفعيل أزرار التصويت وعرض المشاريع
+    projectItems.forEach(item => {
+      const imageContainer = item.querySelector('.project-image-container');
+      const voteButton = item.querySelector('.vote-button');
+      const projectTitle = item.querySelector('.project-title').textContent;
+      
+      const formUrl = item.dataset.formUrl;
+
+      // وظيفة النقر على صورة المشروع
+      if (imageContainer) {
+        imageContainer.addEventListener('click', () => {
+          openProjectModal(item);
+        });
+      }
+
+      // وظيفة النقر على زر "صوّت"
+      if (voteButton) {
+        voteButton.addEventListener('click', (e) => {
+          e.stopPropagation();
+          
+          // تأثير النقر
+          voteButton.classList.add('clicked');
+          setTimeout(() => {
+            voteButton.classList.remove('clicked');
+          }, 300);
+          
+          // إضافة تصويت محلي فوري
+          addLocalVote(projectTitle);
+          
+          // عرض رسالة التصويت
+          showVoteMessage(projectTitle);
+          
+          // فتح نموذج Google للتصويت
+          if (formUrl) {
+            const popupWidth = 600;
+            const popupHeight = 800;
+            const left = (window.screen.width / 2) - (popupWidth / 2);
+            const top = (window.screen.height / 2) - (popupHeight / 2);
+
+            window.open(formUrl, 'googleFormPopup', `width=${popupWidth},height=${popupHeight},top=${top},left=${left}`);
+          }
+          
+          // تحديث البيانات بعد 5 ثواني
+          setTimeout(fetchAndUpdateLikes, 5000);
+        });
+      }
+    });
+
+    // 9. إغلاق النافذة المنبثقة
+    closeProjectModal.addEventListener('click', closeModal);
+    
+    // إغلاق النافذة عند النقر خارجها
+    projectModal.addEventListener('click', function(e) {
+      if (e.target === projectModal) {
+        closeModal();
+      }
+    });
+    
+    // إغلاق النافذة عند الضغط على Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && projectModal.style.display === 'flex') {
+        closeModal();
+      }
+    });
+
+    // 10. التشغيل الأولي وتعيين التحديث الدوري
+    // تحميل التصويتات المحلية أولاً
+    updateFromLocalStorage();
+    
+    // ثم جلب البيانات من Google Sheets
+    fetchAndUpdateLikes();
+    
+    // تحديث كل دقيقة
+    setInterval(fetchAndUpdateLikes, 60000);
   }
 
   // ============================================
@@ -3187,8 +3521,8 @@ function initProjectSection() {
     initAIAssistant();
     initCardToggles();
     initInquiryModal();
-    initHonorsSection(); // تم تحديث هذه الدالة
-    initProjectSection();
+    initHonorsSection();
+    initProjectSection(); // تم إضافة هذه الدالة
     initBackToTop();
     
     checkFadeElements();
@@ -3198,17 +3532,6 @@ function initProjectSection() {
       window.scrollTo(0, 0);
     }, 500);
   });
-
 </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
