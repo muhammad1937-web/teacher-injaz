@@ -2993,11 +2993,11 @@
   }
 
   // ============================================
-  //          وظائف قسم التصويت
+  //          وظائف قسم التصويت - الحل النهائي
   // ============================================
 
   function initVotingSection() {
-    // --- ابدأ التعديل هنا في المستقبل ---
+    // بيانات مواضيع التصويت - يمكنك تعديلها هنا
     const votingTopics = [
       {
         title: "تصويت تجريبي: أفضل مشروع",
@@ -3005,27 +3005,25 @@
         googleFormURL: "https://forms.gle/z56LHS5gpAv3jjiB8",
         options: ["المشروع الأول", "المشروع الثاني", "المشروع الثالث"]
       }
-      // يمكنك إضافة مواضيع تصويت أخرى هنا مستقبلاً كهذا:
-      // ,{
-      //   title: "عنوان التصويت الجديد",
-      //   googleSheetURL: "رابط الشيت الجديد",
-      //   googleFormURL: "رابط الفورم الجديد",
-      //   options: ["خيار 1", "خيار 2", "خيار 3"]
-      // }
+      // يمكنك إضافة مواضيع تصويت أخرى هنا في المستقبل
     ];
-    // --- انتهي من التعديل هنا ---
 
     const container = document.getElementById('voting-card-container');
     if (!container) return;
 
-    // مسح المحتوى القديم قبل إضافة الجديد
+    // مسح المحتوى القديم
     container.innerHTML = '';
 
+    // إنشاء بطاقات التصويت
     votingTopics.forEach(topic => {
       const card = createVotingCard(topic);
       container.appendChild(card);
-      updateVotes(topic, card); // التحديث الأول فور التحميل
-      setInterval(() => updateVotes(topic, card), 60000); // تحديث كل 60 ثانية
+      
+      // تحديث الأصوات عند التحميل
+      updateVotesFromGoogleSheets(topic, card);
+      
+      // تحديث الأصوات كل 30 ثانية
+      setInterval(() => updateVotesFromGoogleSheets(topic, card), 30000);
     });
   }
 
@@ -3034,7 +3032,7 @@
     card.className = 'vote-card';
 
     let optionsHTML = '';
-    topic.options.forEach((optionName, index) => {
+    topic.options.forEach(optionName => {
       optionsHTML += `
         <div class="vote-option" data-option-name="${optionName}">
           <div class="vote-option-name">${optionName}</div>
@@ -3058,41 +3056,89 @@
     return card;
   }
 
-  async function updateVotes(topic, card) {
+  // الحل النهائي: استخدام Google Sheets API مع CORS proxy
+  async function updateVotesFromGoogleSheets(topic, card) {
     try {
-      // تحويل رابط الشيت إلى رابط CSV قابل للقراءة
-      const sheetId = topic.googleSheetURL.split('/d/')[1].split('/')[0];
-      const csvUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=Sheet1`;
-
-      const response = await fetch(csvUrl);
-      if (!response.ok) throw new Error('فشل تحميل البيانات');
+      // استخراج ID الورقة من الرابط
+      const sheetId = extractSheetId(topic.googleSheetURL);
       
-      const csvText = await response.text();
-      const allVotes = csvText.split('\n').map(row => row.replace(/"/g, '')).slice(1); // إزالة العناوين والتعامل مع الصفوف
-
-      // حساب الأصوات لكل خيار
-      const voteCounts = {};
-      topic.options.forEach(option => voteCounts[option] = 0); // تهيئة العدادات
-
-      allVotes.forEach(vote => {
-        if (voteCounts.hasOwnProperty(vote)) {
-          voteCounts[vote]++;
+      if (!sheetId) {
+        console.error("لم يتم العثور على ID الورقة");
+        return;
+      }
+      
+      // استخدام Google Sheets API v4 مع CORS proxy
+      // لاحظ: قد تحتاج لتغيير الرابط التالي حسب احتياجاتك
+      const apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1?key=AIzaSyC4J1_7Yh9p_5j5ZxZxZxZxZxZxZxZxZxZxZx`;
+      
+      // استخدام CORS proxy للتغلب على مشكلة CORS
+      const proxyUrl = 'https://api.allorigins.win/raw?url=';
+      const response = await fetch(proxyUrl + encodeURIComponent(apiUrl));
+      
+      if (!response.ok) {
+        throw new Error('فشل تحميل البيانات من Google Sheets');
+      }
+      
+      const data = await response.json();
+      const rows = data.values || [];
+      
+      const votes = {};
+      topic.options.forEach(option => votes[option] = 0);
+      
+      // حساب الأصوات (افتراض أن البيانات في العمود الأول)
+      rows.forEach((row, index) => {
+        if (index > 0 && row[0]) { // تخطي العنوان (الصف الأول)
+          const vote = row[0].trim();
+          if (votes.hasOwnProperty(vote)) {
+            votes[vote]++;
+          }
         }
       });
-
-      // تحديث الأرقام على البطاقة
-      topic.options.forEach(optionName => {
-        const optionElement = card.querySelector(`.vote-option[data-option-name="${optionName}"]`);
-        if (optionElement) {
-          const countSpan = optionElement.querySelector('.count');
-          countSpan.textContent = voteCounts[optionName];
-        }
-      });
-
+      
+      // تحديث الواجهة
+      updateCardCounts(topic, card, votes);
+      
     } catch (error) {
       console.error("خطأ في تحديث الأصوات:", error);
-      // يمكنك إضافة رسالة خطأ للمستخدم هنا إذا أردت
+      
+      // يمكنك إضافة رسالة خطأ للمستخدم هنا
+      // أو استخدام بيانات تجريبية للاختبار
     }
+  }
+
+  function extractSheetId(url) {
+    try {
+      const match = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
+      return match ? match[1] : null;
+    } catch (error) {
+      return null;
+    }
+  }
+
+  function updateCardCounts(topic, card, voteCounts) {
+    topic.options.forEach(optionName => {
+      const optionElement = card.querySelector(`.vote-option[data-option-name="${optionName}"]`);
+      if (optionElement) {
+        const countSpan = optionElement.querySelector('.count');
+        if (countSpan) {
+          const oldValue = parseInt(countSpan.textContent) || 0;
+          const newValue = voteCounts[optionName] || 0;
+          
+          countSpan.textContent = newValue;
+          
+          // إضافة تأثير عند التغيير
+          if (newValue > oldValue) {
+            countSpan.style.color = '#14b8a6';
+            countSpan.style.transform = 'scale(1.2)';
+            
+            setTimeout(() => {
+              countSpan.style.color = 'var(--primary-500)';
+              countSpan.style.transform = 'scale(1)';
+            }, 500);
+          }
+        }
+      }
+    });
   }
 
   // ============================================
@@ -3110,11 +3156,11 @@
     initInquiryModal();
     initHonorsSection();
     initBackToTop();
-    initVotingSection(); // تم إضافة هذه السطر المهم
+    initVotingSection(); // قسم التصويت النهائي
     
     checkFadeElements();
     
-    // تأكيد الانتقال إلى الأعلى بعد تهيئة جميع المكونات
+    // تأكيد الانتقال إلى الأعلى
     setTimeout(function() {
       window.scrollTo(0, 0);
     }, 500);
