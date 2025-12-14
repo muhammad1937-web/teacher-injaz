@@ -1926,6 +1926,8 @@
   justify-content: center;
   align-items: center;
   z-index: 10001;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
 .project-modal-content {
@@ -1938,6 +1940,16 @@
   position: relative;
   padding: 2rem;
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.project-modal-overlay.visible {
+  opacity: 1;
+}
+
+.project-modal-overlay.visible .project-modal-content {
+  transform: scale(1);
 }
 
 .project-modal-close {
@@ -2013,6 +2025,32 @@
 .project-modal-external-link:hover {
   background: var(--primary-600);
   transform: translateY(-3px);
+}
+
+/* تأثير النقر على زر التصويت */
+.vote-button.clicked {
+  background-color: #2ecc71 !important;
+  transform: scale(0.95);
+}
+
+.vote-button.clicked::after {
+  content: ' ✓';
+}
+
+/* رسالة تنبيه عند التصويت */
+.vote-message {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: #2ecc71;
+  color: white;
+  padding: 12px 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  z-index: 10002;
+  display: none;
+  align-items: center;
+  gap: 10px;
 }
 
   </style>
@@ -2222,6 +2260,12 @@
       <!-- سيتم ملء المحتوى هنا ديناميكياً -->
     </div>
   </div>
+</div>
+
+<!-- رسالة تنبيه عند التصويت -->
+<div id="voteMessage" class="vote-message">
+  <i class="fas fa-check-circle"></i>
+  <span id="voteMessageText">تم التصويت بنجاح!</span>
 </div>
 
 <!-- ========================================= -->
@@ -2873,18 +2917,28 @@
     const projectModalTitle = document.getElementById('projectModalTitle');
     const projectModalStudent = document.getElementById('projectModalStudent');
     const projectModalBody = document.getElementById('projectModalBody');
+    const voteMessage = document.getElementById('voteMessage');
+    const voteMessageText = document.getElementById('voteMessageText');
 
+    // تخزين محلي للتصويتات لحل مشكلة التحديث البطيء
+    let localVotes = JSON.parse(localStorage.getItem('projectVotes')) || {};
+    
     // 2. وظيفة جلب البيانات وتحديث العدادات
     async function fetchAndUpdateLikes() {
       try {
         // إضافة متغير عشوائي لمنع التخزين المؤقت (caching)
-        const response = await fetch(GOOGLE_SHEET_CSV_URL + '&_cache_buster=' + new Date().getTime());
+        const timestamp = new Date().getTime();
+        const response = await fetch(`${GOOGLE_SHEET_CSV_URL}&_cache_buster=${timestamp}`);
+        
         if (!response.ok) {
           console.error('فشل في جلب بيانات الأصوات.');
+          updateFromLocalStorage();
           return;
         }
         
         const csvText = await response.text();
+        console.log('CSV Response:', csvText); // لأغراض التصحيح
+        
         const rows = csvText.split('\n').slice(1); // تجاهل الصف الأول (العناوين)
 
         // إنشاء كائن لتخزين عدد الأصوات لكل مشروع
@@ -2892,9 +2946,24 @@
 
         // المرور على كل صف في جدول البيانات
         rows.forEach(row => {
+          if (row.trim() === '') return;
+          
           const columns = row.split(',');
-          // العمود الثاني (B) هو الذي يحتوي على اسم المشروع المصوّت له
-          const votedProject = columns[1] ? columns[1].trim().replace(/"/g, '') : ''; 
+          console.log('Row columns:', columns); // لأغراض التصحيح
+          
+          // العمود الأول (A) يحتوي على الوقت، والعمود الثاني (B) هو اسم المشروع
+          // نبحث عن اسم المشروع في جميع الأعمدة
+          let votedProject = '';
+          for (let i = 0; i < columns.length; i++) {
+            const cell = columns[i].trim().replace(/"/g, '');
+            // نبحث عن أسماء المشاريع المعروفة
+            if (cell.includes('تصميم انفوجرافيك') || 
+                cell.includes('بحث عن الأمن السيبراني') || 
+                cell.includes('موقع اليوم الوطني')) {
+              votedProject = cell;
+              break;
+            }
+          }
           
           if (votedProject) {
             if (voteCounts[votedProject]) {
@@ -2905,25 +2974,59 @@
           }
         });
 
+        console.log('Vote counts from CSV:', voteCounts); // لأغراض التصحيح
+
         // 3. تحديث العدادات على الصفحة
         projectItems.forEach(item => {
           const projectTitle = item.querySelector('.project-title').textContent.trim();
           const likesCountSpan = item.querySelector('.likes-count');
           
-          // تحديث الرقم إذا وجد المشروع في نتائج التصويت
+          // حساب مجموع الأصوات: من CSV + من التخزين المحلي
+          let totalVotes = 0;
+          
           if (voteCounts[projectTitle]) {
-            likesCountSpan.textContent = voteCounts[projectTitle];
-          } else {
-            likesCountSpan.textContent = '0'; // إذا لم يكن هناك أصوات
+            totalVotes += voteCounts[projectTitle];
           }
+          
+          if (localVotes[projectTitle]) {
+            totalVotes += localVotes[projectTitle];
+          }
+          
+          // تحديث الرقم على الصفحة
+          likesCountSpan.textContent = totalVotes;
         });
 
       } catch (error) {
         console.error('حدث خطأ أثناء تحديث الإعجابات:', error);
+        updateFromLocalStorage();
       }
     }
 
-    // 4. وظيفة عرض النافذة المنبثقة للمشروع
+    // تحديث من التخزين المحلي فقط
+    function updateFromLocalStorage() {
+      projectItems.forEach(item => {
+        const projectTitle = item.querySelector('.project-title').textContent.trim();
+        const likesCountSpan = item.querySelector('.likes-count');
+        
+        if (localVotes[projectTitle]) {
+          likesCountSpan.textContent = localVotes[projectTitle];
+        } else {
+          likesCountSpan.textContent = '0';
+        }
+      });
+    }
+
+    // 4. إضافة تصويت محلي
+    function addLocalVote(projectTitle) {
+      if (!localVotes[projectTitle]) {
+        localVotes[projectTitle] = 0;
+      }
+      localVotes[projectTitle]++;
+      localStorage.setItem('projectVotes', JSON.stringify(localVotes));
+      updateFromLocalStorage();
+    }
+
+    // 5. وظيفة عرض النافذة المنبثقة للمشروع
     function openProjectModal(projectItem) {
       const type = projectItem.dataset.type;
       const url = projectItem.dataset.url;
@@ -2971,22 +3074,33 @@
       
       // إضافة تأثير ظهور
       setTimeout(() => {
-        projectModal.style.opacity = '1';
+        projectModal.classList.add('visible');
       }, 10);
     }
 
-    // 5. إغلاق النافذة المنبثقة
+    // 6. إغلاق النافذة المنبثقة
     function closeModal() {
-      projectModal.style.opacity = '0';
+      projectModal.classList.remove('visible');
       setTimeout(() => {
         projectModal.style.display = 'none';
       }, 300);
     }
 
-    // 6. تفعيل أزرار التصويت وعرض المشاريع
+    // 7. عرض رسالة التصويت
+    function showVoteMessage(projectTitle) {
+      voteMessageText.textContent = `تم التصويت لـ "${projectTitle}" بنجاح!`;
+      voteMessage.style.display = 'flex';
+      
+      setTimeout(() => {
+        voteMessage.style.display = 'none';
+      }, 3000);
+    }
+
+    // 8. تفعيل أزرار التصويت وعرض المشاريع
     projectItems.forEach(item => {
       const imageContainer = item.querySelector('.project-image-container');
       const voteButton = item.querySelector('.vote-button');
+      const projectTitle = item.querySelector('.project-title').textContent;
       
       const formUrl = item.dataset.formUrl;
 
@@ -3001,22 +3115,36 @@
       if (voteButton) {
         voteButton.addEventListener('click', (e) => {
           e.stopPropagation();
-          if (!formUrl) return;
           
-          const popupWidth = 600;
-          const popupHeight = 800;
-          const left = (window.screen.width / 2) - (popupWidth / 2);
-          const top = (window.screen.height / 2) - (popupHeight / 2);
+          // تأثير النقر
+          voteButton.classList.add('clicked');
+          setTimeout(() => {
+            voteButton.classList.remove('clicked');
+          }, 300);
+          
+          // إضافة تصويت محلي فوري
+          addLocalVote(projectTitle);
+          
+          // عرض رسالة التصويت
+          showVoteMessage(projectTitle);
+          
+          // فتح نموذج Google للتصويت
+          if (formUrl) {
+            const popupWidth = 600;
+            const popupHeight = 800;
+            const left = (window.screen.width / 2) - (popupWidth / 2);
+            const top = (window.screen.height / 2) - (popupHeight / 2);
 
-          window.open(formUrl, 'googleFormPopup', `width=${popupWidth},height=${popupHeight},top=${top},left=${left}`);
+            window.open(formUrl, 'googleFormPopup', `width=${popupWidth},height=${popupHeight},top=${top},left=${left}`);
+          }
           
-          // بعد التصويت، تحديث العدادات بعد فترة قصيرة
-          setTimeout(fetchAndUpdateLikes, 3000);
+          // تحديث البيانات بعد 5 ثواني
+          setTimeout(fetchAndUpdateLikes, 5000);
         });
       }
     });
 
-    // 7. إغلاق النافذة المنبثقة
+    // 9. إغلاق النافذة المنبثقة
     closeProjectModal.addEventListener('click', closeModal);
     
     // إغلاق النافذة عند النقر خارجها
@@ -3033,9 +3161,15 @@
       }
     });
 
-    // 8. التشغيل الأولي وتعيين التحديث الدوري
-    fetchAndUpdateLikes(); // تحديث فوري عند تحميل الصفحة
-    setInterval(fetchAndUpdateLikes, 30000); // تحديث كل 30 ثانية
+    // 10. التشغيل الأولي وتعيين التحديث الدوري
+    // تحميل التصويتات المحلية أولاً
+    updateFromLocalStorage();
+    
+    // ثم جلب البيانات من Google Sheets
+    fetchAndUpdateLikes();
+    
+    // تحديث كل دقيقة
+    setInterval(fetchAndUpdateLikes, 60000);
   }
 
   // ============================================
