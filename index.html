@@ -1745,151 +1745,6 @@
     inset 0 0 0 1px rgba(255, 255, 255, 0.8);
   transform: translateY(-2px);
 }
-/* ============================================ */
-/* ==========   قسم مواضيع التصويت   ========== */
-/* ============================================ */
-.voting-section {
-  max-width: 900px;
-  margin: 2.5rem auto;
-  padding: 1.5rem 1.8rem;
-  border-radius: 20px;
-  background: linear-gradient(to bottom, rgba(20, 184, 166, 0.03) 0%, rgba(122, 67, 204, 0.05) 100%);
-  box-shadow: 0 10px 25px rgba(122, 67, 204, 0.1);
-  border: 1px solid rgba(122, 67, 204, 0.2);
-  text-align: center;
-}
-
-.voting-title {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--accent-teal);
-  margin-bottom: 0.5rem;
-}
-
-.voting-title i {
-  font-size: 1.6rem;
-}
-
-.voting-subtitle {
-  margin: 0 0 1.5rem 0;
-  font-size: 0.9rem;
-  color: var(--text-light);
-  text-align: center;
-}
-
-.voting-card-container {
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-}
-
-.vote-card {
-  background: var(--card-bg);
-  border-radius: 15px;
-  padding: 1.5rem;
-  box-shadow: 0 8px 20px rgba(122, 67, 204, 0.1);
-  border: 1px solid rgba(122, 67, 204, 0.15);
-  transition: var(--transition);
-  text-align: right;
-}
-
-.vote-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 12px 30px rgba(122, 67, 204, 0.2);
-}
-
-.vote-card-title {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--primary-600);
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid rgba(122, 67, 204, 0.2);
-}
-
-.vote-options {
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  margin-bottom: 2rem;
-}
-
-.vote-option {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-  min-width: 120px;
-}
-
-.vote-option-name {
-  font-size: 1rem;
-  font-weight: 600;
-  color: var(--text-dark);
-}
-
-.vote-counter {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  background-color: var(--primary-soft-2);
-  padding: 5px 12px;
-  border-radius: 20px;
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--primary-500);
-  transition: all 0.3s ease;
-}
-
-.vote-counter i {
-  font-size: 1.1rem;
-  color: var(--primary-400);
-}
-
-.vote-button {
-  display: inline-block;
-  width: 100%;
-  background-color: var(--accent-teal);
-  color: white;
-  padding: 12px 20px;
-  border-radius: 10px;
-  text-decoration: none;
-  font-size: 1.1rem;
-  font-weight: 700;
-  text-align: center;
-  transition: var(--transition);
-  border: none;
-  cursor: pointer;
-}
-
-.vote-button:hover {
-  background-color: #0d9488;
-  transform: scale(1.02);
-  box-shadow: 0 5px 15px rgba(20, 184, 166, 0.3);
-}
-
-/* تعديلات للجوال */
-@media (max-width: 768px) {
-  .voting-section {
-    padding: 1.3rem 1rem;
-  }
-  .vote-card {
-    padding: 1.2rem;
-  }
-  .vote-card-title {
-    font-size: 1.15rem;
-  }
-  .vote-options {
-    justify-content: center;
-  }
-}
-
   </style>
 </head>
 <body>
@@ -2004,20 +1859,6 @@
   </div>
   
   <!-- تم إزالة النقاط الثلاثة تماماً -->
-</section>
-<!-- ============================================ -->
-<!-- ==========     قسم مواضيع التصويت     ========== -->
-<!-- ============================================ -->
-<section class="voting-section fade-in" id="voting-section">
-  <div class="voting-title">
-    <i class="fas fa-poll-h"></i>
-    <span>مواضيع التصويت</span>
-  </div>
-  <p class="voting-subtitle">شارك برأيك وادعم المشاريع المتميزة</p>
-
-  <div class="voting-card-container" id="voting-card-container">
-    <!-- سيتم إضافة بطاقة التصويت هنا بواسطة JavaScript لاحقاً -->
-  </div>
 </section>
 
 <!-- ========================================= -->
@@ -2993,155 +2834,6 @@
   }
 
   // ============================================
-  //          وظائف قسم التصويت - الحل النهائي
-  // ============================================
-
-  function initVotingSection() {
-    // بيانات مواضيع التصويت - يمكنك تعديلها هنا
-    const votingTopics = [
-      {
-        title: "تصويت تجريبي: أفضل مشروع",
-        googleSheetURL: "https://docs.google.com/spreadsheets/d/1yerJFSeoJkHX1WfDzb5wBh_O4tMz2awuVKayrNa5kHs/edit?usp=sharing",
-        googleFormURL: "https://forms.gle/z56LHS5gpAv3jjiB8",
-        options: ["المشروع الأول", "المشروع الثاني", "المشروع الثالث"]
-      }
-      // يمكنك إضافة مواضيع تصويت أخرى هنا في المستقبل
-    ];
-
-    const container = document.getElementById('voting-card-container');
-    if (!container) return;
-
-    // مسح المحتوى القديم
-    container.innerHTML = '';
-
-    // إنشاء بطاقات التصويت
-    votingTopics.forEach(topic => {
-      const card = createVotingCard(topic);
-      container.appendChild(card);
-      
-      // تحديث الأصوات عند التحميل
-      updateVotesFromGoogleSheets(topic, card);
-      
-      // تحديث الأصوات كل 30 ثانية
-      setInterval(() => updateVotesFromGoogleSheets(topic, card), 30000);
-    });
-  }
-
-  function createVotingCard(topic) {
-    const card = document.createElement('div');
-    card.className = 'vote-card';
-
-    let optionsHTML = '';
-    topic.options.forEach(optionName => {
-      optionsHTML += `
-        <div class="vote-option" data-option-name="${optionName}">
-          <div class="vote-option-name">${optionName}</div>
-          <div class="vote-counter">
-            <i class="fas fa-thumbs-up"></i>
-            <span class="count">0</span>
-          </div>
-        </div>
-      `;
-    });
-
-    card.innerHTML = `
-      <h3 class="vote-card-title">${topic.title}</h3>
-      <div class="vote-options">
-        ${optionsHTML}
-      </div>
-      <a href="${topic.googleFormURL}" target="_blank" class="vote-button">
-        <i class="fas fa-vote-yea"></i> صوّت الآن
-      </a>
-    `;
-    return card;
-  }
-
-  // الحل النهائي: استخدام Google Sheets API مع CORS proxy
-  async function updateVotesFromGoogleSheets(topic, card) {
-    try {
-      // استخراج ID الورقة من الرابط
-      const sheetId = extractSheetId(topic.googleSheetURL);
-      
-      if (!sheetId) {
-        console.error("لم يتم العثور على ID الورقة");
-        return;
-      }
-      
-      // استخدام Google Sheets API v4 مع CORS proxy
-      // لاحظ: قد تحتاج لتغيير الرابط التالي حسب احتياجاتك
-      const apiUrl = `https://sheets.googleapis.com/v4/spreadsheets/${sheetId}/values/Sheet1?key=AIzaSyC4J1_7Yh9p_5j5ZxZxZxZxZxZxZxZxZxZxZx`;
-      
-      // استخدام CORS proxy للتغلب على مشكلة CORS
-      const proxyUrl = 'https://api.allorigins.win/raw?url=';
-      const response = await fetch(proxyUrl + encodeURIComponent(apiUrl));
-      
-      if (!response.ok) {
-        throw new Error('فشل تحميل البيانات من Google Sheets');
-      }
-      
-      const data = await response.json();
-      const rows = data.values || [];
-      
-      const votes = {};
-      topic.options.forEach(option => votes[option] = 0);
-      
-      // حساب الأصوات (افتراض أن البيانات في العمود الأول)
-      rows.forEach((row, index) => {
-        if (index > 0 && row[0]) { // تخطي العنوان (الصف الأول)
-          const vote = row[0].trim();
-          if (votes.hasOwnProperty(vote)) {
-            votes[vote]++;
-          }
-        }
-      });
-      
-      // تحديث الواجهة
-      updateCardCounts(topic, card, votes);
-      
-    } catch (error) {
-      console.error("خطأ في تحديث الأصوات:", error);
-      
-      // يمكنك إضافة رسالة خطأ للمستخدم هنا
-      // أو استخدام بيانات تجريبية للاختبار
-    }
-  }
-
-  function extractSheetId(url) {
-    try {
-      const match = url.match(/\/d\/([a-zA-Z0-9-_]+)/);
-      return match ? match[1] : null;
-    } catch (error) {
-      return null;
-    }
-  }
-
-  function updateCardCounts(topic, card, voteCounts) {
-    topic.options.forEach(optionName => {
-      const optionElement = card.querySelector(`.vote-option[data-option-name="${optionName}"]`);
-      if (optionElement) {
-        const countSpan = optionElement.querySelector('.count');
-        if (countSpan) {
-          const oldValue = parseInt(countSpan.textContent) || 0;
-          const newValue = voteCounts[optionName] || 0;
-          
-          countSpan.textContent = newValue;
-          
-          // إضافة تأثير عند التغيير
-          if (newValue > oldValue) {
-            countSpan.style.color = '#14b8a6';
-            countSpan.style.transform = 'scale(1.2)';
-            
-            setTimeout(() => {
-              countSpan.style.color = 'var(--primary-500)';
-              countSpan.style.transform = 'scale(1)';
-            }, 500);
-          }
-        }
-      }
-    });
-  }
-
-  // ============================================
   //          تهيئة جميع الوظائف
   // ============================================
 
@@ -3154,13 +2846,12 @@
     initAIAssistant();
     initCardToggles();
     initInquiryModal();
-    initHonorsSection();
+    initHonorsSection(); // تم تحديث هذه الدالة
     initBackToTop();
-    initVotingSection(); // قسم التصويت النهائي
     
     checkFadeElements();
     
-    // تأكيد الانتقال إلى الأعلى
+    // تأكيد الانتقال إلى الأعلى بعد تهيئة جميع المكونات
     setTimeout(function() {
       window.scrollTo(0, 0);
     }, 500);
@@ -3169,3 +2860,15 @@
 </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
