@@ -2993,6 +2993,109 @@
   }
 
   // ============================================
+  //          وظائف قسم التصويت
+  // ============================================
+
+  function initVotingSection() {
+    // --- ابدأ التعديل هنا في المستقبل ---
+    const votingTopics = [
+      {
+        title: "تصويت تجريبي: أفضل مشروع",
+        googleSheetURL: "https://docs.google.com/spreadsheets/d/1yerJFSeoJkHX1WfDzb5wBh_O4tMz2awuVKayrNa5kHs/edit?usp=sharing",
+        googleFormURL: "https://forms.gle/z56LHS5gpAv3jjiB8",
+        options: ["المشروع الأول", "المشروع الثاني", "المشروع الثالث"]
+      }
+      // يمكنك إضافة مواضيع تصويت أخرى هنا مستقبلاً كهذا:
+      // ,{
+      //   title: "عنوان التصويت الجديد",
+      //   googleSheetURL: "رابط الشيت الجديد",
+      //   googleFormURL: "رابط الفورم الجديد",
+      //   options: ["خيار 1", "خيار 2", "خيار 3"]
+      // }
+    ];
+    // --- انتهي من التعديل هنا ---
+
+    const container = document.getElementById('voting-card-container');
+    if (!container) return;
+
+    // مسح المحتوى القديم قبل إضافة الجديد
+    container.innerHTML = '';
+
+    votingTopics.forEach(topic => {
+      const card = createVotingCard(topic);
+      container.appendChild(card);
+      updateVotes(topic, card); // التحديث الأول فور التحميل
+      setInterval(() => updateVotes(topic, card), 60000); // تحديث كل 60 ثانية
+    });
+  }
+
+  function createVotingCard(topic) {
+    const card = document.createElement('div');
+    card.className = 'vote-card';
+
+    let optionsHTML = '';
+    topic.options.forEach((optionName, index) => {
+      optionsHTML += `
+        <div class="vote-option" data-option-name="${optionName}">
+          <div class="vote-option-name">${optionName}</div>
+          <div class="vote-counter">
+            <i class="fas fa-thumbs-up"></i>
+            <span class="count">0</span>
+          </div>
+        </div>
+      `;
+    });
+
+    card.innerHTML = `
+      <h3 class="vote-card-title">${topic.title}</h3>
+      <div class="vote-options">
+        ${optionsHTML}
+      </div>
+      <a href="${topic.googleFormURL}" target="_blank" class="vote-button">
+        <i class="fas fa-vote-yea"></i> صوّت الآن
+      </a>
+    `;
+    return card;
+  }
+
+  async function updateVotes(topic, card) {
+    try {
+      // تحويل رابط الشيت إلى رابط CSV قابل للقراءة
+      const sheetId = topic.googleSheetURL.split('/d/')[1].split('/')[0];
+      const csvUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=Sheet1`;
+
+      const response = await fetch(csvUrl);
+      if (!response.ok) throw new Error('فشل تحميل البيانات');
+      
+      const csvText = await response.text();
+      const allVotes = csvText.split('\n').map(row => row.replace(/"/g, '')).slice(1); // إزالة العناوين والتعامل مع الصفوف
+
+      // حساب الأصوات لكل خيار
+      const voteCounts = {};
+      topic.options.forEach(option => voteCounts[option] = 0); // تهيئة العدادات
+
+      allVotes.forEach(vote => {
+        if (voteCounts.hasOwnProperty(vote)) {
+          voteCounts[vote]++;
+        }
+      });
+
+      // تحديث الأرقام على البطاقة
+      topic.options.forEach(optionName => {
+        const optionElement = card.querySelector(`.vote-option[data-option-name="${optionName}"]`);
+        if (optionElement) {
+          const countSpan = optionElement.querySelector('.count');
+          countSpan.textContent = voteCounts[optionName];
+        }
+      });
+
+    } catch (error) {
+      console.error("خطأ في تحديث الأصوات:", error);
+      // يمكنك إضافة رسالة خطأ للمستخدم هنا إذا أردت
+    }
+  }
+
+  // ============================================
   //          تهيئة جميع الوظائف
   // ============================================
 
@@ -3005,8 +3108,9 @@
     initAIAssistant();
     initCardToggles();
     initInquiryModal();
-    initHonorsSection(); // تم تحديث هذه الدالة
+    initHonorsSection();
     initBackToTop();
+    initVotingSection(); // تم إضافة هذه السطر المهم
     
     checkFadeElements();
     
@@ -3015,116 +3119,6 @@
       window.scrollTo(0, 0);
     }, 500);
   });
-// =================================================
-//          وظائف قسم التصويت
-// =================================================
-
-function initVotingSection() {
-  // --- ابدأ التعديل هنا في المستقبل ---
-  const votingTopics = [
-    {
-      title: "تصويت تجريبي: أفضل مشروع",
-      googleSheetURL: "https://docs.google.com/spreadsheets/d/1yerJFSeoJkHX1WfDzb5wBh_O4tMz2awuVKayrNa5kHs/edit?usp=sharing",
-      googleFormURL: "https://forms.gle/z56LHS5gpAv3jjiB8",
-      options: ["المشروع الأول", "المشروع الثاني", "المشروع الثالث"]
-    }
-    // يمكنك إضافة مواضيع تصويت أخرى هنا مستقبلاً كهذا:
-    // ,{
-    //   title: "عنوان التصويت الجديد",
-    //   googleSheetURL: "رابط الشيت الجديد",
-    //   googleFormURL: "رابط الفورم الجديد",
-    //   options: ["خيار 1", "خيار 2", "خيار 3"]
-    // }
-  ];
-  // --- انتهي من التعديل هنا ---
-
-  const container = document.getElementById('voting-card-container' );
-  if (!container) return;
-
-  // مسح المحتوى القديم قبل إضافة الجديد
-  container.innerHTML = '';
-
-  votingTopics.forEach(topic => {
-    const card = createVotingCard(topic);
-    container.appendChild(card);
-    updateVotes(topic, card); // التحديث الأول فور التحميل
-    setInterval(() => updateVotes(topic, card), 60000); // تحديث كل 60 ثانية
-  });
-}
-
-function createVotingCard(topic) {
-  const card = document.createElement('div');
-  card.className = 'vote-card';
-
-  let optionsHTML = '';
-  topic.options.forEach((optionName, index) => {
-    optionsHTML += `
-      <div class="vote-option" data-option-name="${optionName}">
-        <div class="vote-option-name">${optionName}</div>
-        <div class="vote-counter">
-          <i class="fas fa-thumbs-up"></i>
-          <span class="count">0</span>
-        </div>
-      </div>
-    `;
-  });
-
-  card.innerHTML = `
-    <h3 class="vote-card-title">${topic.title}</h3>
-    <div class="vote-options">
-      ${optionsHTML}
-    </div>
-    <a href="${topic.googleFormURL}" target="_blank" class="vote-button">
-      <i class="fas fa-vote-yea"></i> صوّت الآن
-    </a>
-  `;
-  return card;
-}
-
-async function updateVotes(topic, card) {
-  try {
-    // تحويل رابط الشيت إلى رابط CSV قابل للقراءة
-    const sheetId = topic.googleSheetURL.split('/d/')[1].split('/')[0];
-    const csvUrl = `https://docs.google.com/spreadsheets/d/${sheetId}/gviz/tq?tqx=out:csv&sheet=Sheet1`;
-
-    const response = await fetch(csvUrl );
-    if (!response.ok) throw new Error('فشل تحميل البيانات');
-    
-    const csvText = await response.text();
-    const allVotes = csvText.split('\n').map(row => row.replace(/"/g, '')).slice(1); // إزالة العناوين والتعامل مع الصفوف
-
-    // حساب الأصوات لكل خيار
-    const voteCounts = {};
-    topic.options.forEach(option => voteCounts[option] = 0); // تهيئة العدادات
-
-    allVotes.forEach(vote => {
-      if (voteCounts.hasOwnProperty(vote)) {
-        voteCounts[vote]++;
-      }
-    });
-
-    // تحديث الأرقام على البطاقة
-    topic.options.forEach(optionName => {
-      const optionElement = card.querySelector(`.vote-option[data-option-name="${optionName}"]`);
-      if (optionElement) {
-        const countSpan = optionElement.querySelector('.count');
-        countSpan.textContent = voteCounts[optionName];
-      }
-    });
-
-  } catch (error) {
-    console.error("خطأ في تحديث الأصوات:", error);
-    // يمكنك إضافة رسالة خطأ للمستخدم هنا إذا أردت
-  }
-}
-
-// استدعاء الدالة الرئيسية عند تحميل الصفحة
-document.addEventListener('DOMContentLoaded', function() {
-    // ... (الكود الموجود لديك بالفعل) ...
-    
-    // أضف هذا السطر الجديد
-    initVotingSection(); 
-});
 
 </script>
 </body>
