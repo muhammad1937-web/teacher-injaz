@@ -1745,6 +1745,62 @@
     inset 0 0 0 1px rgba(255, 255, 255, 0.8);
   transform: translateY(-2px);
 }
+/* ============================================ */
+/* ==========   قسم مواضيع التصويت   ========== */
+/* ============================================ */
+.voting-section {
+  max-width: 900px;
+  margin: 2.5rem auto;
+  padding: 1.5rem 1.8rem;
+  border-radius: 20px;
+  background: linear-gradient(to bottom, rgba(122, 67, 204, 0.05) 0%, rgba(20, 184, 166, 0.03) 100%);
+  box-shadow: 0 10px 25px rgba(122, 67, 204, 0.1);
+  border: 1px solid rgba(122, 67, 204, 0.2);
+  text-align: center;
+}
+
+.voting-header {
+  display: flex;
+  justify-content: center; /* تم التعديل ليناسب العنوان فقط */
+  align-items: center;
+  margin-bottom: 0.8rem;
+}
+
+.voting-title {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--primary-600);
+  margin: 0;
+}
+
+.voting-title i {
+  font-size: 1.5rem;
+  color: var(--accent-teal);
+}
+
+.voting-description {
+  font-size: 1.1rem;
+  color: var(--text-dark);
+  font-weight: 600;
+  margin: 0 auto 1.5rem;
+  padding: 8px 16px;
+  background: var(--primary-100);
+  border-radius: 12px;
+  border: 1px solid var(--primary-300);
+  display: inline-block;
+}
+
+/* هذا الكود مهم لتنسيق صندوق Disqus نفسه */
+#disqus_thread {
+  background-color: #FFFFFF;
+  padding: 1rem;
+  border-radius: 15px;
+  border: 1px solid rgba(122, 67, 204, 0.15);
+}
+
   </style>
 </head>
 <body>
@@ -1860,6 +1916,43 @@
   
   <!-- تم إزالة النقاط الثلاثة تماماً -->
 </section>
+<!-- ============================================ -->
+<!-- ==========   قسم مواضيع التصويت   ========== -->
+<!-- ============================================ -->
+<section class="voting-section fade-in">
+  <div class="voting-header">
+    <h3 class="voting-title">
+      <i class="fas fa-poll-h"></i>
+      <span>مواضيع التصويت</span>
+    </h3>
+  </div>
+  <p class="voting-description">شاركنا رأيك: اختر أفضل مشروع برأيك من المشاريع التالية</p>
+  
+
+<div id="disqus_thread"></div>
+<script>
+    /**
+    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+    /*
+    var disqus_config = function () {
+    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+    };
+    */
+    (function() { // DON'T EDIT BELOW THIS LINE
+    var d = document, s = d.createElement('script');
+    s.src = 'https://m-alghamdi-site.disqus.com/embed.js';
+    s.setAttribute('data-timestamp', +new Date());
+    (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+  
+</section>
+
 
 <!-- ========================================= -->
 <!--            جميع القوالب التعليمية         -->
@@ -2860,3 +2953,4 @@
 </script>
 </body>
 </html>
+
