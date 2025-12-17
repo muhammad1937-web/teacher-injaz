@@ -390,15 +390,14 @@
     /* ============================================ */
     /* ==========  قسم التميز المحسّن   ========== */
     /* ============================================ */
-    /* تم تعديل المسافات لتكون أقل وتقليل الحجم العام */
     .fame-bar-section {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.8rem; /* تقليل المسافة بين العناصر */
+      gap: 0.8rem;
       max-width: 900px;
-      margin: 1.5rem auto 2.5rem auto; /* تقليل المسافة العلوية والسفلية */
-      padding: 1.5rem 1.8rem 1.3rem; /* تقليل الحشوة الداخلية */
+      margin: 1.5rem auto 2.5rem auto;
+      padding: 1.5rem 1.8rem 1.3rem;
       border-radius: 20px;
       position: relative;
       overflow: hidden;
@@ -423,7 +422,7 @@
       font-size: 1.1rem;
       font-weight: 700;
       color: var(--primary-600);
-      margin-bottom: 0.1rem; /* تقليل المسافة السفلية */
+      margin-bottom: 0.1rem;
     }
 
     .fame-bar-title i {
@@ -432,10 +431,32 @@
     }
 
     .honors-subtitle {
-      margin: 0 0 0.8rem 0; /* تقليل المسافة السفلية */
+      margin: 0 0 0.8rem 0;
       font-size: 0.9rem;
       color: var(--text-light);
       text-align: center;
+      padding: 10px 25px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 18px;
+      border: 1px solid rgba(122, 67, 204, 0.1);
+      display: inline-block;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 
+        0 3px 12px rgba(122, 67, 204, 0.08),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .honors-subtitle:hover {
+      background: rgba(255, 255, 255, 0.35);
+      border-color: rgba(122, 67, 204, 0.2);
+      box-shadow: 
+        0 5px 18px rgba(122, 67, 204, 0.12),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+      transform: translateY(-2px);
     }
 
     .students-container {
@@ -444,7 +465,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-top: 0.5rem; /* إضافة مسافة علوية صغيرة */
+      margin-top: 0.5rem;
     }
 
     /* تعديل القائمة لعرض جميع الصور بجانب بعضها بشكل ثابت */
@@ -452,11 +473,11 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 2.5rem; /* مسافة متوازنة بين الصور */
+      gap: 2.5rem;
       width: 100%;
-      flex-wrap: nowrap; /* منع التفاف العناصر */
+      flex-wrap: nowrap;
       padding: 0.5rem 0;
-      overflow: visible; /* إظهار جميع العناصر */
+      overflow: visible;
     }
 
     /* إخفاء أزرار التنقل تماماً */
@@ -470,17 +491,17 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.4rem; /* تقليل المسافة بين الصورة والأيقونة */
+      gap: 0.4rem;
     }
 
     /* تعديل حجم الصور لتناسب العرض الثابت */
     .student-image {
       position: relative;
-      width: 95px; /* تقليل حجم الصورة قليلاً */
-      height: 95px; /* تقليل حجم الصورة قليلاً */
+      width: 95px;
+      height: 95px;
       border-radius: 50%;
       overflow: hidden;
-      border: 3px solid white; /* تقليل سمك الحدود */
+      border: 3px solid white;
       box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
@@ -503,22 +524,22 @@
     }
 
     .info-toggle-btn {
-      width: 30px; /* تقليل الحجم قليلاً */
-      height: 30px; /* تقليل الحسم قليلاً */
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       background: var(--accent-teal);
       color: white;
-      border: 2px solid white; /* تقليل سمك الحدود */
+      border: 2px solid white;
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 0.85rem; /* تصغير الخط قليلاً */
+      font-size: 0.85rem;
       font-weight: bold;
       transition: all 0.3s ease;
       box-shadow: 0 3px 10px rgba(20, 184, 166, 0.4);
       z-index: 10;
-      margin-top: 0.2rem; /* تقليل المسافة العلوية */
+      margin-top: 0.2rem;
     }
 
     .info-toggle-btn:hover {
@@ -543,14 +564,14 @@
     /* النص المنبثق - تم تعديل المسافة لترتبط بشكل أفضل بالصورة */
     .student-info {
       position: absolute;
-      top: -140px; /* تقليل المسافة من الأعلى */
+      top: -140px;
       left: 50%;
       transform: translateX(-50%) translateY(10px);
       background: #4a2c7a;
       color: white;
-      padding: 0.9rem 1.1rem; /* تقليل الحشوة الداخلية */
+      padding: 0.9rem 1.1rem;
       border-radius: 12px;
-      width: 240px; /* تقليل العرض قليلاً */
+      width: 240px;
       text-align: center;
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
       z-index: 1005;
@@ -580,15 +601,15 @@
     }
 
     .student-info h4 {
-      margin: 0 0 0.4rem 0; /* تقليل المسافة السفلية */
-      font-size: 1rem; /* تصغير الخط قليلاً */
+      margin: 0 0 0.4rem 0;
+      font-size: 1rem;
       font-weight: 600;
       color: white;
     }
 
     .student-info p {
       margin: 0;
-      font-size: 0.85rem; /* تصغير الخط قليلاً */
+      font-size: 0.85rem;
       opacity: 0.9;
       line-height: 1.4;
       color: rgba(255, 255, 255, 0.95);
@@ -599,14 +620,14 @@
     /* ============================================ */
     @media (max-width: 768px) {
       .students-list {
-        flex-wrap: wrap; /* السماح بالتفاف العناصر على الجوال */
+        flex-wrap: wrap;
         justify-content: center;
-        gap: 1.8rem; /* تقليل المسافة بين الصور */
+        gap: 1.8rem;
         padding: 0.8rem 0;
       }
       
       .student-item {
-        flex: 0 0 auto; /* عرض ثابت دون تغيير */
+        flex: 0 0 auto;
         min-height: auto;
         padding: 0;
         margin: 0;
@@ -625,7 +646,7 @@
       
       .student-info {
         width: 260px;
-        position: fixed; /* لجعله في منتصف الشاشة على الجوال */
+        position: fixed;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%) scale(0.9);
@@ -638,7 +659,7 @@
       }
       
       .student-info::after {
-        display: none; /* إخفاء السهم على الجوال */
+        display: none;
       }
       
       /* إزالة جميع تأثيرات السحب والتمرير */
@@ -657,6 +678,8 @@
       
       .honors-subtitle {
         margin-bottom: 0.6rem;
+        padding: 8px 20px;
+        font-size: 0.85rem;
       }
     }
 
@@ -1403,6 +1426,184 @@
       transform: translateY(0);
     }
 
+    /* ============================================ */
+    /* ==========   قسم مواضيع التصويت   ========== */
+    /* ============================================ */
+    .voting-section {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      padding: 1.5rem 1.8rem;
+      border-radius: 20px;
+      background: linear-gradient(to bottom, rgba(122, 67, 204, 0.05) 0%, rgba(20, 184, 166, 0.03) 100%);
+      box-shadow: 0 10px 25px rgba(122, 67, 204, 0.1);
+      border: 1px solid rgba(122, 67, 204, 0.2);
+      text-align: center;
+    }
+
+    .voting-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .voting-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-600);
+      margin: 0;
+    }
+
+    .voting-title i {
+      font-size: 1.5rem;
+      color: var(--accent-teal);
+    }
+
+    .voting-description {
+      margin: 0 0 1.5rem 0;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-align: center;
+      padding: 10px 25px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 18px;
+      border: 1px solid rgba(122, 67, 204, 0.1);
+      display: inline-block;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 
+        0 3px 12px rgba(122, 67, 204, 0.08),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .voting-description:hover {
+      background: rgba(255, 255, 255, 0.35);
+      border-color: rgba(122, 67, 204, 0.2);
+      box-shadow: 
+        0 5px 18px rgba(122, 67, 204, 0.12),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+      transform: translateY(-2px);
+    }
+
+    /* ============================================ */
+    /* =======  أزرار مشاريع التصويت الجديدة ====== */
+    /* ============================================ */
+    .projects-container {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .project-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.8rem 1.2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      white-space: nowrap;
+      min-width: 140px;
+      background: rgba(255, 255, 255, 0.7);
+      color: var(--primary-600);
+      border: 1.5px solid rgba(122, 67, 204, 0.2);
+      box-shadow: 0 4px 12px rgba(122, 67, 204, 0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .project-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(122, 67, 204, 0.05), rgba(20, 184, 166, 0.05));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-btn i {
+      font-size: 1em;
+      color: var(--accent-teal);
+      transition: all 0.3s ease;
+    }
+
+    .project-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(122, 67, 204, 0.2);
+      border-color: var(--primary-400);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--primary-500);
+    }
+
+    .project-btn:hover::before {
+      opacity: 1;
+    }
+
+    .project-btn:hover i {
+      transform: translateX(3px);
+      color: var(--primary-500);
+    }
+
+    .project-btn:active {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(122, 67, 204, 0.15);
+    }
+
+    /* زر المشروع الأول - لون متميز */
+    .project-btn:nth-child(1) {
+      border-color: rgba(122, 67, 204, 0.3);
+    }
+
+    .project-btn:nth-child(1):hover {
+      border-color: var(--primary-500);
+      background: linear-gradient(135deg, rgba(122, 67, 204, 0.1), rgba(255, 255, 255, 0.9));
+    }
+
+    /* زر المشروع الثاني - لون متميز */
+    .project-btn:nth-child(2) {
+      border-color: rgba(20, 184, 166, 0.3);
+    }
+
+    .project-btn:nth-child(2):hover {
+      border-color: var(--accent-teal);
+      background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(255, 255, 255, 0.9));
+    }
+
+    /* زر المشروع الثالث - لون متميز */
+    .project-btn:nth-child(3) {
+      border-color: rgba(255, 195, 0, 0.3);
+    }
+
+    .project-btn:nth-child(3):hover {
+      border-color: var(--gold-color);
+      background: linear-gradient(135deg, rgba(255, 195, 0, 0.1), rgba(255, 255, 255, 0.9));
+    }
+
+    /* هذا الكود مهم لتنسيق صندوق Disqus نفسه */
+    #disqus_thread {
+      background-color: #FFFFFF;
+      padding: 1rem;
+      border-radius: 15px;
+      border: 1px solid rgba(122, 67, 204, 0.15);
+    }
+
     /* ========================================= */
     /*        تحسينات للاستجابة                 */
     /* ========================================= */
@@ -1530,6 +1731,29 @@
         font-size: 1.3rem;
       }
       
+      /* تحسين قسم التصويت على الجوال */
+      .voting-section {
+        padding: 1.3rem 1rem 1.2rem;
+      }
+      
+      .voting-description {
+        padding: 8px 20px;
+        font-size: 0.85rem;
+      }
+      
+      /* تحسين أزرار المشاريع على الجوال */
+      .projects-container {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+      }
+      
+      .project-btn {
+        width: 90%;
+        max-width: 280px;
+        padding: 0.9rem 1.5rem;
+      }
+      
       /* زر العودة للأعلى على الجوال */
       .back-to-top {
         bottom: 20px;
@@ -1595,7 +1819,7 @@
       
       /* تعديل قسم التميز للشاشات الصغيرة جداً */
       .students-list {
-        gap: 1.5rem; /* تقليل المسافة أكثر */
+        gap: 1.5rem;
       }
       
       .student-image {
@@ -1619,6 +1843,20 @@
       .honors-subtitle {
         margin-bottom: 0.5rem;
         font-size: 0.85rem;
+        padding: 8px 15px;
+      }
+      
+      /* تحسين قسم التصويت للشاشات الصغيرة */
+      .voting-description {
+        padding: 8px 15px;
+        font-size: 0.85rem;
+      }
+      
+      /* تحسين أزرار المشاريع للشاشات الصغيرة */
+      .project-btn {
+        width: 95%;
+        padding: 0.8rem 1.2rem;
+        font-size: 0.9rem;
       }
       
       /* زر العودة للأعلى */
@@ -1665,142 +1903,12 @@
         width: 320px;
       }
     }
+    
+    /* تعديل لظهور النص المنبثق بشكل صحيح */
     .student-item.active .student-info {
-    transform: translateX(-50%) translateY(-130px) !important;
-}
-/* تأثير زجاجي خفي */
-.honors-subtitle {
-  padding: 9px 24px;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 16px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  display: inline-block;
-  margin: 0 auto 15px;
-  font-weight: 500;
-  color: var(--text-dark); /* لون النص الداكن */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 
-    0 2px 10px rgba(122, 67, 204, 0.05),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
-}
-
-.honors-subtitle:hover {
-  background: rgba(255, 255, 255, 0.35);
-  box-shadow: 
-    0 3px 15px rgba(122, 67, 204, 0.08),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.7);
-}
-    /* بديل أبسط */
-.honors-subtitle {
-  padding: 8px 16px;
-  background: var(--primary-100);
-  border-radius: 12px;
-  border: 1px solid var(--primary-300);
-  box-shadow: 0 3px 10px rgba(122, 67, 204, 0.08);
-  display: inline-block;
-  margin-bottom: 15px;
-}
-/* الخيار المتكامل */
-.fame-bar-title {
-  display: flex;
-  align-items: baseline; /* محاذاة حسب خط الأساس */
-  gap: 0.8rem;
-}
-
-.fame-bar-title i {
-  font-size: 1.6rem;
-}
-
-.fame-bar-title span {
-  font-size: 1.2rem;
-  position: relative;
-  top: -3px; /* اضبط هذه القيمة: 1px, 2px, 3px */
-}
-    /* تأثير زجاجي خفي */
-.honors-subtitle {
-  padding: 10px 25px;
-  background: rgba(255, 255, 255, 0.25);
-  border-radius: 18px;
-  border: 1px solid rgba(122, 67, 204, 0.1); /* ← تغيير طفيف هنا */
-  display: inline-block;
-  margin: 0 auto 15px;
-  font-weight: 500;
-  color: var(--text-dark);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 
-    0 3px 12px rgba(122, 67, 204, 0.08),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.6);
-  text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
-  transition: all 0.3s ease;
-}
-
-.honors-subtitle:hover {
-  background: rgba(255, 255, 255, 0.35);
-  border-color: rgba(122, 67, 204, 0.2); /* ← تأثير عند التمرير */
-  box-shadow: 
-    0 5px 18px rgba(122, 67, 204, 0.12),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.8);
-  transform: translateY(-2px);
-}
-/* ============================================ */
-/* ==========   قسم مواضيع التصويت   ========== */
-/* ============================================ */
-.voting-section {
-  max-width: 900px;
-  margin: 2.5rem auto;
-  padding: 1.5rem 1.8rem;
-  border-radius: 20px;
-  background: linear-gradient(to bottom, rgba(122, 67, 204, 0.05) 0%, rgba(20, 184, 166, 0.03) 100%);
-  box-shadow: 0 10px 25px rgba(122, 67, 204, 0.1);
-  border: 1px solid rgba(122, 67, 204, 0.2);
-  text-align: center;
-}
-
-.voting-header {
-  display: flex;
-  justify-content: center; /* تم التعديل ليناسب العنوان فقط */
-  align-items: center;
-  margin-bottom: 0.8rem;
-}
-
-.voting-title {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  font-size: 1.2rem;
-  font-weight: 700;
-  color: var(--primary-600);
-  margin: 0;
-}
-
-.voting-title i {
-  font-size: 1.5rem;
-  color: var(--accent-teal);
-}
-
-.voting-description {
-  font-size: 1.1rem;
-  color: var(--text-dark);
-  font-weight: 600;
-  margin: 0 auto 1.5rem;
-  padding: 8px 16px;
-  background: var(--primary-100);
-  border-radius: 12px;
-  border: 1px solid var(--primary-300);
-  display: inline-block;
-}
-
-/* هذا الكود مهم لتنسيق صندوق Disqus نفسه */
-#disqus_thread {
-  background-color: #FFFFFF;
-  padding: 1rem;
-  border-radius: 15px;
-  border: 1px solid rgba(122, 67, 204, 0.15);
-}
-
+      transform: translateX(-50%) translateY(-130px) !important;
+    }
+    
   </style>
 </head>
 <body>
@@ -1916,6 +2024,7 @@
   
   <!-- تم إزالة النقاط الثلاثة تماماً -->
 </section>
+
 <!-- ============================================ -->
 <!-- ==========   قسم مواضيع التصويت   ========== -->
 <!-- ============================================ -->
@@ -1926,30 +2035,50 @@
       <span>مواضيع التصويت</span>
     </h3>
   </div>
-  <p class="voting-description">شاركنا رأيك: اختر أفضل مشروع برأيك من المشاريع التالية</p>
   
+  <p class="voting-description">شارك برأيك واختر المشروع الأفضل</p>
+  
+  <!-- أزرار المشاريع الثلاثة -->
+  <div class="projects-container">
+    <!-- المشروع الأول -->
+    <a href="YOUR_LINK_1_HERE" target="_blank" class="project-btn">
+      <i class="fas fa-file-alt"></i>
+      <span>المشروع الأول</span>
+    </a>
+    
+    <!-- المشروع الثاني -->
+    <a href="YOUR_LINK_2_HERE" target="_blank" class="project-btn">
+      <i class="fas fa-chart-bar"></i>
+      <span>المشروع الثاني</span>
+    </a>
+    
+    <!-- المشروع الثالث -->
+    <a href="YOUR_LINK_3_HERE" target="_blank" class="project-btn">
+      <i class="fas fa-code"></i>
+      <span>المشروع الثالث</span>
+    </a>
+  </div>
 
-<div id="disqus_thread"></div>
-<script>
-    /**
-    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-    /*
-    var disqus_config = function () {
-    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-    };
-    */
-    (function() { // DON'T EDIT BELOW THIS LINE
-    var d = document, s = d.createElement('script');
-    s.src = 'https://m-alghamdi-site.disqus.com/embed.js';
-    s.setAttribute('data-timestamp', +new Date());
-    (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-
-
+  <!-- صندوق Disqus -->
+  <div id="disqus_thread"></div>
+  <script>
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+      /*
+      var disqus_config = function () {
+      this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      */
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://m-alghamdi-site.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   
 </section>
 
@@ -2939,7 +3068,7 @@
     initAIAssistant();
     initCardToggles();
     initInquiryModal();
-    initHonorsSection(); // تم تحديث هذه الدالة
+    initHonorsSection();
     initBackToTop();
     
     checkFadeElements();
@@ -2953,4 +3082,3 @@
 </script>
 </body>
 </html>
-
