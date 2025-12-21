@@ -45,9 +45,10 @@
       --warning-red-rgb: 231, 76, 60;
       
       /* ألوان النصوص */
-      --text-dark: #2C3E50; /* نفس اللون الرئيسي */
-      --text-medium: #34495E; /* أزرق أفتح قليلاً */
-      --text-light: #7F8C8D; /* رمادي أزرق للتوضيح */
+      --text-dark: #2C3E50;
+      --text-medium: #34495E;
+      --text-light: #7F8C8D;
+      --text-subtitle: #5D6D7E; /* لون جديد للجمل تحت العناوين */
       
       /* ظلال وألوان تكميلية */
       --shadow-color: rgba(44, 62, 80, 0.1);
@@ -161,10 +162,13 @@
     }
 
     /* ========================================= */
-    /*      الهيدر الجديد - بتصميم عصري         */
+    /*      الهيدر الجديد - مع خلفية صورة      */
     /* ========================================= */
     .tech-header {
-      background: var(--gradient-primary);
+      background-image: url('images/no.png'); /* يمكنك تغيير هذا المسار */
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
       color: white;
       text-align: center;
       padding: 2.2rem 1rem 1.8rem;
@@ -181,6 +185,7 @@
       justify-content: center;
     }
 
+    /* طبقة شفافة فوق الصورة لجعل النصوص واضحة */
     .tech-header::before {
       content: '';
       position: absolute;
@@ -188,11 +193,8 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(135deg, 
-        rgba(255, 255, 255, 0.1) 0%,
-        rgba(255, 255, 255, 0.05) 50%,
-        transparent 100%);
-      z-index: -1;
+      background: rgba(0, 0, 0, 0.4); /* طبقة داكنة شفافة */
+      z-index: 1;
     }
 
     /* تصميم الهيدر - مركز كامل ومضغوط */
@@ -217,7 +219,7 @@
     .header-logo img {
       height: 85px;
       width: auto;
-      filter: brightness(0) invert(1);
+      filter: brightness(0) invert(1); /* يجعل الشعار أبيض */
       transition: transform 0.3s ease;
     }
 
@@ -229,13 +231,15 @@
     .header-text-content {
       text-align: center;
       width: 100%;
+      position: relative;
+      z-index: 2;
     }
 
     .tech-header h1 {
       font-size: 2.2rem;
       font-weight: 800;
       margin: 0 0 0.6rem 0;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
       color: white;
       letter-spacing: -0.5px;
     }
@@ -245,7 +249,7 @@
       font-weight: 700;
       margin: 0 0 0.4rem 0;
       color: rgba(255, 255, 255, 0.95);
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
     }
 
     .tech-header p {
@@ -432,14 +436,27 @@
       border-radius: 20px;
       position: relative;
       overflow: hidden;
-      background: linear-gradient(
-        to bottom,
-        rgba(var(--primary-dark-rgb), 0.03) 0%,
-        rgba(var(--accent-teal-rgb), 0.02) 100%
-      );
+      background: var(--gradient-card);
       box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.08);
       border: 1px solid var(--border-color);
       transition: var(--transition);
+    }
+
+    /* الخط الأخضر في الأعلى - نفس شكل القوالب التعليمية */
+    .fame-bar-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 5px;
+      background: var(--gradient-accent);
+      border-radius: 2px 2px 0 0;
+      transition: height 0.3s ease;
+    }
+
+    .fame-bar-section:hover::before {
+      height: 6px;
     }
 
     .fame-bar-section:hover {
@@ -451,7 +468,7 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      font-size: 1.1rem;
+        font-size: 1.2rem;
       font-weight: 700;
       color: var(--primary-dark);
       margin-bottom: 0.1rem;
@@ -463,33 +480,28 @@
       text-shadow: 0 2px 4px rgba(var(--gold-excellence-rgb), 0.3);
     }
 
+    /* الجملة تحت العنوان - خفيفة بدون إطار */
     .honors-subtitle {
       margin: 0 0 0.8rem 0;
       font-size: 0.95rem;
-      color: var(--text-medium);
-      font-weight: 600;
+      color: var(--text-subtitle);
+      font-weight: 400;
       text-align: center;
-      padding: 10px 25px;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      display: inline-block;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 
-        0 3px 12px rgba(var(--primary-dark-rgb), 0.06),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.6);
-      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
-      transition: all 0.3s ease;
+      line-height: 1.5;
+      padding: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      text-shadow: none;
+      transition: color 0.3s ease;
     }
 
     .honors-subtitle:hover {
-      background: rgba(255, 255, 255, 0.4);
-      border-color: rgba(var(--primary-dark-rgb), 0.2);
-      box-shadow: 
-        0 5px 18px rgba(var(--primary-dark-rgb), 0.1),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
-      transform: translateY(-2px);
+      color: var(--tech-blue);
+      transform: none;
+      background: transparent;
+      border: none;
+      box-shadow: none;
     }
 
     .students-container {
@@ -511,11 +523,6 @@
       flex-wrap: nowrap;
       padding: 0.5rem 0;
       overflow: visible;
-    }
-
-    /* إخفاء أزرار التنقل تماماً */
-    .slider-nav {
-      display: none !important;
     }
 
     .student-item {
@@ -700,13 +707,6 @@
         margin-bottom: 2.5rem;
         padding: 1.3rem 1rem 1.2rem;
         gap: 0.6rem;
-      }
-      
-      .honors-subtitle {
-        margin-bottom: 0.6rem;
-        padding: 8px 20px;
-        font-size: 0.85rem;
-        border-radius: 10px;
       }
     }
 
@@ -987,10 +987,7 @@
       right: 0;
       left: 0;
       height: 5px;
-      background: linear-gradient(90deg, 
-        #2C3E50 0%, 
-        #17A589 50%, 
-        #1ABC9C 100%);
+      background: var(--gradient-accent);
       border-radius: 2px 2px 0 0;
     }
 
@@ -1460,12 +1457,34 @@
       margin: 2.5rem auto;
       padding: 1.5rem 1.8rem;
       border-radius: 20px;
-      background: linear-gradient(to bottom, 
-        rgba(var(--primary-dark-rgb), 0.03) 0%, 
-        rgba(var(--accent-teal-rgb), 0.02) 100%);
+      background: var(--gradient-card);
       box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.08);
       border: 1px solid var(--border-color);
       text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* الخط الأخضر في الأعلى - نفس شكل القوالب التعليمية */
+    .voting-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 5px;
+      background: var(--gradient-accent);
+      border-radius: 2px 2px 0 0;
+      transition: height 0.3s ease;
+    }
+
+    .voting-section:hover::before {
+      height: 6px;
+    }
+
+    .voting-section:hover {
+      box-shadow: 0 15px 35px rgba(var(--primary-dark-rgb), 0.12);
+      transform: translateY(-2px);
     }
 
     .voting-header {
@@ -1490,33 +1509,28 @@
       color: var(--accent-teal);
     }
 
+    /* الجملة تحت العنوان - خفيفة بدون إطار */
     .voting-description {
       margin: 0 0 1.5rem 0;
       font-size: 0.95rem;
-      color: var(--text-medium);
-      font-weight: 600;
+      color: var(--text-subtitle);
+      font-weight: 400;
       text-align: center;
-      padding: 10px 25px;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 12px;
-      border: 1px solid var(--border-color);
-      display: inline-block;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 
-        0 3px 12px rgba(var(--primary-dark-rgb), 0.06),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.6);
-      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
-      transition: all 0.3s ease;
+      line-height: 1.5;
+      padding: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      text-shadow: none;
+      transition: color 0.3s ease;
     }
 
     .voting-description:hover {
-      background: rgba(255, 255, 255, 0.4);
-      border-color: rgba(var(--primary-dark-rgb), 0.2);
-      box-shadow: 
-        0 5px 18px rgba(var(--primary-dark-rgb), 0.1),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
-      transform: translateY(-2px);
+      color: var(--tech-blue);
+      transform: none;
+      background: transparent;
+      border: none;
+      box-shadow: none;
     }
 
     /* ============================================ */
@@ -1677,12 +1691,34 @@
       margin: 2.5rem auto;
       padding: 1.5rem 1.8rem;
       border-radius: 20px;
-      background: linear-gradient(to bottom, 
-        rgba(88, 101, 242, 0.05) 0%, 
-        rgba(var(--accent-teal-rgb), 0.02) 100%);
-      border: 1px solid rgba(88, 101, 242, 0.2);
+      background: var(--gradient-card);
+      border: 1px solid var(--border-color);
       text-align: center;
-      box-shadow: 0 10px 25px rgba(88, 101, 242, 0.08);
+      box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* الخط الأخضر في الأعلى - نفس شكل القوالب التعليمية */
+    .discord-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 5px;
+      background: var(--gradient-accent);
+      border-radius: 2px 2px 0 0;
+      transition: height 0.3s ease;
+    }
+
+    .discord-section:hover::before {
+      height: 6px;
+    }
+
+    .discord-section:hover {
+      box-shadow: 0 15px 35px rgba(var(--primary-dark-rgb), 0.12);
+      transform: translateY(-2px);
     }
 
     .discord-header {
@@ -1707,33 +1743,28 @@
       color: #5865F2;
     }
 
+    /* الجملة تحت العنوان - خفيفة بدون إطار */
     .discord-description {
       margin: 0 0 1.5rem 0;
       font-size: 0.95rem;
-      color: var(--text-medium);
-      font-weight: 600;
+      color: var(--text-subtitle);
+      font-weight: 400;
       text-align: center;
-      padding: 10px 25px;
-      background: rgba(255, 255, 255, 0.3);
-      border-radius: 12px;
-      border: 1px solid rgba(88, 101, 242, 0.1);
-      display: inline-block;
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: 
-        0 3px 12px rgba(88, 101, 242, 0.06),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.6);
-      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
-      transition: all 0.3s ease;
+      line-height: 1.5;
+      padding: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      text-shadow: none;
+      transition: color 0.3s ease;
     }
 
     .discord-description:hover {
-      background: rgba(255, 255, 255, 0.4);
-      border-color: rgba(88, 101, 242, 0.2);
-      box-shadow: 
-        0 5px 18px rgba(88, 101, 242, 0.1),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
-      transform: translateY(-2px);
+      color: var(--tech-blue);
+      transform: none;
+      background: transparent;
+      border: none;
+      box-shadow: none;
     }
 
     /* زر الديسكورد الخاص */
@@ -1830,6 +1861,7 @@
       .tech-header {
         padding: 1.8rem 1rem 1.5rem;
         min-height: 190px;
+        background-position: center;
       }
       
       .header-logo img {
@@ -1948,21 +1980,9 @@
         padding: 1.3rem 1rem 1.2rem;
       }
       
-      .voting-description {
-        padding: 8px 20px;
-        font-size: 0.85rem;
-        border-radius: 10px;
-      }
-      
       /* تحسين قسم الديسكورد على الجوال */
       .discord-section {
         padding: 1.3rem 1rem 1.2rem;
-      }
-      
-      .discord-description {
-        padding: 8px 20px;
-        font-size: 0.85rem;
-        border-radius: 10px;
       }
       
       .discord-btn {
@@ -1971,12 +1991,12 @@
         font-size: 0.95rem;
       }
       
-      /* إصلاح أزرار المشاريع */
+      /* إصلاح أزرار المشاريع مع زيادة التباعد على الجوال */
       .projects-container {
         flex-direction: row !important;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 1.2rem;
+        gap: 1.5rem; /* زيادة التباعد على الجوال */
       }
       
       .project-btn {
@@ -1996,7 +2016,7 @@
           flex-direction: row !important;
           flex-wrap: wrap;
           justify-content: center;
-          gap: 1rem;
+          gap: 1.2rem; /* تباعد مناسب للشاشات الصغيرة */
         }
         
         .project-btn {
@@ -2101,33 +2121,6 @@
         gap: 0.5rem;
       }
       
-      .honors-subtitle {
-        margin-bottom: 0.5rem;
-        font-size: 0.85rem;
-        padding: 8px 15px;
-        border-radius: 8px;
-      }
-      
-      /* تحسين قسم التصويت للشاشات الصغيرة */
-      .voting-description {
-        padding: 8px 15px;
-        font-size: 0.85rem;
-        border-radius: 8px;
-      }
-      
-      /* تحسين قسم الديسكورد للشاشات الصغيرة */
-      .discord-description {
-        padding: 8px 15px;
-        font-size: 0.85rem;
-        border-radius: 8px;
-      }
-      
-      .discord-btn {
-        min-width: 180px;
-        padding: 0.7rem 1.2rem;
-        font-size: 0.9rem;
-      }
-      
       /* زر العودة للأعلى */
       .back-to-top {
         bottom: 15px;
@@ -2186,7 +2179,7 @@
     @media (min-width: 1025px) {
       /* تحسين أزرار المشاريع للشاشات الكبيرة */
       .projects-container {
-        gap: 2rem;
+        gap: 2rem; /* التباعد المطلوب للشاشات الكبيرة */
       }
       
       .project-btn {
@@ -2213,7 +2206,7 @@
   </div>
 </div>
 
-<!-- === الهيدر الجديد === -->
+<!-- === الهيدر الجديد مع خلفية صورة === -->
 <header class="tech-header fade-in">
   <div class="header-content">
     <!-- الشعار في المنتصف -->
@@ -2322,7 +2315,7 @@
     </h3>
   </div>
   
-  <p class="voting-description"> شاركنا رأيك: وأختر المشروع الذي ترى أنه الأفضل </p>
+  <p class="voting-description">شاركنا رأيك: وأختر المشروع الذي ترى أنه الأفضل</p>
   
   <!-- أزرار المشاريع الثلاثة -->
   <div class="projects-container">
@@ -2379,9 +2372,7 @@
     </h3>
   </div>
   
-  <p class="discord-description">
-    انضم إلى مجتمعنا على ديسكورد للنقاش الفوري وطرح الأسئلة.
-  </p>
+  <p class="discord-description">انضم إلى مجتمعنا على ديسكورد للنقاش الفوري وطرح الأسئلة.</p>
   
   <div class="projects-container">
     <a href="HERE_IS_YOUR_INVITE_LINK" target="_blank" class="discord-btn">
