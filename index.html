@@ -9,37 +9,58 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     /* ========================================= */
-    /*           متغيرات الألوان                 */
+    /*     متغيرات الألوان الجديدة - الهوية المدمجة   */
     /* ========================================= */
     :root {
-      --primary-100: #f3e8ff;
-      --primary-200: #d5b8ff;
-      --primary-300: #b58fff;
-      --primary-400: #9a69e6;
-      --primary-500: #7a43cc;
-      --primary-600: #5e3399;
-      --accent-teal: #14b8a6;
-      --header-color: #5D3FD3;
-      --primary-soft-2: #E6E6FA;
-      --primary-soft-1: #00B4D8;
-      --notification-color: #E6E6FA;
-      --text-dark: #2c2c3a;
-      --text-light: #5a527f;
-      --light-bg: #faf7ff;
-      --green-100: #e8f5e9;
-      --green-200: #c8e6c9;
-      --green-300: #a5d6a7;
-      --green-400: #81c784;
-      --green-text: #2e7d32;
+      /* اللون الرئيسي: أزرق الدنيم الداكن - للثقة والاستقرار */
+      --primary-dark: #2C3E50;
+      --primary-dark-rgb: 44, 62, 80;
+      
+      /* اللون التقني: أزرق عميق - للعمق التقني */
+      --tech-blue: #1A5276;
+      --tech-blue-rgb: 26, 82, 118;
+      
+      /* اللون الثانوي: تركواز مشرق - للحيوية والتفاعل */
+      --accent-teal: #1ABC9C;
+      --accent-teal-rgb: 26, 188, 156;
+      
+      /* اللون الذكي: تركواز أعمق - للذكاء الاصطناعي */
+      --ai-teal: #17A589;
+      --ai-teal-rgb: 23, 165, 137;
+      
+      /* اللون الخفيف: أبيض ثلجي - للخلفيات المريحة */
+      --light-bg: #F8F9FA;
+      --light-bg-rgb: 248, 249, 250;
+      
+      /* اللون النقي: أبيض نقي - للبطاقات */
+      --pure-white: #FDFEFE;
+      --pure-white-rgb: 253, 254, 254;
+      
+      /* لون التميز: ذهبي - للصدارة فقط */
+      --gold-excellence: #D4AC0D;
+      --gold-excellence-rgb: 212, 172, 13;
+      
+      /* لون التحذير: أحمر خفيف - للتحذيرات المهمة */
+      --warning-red: #E74C3C;
+      --warning-red-rgb: 231, 76, 60;
+      
+      /* ألوان النصوص */
+      --text-dark: #2C3E50; /* نفس اللون الرئيسي */
+      --text-medium: #34495E; /* أزرق أفتح قليلاً */
+      --text-light: #7F8C8D; /* رمادي أزرق للتوضيح */
+      
+      /* ظلال وألوان تكميلية */
+      --shadow-color: rgba(44, 62, 80, 0.1);
+      --border-color: rgba(44, 62, 80, 0.15);
+      --hover-color: rgba(26, 188, 156, 0.1);
+      
+      /* التدرجات */
+      --gradient-primary: linear-gradient(135deg, #2C3E50 0%, #1A5276 100%);
+      --gradient-accent: linear-gradient(135deg, #1ABC9C 0%, #17A589 100%);
+      --gradient-card: linear-gradient(to bottom, #FDFEFE, #F8F9FA);
+      
+      /* انتقالات */
       --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-      --card-bg: linear-gradient(to bottom, #ffffff, #faf7ff);
-      --card-hover-bg: linear-gradient(to right, #ece2ff, #e6d9ff);
-      --body-bg: #faf7ff;
-      --body-bg-image: radial-gradient(circle at 90% 10%, rgba(122, 67, 204, 0.03) 0%, transparent 20%),
-        radial-gradient(circle at 10% 90%, rgba(122, 67, 204, 0.03) 0%, transparent 20%);
-      --gold-color: #FFC300;
-      --back-to-top-color: rgba(122, 67, 204, 0.85);
-      --text-medium: #333;
     }
 
     /* ========================================= */
@@ -58,30 +79,33 @@
 
     body {
       font-family: 'Tajawal', sans-serif;
-      background-color: var(--body-bg);
+      background-color: var(--light-bg);
       color: var(--text-dark);
       line-height: 1.6;
       font-weight: 400;
       min-height: 100vh;
       padding-bottom: 3rem;
-      background-image: var(--body-bg-image);
+      background-image: 
+        radial-gradient(circle at 90% 10%, rgba(44, 62, 80, 0.03) 0%, transparent 20%),
+        radial-gradient(circle at 10% 90%, rgba(26, 188, 156, 0.03) 0%, transparent 20%);
       transition: background-color 0.5s ease, color 0.5s ease;
       overflow-x: hidden;
     }
 
     /* ========================================= */
-    /*        شريط الإشعارات (مع خطوط)          */
+    /*        شريط الإشعارات                     */
     /* ========================================= */
     .notification-bar {
-      background: linear-gradient(90deg, #ede9f2, #f7f5fa);
+      background: linear-gradient(90deg, 
+        rgba(var(--primary-dark-rgb), 0.05) 0%, 
+        rgba(var(--accent-teal-rgb), 0.03) 100%);
       color: var(--text-dark);
       padding: 8px 0;
       overflow: hidden;
       position: relative;
       width: 100%;
-      box-shadow: 0 2px 10px rgba(122, 67, 204, 0.2);
-      border-top: 1px solid rgba(106, 90, 205, 0.2);
-      border-bottom: 1px solid rgba(106, 90, 205, 0.1);
+      box-shadow: 0 2px 10px var(--shadow-color);
+      border-bottom: 1px solid var(--border-color);
       font-size: 0.9rem;
     }
 
@@ -98,7 +122,7 @@
     .notification-container i {
       margin-left: 8px;
       margin-right: 6px;
-      color: var(--header-color);
+      color: var(--accent-teal);
       animation: ring 4s 0.7s ease-in-out infinite;
       transform-origin: 50% 4px;
       font-size: 0.9rem;
@@ -137,19 +161,17 @@
     }
 
     /* ========================================= */
-    /*      الهيدر الجديد - تصميم مركز ومضغوط  */
+    /*      الهيدر الجديد - بتصميم عصري         */
     /* ========================================= */
     .tech-header {
-      background-image: url('images/header-bg.jpg');
-      background-size: cover;
-      background-position: center center;
+      background: var(--gradient-primary);
       color: white;
       text-align: center;
       padding: 2.2rem 1rem 1.8rem;
       position: relative;
       border-bottom-left-radius: 25px;
       border-bottom-right-radius: 25px;
-      box-shadow: 0 10px 30px rgba(93, 63, 211, 0.15);
+      box-shadow: 0 10px 30px rgba(var(--primary-dark-rgb), 0.2);
       margin: 0;
       overflow: hidden;
       z-index: 1;
@@ -166,7 +188,10 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(0, 0, 0, 0.3);
+      background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0.05) 50%,
+        transparent 100%);
       z-index: -1;
     }
 
@@ -200,8 +225,6 @@
       transform: scale(1.05);
     }
 
-    /* تم إزالة الخط الفاصل تماماً */
-
     /* تحسينات النصوص - مسافات مضغوطة */
     .header-text-content {
       text-align: center;
@@ -212,7 +235,7 @@
       font-size: 2.2rem;
       font-weight: 800;
       margin: 0 0 0.6rem 0;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
       color: white;
       letter-spacing: -0.5px;
     }
@@ -222,7 +245,7 @@
       font-weight: 700;
       margin: 0 0 0.4rem 0;
       color: rgba(255, 255, 255, 0.95);
-      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
     }
 
     .tech-header p {
@@ -253,28 +276,32 @@
     }
 
     .compact-date.new-position {
-      background: var(--notification-color);
+      background: rgba(var(--primary-dark-rgb), 0.05);
       color: var(--text-dark);
       padding: 8px 18px;
       border-radius: 25px;
       font-size: 0.9rem;
       font-weight: 700;
-      box-shadow: 0 4px 15px rgba(122, 67, 204, 0.2);
-      border: 1px solid rgba(93, 63, 211, 0.1);
+      box-shadow: 0 4px 15px rgba(var(--primary-dark-rgb), 0.1);
+      border: 1px solid var(--border-color);
       position: static;
       transform: none;
       margin: 0 auto;
       display: inline-block;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
 
     .compact-date.new-position:hover {
       transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(122, 67, 204, 0.3);
+      box-shadow: 0 6px 20px rgba(var(--primary-dark-rgb), 0.15);
+      background: rgba(var(--primary-dark-rgb), 0.08);
     }
 
     .compact-date .separator {
       margin: 0 8px;
-      opacity: 0.8;
+      opacity: 0.5;
+      color: var(--accent-teal);
     }
 
     /* ========================================= */
@@ -296,13 +323,13 @@
     .search-input {
       width: 100%;
       padding: 12px 50px 12px 20px;
-      border: 2px solid rgba(122, 67, 204, 0.2);
+      border: 2px solid var(--border-color);
       border-radius: 30px;
       font-size: 1rem;
       font-family: 'Tajawal', sans-serif;
-      background: var(--light-bg);
+      background: var(--pure-white);
       color: var(--text-dark);
-      box-shadow: 0 4px 15px rgba(122, 67, 204, 0.1);
+      box-shadow: 0 4px 15px rgba(var(--primary-dark-rgb), 0.08);
       transition: var(--transition);
       outline: none;
       position: relative;
@@ -310,8 +337,8 @@
     }
 
     .search-input:focus {
-      border-color: var(--primary-500);
-      box-shadow: 0 6px 20px rgba(122, 67, 204, 0.2);
+      border-color: var(--accent-teal);
+      box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.15);
       padding-right: 55px;
     }
 
@@ -320,7 +347,7 @@
       left: 10px;
       top: 50%;
       transform: translateY(-50%);
-      background: #14b8a6; /* تغيير اللون إلى الأخضر */
+      background: var(--accent-teal);
       color: white;
       border: none;
       width: 36px;
@@ -332,11 +359,13 @@
       justify-content: center;
       transition: var(--transition);
       z-index: 1003;
+      box-shadow: 0 3px 10px rgba(var(--accent-teal-rgb), 0.3);
     }
 
     .search-button:hover {
-      background: #0d9488; /* أخضر أغمق عند التمرير */
+      background: var(--ai-teal);
       transform: translateY(-50%) scale(1.05);
+      box-shadow: 0 5px 15px rgba(var(--accent-teal-rgb), 0.4);
     }
 
     .search-results {
@@ -344,20 +373,21 @@
       top: 100%;
       left: 0;
       right: 0;
-      background: var(--light-bg);
+      background: var(--pure-white);
       color: var(--text-dark);
       border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(122, 67, 204, 0.3);
+      box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.15);
       margin-top: 5px;
       z-index: 10000;
       max-height: 300px;
       overflow-y: auto;
       display: none;
+      border: 1px solid var(--border-color);
     }
 
     .search-result-item {
       padding: 12px 20px;
-      border-bottom: 1px solid rgba(122, 67, 204, 0.1);
+      border-bottom: 1px solid rgba(var(--primary-dark-rgb), 0.08);
       cursor: pointer;
       transition: var(--transition);
       display: flex;
@@ -370,11 +400,11 @@
     }
 
     .search-result-item:hover {
-      background: var(--primary-soft-2);
+      background: rgba(var(--accent-teal-rgb), 0.05);
     }
 
     .search-result-item i {
-      color: var(--primary-500);
+      color: var(--accent-teal);
       font-size: 0.9rem;
     }
 
@@ -404,16 +434,17 @@
       overflow: hidden;
       background: linear-gradient(
         to bottom,
-        rgba(122, 67, 204, 0.05) 0%,
-        rgba(20, 184, 166, 0.03) 100%
+        rgba(var(--primary-dark-rgb), 0.03) 0%,
+        rgba(var(--accent-teal-rgb), 0.02) 100%
       );
-      box-shadow: 0 10px 25px rgba(122, 67, 204, 0.1);
-      border: 1px solid rgba(122, 67, 204, 0.2);
+      box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.08);
+      border: 1px solid var(--border-color);
       transition: var(--transition);
     }
 
     .fame-bar-section:hover {
-      box-shadow: 0 15px 35px rgba(122, 67, 204, 0.15);
+      box-shadow: 0 15px 35px rgba(var(--primary-dark-rgb), 0.12);
+      transform: translateY(-2px);
     }
 
     .fame-bar-title {
@@ -422,13 +453,14 @@
       gap: 0.75rem;
       font-size: 1.1rem;
       font-weight: 700;
-      color: var(--primary-600); /* اللون المراد تطبيقه */
+      color: var(--primary-dark);
       margin-bottom: 0.1rem;
     }
 
     .fame-bar-title i {
       font-size: 1.5rem;
-      color: #FFD700;
+      color: var(--gold-excellence);
+      text-shadow: 0 2px 4px rgba(var(--gold-excellence-rgb), 0.3);
     }
 
     .honors-subtitle {
@@ -438,24 +470,24 @@
       font-weight: 600;
       text-align: center;
       padding: 10px 25px;
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.3);
       border-radius: 12px;
-      border: 1px solid rgba(122, 67, 204, 0.1);
+      border: 1px solid var(--border-color);
       display: inline-block;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       box-shadow: 
-        0 3px 12px rgba(122, 67, 204, 0.08),
+        0 3px 12px rgba(var(--primary-dark-rgb), 0.06),
         inset 0 0 0 1px rgba(255, 255, 255, 0.6);
       text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
       transition: all 0.3s ease;
     }
 
     .honors-subtitle:hover {
-      background: rgba(255, 255, 255, 0.35);
-      border-color: rgba(122, 67, 204, 0.2);
+      background: rgba(255, 255, 255, 0.4);
+      border-color: rgba(var(--primary-dark-rgb), 0.2);
       box-shadow: 
-        0 5px 18px rgba(122, 67, 204, 0.12),
+        0 5px 18px rgba(var(--primary-dark-rgb), 0.1),
         inset 0 0 0 1px rgba(255, 255, 255, 0.8);
       transform: translateY(-2px);
     }
@@ -469,7 +501,7 @@
       margin-top: 0.5rem;
     }
 
-    /* تعديل القائمة لعرض جميع الصور بجانب بعضها بشكل ثابت */
+    /* قائمة الطلاب */
     .students-list {
       display: flex;
       align-items: center;
@@ -528,7 +560,7 @@
       width: 30px;
       height: 30px;
       border-radius: 50%;
-      background: var(--accent-teal); /* اللون الأخضر */
+      background: var(--accent-teal);
       color: white;
       border: 2px solid white;
       display: flex;
@@ -538,37 +570,37 @@
       font-size: 0.85rem;
       font-weight: bold;
       transition: all 0.3s ease;
-      box-shadow: 0 3px 10px rgba(20, 184, 166, 0.4);
+      box-shadow: 0 3px 10px rgba(var(--accent-teal-rgb), 0.4);
       z-index: 10;
       margin-top: 0.2rem;
     }
 
     .info-toggle-btn:hover {
-      background: #0d9488;
+      background: var(--ai-teal);
       transform: scale(1.1);
-      box-shadow: 0 5px 15px rgba(20, 184, 166, 0.6);
+      box-shadow: 0 5px 15px rgba(var(--accent-teal-rgb), 0.6);
     }
 
     /* تغيير اللون إلى الذهبي عند النقر */
     .student-item.active .info-toggle-btn {
-      background: var(--gold-color);
+      background: var(--gold-excellence);
       transform: rotate(45deg);
-      box-shadow: 0 3px 10px rgba(255, 195, 0, 0.6);
+      box-shadow: 0 3px 10px rgba(var(--gold-excellence-rgb), 0.6);
     }
 
     .student-item.active .info-toggle-btn:hover {
-      background: #e6b400;
+      background: #c29a0b;
       transform: rotate(45deg) scale(1.1);
-      box-shadow: 0 5px 15px rgba(255, 195, 0, 0.8);
+      box-shadow: 0 5px 15px rgba(var(--gold-excellence-rgb), 0.8);
     }
 
-    /* النص المنبثق - تم تعديل المسافة لترتبط بشكل أفضل بالصورة */
+    /* النص المنبثق */
     .student-info {
       position: absolute;
       top: -140px;
       left: 50%;
       transform: translateX(-50%) translateY(10px);
-      background: #4a2c7a;
+      background: var(--primary-dark);
       color: white;
       padding: 0.9rem 1.1rem;
       border-radius: 12px;
@@ -598,7 +630,7 @@
       transform: translateX(-50%);
       border-width: 10px;
       border-style: solid;
-      border-color: #4a2c7a transparent transparent transparent;
+      border-color: var(--primary-dark) transparent transparent transparent;
     }
 
     .student-info h4 {
@@ -663,13 +695,6 @@
         display: none;
       }
       
-      /* إزالة جميع تأثيرات السحب والتمرير */
-      .students-list {
-        -webkit-overflow-scrolling: auto;
-        scroll-snap-type: none;
-        overflow-x: visible;
-      }
-      
       /* تقليل المسافة السفلية للقسم على الجوال */
       .fame-bar-section {
         margin-bottom: 2.5rem;
@@ -699,9 +724,9 @@
     }
 
     .section-card {
-      background: var(--card-bg);
+      background: var(--gradient-card);
       border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(122, 67, 204, 0.15);
+      box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.1);
       padding: 2rem 2rem 1.5rem;
       width: 350px;
       display: flex;
@@ -711,7 +736,7 @@
       cursor: default;
       position: relative;
       overflow: hidden;
-      border: 1px solid rgba(122, 67, 204, 0.1);
+      border: 1px solid var(--border-color);
     }
 
     .section-card::before {
@@ -721,10 +746,7 @@
       right: 0;
       left: 0;
       height: 5px;
-     background: linear-gradient(90deg, 
-        #4a2c7a 0%, 
-        #9a69e6 50%, 
-        #14b8a6 100%);
+      background: var(--gradient-accent);
       border-radius: 2px 2px 0 0;
       transition: height 0.3s ease;
     }
@@ -734,14 +756,14 @@
     }
 
     .section-card:hover {
-      box-shadow: 0 15px 35px rgba(122, 67, 204, 0.25);
+      box-shadow: 0 15px 35px rgba(var(--primary-dark-rgb), 0.15);
       transform: translateY(-7px);
-      border-color: rgba(122, 67, 204, 0.2);
+      border-color: rgba(var(--primary-dark-rgb), 0.2);
     }
 
     .section-title {
       font-size: 1.65rem;
-      color: var(--primary-600); /* تغيير اللون إلى نفس لون قسم التميز */
+      color: var(--primary-dark);
       margin-bottom: 1.5rem;
       padding-right: 0.8rem;
       font-weight: 700;
@@ -752,7 +774,7 @@
       align-items: center;
       justify-content: space-between;
       gap: 0.8rem;
-      text-shadow: 0 1px 2px rgba(122, 67, 204, 0.1);
+      text-shadow: 0 1px 2px rgba(var(--primary-dark-rgb), 0.1);
     }
 
     .title-container {
@@ -765,31 +787,23 @@
 
     .section-icon {
       font-size: 1.5rem;
-      color: var(--accent-teal);
-      opacity: 0.8;
+      color: var(--tech-blue);
+      opacity: 0.9;
       transition: var(--transition);
       user-select: none;
-      background: none;
-      width: auto;
-      height: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 0;
       flex-shrink: 0;
     }
 
     .section-title:hover .section-icon {
       opacity: 1;
       transform: scale(1.1) rotate(5deg);
-      background: none;
-      box-shadow: none;
+      color: var(--primary-dark);
     }
 
     .toggle-cards {
       background: transparent;
-      color: var(--primary-500);
-      border: 1px solid rgba(122, 67, 204, 0.3);
+      color: var(--primary-dark);
+      border: 1px solid var(--border-color);
       width: 35px;
       height: 35px;
       border-radius: 50%;
@@ -805,10 +819,10 @@
     }
 
     .toggle-cards:hover {
-      background: rgba(122, 67, 204, 0.1);
-      color: var(--primary-600);
+      background: rgba(var(--primary-dark-rgb), 0.08);
+      color: var(--tech-blue);
       transform: scale(1.1);
-      box-shadow: 0 3px 10px rgba(122, 67, 204, 0.2);
+      box-shadow: 0 3px 10px rgba(var(--primary-dark-rgb), 0.1);
     }
 
     .toggle-cards i {
@@ -820,8 +834,8 @@
     }
 
     .toggle-cards.collapsed {
-      background: rgba(122, 67, 204, 0.1);
-      color: var(--primary-600);
+      background: rgba(var(--primary-dark-rgb), 0.08);
+      color: var(--tech-blue);
     }
 
     .cards-container {
@@ -842,11 +856,11 @@
 
     /* بطاقات محسنة للنصوص الطويلة */
     .card {
-      background: linear-gradient(to right, var(--primary-soft-2), var(--primary-100));
+      background: var(--pure-white);
       border-radius: 16px;
       padding: 1.2rem 1.4rem;
-      box-shadow: 0 4px 12px rgba(122, 67, 204, 0.1);
-      border: 1.5px solid rgba(122, 67, 204, 0.15);
+      box-shadow: 0 4px 12px rgba(var(--primary-dark-rgb), 0.08);
+      border: 1.5px solid var(--border-color);
       display: flex;
       align-items: center;
       gap: 1rem;
@@ -867,16 +881,16 @@
       right: 0;
       bottom: 0;
       left: 0;
-      background: linear-gradient(to right, rgba(122, 67, 204, 0.03), transparent);
+      background: rgba(var(--accent-teal-rgb), 0.03);
       opacity: 0;
       transition: opacity 0.3s ease;
     }
 
     .card:hover {
       transform: translateY(-5px);
-      box-shadow: 0 8px 20px rgba(122, 67, 204, 0.25);
-      border-color: var(--primary-400);
-      background: var(--card-hover-bg);
+      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.15);
+      border-color: var(--accent-teal);
+      background: var(--pure-white);
     }
 
     .card:hover::before {
@@ -885,21 +899,21 @@
 
     .card-icon {
       font-size: 1.7rem;
-      color: var(--primary-500);
+      color: var(--tech-blue);
       min-width: 38px;
       text-align: center;
       transition: var(--transition);
       opacity: 0.9;
       user-select: none;
-      text-shadow: 0 1px 2px rgba(122, 67, 204, 0.2);
+      text-shadow: 0 1px 2px rgba(var(--tech-blue-rgb), 0.2);
       flex-shrink: 0;
     }
 
     .card:hover .card-icon {
       transform: scale(1.2) rotate(5deg);
-      color: var(--primary-600);
+      color: var(--accent-teal);
       opacity: 1;
-      text-shadow: 0 2px 4px rgba(122, 67, 204, 0.3);
+      text-shadow: 0 2px 4px rgba(var(--accent-teal-rgb), 0.3);
     }
 
     .card-title {
@@ -920,7 +934,7 @@
     }
 
     .card:hover .card-title {
-      color: var(--primary-600);
+      color: var(--tech-blue);
     }
 
     .nowrap-text {
@@ -931,7 +945,7 @@
 
     .card-title .external-icon {
       font-size: 0.75em;
-      color: var(--primary-500);
+      color: var(--tech-blue);
       margin-right: 5px;
       opacity: 0.8;
       transition: var(--transition);
@@ -940,7 +954,7 @@
 
     .card:hover .external-icon {
       opacity: 1;
-      color: var(--primary-600);
+      color: var(--accent-teal);
       transform: translateX(3px);
     }
 
@@ -958,12 +972,12 @@
       max-width: 800px;
       margin: 3rem auto;
       padding: 2.5rem;
-      background: var(--card-bg);
+      background: var(--gradient-card);
       border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(122, 67, 204, 0.2);
+      box-shadow: 0 10px 30px rgba(var(--primary-dark-rgb), 0.1);
       position: relative;
       overflow: hidden;
-      border: 1px solid rgba(122, 67, 204, 0.15);
+      border: 1px solid var(--border-color);
     }
 
     .ai-assistant-container::before {
@@ -973,12 +987,15 @@
       right: 0;
       left: 0;
       height: 5px;
-      background: linear-gradient(90deg, #4285f4 0%, #34a853 33%, #fbbc05 66%, #ea4335 100%);
+      background: linear-gradient(90deg, 
+        #2C3E50 0%, 
+        #17A589 50%, 
+        #1ABC9C 100%);
       border-radius: 2px 2px 0 0;
     }
 
     .ai-header {
-      color: var(--primary-600); /* تغيير اللون إلى نفس لون قسم التميز */
+      color: var(--primary-dark);
       text-align: center;
       margin-bottom: 2rem;
       font-size: 1.7rem;
@@ -992,7 +1009,10 @@
 
     .ai-icon {
       font-size: 2rem;
-      background: linear-gradient(135deg, #4285f4, #34a853, #fbbc05, #ea4335);
+      background: linear-gradient(135deg, 
+        var(--tech-blue) 0%, 
+        var(--ai-teal) 50%, 
+        var(--accent-teal) 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -1007,18 +1027,18 @@
 
     .ai-description {
       text-align: center;
-      color: var(--text-light);
+      color: var(--text-medium);
       margin-bottom: 2rem;
       font-size: 1.1rem;
       line-height: 1.6;
     }
 
     .ai-chat-container {
-      background: var(--light-bg);
+      background: var(--pure-white);
       border-radius: 15px;
       padding: 1.5rem;
-      box-shadow: 0 4px 15px rgba(122, 67, 204, 0.1);
-      border: 1px solid rgba(122, 67, 204, 0.1);
+      box-shadow: 0 4px 15px rgba(var(--primary-dark-rgb), 0.08);
+      border: 1px solid var(--border-color);
       margin-bottom: 1.5rem;
     }
 
@@ -1027,9 +1047,9 @@
       overflow-y: auto;
       margin-bottom: 1rem;
       padding: 1rem;
-      background: var(--light-bg);
+      background: var(--pure-white);
       border-radius: 10px;
-      border: 1px solid rgba(122, 67, 204, 0.1);
+      border: 1px solid var(--border-color);
     }
 
     .message {
@@ -1052,22 +1072,22 @@
     }
 
     .user-message {
-      background: var(--card-bg);
+      background: rgba(var(--primary-dark-rgb), 0.05);
       color: var(--text-dark);
       margin-right: auto;
       border-bottom-right-radius: 4px;
-      border: 1px solid rgba(0, 0, 0, 0.05);
+      border: 1px solid rgba(var(--primary-dark-rgb), 0.1);
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
       transform-origin: bottom left;
     }
 
     .ai-message {
-      background: #f4f0ff;
+      background: rgba(var(--ai-teal-rgb), 0.05);
       color: var(--text-dark);
       margin-left: auto;
-      border: 1px solid rgba(122, 67, 204, 0.2);
+      border: 1px solid rgba(var(--ai-teal-rgb), 0.2);
       border-bottom-left-radius: 4px;
-      box-shadow: 0 3px 10px rgba(93, 63, 211, 0.1);
+      box-shadow: 0 3px 10px rgba(var(--ai-teal-rgb), 0.1);
       transform-origin: bottom right;
       position: relative;
       padding-left: 45px;
@@ -1077,8 +1097,8 @@
       position: absolute;
       top: 10px;
       left: 10px;
-      background: rgba(122, 67, 204, 0.15);
-      color: var(--primary-500);
+      background: rgba(var(--ai-teal-rgb), 0.15);
+      color: var(--ai-teal);
       border: none;
       width: 30px;
       height: 30px;
@@ -1094,6 +1114,7 @@
 
     .ai-message:hover .copy-btn {
       opacity: 1;
+      background: rgba(var(--ai-teal-rgb), 0.2);
     }
 
     .copy-btn:active {
@@ -1101,7 +1122,7 @@
     }
 
     .copy-btn .fa-check {
-      color: #10b981;
+      color: var(--accent-teal);
       font-size: 1.1rem;
     }
 
@@ -1113,23 +1134,23 @@
     .ai-input {
       flex: 1;
       padding: 12px 15px;
-      border: 2px solid rgba(122, 67, 204, 0.2);
+      border: 2px solid var(--border-color);
       border-radius: 25px;
       font-size: 1rem;
       font-family: 'Tajawal', sans-serif;
-      background: var(--light-bg);
+      background: var(--pure-white);
       color: var(--text-dark);
       transition: var(--transition);
       outline: none;
     }
 
     .ai-input:focus {
-      border-color: var(--primary-500);
-      box-shadow: 0 0 0 3px rgba(122, 67, 204, 0.1);
+      border-color: var(--ai-teal);
+      box-shadow: 0 0 0 3px rgba(var(--ai-teal-rgb), 0.1);
     }
 
     .ai-send-btn {
-      background: var(--primary-500);
+      background: var(--ai-teal);
       color: white;
       border: none;
       width: 50px;
@@ -1141,11 +1162,13 @@
       justify-content: center;
       transition: var(--transition);
       font-size: 1.2rem;
+      box-shadow: 0 3px 10px rgba(var(--ai-teal-rgb), 0.3);
     }
 
     .ai-send-btn:hover {
-      background: var(--primary-600);
+      background: var(--accent-teal);
       transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(var(--ai-teal-rgb), 0.4);
     }
 
     .ai-send-btn:disabled {
@@ -1165,7 +1188,7 @@
       width: 8px;
       height: 8px;
       border-radius: 50%;
-      background-color: var(--primary-400);
+      background-color: var(--ai-teal);
       margin: 0 3px;
       animation: typing-bounce 1.4s infinite ease-in-out both;
     }
@@ -1181,16 +1204,16 @@
     .ai-disclaimer {
       text-align: center;
       font-size: 0.85rem;
-      color: var(--text-light);
+      color: var(--text-medium);
       margin-top: 1rem;
       padding: 1rem;
-      background: var(--green-100);
+      background: rgba(var(--ai-teal-rgb), 0.08);
       border-radius: 10px;
-      border: 1px solid var(--green-200);
+      border: 1px solid rgba(var(--ai-teal-rgb), 0.15);
     }
 
     .ai-disclaimer i {
-      color: var(--green-text);
+      color: var(--ai-teal);
       margin-left: 0.5rem;
     }
 
@@ -1232,13 +1255,13 @@
     .inquiry-btn.primary {
       background-color: var(--accent-teal);
       color: white;
-      box-shadow: 0 4px 15px rgba(20, 184, 166, 0.3);
+      box-shadow: 0 4px 15px rgba(var(--accent-teal-rgb), 0.3);
     }
 
     .inquiry-btn.primary:hover {
-      background-color: #0d9488;
+      background-color: var(--ai-teal);
       transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(20, 184, 166, 0.4);
+      box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.4);
     }
 
     .inquiry-btn.secondary {
@@ -1248,7 +1271,7 @@
     }
 
     .inquiry-btn.secondary:hover {
-      background-color: rgba(20, 184, 166, 0.1);
+      background-color: rgba(var(--accent-teal-rgb), 0.1);
       transform: translateY(-3px);
     }
 
@@ -1270,7 +1293,7 @@
     }
 
     .modal-content {
-      background: var(--body-bg);
+      background: var(--pure-white);
       padding: 2rem;
       border-radius: 15px;
       width: 90%;
@@ -1282,6 +1305,7 @@
       position: relative;
       transform: scale(0.9);
       transition: transform 0.3s ease;
+      border: 1px solid var(--border-color);
     }
 
     .modal-overlay.visible {
@@ -1308,17 +1332,17 @@
     .modal-header {
       text-align: center;
       margin-bottom: 1.5rem;
-      border-bottom: 1px solid rgba(122, 67, 204, 0.2);
+      border-bottom: 1px solid var(--border-color);
       padding-bottom: 1rem;
     }
 
     .modal-header h2 {
-      color: var(--primary-500);
+      color: var(--primary-dark);
       font-size: 1.8rem;
     }
 
     .modal-header p {
-      color: var(--text-light);
+      color: var(--text-medium);
       font-size: 1rem;
     }
 
@@ -1331,7 +1355,7 @@
       left: 30px;
       width: 50px;
       height: 50px;
-      background: var(--back-to-top-color);
+      background: rgba(var(--primary-dark-rgb), 0.85);
       border-radius: 50%;
       display: flex;
       align-items: center;
@@ -1345,7 +1369,7 @@
       transform: translateY(20px);
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
       border: 2px solid rgba(255, 255, 255, 0.3);
-      box-shadow: 0 5px 20px rgba(122, 67, 204, 0.3);
+      box-shadow: 0 5px 20px rgba(var(--primary-dark-rgb), 0.3);
     }
 
     .back-to-top.visible {
@@ -1355,9 +1379,9 @@
     }
 
     .back-to-top:hover {
-      background: rgba(122, 67, 204, 0.95);
+      background: rgba(var(--primary-dark-rgb), 0.95);
       transform: translateY(-5px) scale(1.05);
-      box-shadow: 0 8px 25px rgba(122, 67, 204, 0.4);
+      box-shadow: 0 8px 25px rgba(var(--primary-dark-rgb), 0.4);
     }
 
     .back-to-top:active {
@@ -1368,12 +1392,12 @@
     /*          تذييل الصفحة                    */
     /* ========================================= */
     .site-footer {
-      background: var(--light-bg);
-      color: var(--text-light);
+      background: var(--pure-white);
+      color: var(--text-medium);
       padding: 2rem 1.5rem;
       text-align: center;
       margin-top: 3rem;
-      border-top: 1px solid rgba(122, 67, 204, 0.1);
+      border-top: 1px solid var(--border-color);
     }
 
     .footer-content {
@@ -1402,12 +1426,12 @@
     }
 
     .footer-link:hover {
-      color: var(--primary-500);
+      color: var(--accent-teal);
       transform: translateY(-2px);
     }
 
     .footer-link i {
-      color: var(--primary-500);
+      color: var(--accent-teal);
     }
 
     .footer-copyright {
@@ -1436,9 +1460,11 @@
       margin: 2.5rem auto;
       padding: 1.5rem 1.8rem;
       border-radius: 20px;
-      background: linear-gradient(to bottom, rgba(122, 67, 204, 0.05) 0%, rgba(20, 184, 166, 0.03) 100%);
-      box-shadow: 0 10px 25px rgba(122, 67, 204, 0.1);
-      border: 1px solid rgba(122, 67, 204, 0.2);
+      background: linear-gradient(to bottom, 
+        rgba(var(--primary-dark-rgb), 0.03) 0%, 
+        rgba(var(--accent-teal-rgb), 0.02) 100%);
+      box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.08);
+      border: 1px solid var(--border-color);
       text-align: center;
     }
 
@@ -1455,7 +1481,7 @@
       gap: 0.75rem;
       font-size: 1.2rem;
       font-weight: 700;
-      color: var(--primary-600); /* نفس لون قسم التميز */
+      color: var(--primary-dark);
       margin: 0;
     }
 
@@ -1471,24 +1497,24 @@
       font-weight: 600;
       text-align: center;
       padding: 10px 25px;
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.3);
       border-radius: 12px;
-      border: 1px solid rgba(122, 67, 204, 0.1);
+      border: 1px solid var(--border-color);
       display: inline-block;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       box-shadow: 
-        0 3px 12px rgba(122, 67, 204, 0.08),
+        0 3px 12px rgba(var(--primary-dark-rgb), 0.06),
         inset 0 0 0 1px rgba(255, 255, 255, 0.6);
       text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
       transition: all 0.3s ease;
     }
 
     .voting-description:hover {
-      background: rgba(255, 255, 255, 0.35);
-      border-color: rgba(122, 67, 204, 0.2);
+      background: rgba(255, 255, 255, 0.4);
+      border-color: rgba(var(--primary-dark-rgb), 0.2);
       box-shadow: 
-        0 5px 18px rgba(122, 67, 204, 0.12),
+        0 5px 18px rgba(var(--primary-dark-rgb), 0.1),
         inset 0 0 0 1px rgba(255, 255, 255, 0.8);
       transform: translateY(-2px);
     }
@@ -1499,7 +1525,7 @@
     .projects-container {
       display: flex;
       justify-content: center;
-      gap: 2rem; /* زيادة التباعد بين الأزرار */
+      gap: 2rem;
       margin-bottom: 1.5rem;
       flex-wrap: wrap;
     }
@@ -1522,8 +1548,8 @@
       min-width: 160px;
       background: rgba(255, 255, 255, 0.7);
       color: var(--text-medium);
-      border: 1.5px solid rgba(122, 67, 204, 0.2);
-      box-shadow: 0 4px 12px rgba(122, 67, 204, 0.1);
+      border: 1.5px solid var(--border-color);
+      box-shadow: 0 4px 12px rgba(var(--primary-dark-rgb), 0.08);
       position: relative;
       overflow: hidden;
       text-align: center;
@@ -1537,7 +1563,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(135deg, rgba(122, 67, 204, 0.05), rgba(20, 184, 166, 0.05));
+      background: rgba(var(--accent-teal-rgb), 0.05);
       opacity: 0;
       transition: opacity 0.3s ease;
     }
@@ -1549,10 +1575,10 @@
 
     .project-btn:hover {
       transform: translateY(-3px);
-      box-shadow: 0 6px 18px rgba(122, 67, 204, 0.2);
-      border-color: var(--primary-400);
+      box-shadow: 0 6px 18px rgba(var(--primary-dark-rgb), 0.12);
+      border-color: var(--accent-teal);
       background: rgba(255, 255, 255, 0.9);
-      color: var(--primary-500);
+      color: var(--primary-dark);
     }
 
     .project-btn:hover::before {
@@ -1565,7 +1591,7 @@
 
     .project-btn:active {
       transform: translateY(-1px);
-      box-shadow: 0 3px 10px rgba(122, 67, 204, 0.15);
+      box-shadow: 0 3px 10px rgba(var(--primary-dark-rgb), 0.1);
     }
 
     /* تحسين النص داخل الأزرار */
@@ -1575,27 +1601,29 @@
       text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
     }
 
-    /* زر المشروع الأول - لون أرجواني */
+    /* زر المشروع الأول - لون أزرق تقني */
     .project-btn:nth-child(1) {
-      border-color: rgba(122, 67, 204, 0.3);
+      border-color: rgba(var(--tech-blue-rgb), 0.3);
     }
 
     .project-btn:nth-child(1) i {
-      color: var(--primary-500);
+      color: var(--tech-blue);
     }
 
     .project-btn:nth-child(1):hover {
-      border-color: var(--primary-500);
-      background: linear-gradient(135deg, rgba(122, 67, 204, 0.1), rgba(255, 255, 255, 0.9));
+      border-color: var(--tech-blue);
+      background: linear-gradient(135deg, 
+        rgba(var(--tech-blue-rgb), 0.1), 
+        rgba(255, 255, 255, 0.9));
     }
 
     .project-btn:nth-child(1):hover i {
-      color: var(--primary-600);
+      color: var(--tech-blue);
     }
 
     /* زر المشروع الثاني - لون تركوازي */
     .project-btn:nth-child(2) {
-      border-color: rgba(20, 184, 166, 0.3);
+      border-color: rgba(var(--accent-teal-rgb), 0.3);
     }
 
     .project-btn:nth-child(2) i {
@@ -1604,37 +1632,41 @@
 
     .project-btn:nth-child(2):hover {
       border-color: var(--accent-teal);
-      background: linear-gradient(135deg, rgba(20, 184, 166, 0.1), rgba(255, 255, 255, 0.9));
+      background: linear-gradient(135deg, 
+        rgba(var(--accent-teal-rgb), 0.1), 
+        rgba(255, 255, 255, 0.9));
     }
 
     .project-btn:nth-child(2):hover i {
-      color: #0d9488;
+      color: var(--accent-teal);
     }
 
     /* زر المشروع الثالث - لون ذهبي */
     .project-btn:nth-child(3) {
-      border-color: rgba(255, 195, 0, 0.3);
+      border-color: rgba(var(--gold-excellence-rgb), 0.3);
     }
 
     .project-btn:nth-child(3) i {
-      color: var(--gold-color);
+      color: var(--gold-excellence);
     }
 
     .project-btn:nth-child(3):hover {
-      border-color: var(--gold-color);
-      background: linear-gradient(135deg, rgba(255, 195, 0, 0.1), rgba(255, 255, 255, 0.9));
+      border-color: var(--gold-excellence);
+      background: linear-gradient(135deg, 
+        rgba(var(--gold-excellence-rgb), 0.1), 
+        rgba(255, 255, 255, 0.9));
     }
 
     .project-btn:nth-child(3):hover i {
-      color: #e6b400;
+      color: #c29a0b;
     }
 
     /* هذا الكود مهم لتنسيق صندوق Disqus نفسه */
     #disqus_thread {
-      background-color: #FFFFFF;
+      background-color: var(--pure-white);
       padding: 1rem;
       border-radius: 15px;
-      border: 1px solid rgba(122, 67, 204, 0.15);
+      border: 1px solid var(--border-color);
     }
 
     /* ============================================ */
@@ -1645,10 +1677,12 @@
       margin: 2.5rem auto;
       padding: 1.5rem 1.8rem;
       border-radius: 20px;
-      background: linear-gradient(to bottom, rgba(88, 101, 242, 0.05) 0%, rgba(20, 184, 166, 0.03) 100%);
+      background: linear-gradient(to bottom, 
+        rgba(88, 101, 242, 0.05) 0%, 
+        rgba(var(--accent-teal-rgb), 0.02) 100%);
       border: 1px solid rgba(88, 101, 242, 0.2);
       text-align: center;
-      box-shadow: 0 10px 25px rgba(88, 101, 242, 0.1);
+      box-shadow: 0 10px 25px rgba(88, 101, 242, 0.08);
     }
 
     .discord-header {
@@ -1664,13 +1698,13 @@
       gap: 0.75rem;
       font-size: 1.2rem;
       font-weight: 700;
-      color: var(--primary-600); /* نفس لون قسم التميز */
+      color: var(--primary-dark);
       margin: 0;
     }
 
     .discord-title i {
       font-size: 1.5rem;
-      color: #5865F2; /* لون الديسكورد الأزرق */
+      color: #5865F2;
     }
 
     .discord-description {
@@ -1680,24 +1714,24 @@
       font-weight: 600;
       text-align: center;
       padding: 10px 25px;
-      background: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.3);
       border-radius: 12px;
       border: 1px solid rgba(88, 101, 242, 0.1);
       display: inline-block;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
       box-shadow: 
-        0 3px 12px rgba(88, 101, 242, 0.08),
+        0 3px 12px rgba(88, 101, 242, 0.06),
         inset 0 0 0 1px rgba(255, 255, 255, 0.6);
       text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
       transition: all 0.3s ease;
     }
 
     .discord-description:hover {
-      background: rgba(255, 255, 255, 0.35);
+      background: rgba(255, 255, 255, 0.4);
       border-color: rgba(88, 101, 242, 0.2);
       box-shadow: 
-        0 5px 18px rgba(88, 101, 242, 0.12),
+        0 5px 18px rgba(88, 101, 242, 0.1),
         inset 0 0 0 1px rgba(255, 255, 255, 0.8);
       transform: translateY(-2px);
     }
@@ -1718,7 +1752,7 @@
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       white-space: nowrap;
       min-width: 250px;
-      background: #5865F2; /* اللون الأزرق للديسكورد */
+      background: #5865F2;
       color: white;
       border: 2px solid transparent;
       box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
@@ -1734,7 +1768,9 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+      background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.1), 
+        transparent);
       opacity: 0;
       transition: opacity 0.3s ease;
     }
@@ -1745,7 +1781,7 @@
     }
 
     .discord-btn:hover {
-      background: #4752C4; /* لون أغمق عند التمرير */
+      background: #4752C4;
       transform: translateY(-3px);
       box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4);
     }
@@ -1763,13 +1799,34 @@
       box-shadow: 0 3px 10px rgba(88, 101, 242, 0.25);
     }
 
+    /* زر مسح محادثة الذكاء الاصطناعي */
+    .clear-chat-btn {
+      background: var(--warning-red);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin: 0 auto 10px;
+    }
+
+    .clear-chat-btn:hover {
+      background: #c0392b;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(var(--warning-red-rgb), 0.3);
+    }
+
     /* ========================================= */
     /*        تحسينات للاستجابة                 */
     /* ========================================= */
     @media (max-width: 768px) {
-      /* ========================================= */
-      /* تحسين الهيدر على الجوال - مضغوط أكثر */
-      /* ========================================= */
+      /* تحسين الهيدر على الجوال */
       .tech-header {
         padding: 1.8rem 1rem 1.5rem;
         min-height: 190px;
@@ -1798,10 +1855,6 @@
         font-size: 0.95rem;
         padding: 0 0.5rem;
       }
-      
-      /* ========================================= */
-      /* بقية التحسينات للجوال */
-      /* ========================================= */
       
       /* إصلاح عنوان "العمل التعليمي" على الجوال */
       .section-title {
@@ -1918,14 +1971,12 @@
         font-size: 0.95rem;
       }
       
-      /* ========================================= */
-      /* ========= إصلاح أزرار المشاريع ========= */
-      /* ========================================= */
+      /* إصلاح أزرار المشاريع */
       .projects-container {
         flex-direction: row !important;
         flex-wrap: wrap;
         justify-content: center;
-        gap: 1.2rem; /* تباعد مناسب على الجوال */
+        gap: 1.2rem;
       }
       
       .project-btn {
@@ -1945,7 +1996,7 @@
           flex-direction: row !important;
           flex-wrap: wrap;
           justify-content: center;
-          gap: 1rem; /* تباعد مناسب للشاشات الصغيرة */
+          gap: 1rem;
         }
         
         .project-btn {
@@ -2123,7 +2174,7 @@
       
       /* تحسين أزرار المشاريع للشاشات المتوسطة */
       .projects-container {
-        gap: 1.5rem; /* تباعد مناسب للشاشات المتوسطة */
+        gap: 1.5rem;
       }
       
       .project-btn {
@@ -2135,7 +2186,7 @@
     @media (min-width: 1025px) {
       /* تحسين أزرار المشاريع للشاشات الكبيرة */
       .projects-container {
-        gap: 2rem; /* التباعد المطلوب للشاشات الكبيرة */
+        gap: 2rem;
       }
       
       .project-btn {
@@ -2154,7 +2205,7 @@
 </head>
 <body>
 
-<!-- === شريط الإشعارات (مع خطوط) === -->
+<!-- === شريط الإشعارات === -->
 <div class="notification-bar fade-in">
   <div class="notification-container">
     <i class="fas fa-bell"></i>
@@ -2162,7 +2213,7 @@
   </div>
 </div>
 
-<!-- === الهيدر الجديد بالتصميم المركزي المضغوط === -->
+<!-- === الهيدر الجديد === -->
 <header class="tech-header fade-in">
   <div class="header-content">
     <!-- الشعار في المنتصف -->
@@ -2170,7 +2221,7 @@
       <img src="images/logo.png" alt="شعار واجهة المعلم الرقمي">
     </div>
     
-    <!-- النصوص - بدون خط فاصل -->
+    <!-- النصوص -->
     <div class="header-text-content">
       <h1>واجهـة المعلـم الرقمـي</h1>
       <h2>أ. محمد حمدان الغامدي</h2>
@@ -2183,11 +2234,11 @@
 <!-- الوقت والتاريخ -->
 <div class="date-time-container fade-in">
   <div class="compact-date new-position" dir="rtl">
-    <i class="fas fa-calendar-alt" style="color: var(--primary-500); margin-left: 5px;"></i><span id="hijri-date"></span> 
-    <span class="separator" style="color: var(--primary-500); margin: 0 4px; opacity: 0.7;">•</span>
+    <i class="fas fa-calendar-alt" style="color: var(--accent-teal); margin-left: 5px;"></i><span id="hijri-date"></span> 
+    <span class="separator">•</span>
     <span id="gregorian-date"></span>
-    <span class="separator" style="color: var(--primary-500); margin: 0 4px; opacity: 0.7;">•</span>
-    <i class="fas fa-clock" style="color: var(--primary-500); margin-left: 5px;"></i><span id="live-time"></span>
+    <span class="separator">•</span>
+    <i class="fas fa-clock" style="color: var(--accent-teal); margin-left: 5px;"></i><span id="live-time"></span>
   </div>
 </div>
 
@@ -2207,15 +2258,13 @@
 <!-- ============================================ -->
 <section class="fame-bar-section fade-in">
   <div class="fame-bar-title">
-    <i class="fas fa-trophy" style="color: #FFD700; text-shadow: 0 2px 4px rgba(255, 215, 0, 0.3);"></i>
+    <i class="fas fa-trophy"></i>
     <span>قائمة التميز</span>
   </div>
   <p class="honors-subtitle">انقر على الأيقونة تحت كل صورة لمعرفة المزيد</p>
   
   <div class="students-container">
-    <!-- تم إخفاء أزرار التنقل تماماً -->
-    
-    <!-- قائمة الطلاب - تم تعديلها لعرض جميع الصور بجانب بعضها -->
+    <!-- قائمة الطلاب -->
     <div class="students-list" id="studentsList">
       <!-- الطالب الأول -->
       <div class="student-item" data-index="0">
@@ -2259,11 +2308,7 @@
         </div>
       </div>
     </div>
-    
-    <!-- تم إخفاء أزرار التنقل تماماً -->
   </div>
-  
-  <!-- تم إزالة النقاط الثلاثة تماماً -->
 </section>
 
 <!-- ============================================ -->
@@ -2279,7 +2324,7 @@
   
   <p class="voting-description"> شاركنا رأيك: وأختر المشروع الذي ترى أنه الأفضل </p>
   
-  <!-- أزرار المشاريع الثلاثة - الآن بشكل أفقي -->
+  <!-- أزرار المشاريع الثلاثة -->
   <div class="projects-container">
     <!-- المشروع الأول -->
     <a href="YOUR_LINK_1_HERE" target="_blank" class="project-btn">
@@ -2635,6 +2680,10 @@
   </p>
   
   <div class="ai-chat-container">
+    <button class="clear-chat-btn" id="clearChatBtn">
+      <i class="fas fa-trash"></i> مسح المحادثة
+    </button>
+    
     <div class="ai-messages" id="aiMessages">
       <div class="message ai-message">
         <strong>الذكاء الاصطناعي:</strong> مرحباً بك! أنا المساعد الرقمي للأستاذ محمد الغامدي، وشريكك في رحلة التعلم، تفضل بطرح سؤالك.
@@ -2682,9 +2731,9 @@
     <button id="closeInquiryModalBtn" class="modal-close-btn">&times;</button>
     <div class="modal-header">
       <h2 style="font-size: 1.4rem; white-space: nowrap; display: flex; align-items: center; gap: 10px; justify-content: center;">
-  <i class="fas fa-question-circle" style="color: #14b8a6; font-size: 1.3em;"></i>
-  الاستفسارات التعليمية
-</h2>
+        <i class="fas fa-question-circle" style="color: var(--accent-teal); font-size: 1.3em;"></i>
+        الاستفسارات التعليمية
+      </h2>
       <p>هذا النموذج مخصص لاستفسارات الطلاب التعليمية</p>
     </div>
     <iframe 
@@ -2729,15 +2778,12 @@
   
   // الانتقال إلى أعلى الصفحة فور التحميل
   window.addEventListener('load', function() {
-    // الانتقال إلى أعلى الصفحة فوراً
     window.scrollTo(0, 0);
     
-    // تأكيد الانتقال بعد تحميل الصفحة بالكامل
     setTimeout(function() {
       window.scrollTo(0, 0);
     }, 100);
     
-    // منع أي تمرير تلقائي
     document.body.style.overflow = 'hidden';
     setTimeout(function() {
       document.body.style.overflow = '';
@@ -2748,7 +2794,6 @@
   document.addEventListener('DOMContentLoaded', function() {
     window.scrollTo(0, 0);
     
-    // إزالة أي علامة تجزئة من الرابط
     if (window.location.hash) {
       history.replaceState(null, null, window.location.pathname);
     }
@@ -2858,16 +2903,11 @@
   });
 
   // ============================================
-  //      وظائف قسم التميز المحسّن - المحدث
+  //      وظائف قسم التميز المحسّن
   // ============================================
 
   function initHonorsSection() {
     const studentItems = document.querySelectorAll('.student-item');
-    
-    // إخفاء أزرار التنقل نهائياً
-    document.querySelectorAll('.slider-nav').forEach(btn => {
-      btn.style.display = 'none';
-    });
     
     // تفعيل النصوص المنبثقة لكل صورة بشكل منفرد
     studentItems.forEach(item => {
@@ -2879,7 +2919,6 @@
         const toggleInfo = function(e) {
           e.stopPropagation();
           
-          // التحقق مما إذا كان هذا العنصر نشطاً بالفعل
           const isActive = item.classList.contains('active');
           
           // إغلاق جميع النصوص المنبثقة الأخرى أولاً
@@ -2965,21 +3004,6 @@
         });
       }
     });
-    
-    // إزالة جميع أحداث السحب والمسح
-    const studentsList = document.getElementById('studentsList');
-    if (studentsList) {
-      // إزالة جميع المعالجات القديمة للسحب
-      studentsList.ontouchstart = null;
-      studentsList.ontouchmove = null;
-      studentsList.ontouchend = null;
-      
-      // جعل القائمة ثابتة بدون تمرير
-      studentsList.style.overflowX = 'visible';
-      studentsList.style.scrollBehavior = 'auto';
-      studentsList.style.webkitOverflowScrolling = 'auto';
-      studentsList.style.scrollSnapType = 'none';
-    }
   }
 
   // ============================================
@@ -3084,28 +3108,10 @@
     const aiInput = document.getElementById('aiInput');
     const aiSendBtn = document.getElementById('aiSendBtn');
     const aiTypingIndicator = document.getElementById('aiTypingIndicator');
+    const clearChatBtn = document.getElementById('clearChatBtn');
     const API_URL = '/api/gemini';
 
     // زر مسح المحادثة
-    function addClearButton() {
-      const clearBtn = document.createElement('button');
-      clearBtn.innerHTML = '<i class="fas fa-trash"></i> مسح المحادثة';
-      clearBtn.style.cssText = `
-        background: #ff4757;
-        color: white;
-        border: none;
-        padding: 8px 15px;
-        border-radius: 20px;
-        cursor: pointer;
-        font-size: 0.9rem;
-        margin-bottom: 10px;
-        transition: all 0.3s;
-      `;
-      clearBtn.onclick = clearConversation;
-      
-      aiMessages.parentNode.insertBefore(clearBtn, aiMessages);
-    }
-
     function clearConversation() {
       aiMessages.innerHTML = `
         <div class="message ai-message">
@@ -3198,7 +3204,7 @@
       aiMessages.scrollTop = aiMessages.scrollHeight;
     }
 
-    addClearButton();
+    clearChatBtn.addEventListener('click', clearConversation);
 
     aiSendBtn.addEventListener('click', sendMessage);
     aiInput.addEventListener('keypress', (e) => {
