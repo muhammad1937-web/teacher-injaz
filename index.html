@@ -39,7 +39,7 @@
         radial-gradient(circle at 10% 90%, rgba(122, 67, 204, 0.03) 0%, transparent 20%);
       --gold-color: #FFC300;
       --back-to-top-color: rgba(122, 67, 204, 0.85);
-      --text-medium: #333; /* لون أغمق للنصوص الهامة */
+      --text-medium: #333;
     }
 
     /* ========================================= */
@@ -320,7 +320,7 @@
       left: 10px;
       top: 50%;
       transform: translateY(-50%);
-      background: var(--primary-500);
+      background: #14b8a6; /* تغيير اللون إلى الأخضر */
       color: white;
       border: none;
       width: 36px;
@@ -335,7 +335,7 @@
     }
 
     .search-button:hover {
-      background: var(--primary-600);
+      background: #0d9488; /* أخضر أغمق عند التمرير */
       transform: translateY(-50%) scale(1.05);
     }
 
@@ -422,7 +422,7 @@
       gap: 0.75rem;
       font-size: 1.1rem;
       font-weight: 700;
-      color: var(--primary-600);
+      color: var(--primary-600); /* اللون المراد تطبيقه */
       margin-bottom: 0.1rem;
     }
 
@@ -434,12 +434,12 @@
     .honors-subtitle {
       margin: 0 0 0.8rem 0;
       font-size: 0.95rem;
-      color: var(--text-medium); /* تغيير من var(--text-light) إلى var(--text-medium) */
-      font-weight: 600; /* إضافة وزن خط */
+      color: var(--text-medium);
+      font-weight: 600;
       text-align: center;
       padding: 10px 25px;
       background: rgba(255, 255, 255, 0.25);
-      border-radius: 12px; /* تم تعديل الزوايا لتكون أقل انحناءً */
+      border-radius: 12px;
       border: 1px solid rgba(122, 67, 204, 0.1);
       display: inline-block;
       backdrop-filter: blur(10px);
@@ -528,7 +528,7 @@
       width: 30px;
       height: 30px;
       border-radius: 50%;
-      background: var(--accent-teal);
+      background: var(--accent-teal); /* اللون الأخضر */
       color: white;
       border: 2px solid white;
       display: flex;
@@ -681,7 +681,7 @@
         margin-bottom: 0.6rem;
         padding: 8px 20px;
         font-size: 0.85rem;
-        border-radius: 10px; /* نفس التعديل على الجوال */
+        border-radius: 10px;
       }
     }
 
@@ -741,7 +741,7 @@
 
     .section-title {
       font-size: 1.65rem;
-      color: var(--primary-500);
+      color: var(--primary-600); /* تغيير اللون إلى نفس لون قسم التميز */
       margin-bottom: 1.5rem;
       padding-right: 0.8rem;
       font-weight: 700;
@@ -978,7 +978,7 @@
     }
 
     .ai-header {
-      color: var(--primary-500);
+      color: var(--primary-600); /* تغيير اللون إلى نفس لون قسم التميز */
       text-align: center;
       margin-bottom: 2rem;
       font-size: 1.7rem;
@@ -1455,24 +1455,24 @@
       gap: 0.75rem;
       font-size: 1.2rem;
       font-weight: 700;
-      color: var(--primary-600);
+      color: var(--primary-600); /* نفس لون قسم التميز */
       margin: 0;
     }
 
     .voting-title i {
       font-size: 1.5rem;
-      color: var(--accent-teal); /* إبقاء أيقونة العنوان كما هي */
+      color: var(--accent-teal);
     }
 
     .voting-description {
       margin: 0 0 1.5rem 0;
       font-size: 0.95rem;
-      color: var(--text-medium); /* تغيير من var(--text-light) إلى var(--text-medium) */
-      font-weight: 600; /* إضافة وزن خط */
+      color: var(--text-medium);
+      font-weight: 600;
       text-align: center;
       padding: 10px 25px;
       background: rgba(255, 255, 255, 0.25);
-      border-radius: 12px; /* تم تعديل الزوايا لتكون أقل انحناءً */
+      border-radius: 12px;
       border: 1px solid rgba(122, 67, 204, 0.1);
       display: inline-block;
       backdrop-filter: blur(10px);
@@ -1499,7 +1499,7 @@
     .projects-container {
       display: flex;
       justify-content: center;
-      gap: 1rem;
+      gap: 2rem; /* زيادة التباعد بين الأزرار */
       margin-bottom: 1.5rem;
       flex-wrap: wrap;
     }
@@ -1512,22 +1512,22 @@
       font-family: 'Tajawal', sans-serif;
       font-size: 0.95rem;
       font-weight: 600;
-      padding: 0.9rem 1.5rem; /* زيادة الحشوة لتوحيد الحجم */
-      border-radius: 12px; /* نفس زوايا إطار الجملة */
+      padding: 0.9rem 1.5rem;
+      border-radius: 12px;
       text-decoration: none;
       border: 2px solid transparent;
       cursor: pointer;
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       white-space: nowrap;
-      min-width: 160px; /* عرض أدنى موحد */
+      min-width: 160px;
       background: rgba(255, 255, 255, 0.7);
-      color: var(--text-medium); /* استخدام نفس لون النصوص الهامة */
+      color: var(--text-medium);
       border: 1.5px solid rgba(122, 67, 204, 0.2);
       box-shadow: 0 4px 12px rgba(122, 67, 204, 0.1);
       position: relative;
       overflow: hidden;
       text-align: center;
-      flex: 1; /* السماح للأزرار بالتمدد بشكل متساوٍ */
+      flex: 1;
     }
 
     .project-btn::before {
@@ -1570,8 +1570,8 @@
 
     /* تحسين النص داخل الأزرار */
     .project-btn span {
-      font-weight: 600; /* نفس وزن الجملة تحت العنوان */
-      color: var(--text-medium); /* نفس لون الجملة تحت العنوان */
+      font-weight: 600;
+      color: var(--text-medium);
       text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
     }
 
@@ -1581,7 +1581,7 @@
     }
 
     .project-btn:nth-child(1) i {
-      color: var(--primary-500); /* أرجواني */
+      color: var(--primary-500);
     }
 
     .project-btn:nth-child(1):hover {
@@ -1590,7 +1590,7 @@
     }
 
     .project-btn:nth-child(1):hover i {
-      color: var(--primary-600); /* أرجواني غامق عند التمرير */
+      color: var(--primary-600);
     }
 
     /* زر المشروع الثاني - لون تركوازي */
@@ -1599,7 +1599,7 @@
     }
 
     .project-btn:nth-child(2) i {
-      color: var(--accent-teal); /* تركوازي */
+      color: var(--accent-teal);
     }
 
     .project-btn:nth-child(2):hover {
@@ -1608,7 +1608,7 @@
     }
 
     .project-btn:nth-child(2):hover i {
-      color: #0d9488; /* تركوازي غامق عند التمرير */
+      color: #0d9488;
     }
 
     /* زر المشروع الثالث - لون ذهبي */
@@ -1617,7 +1617,7 @@
     }
 
     .project-btn:nth-child(3) i {
-      color: var(--gold-color); /* ذهبي */
+      color: var(--gold-color);
     }
 
     .project-btn:nth-child(3):hover {
@@ -1626,7 +1626,7 @@
     }
 
     .project-btn:nth-child(3):hover i {
-      color: #e6b400; /* ذهبي غامق عند التمرير */
+      color: #e6b400;
     }
 
     /* هذا الكود مهم لتنسيق صندوق Disqus نفسه */
@@ -1635,6 +1635,132 @@
       padding: 1rem;
       border-radius: 15px;
       border: 1px solid rgba(122, 67, 204, 0.15);
+    }
+
+    /* ============================================ */
+    /* ==========   قسم ساحة النقاش   ========== */
+    /* ============================================ */
+    .discord-section {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      padding: 1.5rem 1.8rem;
+      border-radius: 20px;
+      background: linear-gradient(to bottom, rgba(88, 101, 242, 0.05) 0%, rgba(20, 184, 166, 0.03) 100%);
+      border: 1px solid rgba(88, 101, 242, 0.2);
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(88, 101, 242, 0.1);
+    }
+
+    .discord-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .discord-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-600); /* نفس لون قسم التميز */
+      margin: 0;
+    }
+
+    .discord-title i {
+      font-size: 1.5rem;
+      color: #5865F2; /* لون الديسكورد الأزرق */
+    }
+
+    .discord-description {
+      margin: 0 0 1.5rem 0;
+      font-size: 0.95rem;
+      color: var(--text-medium);
+      font-weight: 600;
+      text-align: center;
+      padding: 10px 25px;
+      background: rgba(255, 255, 255, 0.25);
+      border-radius: 12px;
+      border: 1px solid rgba(88, 101, 242, 0.1);
+      display: inline-block;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      box-shadow: 
+        0 3px 12px rgba(88, 101, 242, 0.08),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.6);
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+      transition: all 0.3s ease;
+    }
+
+    .discord-description:hover {
+      background: rgba(255, 255, 255, 0.35);
+      border-color: rgba(88, 101, 242, 0.2);
+      box-shadow: 
+        0 5px 18px rgba(88, 101, 242, 0.12),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+      transform: translateY(-2px);
+    }
+
+    /* زر الديسكورد الخاص */
+    .discord-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      white-space: nowrap;
+      min-width: 250px;
+      background: #5865F2; /* اللون الأزرق للديسكورد */
+      color: white;
+      border: 2px solid transparent;
+      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .discord-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .discord-btn i {
+      font-size: 1.2em;
+      transition: transform 0.3s ease;
+    }
+
+    .discord-btn:hover {
+      background: #4752C4; /* لون أغمق عند التمرير */
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4);
+    }
+
+    .discord-btn:hover::before {
+      opacity: 1;
+    }
+
+    .discord-btn:hover i {
+      transform: translateX(3px);
+    }
+
+    .discord-btn:active {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(88, 101, 242, 0.25);
     }
 
     /* ========================================= */
@@ -1772,44 +1898,61 @@
       .voting-description {
         padding: 8px 20px;
         font-size: 0.85rem;
-        border-radius: 10px; /* نفس التعديل على الجوال */
+        border-radius: 10px;
+      }
+      
+      /* تحسين قسم الديسكورد على الجوال */
+      .discord-section {
+        padding: 1.3rem 1rem 1.2rem;
+      }
+      
+      .discord-description {
+        padding: 8px 20px;
+        font-size: 0.85rem;
+        border-radius: 10px;
+      }
+      
+      .discord-btn {
+        min-width: 200px;
+        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
       }
       
       /* ========================================= */
       /* ========= إصلاح أزرار المشاريع ========= */
       /* ========================================= */
       .projects-container {
-        flex-direction: row !important; /* إجبار على الاتجاه الأفقي */
-        flex-wrap: wrap; /* السماح بالالتفاف */
+        flex-direction: row !important;
+        flex-wrap: wrap;
         justify-content: center;
-        gap: 0.8rem;
+        gap: 1.2rem; /* تباعد مناسب على الجوال */
       }
       
       .project-btn {
-        width: auto !important; /* عرض تلقائي */
-        max-width: none !important; /* إزالة الحد الأقصى */
-        min-width: 140px; /* عرض أدنى ثابت */
-        padding: 0.8rem 1.2rem !important; /* حشوة ثابتة */
-        flex: 0 0 auto; /* منع التمدد الزائد */
+        width: auto !important;
+        max-width: none !important;
+        min-width: 140px;
+        padding: 0.8rem 1.2rem !important;
+        flex: 0 0 auto;
         font-size: 0.9rem;
-        margin: 0 !important; /* إزالة الهوامش */
-        display: inline-flex !important; /* عرض مضمن */
+        margin: 0 !important;
+        display: inline-flex !important;
       }
       
       /* تعديل خاص للشاشات الصغيرة جداً */
       @media (max-width: 480px) {
         .projects-container {
-          flex-direction: row !important; /* إبقاء أفقي */
-          flex-wrap: wrap; /* السماح بالالتفاف */
+          flex-direction: row !important;
+          flex-wrap: wrap;
           justify-content: center;
-          gap: 0.6rem;
+          gap: 1rem; /* تباعد مناسب للشاشات الصغيرة */
         }
         
         .project-btn {
-          min-width: 120px; /* عرض أقل للشاشات الصغيرة */
+          min-width: 120px;
           padding: 0.7rem 1rem !important;
           font-size: 0.85rem;
-          flex: 0 0 auto; /* عرض ثابت */
+          flex: 0 0 auto;
         }
       }
       
@@ -1911,14 +2054,27 @@
         margin-bottom: 0.5rem;
         font-size: 0.85rem;
         padding: 8px 15px;
-        border-radius: 8px; /* نفس التعديل على الشاشات الصغيرة */
+        border-radius: 8px;
       }
       
       /* تحسين قسم التصويت للشاشات الصغيرة */
       .voting-description {
         padding: 8px 15px;
         font-size: 0.85rem;
-        border-radius: 8px; /* نفس التعديل على الشاشات الصغيرة */
+        border-radius: 8px;
+      }
+      
+      /* تحسين قسم الديسكورد للشاشات الصغيرة */
+      .discord-description {
+        padding: 8px 15px;
+        font-size: 0.85rem;
+        border-radius: 8px;
+      }
+      
+      .discord-btn {
+        min-width: 180px;
+        padding: 0.7rem 1.2rem;
+        font-size: 0.9rem;
       }
       
       /* زر العودة للأعلى */
@@ -1967,7 +2123,7 @@
       
       /* تحسين أزرار المشاريع للشاشات المتوسطة */
       .projects-container {
-        gap: 0.8rem;
+        gap: 1.5rem; /* تباعد مناسب للشاشات المتوسطة */
       }
       
       .project-btn {
@@ -1979,7 +2135,7 @@
     @media (min-width: 1025px) {
       /* تحسين أزرار المشاريع للشاشات الكبيرة */
       .projects-container {
-        gap: 1.2rem;
+        gap: 2rem; /* التباعد المطلوب للشاشات الكبيرة */
       }
       
       .project-btn {
@@ -2167,6 +2323,28 @@
   
 </section>
 
+<!-- ============================================ -->
+<!-- ==========   قسم ساحة النقاش   ========== -->
+<!-- ============================================ -->
+<section class="discord-section fade-in">
+  <div class="discord-header">
+    <h3 class="discord-title">
+      <i class="fab fa-discord"></i>
+      <span>ساحة النقاش التفاعلية</span>
+    </h3>
+  </div>
+  
+  <p class="discord-description">
+    انضم إلى مجتمعنا على ديسكورد للنقاش الفوري وطرح الأسئلة.
+  </p>
+  
+  <div class="projects-container">
+    <a href="HERE_IS_YOUR_INVITE_LINK" target="_blank" class="discord-btn">
+      <i class="fas fa-sign-in-alt"></i>
+      <span>ادخل إلى ساحة النقاش</span>
+    </a>
+  </div>
+</section>
 
 <!-- ========================================= -->
 <!--            جميع القوالب التعليمية         -->
