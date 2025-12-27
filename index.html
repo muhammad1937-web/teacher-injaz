@@ -1740,7 +1740,15 @@
 
     .discord-title i {
       font-size: 1.5rem;
-      color: #5865F2;
+      color: var(--tech-blue); /* التعديل: نفس لون الأيقونات الرئيسية */
+      opacity: 0.9;
+      transition: all 0.3s ease;
+    }
+
+    /* تأثير hover على الأيقونة مثل باقي الأيقونات */
+    .discord-title:hover i {
+      opacity: 1;
+      transform: scale(1.1) rotate(5deg);
     }
 
     /* الجملة تحت العنوان - خفيفة بدون إطار */
@@ -1767,7 +1775,7 @@
       box-shadow: none;
     }
 
-    /* زر الديسكورد الخاص */
+    /* زر الديسكورد الخاص - مع ألوان الموقع */
     .discord-btn {
       display: inline-flex;
       align-items: center;
@@ -1783,10 +1791,10 @@
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       white-space: nowrap;
       min-width: 250px;
-      background: #5865F2;
+      background: var(--accent-teal); /* التعديل: لون الموقع بدلاً من أزرق الديسكورد */
       color: white;
       border: 2px solid transparent;
-      box-shadow: 0 4px 15px rgba(88, 101, 242, 0.3);
+      box-shadow: 0 4px 15px rgba(var(--accent-teal-rgb), 0.3); /* التعديل: لون الموقع */
       position: relative;
       overflow: hidden;
       margin: 0 auto;
@@ -1812,9 +1820,9 @@
     }
 
     .discord-btn:hover {
-      background: #4752C4;
+      background: var(--ai-teal); /* التعديل: اللون الأعمق للموقع */
       transform: translateY(-3px);
-      box-shadow: 0 6px 20px rgba(88, 101, 242, 0.4);
+      box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.4);
     }
 
     .discord-btn:hover::before {
@@ -1827,7 +1835,7 @@
 
     .discord-btn:active {
       transform: translateY(-1px);
-      box-shadow: 0 3px 10px rgba(88, 101, 242, 0.25);
+      box-shadow: 0 3px 10px rgba(var(--accent-teal-rgb), 0.25);
     }
 
     /* زر مسح محادثة الذكاء الاصطناعي */
@@ -2372,13 +2380,19 @@
     </h3>
   </div>
   
-  <p class="discord-description">انضم إلى مجتمعنا على ديسكورد للنقاش الفوري وطرح الأسئلة.</p>
+  <p class="discord-description">انضم إلى مجتمعنا على ديسكورد للنقاش وطرح الأسئلة.</p>
   
   <div class="projects-container">
     <a href="https://discord.gg/Cq9mn7Yr" target="_blank" class="discord-btn">
       <i class="fas fa-sign-in-alt"></i>
-      <span>ادخل إلى ساحة النقاش</span>
+      <span>انضم إلى مجتمعنا</span>
     </a>
+    
+    <!-- الجملة التوضيحية المضافة -->
+    <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 10px; line-height: 1.4; width: 100%; text-align: center;">
+      <i class="fas fa-info-circle" style="margin-left: 5px; color: var(--accent-teal);"></i>
+      عند النقر سيتم توجيهك لإنشاء حساب (إن لم يكن لديك)، ثم الدخول مباشرة إلى ساحة النقاش.
+    </p>
   </div>
 </section>
 
@@ -3342,7 +3356,3 @@
 </script>
 </body>
 </html>
-
-
-
-
