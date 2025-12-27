@@ -1,90 +1,3655 @@
-/* الخط العام والخلفية */
-body {
-    font-family: 'Tahoma', sans-serif;
-    background-color: #f4f6f9;
-    color: #333;
-    margin: 0;
-    padding: 0 15px;
-    direction: rtl;
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <title>واجهـة المعلـم الرقمـي</title>
+  <meta name="description" content="موقع أ.محمد الغامدي - توثيق الجهود المهنية ونشر المحتوى التعليمي للطلاب.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ========================================= */
+    /*     متغيرات الألوان الجديدة - الهوية المدمجة   */
+    /* ========================================= */
+    :root {
+      /* اللون الرئيسي: أزرق الدنيم الداكن - للثقة والاستقرار */
+      --primary-dark: #2C3E50;
+      --primary-dark-rgb: 44, 62, 80;
+      
+      /* اللون التقني: أزرق عميق - للعمق التقني */
+      --tech-blue: #1A5276;
+      --tech-blue-rgb: 26, 82, 118;
+      
+      /* اللون الثانوي: تركواز مشرق - للحيوية والتفاعل */
+      --accent-teal: #1ABC9C;
+      --accent-teal-rgb: 26, 188, 156;
+      
+      /* اللون الذكي: تركواز أعمق - للذكاء الاصطناعي */
+      --ai-teal: #17A589;
+      --ai-teal-rgb: 23, 165, 137;
+      
+      /* اللون الخفيف: أبيض ثلجي - للخلفيات المريحة */
+      --light-bg: #F8F9FA;
+      --light-bg-rgb: 248, 249, 250;
+      
+      /* اللون النقي: أبيض نقي - للبطاقات */
+      --pure-white: #FDFEFE;
+      --pure-white-rgb: 253, 254, 254;
+      
+      /* لون التميز: ذهبي - للصدارة فقط */
+      --gold-excellence: #D4AC0D;
+      --gold-excellence-rgb: 212, 172, 13;
+      
+      /* لون التحذير: أحمر خفيف - للتحذيرات المهمة */
+      --warning-red: #E74C3C;
+      --warning-red-rgb: 231, 76, 60;
+      
+      /* ألوان النصوص */
+      --text-dark: #2C3E50;
+      --text-medium: #34495E;
+      --text-light: #7F8C8D;
+      --text-subtitle: #5D6D7E; /* لون جديد للجمل تحت العناوين */
+      
+      /* ظلال وألوان تكميلية */
+      --shadow-color: rgba(44, 62, 80, 0.1);
+      --border-color: rgba(44, 62, 80, 0.15);
+      --hover-color: rgba(26, 188, 156, 0.1);
+      
+      /* التدرجات */
+      --gradient-primary: linear-gradient(135deg, #2C3E50 0%, #1A5276 100%);
+      --gradient-accent: linear-gradient(135deg, #1ABC9C 0%, #17A589 100%);
+      --gradient-card: linear-gradient(to bottom, #FDFEFE, #F8F9FA);
+      
+      /* انتقالات */
+      --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    /* ========================================= */
+    /*           إعدادات عامة                   */
+    /* ========================================= */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: var(--light-bg);
+      color: var(--text-dark);
+      line-height: 1.6;
+      font-weight: 400;
+      min-height: 100vh;
+      padding-bottom: 3rem;
+      background-image: 
+        radial-gradient(circle at 90% 10%, rgba(44, 62, 80, 0.03) 0%, transparent 20%),
+        radial-gradient(circle at 10% 90%, rgba(26, 188, 156, 0.03) 0%, transparent 20%);
+      transition: background-color 0.5s ease, color 0.5s ease;
+      overflow-x: hidden;
+    }
+
+    /* ========================================= */
+    /*        شريط الإشعارات                     */
+    /* ========================================= */
+    .notification-bar {
+      background: linear-gradient(90deg, 
+        rgba(var(--primary-dark-rgb), 0.05) 0%, 
+        rgba(var(--accent-teal-rgb), 0.03) 100%);
+      color: var(--text-dark);
+      padding: 8px 0;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      box-shadow: 0 2px 10px var(--shadow-color);
+      border-bottom: 1px solid var(--border-color);
+      font-size: 0.9rem;
+    }
+
+    .notification-container {
+      display: inline-block;
+      white-space: nowrap;
+      padding-right: 100%;
+      animation: scroll 20s linear infinite;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      box-sizing: content-box;
+    }
+
+    .notification-container i {
+      margin-left: 8px;
+      margin-right: 6px;
+      color: var(--accent-teal);
+      animation: ring 4s 0.7s ease-in-out infinite;
+      transform-origin: 50% 4px;
+      font-size: 0.9rem;
+    }
+
+    @keyframes scroll {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(100%); }
+    }
+
+    @keyframes ring {
+      0% { transform: rotate(0); }
+      1% { transform: rotate(30deg); }
+      3% { transform: rotate(-28deg); }
+      5% { transform: rotate(34deg); }
+      7% { transform: rotate(-32deg); }
+      9% { transform: rotate(30deg); }
+      11% { transform: rotate(-28deg); }
+      13% { transform: rotate(26deg); }
+      15% { transform: rotate(-24deg); }
+      17% { transform: rotate(22deg); }
+      19% { transform: rotate(-20deg); }
+      21% { transform: rotate(18deg); }
+      23% { transform: rotate(-16deg); }
+      25% { transform: rotate(14deg); }
+      27% { transform: rotate(-12deg); }
+      29% { transform: rotate(10deg); }
+      31% { transform: rotate(-8deg); }
+      33% { transform: rotate(6deg); }
+      35% { transform: rotate(-4deg); }
+      37% { transform: rotate(2deg); }
+      39% { transform: rotate(-1deg); }
+      41% { transform: rotate(1deg); }
+      43% { transform: rotate(0); }
+      100% { transform: rotate(0); }
+    }
+
+    /* ========================================= */
+    /*      الهيدر الجديد - مع خلفية صورة      */
+    /* ========================================= */
+    .tech-header {
+      background-image: url('images/rrr.png'); /* يمكنك تغيير هذا المسار */
+      background-size: cover;
+      background-position: center center;
+      background-repeat: no-repeat;
+      color: white;
+      text-align: center;
+      padding: 2.2rem 1rem 1.8rem;
+      position: relative;
+      border-bottom-left-radius: 25px;
+      border-bottom-right-radius: 25px;
+      box-shadow: 0 10px 30px rgba(var(--primary-dark-rgb), 0.2);
+      margin: 0;
+      overflow: hidden;
+      z-index: 1;
+      min-height: 220px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* طبقة شفافة فوق الصورة لجعل النصوص واضحة */
+    .tech-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.4); /* طبقة داكنة شفافة */
+      z-index: 1;
+    }
+
+    /* تصميم الهيدر - مركز كامل ومضغوط */
+    .header-content {
+      position: relative;
+      z-index: 2;
+      max-width: 1100px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      width: 100%;
+    }
+
+    /* الشعار في المنتصف مع مسافة أقل */
+    .header-logo {
+      margin-bottom: 0.3rem;
+    }
+
+    .header-logo img {
+      height: 85px;
+      width: auto;
+      filter: brightness(0) invert(1); /* يجعل الشعار أبيض */
+      transition: transform 0.3s ease;
+    }
+
+    .header-logo img:hover {
+      transform: scale(1.05);
+    }
+
+    /* تحسينات النصوص - مسافات مضغوطة */
+    .header-text-content {
+      text-align: center;
+      width: 100%;
+      position: relative;
+      z-index: 2;
+    }
+
+    .tech-header h1 {
+      font-size: 2.2rem;
+      font-weight: 800;
+      margin: 0 0 0.6rem 0;
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+      color: white;
+      letter-spacing: -0.5px;
+    }
+
+    .tech-header h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 0 0 0.4rem 0;
+      color: rgba(255, 255, 255, 0.95);
+      text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .tech-header p {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem 0;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .tech-header span {
+      font-size: 1.05rem;
+      font-weight: 400;
+      color: rgba(255, 255, 255, 0.85);
+      display: block;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.5;
+      padding: 0 1rem;
+    }
+
+    /* ========================================= */
+    /*         الوقت والتاريخ                   */
+    /* ========================================= */
+    .date-time-container {
+      text-align: center;
+      margin-bottom: 10px;
+      margin-top: 20px;
+    }
+
+    .compact-date.new-position {
+      background: rgba(var(--primary-dark-rgb), 0.05);
+      color: var(--text-dark);
+      padding: 8px 18px;
+      border-radius: 25px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      box-shadow: 0 4px 15px rgba(var(--primary-dark-rgb), 0.1);
+      border: 1px solid var(--border-color);
+      position: static;
+      transform: none;
+      margin: 0 auto;
+      display: inline-block;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+
+    .compact-date.new-position:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(var(--primary-dark-rgb), 0.15);
+      background: rgba(var(--primary-dark-rgb), 0.08);
+    }
+
+    .compact-date .separator {
+      margin: 0 8px;
+      opacity: 0.5;
+      color: var(--accent-teal);
+    }
+
+    /* ========================================= */
+    /*           شريط البحث                     */
+    /* ========================================= */
+    .search-container {
+      max-width: 500px;
+      margin: 0 auto 2rem;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 1001;
+    }
+
+    .search-box {
+      position: relative;
+      width: 100%;
+    }
+
+    .search-input {
+      width: 100%;
+      padding: 12px 50px 12px 20px;
+      border: 2px solid var(--border-color);
+      border-radius: 30px;
+      font-size: 1rem;
+      font-family: 'Tajawal', sans-serif;
+      background: var(--pure-white);
+      color: var(--text-dark);
+      box-shadow: 0 4px 15px rgba(var(--primary-dark-rgb), 0.08);
+      transition: var(--transition);
+      outline: none;
+      position: relative;
+      z-index: 1002;
+    }
+
+    .search-input:focus {
+      border-color: var(--accent-teal);
+      box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.15);
+      padding-right: 55px;
+    }
+
+    .search-button {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      background: var(--accent-teal);
+      color: white;
+      border: none;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      z-index: 1003;
+      box-shadow: 0 3px 10px rgba(var(--accent-teal-rgb), 0.3);
+    }
+
+    .search-button:hover {
+      background: var(--ai-teal);
+      transform: translateY(-50%) scale(1.05);
+      box-shadow: 0 5px 15px rgba(var(--accent-teal-rgb), 0.4);
+    }
+
+    .search-results {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      right: 0;
+      background: var(--pure-white);
+      color: var(--text-dark);
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.15);
+      margin-top: 5px;
+      z-index: 10000;
+      max-height: 300px;
+      overflow-y: auto;
+      display: none;
+      border: 1px solid var(--border-color);
+    }
+
+    .search-result-item {
+      padding: 12px 20px;
+      border-bottom: 1px solid rgba(var(--primary-dark-rgb), 0.08);
+      cursor: pointer;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .search-result-item:last-child {
+      border-bottom: none;
+    }
+
+    .search-result-item:hover {
+      background: rgba(var(--accent-teal-rgb), 0.05);
+    }
+
+    .search-result-item i {
+      color: var(--accent-teal);
+      font-size: 0.9rem;
+    }
+
+    .search-result-item span {
+      flex: 1;
+    }
+
+    .no-results {
+      padding: 15px 20px;
+      text-align: center;
+      color: var(--text-light);
+    }
+
+    /* ============================================ */
+    /* ==========  قسم التميز المحسّن   ========== */
+    /* ============================================ */
+    .fame-bar-section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.8rem;
+      max-width: 900px;
+      margin: 1.5rem auto 2.5rem auto;
+      padding: 1.5rem 1.8rem 1.3rem;
+      border-radius: 20px;
+      position: relative;
+      overflow: hidden;
+      background: var(--gradient-card);
+      box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.08);
+      border: 1px solid var(--border-color);
+      transition: var(--transition);
+    }
+
+    /* الخط الأخضر في الأعلى - نفس شكل القوالب التعليمية */
+    .fame-bar-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 5px;
+      background: var(--gradient-accent);
+      border-radius: 2px 2px 0 0;
+      transition: height 0.3s ease;
+    }
+
+    .fame-bar-section:hover::before {
+      height: 6px;
+    }
+
+    .fame-bar-section:hover {
+      box-shadow: 0 15px 35px rgba(var(--primary-dark-rgb), 0.12);
+      transform: translateY(-2px);
+    }
+
+    .fame-bar-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin-bottom: 0.1rem;
+    }
+
+    .fame-bar-title i {
+      font-size: 1.5rem;
+      color: var(--gold-excellence);
+      text-shadow: 0 2px 4px rgba(var(--gold-excellence-rgb), 0.3);
+    }
+
+    /* الجملة تحت العنوان - خفيفة بدون إطار */
+    .honors-subtitle {
+      margin: 0 0 0.8rem 0;
+      font-size: 0.95rem;
+      color: var(--text-subtitle);
+      font-weight: 400;
+      text-align: center;
+      line-height: 1.5;
+      padding: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      text-shadow: none;
+      transition: color 0.3s ease;
+    }
+
+    .honors-subtitle:hover {
+      color: var(--tech-blue);
+      transform: none;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+
+    .students-container {
+      position: relative;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 0.5rem;
+    }
+
+    /* قائمة الطلاب */
+    .students-list {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2.5rem;
+      width: 100%;
+      flex-wrap: nowrap;
+      padding: 0.5rem 0;
+      overflow: visible;
+    }
+
+    .student-item {
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    /* تعديل حجم الصور لتناسب العرض الثابت */
+    .student-image {
+      position: relative;
+      width: 95px;
+      height: 95px;
+      border-radius: 50%;
+      overflow: hidden;
+      border: 3px solid white;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
+
+    .student-image:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
+    }
+
+    .student-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+
+    .student-image:hover img {
+      transform: scale(1.1);
+    }
+
+    .info-toggle-btn {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--accent-teal);
+      color: white;
+      border: 2px solid white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 0.85rem;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 3px 10px rgba(var(--accent-teal-rgb), 0.4);
+      z-index: 10;
+      margin-top: 0.2rem;
+    }
+
+    .info-toggle-btn:hover {
+      background: var(--ai-teal);
+      transform: scale(1.1);
+      box-shadow: 0 5px 15px rgba(var(--accent-teal-rgb), 0.6);
+    }
+
+    /* تغيير اللون إلى الذهبي عند النقر */
+    .student-item.active .info-toggle-btn {
+      background: var(--gold-excellence);
+      transform: rotate(45deg);
+      box-shadow: 0 3px 10px rgba(var(--gold-excellence-rgb), 0.6);
+    }
+
+    .student-item.active .info-toggle-btn:hover {
+      background: #c29a0b;
+      transform: rotate(45deg) scale(1.1);
+      box-shadow: 0 5px 15px rgba(var(--gold-excellence-rgb), 0.8);
+    }
+
+    /* النص المنبثق */
+    .student-info {
+      position: absolute;
+      top: -140px;
+      left: 50%;
+      transform: translateX(-50%) translateY(10px);
+      background: var(--primary-dark);
+      color: white;
+      padding: 0.9rem 1.1rem;
+      border-radius: 12px;
+      width: 240px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      z-index: 1005;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
+      pointer-events: none;
+    }
+
+    .student-item.active .student-info {
+      opacity: 1;
+      visibility: visible;
+      transform: translateX(-50%) translateY(0);
+      pointer-events: auto;
+    }
+
+    /* السهم يشير لأسفل */
+    .student-info::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      border-width: 10px;
+      border-style: solid;
+      border-color: var(--primary-dark) transparent transparent transparent;
+    }
+
+    .student-info h4 {
+      margin: 0 0 0.4rem 0;
+      font-size: 1rem;
+      font-weight: 600;
+      color: white;
+    }
+
+    .student-info p {
+      margin: 0;
+      font-size: 0.85rem;
+      opacity: 0.9;
+      line-height: 1.4;
+      color: rgba(255, 255, 255, 0.95);
+    }
+
+    /* ========================================= */
+    /*          تنسيقات البطاقات                 */
+    /* ========================================= */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem 3rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 2rem;
+      justify-content: center;
+    }
+
+    .section-card {
+      background: var(--gradient-card);
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.1);
+      padding: 2rem 2rem 1.5rem;
+      width: 350px;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+      transition: var(--transition);
+      cursor: default;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .section-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 5px;
+      background: var(--gradient-accent);
+      border-radius: 2px 2px 0 0;
+      transition: height 0.3s ease;
+    }
+
+    .section-card:hover::before {
+      height: 6px;
+    }
+
+    .section-card:hover {
+      box-shadow: 0 15px 35px rgba(var(--primary-dark-rgb), 0.15);
+      transform: translateY(-7px);
+      border-color: rgba(var(--primary-dark-rgb), 0.2);
+    }
+
+    .section-title {
+      font-size: 1.65rem;
+      color: var(--primary-dark);
+      margin-bottom: 1.5rem;
+      padding-right: 0.8rem;
+      font-weight: 700;
+      position: relative;
+      letter-spacing: 0.5px;
+      user-select: none;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.8rem;
+      text-shadow: 0 1px 2px rgba(var(--primary-dark-rgb), 0.1);
+    }
+
+    .title-container {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .section-icon {
+      font-size: 1.5rem;
+      color: var(--tech-blue);
+      opacity: 0.9;
+      transition: var(--transition);
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    .section-title:hover .section-icon {
+      opacity: 1;
+      transform: scale(1.1) rotate(5deg);
+      color: var(--primary-dark);
+    }
+
+    .toggle-cards {
+      background: transparent;
+      color: var(--primary-dark);
+      border: 1px solid var(--border-color);
+      width: 35px;
+      height: 35px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-left: 15px;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .toggle-cards:hover {
+      background: rgba(var(--primary-dark-rgb), 0.08);
+      color: var(--tech-blue);
+      transform: scale(1.1);
+      box-shadow: 0 3px 10px rgba(var(--primary-dark-rgb), 0.1);
+    }
+
+    .toggle-cards i {
+      transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+    }
+
+    .toggle-cards.collapsed i {
+      transform: rotate(180deg);
+    }
+
+    .toggle-cards.collapsed {
+      background: rgba(var(--primary-dark-rgb), 0.08);
+      color: var(--tech-blue);
+    }
+
+    .cards-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      margin-top: 0.8rem;
+      overflow: hidden;
+      transition: max-height 0.7s ease-in-out;
+      max-height: 2000px;
+    }
+
+    .cards-container.collapsed {
+      max-height: 0;
+      margin-top: 0;
+      overflow: hidden;
+    }
+
+    /* بطاقات محسنة للنصوص الطويلة */
+    .card {
+      background: var(--pure-white);
+      border-radius: 16px;
+      padding: 1.2rem 1.4rem;
+      box-shadow: 0 4px 12px rgba(var(--primary-dark-rgb), 0.08);
+      border: 1.5px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(15px);
+      animation: fadeSlideUp 0.5s forwards ease;
+      transition: var(--transition);
+      user-select: text;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background: rgba(var(--accent-teal-rgb), 0.03);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.15);
+      border-color: var(--accent-teal);
+      background: var(--pure-white);
+    }
+
+    .card:hover::before {
+      opacity: 1;
+    }
+
+    .card-icon {
+      font-size: 1.7rem;
+      color: var(--tech-blue);
+      min-width: 38px;
+      text-align: center;
+      transition: var(--transition);
+      opacity: 0.9;
+      user-select: none;
+      text-shadow: 0 1px 2px rgba(var(--tech-blue-rgb), 0.2);
+      flex-shrink: 0;
+    }
+
+    .card:hover .card-icon {
+      transform: scale(1.2) rotate(5deg);
+      color: var(--accent-teal);
+      opacity: 1;
+      text-shadow: 0 2px 4px rgba(var(--accent-teal-rgb), 0.3);
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--text-dark);
+      transition: color 0.3s ease;
+      word-break: keep-all;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      position: relative;
+      overflow: visible;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .card:hover .card-title {
+      color: var(--tech-blue);
+    }
+
+    .nowrap-text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .card-title .external-icon {
+      font-size: 0.75em;
+      color: var(--tech-blue);
+      margin-right: 5px;
+      opacity: 0.8;
+      transition: var(--transition);
+      flex-shrink: 0;
+    }
+
+    .card:hover .external-icon {
+      opacity: 1;
+      color: var(--accent-teal);
+      transform: translateX(3px);
+    }
+
+    @keyframes fadeSlideUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ========================================= */
+    /*      قسم الذكاء الاصطناعي                 */
+    /* ========================================= */
+    .ai-assistant-container {
+      max-width: 800px;
+      margin: 3rem auto;
+      padding: 2.5rem;
+      background: var(--gradient-card);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(var(--primary-dark-rgb), 0.1);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--border-color);
+    }
+
+    .ai-assistant-container::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 5px;
+      background: var(--gradient-accent);
+      border-radius: 2px 2px 0 0;
+    }
+
+    .ai-header {
+      color: var(--primary-dark);
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 1.7rem;
+      position: relative;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .ai-icon {
+      font-size: 2rem;
+      background: linear-gradient(135deg, 
+        var(--tech-blue) 0%, 
+        var(--ai-teal) 50%, 
+        var(--accent-teal) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+
+    .ai-description {
+      text-align: center;
+      color: var(--text-medium);
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+      line-height: 1.6;
+    }
+
+    .ai-chat-container {
+      background: var(--pure-white);
+      border-radius: 15px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 15px rgba(var(--primary-dark-rgb), 0.08);
+      border: 1px solid var(--border-color);
+      margin-bottom: 1.5rem;
+    }
+
+    .ai-messages {
+      height: 300px;
+      overflow-y: auto;
+      margin-bottom: 1rem;
+      padding: 1rem;
+      background: var(--pure-white);
+      border-radius: 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    .message {
+      margin-bottom: 1rem;
+      padding: 0.8rem 1rem;
+      border-radius: 12px;
+      max-width: 85%;
+      word-wrap: break-word;
+      transform: scale(0.95);
+      opacity: 0;
+      transform-origin: bottom left;
+      animation: pop-in 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+    }
+
+    @keyframes pop-in {
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    .user-message {
+      background: rgba(var(--primary-dark-rgb), 0.05);
+      color: var(--text-dark);
+      margin-right: auto;
+      border-bottom-right-radius: 4px;
+      border: 1px solid rgba(var(--primary-dark-rgb), 0.1);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+      transform-origin: bottom left;
+    }
+
+    .ai-message {
+      background: rgba(var(--ai-teal-rgb), 0.05);
+      color: var(--text-dark);
+      margin-left: auto;
+      border: 1px solid rgba(var(--ai-teal-rgb), 0.2);
+      border-bottom-left-radius: 4px;
+      box-shadow: 0 3px 10px rgba(var(--ai-teal-rgb), 0.1);
+      transform-origin: bottom right;
+      position: relative;
+      padding-left: 45px;
+    }
+
+    .copy-btn {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(var(--ai-teal-rgb), 0.15);
+      color: var(--ai-teal);
+      border: none;
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      opacity: 0.5;
+      transition: opacity 0.3s ease, background-color 0.3s ease;
+    }
+
+    .ai-message:hover .copy-btn {
+      opacity: 1;
+      background: rgba(var(--ai-teal-rgb), 0.2);
+    }
+
+    .copy-btn:active {
+      transform: scale(0.95);
+    }
+
+    .copy-btn .fa-check {
+      color: var(--accent-teal);
+      font-size: 1.1rem;
+    }
+
+    .ai-input-group {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .ai-input {
+      flex: 1;
+      padding: 12px 15px;
+      border: 2px solid var(--border-color);
+      border-radius: 25px;
+      font-size: 1rem;
+      font-family: 'Tajawal', sans-serif;
+      background: var(--pure-white);
+      color: var(--text-dark);
+      transition: var(--transition);
+      outline: none;
+    }
+
+    .ai-input:focus {
+      border-color: var(--ai-teal);
+      box-shadow: 0 0 0 3px rgba(var(--ai-teal-rgb), 0.1);
+    }
+
+    .ai-send-btn {
+      background: var(--ai-teal);
+      color: white;
+      border: none;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      font-size: 1.2rem;
+      box-shadow: 0 3px 10px rgba(var(--ai-teal-rgb), 0.3);
+    }
+
+    .ai-send-btn:hover {
+      background: var(--accent-teal);
+      transform: scale(1.05);
+      box-shadow: 0 5px 15px rgba(var(--ai-teal-rgb), 0.4);
+    }
+
+    .ai-send-btn:disabled {
+      background: var(--text-light);
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .ai-typing-indicator {
+      display: flex;
+      align-items: center;
+      padding: 10px 15px;
+      display: none;
+    }
+
+    .ai-typing-indicator .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: var(--ai-teal);
+      margin: 0 3px;
+      animation: typing-bounce 1.4s infinite ease-in-out both;
+    }
+
+    @keyframes typing-bounce {
+      0%, 80%, 100% { transform: scale(0); }
+      40% { transform: scale(1.0); }
+    }
+
+    .ai-typing-indicator .dot:nth-child(1) { animation-delay: -0.32s; }
+    .ai-typing-indicator .dot:nth-child(2) { animation-delay: -0.16s; }
+
+    .ai-disclaimer {
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-medium);
+      margin-top: 1rem;
+      padding: 1rem;
+      background: rgba(var(--ai-teal-rgb), 0.08);
+      border-radius: 10px;
+      border: 1px solid rgba(var(--ai-teal-rgb), 0.15);
+    }
+
+    .ai-disclaimer i {
+      color: var(--ai-teal);
+      margin-left: 0.5rem;
+    }
+
+    /* ========================================= */
+    /*      قسم الاستفسارات                     */
+    /* ========================================= */
+    .inquiries-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      padding: 2rem;
+      margin: 2rem auto;
+      flex-wrap: wrap;
+      max-width: 800px;
+    }
+
+    .inquiry-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      padding: 0.9rem 1.8rem;
+      border-radius: 50px;
+      text-decoration: none;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .inquiry-btn i {
+      font-size: 1.2em;
+    }
+
+    .inquiry-btn.primary {
+      background-color: var(--accent-teal);
+      color: white;
+      box-shadow: 0 4px 15px rgba(var(--accent-teal-rgb), 0.3);
+    }
+
+    .inquiry-btn.primary:hover {
+      background-color: var(--ai-teal);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.4);
+    }
+
+    .inquiry-btn.secondary {
+      background-color: transparent;
+      color: var(--accent-teal);
+      border-color: var(--accent-teal);
+    }
+
+    .inquiry-btn.secondary:hover {
+      background-color: rgba(var(--accent-teal-rgb), 0.1);
+      transform: translateY(-3px);
+    }
+
+    /* نافذة الاستفسارات المنبثقة */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.6);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .modal-content {
+      background: var(--pure-white);
+      padding: 2rem;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 700px;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      position: relative;
+      transform: scale(0.9);
+      transition: transform 0.3s ease;
+      border: 1px solid var(--border-color);
+    }
+
+    .modal-overlay.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-overlay.visible .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-close-btn {
+      position: absolute;
+      top: 1rem;
+      left: 1rem;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: var(--text-light);
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .modal-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+      border-bottom: 1px solid var(--border-color);
+      padding-bottom: 1rem;
+    }
+
+    .modal-header h2 {
+      color: var(--primary-dark);
+      font-size: 1.8rem;
+    }
+
+    .modal-header p {
+      color: var(--text-medium);
+      font-size: 1rem;
+    }
+
+    /* ========================================= */
+    /*          زر العودة للأعلى                 */
+    /* ========================================= */
+    .back-to-top {
+      position: fixed;
+      bottom: 30px;
+      left: 30px;
+      width: 50px;
+      height: 50px;
+      background: rgba(var(--primary-dark-rgb), 0.85);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 1.3rem;
+      cursor: pointer;
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(20px);
+      transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      box-shadow: 0 5px 20px rgba(var(--primary-dark-rgb), 0.3);
+    }
+
+    .back-to-top.visible {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .back-to-top:hover {
+      background: rgba(var(--primary-dark-rgb), 0.95);
+      transform: translateY(-5px) scale(1.05);
+      box-shadow: 0 8px 25px rgba(var(--primary-dark-rgb), 0.4);
+    }
+
+    .back-to-top:active {
+      transform: translateY(-2px) scale(0.98);
+    }
+
+    /* ========================================= */
+    /*          تذييل الصفحة                    */
+    /* ========================================= */
+    .site-footer {
+      background: var(--pure-white);
+      color: var(--text-medium);
+      padding: 2rem 1.5rem;
+      text-align: center;
+      margin-top: 3rem;
+      border-top: 1px solid var(--border-color);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      margin-bottom: 1.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-link {
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .footer-link:hover {
+      color: var(--accent-teal);
+      transform: translateY(-2px);
+    }
+
+    .footer-link i {
+      color: var(--accent-teal);
+    }
+
+    .footer-copyright {
+      font-size: 0.9rem;
+    }
+
+    /* ========================================= */
+    /*          تأثيرات الظهور                  */
+    /* ========================================= */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ============================================ */
+    /* ==========   قسم مواضيع التصويت   ========== */
+    /* ============================================ */
+    .voting-section {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      padding: 1.5rem 1.8rem;
+      border-radius: 20px;
+      background: var(--gradient-card);
+      box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.08);
+      border: 1px solid var(--border-color);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* الخط الأخضر في الأعلى - نفس شكل القوالب التعليمية */
+    .voting-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 5px;
+      background: var(--gradient-accent);
+      border-radius: 2px 2px 0 0;
+      transition: height 0.3s ease;
+    }
+
+    .voting-section:hover::before {
+      height: 6px;
+    }
+
+    .voting-section:hover {
+      box-shadow: 0 15px 35px rgba(var(--primary-dark-rgb), 0.12);
+      transform: translateY(-2px);
+    }
+
+    .voting-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .voting-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin: 0;
+    }
+
+    .voting-title i {
+      font-size: 1.5rem;
+      color: var(--accent-teal);
+    }
+
+    /* الجملة تحت العنوان - خفيفة بدون إطار */
+    .voting-description {
+      margin: 0 0 1.5rem 0;
+      font-size: 0.95rem;
+      color: var(--text-subtitle);
+      font-weight: 400;
+      text-align: center;
+      line-height: 1.5;
+      padding: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      text-shadow: none;
+      transition: color 0.3s ease;
+    }
+
+    .voting-description:hover {
+      color: var(--tech-blue);
+      transform: none;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+
+    /* ============================================ */
+    /* =======  أزرار مشاريع التصويت الجديدة ====== */
+    /* ============================================ */
+    .projects-container {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .project-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 600;
+      padding: 0.9rem 1.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      white-space: nowrap;
+      min-width: 160px;
+      background: rgba(255, 255, 255, 0.7);
+      color: var(--text-medium);
+      border: 1.5px solid var(--border-color);
+      box-shadow: 0 4px 12px rgba(var(--primary-dark-rgb), 0.08);
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+      flex: 1;
+    }
+
+    .project-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(var(--accent-teal-rgb), 0.05);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-btn i {
+      font-size: 1em;
+      transition: all 0.3s ease;
+    }
+
+    .project-btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(var(--primary-dark-rgb), 0.12);
+      border-color: var(--accent-teal);
+      background: rgba(255, 255, 255, 0.9);
+      color: var(--primary-dark);
+    }
+
+    .project-btn:hover::before {
+      opacity: 1;
+    }
+
+    .project-btn:hover i {
+      transform: translateX(3px);
+    }
+
+    .project-btn:active {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(var(--primary-dark-rgb), 0.1);
+    }
+
+    /* تحسين النص داخل الأزرار */
+    .project-btn span {
+      font-weight: 600;
+      color: var(--text-medium);
+      text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
+    }
+
+    /* زر المشروع الأول - لون أزرق تقني */
+    .project-btn:nth-child(1) {
+      border-color: rgba(var(--tech-blue-rgb), 0.3);
+    }
+
+    .project-btn:nth-child(1) i {
+      color: var(--tech-blue);
+    }
+
+    .project-btn:nth-child(1):hover {
+      border-color: var(--tech-blue);
+      background: linear-gradient(135deg, 
+        rgba(var(--tech-blue-rgb), 0.1), 
+        rgba(255, 255,255, 0.9));
+    }
+
+    .project-btn:nth-child(1):hover i {
+      color: var(--tech-blue);
+    }
+
+    /* زر المشروع الثاني - لون تركوازي */
+    .project-btn:nth-child(2) {
+      border-color: rgba(var(--accent-teal-rgb), 0.3);
+    }
+
+    .project-btn:nth-child(2) i {
+      color: var(--accent-teal);
+    }
+
+    .project-btn:nth-child(2):hover {
+      border-color: var(--accent-teal);
+      background: linear-gradient(135deg, 
+        rgba(var(--accent-teal-rgb), 0.1), 
+        rgba(255, 255, 255, 0.9));
+    }
+
+    .project-btn:nth-child(2):hover i {
+      color: var(--accent-teal);
+    }
+
+    /* زر المشروع الثالث - لون ذهبي */
+    .project-btn:nth-child(3) {
+      border-color: rgba(var(--gold-excellence-rgb), 0.3);
+    }
+
+    .project-btn:nth-child(3) i {
+      color: var(--gold-excellence);
+    }
+
+    .project-btn:nth-child(3):hover {
+      border-color: var(--gold-excellence);
+      background: linear-gradient(135deg, 
+        rgba(var(--gold-excellence-rgb), 0.1), 
+        rgba(255, 255, 255, 0.9));
+    }
+
+    .project-btn:nth-child(3):hover i {
+      color: #c29a0b;
+    }
+
+    /* هذا الكود مهم لتنسيق صندوق Disqus نفسه */
+    #disqus_thread {
+      background-color: var(--pure-white);
+      padding: 1rem;
+      border-radius: 15px;
+      border: 1px solid var(--border-color);
+    }
+
+    /* ============================================ */
+    /* ==========   قسم ساحة النقاش   ========== */
+    /* ============================================ */
+    .discord-section {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      padding: 1.5rem 1.8rem;
+      border-radius: 20px;
+      background: var(--gradient-card);
+      border: 1px solid var(--border-color);
+      text-align: center;
+      box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.08);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* الخط الأخضر في الأعلى - نفس شكل القوالب التعليمية */
+    .discord-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 5px;
+      background: var(--gradient-accent);
+      border-radius: 2px 2px 0 0;
+      transition: height 0.3s ease;
+    }
+
+    .discord-section:hover::before {
+      height: 6px;
+    }
+
+    .discord-section:hover {
+      box-shadow: 0 15px 35px rgba(var(--primary-dark-rgb), 0.12);
+      transform: translateY(-2px);
+    }
+
+    .discord-header {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+
+    .discord-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+      margin: 0;
+    }
+
+    .discord-title i {
+      font-size: 1.5rem;
+      color: var(--tech-blue); /* التعديل: نفس لون الأيقونات الرئيسية */
+      opacity: 0.9;
+      transition: all 0.3s ease;
+    }
+
+    /* تأثير hover على الأيقونة مثل باقي الأيقونات */
+    .discord-title:hover i {
+      opacity: 1;
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    /* الجملة تحت العنوان - خفيفة بدون إطار */
+    .discord-description {
+      margin: 0 0 1.5rem 0;
+      font-size: 0.95rem;
+      color: var(--text-subtitle);
+      font-weight: 400;
+      text-align: center;
+      line-height: 1.5;
+      padding: 0;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+      text-shadow: none;
+      transition: color 0.3s ease;
+    }
+
+    .discord-description:hover {
+      color: var(--tech-blue);
+      transform: none;
+      background: transparent;
+      border: none;
+      box-shadow: none;
+    }
+
+    /* زر الديسكورد الخاص - مع ألوان الموقع */
+    .discord-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 0.9rem 2rem;
+      border-radius: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      white-space: nowrap;
+      min-width: 250px;
+      background: var(--accent-teal); /* التعديل: لون الموقع بدلاً من أزرق الديسكورد */
+      color: white;
+      border: 2px solid transparent;
+      box-shadow: 0 4px 15px rgba(var(--accent-teal-rgb), 0.3); /* التعديل: لون الموقع */
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+    }
+
+    .discord-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.1), 
+        transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .discord-btn i {
+      font-size: 1.2em;
+      transition: transform 0.3s ease;
+    }
+
+    .discord-btn:hover {
+      background: var(--ai-teal); /* التعديل: اللون الأعمق للموقع */
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.4);
+    }
+
+    .discord-btn:hover::before {
+      opacity: 1;
+    }
+
+    .discord-btn:hover i {
+      transform: translateX(3px);
+    }
+
+    .discord-btn:active {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(var(--accent-teal-rgb), 0.25);
+    }
+
+    /* زر مسح محادثة الذكاء الاصطناعي */
+    .clear-chat-btn {
+      background: var(--warning-red);
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      margin-bottom: 10px;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin: 0 auto 10px;
+    }
+
+    .clear-chat-btn:hover {
+      background: #c0392b;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(var(--warning-red-rgb), 0.3);
+    }
+
+    /* ============================================ */
+    /* ==========   الفواصل الجديدة      ========== */
+    /* ============================================ */
+    .section-divider {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 2rem auto;
+      max-width: 80%;
+      height: 1px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .section-divider.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(var(--primary-dark-rgb), 0.1);
+    }
+
+    .divider-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-teal);
+      margin: 0 15px;
+      position: relative;
+    }
+
+    .divider-dot::before,
+    .divider-dot::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(var(--primary-dark-rgb), 0.3);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .divider-dot::before {
+      right: 20px;
+    }
+
+    .divider-dot::after {
+      left: 20px;
+    }
+
+    /* ============================================ */
+    /* ==========   العنوان الرئيسي المعدل   ========== */
+    /* ============================================ */
+    .section-main-title {
+      text-align: center;
+      margin: 2.5rem auto 2.5rem; /* زيادة المسافة السفلية من 1.5rem إلى 2.5rem */
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      width: 100%;
+      position: relative;
+    }
+
+    .section-main-title.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .main-title-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.7rem;
+      max-width: 100%;
+      padding: 1.5rem 2.5rem; /* زيادة المساحة الداخلية */
+      border: 2px solid rgba(var(--accent-teal-rgb), 0.4); /* إطار جديد */
+      border-radius: 18px; /* زوايا منحنية */
+      background: transparent; /* خلفية شفافة */
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(var(--primary-dark-rgb), 0.05); /* ظل خفيف جداً */
+      backdrop-filter: blur(5px); /* تأثير ضبابي خفيف */
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    /* إزالة النقاط الزخرفية القديمة */
+    .main-title-content::before,
+    .main-title-content::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, 
+        transparent, 
+        rgba(var(--accent-teal-rgb), 0.3), 
+        transparent);
+    }
+
+    .main-title-content::before {
+      right: 15px;
+    }
+
+    .main-title-content::after {
+      left: 15px;
+    }
+
+    .main-title-icon {
+      font-size: 2.2rem;
+      background: linear-gradient(135deg, var(--accent-teal) 0%, var(--ai-teal) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gentle-pulse 3s infinite ease-in-out;
+      margin-bottom: 0.3rem;
+      transition: var(--transition);
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 4px rgba(var(--accent-teal-rgb), 0.2);
+    }
+
+    .main-title-content:hover .main-title-icon {
+      transform: rotate(10deg) scale(1.1);
+      background: linear-gradient(135deg, var(--ai-teal) 0%, var(--tech-blue) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    @keyframes gentle-pulse {
+      0%, 100% { 
+        transform: scale(1); 
+        opacity: 0.9; 
+      }
+      50% { 
+        transform: scale(1.05); 
+        opacity: 1; 
+      }
+    }
+
+    .main-title-text {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: -0.8px;
+      text-shadow: 0 2px 4px rgba(var(--primary-dark-rgb), 0.1);
+      text-align: center;
+      line-height: 1.3;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      position: relative;
+      z-index: 2;
+      padding: 0 0.5rem;
+    }
+
+    /* تأثير hover على الإطار */
+    .main-title-content:hover {
+      border-color: rgba(var(--accent-teal-rgb), 0.6);
+      box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.1);
+      transform: translateY(-2px);
+      transition: all 0.3s ease;
+    }
+
+    /* ========================================= */
+    /*        تحسينات للاستجابة                 */
+    /* ========================================= */
+    @media (max-width: 768px) {
+      /* تحسين الهيدر على الجوال */
+      .tech-header {
+        padding: 1.8rem 1rem 1.5rem;
+        min-height: 190px;
+        background-position: center;
+      }
+      
+      .header-logo img {
+        height: 65px;
+      }
+      
+      .tech-header h1 {
+        font-size: 1.7rem;
+        margin-bottom: 0.4rem;
+      }
+      
+      .tech-header h2 {
+        font-size: 1.3rem;
+        margin-bottom: 0.3rem;
+      }
+      
+      .tech-header p {
+        font-size: 1.1rem;
+        margin-bottom: 0.4rem;
+      }
+      
+      .tech-header span {
+        font-size: 0.95rem;
+        padding: 0 0.5rem;
+      }
+      
+      /* إصلاح عنوان "العمل التعليمي" على الجوال */
+      .section-title {
+        font-size: 1.35rem;
+        gap: 0.6rem;
+      }
+      
+      .section-title[data-title="العمل التعليمي"] {
+        font-size: 1.3rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      
+      /* بقية التحسينات */
+      .section-card {
+        width: 95% !important;
+        padding: 1.5rem 1.5rem 1rem !important;
+        margin: 0 auto 1.2rem !important;
+      }
+      
+      .card {
+        padding: 1rem 1.2rem !important;
+        gap: 0.8rem;
+      }
+      
+      .card-icon {
+        min-width: 32px;
+        font-size: 1.5rem;
+      }
+      
+      .card-title {
+        font-size: 1.05rem;
+        gap: 6px;
+      }
+      
+      /* معالجة خاصة للنصوص الطويلة على الجوال */
+      .card[data-title*="ميثاق مهنة التعليم"] .card-title,
+      .card[data-title*="رؤية ورسالة المعلم"] .card-title,
+      .card[data-title*="المجتمعات المهنية"] .card-title,
+      .card[data-title*="أهداف تعليم المادة"] .card-title {
+        letter-spacing: -0.2px;
+        word-spacing: -0.5px;
+        font-size: 1.03rem;
+        padding-left: 1px;
+      }
+      
+      .search-container {
+        padding: 0 1rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .search-input {
+        padding: 10px 45px 10px 15px;
+        font-size: 0.95rem;
+      }
+      
+      .search-button {
+        width: 32px;
+        height: 32px;
+      }
+      
+      .compact-date.new-position {
+        padding: 6px 15px;
+        font-size: 0.85rem;
+      }
+      
+      .ai-assistant-container {
+        padding: 1.5rem;
+      }
+      
+      .ai-messages {
+        height: 250px;
+      }
+      
+      .inquiries-container {
+        flex-direction: column;
+      }
+      
+      .inquiry-btn {
+        width: 100%;
+        max-width: 300px;
+      }
+      
+      .section-icon {
+        font-size: 1.3rem;
+      }
+      
+      /* تحسين قسم التصويت على الجوال */
+      .voting-section {
+        padding: 1.3rem 1rem 1.2rem;
+      }
+      
+      /* تحسين قسم الديسكورد على الجوال */
+      .discord-section {
+        padding: 1.3rem 1rem 1.2rem;
+      }
+      
+      .discord-btn {
+        min-width: 200px;
+        padding: 0.8rem 1.5rem;
+        font-size: 0.95rem;
+      }
+      
+      /* تحسين الفواصل على الجوال */
+      .section-divider {
+        max-width: 90%;
+        margin: 1.5rem auto;
+      }
+      
+      .divider-dot {
+        width: 5px;
+        height: 5px;
+        margin: 0 12px;
+      }
+      
+      .divider-dot::before {
+        right: 15px;
+      }
+      
+      .divider-dot::after {
+        left: 15px;
+      }
+      
+      /* تحسين العنوان الرئيسي المعدل على الجوال */
+      .section-main-title {
+        margin: 2rem auto 2.5rem;
+      }
+      
+      .main-title-content {
+        padding: 1.2rem 1.5rem;
+        margin: 0 1rem;
+        border-width: 1.5px;
+      }
+      
+      .main-title-icon {
+        font-size: 1.8rem;
+      }
+      
+      .main-title-text {
+        font-size: 1.3rem;
+        padding: 0 0.3rem;
+        letter-spacing: -0.6px;
+      }
+      
+      /* إخفاء الخطوط العمودية على الجوال الصغير */
+      .main-title-content::before,
+      .main-title-content::after {
+        display: none;
+      }
+      
+      /* إصلاح أزرار المشاريع مع زيادة التباعد على الجوال */
+      .projects-container {
+        flex-direction: row !important;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1.5rem; /* زيادة التباعد على الجوال */
+      }
+      
+      .project-btn {
+        width: auto !important;
+        max-width: none !important;
+        min-width: 140px;
+        padding: 0.8rem 1.2rem !important;
+        flex: 0 0 auto;
+        font-size: 0.9rem;
+        margin: 0 !important;
+        display: inline-flex !important;
+      }
+      
+      /* تعديل خاص للشاشات الصغيرة جداً */
+      @media (max-width: 480px) {
+        .projects-container {
+          flex-direction: row !important;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 1.2rem; /* تباعد مناسب للشاشات الصغيرة */
+        }
+        
+        .project-btn {
+          min-width: 120px;
+          padding: 0.7rem 1rem !important;
+          font-size: 0.85rem;
+          flex: 0 0 auto;
+        }
+      }
+      
+      /* تعديل خاص للشاشات المتوسطة الصغيرة */
+      @media (min-width: 481px) and (max-width: 768px) {
+        .project-btn {
+          min-width: 150px;
+          padding: 0.8rem 1.2rem !important;
+        }
+      }
+      
+      /* زر العودة للأعلى على الجوال */
+      .back-to-top {
+        bottom: 20px;
+        left: 20px;
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      /* تحسينات إضافية للشاشات الصغيرة جداً */
+      .tech-header {
+        padding: 1.5rem 0.5rem 1.2rem;
+        min-height: 180px;
+      }
+      
+      .header-logo img {
+        height: 55px;
+      }
+      
+      .tech-header h1 {
+        font-size: 1.5rem;
+        margin-bottom: 0.3rem;
+      }
+      
+      .tech-header h2 {
+        font-size: 1.2rem;
+        margin-bottom: 0.2rem;
+      }
+      
+      .tech-header p {
+        font-size: 1rem;
+        margin-bottom: 0.3rem;
+      }
+      
+      .tech-header span {
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+      
+      .compact-date.new-position {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+      }
+      
+      .search-input {
+        font-size: 0.9rem;
+      }
+      
+      .card-title {
+        font-size: 1rem;
+      }
+      
+      .section-title {
+        font-size: 1.25rem;
+      }
+      
+      .notification-bar {
+        font-size: 0.8rem;
+        padding: 7px 0;
+      }
+      
+      /* تعديل قسم التميز للشاشات الصغيرة جداً */
+      .students-list {
+        gap: 1.5rem;
+      }
+      
+      .student-image {
+        width: 85px;
+        height: 85px;
+      }
+      
+      .info-toggle-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
+      }
+      
+      /* المزيد من التحسينات لقسم التميز */
+      .fame-bar-section {
+        margin-bottom: 2rem;
+        padding: 1.2rem 0.8rem 1rem;
+        gap: 0.5rem;
+      }
+      
+      /* تحسين الفواصل للشاشات الصغيرة */
+      .section-divider {
+        margin: 1rem auto;
+      }
+      
+      .divider-dot::before {
+        right: 12px;
+      }
+      
+      .divider-dot::after {
+        left: 12px;
+      }
+      
+      /* تحسين العنوان الرئيسي المعدل للشاشات الصغيرة */
+      .main-title-icon {
+        font-size: 1.5rem;
+      }
+      
+      .main-title-text {
+        font-size: 1.1rem;
+        padding: 0 0.3rem;
+        letter-spacing: -0.5px;
+      }
+      
+      .main-title-content {
+        padding: 1rem 1.2rem;
+        margin: 0 0.5rem;
+        border-width: 1px;
+      }
+      
+      /* زر العودة للأعلى */
+      .back-to-top {
+        bottom: 15px;
+        left: 15px;
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+      }
+    }
+
+    @media (min-width: 481px) and (max-width: 768px) {
+      /* تحسينات للشاشات المتوسطة الصغيرة */
+      .tech-header {
+        min-height: 200px;
+        padding: 1.8rem 1rem 1.5rem;
+      }
+      
+      .header-logo img {
+        height: 70px;
+      }
+      
+      .tech-header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .tech-header h2 {
+        font-size: 1.4rem;
+      }
+    }
+
+    @media (min-width: 769px) and (max-width: 1024px) {
+      .students-list {
+        gap: 2rem;
+      }
+      
+      .student-image {
+        width: 110px;
+        height: 110px;
+      }
+      
+      .section-card {
+        width: 320px;
+      }
+      
+      /* تحسين أزرار المشاريع للشاشات المتوسطة */
+      .projects-container {
+        gap: 1.5rem;
+      }
+      
+      .project-btn {
+        min-width: 150px;
+        padding: 0.8rem 1.2rem;
+      }
+    }
+
+    @media (min-width: 1025px) {
+      /* تحسين أزرار المشاريع للشاشات الكبيرة */
+      .projects-container {
+        gap: 2rem; /* التباعد المطلوب للشاشات الكبيرة */
+      }
+      
+      .project-btn {
+        min-width: 160px;
+        padding: 0.9rem 1.5rem;
+        font-size: 0.95rem;
+      }
+    }
+    
+    /* تعديل لظهور النص المنبثق بشكل صحيح */
+    .student-item.active .student-info {
+      transform: translateX(-50%) translateY(-130px) !important;
+    }
+    
+  </style>
+</head>
+<body>
+
+<!-- === شريط الإشعارات === -->
+<div class="notification-bar fade-in">
+  <div class="notification-container">
+    <i class="fas fa-bell"></i>
+    <span id="notificationContent">جاري تحميل الإشعارات...</span>
+  </div>
+</div>
+
+<!-- === الهيدر الجديد مع خلفية صورة === -->
+<header class="tech-header fade-in">
+  <div class="header-content">
+    <!-- الشعار في المنتصف -->
+    <div class="header-logo">
+      <img src="images/logo.png" alt="شعار واجهة المعلم الرقمي">
+    </div>
+    
+    <!-- النصوص -->
+    <div class="header-text-content">
+      <h1>واجهـة المعلـم الرقمـي</h1>
+      <h2>أ. محمد حمدان الغامدي</h2>
+      <p>معلم التقنية الرقمية</p>
+      <span>جهود مهنية ومحتوى تعليمي لجيل مبدع</span>
+    </div>
+  </div>
+</header>
+
+<!-- الوقت والتاريخ -->
+<div class="date-time-container fade-in">
+  <div class="compact-date new-position" dir="rtl">
+    <i class="fas fa-calendar-alt" style="color: var(--accent-teal); margin-left: 5px;"></i><span id="hijri-date"></span> 
+    <span class="separator">•</span>
+    <span id="gregorian-date"></span>
+    <span class="separator">•</span>
+    <i class="fas fa-clock" style="color: var(--accent-teal); margin-left: 5px;"></i><span id="live-time"></span>
+  </div>
+</div>
+
+<!-- شريط البحث -->
+<div class="search-container fade-in">
+  <div class="search-box">
+    <input type="text" class="search-input" placeholder="ابحث في المحتوى التعليمي..." id="searchInput">
+    <button class="search-button" id="searchButton">
+      <i class="fas fa-search"></i>
+    </button>
+    <div class="search-results" id="searchResults"></div>
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- ==========   قسم التميز المحسّن   ========== -->
+<!-- ============================================ -->
+<section class="fame-bar-section fade-in">
+  <div class="fame-bar-title">
+    <i class="fas fa-trophy"></i>
+    <span>قائمة التميز</span>
+  </div>
+  <p class="honors-subtitle">انقر على الأيقونة تحت كل صورة لمعرفة المزيد</p>
+  
+  <div class="students-container">
+    <!-- قائمة الطلاب -->
+    <div class="students-list" id="studentsList">
+      <!-- الطالب الأول -->
+      <div class="student-item" data-index="0">
+        <div class="student-image">
+          <img src="images/mh.jpeg" alt="الطالب المتميز الأول">
+        </div>
+        <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب">
+          <i class="fas fa-plus"></i>
+        </button>
+        <div class="student-info">
+          <h4 class="student-name">الطالب المتميز الأول</h4>
+          <p class="student-reason">التميز في مشروع الوحدة الأولى وإبداع في التصميم</p>
+        </div>
+      </div>
+
+      <!-- الطالب الثاني -->
+      <div class="student-item" data-index="1">
+        <div class="student-image">
+          <img src="images/ee.png" alt="الطالب المتميز الثاني">
+        </div>
+        <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب">
+          <i class="fas fa-plus"></i>
+        </button>
+        <div class="student-info">
+          <h4 class="student-name">الطالب المتميز الثاني</h4>
+          <p class="student-reason">تفوق في الاختبارات العملية وابتكار حلول تقنية</p>
+        </div>
+      </div>
+
+      <!-- الطالب الثالث -->
+      <div class="student-item" data-index="2">
+        <div class="student-image">
+          <img src="images/mh.jpeg" alt="الطالب المتميز الثالث">
+        </div>
+        <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب">
+          <i class="fas fa-plus"></i>
+        </button>
+        <div class="student-info">
+          <h4 class="student-name">الطالب المتميز الثالث</h4>
+          <p class="student-reason">مشاركة فعالة في الأنشطة الصفية ودعم الزملاء</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- ==========   الفاصل الأول        ========== -->
+<!-- ============================================ -->
+<div class="section-divider fade-in">
+  <div class="divider-line"></div>
+  <div class="divider-dot"></div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ============================================ -->
+<!-- ==========   قسم مواضيع التصويت   ========== -->
+<!-- ============================================ -->
+<section class="voting-section fade-in">
+  <div class="voting-header">
+    <h3 class="voting-title">
+      <i class="fas fa-poll-h"></i>
+      <span>مواضيع التصويت</span>
+    </h3>
+  </div>
+  
+  <p class="voting-description">شاركنا رأيك: وأختر المشروع الذي ترى أنه الأفضل</p>
+  
+  <!-- أزرار المشاريع الثلاثة -->
+  <div class="projects-container">
+    <!-- المشروع الأول -->
+    <a href="YOUR_LINK_1_HERE" target="_blank" class="project-btn">
+      <i class="fas fa-file-alt"></i>
+      <span>المشروع الأول</span>
+    </a>
+    
+    <!-- المشروع الثاني -->
+    <a href="YOUR_LINK_2_HERE" target="_blank" class="project-btn">
+      <i class="fas fa-chart-bar"></i>
+      <span>المشروع الثاني</span>
+    </a>
+    
+    <!-- المشروع الثالث -->
+    <a href="YOUR_LINK_3_HERE" target="_blank" class="project-btn">
+      <i class="fas fa-code"></i>
+      <span>المشروع الثالث</span>
+    </a>
+  </div>
+
+  <!-- صندوق Disqus -->
+  <div id="disqus_thread"></div>
+  <script>
+      /**
+      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+      /*
+      var disqus_config = function () {
+      this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+      this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+      };
+      */
+      (function() { // DON'T EDIT BELOW THIS LINE
+      var d = document, s = d.createElement('script');
+      s.src = 'https://m-alghamdi-site.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', +new Date());
+      (d.head || d.body).appendChild(s);
+      })();
+  </script>
+  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+  
+</section>
+
+<!-- ============================================ -->
+<!-- ==========   الفاصل الثاني       ========== -->
+<!-- ============================================ -->
+<div class="section-divider fade-in">
+  <div class="divider-line"></div>
+  <div class="divider-dot"></div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ============================================ -->
+<!-- ==========   قسم ساحة النقاش   ========== -->
+<!-- ============================================ -->
+<section class="discord-section fade-in">
+  <div class="discord-header">
+    <h3 class="discord-title">
+      <i class="fab fa-discord"></i>
+      <span>ساحة النقاش التفاعلية</span>
+    </h3>
+  </div>
+  
+  <p class="discord-description">انضم إلى مجتمعنا على ديسكورد للنقاش وطرح الأسئلة.</p>
+  
+  <div class="projects-container">
+    <a href="https://discord.gg/Cq9mn7Yr" target="_blank" class="discord-btn">
+      <i class="fas fa-sign-in-alt"></i>
+      <span>انضم إلى مجتمعنا</span>
+    </a>
+    
+    <!-- الجملة التوضيحية المضافة -->
+    <p style="font-size: 0.9rem; color: var(--text-light); margin-top: 10px; line-height: 1.4; width: 100%; text-align: center;">
+      <i class="fas fa-info-circle" style="margin-left: 5px; color: var(--accent-teal);"></i>
+      عند النقر سيتم توجيهك لإنشاء حساب (إن لم يكن لديك)، ثم الدخول مباشرة إلى ساحة النقاش.
+    </p>
+  </div>
+</section>
+
+<!-- ============================================ -->
+<!-- ==========   الفاصل الثالث      ========== -->
+<!-- ============================================ -->
+<div class="section-divider fade-in">
+  <div class="divider-line"></div>
+  <div class="divider-dot"></div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ============================================ -->
+<!-- ==========   العنوان الرئيسي المعدل   ========== -->
+<!-- ============================================ -->
+<div class="section-main-title fade-in">
+  <div class="main-title-content">
+    <i class="fas fa-archive main-title-icon"></i>
+    <h2 class="main-title-text">التوثيق المهني والمصادر التعليمية</h2>
+  </div>
+</div>
+
+
+
+<!-- ========================================= -->
+<!--            جميع القوالب التعليمية         -->
+<!-- ========================================= -->
+<div class="container">
+  <!-- معلومات عامة -->
+  <section class="section-card fade-in">
+    <div class="section-title" data-title="معلومات عامة">
+      <div class="title-container">
+        <i class="fas fa-info-circle section-icon"></i>
+        <span>معلومات عامة</span>
+      </div>
+      <button class="toggle-cards" data-target="info-cards" title="طي/فتح">
+        <i class="fas fa-chevron-up"></i>
+      </button>
+    </div>
+    <div class="cards-container collapsed" id="info-cards">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/qws2/%D8%A3%D9%87%D8%AF%D8%A7%D9%81-%D8%B3%D9%8A%D8%A7%D8%B3%D8%A9-%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A8%D8%A7%D9%84%D9%85%D9%85%D9%84%D9%83%D8%A9?authuser=1" data-title="أهداف التعليم">
+        <i class="fas fa-bullseye card-icon"></i>
+        <h3 class="card-title">أهداف التعليم</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/afsw/%D9%85%D9%8A%D8%AB%D8%A7%D9%82-%D8%A3%D8%AE%D9%84%D8%A7%D9%82%D9%8A%D8%A7%D8%AA-%D9%85%D9%87%D9%86%D8%A9-%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85?authuser=1" data-title="ميثاق مهنة التعليم">
+        <i class="fas fa-scroll card-icon"></i>
+        <h3 class="card-title">ميثاق مهنة التعليم</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/werzz/%D8%A7%D9%84%D8%A3%D9%87%D8%AF%D8%A7%D9%81-%D8%A7%D9%84%D9%88%D8%B8%D9%8A%D9%81%D9%8A%D8%A9?authuser=1" data-title="الأهداف الوظيفية">
+        <i class="fas fa-bullhorn card-icon"></i>
+        <h3 class="card-title">الأهداف الوظيفية</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/wsffew/%D8%B1%D8%A4%D9%8A%D8%A9-%D9%88%D8%B1%D8%B3%D8%A7%D9%84%D8%A9-%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%85?authuser=1" data-title="رؤية ورسالة المعلم">
+        <i class="fas fa-eye card-icon"></i>
+        <h3 class="card-title">رؤية ورسالة المعلم</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.25s;" data-url="https://sites.google.com/view/retgv3/%D8%B1%D8%A4%D9%8A%D8%A9-%D9%88%D8%B1%D8%B3%D8%A7%D9%84%D8%A9-%D8%A7%D9%84%D9%85%D8%AF%D8%B1%D8%B3%D8%A9?authuser=1" data-title="رؤية المدرسة">
+        <i class="fas fa-school card-icon"></i>
+        <h3 class="card-title">رؤية المدرسة</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.3s;" data-url="https://sites.google.com/view/ererwq6/%D9%85%D9%87%D8%A7%D9%85-%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%85-%D9%88%D9%88%D8%A7%D8%AC%D8%A8%D8%A7%D8%AA%D8%A9?authuser=1" data-title="مهام المعلم">
+        <i class="fas fa-tasks card-icon"></i>
+        <h3 class="card-title">مهام المعلم</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.35s;" data-url="https://sites.google.com/view/we3rt/home?authuser=1" data-title="السيرة الذاتية">
+        <i class="fas fa-user card-icon"></i>
+        <h3 class="card-title">السيرة الذاتية</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.4s;" data-url="https://sites.google.com/view/3534rf/home?authuser=1" data-title="المؤهل والخبرات">
+        <i class="fas fa-graduation-cap card-icon"></i>
+        <h3 class="card-title">المؤهل والخبرات</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- التنمية المهنية -->
+  <section class="section-card fade-in">
+    <div class="section-title" data-title="التنمية المهنية">
+      <div class="title-container">
+        <i class="fas fa-briefcase section-icon"></i>
+        <span>التنمية المهنية</span>
+      </div>
+      <button class="toggle-cards" data-target="dev-cards" title="طي/فتح">
+        <i class="fas fa-chevron-up"></i>
+      </button>
+    </div>
+    <div class="cards-container collapsed" id="dev-cards">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/aser2w/home?authuser=1" data-title="الدورات التدريبية">
+        <i class="fas fa-chalkboard-teacher card-icon"></i>
+        <h3 class="card-title">الدورات التدريبية</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/erfedf43/m?authuser=1" data-title="الإنجازات">
+        <i class="fas fa-award card-icon"></i>
+        <h3 class="card-title">الإنجازات</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- التطوير المهني -->
+  <section class="section-card fade-in">
+    <div class="section-title" data-title="التطوير المهني">
+      <div class="title-container">
+        <i class="fas fa-sync-alt section-icon"></i>
+        <span>التطوير المهني</span>
+      </div>
+      <button class="toggle-cards" data-target="pro-cards" title="طي/فتح">
+        <i class="fas fa-chevron-up"></i>
+      </button>
+    </div>
+    <div class="cards-container collapsed" id="pro-cards">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/edsww2/%D8%AA%D8%A8%D8%A7%D8%AF%D9%84-%D8%A7%D9%84%D8%B2%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA?authuser=1" data-title="تبادل الزيارات">
+        <i class="fas fa-exchange-alt card-icon"></i>
+        <h3 class="card-title">تبادل الزيارات</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/wafe23/%D8%A7%D9%84%D9%85%D8%AC%D8%AA%D9%85%D8%B9%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D9%87%D9%86%D9%8A%D8%A9?authuser=1" data-title="المجتمعات المهنية">
+        <i class="fas fa-users-cog card-icon"></i>
+        <h3 class="card-title">المجتمعات المهنية</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- التكريم والجوائز -->
+  <section class="section-card fade-in">
+    <div class="section-title" data-title="التكريم والجوائز">
+      <div class="title-container">
+        <i class="fas fa-award section-icon"></i>
+        <span>التكريم والجوائز</span>
+      </div>
+      <button class="toggle-cards" data-target="awards-cards" title="طي/فتح">
+        <i class="fas fa-chevron-up"></i>
+      </button>
+    </div>
+    <div class="cards-container collapsed" id="awards-cards">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sf56/%D8%A7%D9%84%D8%AA%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D8%A6%D8%B2?authuser=1" data-title="التكريم والجوائز">
+        <i class="fas fa-trophy card-icon"></i>
+        <h3 class="card-title">التكريم والجوائز</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- العمل التعليمي -->
+  <section class="section-card fade-in">
+    <div class="section-title" data-title="العمل التعليمي">
+      <div class="title-container">
+        <i class="fas fa-chalkboard section-icon"></i>
+        <span>العمل التعليمي</span>
+      </div>
+      <button class="toggle-cards" data-target="edu-cards" title="طي/فتح">
+        <i class="fas fa-chevron-up"></i>
+      </button>
+    </div>
+    <div class="cards-container collapsed" id="edu-cards">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sa32sa2/%D8%A3%D9%87%D8%AF%D8%A7%D9%81-%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A7%D9%84%D9%85%D8%A7%D8%AF%D8%A9?authuser=1" data-title="أهداف تعليم المادة">
+        <i class="fas fa-bullseye card-icon"></i>
+        <h3 class="card-title">أهداف تعليم المادة</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/sacsd/dc?authuser=1" data-title="جدول الحصص">
+        <i class="fas fa-calendar-alt card-icon"></i>
+        <h3 class="card-title">جدول الحصص</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/erferx/%D8%AA%D9%88%D8%B2%D9%8A%D8%B9-%D8%A7%D9%84%D9%85%D9%86%D9%87%D8%AC?authuser=1" data-title="توزيع المنهج">
+        <i class="fas fa-book card-icon"></i>
+        <h3 class="card-title">توزيع المنهج</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/sdf6664rf/fg?authuser=1" data-title="الخطة الزمنية">
+        <i class="fas fa-calendar-week card-icon"></i>
+        <h3 class="card-title">الخطة الزمنية</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.25s;" data-url="https://sites.google.com/view/dfgtte2/%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1-%D8%A7%D9%84%D9%85%D9%86%D8%B5%D8%A9?authuser=1" data-title="تحضير المنصة">
+        <i class="fas fa-chalkboard card-icon"></i>
+        <h3 class="card-title">تحضير المنصة</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.3s;" data-url="https://sites.google.com/view/dvfdg78/%D8%A7%D9%84%D9%88%D8%A7%D8%AC%D8%A8%D8%A7%D8%AA?authuser=1" data-title="الواجبات">
+        <i class="fas fa-tasks card-icon"></i>
+        <h3 class="card-title">الواجبات</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.35s;" data-url="https://sites.google.com/view/dfgu55/%D8%B9%D8%B1%D9%88%D8%B6-%D8%AA%D9%82%D8%AF%D9%8A%D9%85%D9%8A%D8%A9?authuser=1" data-title="عروض تقديمية">
+        <i class="fas fa-file-powerpoint card-icon"></i>
+        <h3 class="card-title">عروض تقديمية</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.4s;" data-url="https://sites.google.com/view/sdgvt6/sw?authuser=1" data-title="أوراق العمل">
+        <i class="fas fa-file-alt card-icon"></i>
+        <h3 class="card-title">أوراق العمل</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.45s;" data-url="https://sites.google.com/view/dvfdg33/ss?authuser=1" data-title="استراتيجيات حديثة">
+        <i class="fas fa-lightbulb card-icon"></i>
+        <h3 class="card-title">استراتيجيات حديثة</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.5s;" data-url="https://sites.google.com/view/dfg6654e/we?authuser=1" data-title="تفاعلات الطلاب">
+        <i class="fas fa-comments card-icon"></i>
+        <h3 class="card-title">تفاعلات الطلاب</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.55s;" data-url="https://sites.google.com/view/fghhny8/%D9%85%D8%B4%D8%A7%D8%B1%D9%8A%D8%B9-steam?authuser=1" data-title="STEM">
+        <i class="fas fa-atom card-icon"></i>
+        <h3 class="card-title">STEM</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.6s;" data-url="https://sites.google.com/view/kjjhhjkl6/%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D8%A7%D8%AA?authuser=1" data-title="المسابقات">
+        <i class="fas fa-medal card-icon"></i>
+        <h3 class="card-title">المسابقات</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.65s;" data-url="https://sites.google.com/view/sdsgdfsb6/ee?authuser=1" data-title="البيئة التعليمية">
+        <i class="fas fa-school card-icon"></i>
+        <h3 class="card-title">البيئة التعليمية</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.7s;" data-url="https://sites.google.com/view/sdergrt7/xc?authuser=1" data-title="التقنية والتعليم">
+        <i class="fas fa-laptop-code card-icon"></i>
+        <h3 class="card-title">التقنية والتعليم</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- تقويم الطلاب -->
+  <section class="section-card fade-in">
+    <div class="section-title" data-title="تقويم الطلاب">
+      <div class="title-container">
+        <i class="fas fa-clipboard-list section-icon"></i>
+        <span>تقويم الطلاب</span>
+      </div>
+      <button class="toggle-cards" data-target="eval-cards" title="طي/فتح">
+        <i class="fas fa-chevron-up"></i>
+      </button>
+    </div>
+    <div class="cards-container collapsed" id="eval-cards">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/ghgv54/q?authuser=1" data-title="سجلات المتابعة">
+        <i class="fas fa-chart-line card-icon"></i>
+        <h3 class="card-title">سجلات المتابعة</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/edsfvd45/aw?authuser=1" data-title="الاختبارات">
+        <i class="fas fa-check-circle card-icon"></i>
+        <h3 class="card-title">الاختبارات</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/sdfcdrt66/zx?authuser=1" data-title="تحليل النتائج">
+        <i class="fas fa-chart-pie card-icon"></i>
+        <h3 class="card-title">تحليل النتائج</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/sdfdrttr4/ed?authuser=1" data-title="الطلاب المتفوقين">
+        <i class="fas fa-crown card-icon"></i>
+        <h3 class="card-title">الطلاب المتفوقين</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.25s;" data-url="https://sites.google.com/view/drhfbtrh55/bn?authuser=1" data-title="الطلاب الضعاف">
+        <i class="fas fa-user-friends card-icon"></i>
+        <h3 class="card-title">الطلاب الضعاف</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- مكتبة الطالب -->
+  <section class="section-card fade-in">
+    <div class="section-title" data-title="مكتبة الطالب">
+      <div class="title-container">
+        <i class="fas fa-user-graduate section-icon"></i>
+        <span>مكتبة الطالب</span>
+      </div>
+      <button class="toggle-cards" data-target="library-cards" title="طي/فتح">
+        <i class="fas fa-chevron-up"></i>
+      </button>
+    </div>
+    <div class="cards-container collapsed" id="library-cards">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/dvdf55/ss?authuser=1" data-title="الأول ثانوي">
+        <i class="fas fa-book card-icon"></i>
+        <h3 class="card-title nowrap-text">الأول ثانوي</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/dgvgrhbht76/hj?authuser=1" data-title="الثاني ثانوي">
+        <i class="fas fa-book card-icon"></i>
+        <h3 class="card-title nowrap-text">الثاني ثانوي</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/regf78/ut?authuser=1" data-title="الثالث ثانوي">
+        <i class="fas fa-book card-icon"></i>
+        <h3 class="card-title nowrap-text">الثالث ثانوي</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- الاثراء التقني -->
+  <section class="section-card fade-in">
+    <div class="section-title" data-title="الاثراء التقني">
+      <div class="title-container">
+        <i class="fas fa-laptop-code section-icon"></i>
+        <span>الاثراء التقني</span>
+      </div>
+      <button class="toggle-cards" data-target="tech-cards" title="طي/فتح">
+        <i class="fas fa-chevron-up"></i>
+      </button>
+    </div>
+    <div class="cards-container collapsed" id="tech-cards">
+      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sdfgbdh77/wc?authuser=1" data-title="كتب التقنية">
+        <i class="fas fa-code card-icon"></i>
+        <h3 class="card-title">كتب التقنية</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/sdfgdf6/vm?authuser=1" data-title="إنفوجرافيك">
+        <i class="fas fa-image card-icon"></i>
+        <h3 class="card-title">إنفوجرافيك</h3>
+      </div>
+      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/sdfh77/rt?authuser=1" data-title="فيديوهات قصيرة">
+        <i class="fas fa-video card-icon"></i>
+        <h3 class="card-title">فيديوهات قصيرة</h3>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ============================================ -->
+<!-- ==========   الفاصل الخامس      ========== -->
+<!-- ============================================ -->
+<div class="section-divider fade-in">
+  <div class="divider-line"></div>
+  <div class="divider-dot"></div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- قسم الذكاء الاصطناعي -->
+<div id="ai-assistant-section" class="ai-assistant-container fade-in">
+  <h2 class="ai-header">
+    <i class="fas fa-robot ai-icon"></i>
+    <span>الذكاء الاصطناعي</span>
+  </h2>
+  
+  <p class="ai-description">
+    اسأل عن أي موضوع في التقنية الرقمية أو غيرها من المواضيع 
+  </p>
+  
+  <div class="ai-chat-container">
+    <button class="clear-chat-btn" id="clearChatBtn">
+      <i class="fas fa-trash"></i> مسح المحادثة
+    </button>
+    
+    <div class="ai-messages" id="aiMessages">
+      <div class="message ai-message">
+        <strong>الذكاء الاصطناعي:</strong> مرحباً بك! أنا المساعد الرقمي للأستاذ محمد الغامدي، وشريكك في رحلة التعلم، تفضل بطرح سؤالك.
+      </div>
+    </div>
+    
+    <div class="ai-input-group">
+      <input type="text" class="ai-input" id="aiInput" placeholder="أكتب سؤالك هنا..." maxlength="500">
+      <button class="ai-send-btn" id="aiSendBtn">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </div>
+    
+    <div class="ai-typing-indicator" id="aiTypingIndicator">
+      <div class="dot"></div>
+      <div class="dot"></div>
+      <div class="dot"></div>
+    </div>
+  </div>
+  
+  <div class="ai-disclaimer">
+    <i class="fas fa-info-circle"></i>
+    ملاحظة: الإجابات تعتمد على المعرفة العامة للذكاء الاصطناعي وقد تحتاج لمراجعة المعلم للتأكد من دقتها
+  </div>
+</div>
+
+<!-- ============================================ -->
+<!-- ==========   الفاصل السادس      ========== -->
+<!-- ============================================ -->
+<div class="section-divider fade-in">
+  <div class="divider-line"></div>
+  <div class="divider-dot"></div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- قسم الاستفسارات -->
+<div class="inquiries-container fade-in">
+  <button id="openInquiryModalBtn" class="inquiry-btn primary">
+    <i class="fas fa-comment-dots"></i> اطرح استفساراً
+  </button>
+  <a href="https://docs.google.com/spreadsheets/d/14FqkF7e83_KW_Gd48G2OlRLIJYuaKYTPndo-qb5DjKo/edit?usp=sharing" target="_blank" class="inquiry-btn secondary">
+    <i class="fas fa-list-alt"></i> عرض إجابات المعلم
+  </a>
+</div>
+
+<!-- زر العودة للأعلى -->
+<button class="back-to-top" id="backToTop" aria-label="العودة إلى الأعلى">
+  <i class="fas fa-chevron-up"></i>
+</button>
+
+<!-- نافذة الاستفسارات المنبثقة -->
+<div id="inquiryModal" class="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <button id="closeInquiryModalBtn" class="modal-close-btn">&times;</button>
+    <div class="modal-header">
+      <h2 style="font-size: 1.4rem; white-space: nowrap; display: flex; align-items: center; gap: 10px; justify-content: center;">
+        <i class="fas fa-question-circle" style="color: var(--accent-teal); font-size: 1.3em;"></i>
+        الاستفسارات التعليمية
+      </h2>
+      <p>هذا النموذج مخصص لاستفسارات الطلاب التعليمية</p>
+    </div>
+    <iframe 
+      src="https://docs.google.com/forms/d/e/1FAIpQLScP82hCVuCxuIl_FBXQpZJyGbR6kWGVEuT2Y6oKNPm2TfIwcA/viewform?embedded=true" 
+      width="100%" 
+      height="500" 
+      frameborder="0" 
+      marginheight="0" 
+      marginwidth="0"
+      title="نموذج استفسارات الطلاب">
+      جاري التحميل...
+    </iframe>
+  </div>
+</div>
+
+<!-- الفوتر -->
+<footer class="site-footer">
+  <div class="footer-content">
+    <div class="footer-links">
+      <a href="mailto:mfh713623@gmail.com" class="footer-link">
+        <i class="fas fa-envelope"></i> البريد الإلكتروني
+      </a>
+      <a href="#ai-assistant-section" class="footer-link">
+        <i class="fas fa-robot"></i> مساعد الذكاء الاصطناعي
+      </a>
+    </div>
+    <div class="footer-copyright">
+      © 2026 جميع الحقوق محفوظة | واجهة المعلم الرقمي - أ. محمد الغامدي
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ============================================
+  //          تهيئة الصفحة من الأعلى
+  // ============================================
+  
+  // منع استعادة التمرير التلقائي من المتصفح
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
   }
   
-  /* ترويسة الموقع */
-  header {
-    background-color: #4a90e2;
-    color: white;
-    text-align: center;
-    padding: 30px 15px;
-    margin-bottom: 25px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-  }
+  // الانتقال إلى أعلى الصفحة فور التحميل
+  window.addEventListener('load', function() {
+    window.scrollTo(0, 0);
+    
+    setTimeout(function() {
+      window.scrollTo(0, 0);
+    }, 100);
+    
+    document.body.style.overflow = 'hidden';
+    setTimeout(function() {
+      document.body.style.overflow = '';
+    }, 200);
+  });
   
-  header h1 {
-    margin: 0;
-    font-size: 28px;
+  // التأكد من الانتقال إلى الأعلى عند فتح الصفحة
+  document.addEventListener('DOMContentLoaded', function() {
+    window.scrollTo(0, 0);
+    
+    if (window.location.hash) {
+      history.replaceState(null, null, window.location.pathname);
+    }
+  });
+
+  // ============================================
+  //         وظائف التاريخ والوقت
+  // ============================================
+
+  function updateCompactDate() {
+    const now = new Date();
+    const correctedDate = new Date(now);
+    correctedDate.setDate(correctedDate.getDate() - 1);
+    
+    const hijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', {
+      day: 'numeric',
+      month: 'long'
+    }).format(correctedDate);
+    
+    const gregorian = new Intl.DateTimeFormat('ar-EG', {
+      day: 'numeric',
+      month: 'numeric',
+      year: 'numeric'
+    }).format(now);
+    
+    const time = new Date().toLocaleTimeString('ar-EG', {
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+    
+    document.getElementById('hijri-date').textContent = hijri;
+    document.getElementById('gregorian-date').textContent = gregorian;
+    document.getElementById('live-time').textContent = time;
   }
-  
-  header p {
-    font-size: 18px;
-    margin-top: 10px;
+
+  // التحديث كل ثانية
+  updateCompactDate();
+  setInterval(updateCompactDate, 1000);
+
+  // ============================================
+  //          وظائف الإشعارات
+  // ============================================
+
+  function fetchNotification() {
+    const notificationUrl = 'https://raw.githubusercontent.com/muhammad1937-web/teacher-injaz/refs/heads/main/notification.txt';
+    const notificationContent = document.getElementById('notificationContent');
+    
+    const timestamp = new Date().getTime();
+    const urlWithTimestamp = `${notificationUrl}?t=${timestamp}`;
+    
+    fetch(urlWithTimestamp)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('فشل جلب الإشعار');
+        }
+        return response.text();
+      })
+      .then(text => {
+        if (text.trim()) {
+          notificationContent.textContent = text;
+          adjustScrollSpeed(text.length);
+        } else {
+          notificationContent.textContent = "مرحباً بكم في واجهة المعلم الرقمي .. أ.محمد حمدان الغامدي";
+          adjustScrollSpeed(50);
+        }
+      })
+      .catch(error => {
+        console.error('حدث خطأ:', error);
+        notificationContent.textContent = "مرحباً بكم في واجهة المعلم الرقمي .. أ.محمد حمدان الغامدي";
+        adjustScrollSpeed(50);
+      });
   }
-  
-  /* البطاقات */
-  .card {
-    background-color: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-    padding: 20px 25px;
-    margin-bottom: 25px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+  function adjustScrollSpeed(textLength) {
+    const container = document.querySelector('.notification-container');
+    const baseDuration = 20;
+    const additionalTimePerChar = 0.05;
+    
+    let duration = baseDuration + (textLength * additionalTimePerChar);
+    duration = Math.min(duration, 60);
+    
+    container.style.animationDuration = `${duration}s`;
+    
+    container.style.animation = 'none';
+    void container.offsetWidth;
+    container.style.animation = `scroll ${duration}s linear infinite`;
   }
-  
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+
+  // تحديث الإشعار كل 5 دقائق
+  fetchNotification();
+  setInterval(fetchNotification, 5 * 60 * 1000);
+
+  // ============================================
+  //      وظائف البطاقات والروابط
+  // ============================================
+
+  document.querySelectorAll('.card[data-url]').forEach(card => {
+    const externalIcon = document.createElement('i');
+    externalIcon.className = 'fas fa-external-link-alt external-icon';
+    card.querySelector('.card-title').appendChild(externalIcon);
+    
+    card.addEventListener('click', function(e) {
+      if (this.dataset.url) {
+        window.open(this.dataset.url, '_blank', 'noopener,noreferrer');
+      }
+    });
+  });
+
+  // ============================================
+  //      وظائف قسم التميز المحسّن
+  // ============================================
+
+  function initHonorsSection() {
+    const studentItems = document.querySelectorAll('.student-item');
+    
+    // تفعيل النصوص المنبثقة لكل صورة بشكل منفرد
+    studentItems.forEach(item => {
+      const toggleBtn = item.querySelector('.info-toggle-btn');
+      const studentInfo = item.querySelector('.student-info');
+      
+      if (toggleBtn && studentInfo) {
+        // إضافة حدث النقر للزر
+        const toggleInfo = function(e) {
+          e.stopPropagation();
+          
+          const isActive = item.classList.contains('active');
+          
+          // إغلاق جميع النصوص المنبثقة الأخرى أولاً
+          studentItems.forEach(otherItem => {
+            if (otherItem !== item && otherItem.classList.contains('active')) {
+              otherItem.classList.remove('active');
+              const otherToggleBtn = otherItem.querySelector('.info-toggle-btn');
+              if (otherToggleBtn) {
+                otherToggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
+                otherToggleBtn.setAttribute('aria-label', 'إظهار المعلومات');
+              }
+            }
+          });
+          
+          // إذا لم يكن العنصر نشطاً، فعّله
+          if (!isActive) {
+            item.classList.add('active');
+            toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
+            toggleBtn.setAttribute('aria-label', 'إغلاق المعلومات');
+          } else {
+            // إذا كان نشطاً بالفعل، أغلقه
+            item.classList.remove('active');
+            toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
+            toggleBtn.setAttribute('aria-label', 'إظهار المعلومات');
+          }
+        };
+        
+        // إضافة أحداث النقر واللمس
+        toggleBtn.addEventListener('click', toggleInfo);
+        
+        toggleBtn.addEventListener('touchstart', function(e) {
+          e.preventDefault();
+          toggleInfo(e);
+        }, { passive: false });
+        
+        // إضافة حدث للنقر على الصورة نفسها (اختياري)
+        const studentImage = item.querySelector('.student-image');
+        if (studentImage) {
+          studentImage.addEventListener('click', function(e) {
+            e.stopPropagation();
+            toggleBtn.click();
+          });
+        }
+      }
+    });
+    
+    // إغلاق جميع النصوص المنبثقة عند النقر خارجها
+    document.addEventListener('click', function(e) {
+      let clickedInside = false;
+      
+      studentItems.forEach(item => {
+        if (item.contains(e.target)) {
+          clickedInside = true;
+        }
+      });
+      
+      if (!clickedInside) {
+        studentItems.forEach(item => {
+          if (item.classList.contains('active')) {
+            item.classList.remove('active');
+            const toggleBtn = item.querySelector('.info-toggle-btn');
+            if (toggleBtn) {
+              toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
+              toggleBtn.setAttribute('aria-label', 'إظهار المعلومات');
+            }
+          }
+        });
+      }
+    });
+    
+    // إغلاق عند الضغط على Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        studentItems.forEach(item => {
+          if (item.classList.contains('active')) {
+            item.classList.remove('active');
+            const toggleBtn = item.querySelector('.info-toggle-btn');
+            if (toggleBtn) {
+              toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
+              toggleBtn.setAttribute('aria-label', 'إظهار المعلومات');
+            }
+          }
+        });
+      }
+    });
   }
-  
-  /* عنوان كل قسم */
-  .card h2 {
-    font-size: 22px;
-    color: #0d47a1;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 15px;
+
+  // ============================================
+  //         وظائف الظهور عند التمرير
+  // ============================================
+
+  function checkFadeElements() {
+    const fadeElements = document.querySelectorAll('.fade-in');
+    fadeElements.forEach(el => {
+      const elementTop = el.getBoundingClientRect().top;
+      const elementVisible = 150;
+      if (elementTop < window.innerHeight - elementVisible) {
+        el.classList.add('visible');
+      }
+    });
   }
-  
-  /* قائمة الروابط الفرعية */
-  .card ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
+
+  window.addEventListener('scroll', checkFadeElements);
+  window.addEventListener('load', checkFadeElements);
+
+  // ============================================
+  //            وظائف البحث
+  // ============================================
+
+  function initSearch() {
+    const searchInput = document.getElementById('searchInput');
+    const searchButton = document.getElementById('searchButton');
+    const searchResults = document.getElementById('searchResults');
+    
+    const searchableItems = Array.from(document.querySelectorAll('.card'));
+    
+    function performSearch() {
+      const searchTerm = searchInput.value.trim().toLowerCase();
+      
+      if (searchTerm.length < 2) {
+        searchResults.style.display = 'none';
+        return;
+      }
+      
+      const filteredItems = searchableItems.filter(item => {
+        const title = item.querySelector('.card-title').textContent.toLowerCase();
+        return title.includes(searchTerm);
+      });
+      
+      displayResults(filteredItems, searchTerm);
+    }
+    
+    function displayResults(items, searchTerm) {
+      searchResults.innerHTML = '';
+      
+      if (items.length === 0) {
+        searchResults.innerHTML = '<div class="no-results">لا توجد نتائج مطابقة</div>';
+      } else {
+        items.forEach(item => {
+          const title = item.querySelector('.card-title').textContent;
+          const resultItem = document.createElement('div');
+          resultItem.className = 'search-result-item';
+          resultItem.innerHTML = `
+            <i class="fas fa-external-link-alt"></i>
+            <span>${title}</span>
+          `;
+          
+          resultItem.addEventListener('click', () => {
+            if (item.dataset.url) {
+              window.open(item.dataset.url, '_blank', 'noopener,noreferrer');
+            } else if (item.onclick) {
+              item.onclick();
+            }
+            searchResults.style.display = 'none';
+            searchInput.value = '';
+          });
+          
+          searchResults.appendChild(resultItem);
+        });
+      }
+      
+      searchResults.style.display = 'block';
+    }
+    
+    searchInput.addEventListener('input', performSearch);
+    searchButton.addEventListener('click', performSearch);
+    
+    document.addEventListener('click', (e) => {
+      if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+        searchResults.style.display = 'none';
+      }
+    });
+    
+    searchInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        performSearch();
+      }
+    });
   }
-  
-  .card ul li {
-    margin-bottom: 10px;
+
+  // ============================================
+  //        وظائف الذكاء الاصطناعي
+  // ============================================
+
+  function initAIAssistant() {
+    const aiMessages = document.getElementById('aiMessages');
+    const aiInput = document.getElementById('aiInput');
+    const aiSendBtn = document.getElementById('aiSendBtn');
+    const aiTypingIndicator = document.getElementById('aiTypingIndicator');
+    const clearChatBtn = document.getElementById('clearChatBtn');
+    const API_URL = '/api/gemini';
+
+    // زر مسح المحادثة
+    function clearConversation() {
+      aiMessages.innerHTML = `
+        <div class="message ai-message">
+          <strong>الذكاء الاصطناعي:</strong> مرحباً! كيف يمكنني مساعدتك في مواضيع التقنية الرقمية أو أي موضوع آخر؟
+        </div>
+      `;
+    }
+
+    async function sendMessage() {
+      const message = aiInput.value.trim();
+      if (!message) return;
+
+      addMessage(message, 'user');
+      aiInput.value = '';
+      aiSendBtn.disabled = true;
+      aiTypingIndicator.style.display = 'flex';
+
+      try {
+        const response = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{
+              parts: [{
+                text: message
+              }]
+            }]
+          })
+        });
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          throw new Error(errorData.error || 'فشل في الاتصال بالخدمة');
+        }
+
+        const data = await response.json();
+        
+        if (data.candidates && data.candidates[0].content.parts[0].text) {
+          const aiResponse = data.candidates[0].content.parts[0].text;
+          addMessage(aiResponse, 'ai');
+        } else {
+          if (data.error) {
+            throw new Error(data.error.message);
+          }
+          throw new Error('لم يتم الحصول على إجابة');
+        }
+
+      } catch (error) {
+        addMessage(`عذراً، حدث خطأ: ${error.message}`, 'ai');
+      } finally {
+        aiTypingIndicator.style.display = 'none';
+        aiSendBtn.disabled = false;
+        aiInput.focus();
+      }
+    }
+
+    function addMessage(text, sender) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${sender}-message`;
+      
+      if (sender === 'user') {
+        messageDiv.innerHTML = `<strong>أنت:</strong> ${text}`;
+      } else {
+        const copyBtn = document.createElement('button');
+        copyBtn.className = 'copy-btn';
+        copyBtn.title = 'نسخ الرد';
+        copyBtn.innerHTML = "<i class='fas fa-copy'></i>";
+
+        copyBtn.addEventListener('click', function() {
+          navigator.clipboard.writeText(text).then(() => {
+            copyBtn.innerHTML = "<i class='fas fa-check'></i>";
+            
+            setTimeout(() => {
+              copyBtn.innerHTML = "<i class='fas fa-copy'></i>";
+            }, 2000);
+          }).catch(err => {
+            console.error('فشل نسخ النص: ', err);
+          });
+        });
+
+        const textContainer = document.createElement('div');
+        const formattedText = text.replace(/\n/g, '');
+        textContainer.innerHTML = `<strong>الذكاء الاصطناعي:</strong> ${formattedText}`;
+
+        messageDiv.appendChild(copyBtn);
+        messageDiv.appendChild(textContainer);
+      }
+      
+      aiMessages.appendChild(messageDiv);
+      aiMessages.scrollTop = aiMessages.scrollHeight;
+    }
+
+    clearChatBtn.addEventListener('click', clearConversation);
+
+    aiSendBtn.addEventListener('click', sendMessage);
+    aiInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        e.preventDefault();
+        sendMessage();
+      }
+    });
+
+    aiInput.addEventListener('input', () => {
+      aiSendBtn.disabled = !aiInput.value.trim();
+    });
   }
-  
-  /* تنسيق الروابط داخل الأقسام */
-  .card ul li a {
-    text-decoration: none;
-    color: #1565c0;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 6px 10px;
-    border-radius: 5px;
-    transition: background-color 0.3s, color 0.3s;
+
+  // ============================================
+  //      وظائف طي/فتح البطاقات
+  // ============================================
+
+  function initCardToggles() {
+    const toggleButtons = document.querySelectorAll('.toggle-cards');
+    
+    toggleButtons.forEach(button => {
+      const targetId = button.getAttribute('data-target');
+      const cardsContainer = document.getElementById(targetId);
+      
+      if (cardsContainer) {
+        cardsContainer.classList.add('collapsed');
+        button.classList.add('collapsed');
+
+        button.addEventListener('click', () => {
+          cardsContainer.classList.toggle('collapsed');
+          button.classList.toggle('collapsed');
+
+          if (!cardsContainer.classList.contains('collapsed')) {
+            cardsContainer.style.paddingTop = '0.8rem';
+            cardsContainer.style.paddingBottom = '0.8rem';
+          } else {
+            cardsContainer.style.paddingTop = '0';
+            cardsContainer.style.paddingBottom = '0';
+          }
+        });
+      }
+    });
   }
-  
-  .card ul li a:hover {
-    background-color: #e3f2fd;
-    color: #0d47a1;
-    font-weight: bold;
+
+  // ============================================
+  //      وظائف نافذة الاستفسارات
+  // ============================================
+
+  function initInquiryModal() {
+    const openModalBtn = document.getElementById('openInquiryModalBtn');
+    const closeModalBtn = document.getElementById('closeInquiryModalBtn');
+    const modalOverlay = document.getElementById('inquiryModal');
+
+    function openModal() {
+      if (modalOverlay) {
+        modalOverlay.style.display = 'flex';
+        setTimeout(() => {
+          modalOverlay.classList.add('visible');
+        }, 10);
+      }
+    }
+
+    function closeModal() {
+      if (modalOverlay) {
+        modalOverlay.classList.remove('visible');
+        setTimeout(() => {
+          modalOverlay.style.display = 'none';
+        }, 300);
+      }
+    }
+
+    if (openModalBtn) {
+      openModalBtn.addEventListener('click', openModal);
+    }
+
+    if (closeModalBtn) {
+      closeModalBtn.addEventListener('click', closeModal);
+    }
+
+    if (modalOverlay) {
+      modalOverlay.addEventListener('click', function(event) {
+        if (event.target === modalOverlay) {
+          closeModal();
+        }
+      });
+    }
   }
-  
-  /* أيقونات داخل الروابط */
-  .card ul li i {
-    font-size: 16px;
+
+  // ============================================
+  //      وظائف زر العودة للأعلى
+  // ============================================
+
+  function initBackToTop() {
+    const backToTopBtn = document.getElementById('backToTop');
+    
+    function toggleBackToTop() {
+      if (window.scrollY > 500) {
+        backToTopBtn.classList.add('visible');
+      } else {
+        backToTopBtn.classList.remove('visible');
+      }
+    }
+    
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+    
+    // إضافة أحداث
+    window.addEventListener('scroll', toggleBackToTop);
+    backToTopBtn.addEventListener('click', scrollToTop);
+    
+    // التهيئة الأولية
+    toggleBackToTop();
   }
-  
+
+  // ============================================
+  //      وظائف الفواصل والعنوان الجديد
+  // ============================================
+
+  function initNewSections() {
+    // التحقق من ظهور الفواصل والعنوان عند التمرير
+    const dividers = document.querySelectorAll('.section-divider');
+    const mainTitle = document.querySelector('.section-main-title');
+    
+    const observerOptions = {
+      threshold: 0.3,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+    
+    // مراقبة جميع الفواصل
+    dividers.forEach(divider => {
+      observer.observe(divider);
+    });
+    
+    // مراقبة العنوان الرئيسي
+    if (mainTitle) {
+      observer.observe(mainTitle);
+    }
+    
+    // إضافة تأثيرات تفاعلية للعنوان الرئيسي
+    if (mainTitle) {
+      const titleIcon = mainTitle.querySelector('.main-title-icon');
+      
+      titleIcon.addEventListener('mouseenter', () => {
+        titleIcon.style.transform = 'scale(1.1) rotate(10deg)';
+      });
+      
+      titleIcon.addEventListener('mouseleave', () => {
+        titleIcon.style.transform = 'scale(1) rotate(0deg)';
+      });
+    }
+  }
+
+  // ============================================
+  //          تهيئة جميع الوظائف
+  // ============================================
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // الانتقال إلى أعلى الصفحة فوراً
+    window.scrollTo(0, 0);
+    
+    // تهيئة جميع المكونات
+    initSearch();
+    initAIAssistant();
+    initCardToggles();
+    initInquiryModal();
+    initHonorsSection();
+    initBackToTop();
+    initNewSections(); // تهيئة الفواصل والعنوان الجديد
+    
+    checkFadeElements();
+    
+    // تأكيد الانتقال إلى الأعلى بعد تهيئة جميع المكونات
+    setTimeout(function() {
+      window.scrollTo(0, 0);
+    }, 500);
+  });
+
+</script>
+</body>
+</html>
