@@ -468,7 +468,7 @@
       display: flex;
       align-items: center;
       gap: 0.75rem;
-        font-size: 1.2rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: var(--primary-dark);
       margin-bottom: 0.1rem;
@@ -653,61 +653,6 @@
       opacity: 0.9;
       line-height: 1.4;
       color: rgba(255, 255, 255, 0.95);
-    }
-
-    /* ============================================ */
-    /* ===== تعديلات العرض على الجوال ===== */
-    /* ============================================ */
-    @media (max-width: 768px) {
-      .students-list {
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1.8rem;
-        padding: 0.8rem 0;
-      }
-      
-      .student-item {
-        flex: 0 0 auto;
-        min-height: auto;
-        padding: 0;
-        margin: 0;
-      }
-      
-      .student-image {
-        width: 100px;
-        height: 100px;
-      }
-      
-      .info-toggle-btn {
-        width: 32px;
-        height: 32px;
-        font-size: 0.9rem;
-      }
-      
-      .student-info {
-        width: 260px;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) scale(0.9);
-        z-index: 9999;
-        bottom: auto;
-      }
-      
-      .student-item.active .student-info {
-        transform: translate(-50%, -50%) scale(1);
-      }
-      
-      .student-info::after {
-        display: none;
-      }
-      
-      /* تقليل المسافة السفلية للقسم على الجوال */
-      .fame-bar-section {
-        margin-bottom: 2.5rem;
-        padding: 1.3rem 1rem 1.2rem;
-        gap: 0.6rem;
-      }
     }
 
     /* ========================================= */
@@ -1628,7 +1573,7 @@
       border-color: var(--tech-blue);
       background: linear-gradient(135deg, 
         rgba(var(--tech-blue-rgb), 0.1), 
-        rgba(255, 255, 255, 0.9));
+        rgba(255, 255,255, 0.9));
     }
 
     .project-btn:nth-child(1):hover i {
@@ -1861,6 +1806,177 @@
       box-shadow: 0 4px 12px rgba(var(--warning-red-rgb), 0.3);
     }
 
+    /* ============================================ */
+    /* ==========   الفواصل الجديدة      ========== */
+    /* ============================================ */
+    .section-divider {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 2rem auto;
+      max-width: 80%;
+      height: 1px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .section-divider.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .divider-line {
+      flex: 1;
+      height: 1px;
+      background: rgba(var(--primary-dark-rgb), 0.1);
+    }
+
+    .divider-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-teal);
+      margin: 0 15px;
+      position: relative;
+    }
+
+    .divider-dot::before,
+    .divider-dot::after {
+      content: '';
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: rgba(var(--primary-dark-rgb), 0.3);
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .divider-dot::before {
+      right: 20px;
+    }
+
+    .divider-dot::after {
+      left: 20px;
+    }
+
+    /* ============================================ */
+    /* ==========   العنوان الرئيسي المعدل   ========== */
+    /* ============================================ */
+    .section-main-title {
+      text-align: center;
+      margin: 2.5rem auto 2.5rem; /* زيادة المسافة السفلية من 1.5rem إلى 2.5rem */
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+      width: 100%;
+      position: relative;
+    }
+
+    .section-main-title.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .main-title-content {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.7rem;
+      max-width: 100%;
+      padding: 1.5rem 2.5rem; /* زيادة المساحة الداخلية */
+      border: 2px solid rgba(var(--accent-teal-rgb), 0.4); /* إطار جديد */
+      border-radius: 18px; /* زوايا منحنية */
+      background: transparent; /* خلفية شفافة */
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 4px 15px rgba(var(--primary-dark-rgb), 0.05); /* ظل خفيف جداً */
+      backdrop-filter: blur(5px); /* تأثير ضبابي خفيف */
+      -webkit-backdrop-filter: blur(5px);
+    }
+
+    /* إزالة النقاط الزخرفية القديمة */
+    .main-title-content::before,
+    .main-title-content::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, 
+        transparent, 
+        rgba(var(--accent-teal-rgb), 0.3), 
+        transparent);
+    }
+
+    .main-title-content::before {
+      right: 15px;
+    }
+
+    .main-title-content::after {
+      left: 15px;
+    }
+
+    .main-title-icon {
+      font-size: 2.2rem;
+      background: linear-gradient(135deg, var(--accent-teal) 0%, var(--ai-teal) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: gentle-pulse 3s infinite ease-in-out;
+      margin-bottom: 0.3rem;
+      transition: var(--transition);
+      position: relative;
+      z-index: 2;
+      text-shadow: 0 2px 4px rgba(var(--accent-teal-rgb), 0.2);
+    }
+
+    .main-title-content:hover .main-title-icon {
+      transform: rotate(10deg) scale(1.1);
+      background: linear-gradient(135deg, var(--ai-teal) 0%, var(--tech-blue) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+    }
+
+    @keyframes gentle-pulse {
+      0%, 100% { 
+        transform: scale(1); 
+        opacity: 0.9; 
+      }
+      50% { 
+        transform: scale(1.05); 
+        opacity: 1; 
+      }
+    }
+
+    .main-title-text {
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      letter-spacing: -0.8px;
+      text-shadow: 0 2px 4px rgba(var(--primary-dark-rgb), 0.1);
+      text-align: center;
+      line-height: 1.3;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+      position: relative;
+      z-index: 2;
+      padding: 0 0.5rem;
+    }
+
+    /* تأثير hover على الإطار */
+    .main-title-content:hover {
+      border-color: rgba(var(--accent-teal-rgb), 0.6);
+      box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.1);
+      transform: translateY(-2px);
+      transition: all 0.3s ease;
+    }
+
     /* ========================================= */
     /*        تحسينات للاستجابة                 */
     /* ========================================= */
@@ -1999,6 +2115,53 @@
         font-size: 0.95rem;
       }
       
+      /* تحسين الفواصل على الجوال */
+      .section-divider {
+        max-width: 90%;
+        margin: 1.5rem auto;
+      }
+      
+      .divider-dot {
+        width: 5px;
+        height: 5px;
+        margin: 0 12px;
+      }
+      
+      .divider-dot::before {
+        right: 15px;
+      }
+      
+      .divider-dot::after {
+        left: 15px;
+      }
+      
+      /* تحسين العنوان الرئيسي المعدل على الجوال */
+      .section-main-title {
+        margin: 2rem auto 2.5rem;
+      }
+      
+      .main-title-content {
+        padding: 1.2rem 1.5rem;
+        margin: 0 1rem;
+        border-width: 1.5px;
+      }
+      
+      .main-title-icon {
+        font-size: 1.8rem;
+      }
+      
+      .main-title-text {
+        font-size: 1.3rem;
+        padding: 0 0.3rem;
+        letter-spacing: -0.6px;
+      }
+      
+      /* إخفاء الخطوط العمودية على الجوال الصغير */
+      .main-title-content::before,
+      .main-title-content::after {
+        display: none;
+      }
+      
       /* إصلاح أزرار المشاريع مع زيادة التباعد على الجوال */
       .projects-container {
         flex-direction: row !important;
@@ -2127,6 +2290,36 @@
         margin-bottom: 2rem;
         padding: 1.2rem 0.8rem 1rem;
         gap: 0.5rem;
+      }
+      
+      /* تحسين الفواصل للشاشات الصغيرة */
+      .section-divider {
+        margin: 1rem auto;
+      }
+      
+      .divider-dot::before {
+        right: 12px;
+      }
+      
+      .divider-dot::after {
+        left: 12px;
+      }
+      
+      /* تحسين العنوان الرئيسي المعدل للشاشات الصغيرة */
+      .main-title-icon {
+        font-size: 1.5rem;
+      }
+      
+      .main-title-text {
+        font-size: 1.1rem;
+        padding: 0 0.3rem;
+        letter-spacing: -0.5px;
+      }
+      
+      .main-title-content {
+        padding: 1rem 1.2rem;
+        margin: 0 0.5rem;
+        border-width: 1px;
       }
       
       /* زر العودة للأعلى */
@@ -2313,6 +2506,15 @@
 </section>
 
 <!-- ============================================ -->
+<!-- ==========   الفاصل الأول        ========== -->
+<!-- ============================================ -->
+<div class="section-divider fade-in">
+  <div class="divider-line"></div>
+  <div class="divider-dot"></div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ============================================ -->
 <!-- ==========   قسم مواضيع التصويت   ========== -->
 <!-- ============================================ -->
 <section class="voting-section fade-in">
@@ -2370,6 +2572,15 @@
 </section>
 
 <!-- ============================================ -->
+<!-- ==========   الفاصل الثاني       ========== -->
+<!-- ============================================ -->
+<div class="section-divider fade-in">
+  <div class="divider-line"></div>
+  <div class="divider-dot"></div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ============================================ -->
 <!-- ==========   قسم ساحة النقاش   ========== -->
 <!-- ============================================ -->
 <section class="discord-section fade-in">
@@ -2395,6 +2606,27 @@
     </p>
   </div>
 </section>
+
+<!-- ============================================ -->
+<!-- ==========   الفاصل الثالث      ========== -->
+<!-- ============================================ -->
+<div class="section-divider fade-in">
+  <div class="divider-line"></div>
+  <div class="divider-dot"></div>
+  <div class="divider-line"></div>
+</div>
+
+<!-- ============================================ -->
+<!-- ==========   العنوان الرئيسي المعدل   ========== -->
+<!-- ============================================ -->
+<div class="section-main-title fade-in">
+  <div class="main-title-content">
+    <i class="fas fa-archive main-title-icon"></i>
+    <h2 class="main-title-text">التوثيق المهني والمصادر التعليمية</h2>
+  </div>
+</div>
+
+
 
 <!-- ========================================= -->
 <!--            جميع القوالب التعليمية         -->
@@ -2673,6 +2905,15 @@
   </section>
 </div>
 
+<!-- ============================================ -->
+<!-- ==========   الفاصل الخامس      ========== -->
+<!-- ============================================ -->
+<div class="section-divider fade-in">
+  <div class="divider-line"></div>
+  <div class="divider-dot"></div>
+  <div class="divider-line"></div>
+</div>
+
 <!-- قسم الذكاء الاصطناعي -->
 <div id="ai-assistant-section" class="ai-assistant-container fade-in">
   <h2 class="ai-header">
@@ -2713,6 +2954,15 @@
     <i class="fas fa-info-circle"></i>
     ملاحظة: الإجابات تعتمد على المعرفة العامة للذكاء الاصطناعي وقد تحتاج لمراجعة المعلم للتأكد من دقتها
   </div>
+</div>
+
+<!-- ============================================ -->
+<!-- ==========   الفاصل السادس      ========== -->
+<!-- ============================================ -->
+<div class="section-divider fade-in">
+  <div class="divider-line"></div>
+  <div class="divider-dot"></div>
+  <div class="divider-line"></div>
 </div>
 
 <!-- قسم الاستفسارات -->
@@ -3330,6 +3580,52 @@
   }
 
   // ============================================
+  //      وظائف الفواصل والعنوان الجديد
+  // ============================================
+
+  function initNewSections() {
+    // التحقق من ظهور الفواصل والعنوان عند التمرير
+    const dividers = document.querySelectorAll('.section-divider');
+    const mainTitle = document.querySelector('.section-main-title');
+    
+    const observerOptions = {
+      threshold: 0.3,
+      rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, observerOptions);
+    
+    // مراقبة جميع الفواصل
+    dividers.forEach(divider => {
+      observer.observe(divider);
+    });
+    
+    // مراقبة العنوان الرئيسي
+    if (mainTitle) {
+      observer.observe(mainTitle);
+    }
+    
+    // إضافة تأثيرات تفاعلية للعنوان الرئيسي
+    if (mainTitle) {
+      const titleIcon = mainTitle.querySelector('.main-title-icon');
+      
+      titleIcon.addEventListener('mouseenter', () => {
+        titleIcon.style.transform = 'scale(1.1) rotate(10deg)';
+      });
+      
+      titleIcon.addEventListener('mouseleave', () => {
+        titleIcon.style.transform = 'scale(1) rotate(0deg)';
+      });
+    }
+  }
+
+  // ============================================
   //          تهيئة جميع الوظائف
   // ============================================
 
@@ -3344,6 +3640,7 @@
     initInquiryModal();
     initHonorsSection();
     initBackToTop();
+    initNewSections(); // تهيئة الفواصل والعنوان الجديد
     
     checkFadeElements();
     
