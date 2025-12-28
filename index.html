@@ -435,7 +435,7 @@
       padding: 1.5rem 1.8rem 1.3rem;
       border-radius: 20px;
       position: relative;
-      overflow: hidden;
+      overflow: visible; /* تغيير من hidden إلى visible */
       background: var(--gradient-card);
       box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.08);
       border: 1px solid var(--border-color);
@@ -523,6 +523,7 @@
       flex-wrap: nowrap;
       padding: 0.5rem 0;
       overflow: visible;
+      position: relative;
     }
 
     .student-item {
@@ -601,10 +602,12 @@
       box-shadow: 0 5px 15px rgba(var(--gold-excellence-rgb), 0.8);
     }
 
-    /* النص المنبثق */
-    .student-info {
+    /* ============================================ */
+    /* ===  النص المنبثق الموحد فوق الصورة الوسطى === */
+    /* ============================================ */
+    .unified-student-info {
       position: absolute;
-      top: -140px;
+      top: -104px; /* فوق الصورة الوسطى */
       left: 50%;
       transform: translateX(-50%) translateY(10px);
       background: var(--primary-dark);
@@ -621,33 +624,21 @@
       pointer-events: none;
     }
 
-    .student-item.active .student-info {
+    .unified-student-info.active {
       opacity: 1;
       visibility: visible;
       transform: translateX(-50%) translateY(0);
       pointer-events: auto;
     }
 
-    /* السهم يشير لأسفل */
-    .student-info::after {
-      content: '';
-      position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-      border-width: 10px;
-      border-style: solid;
-      border-color: var(--primary-dark) transparent transparent transparent;
-    }
-
-    .student-info h4 {
+    .unified-student-info h4 {
       margin: 0 0 0.4rem 0;
       font-size: 1rem;
       font-weight: 600;
       color: white;
     }
 
-    .student-info p {
+    .unified-student-info p {
       margin: 0;
       font-size: 0.85rem;
       opacity: 0.9;
@@ -2389,12 +2380,6 @@
         font-size: 0.95rem;
       }
     }
-    
-    /* تعديل لظهور النص المنبثق بشكل صحيح */
-    .student-item.active .student-info {
-      transform: translateX(-50%) translateY(-130px) !important;
-    }
-    
   </style>
 </head>
 <body>
@@ -2468,10 +2453,6 @@
         <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب">
           <i class="fas fa-plus"></i>
         </button>
-        <div class="student-info">
-          <h4 class="student-name">الطالب المتميز الأول</h4>
-          <p class="student-reason">التميز في مشروع الوحدة الأولى وإبداع في التصميم</p>
-        </div>
       </div>
 
       <!-- الطالب الثاني -->
@@ -2482,10 +2463,6 @@
         <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب">
           <i class="fas fa-plus"></i>
         </button>
-        <div class="student-info">
-          <h4 class="student-name">الطالب المتميز الثاني</h4>
-          <p class="student-reason">تفوق في الاختبارات العملية وابتكار حلول تقنية</p>
-        </div>
       </div>
 
       <!-- الطالب الثالث -->
@@ -2496,11 +2473,13 @@
         <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب">
           <i class="fas fa-plus"></i>
         </button>
-        <div class="student-info">
-          <h4 class="student-name">الطالب المتميز الثالث</h4>
-          <p class="student-reason">مشاركة فعالة في الأنشطة الصفية ودعم الزملاء</p>
-        </div>
       </div>
+    </div>
+    
+    <!-- النص المنبثق الموحد - سيظهر فوق الصورة الوسطى دائماً -->
+    <div class="unified-student-info" id="unifiedStudentInfo">
+      <h4 id="studentName">اسم الطالب</h4>
+      <p id="studentReason">سبب التميز</p>
     </div>
   </div>
 </section>
@@ -3052,595 +3031,598 @@
     if (window.location.hash) {
       history.replaceState(null, null, window.location.pathname);
     }
-  });
+    
+    // ============================================
+    //         وظائف التاريخ والوقت
+    // ============================================
 
-  // ============================================
-  //         وظائف التاريخ والوقت
-  // ============================================
+    function updateCompactDate() {
+      const now = new Date();
+      const correctedDate = new Date(now);
+      correctedDate.setDate(correctedDate.getDate() - 1);
+      
+      const hijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', {
+        day: 'numeric',
+        month: 'long'
+      }).format(correctedDate);
+      
+      const gregorian = new Intl.DateTimeFormat('ar-EG', {
+        day: 'numeric',
+        month: 'numeric',
+        year: 'numeric'
+      }).format(now);
+      
+      const time = new Date().toLocaleTimeString('ar-EG', {
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+      
+      document.getElementById('hijri-date').textContent = hijri;
+      document.getElementById('gregorian-date').textContent = gregorian;
+      document.getElementById('live-time').textContent = time;
+    }
 
-  function updateCompactDate() {
-    const now = new Date();
-    const correctedDate = new Date(now);
-    correctedDate.setDate(correctedDate.getDate() - 1);
-    
-    const hijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', {
-      day: 'numeric',
-      month: 'long'
-    }).format(correctedDate);
-    
-    const gregorian = new Intl.DateTimeFormat('ar-EG', {
-      day: 'numeric',
-      month: 'numeric',
-      year: 'numeric'
-    }).format(now);
-    
-    const time = new Date().toLocaleTimeString('ar-EG', {
-      hour: '2-digit',
-      minute: '2-digit'
-    });
-    
-    document.getElementById('hijri-date').textContent = hijri;
-    document.getElementById('gregorian-date').textContent = gregorian;
-    document.getElementById('live-time').textContent = time;
-  }
+    // التحديث كل ثانية
+    updateCompactDate();
+    setInterval(updateCompactDate, 1000);
 
-  // التحديث كل ثانية
-  updateCompactDate();
-  setInterval(updateCompactDate, 1000);
+    // ============================================
+    //          وظائف الإشعارات
+    // ============================================
 
-  // ============================================
-  //          وظائف الإشعارات
-  // ============================================
-
-  function fetchNotification() {
-    const notificationUrl = 'https://raw.githubusercontent.com/muhammad1937-web/teacher-injaz/refs/heads/main/notification.txt';
-    const notificationContent = document.getElementById('notificationContent');
-    
-    const timestamp = new Date().getTime();
-    const urlWithTimestamp = `${notificationUrl}?t=${timestamp}`;
-    
-    fetch(urlWithTimestamp)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('فشل جلب الإشعار');
-        }
-        return response.text();
-      })
-      .then(text => {
-        if (text.trim()) {
-          notificationContent.textContent = text;
-          adjustScrollSpeed(text.length);
-        } else {
+    function fetchNotification() {
+      const notificationUrl = 'https://raw.githubusercontent.com/muhammad1937-web/teacher-injaz/refs/heads/main/notification.txt';
+      const notificationContent = document.getElementById('notificationContent');
+      
+      const timestamp = new Date().getTime();
+      const urlWithTimestamp = `${notificationUrl}?t=${timestamp}`;
+      
+      fetch(urlWithTimestamp)
+        .then(response => {
+          if (!response.ok) {
+            throw new Error('فشل جلب الإشعار');
+          }
+          return response.text();
+        })
+        .then(text => {
+          if (text.trim()) {
+            notificationContent.textContent = text;
+            adjustScrollSpeed(text.length);
+          } else {
+            notificationContent.textContent = "مرحباً بكم في واجهة المعلم الرقمي .. أ.محمد حمدان الغامدي";
+            adjustScrollSpeed(50);
+          }
+        })
+        .catch(error => {
+          console.error('حدث خطأ:', error);
           notificationContent.textContent = "مرحباً بكم في واجهة المعلم الرقمي .. أ.محمد حمدان الغامدي";
           adjustScrollSpeed(50);
-        }
-      })
-      .catch(error => {
-        console.error('حدث خطأ:', error);
-        notificationContent.textContent = "مرحباً بكم في واجهة المعلم الرقمي .. أ.محمد حمدان الغامدي";
-        adjustScrollSpeed(50);
-      });
-  }
+        });
+    }
 
-  function adjustScrollSpeed(textLength) {
-    const container = document.querySelector('.notification-container');
-    const baseDuration = 20;
-    const additionalTimePerChar = 0.05;
-    
-    let duration = baseDuration + (textLength * additionalTimePerChar);
-    duration = Math.min(duration, 60);
-    
-    container.style.animationDuration = `${duration}s`;
-    
-    container.style.animation = 'none';
-    void container.offsetWidth;
-    container.style.animation = `scroll ${duration}s linear infinite`;
-  }
-
-  // تحديث الإشعار كل 5 دقائق
-  fetchNotification();
-  setInterval(fetchNotification, 5 * 60 * 1000);
-
-  // ============================================
-  //      وظائف البطاقات والروابط
-  // ============================================
-
-  document.querySelectorAll('.card[data-url]').forEach(card => {
-    const externalIcon = document.createElement('i');
-    externalIcon.className = 'fas fa-external-link-alt external-icon';
-    card.querySelector('.card-title').appendChild(externalIcon);
-    
-    card.addEventListener('click', function(e) {
-      if (this.dataset.url) {
-        window.open(this.dataset.url, '_blank', 'noopener,noreferrer');
-      }
-    });
-  });
-
-  // ============================================
-  //      وظائف قسم التميز المحسّن
-  // ============================================
-
-  function initHonorsSection() {
-    const studentItems = document.querySelectorAll('.student-item');
-    
-    // تفعيل النصوص المنبثقة لكل صورة بشكل منفرد
-    studentItems.forEach(item => {
-      const toggleBtn = item.querySelector('.info-toggle-btn');
-      const studentInfo = item.querySelector('.student-info');
+    function adjustScrollSpeed(textLength) {
+      const container = document.querySelector('.notification-container');
+      const baseDuration = 20;
+      const additionalTimePerChar = 0.05;
       
-      if (toggleBtn && studentInfo) {
-        // إضافة حدث النقر للزر
-        const toggleInfo = function(e) {
-          e.stopPropagation();
-          
-          const isActive = item.classList.contains('active');
-          
-          // إغلاق جميع النصوص المنبثقة الأخرى أولاً
-          studentItems.forEach(otherItem => {
-            if (otherItem !== item && otherItem.classList.contains('active')) {
-              otherItem.classList.remove('active');
-              const otherToggleBtn = otherItem.querySelector('.info-toggle-btn');
-              if (otherToggleBtn) {
-                otherToggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
-                otherToggleBtn.setAttribute('aria-label', 'إظهار المعلومات');
-              }
-            }
-          });
-          
-          // إذا لم يكن العنصر نشطاً، فعّله
-          if (!isActive) {
-            item.classList.add('active');
-            toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
-            toggleBtn.setAttribute('aria-label', 'إغلاق المعلومات');
-          } else {
-            // إذا كان نشطاً بالفعل، أغلقه
-            item.classList.remove('active');
-            toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
-            toggleBtn.setAttribute('aria-label', 'إظهار المعلومات');
-          }
-        };
+      let duration = baseDuration + (textLength * additionalTimePerChar);
+      duration = Math.min(duration, 60);
+      
+      container.style.animationDuration = `${duration}s`;
+      
+      container.style.animation = 'none';
+      void container.offsetWidth;
+      container.style.animation = `scroll ${duration}s linear infinite`;
+    }
+
+    // تحديث الإشعار كل 5 دقائق
+    fetchNotification();
+    setInterval(fetchNotification, 5 * 60 * 1000);
+
+    // ============================================
+    //      وظائف البطاقات والروابط
+    // ============================================
+
+    document.querySelectorAll('.card[data-url]').forEach(card => {
+      const externalIcon = document.createElement('i');
+      externalIcon.className = 'fas fa-external-link-alt external-icon';
+      card.querySelector('.card-title').appendChild(externalIcon);
+      
+      card.addEventListener('click', function(e) {
+        if (this.dataset.url) {
+          window.open(this.dataset.url, '_blank', 'noopener,noreferrer');
+        }
+      });
+    });
+
+    // ============================================
+    //      وظائف قسم التميز (الحل النهائي)
+    // ============================================
+
+    function initHonorsSection() {
+      const studentItems = document.querySelectorAll('.student-item');
+      const unifiedInfo = document.getElementById('unifiedStudentInfo');
+      const studentName = document.getElementById('studentName');
+      const studentReason = document.getElementById('studentReason');
+      
+      // بيانات الطلاب
+      const studentsData = [
+        {
+          name: "الطالب المتميز الأول",
+          reason: "التميز في مشروع الوحدة الأولى وإبداع في التصميم"
+        },
+        {
+          name: "الطالب المتميز الثاني",
+          reason: "تفوق في الاختبارات العملية وابتكار حلول تقنية"
+        },
+        {
+          name: "الطالب المتميز الثالث", 
+          reason: "مشاركة فعالة في الأنشطة الصفية ودعم الزملاء"
+        }
+      ];
+      
+      let activeIndex = null;
+      
+      studentItems.forEach((item, index) => {
+        const toggleBtn = item.querySelector('.info-toggle-btn');
         
-        // إضافة أحداث النقر واللمس
-        toggleBtn.addEventListener('click', toggleInfo);
-        
-        toggleBtn.addEventListener('touchstart', function(e) {
-          e.preventDefault();
-          toggleInfo(e);
-        }, { passive: false });
-        
-        // إضافة حدث للنقر على الصورة نفسها (اختياري)
-        const studentImage = item.querySelector('.student-image');
-        if (studentImage) {
-          studentImage.addEventListener('click', function(e) {
+        if (toggleBtn) {
+          toggleBtn.addEventListener('click', function(e) {
             e.stopPropagation();
-            toggleBtn.click();
-          });
-        }
-      }
-    });
-    
-    // إغلاق جميع النصوص المنبثقة عند النقر خارجها
-    document.addEventListener('click', function(e) {
-      let clickedInside = false;
-      
-      studentItems.forEach(item => {
-        if (item.contains(e.target)) {
-          clickedInside = true;
-        }
-      });
-      
-      if (!clickedInside) {
-        studentItems.forEach(item => {
-          if (item.classList.contains('active')) {
-            item.classList.remove('active');
-            const toggleBtn = item.querySelector('.info-toggle-btn');
-            if (toggleBtn) {
-              toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
-              toggleBtn.setAttribute('aria-label', 'إظهار المعلومات');
-            }
-          }
-        });
-      }
-    });
-    
-    // إغلاق عند الضغط على Escape
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') {
-        studentItems.forEach(item => {
-          if (item.classList.contains('active')) {
-            item.classList.remove('active');
-            const toggleBtn = item.querySelector('.info-toggle-btn');
-            if (toggleBtn) {
-              toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
-              toggleBtn.setAttribute('aria-label', 'إظهار المعلومات');
-            }
-          }
-        });
-      }
-    });
-  }
-
-  // ============================================
-  //         وظائف الظهور عند التمرير
-  // ============================================
-
-  function checkFadeElements() {
-    const fadeElements = document.querySelectorAll('.fade-in');
-    fadeElements.forEach(el => {
-      const elementTop = el.getBoundingClientRect().top;
-      const elementVisible = 150;
-      if (elementTop < window.innerHeight - elementVisible) {
-        el.classList.add('visible');
-      }
-    });
-  }
-
-  window.addEventListener('scroll', checkFadeElements);
-  window.addEventListener('load', checkFadeElements);
-
-  // ============================================
-  //            وظائف البحث
-  // ============================================
-
-  function initSearch() {
-    const searchInput = document.getElementById('searchInput');
-    const searchButton = document.getElementById('searchButton');
-    const searchResults = document.getElementById('searchResults');
-    
-    const searchableItems = Array.from(document.querySelectorAll('.card'));
-    
-    function performSearch() {
-      const searchTerm = searchInput.value.trim().toLowerCase();
-      
-      if (searchTerm.length < 2) {
-        searchResults.style.display = 'none';
-        return;
-      }
-      
-      const filteredItems = searchableItems.filter(item => {
-        const title = item.querySelector('.card-title').textContent.toLowerCase();
-        return title.includes(searchTerm);
-      });
-      
-      displayResults(filteredItems, searchTerm);
-    }
-    
-    function displayResults(items, searchTerm) {
-      searchResults.innerHTML = '';
-      
-      if (items.length === 0) {
-        searchResults.innerHTML = '<div class="no-results">لا توجد نتائج مطابقة</div>';
-      } else {
-        items.forEach(item => {
-          const title = item.querySelector('.card-title').textContent;
-          const resultItem = document.createElement('div');
-          resultItem.className = 'search-result-item';
-          resultItem.innerHTML = `
-            <i class="fas fa-external-link-alt"></i>
-            <span>${title}</span>
-          `;
-          
-          resultItem.addEventListener('click', () => {
-            if (item.dataset.url) {
-              window.open(item.dataset.url, '_blank', 'noopener,noreferrer');
-            } else if (item.onclick) {
-              item.onclick();
-            }
-            searchResults.style.display = 'none';
-            searchInput.value = '';
-          });
-          
-          searchResults.appendChild(resultItem);
-        });
-      }
-      
-      searchResults.style.display = 'block';
-    }
-    
-    searchInput.addEventListener('input', performSearch);
-    searchButton.addEventListener('click', performSearch);
-    
-    document.addEventListener('click', (e) => {
-      if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
-        searchResults.style.display = 'none';
-      }
-    });
-    
-    searchInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter') {
-        performSearch();
-      }
-    });
-  }
-
-  // ============================================
-  //        وظائف الذكاء الاصطناعي
-  // ============================================
-
-  function initAIAssistant() {
-    const aiMessages = document.getElementById('aiMessages');
-    const aiInput = document.getElementById('aiInput');
-    const aiSendBtn = document.getElementById('aiSendBtn');
-    const aiTypingIndicator = document.getElementById('aiTypingIndicator');
-    const clearChatBtn = document.getElementById('clearChatBtn');
-    const API_URL = '/api/gemini';
-
-    // زر مسح المحادثة
-    function clearConversation() {
-      aiMessages.innerHTML = `
-        <div class="message ai-message">
-          <strong>الذكاء الاصطناعي:</strong> مرحباً! كيف يمكنني مساعدتك في مواضيع التقنية الرقمية أو أي موضوع آخر؟
-        </div>
-      `;
-    }
-
-    async function sendMessage() {
-      const message = aiInput.value.trim();
-      if (!message) return;
-
-      addMessage(message, 'user');
-      aiInput.value = '';
-      aiSendBtn.disabled = true;
-      aiTypingIndicator.style.display = 'flex';
-
-      try {
-        const response = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            contents: [{
-              parts: [{
-                text: message
-              }]
-            }]
-          })
-        });
-
-        if (!response.ok) {
-          const errorData = await response.json();
-          throw new Error(errorData.error || 'فشل في الاتصال بالخدمة');
-        }
-
-        const data = await response.json();
-        
-        if (data.candidates && data.candidates[0].content.parts[0].text) {
-          const aiResponse = data.candidates[0].content.parts[0].text;
-          addMessage(aiResponse, 'ai');
-        } else {
-          if (data.error) {
-            throw new Error(data.error.message);
-          }
-          throw new Error('لم يتم الحصول على إجابة');
-        }
-
-      } catch (error) {
-        addMessage(`عذراً، حدث خطأ: ${error.message}`, 'ai');
-      } finally {
-        aiTypingIndicator.style.display = 'none';
-        aiSendBtn.disabled = false;
-        aiInput.focus();
-      }
-    }
-
-    function addMessage(text, sender) {
-      const messageDiv = document.createElement('div');
-      messageDiv.className = `message ${sender}-message`;
-      
-      if (sender === 'user') {
-        messageDiv.innerHTML = `<strong>أنت:</strong> ${text}`;
-      } else {
-        const copyBtn = document.createElement('button');
-        copyBtn.className = 'copy-btn';
-        copyBtn.title = 'نسخ الرد';
-        copyBtn.innerHTML = "<i class='fas fa-copy'></i>";
-
-        copyBtn.addEventListener('click', function() {
-          navigator.clipboard.writeText(text).then(() => {
-            copyBtn.innerHTML = "<i class='fas fa-check'></i>";
             
-            setTimeout(() => {
-              copyBtn.innerHTML = "<i class='fas fa-copy'></i>";
-            }, 2000);
-          }).catch(err => {
-            console.error('فشل نسخ النص: ', err);
+            // هل النص المنبثق ظاهر بالفعل؟
+            const isVisible = unifiedInfo.classList.contains('active');
+            
+            // إذا كان ظاهراً وكان عنصراً مختلفاً، غيّر المحتوى
+            if (isVisible && activeIndex === index) {
+              // إذا كان نفس العنصر، أخفيه
+              unifiedInfo.classList.remove('active');
+              toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
+              item.classList.remove('active');
+              activeIndex = null;
+            } else {
+              // تحديث المحتوى
+              studentName.textContent = studentsData[index].name;
+              studentReason.textContent = studentsData[index].reason;
+              
+              // إخفاء جميع الأزرار الأخرى
+              studentItems.forEach((otherItem, otherIndex) => {
+                const otherBtn = otherItem.querySelector('.info-toggle-btn');
+                if (otherBtn) {
+                  otherBtn.innerHTML = '<i class="fas fa-plus"></i>';
+                  otherItem.classList.remove('active');
+                }
+              });
+              
+              // إظهار النص المنبثق
+              unifiedInfo.classList.add('active');
+              toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
+              item.classList.add('active');
+              activeIndex = index;
+            }
           });
-        });
-
-        const textContainer = document.createElement('div');
-        const formattedText = text.replace(/\n/g, '');
-        textContainer.innerHTML = `<strong>الذكاء الاصطناعي:</strong> ${formattedText}`;
-
-        messageDiv.appendChild(copyBtn);
-        messageDiv.appendChild(textContainer);
-      }
+          
+          // إضافة حدث للنقر على الصورة نفسها
+          const studentImage = item.querySelector('.student-image');
+          if (studentImage) {
+            studentImage.addEventListener('click', function(e) {
+              e.stopPropagation();
+              toggleBtn.click();
+            });
+          }
+        }
+      });
       
-      aiMessages.appendChild(messageDiv);
-      aiMessages.scrollTop = aiMessages.scrollHeight;
+      // إغلاق النص عند النقر خارج المنطقة
+      document.addEventListener('click', function(e) {
+        const isClickInside = Array.from(studentItems).some(item => item.contains(e.target));
+        const isClickOnInfo = unifiedInfo.contains(e.target);
+        
+        if (!isClickInside && !isClickOnInfo) {
+          unifiedInfo.classList.remove('active');
+          studentItems.forEach(item => {
+            const toggleBtn = item.querySelector('.info-toggle-btn');
+            if (toggleBtn) {
+              toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
+              item.classList.remove('active');
+            }
+          });
+          activeIndex = null;
+        }
+      });
+      
+      // إغلاق عند الضغط على Escape
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+          unifiedInfo.classList.remove('active');
+          studentItems.forEach(item => {
+            const toggleBtn = item.querySelector('.info-toggle-btn');
+            if (toggleBtn) {
+              toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
+              item.classList.remove('active');
+            }
+          });
+          activeIndex = null;
+        }
+      });
     }
 
-    clearChatBtn.addEventListener('click', clearConversation);
+    // ============================================
+    //         وظائف الظهور عند التمرير
+    // ============================================
 
-    aiSendBtn.addEventListener('click', sendMessage);
-    aiInput.addEventListener('keypress', (e) => {
-      if (e.key === 'Enter' && !e.shiftKey) {
-        e.preventDefault();
-        sendMessage();
-      }
-    });
+    function checkFadeElements() {
+      const fadeElements = document.querySelectorAll('.fade-in');
+      fadeElements.forEach(el => {
+        const elementTop = el.getBoundingClientRect().top;
+        const elementVisible = 150;
+        if (elementTop < window.innerHeight - elementVisible) {
+          el.classList.add('visible');
+        }
+      });
+    }
 
-    aiInput.addEventListener('input', () => {
-      aiSendBtn.disabled = !aiInput.value.trim();
-    });
-  }
+    window.addEventListener('scroll', checkFadeElements);
+    window.addEventListener('load', checkFadeElements);
 
-  // ============================================
-  //      وظائف طي/فتح البطاقات
-  // ============================================
+    // ============================================
+    //            وظائف البحث
+    // ============================================
 
-  function initCardToggles() {
-    const toggleButtons = document.querySelectorAll('.toggle-cards');
-    
-    toggleButtons.forEach(button => {
-      const targetId = button.getAttribute('data-target');
-      const cardsContainer = document.getElementById(targetId);
+    function initSearch() {
+      const searchInput = document.getElementById('searchInput');
+      const searchButton = document.getElementById('searchButton');
+      const searchResults = document.getElementById('searchResults');
       
-      if (cardsContainer) {
-        cardsContainer.classList.add('collapsed');
-        button.classList.add('collapsed');
+      const searchableItems = Array.from(document.querySelectorAll('.card'));
+      
+      function performSearch() {
+        const searchTerm = searchInput.value.trim().toLowerCase();
+        
+        if (searchTerm.length < 2) {
+          searchResults.style.display = 'none';
+          return;
+        }
+        
+        const filteredItems = searchableItems.filter(item => {
+          const title = item.querySelector('.card-title').textContent.toLowerCase();
+          return title.includes(searchTerm);
+        });
+        
+        displayResults(filteredItems, searchTerm);
+      }
+      
+      function displayResults(items, searchTerm) {
+        searchResults.innerHTML = '';
+        
+        if (items.length === 0) {
+          searchResults.innerHTML = '<div class="no-results">لا توجد نتائج مطابقة</div>';
+        } else {
+          items.forEach(item => {
+            const title = item.querySelector('.card-title').textContent;
+            const resultItem = document.createElement('div');
+            resultItem.className = 'search-result-item';
+            resultItem.innerHTML = `
+              <i class="fas fa-external-link-alt"></i>
+              <span>${title}</span>
+            `;
+            
+            resultItem.addEventListener('click', () => {
+              if (item.dataset.url) {
+                window.open(item.dataset.url, '_blank', 'noopener,noreferrer');
+              } else if (item.onclick) {
+                item.onclick();
+              }
+              searchResults.style.display = 'none';
+              searchInput.value = '';
+            });
+            
+            searchResults.appendChild(resultItem);
+          });
+        }
+        
+        searchResults.style.display = 'block';
+      }
+      
+      searchInput.addEventListener('input', performSearch);
+      searchButton.addEventListener('click', performSearch);
+      
+      document.addEventListener('click', (e) => {
+        if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
+          searchResults.style.display = 'none';
+        }
+      });
+      
+      searchInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+          performSearch();
+        }
+      });
+    }
 
-        button.addEventListener('click', () => {
-          cardsContainer.classList.toggle('collapsed');
-          button.classList.toggle('collapsed');
+    // ============================================
+    //        وظائف الذكاء الاصطناعي
+    // ============================================
 
-          if (!cardsContainer.classList.contains('collapsed')) {
-            cardsContainer.style.paddingTop = '0.8rem';
-            cardsContainer.style.paddingBottom = '0.8rem';
+    function initAIAssistant() {
+      const aiMessages = document.getElementById('aiMessages');
+      const aiInput = document.getElementById('aiInput');
+      const aiSendBtn = document.getElementById('aiSendBtn');
+      const aiTypingIndicator = document.getElementById('aiTypingIndicator');
+      const clearChatBtn = document.getElementById('clearChatBtn');
+      const API_URL = '/api/gemini';
+
+      // زر مسح المحادثة
+      function clearConversation() {
+        aiMessages.innerHTML = `
+          <div class="message ai-message">
+            <strong>الذكاء الاصطناعي:</strong> مرحباً! كيف يمكنني مساعدتك في مواضيع التقنية الرقمية أو أي موضوع آخر؟
+          </div>
+        `;
+      }
+
+      async function sendMessage() {
+        const message = aiInput.value.trim();
+        if (!message) return;
+
+        addMessage(message, 'user');
+        aiInput.value = '';
+        aiSendBtn.disabled = true;
+        aiTypingIndicator.style.display = 'flex';
+
+        try {
+          const response = await fetch(API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{
+                parts: [{
+                  text: message
+                }]
+              }]
+            })
+          });
+
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'فشل في الاتصال بالخدمة');
+          }
+
+          const data = await response.json();
+          
+          if (data.candidates && data.candidates[0].content.parts[0].text) {
+            const aiResponse = data.candidates[0].content.parts[0].text;
+            addMessage(aiResponse, 'ai');
           } else {
-            cardsContainer.style.paddingTop = '0';
-            cardsContainer.style.paddingBottom = '0';
+            if (data.error) {
+              throw new Error(data.error.message);
+            }
+            throw new Error('لم يتم الحصول على إجابة');
+          }
+
+        } catch (error) {
+          addMessage(`عذراً، حدث خطأ: ${error.message}`, 'ai');
+        } finally {
+          aiTypingIndicator.style.display = 'none';
+          aiSendBtn.disabled = false;
+          aiInput.focus();
+        }
+      }
+
+      function addMessage(text, sender) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `message ${sender}-message`;
+        
+        if (sender === 'user') {
+          messageDiv.innerHTML = `<strong>أنت:</strong> ${text}`;
+        } else {
+          const copyBtn = document.createElement('button');
+          copyBtn.className = 'copy-btn';
+          copyBtn.title = 'نسخ الرد';
+          copyBtn.innerHTML = "<i class='fas fa-copy'></i>";
+
+          copyBtn.addEventListener('click', function() {
+            navigator.clipboard.writeText(text).then(() => {
+              copyBtn.innerHTML = "<i class='fas fa-check'></i>";
+              
+              setTimeout(() => {
+                copyBtn.innerHTML = "<i class='fas fa-copy'></i>";
+              }, 2000);
+            }).catch(err => {
+              console.error('فشل نسخ النص: ', err);
+            });
+          });
+
+          const textContainer = document.createElement('div');
+          const formattedText = text.replace(/\n/g, '');
+          textContainer.innerHTML = `<strong>الذكاء الاصطناعي:</strong> ${formattedText}`;
+
+          messageDiv.appendChild(copyBtn);
+          messageDiv.appendChild(textContainer);
+        }
+        
+        aiMessages.appendChild(messageDiv);
+        aiMessages.scrollTop = aiMessages.scrollHeight;
+      }
+
+      clearChatBtn.addEventListener('click', clearConversation);
+
+      aiSendBtn.addEventListener('click', sendMessage);
+      aiInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage();
+        }
+      });
+
+      aiInput.addEventListener('input', () => {
+        aiSendBtn.disabled = !aiInput.value.trim();
+      });
+    }
+
+    // ============================================
+    //      وظائف طي/فتح البطاقات
+    // ============================================
+
+    function initCardToggles() {
+      const toggleButtons = document.querySelectorAll('.toggle-cards');
+      
+      toggleButtons.forEach(button => {
+        const targetId = button.getAttribute('data-target');
+        const cardsContainer = document.getElementById(targetId);
+        
+        if (cardsContainer) {
+          cardsContainer.classList.add('collapsed');
+          button.classList.add('collapsed');
+
+          button.addEventListener('click', () => {
+            cardsContainer.classList.toggle('collapsed');
+            button.classList.toggle('collapsed');
+
+            if (!cardsContainer.classList.contains('collapsed')) {
+              cardsContainer.style.paddingTop = '0.8rem';
+              cardsContainer.style.paddingBottom = '0.8rem';
+            } else {
+              cardsContainer.style.paddingTop = '0';
+              cardsContainer.style.paddingBottom = '0';
+            }
+          });
+        }
+      });
+    }
+
+    // ============================================
+    //      وظائف نافذة الاستفسارات
+    // ============================================
+
+    function initInquiryModal() {
+      const openModalBtn = document.getElementById('openInquiryModalBtn');
+      const closeModalBtn = document.getElementById('closeInquiryModalBtn');
+      const modalOverlay = document.getElementById('inquiryModal');
+
+      function openModal() {
+        if (modalOverlay) {
+          modalOverlay.style.display = 'flex';
+          setTimeout(() => {
+            modalOverlay.classList.add('visible');
+          }, 10);
+        }
+      }
+
+      function closeModal() {
+        if (modalOverlay) {
+          modalOverlay.classList.remove('visible');
+          setTimeout(() => {
+            modalOverlay.style.display = 'none';
+          }, 300);
+        }
+      }
+
+      if (openModalBtn) {
+        openModalBtn.addEventListener('click', openModal);
+      }
+
+      if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeModal);
+      }
+
+      if (modalOverlay) {
+        modalOverlay.addEventListener('click', function(event) {
+          if (event.target === modalOverlay) {
+            closeModal();
           }
         });
       }
-    });
-  }
-
-  // ============================================
-  //      وظائف نافذة الاستفسارات
-  // ============================================
-
-  function initInquiryModal() {
-    const openModalBtn = document.getElementById('openInquiryModalBtn');
-    const closeModalBtn = document.getElementById('closeInquiryModalBtn');
-    const modalOverlay = document.getElementById('inquiryModal');
-
-    function openModal() {
-      if (modalOverlay) {
-        modalOverlay.style.display = 'flex';
-        setTimeout(() => {
-          modalOverlay.classList.add('visible');
-        }, 10);
-      }
     }
 
-    function closeModal() {
-      if (modalOverlay) {
-        modalOverlay.classList.remove('visible');
-        setTimeout(() => {
-          modalOverlay.style.display = 'none';
-        }, 300);
-      }
-    }
+    // ============================================
+    //      وظائف زر العودة للأعلى
+    // ============================================
 
-    if (openModalBtn) {
-      openModalBtn.addEventListener('click', openModal);
-    }
-
-    if (closeModalBtn) {
-      closeModalBtn.addEventListener('click', closeModal);
-    }
-
-    if (modalOverlay) {
-      modalOverlay.addEventListener('click', function(event) {
-        if (event.target === modalOverlay) {
-          closeModal();
-        }
-      });
-    }
-  }
-
-  // ============================================
-  //      وظائف زر العودة للأعلى
-  // ============================================
-
-  function initBackToTop() {
-    const backToTopBtn = document.getElementById('backToTop');
-    
-    function toggleBackToTop() {
-      if (window.scrollY > 500) {
-        backToTopBtn.classList.add('visible');
-      } else {
-        backToTopBtn.classList.remove('visible');
-      }
-    }
-    
-    function scrollToTop() {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    }
-    
-    // إضافة أحداث
-    window.addEventListener('scroll', toggleBackToTop);
-    backToTopBtn.addEventListener('click', scrollToTop);
-    
-    // التهيئة الأولية
-    toggleBackToTop();
-  }
-
-  // ============================================
-  //      وظائف الفواصل والعنوان الجديد
-  // ============================================
-
-  function initNewSections() {
-    // التحقق من ظهور الفواصل والعنوان عند التمرير
-    const dividers = document.querySelectorAll('.section-divider');
-    const mainTitle = document.querySelector('.section-main-title');
-    
-    const observerOptions = {
-      threshold: 0.3,
-      rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    }, observerOptions);
-    
-    // مراقبة جميع الفواصل
-    dividers.forEach(divider => {
-      observer.observe(divider);
-    });
-    
-    // مراقبة العنوان الرئيسي
-    if (mainTitle) {
-      observer.observe(mainTitle);
-    }
-    
-    // إضافة تأثيرات تفاعلية للعنوان الرئيسي
-    if (mainTitle) {
-      const titleIcon = mainTitle.querySelector('.main-title-icon');
+    function initBackToTop() {
+      const backToTopBtn = document.getElementById('backToTop');
       
-      titleIcon.addEventListener('mouseenter', () => {
-        titleIcon.style.transform = 'scale(1.1) rotate(10deg)';
+      function toggleBackToTop() {
+        if (window.scrollY > 500) {
+          backToTopBtn.classList.add('visible');
+        } else {
+          backToTopBtn.classList.remove('visible');
+        }
+      }
+      
+      function scrollToTop() {
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+      
+      // إضافة أحداث
+      window.addEventListener('scroll', toggleBackToTop);
+      backToTopBtn.addEventListener('click', scrollToTop);
+      
+      // التهيئة الأولية
+      toggleBackToTop();
+    }
+
+    // ============================================
+    //      وظائف الفواصل والعنوان الجديد
+    // ============================================
+
+    function initNewSections() {
+      // التحقق من ظهور الفواصل والعنوان عند التمرير
+      const dividers = document.querySelectorAll('.section-divider');
+      const mainTitle = document.querySelector('.section-main-title');
+      
+      const observerOptions = {
+        threshold: 0.3,
+        rootMargin: '0px 0px -50px 0px'
+      };
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, observerOptions);
+      
+      // مراقبة جميع الفواصل
+      dividers.forEach(divider => {
+        observer.observe(divider);
       });
       
-      titleIcon.addEventListener('mouseleave', () => {
-        titleIcon.style.transform = 'scale(1) rotate(0deg)';
-      });
+      // مراقبة العنوان الرئيسي
+      if (mainTitle) {
+        observer.observe(mainTitle);
+      }
+      
+      // إضافة تأثيرات تفاعلية للعنوان الرئيسي
+      if (mainTitle) {
+        const titleIcon = mainTitle.querySelector('.main-title-icon');
+        
+        titleIcon.addEventListener('mouseenter', () => {
+          titleIcon.style.transform = 'scale(1.1) rotate(10deg)';
+        });
+        
+        titleIcon.addEventListener('mouseleave', () => {
+          titleIcon.style.transform = 'scale(1) rotate(0deg)';
+        });
+      }
     }
-  }
 
-  // ============================================
-  //          تهيئة جميع الوظائف
-  // ============================================
+    // ============================================
+    //          تهيئة جميع الوظائف
+    // ============================================
 
-  document.addEventListener('DOMContentLoaded', function() {
-    // الانتقال إلى أعلى الصفحة فوراً
-    window.scrollTo(0, 0);
-    
     // تهيئة جميع المكونات
     initSearch();
     initAIAssistant();
     initCardToggles();
     initInquiryModal();
-    initHonorsSection();
+    initHonorsSection(); // التعديل الجديد
     initBackToTop();
-    initNewSections(); // تهيئة الفواصل والعنوان الجديد
+    initNewSections();
     
     checkFadeElements();
     
@@ -3649,7 +3631,6 @@
       window.scrollTo(0, 0);
     }, 500);
   });
-
 </script>
 </body>
 </html>
