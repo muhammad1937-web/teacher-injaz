@@ -435,23 +435,23 @@
       padding: 1.5rem 1.8rem 1.3rem;
       border-radius: 20px;
       position: relative;
-      overflow: visible; /* تغيير من hidden إلى visible */
+      overflow: hidden;
       background: var(--gradient-card);
       box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.08);
       border: 1px solid var(--border-color);
       transition: var(--transition);
     }
 
-    /* الخط الأخضر في الأعلى - نفس شكل القوالب التعليمية */
+    /* الخط الأخضر المعدل - التصحيح النهائي */
     .fame-bar-section::before {
       content: '';
       position: absolute;
       top: 0;
-      right: 0;
-      left: 0;
+      right: 5px;
+      left: 5px;
       height: 5px;
       background: var(--gradient-accent);
-      border-radius: 2px 2px 0 0;
+      border-radius: 12px 12px 0 0;
       transition: height 0.3s ease;
     }
 
@@ -547,6 +547,15 @@
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
+    /* إطار ذهبي عند تفعيل الطالب */
+    .student-item.active .student-image {
+      border-color: var(--gold-excellence);
+      box-shadow: 
+        0 0 0 3px rgba(var(--gold-excellence-rgb), 0.3),
+        0 8px 25px rgba(0, 0, 0, 0.25);
+      transform: scale(1.05);
+    }
+
     .student-image:hover {
       transform: scale(1.05);
       box-shadow: 0 8px 25px rgba(0, 0, 0, 0.25);
@@ -561,6 +570,15 @@
     }
 
     .student-image:hover img {
+      transform: scale(1.1);
+    }
+
+    /* تأثير إضافي عند hover على الصورة المفعلة */
+    .student-item.active .student-image:hover {
+      border-color: var(--gold-excellence);
+      box-shadow: 
+        0 0 0 4px rgba(var(--gold-excellence-rgb), 0.4),
+        0 10px 30px rgba(0, 0, 0, 0.3);
       transform: scale(1.1);
     }
 
@@ -1877,37 +1895,20 @@
       align-items: center;
       gap: 0.7rem;
       max-width: 100%;
-      padding: 1.5rem 2.5rem; /* زيادة المساحة الداخلية */
-      border: 2px solid rgba(var(--accent-teal-rgb), 0.4); /* إطار جديد */
-      border-radius: 18px; /* زوايا منحنية */
+      padding: 1.5rem 1.5rem; /* إزالة الإطار - مساحة داخلية أقل */
       background: transparent; /* خلفية شفافة */
       position: relative;
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(var(--primary-dark-rgb), 0.05); /* ظل خفيف جداً */
-      backdrop-filter: blur(5px); /* تأثير ضبابي خفيف */
-      -webkit-backdrop-filter: blur(5px);
+      box-shadow: none; /* إزالة الظل */
+      backdrop-filter: none; /* إزالة التأثير الضبابي */
+      -webkit-backdrop-filter: none;
+      border: none; /* إزالة الإطار بالكامل */
     }
 
     /* إزالة النقاط الزخرفية القديمة */
     .main-title-content::before,
     .main-title-content::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, 
-        transparent, 
-        rgba(var(--accent-teal-rgb), 0.3), 
-        transparent);
-    }
-
-    .main-title-content::before {
-      right: 15px;
-    }
-
-    .main-title-content::after {
-      left: 15px;
+      display: none; /* إزالة الخطوط العمودية */
     }
 
     .main-title-icon {
@@ -1942,9 +1943,10 @@
       }
     }
 
+    /* العنوان الرئيسي المكبر */
     .main-title-text {
-      font-size: 1.7rem;
-      font-weight: 800;
+      font-size: 2rem; /* تكبير النص من 1.7rem إلى 2rem */
+      font-weight: 900; /* زيادة الوزن */
       color: var(--primary-dark);
       letter-spacing: -0.8px;
       text-shadow: 0 2px 4px rgba(var(--primary-dark-rgb), 0.1);
@@ -1960,12 +1962,11 @@
       padding: 0 0.5rem;
     }
 
-    /* تأثير hover على الإطار */
+    /* إزالة تأثير hover على الإطار */
     .main-title-content:hover {
-      border-color: rgba(var(--accent-teal-rgb), 0.6);
-      box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.1);
-      transform: translateY(-2px);
-      transition: all 0.3s ease;
+      border: none;
+      box-shadow: none;
+      transform: none;
     }
 
     /* ========================================= */
@@ -2014,6 +2015,20 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+      
+      /* تحسين العنوان الرئيسي على الجوال */
+      .main-title-text {
+        font-size: 1.5rem;
+        font-weight: 800;
+      }
+      
+      .main-title-icon {
+        font-size: 1.8rem;
+      }
+      
+      .main-title-content {
+        padding: 1rem 0.5rem;
       }
       
       /* بقية التحسينات */
@@ -2126,31 +2141,30 @@
         left: 15px;
       }
       
-      /* تحسين العنوان الرئيسي المعدل على الجوال */
-      .section-main-title {
-        margin: 2rem auto 2.5rem;
+      /* تحسين قائمة التميز على الجوال */
+      .students-list {
+        gap: 1.5rem;
       }
       
-      .main-title-content {
-        padding: 1.2rem 1.5rem;
-        margin: 0 1rem;
-        border-width: 1.5px;
+      .student-image {
+        width: 85px;
+        height: 85px;
       }
       
-      .main-title-icon {
-        font-size: 1.8rem;
+      .info-toggle-btn {
+        width: 28px;
+        height: 28px;
+        font-size: 0.8rem;
       }
       
-      .main-title-text {
-        font-size: 1.3rem;
-        padding: 0 0.3rem;
-        letter-spacing: -0.6px;
+      .unified-student-info {
+        width: 200px;
+        top: -90px;
+        padding: 0.7rem 1rem;
       }
       
-      /* إخفاء الخطوط العمودية على الجوال الصغير */
-      .main-title-content::before,
-      .main-title-content::after {
-        display: none;
+      .fame-bar-section {
+        padding: 1.2rem 0.8rem 1rem;
       }
       
       /* إصلاح أزرار المشاريع مع زيادة التباعد على الجوال */
@@ -2187,6 +2201,15 @@
           font-size: 0.85rem;
           flex: 0 0 auto;
         }
+        
+        /* تحسين العنوان الرئيسي للشاشات الصغيرة جداً */
+        .main-title-text {
+          font-size: 1.3rem;
+        }
+        
+        .main-title-icon {
+          font-size: 1.5rem;
+        }
       }
       
       /* تعديل خاص للشاشات المتوسطة الصغيرة */
@@ -2194,6 +2217,10 @@
         .project-btn {
           min-width: 150px;
           padding: 0.8rem 1.2rem !important;
+        }
+        
+        .main-title-text {
+          font-size: 1.7rem;
         }
       }
       
@@ -2262,24 +2289,24 @@
       
       /* تعديل قسم التميز للشاشات الصغيرة جداً */
       .students-list {
-        gap: 1.5rem;
+        gap: 1.2rem;
       }
       
       .student-image {
-        width: 85px;
-        height: 85px;
+        width: 75px;
+        height: 75px;
       }
       
       .info-toggle-btn {
-        width: 28px;
-        height: 28px;
-        font-size: 0.8rem;
+        width: 26px;
+        height: 26px;
+        font-size: 0.75rem;
       }
       
       /* المزيد من التحسينات لقسم التميز */
       .fame-bar-section {
         margin-bottom: 2rem;
-        padding: 1.2rem 0.8rem 1rem;
+        padding: 1rem 0.5rem 0.8rem;
         gap: 0.5rem;
       }
       
@@ -2302,15 +2329,13 @@
       }
       
       .main-title-text {
-        font-size: 1.1rem;
+        font-size: 1.2rem;
         padding: 0 0.3rem;
         letter-spacing: -0.5px;
       }
       
       .main-title-content {
-        padding: 1rem 1.2rem;
-        margin: 0 0.5rem;
-        border-width: 1px;
+        padding: 0.8rem 0.5rem;
       }
       
       /* زر العودة للأعلى */
@@ -3136,7 +3161,7 @@
     });
 
     // ============================================
-    //      وظائف قسم التميز (الحل النهائي)
+    //      وظائف قسم التميز (المحسّنة)
     // ============================================
 
     function initHonorsSection() {
@@ -3165,6 +3190,7 @@
       
       studentItems.forEach((item, index) => {
         const toggleBtn = item.querySelector('.info-toggle-btn');
+        const studentImage = item.querySelector('.student-image');
         
         if (toggleBtn) {
           toggleBtn.addEventListener('click', function(e) {
@@ -3178,32 +3204,49 @@
               // إذا كان نفس العنصر، أخفيه
               unifiedInfo.classList.remove('active');
               toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
+              toggleBtn.style.background = 'var(--accent-teal)'; // إعادة اللون الأصلي
+              toggleBtn.style.transform = 'rotate(0deg)';
               item.classList.remove('active');
+              if (studentImage) {
+                studentImage.style.borderColor = 'white';
+              }
               activeIndex = null;
             } else {
               // تحديث المحتوى
               studentName.textContent = studentsData[index].name;
               studentReason.textContent = studentsData[index].reason;
               
-              // إخفاء جميع الأزرار الأخرى
+              // إخفاء جميع الأزرار الأخرى وإزالة التأثيرات
               studentItems.forEach((otherItem, otherIndex) => {
                 const otherBtn = otherItem.querySelector('.info-toggle-btn');
+                const otherImage = otherItem.querySelector('.student-image');
                 if (otherBtn) {
                   otherBtn.innerHTML = '<i class="fas fa-plus"></i>';
+                  otherBtn.style.background = 'var(--accent-teal)';
+                  otherBtn.style.transform = 'rotate(0deg)';
                   otherItem.classList.remove('active');
+                }
+                if (otherImage) {
+                  otherImage.style.borderColor = 'white';
                 }
               });
               
               // إظهار النص المنبثق
               unifiedInfo.classList.add('active');
               toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
+              toggleBtn.style.background = 'var(--gold-excellence)'; // اللون الذهبي
+              toggleBtn.style.transform = 'rotate(45deg)';
               item.classList.add('active');
               activeIndex = index;
+              
+              // إضافة إطار ذهبي للصورة
+              if (studentImage) {
+                studentImage.style.borderColor = 'var(--gold-excellence)';
+              }
             }
           });
           
           // إضافة حدث للنقر على الصورة نفسها
-          const studentImage = item.querySelector('.student-image');
           if (studentImage) {
             studentImage.addEventListener('click', function(e) {
               e.stopPropagation();
@@ -3222,9 +3265,15 @@
           unifiedInfo.classList.remove('active');
           studentItems.forEach(item => {
             const toggleBtn = item.querySelector('.info-toggle-btn');
+            const studentImage = item.querySelector('.student-image');
             if (toggleBtn) {
               toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
+              toggleBtn.style.background = 'var(--accent-teal)';
+              toggleBtn.style.transform = 'rotate(0deg)';
               item.classList.remove('active');
+            }
+            if (studentImage) {
+              studentImage.style.borderColor = 'white';
             }
           });
           activeIndex = null;
@@ -3237,9 +3286,15 @@
           unifiedInfo.classList.remove('active');
           studentItems.forEach(item => {
             const toggleBtn = item.querySelector('.info-toggle-btn');
+            const studentImage = item.querySelector('.student-image');
             if (toggleBtn) {
               toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
+              toggleBtn.style.background = 'var(--accent-teal)';
+              toggleBtn.style.transform = 'rotate(0deg)';
               item.classList.remove('active');
+            }
+            if (studentImage) {
+              studentImage.style.borderColor = 'white';
             }
           });
           activeIndex = null;
@@ -3620,7 +3675,7 @@
     initAIAssistant();
     initCardToggles();
     initInquiryModal();
-    initHonorsSection(); // التعديل الجديد
+    initHonorsSection();
     initBackToTop();
     initNewSections();
     
@@ -3634,5 +3689,3 @@
 </script>
 </body>
 </html>
-
-
