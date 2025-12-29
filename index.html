@@ -442,7 +442,7 @@
       transition: var(--transition);
     }
 
-    /* الخط الأخضر في الأعلى - نفس شكل القوالب التعليمية */
+    /* الخط الأخضر في الأعلى - مطابق للقوالب التعليمية تماماً */
     .fame-bar-section::before {
       content: '';
       position: absolute;
@@ -451,7 +451,7 @@
       left: 0;
       height: 5px;
       background: var(--gradient-accent);
-      border-radius: 2px 2px 0 0;
+      border-radius: 20px 20px 0 0; /* التعديل الأول: زوايا منحنية */
       transition: height 0.3s ease;
     }
 
@@ -624,11 +624,29 @@
       pointer-events: none;
     }
 
+    /* تأثير التميز المتوهج - التعديل الثاني */
     .unified-student-info.active {
       opacity: 1;
       visibility: visible;
       transform: translateX(-50%) translateY(0);
       pointer-events: auto;
+      animation: excellenceGlow 1.2s ease-out;
+    }
+
+    @keyframes excellenceGlow {
+      0% {
+        opacity: 0;
+        transform: translateX(-50%) translateY(10px);
+        box-shadow: 0 0 0 rgba(var(--gold-excellence-rgb), 0);
+      }
+      50% {
+        box-shadow: 0 0 30px rgba(var(--gold-excellence-rgb), 0.6);
+      }
+      100% {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      }
     }
 
     .unified-student-info h4 {
@@ -1877,37 +1895,21 @@
       align-items: center;
       gap: 0.7rem;
       max-width: 100%;
-      padding: 1.5rem 2.5rem; /* زيادة المساحة الداخلية */
-      border: 2px solid rgba(var(--accent-teal-rgb), 0.4); /* إطار جديد */
-      border-radius: 18px; /* زوايا منحنية */
-      background: transparent; /* خلفية شفافة */
+      padding: 1.2rem; /* تقليل المساحة الداخلية */
+      border: none; /* إزالة الإطار */
+      border-radius: 0; /* إزالة الزوايا المنحنية */
+      background: transparent; /* خلفية شفافية */
       position: relative;
       overflow: hidden;
-      box-shadow: 0 4px 15px rgba(var(--primary-dark-rgb), 0.05); /* ظل خفيف جداً */
-      backdrop-filter: blur(5px); /* تأثير ضبابي خفيف */
-      -webkit-backdrop-filter: blur(5px);
+      box-shadow: none; /* إزالة الظل */
+      backdrop-filter: none; /* إزالة التأثير الضبابي */
+      -webkit-backdrop-filter: none;
     }
 
     /* إزالة النقاط الزخرفية القديمة */
     .main-title-content::before,
     .main-title-content::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background: linear-gradient(to bottom, 
-        transparent, 
-        rgba(var(--accent-teal-rgb), 0.3), 
-        transparent);
-    }
-
-    .main-title-content::before {
-      right: 15px;
-    }
-
-    .main-title-content::after {
-      left: 15px;
+      content: none;
     }
 
     .main-title-icon {
@@ -1957,13 +1959,34 @@
       max-width: 100%;
       position: relative;
       z-index: 2;
-      padding: 0 0.5rem;
+      padding: 0 0.5rem 15px; /* إضافة مساحة للخط السفلي */
     }
 
-    /* تأثير hover على الإطار */
+    /* الخط السفلي الزخرفي - التعديل الثالث */
+    .main-title-text::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      right: 30%;
+      left: 30%;
+      height: 3px;
+      background: linear-gradient(90deg, 
+        var(--tech-blue), 
+        var(--accent-teal), 
+        var(--ai-teal));
+      border-radius: 2px;
+      box-shadow: 0 2px 8px rgba(var(--accent-teal-rgb), 0.3);
+      transition: all 0.4s ease;
+    }
+
+    .main-title-content:hover .main-title-text::after {
+      right: 25%;
+      left: 25%;
+      box-shadow: 0 2px 12px rgba(var(--accent-teal-rgb), 0.4);
+    }
+
+    /* تأثير hover خفيف على العنصر كله */
     .main-title-content:hover {
-      border-color: rgba(var(--accent-teal-rgb), 0.6);
-      box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.1);
       transform: translateY(-2px);
       transition: all 0.3s ease;
     }
@@ -2132,9 +2155,7 @@
       }
       
       .main-title-content {
-        padding: 1.2rem 1.5rem;
-        margin: 0 1rem;
-        border-width: 1.5px;
+        padding: 1rem;
       }
       
       .main-title-icon {
@@ -2143,14 +2164,20 @@
       
       .main-title-text {
         font-size: 1.3rem;
-        padding: 0 0.3rem;
+        padding: 0 0.3rem 12px;
         letter-spacing: -0.6px;
       }
       
-      /* إخفاء الخطوط العمودية على الجوال الصغير */
-      .main-title-content::before,
-      .main-title-content::after {
-        display: none;
+      /* تعديل الخط السفلي للجوال */
+      .main-title-text::after {
+        right: 25%;
+        left: 25%;
+        height: 2.5px;
+      }
+      
+      .main-title-content:hover .main-title-text::after {
+        right: 20%;
+        left: 20%;
       }
       
       /* إصلاح أزرار المشاريع مع زيادة التباعد على الجوال */
@@ -2303,14 +2330,24 @@
       
       .main-title-text {
         font-size: 1.1rem;
-        padding: 0 0.3rem;
+        padding: 0 0.3rem 10px;
         letter-spacing: -0.5px;
       }
       
       .main-title-content {
-        padding: 1rem 1.2rem;
-        margin: 0 0.5rem;
-        border-width: 1px;
+        padding: 0.8rem;
+      }
+      
+      /* تعديل الخط السفلي للشاشات الصغيرة */
+      .main-title-text::after {
+        right: 20%;
+        left: 20%;
+        height: 2px;
+      }
+      
+      .main-title-content:hover .main-title-text::after {
+        right: 15%;
+        left: 15%;
       }
       
       /* زر العودة للأعلى */
@@ -2631,7 +2668,7 @@
         <i class="fas fa-scroll card-icon"></i>
         <h3 class="card-title">ميثاق مهنة التعليم</h3>
       </div>
-      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/werzz/%D8%A7%D9%84%D8%A3%D9%87%D8%AF%D8%A7%D9%81-%D8%A7%D9%84%D9%88%D8%B8%D9%8A%D9%81%D9%8A%D8%A9?authuser=1" data-title="الأهداف الوظيفية">
+      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/werzz/%D8%A7%D9%84%D8%A3%D9%87%D8%AF%D8%A7%D9%81-%D8%A7%D9%84%D9%88%D8%B8%D9%8A%D9%81%D9%8A%D9%87?authuser=1" data-title="الأهداف الوظيفية">
         <i class="fas fa-bullhorn card-icon"></i>
         <h3 class="card-title">الأهداف الوظيفية</h3>
       </div>
@@ -3136,7 +3173,7 @@
     });
 
     // ============================================
-    //      وظائف قسم التميز (الحل النهائي)
+    //      وظائف قسم التميز - الإصدار الثابت
     // ============================================
 
     function initHonorsSection() {
@@ -3163,86 +3200,108 @@
       
       let activeIndex = null;
       
+      // إغلاق النص المنبثق
+      function closeStudentInfo() {
+        unifiedInfo.classList.remove('active');
+        studentItems.forEach(item => {
+          const toggleBtn = item.querySelector('.info-toggle-btn');
+          if (toggleBtn) {
+            toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
+            item.classList.remove('active');
+          }
+        });
+        activeIndex = null;
+      }
+      
+      // فتح النص المنبثق
+      function openStudentInfo(index) {
+        // تحديث المحتوى
+        studentName.textContent = studentsData[index].name;
+        studentReason.textContent = studentsData[index].reason;
+        
+        // إخفاء جميع الأزرار الأخرى
+        studentItems.forEach((item, itemIndex) => {
+          const toggleBtn = item.querySelector('.info-toggle-btn');
+          if (toggleBtn) {
+            if (itemIndex === index) {
+              toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
+              item.classList.add('active');
+            } else {
+              toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
+              item.classList.remove('active');
+            }
+          }
+        });
+        
+        // إظهار النص المنبثق
+        unifiedInfo.classList.add('active');
+        activeIndex = index;
+        
+        // تأثير ذهبي للصورة المختارة
+        const studentImage = studentItems[index].querySelector('.student-image');
+        if (studentImage) {
+          studentImage.style.boxShadow = '0 0 20px rgba(212, 172, 13, 0.6)';
+          setTimeout(() => {
+            studentImage.style.boxShadow = '0 4px 15px rgba(0, 0, 0, 0.15)';
+          }, 800);
+        }
+      }
+      
+      // إضافة أحداث النقر لكل طالب
       studentItems.forEach((item, index) => {
         const toggleBtn = item.querySelector('.info-toggle-btn');
         
-        if (toggleBtn) {
-          toggleBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            
-            // هل النص المنبثق ظاهر بالفعل؟
-            const isVisible = unifiedInfo.classList.contains('active');
-            
-            // إذا كان ظاهراً وكان عنصراً مختلفاً، غيّر المحتوى
-            if (isVisible && activeIndex === index) {
-              // إذا كان نفس العنصر، أخفيه
-              unifiedInfo.classList.remove('active');
-              toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
-              item.classList.remove('active');
-              activeIndex = null;
-            } else {
-              // تحديث المحتوى
-              studentName.textContent = studentsData[index].name;
-              studentReason.textContent = studentsData[index].reason;
-              
-              // إخفاء جميع الأزرار الأخرى
-              studentItems.forEach((otherItem, otherIndex) => {
-                const otherBtn = otherItem.querySelector('.info-toggle-btn');
-                if (otherBtn) {
-                  otherBtn.innerHTML = '<i class="fas fa-plus"></i>';
-                  otherItem.classList.remove('active');
-                }
-              });
-              
-              // إظهار النص المنبثق
-              unifiedInfo.classList.add('active');
-              toggleBtn.innerHTML = '<i class="fas fa-times"></i>';
-              item.classList.add('active');
-              activeIndex = index;
-            }
-          });
+        // دالة واحدة لمعالجة النقر
+        function handleStudentClick(e) {
+          e.preventDefault();
+          e.stopPropagation();
           
-          // إضافة حدث للنقر على الصورة نفسها
-          const studentImage = item.querySelector('.student-image');
-          if (studentImage) {
-            studentImage.addEventListener('click', function(e) {
-              e.stopPropagation();
-              toggleBtn.click();
-            });
+          // إذا كان نفس العنصر النشط، أغلق
+          if (activeIndex === index) {
+            closeStudentInfo();
+          } else {
+            // افتح العنصر الجديد
+            openStudentInfo(index);
           }
+        }
+        
+        // إضافة حدث النقر للأيقونة
+        if (toggleBtn) {
+          toggleBtn.addEventListener('click', handleStudentClick);
+          toggleBtn.addEventListener('touchstart', handleStudentClick, { passive: true });
+        }
+        
+        // إضافة حدث النقر للصورة
+        const studentImage = item.querySelector('.student-image');
+        if (studentImage) {
+          studentImage.addEventListener('click', handleStudentClick);
+          studentImage.addEventListener('touchstart', handleStudentClick, { passive: true });
         }
       });
       
       // إغلاق النص عند النقر خارج المنطقة
       document.addEventListener('click', function(e) {
-        const isClickInside = Array.from(studentItems).some(item => item.contains(e.target));
-        const isClickOnInfo = unifiedInfo.contains(e.target);
+        // التحقق إذا كان النقر خارج جميع عناصر الطلاب وخارج المربع
+        let clickedInsideStudent = false;
         
-        if (!isClickInside && !isClickOnInfo) {
-          unifiedInfo.classList.remove('active');
-          studentItems.forEach(item => {
-            const toggleBtn = item.querySelector('.info-toggle-btn');
-            if (toggleBtn) {
-              toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
-              item.classList.remove('active');
-            }
-          });
-          activeIndex = null;
+        studentItems.forEach(item => {
+          if (item.contains(e.target)) {
+            clickedInsideStudent = true;
+          }
+        });
+        
+        const clickedOnInfo = unifiedInfo.contains(e.target);
+        
+        // إغلاق فقط إذا كان النقر خارج عناصر الطلاب وخارج المربع
+        if (!clickedInsideStudent && !clickedOnInfo && activeIndex !== null) {
+          closeStudentInfo();
         }
       });
       
       // إغلاق عند الضغط على Escape
       document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape') {
-          unifiedInfo.classList.remove('active');
-          studentItems.forEach(item => {
-            const toggleBtn = item.querySelector('.info-toggle-btn');
-            if (toggleBtn) {
-              toggleBtn.innerHTML = '<i class="fas fa-plus"></i>';
-              item.classList.remove('active');
-            }
-          });
-          activeIndex = null;
+        if (e.key === 'Escape' && activeIndex !== null) {
+          closeStudentInfo();
         }
       });
     }
@@ -3600,6 +3659,7 @@
       // إضافة تأثيرات تفاعلية للعنوان الرئيسي
       if (mainTitle) {
         const titleIcon = mainTitle.querySelector('.main-title-icon');
+        const titleText = mainTitle.querySelector('.main-title-text');
         
         titleIcon.addEventListener('mouseenter', () => {
           titleIcon.style.transform = 'scale(1.1) rotate(10deg)';
@@ -3608,6 +3668,19 @@
         titleIcon.addEventListener('mouseleave', () => {
           titleIcon.style.transform = 'scale(1) rotate(0deg)';
         });
+        
+        // تأثير توسيع الخط السفلي عند التمرير على النص
+        if (titleText) {
+          titleText.addEventListener('mouseenter', function() {
+            const afterElement = titleText;
+            afterElement.style.setProperty('--line-width', '50%');
+          });
+          
+          titleText.addEventListener('mouseleave', function() {
+            const afterElement = titleText;
+            afterElement.style.setProperty('--line-width', '40%');
+          });
+        }
       }
     }
 
@@ -3620,7 +3693,7 @@
     initAIAssistant();
     initCardToggles();
     initInquiryModal();
-    initHonorsSection(); // التعديل الجديد
+    initHonorsSection(); // الإصدار الثابت الجديد
     initBackToTop();
     initNewSections();
     
@@ -3634,4 +3707,3 @@
 </script>
 </body>
 </html>
-
