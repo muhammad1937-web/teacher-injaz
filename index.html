@@ -9,56 +9,61 @@
   <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <style>
     /* ========================================= */
-    /*     متغيرات الألوان الجديدة - التركيز الذهبي   */
+    /*     متغيرات الألوان الجديدة - الأفق الرقمي   */
     /* ========================================= */
     :root {
-      /* اللون الرئيسي: رمادي داكن مائل للزرقة (Charcoal Blue) - للجدية والعمق */
-      --primary-dark: #2C3E50;
-      --primary-dark-rgb: 44, 62, 80;
+      /* اللون الرئيسي: أزرق ليلي داكن (Midnight Blue) - للجدية والعمق */
+      --primary-dark: #2C3A61;
+      --primary-dark-rgb: 44, 58, 97;
       
-      /* اللون التقني: رمادي أعمق */
-      --tech-blue: #34495E;
-      --tech-blue-rgb: 52, 73, 94;
+      /* اللون التقني: أزرق ليلي أعمق */
+      --tech-blue: #2C3A61;
+      --tech-blue-rgb: 44, 58, 97;
       
-      /* لون التمييز الرئيسي: ذهبي خردلي هادئ (Mustard Gold) - للتميز والجودة */
-      --accent-teal: #D4AC0D;
-      --accent-teal-rgb: 212, 172, 13;
+      /* لون التمييز: بنفسجي حيوي (Vibrant Violet) - للتميز والحيوية */
+      --accent-teal: #7D42D3;
+      --accent-teal-rgb: 125, 66, 211;
       
-      /* اللون الذكي: ذهبي أعمق */
-      --ai-teal: #BFA000;
-      --ai-teal-rgb: 191, 160, 0;
+      /* اللون الذكي: بنفسجي أعمق */
+      --ai-teal: #6A35B2;
+      --ai-teal-rgb: 106, 53, 178;
       
-      /* اللون الخفيف: أبيض مائل للرمادي (Off-White) - للخلفية المريحة */
-      --light-bg: #F8F9FA;
-      --light-bg-rgb: 248, 249, 250;
+      /* اللون الثانوي: أزرق سماوي هادئ (Calm Sky Blue) - للتفاصيل الدقيقة */
+      --secondary-blue: #A0B2E8;
+      --secondary-blue-rgb: 160, 178, 232;
+      
+      /* اللون الخفيف: أبيض ثلجي مائل للبرودة - للخلفية المريحة */
+      --light-bg: #F7F9FF;
+      --light-bg-rgb: 247, 249, 255;
       
       /* اللون النقي: أبيض نقي - للبطاقات */
       --pure-white: #FFFFFF;
       --pure-white-rgb: 255, 255, 255;
       
-      /* لون التميز: ذهبي - موحد مع لون التمييز */
-      --gold-excellence: #D4AC0D;
-      --gold-excellence-rgb: 212, 172, 13;
+      /* لون التميز: بنفسجي موحد مع لون التمييز */
+      --gold-excellence: #7D42D3;
+      --gold-excellence-rgb: 125, 66, 211;
       
-      /* لون التحذير: أحمر طوبي (Terra Cotta) - متناسق مع دفء الذهبي */
-      --warning-red: #E57373;
-      --warning-red-rgb: 229, 115, 115;
+      /* لون التحذير: أرجواني محمر (لتوافقه مع اللون البنفسجي) */
+      --warning-red: #D6427D;
+      --warning-red-rgb: 214, 66, 125;
       
       /* ألوان النصوص */
-      --text-dark: #2C3E50;
-      --text-medium: #34495E;
-      --text-light: #7F8C8D;
-      --text-subtitle: #5D6D7E;
+      --text-dark: #2C3A61;
+      --text-medium: #3D4B81;
+      --text-light: #7B8AB8;
+      --text-subtitle: #5D6D9E;
       
       /* ظلال وألوان تكميلية */
-      --shadow-color: rgba(44, 62, 80, 0.08);
-      --border-color: rgba(44, 62, 80, 0.1);
-      --hover-color: rgba(212, 172, 13, 0.1);
+      --shadow-color: rgba(44, 58, 97, 0.08);
+      --border-color: rgba(44, 58, 97, 0.1);
+      --hover-color: rgba(125, 66, 211, 0.1);
       
-      /* التدرجات المعدلة */
-      --gradient-primary: linear-gradient(135deg, #2C3E50 0%, #34495E 100%);
-      --gradient-accent: linear-gradient(135deg, #D4AC0D 0%, #BFA000 100%);
-      --gradient-card: linear-gradient(to bottom, #FFFFFF, #F8F9FA);
+      /* التدرجات المعدلة - مستوحاة من الهيدر */
+      --gradient-primary: linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%);
+      --gradient-accent: linear-gradient(135deg, #7D42D3 0%, #A0B2E8 100%);
+      --gradient-card: linear-gradient(to bottom, #FFFFFF, #F7F9FF);
+      --gradient-subtle: linear-gradient(135deg, rgba(125, 66, 211, 0.1), rgba(160, 178, 232, 0.05));
       
       /* انتقالات */
       --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -87,8 +92,8 @@
       min-height: 100vh;
       padding-bottom: 3rem;
       background-image: 
-        radial-gradient(circle at 90% 10%, rgba(44, 62, 80, 0.03) 0%, transparent 20%),
-        radial-gradient(circle at 10% 90%, rgba(212, 172, 13, 0.03) 0%, transparent 20%);
+        radial-gradient(circle at 90% 10%, rgba(44, 58, 97, 0.03) 0%, transparent 20%),
+        radial-gradient(circle at 10% 90%, rgba(125, 66, 211, 0.03) 0%, transparent 20%);
       transition: background-color 0.5s ease, color 0.5s ease;
       overflow-x: hidden;
     }
@@ -442,7 +447,7 @@
       transition: var(--transition);
     }
 
-    /* الخط الذهبي المعدل */
+    /* الخط البنفسجي المعدل */
     .fame-bar-section::before {
       content: '';
       position: absolute;
@@ -547,7 +552,7 @@
       transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
-    /* إطار ذهبي عند تفعيل الطالب */
+    /* إطار بنفسجي عند تفعيل الطالب */
     .student-item.active .student-image {
       border-color: var(--gold-excellence);
       box-shadow: 
@@ -607,7 +612,7 @@
       box-shadow: 0 5px 15px rgba(var(--accent-teal-rgb), 0.6);
     }
 
-    /* تغيير اللون إلى الذهبي عند النقر */
+    /* تغيير اللون إلى البنفسجي عند النقر */
     .student-item.active .info-toggle-btn {
       background: var(--gold-excellence);
       transform: rotate(45deg);
@@ -615,7 +620,7 @@
     }
 
     .student-item.active .info-toggle-btn:hover {
-      background: #c29a0b;
+      background: #6A35B2;
       transform: rotate(45deg) scale(1.1);
       box-shadow: 0 5px 15px rgba(var(--gold-excellence-rgb), 0.8);
     }
@@ -1419,7 +1424,7 @@
       overflow: hidden;
     }
 
-    /* الخط الذهبي في الأعلى */
+    /* الخط البنفسجي في الأعلى */
     .voting-section::before {
       content: '';
       position: absolute;
@@ -1569,7 +1574,7 @@
       text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5);
     }
 
-    /* زر المشروع الأول - لون رمادي تقني */
+    /* زر المشروع الأول - لون أزرق ليلي */
     .project-btn:nth-child(1) {
       border-color: rgba(var(--tech-blue-rgb), 0.3);
     }
@@ -1589,7 +1594,7 @@
       color: var(--tech-blue);
     }
 
-    /* زر المشروع الثاني - لون ذهبي */
+    /* زر المشروع الثاني - لون بنفسجي */
     .project-btn:nth-child(2) {
       border-color: rgba(var(--accent-teal-rgb), 0.3);
     }
@@ -1609,7 +1614,7 @@
       color: var(--accent-teal);
     }
 
-    /* زر المشروع الثالث - لون ذهبي داكن */
+    /* زر المشروع الثالث - لون بنفسجي داكن */
     .project-btn:nth-child(3) {
       border-color: rgba(var(--gold-excellence-rgb), 0.3);
     }
@@ -1626,7 +1631,7 @@
     }
 
     .project-btn:nth-child(3):hover i {
-      color: #c29a0b;
+      color: var(--ai-teal);
     }
 
     /* هذا الكود مهم لتنسيق صندوق Disqus نفسه */
@@ -1653,7 +1658,7 @@
       overflow: hidden;
     }
 
-    /* الخط الذهبي في الأعلى */
+    /* الخط البنفسجي في الأعلى */
     .discord-section::before {
       content: '';
       position: absolute;
@@ -1729,7 +1734,7 @@
       box-shadow: none;
     }
 
-    /* زر الديسكورد المعدل - مع ألوان الذهبي */
+    /* زر الديسكورد المعدل - مع ألوان البنفسجي */
     .discord-btn {
       display: inline-flex;
       align-items: center;
@@ -1810,7 +1815,7 @@
     }
 
     .clear-chat-btn:hover {
-      background: #d32f2f;
+      background: #c13562;
       transform: translateY(-2px);
       box-shadow: 0 4px 12px rgba(var(--warning-red-rgb), 0.3);
     }
@@ -1913,7 +1918,7 @@
 
     .main-title-icon {
       font-size: 2.2rem;
-      background: linear-gradient(135deg, var(--accent-teal) 0%, var(--ai-teal) 100%);
+      background: linear-gradient(135deg, var(--accent-teal) 0%, var(--secondary-blue) 100%);
       -webkit-background-clip: text;
       background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -3239,7 +3244,7 @@
               item.classList.add('active');
               activeIndex = index;
               
-              // إضافة إطار ذهبي للصورة
+              // إضافة إطار بنفسجي للصورة
               if (studentImage) {
                 studentImage.style.borderColor = 'var(--gold-excellence)';
               }
