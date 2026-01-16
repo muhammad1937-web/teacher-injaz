@@ -2015,30 +2015,43 @@
     /* ============================================ */
 
     .results-card {
-      /* الأبعاد والتباعد */
-      max-width: 500px; /* حد أقصى للعرض لتبدو أنيقة على الشاشات الكبيرة */
-      margin: 1.5rem auto 0; /* توسيط أفقي مع تباعد علوي */
-      padding: 1rem; /* مساحة داخلية حول الجدول */
-      
-      /* التصميم الجمالي */
-      background-color: var(--pure-white); /* خلفية بيضاء نقية */
-      border-radius: 15px; /* حواف دائرية جميلة */
-      border: 1px solid var(--border-color); /* إطار خفيف متناسق */
-      box-shadow: 0 8px 25px rgba(var(--primary-dark-rgb), 0.07); /* ظل ناعم وعميق */
-      overflow: hidden; /* مهم لإخفاء أي زوائد من الـ iframe */
+      max-width: 500px;
+      margin: 1.5rem auto 0;
+      padding: 1rem;
+      background-color: var(--pure-white);
+      border-radius: 15px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 8px 25px rgba(var(--primary-dark-rgb), 0.07);
+      overflow: hidden;
       transition: all 0.3s ease;
     }
 
     .results-card:hover {
-      transform: translateY(-5px); /* تأثير رفع عند المرور */
-      box-shadow: 0 12px 30px rgba(var(--primary-dark-rgb), 0.1); /* ظل أعمق عند المرور */
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(var(--primary-dark-rgb), 0.1);
     }
 
-    /* تنسيق الـ iframe نفسه داخل البطاقة */
+    /* ============================================ */
+    /* ======  الحل الجديد لجدول التصويت   ======= */
+    /* ============================================ */
+
+    /* الحاوية الجديدة للتمرير الأفقي */
+    .iframe-scroll-wrapper {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      padding-top: 30px;
+      width: 100%;
+      border-radius: 10px;
+    }
+
+    /* تعديل تنسيق الـ iframe نفسه */
     .results-card iframe {
-      width: 100%; /* اجعل الجدول يملأ البطاقة */
-      height: 180px; /* ارتفاع مناسب لعرض 3-4 صفوف */
-      border: none; /* **مهم جداً: إزالة الإطار الافتراضي للـ iframe** */
+      width: 100%;
+      min-width: 320px;
+      height: 210px;
+      border: none;
+      margin-top: -60px;
+      display: block;
     }
 
     /* ========================================= */
@@ -2187,7 +2200,7 @@
       
       /* تحسين العنوان الرئيسي على الجوال */
       .main-title-text {
-        font-size: 1.7rem; /* تم تعديله من 1.5rem إلى 1.7rem للجوال */
+        font-size: 1.7rem;
         font-weight: 800;
       }
       
@@ -2296,15 +2309,21 @@
         padding: 1rem;
       }
       
-      /* تحسين بطاقة النتائج على الجوال */
+      /* تحسين جدول النتائج على الجوال */
       .results-card {
         max-width: 100%;
         padding: 0.8rem;
         margin: 1rem auto 0;
       }
       
+      .iframe-scroll-wrapper {
+        padding-top: 25px;
+      }
+      
       .results-card iframe {
-        height: 160px;
+        min-width: 300px;
+        height: 190px;
+        margin-top: -55px;
       }
       
       /* تحسين قسم الديسكورد على الجوال */
@@ -2425,19 +2444,25 @@
           font-size: 0.9rem;
         }
         
-        /* تحسين بطاقة النتائج للشاشات الصغيرة جداً */
+        /* تحسين جدول النتائج للشاشات الصغيرة جداً */
         .results-card {
           padding: 0.6rem;
           margin: 0.8rem auto 0;
         }
         
+        .iframe-scroll-wrapper {
+          padding-top: 20px;
+        }
+        
         .results-card iframe {
-          height: 140px;
+          min-width: 280px;
+          height: 170px;
+          margin-top: -50px;
         }
         
         /* تحسين العنوان الرئيسي للشاشات الصغيرة جداً */
         .main-title-text {
-          font-size: 1.4rem; /* تم تعديله من 1.3rem إلى 1.4rem */
+          font-size: 1.4rem;
         }
         
         .main-title-icon {
@@ -2476,6 +2501,12 @@
         .vote-btn {
           min-width: 190px;
           padding: 0.9rem 2rem;
+        }
+        
+        /* تحسين جدول النتائج للشاشات المتوسطة */
+        .results-card iframe {
+          min-width: 300px;
+          height: 190px;
         }
       }
       
@@ -2578,14 +2609,20 @@
         left: 12px;
       }
       
-      /* تحسين بطاقة النتائج للشاشات الصغيرة جداً */
+      /* تحسين جدول النتائج للشاشات الصغيرة جداً */
       .results-card {
         margin: 0.5rem auto 0;
         padding: 0.6rem;
       }
       
+      .iframe-scroll-wrapper {
+        padding-top: 20px;
+      }
+      
       .results-card iframe {
-        height: 140px;
+        min-width: 280px;
+        height: 170px;
+        margin-top: -50px;
       }
       
       /* تحسين العنوان الرئيسي المعدل للشاشات الصغيرة */
@@ -2594,7 +2631,7 @@
       }
       
       .main-title-text {
-        font-size: 1.4rem; /* تم تعديله من 1.2rem إلى 1.4rem للشاشات الصغيرة جداً */
+        font-size: 1.4rem;
         padding: 0 0.3rem;
         letter-spacing: -0.5px;
       }
@@ -2632,13 +2669,14 @@
         font-size: 1.4rem;
       }
       
-      /* تحسين بطاقة النتائج للشاشات المتوسطة */
+      /* تحسين جدول النتائج للشاشات المتوسطة */
       .results-card {
         max-width: 100%;
       }
       
       .results-card iframe {
-        height: 170px;
+        min-width: 300px;
+        height: 190px;
       }
     }
 
@@ -2666,9 +2704,14 @@
         padding: 0.8rem 1.2rem;
       }
       
-      /* تحسين بطاقة النتائج للشاشات المتوسطة */
+      /* تحسين جدول النتائج للشاشات المتوسطة */
       .results-card {
         max-width: 450px;
+      }
+      
+      .results-card iframe {
+        min-width: 350px;
+        height: 210px;
       }
     }
 
@@ -2684,13 +2727,14 @@
         font-size: 0.95rem;
       }
       
-      /* تحسين بطاقة النتائج للشاشات الكبيرة */
+      /* تحسين جدول النتائج للشاشات الكبيرة */
       .results-card {
         max-width: 500px;
       }
       
       .results-card iframe {
-        height: 180px;
+        min-width: 400px;
+        height: 210px;
       }
     }
   </style>
@@ -2856,12 +2900,14 @@
     <div class="results-container">
       <h3>النتائج المباشرة</h3>
       
-      <!-- بطاقة النتائج -->
+      <!-- بطاقة النتائج - المعدلة مع الحاوية الجديدة -->
       <div class="results-card">
-        <iframe 
-          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRb0-DMLmB9c7s7D008Dv7BZy517_eVPQTjv9m9e0SO-J5wHvDMqoOEJz5pYjueQeeGrkoQ7ePyPq4w/pubhtml?gid=240273209&single=true"
-          title="نتائج التصويت المباشرة">
-        </iframe>
+        <div class="iframe-scroll-wrapper">
+          <iframe 
+            src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRb0-DMLmB9c7s7D008Dv7BZy517_eVPQTjv9m9e0SO-J5wHvDMqoOEJz5pYjueQeeGrkoQ7ePyPq4w/pubhtml?gid=240273209&single=true"
+            title="نتائج التصويت المباشرة">
+          </iframe>
+        </div>
       </div>
       
       <p class="update-note">
