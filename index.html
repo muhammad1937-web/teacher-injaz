@@ -190,7 +190,7 @@
       justify-content: center;
     }
 
-    /* طبقة شفافة فوق الصورة لجعل النصوص واضحة */
+    /* طبقة شفافية فوق الصورة لجعل النصوص واضحة */
     .tech-header::before {
       content: '';
       position: absolute;
@@ -1893,6 +1893,32 @@
       transform: none;
     }
 
+    /* ============================================ */
+    /* ==========   نص الوصف تحت العنوان   ========== */
+    /* ============================================ */
+    .section-description {
+      text-align: center;
+      color: var(--text-medium);
+      font-size: 1.1rem;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0.8rem auto 0;
+      padding: 0 1.5rem;
+      font-weight: 400;
+      opacity: 0.95;
+      transition: all 0.3s ease;
+      
+      /* تأثير الظهور المتدرج */
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
+    }
+
+    .section-main-title.visible .section-description {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
     /* ========================================= */
     /*      نافذة النموذج المنبثقة - الإصلاح    */
     /* ========================================= */
@@ -1984,6 +2010,133 @@
       margin: 0;
     }
 
+    /* ============================================ */
+    /* ==========   بطاقة عرض نتائج التصويت   ========== */
+    /* ============================================ */
+
+    .results-card {
+      /* الأبعاد والتباعد */
+      max-width: 500px; /* حد أقصى للعرض لتبدو أنيقة على الشاشات الكبيرة */
+      margin: 1.5rem auto 0; /* توسيط أفقي مع تباعد علوي */
+      padding: 1rem; /* مساحة داخلية حول الجدول */
+      
+      /* التصميم الجمالي */
+      background-color: var(--pure-white); /* خلفية بيضاء نقية */
+      border-radius: 15px; /* حواف دائرية جميلة */
+      border: 1px solid var(--border-color); /* إطار خفيف متناسق */
+      box-shadow: 0 8px 25px rgba(var(--primary-dark-rgb), 0.07); /* ظل ناعم وعميق */
+      overflow: hidden; /* مهم لإخفاء أي زوائد من الـ iframe */
+      transition: all 0.3s ease;
+    }
+
+    .results-card:hover {
+      transform: translateY(-5px); /* تأثير رفع عند المرور */
+      box-shadow: 0 12px 30px rgba(var(--primary-dark-rgb), 0.1); /* ظل أعمق عند المرور */
+    }
+
+    /* تنسيق الـ iframe نفسه داخل البطاقة */
+    .results-card iframe {
+      width: 100%; /* اجعل الجدول يملأ البطاقة */
+      height: 180px; /* ارتفاع مناسب لعرض 3-4 صفوف */
+      border: none; /* **مهم جداً: إزالة الإطار الافتراضي للـ iframe** */
+    }
+
+    /* ========================================= */
+    /*       تحسينات لقسم التصويت الجديد        */
+    /* ========================================= */
+    .voting-subtitle {
+      margin: 1.5rem 0 1rem;
+      font-size: 1.1rem;
+      color: var(--primary-dark);
+      text-align: center;
+      font-weight: 600;
+    }
+
+    .vote-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      font-family: 'Tajawal', sans-serif;
+      font-size: 1rem;
+      font-weight: 600;
+      padding: 1rem 2.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      white-space: nowrap;
+      min-width: 200px;
+      background: var(--ai-teal);
+      color: white;
+      border: 2px solid transparent;
+      box-shadow: 0 4px 15px rgba(var(--ai-teal-rgb), 0.3);
+      position: relative;
+      overflow: hidden;
+      margin: 1rem auto 2rem;
+    }
+
+    .vote-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, 
+        rgba(255, 255, 255, 0.1), 
+        transparent);
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .vote-btn i {
+      font-size: 1.2em;
+      transition: transform 0.3s ease;
+    }
+
+    .vote-btn:hover {
+      background: var(--accent-teal);
+      transform: translateY(-3px);
+      box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.4);
+    }
+
+    .vote-btn:hover::before {
+      opacity: 1;
+    }
+
+    .vote-btn:hover i {
+      transform: translateX(3px);
+    }
+
+    .vote-btn:active {
+      transform: translateY(-1px);
+      box-shadow: 0 3px 10px rgba(var(--accent-teal-rgb), 0.25);
+    }
+
+    .results-container {
+      margin-top: 2rem;
+      padding: 1.5rem;
+      background: var(--pure-white);
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(var(--primary-dark-rgb), 0.08);
+      border: 1px solid var(--border-color);
+    }
+
+    .results-container h3 {
+      color: var(--primary-dark);
+      text-align: center;
+      margin-bottom: 1.2rem;
+      font-size: 1.3rem;
+    }
+
+    .update-note {
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--text-light);
+      margin-top: 0.5rem;
+    }
+
     /* ========================================= */
     /*        تحسينات للاستجابة                 */
     /* ========================================= */
@@ -2044,6 +2197,14 @@
       
       .main-title-content {
         padding: 1rem 0.5rem;
+      }
+      
+      /* تحسين نص الوصف على الجوال */
+      .section-description {
+        font-size: 1rem;
+        padding: 0 1rem;
+        line-height: 1.5;
+        margin-top: 0.6rem;
       }
       
       /* بقية التحسينات */
@@ -2123,6 +2284,27 @@
       /* تحسين قسم التصويت على الجوال */
       .voting-section {
         padding: 1.3rem 1rem 1.2rem;
+      }
+      
+      .vote-btn {
+        min-width: 180px;
+        padding: 0.9rem 2rem;
+        font-size: 0.95rem;
+      }
+      
+      .results-container {
+        padding: 1rem;
+      }
+      
+      /* تحسين بطاقة النتائج على الجوال */
+      .results-card {
+        max-width: 100%;
+        padding: 0.8rem;
+        margin: 1rem auto 0;
+      }
+      
+      .results-card iframe {
+        height: 160px;
       }
       
       /* تحسين قسم الديسكورد على الجوال */
@@ -2237,6 +2419,22 @@
           flex: 0 0 auto;
         }
         
+        .vote-btn {
+          min-width: 160px;
+          padding: 0.8rem 1.5rem;
+          font-size: 0.9rem;
+        }
+        
+        /* تحسين بطاقة النتائج للشاشات الصغيرة جداً */
+        .results-card {
+          padding: 0.6rem;
+          margin: 0.8rem auto 0;
+        }
+        
+        .results-card iframe {
+          height: 140px;
+        }
+        
         /* تحسين العنوان الرئيسي للشاشات الصغيرة جداً */
         .main-title-text {
           font-size: 1.4rem; /* تم تعديله من 1.3rem إلى 1.4rem */
@@ -2244,6 +2442,12 @@
         
         .main-title-icon {
           font-size: 1.5rem;
+        }
+        
+        .section-description {
+          font-size: 0.95rem;
+          padding: 0 0.8rem;
+          margin-top: 0.5rem;
         }
         
         /* تحسين النافذة المنبثقة للشاشات الصغيرة جداً */
@@ -2267,6 +2471,11 @@
         
         .main-title-text {
           font-size: 1.7rem;
+        }
+        
+        .vote-btn {
+          min-width: 190px;
+          padding: 0.9rem 2rem;
         }
       }
       
@@ -2369,6 +2578,16 @@
         left: 12px;
       }
       
+      /* تحسين بطاقة النتائج للشاشات الصغيرة جداً */
+      .results-card {
+        margin: 0.5rem auto 0;
+        padding: 0.6rem;
+      }
+      
+      .results-card iframe {
+        height: 140px;
+      }
+      
       /* تحسين العنوان الرئيسي المعدل للشاشات الصغيرة */
       .main-title-icon {
         font-size: 1.5rem;
@@ -2412,6 +2631,15 @@
       .tech-header h2 {
         font-size: 1.4rem;
       }
+      
+      /* تحسين بطاقة النتائج للشاشات المتوسطة */
+      .results-card {
+        max-width: 100%;
+      }
+      
+      .results-card iframe {
+        height: 170px;
+      }
     }
 
     @media (min-width: 769px) and (max-width: 1024px) {
@@ -2437,6 +2665,11 @@
         min-width: 150px;
         padding: 0.8rem 1.2rem;
       }
+      
+      /* تحسين بطاقة النتائج للشاشات المتوسطة */
+      .results-card {
+        max-width: 450px;
+      }
     }
 
     @media (min-width: 1025px) {
@@ -2450,50 +2683,16 @@
         padding: 0.9rem 1.5rem;
         font-size: 0.95rem;
       }
+      
+      /* تحسين بطاقة النتائج للشاشات الكبيرة */
+      .results-card {
+        max-width: 500px;
+      }
+      
+      .results-card iframe {
+        height: 180px;
+      }
     }
-    /* ============================================ */
-/* ==========   نص الوصف تحت العنوان   ========== */
-/* ============================================ */
-.section-description {
-  text-align: center;
-  color: var(--text-medium);
-  font-size: 1.1rem;
-  line-height: 1.6;
-  max-width: 800px;
-  margin: 0.8rem auto 0;
-  padding: 0 1.5rem;
-  font-weight: 400;
-  opacity: 0.95;
-  transition: all 0.3s ease;
-  .section-description {
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s;
-}
-
-.section-main-title.visible .section-description {
-  opacity: 1;
-  transform: translateY(0);
-}
-}
-
-/* تحسين التنسيق على الجوال */
-@media (max-width: 768px) {
-  .section-description {
-    font-size: 1rem;
-    padding: 0 1rem;
-    line-height: 1.5;
-    margin-top: 0.6rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .section-description {
-    font-size: 0.95rem;
-    padding: 0 0.8rem;
-    margin-top: 0.5rem;
-  }
-}
   </style>
 </head>
 <body>
@@ -2614,54 +2813,71 @@
   <div class="voting-header">
     <h3 class="voting-title">
       <i class="fas fa-poll-h"></i>
-      <span>مواضيع التصويت</span>
+      <span>معرض المشاريع الطلابية </span>
     </h3>
   </div>
   
-  <p class="voting-description">شاركنا رأيك: وأختر المشروع الذي ترى أنه الأفضل</p>
+  <p class="voting-description">استعرض المشاريع المتنافسة، وادعم إبداع زملائك</p>
   
-  <!-- أزرار المشاريع الثلاثة -->
-  <div class="projects-container">
-    <!-- المشروع الأول -->
-    <a href="YOUR_LINK_1_HERE" target="_blank" class="project-btn">
-      <i class="fas fa-file-alt"></i>
-      <span>المشروع الأول</span>
+  <!-- ===== لوضع المنافسة: احذف 'display: none;' من السطر التالي ===== -->
+  <div id="competition-mode">
+    <!-- أزرار المشاريع الثلاثة -->
+    <div class="projects-container">
+      <!-- المشروع الأول -->
+      <a href="YOUR_LINK_1_HERE" target="_blank" class="project-btn">
+        <i class="fas fa-file-alt"></i>
+        <span>المشروع الأول</span>
+      </a>
+      
+      <!-- المشروع الثاني -->
+      <a href="YOUR_LINK_2_HERE" target="_blank" class="project-btn">
+        <i class="fas fa-chart-bar"></i>
+        <span>المشروع الثاني</span>
+      </a>
+      
+      <!-- المشروع الثالث -->
+      <a href="YOUR_LINK_3_HERE" target="_blank" class="project-btn">
+        <i class="fas fa-code"></i>
+        <span>المشروع الثالث</span>
+      </a>
+    </div>
+    
+    <!-- منطقة التصويت -->
+    <h3 class="voting-subtitle">بعد مشاهدة المشاريع، شاركنا رأيك</h3>
+    
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeSXj_S80vPffGrlHjm0eKwapGL3Do0Z77lT37yegX02-FwxA/viewform" 
+       target="_blank" 
+       class="vote-btn">
+      <i class="fas fa-vote-yea"></i>
+      <span>انقر هنا للتصويت</span>
     </a>
     
-    <!-- المشروع الثاني -->
-    <a href="YOUR_LINK_2_HERE" target="_blank" class="project-btn">
-      <i class="fas fa-chart-bar"></i>
-      <span>المشروع الثاني</span>
-    </a>
-    
-    <!-- المشروع الثالث -->
-    <a href="YOUR_LINK_3_HERE" target="_blank" class="project-btn">
-      <i class="fas fa-code"></i>
-      <span>المشروع الثالث</span>
-    </a>
+    <!-- منطقة عرض النتائج -->
+    <div class="results-container">
+      <h3>النتائج المباشرة</h3>
+      
+      <!-- بطاقة النتائج -->
+      <div class="results-card">
+        <iframe 
+          src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRb0-DMLmB9c7s7D008Dv7BZy517_eVPQTjv9m9e0SO-J5wHvDMqoOEJz5pYjueQeeGrkoQ7ePyPq4w/pubhtml?gid=240273209&single=true"
+          title="نتائج التصويت المباشرة">
+        </iframe>
+      </div>
+      
+      <p class="update-note">
+        يتم تحديث النتائج تلقائياً كل 5 دقائق.
+      </p>
+    </div>
   </div>
-
-  <!-- صندوق Disqus -->
-  <div id="disqus_thread"></div>
-  <script>
-      /**
-      *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-      *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-      /*
-      var disqus_config = function () {
-      this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-      this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-      };
-      */
-      (function() { // DON'T EDIT BELOW THIS LINE
-      var d = document, s = d.createElement('script');
-      s.src = 'https://m-alghamdi-site.disqus.com/embed.js';
-      s.setAttribute('data-timestamp', +new Date());
-      (d.head || d.body).appendChild(s);
-      })();
-  </script>
-  <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
   
+  <!-- ===== لوضع الترقب: أضف 'display: none;' للقسم الأعلى، واحذفه من السطر التالي ===== -->
+  <div id="intermission-mode" style="display: none;">
+    <div style="text-align: center; padding: 2rem 0;">
+      <i class="fas fa-hourglass-half" style="font-size: 3rem; color: var(--accent-teal); margin-bottom: 1rem;"></i>
+      <h3>انتهى التصويت لهذا الشهر!</h3>
+      <p>ترقبوا الإعلان عن المشاريع الجديدة قريباً.</p>
+    </div>
+  </div>
 </section>
 
 <!-- ============================================ -->
@@ -2715,14 +2931,13 @@
 <div class="section-main-title fade-in">
   <div class="main-title-content">
     <i class="fas fa-folder-open main-title-icon"></i>
-    <h2 class="main-title-text">قوالب المجال التعليمي  </h2> <!-- تم تغيير النص -->
-        <p class="section-description">
-      مجموعة منظمة من القوالب التعليمية، تشمل التوثيق المهني للمعلم، ومكتبة متكاملة تستهدف طلاب المرحلة الثانوية بالإضافة إلى محتوى إثرائي متنوع.
+    <h2 class="main-title-text">قوالب المجال التعليمي</h2>
+    <!-- النص التوضيحي الجديد -->
+    <p class="section-description">
+      مجموعة منظمة من القوالب والمصادر التعليمية، تشمل التوثيق المهني ومكتبة متكاملة تستهدف طلاب المرحلة الثانوية بالإضافة إلى محتويات إثرائية متنوعة.
     </p>
   </div>
 </div>
-
-
 
 <!-- ========================================= -->
 <!--            جميع القوالب التعليمية         -->
