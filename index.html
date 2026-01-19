@@ -2150,6 +2150,90 @@
       margin-top: 0.5rem;
     }
 
+    /* ============================================ */
+    /* ===   نافذة كلمة مرور الملف المهني   ======= */
+    /* ============================================ */
+    .portfolio-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(var(--primary-dark-rgb), 0.7);
+      display: none; /* مخفي افتراضياً */
+      justify-content: center;
+      align-items: center;
+      z-index: 10001;
+      backdrop-filter: blur(5px);
+    }
+
+    .portfolio-modal-content {
+      background: var(--pure-white);
+      padding: 2rem;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+      position: relative;
+      border: 1px solid var(--border-color);
+    }
+
+    .portfolio-modal-content h3 {
+      color: var(--primary-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    .portfolio-modal-content p {
+      color: var(--text-medium);
+      margin-bottom: 1.5rem;
+    }
+
+    .portfolio-modal-close {
+      position: absolute;
+      top: 10px;
+      left: 15px;
+      background: none;
+      border: none;
+      font-size: 2rem;
+      color: var(--text-light);
+      cursor: pointer;
+    }
+
+    #password-input {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid var(--border-color);
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1.1rem;
+      margin-bottom: 1rem;
+    }
+
+    #submit-password-btn {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 10px;
+      background-color: var(--accent-teal);
+      color: white;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #submit-password-btn:hover {
+      background-color: var(--ai-teal);
+    }
+
+    .error-text {
+      color: var(--warning-red) !important;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+      height: 20px; /* حجز مساحة لرسالة الخطأ */
+    }
+
     /* ========================================= */
     /*        تحسينات للاستجابة                 */
     /* ========================================= */
@@ -2989,117 +3073,122 @@
 <!--            جميع القوالب التعليمية         -->
 <!-- ========================================= -->
 <div class="container">
-  <!-- معلومات عامة -->
-  <section class="section-card fade-in">
-    <div class="section-title" data-title="معلومات عامة">
-      <div class="title-container">
-        <i class="fas fa-info-circle section-icon"></i>
-        <span>معلومات عامة</span>
-      </div>
-      <button class="toggle-cards" data-target="info-cards" title="طي/فتح">
-        <i class="fas fa-chevron-up"></i>
-      </button>
-    </div>
-    <div class="cards-container collapsed" id="info-cards">
-      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/qws2/%D8%A3%D9%87%D8%AF%D8%A7%D9%81-%D8%B3%D9%8A%D8%A7%D8%B3%D8%A9-%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A8%D8%A7%D9%84%D9%85%D9%85%D9%84%D9%83%D8%A9?authuser=1" data-title="أهداف التعليم">
-        <i class="fas fa-bullseye card-icon"></i>
-        <h3 class="card-title">أهداف التعليم</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/afsw/%D9%85%D9%8A%D8%AB%D8%A7%D9%82-%D8%A3%D8%AE%D9%84%D8%A7%D9%82%D9%8A%D8%A7%D8%AA-%D9%85%D9%87%D9%86%D8%A9-%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85?authuser=1" data-title="ميثاق مهنة التعليم">
-        <i class="fas fa-scroll card-icon"></i>
-        <h3 class="card-title">ميثاق مهنة التعليم</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/werzz/%D8%A7%D9%84%D8%A3%D9%87%D8%AF%D8%A7%D9%81-%D8%A7%D9%84%D9%88%D8%B8%D9%8A%D9%81%D9%8A%D8%A9?authuser=1" data-title="الأهداف الوظيفية">
-        <i class="fas fa-bullhorn card-icon"></i>
-        <h3 class="card-title">الأهداف الوظيفية</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/wsffew/%D8%B1%D8%A4%D9%8A%D8%A9-%D9%88%D8%B1%D8%B3%D8%A7%D9%84%D8%A9-%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%85?authuser=1" data-title="رؤية ورسالة المعلم">
-        <i class="fas fa-eye card-icon"></i>
-        <h3 class="card-title">رؤية ورسالة المعلم</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.25s;" data-url="https://sites.google.com/view/retgv3/%D8%B1%D8%A4%D9%8A%D8%A9-%D9%88%D8%B1%D8%B3%D8%A7%D9%84%D8%A9-%D8%A7%D9%84%D9%85%D8%AF%D8%B1%D8%B3%D8%A9?authuser=1" data-title="رؤية المدرسة">
-        <i class="fas fa-school card-icon"></i>
-        <h3 class="card-title">رؤية المدرسة</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.3s;" data-url="https://sites.google.com/view/ererwq6/%D9%85%D9%87%D8%A7%D9%85-%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%85-%D9%88%D9%88%D8%A7%D8%AC%D8%A8%D8%A7%D8%AA%D8%A9?authuser=1" data-title="مهام المعلم">
-        <i class="fas fa-tasks card-icon"></i>
-        <h3 class="card-title">مهام المعلم</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.35s;" data-url="https://sites.google.com/view/we3rt/home?authuser=1" data-title="السيرة الذاتية">
-        <i class="fas fa-user card-icon"></i>
-        <h3 class="card-title">السيرة الذاتية</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.4s;" data-url="https://sites.google.com/view/3534rf/home?authuser=1" data-title="المؤهل والخبرات">
-        <i class="fas fa-graduation-cap card-icon"></i>
-        <h3 class="card-title">المؤهل والخبرات</h3>
-      </div>
-    </div>
-  </section>
+  <!-- ===== بداية قسم الملف المهني المخفي ===== -->
+  <div id="teacher-portfolio" style="display: none;">
 
-  <!-- التنمية المهنية -->
-  <section class="section-card fade-in">
-    <div class="section-title" data-title="التنمية المهنية">
-      <div class="title-container">
-        <i class="fas fa-briefcase section-icon"></i>
-        <span>التنمية المهنية</span>
+    <!-- قسم "معلومات عامة" -->
+    <section class="section-card fade-in">
+      <div class="section-title" data-title="معلومات عامة">
+        <div class="title-container">
+          <i class="fas fa-info-circle section-icon"></i>
+          <span>معلومات عامة</span>
+        </div>
+        <button class="toggle-cards" data-target="info-cards" title="طي/فتح">
+          <i class="fas fa-chevron-up"></i>
+        </button>
       </div>
-      <button class="toggle-cards" data-target="dev-cards" title="طي/فتح">
-        <i class="fas fa-chevron-up"></i>
-      </button>
-    </div>
-    <div class="cards-container collapsed" id="dev-cards">
-      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/aser2w/home?authuser=1" data-title="الدورات التدريبية">
-        <i class="fas fa-chalkboard-teacher card-icon"></i>
-        <h3 class="card-title">الدورات التدريبية</h3>
+      <div class="cards-container collapsed" id="info-cards">
+        <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/qws2/%D8%A3%D9%87%D8%AF%D8%A7%D9%81-%D8%B3%D9%8A%D8%A7%D8%B3%D8%A9-%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A8%D8%A7%D9%84%D9%85%D9%85%D9%84%D9%83%D8%A9?authuser=1" data-title="أهداف التعليم">
+          <i class="fas fa-bullseye card-icon"></i>
+          <h3 class="card-title">أهداف التعليم</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/afsw/%D9%85%D9%8A%D8%AB%D8%A7%D9%82-%D8%A3%D8%AE%D9%84%D8%A7%D9%82%D9%8A%D8%A7%D8%AA-%D9%85%D9%87%D9%86%D8%A9-%D8%A7%D9%84%D8%AA%D8%B9%D9%84%D9%8A%D9%85?authuser=1" data-title="ميثاق مهنة التعليم">
+          <i class="fas fa-scroll card-icon"></i>
+          <h3 class="card-title">ميثاق مهنة التعليم</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/werzz/%D8%A7%D9%84%D8%A3%D9%87%D8%AF%D8%A7%D9%81-%D8%A7%D9%84%D9%88%D8%B8%D9%8A%D9%81%D9%8A%D8%A9?authuser=1" data-title="الأهداف الوظيفية">
+          <i class="fas fa-bullhorn card-icon"></i>
+          <h3 class="card-title">الأهداف الوظيفية</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/wsffew/%D8%B1%D8%A4%D9%8A%D8%A9-%D9%88%D8%B1%D8%B3%D8%A7%D9%84%D8%A9-%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%85?authuser=1" data-title="رؤية ورسالة المعلم">
+          <i class="fas fa-eye card-icon"></i>
+          <h3 class="card-title">رؤية ورسالة المعلم</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.25s;" data-url="https://sites.google.com/view/retgv3/%D8%B1%D8%A4%D9%8A%D8%A9-%D9%88%D8%B1%D8%B3%D8%A7%D9%84%D8%A9-%D8%A7%D9%84%D9%85%D8%AF%D8%B1%D8%B3%D8%A9?authuser=1" data-title="رؤية المدرسة">
+          <i class="fas fa-school card-icon"></i>
+          <h3 class="card-title">رؤية المدرسة</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.3s;" data-url="https://sites.google.com/view/ererwq6/%D9%85%D9%87%D8%A7%D9%85-%D8%A7%D9%84%D9%85%D8%B9%D9%84%D9%85-%D9%88%D9%88%D8%A7%D8%AC%D8%A8%D8%A7%D8%AA%D8%A9?authuser=1" data-title="مهام المعلم">
+          <i class="fas fa-tasks card-icon"></i>
+          <h3 class="card-title">مهام المعلم</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.35s;" data-url="https://sites.google.com/view/we3rt/home?authuser=1" data-title="السيرة الذاتية">
+          <i class="fas fa-user card-icon"></i>
+          <h3 class="card-title">السيرة الذاتية</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.4s;" data-url="https://sites.google.com/view/3534rf/home?authuser=1" data-title="المؤهل والخبرات">
+          <i class="fas fa-graduation-cap card-icon"></i>
+          <h3 class="card-title">المؤهل والخبرات</h3>
+        </div>
       </div>
-      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/erfedf43/m?authuser=1" data-title="الإنجازات">
-        <i class="fas fa-award card-icon"></i>
-        <h3 class="card-title">الإنجازات</h3>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- التطوير المهني -->
-  <section class="section-card fade-in">
-    <div class="section-title" data-title="التطوير المهني">
-      <div class="title-container">
-        <i class="fas fa-sync-alt section-icon"></i>
-        <span>التطوير المهني</span>
+    <!-- قسم "التنمية المهنية" -->
+    <section class="section-card fade-in">
+      <div class="section-title" data-title="التنمية المهنية">
+        <div class="title-container">
+          <i class="fas fa-briefcase section-icon"></i>
+          <span>التنمية المهنية</span>
+        </div>
+        <button class="toggle-cards" data-target="dev-cards" title="طي/فتح">
+          <i class="fas fa-chevron-up"></i>
+        </button>
       </div>
-      <button class="toggle-cards" data-target="pro-cards" title="طي/فتح">
-        <i class="fas fa-chevron-up"></i>
-      </button>
-    </div>
-    <div class="cards-container collapsed" id="pro-cards">
-      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/edsww2/%D8%AA%D8%A8%D8%A7%D8%AF%D9%84-%D8%A7%D9%84%D8%B2%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA?authuser=1" data-title="تبادل الزيارات">
-        <i class="fas fa-exchange-alt card-icon"></i>
-        <h3 class="card-title">تبادل الزيارات</h3>
+      <div class="cards-container collapsed" id="dev-cards">
+        <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/aser2w/home?authuser=1" data-title="الدورات التدريبية">
+          <i class="fas fa-chalkboard-teacher card-icon"></i>
+          <h3 class="card-title">الدورات التدريبية</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/erfedf43/m?authuser=1" data-title="الإنجازات">
+          <i class="fas fa-award card-icon"></i>
+          <h3 class="card-title">الإنجازات</h3>
+        </div>
       </div>
-      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/wafe23/%D8%A7%D9%84%D9%85%D8%AC%D8%AA%D9%85%D8%B9%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D9%87%D9%86%D9%8A%D8%A9?authuser=1" data-title="المجتمعات المهنية">
-        <i class="fas fa-users-cog card-icon"></i>
-        <h3 class="card-title">المجتمعات المهنية</h3>
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- التكريم والجوائز -->
-  <section class="section-card fade-in">
-    <div class="section-title" data-title="التكريم والجوائز">
-      <div class="title-container">
-        <i class="fas fa-award section-icon"></i>
-        <span>التكريم والجوائز</span>
+    <!-- قسم "التطوير المهني" -->
+    <section class="section-card fade-in">
+      <div class="section-title" data-title="التطوير المهني">
+        <div class="title-container">
+          <i class="fas fa-sync-alt section-icon"></i>
+          <span>التطوير المهني</span>
+        </div>
+        <button class="toggle-cards" data-target="pro-cards" title="طي/فتح">
+          <i class="fas fa-chevron-up"></i>
+        </button>
       </div>
-      <button class="toggle-cards" data-target="awards-cards" title="طي/فتح">
-        <i class="fas fa-chevron-up"></i>
-      </button>
-    </div>
-    <div class="cards-container collapsed" id="awards-cards">
-      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sf56/%D8%A7%D9%84%D8%AA%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D8%A6%D8%B2?authuser=1" data-title="التكريم والجوائز">
-        <i class="fas fa-trophy card-icon"></i>
-        <h3 class="card-title">التكريم والجوائز</h3>
+      <div class="cards-container collapsed" id="pro-cards">
+        <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/edsww2/%D8%AA%D8%A8%D8%A7%D8%AF%D9%84-%D8%A7%D9%84%D8%B2%D9%8A%D8%A7%D8%B1%D8%A7%D8%AA?authuser=1" data-title="تبادل الزيارات">
+          <i class="fas fa-exchange-alt card-icon"></i>
+          <h3 class="card-title">تبادل الزيارات</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/wafe23/%D8%A7%D9%84%D9%85%D8%AC%D8%AA%D9%85%D8%B9%D8%A7%D8%AA-%D8%A7%D9%84%D9%85%D9%87%D9%86%D9%8A%D8%A9?authuser=1" data-title="المجتمعات المهنية">
+          <i class="fas fa-users-cog card-icon"></i>
+          <h3 class="card-title">المجتمعات المهنية</h3>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+
+    <!-- قسم "التكريم والجوائز" -->
+    <section class="section-card fade-in">
+      <div class="section-title" data-title="التكريم والجوائز">
+        <div class="title-container">
+          <i class="fas fa-award section-icon"></i>
+          <span>التكريم والجوائز</span>
+        </div>
+        <button class="toggle-cards" data-target="awards-cards" title="طي/فتح">
+          <i class="fas fa-chevron-up"></i>
+        </button>
+      </div>
+      <div class="cards-container collapsed" id="awards-cards">
+        <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sf56/%D8%A7%D9%84%D8%AA%D9%83%D8%B1%D9%8A%D9%85-%D9%88%D8%A7%D9%84%D8%AC%D9%88%D8%A7%D8%A6%D8%B2?authuser=1" data-title="التكريم والجوائز">
+          <i class="fas fa-trophy card-icon"></i>
+          <h3 class="card-title">التكريم والجوائز</h3>
+        </div>
+      </div>
+    </section>
+  </div>
+  <!-- ===== نهاية قسم الملف المهني المخفي ===== -->
 
   <!-- العمل التعليمي -->
   <section class="section-card fade-in">
@@ -3129,7 +3218,7 @@
         <i class="fas fa-calendar-week card-icon"></i>
         <h3 class="card-title">الخطة الزمنية</h3>
       </div>
-      <div class="card" style="animation-delay: 0.25s;" data-url="https://sites.google.com/view/dfgtte2/%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1-%D8%A7%D9%84%D9%85%D9%86%D8%B5%D8%A9?authuser=1" data-title="تحضير المنصة">
+      <div class"card" style="animation-delay: 0.25s;" data-url="https://sites.google.com/view/dfgtte2/%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1-%D8%A7%D9%84%D9%85%D9%86%D8%B5%D8%A9?authuser=1" data-title="تحضير المنصة">
         <i class="fas fa-chalkboard card-icon"></i>
         <h3 class="card-title">تحضير المنصة</h3>
       </div>
@@ -3357,6 +3446,19 @@
   </div>
 </div>
 
+<!-- ===== بداية نافذة كلمة المرور المنبثقة ===== -->
+<div id="password-modal" class="portfolio-modal-overlay">
+  <div class="portfolio-modal-content">
+    <button id="close-modal-btn" class="portfolio-modal-close">&times;</button>
+    <h3>الوصول إلى الملف المهني</h3>
+    <p>هذا القسم يتطلب كلمة مرور.</p>
+    <input type="password" id="password-input" placeholder="أدخل كلمة المرور هنا">
+    <button id="submit-password-btn">دخـــول</button>
+    <p id="error-message" class="error-text"></p>
+  </div>
+</div>
+<!-- ===== نهاية نافذة كلمة المرور المنبثقة ===== -->
+
 <!-- الفوتر -->
 <footer class="site-footer">
   <div class="footer-content">
@@ -3366,6 +3468,9 @@
       </a>
       <a href="#ai-assistant-section" class="footer-link">
         <i class="fas fa-robot"></i> مساعد الذكاء الاصطناعي
+      </a>
+      <a href="#" id="open-portfolio-btn" class="footer-link">
+        <i class="fas fa-lock"></i> الملف المهني
       </a>
     </div>
     <div class="footer-copyright">
@@ -4030,6 +4135,67 @@
           titleIcon.style.transform = 'scale(1) rotate(0deg)';
         });
       }
+    }
+
+    // ============================================
+    //      كود بوابة الملف المهني المحمي (مع التعديل المطلوب)
+    // ============================================
+    
+    const openBtn = document.getElementById('open-portfolio-btn');
+    const modal = document.getElementById('password-modal');
+    const closeBtn = document.getElementById('close-modal-btn');
+    const passwordInput = document.getElementById('password-input');
+    const submitBtn = document.getElementById('submit-password-btn');
+    const errorMessage = document.getElementById('error-message');
+    const portfolioSection = document.getElementById('teacher-portfolio');
+
+    // كلمة المرور الصحيحة (يمكنك تغييرها بسهولة من هنا)
+    const correctPassword = "PROF_PASSWORD_2026";
+
+    // فتح النافذة المنبثقة
+    if (openBtn) {
+      openBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        if (modal) modal.style.display = 'flex';
+      });
+    }
+
+    // إغلاق النافذة المنبثقة
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() {
+        if (modal) modal.style.display = 'none';
+        errorMessage.textContent = '';
+        passwordInput.value = '';
+      });
+    }
+
+    // التحقق من كلمة المرور - مع التعديل المطلوب
+    if (submitBtn) {
+      submitBtn.addEventListener('click', function() {
+        if (passwordInput.value === correctPassword) {
+          // كلمة المرور صحيحة
+          if (modal) modal.style.display = 'none';
+          // التعديل المهم: استبدال div الحاوي بمحتوياته مباشرة
+          if (portfolioSection) portfolioSection.replaceWith(...portfolioSection.childNodes);
+          // يمكنك إخفاء زر "الملف المهني" بعد الدخول إذا أردت
+          if (openBtn) openBtn.style.display = 'none'; 
+        } else {
+          // كلمة المرور خاطئة
+          errorMessage.textContent = 'كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى.';
+          passwordInput.value = '';
+        }
+      });
+    }
+    
+    // إغلاق النافذة عند النقر خارجها
+    if (modal) {
+      modal.addEventListener('click', function(e) {
+        if (e.target === modal) {
+          modal.style.display = 'none';
+          errorMessage.textContent = '';
+          passwordInput.value = '';
+        }
+      });
     }
 
     // ============================================
