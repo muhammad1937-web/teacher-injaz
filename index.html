@@ -2065,6 +2065,7 @@
       font-weight: 600;
     }
 
+    /* زر التصويت المعدل - نفس لون زر الديسكورد */
     .vote-btn {
       display: inline-flex;
       align-items: center;
@@ -2080,10 +2081,10 @@
       transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       white-space: nowrap;
       min-width: 200px;
-      background: var(--ai-teal);
+      background: var(--accent-teal); /* تغيير اللون ليكون مثل زر الديسكورد */
       color: white;
       border: 2px solid transparent;
-      box-shadow: 0 4px 15px rgba(var(--ai-teal-rgb), 0.3);
+      box-shadow: 0 4px 15px rgba(var(--accent-teal-rgb), 0.3); /* نفس ظل الديسكورد */
       position: relative;
       overflow: hidden;
       margin: 1rem auto 2rem;
@@ -2109,7 +2110,7 @@
     }
 
     .vote-btn:hover {
-      background: var(--accent-teal);
+      background: var(--ai-teal); /* نفس hover زر الديسكورد */
       transform: translateY(-3px);
       box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.4);
     }
@@ -2973,6 +2974,7 @@
     <!-- منطقة التصويت -->
     <h3 class="voting-subtitle">بعد مشاهدة المشاريع، شاركنا رأيك</h3>
     
+    <!-- زر التصويت المعدل بلون مماثل لزر الديسكورد -->
     <a href="https://docs.google.com/forms/d/e/1FAIpQLSeSXj_S80vPffGrlHjm0eKwapGL3Do0Z77lT37yegX02-FwxA/viewform" 
        target="_blank" 
        class="vote-btn">
@@ -3413,11 +3415,12 @@
 
 <!-- قسم الاستفسارات - المعدل -->
 <div class="inquiries-container fade-in">
-  <!-- تم تعديل الزر الأساسي فقط -->
-  <button id="openInquiryModalBtn" class="inquiry-btn primary">
-    <i class="fas fa-upload"></i> مشاريع الطلاب التعليمية <!-- تم تغيير النص والأيقونة -->
-  </button>
-  <!-- تم حذف الزر الثانوي -->
+  <!-- زر رفع المشاريع التعليمية المعدل - يفتح في صفحة خارجية -->
+  <a href="https://docs.google.com/forms/d/e/1FAIpQLScP82hCVuCxuIl_FBXQpZJyGbR6kWGVEuT2Y6oKNPm2TfIwcA/viewform" 
+     target="_blank" 
+     class="inquiry-btn primary">
+    <i class="fas fa-upload"></i> مشاريع الطلاب التعليمية
+  </a>
 </div>
 
 <!-- زر العودة للأعلى -->
@@ -3425,26 +3428,7 @@
   <i class="fas fa-chevron-up"></i>
 </button>
 
-<!-- نافذة النموذج المنبثقة - المعدلة -->
-<div id="inquiryModal" class="modal-overlay">
-  <div class="modal-content">
-    <button id="closeInquiryModalBtn" class="modal-close-btn">&times;</button>
-    <div class="modal-header">
-      <h2>مشاريع الطلاب التعليمية</h2>
-      <p>ارفع مشروعك التعليمي هنا للمراجعة والتقييم</p>
-    </div>
-    <iframe 
-      src="https://docs.google.com/forms/d/e/1FAIpQLScP82hCVuCxuIl_FBXQpZJyGbR6kWGVEuT2Y6oKNPm2TfIwcA/viewform?embedded=true" 
-      width="100%" 
-      height="500" 
-      frameborder="0" 
-      marginheight="0" 
-      marginwidth="0"
-      title="نموذج رفع المشاريع التعليمية">
-      جاري التحميل...
-    </iframe>
-  </div>
-</div>
+<!-- تم حذف نافذة النموذج المنبثقة القديمة -->
 
 <!-- ===== بداية نافذة كلمة المرور المنبثقة ===== -->
 <div id="password-modal" class="portfolio-modal-overlay">
@@ -4001,67 +3985,6 @@
     }
 
     // ============================================
-    //      وظائف نافذة النموذج المنبثقة
-    // ============================================
-
-    function initInquiryModal() {
-      const openModalBtn = document.getElementById('openInquiryModalBtn');
-      const closeModalBtn = document.getElementById('closeInquiryModalBtn');
-      const modalOverlay = document.getElementById('inquiryModal');
-
-      function openModal() {
-        if (modalOverlay) {
-          // إظهار النافذة أولاً
-          modalOverlay.style.display = 'flex';
-          
-          // إضافة الكلاس visible بعد تأخير بسيط لتفعيل الانتقال
-          setTimeout(() => {
-            modalOverlay.classList.add('visible');
-            // منع التمرير في الصفحة الرئيسية عند فتح النافذة
-            document.body.style.overflow = 'hidden';
-          }, 10);
-        }
-      }
-
-      function closeModal() {
-        if (modalOverlay) {
-          // إزالة الكلاس visible أولاً
-          modalOverlay.classList.remove('visible');
-          
-          // إخفاء النافذة بعد انتهاء الانتقال
-          setTimeout(() => {
-            modalOverlay.style.display = 'none';
-            // إعادة التمرير في الصفحة الرئيسية
-            document.body.style.overflow = '';
-          }, 300);
-        }
-      }
-
-      if (openModalBtn) {
-        openModalBtn.addEventListener('click', openModal);
-      }
-
-      if (closeModalBtn) {
-        closeModalBtn.addEventListener('click', closeModal);
-      }
-
-      if (modalOverlay) {
-        modalOverlay.addEventListener('click', function(event) {
-          if (event.target === modalOverlay) {
-            closeModal();
-          }
-        });
-      }
-
-      // إغلاق النافذة عند الضغط على مفتاح Escape
-      document.addEventListener('keydown', function(event) {
-        if (event.key === 'Escape' && modalOverlay.style.display === 'flex') {
-          closeModal();
-        }
-      });
-    }
-
-    // ============================================
     //      وظائف زر العودة للأعلى
     // ============================================
 
@@ -4206,7 +4129,6 @@
     initSearch();
     initAIAssistant();
     initCardToggles();
-    initInquiryModal();
     initHonorsSection();
     initBackToTop();
     initNewSections();
@@ -4221,4 +4143,3 @@
 </script>
 </body>
 </html>
-
