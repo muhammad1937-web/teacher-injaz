@@ -3512,7 +3512,7 @@
     function updateCompactDate() {
   const now = new Date();
   const correctedDate = new Date(now);
-  correctedDate.setDate(correctedDate.getDate() - 1);
+ 
   
   const hijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', {
     day: 'numeric',
