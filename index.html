@@ -6,7 +6,8 @@
   <title>واجهـة المعلـم الرقمـي</title>
   <meta name="description" content="موقع أ.محمد الغامدي - توثيق الجهود المهنية ونشر المحتوى التعليمي للطلاب.">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <!-- الخط الجديد: IBM Plex Sans Arabic مع الأوزان المناسبة -->
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     /* ========================================= */
     /*     متغيرات الألوان الجديدة - الأفق الرقمي   */
@@ -84,7 +85,8 @@
     }
 
     body {
-      font-family: 'Tajawal', sans-serif;
+      /* تطبيق الخط الجديد IBM Plex Sans Arabic مع دعم كامل للأوزان */
+      font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
       background-color: var(--light-bg);
       color: var(--text-dark);
       line-height: 1.6;
@@ -335,7 +337,7 @@
       border: 2px solid var(--border-color);
       border-radius: 30px;
       font-size: 1rem;
-      font-family: 'Tajawal', sans-serif;
+      font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
       background: var(--pure-white);
       color: var(--text-dark);
       box-shadow: 0 4px 15px rgba(var(--primary-dark-rgb), 0.08);
@@ -456,7 +458,7 @@
       left: 5px;
       height: 5px;
       background: var(--gradient-accent);
-      border-radius: 12px 12px 0 0;
+      border-radius: 12px 0 0 0;
       transition: height 0.3s ease;
     }
 
@@ -1094,7 +1096,7 @@
       border: 2px solid var(--border-color);
       border-radius: 25px;
       font-size: 1rem;
-      font-family: 'Tajawal', sans-serif;
+      font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
       background: var(--pure-white);
       color: var(--text-dark);
       transition: var(--transition);
@@ -1193,7 +1195,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.75rem;
-      font-family: 'Tajawal', sans-serif;
+      font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
       font-size: 1.1rem;
       font-weight: 700;
       padding: 0.9rem 1.8rem;
@@ -1427,7 +1429,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.5rem;
-      font-family: 'Tajawal', sans-serif;
+      font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
       font-size: 0.95rem;
       font-weight: 600;
       padding: 0.9rem 1.5rem;
@@ -1659,7 +1661,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.75rem;
-      font-family: 'Tajawal', sans-serif;
+      font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
       font-size: 1rem;
       font-weight: 600;
       padding: 0.9rem 2rem;
@@ -2071,7 +2073,7 @@
       align-items: center;
       justify-content: center;
       gap: 0.75rem;
-      font-family: 'Tajawal', sans-serif;
+      font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
       font-size: 1rem;
       font-weight: 600;
       padding: 1rem 2.5rem;
@@ -2209,6 +2211,7 @@
       text-align: center;
       font-size: 1.1rem;
       margin-bottom: 1rem;
+      font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
     }
 
     #submit-password-btn {
@@ -2222,6 +2225,7 @@
       font-weight: 600;
       cursor: pointer;
       transition: background-color 0.3s ease;
+      font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
     }
 
     #submit-password-btn:hover {
@@ -3077,7 +3081,6 @@
 <div class="container">
   <!-- ===== بداية قسم الملف المهني المخفي ===== -->
   <div id="teacher-portfolio" style="display: none;">
-
     <!-- قسم "معلومات عامة" -->
     <section class="section-card fade-in">
       <div class="section-title" data-title="معلومات عامة">
@@ -3189,79 +3192,81 @@
         </div>
       </div>
     </section>
+
+    <!-- ===== تم نقل قسم "العمل التعليمي" إلى هنا ===== -->
+    <!-- العمل التعليمي -->
+    <section class="section-card fade-in">
+      <div class="section-title" data-title="العمل التعليمي">
+        <div class="title-container">
+          <i class="fas fa-chalkboard section-icon"></i>
+          <span>العمل التعليمي</span>
+        </div>
+        <button class="toggle-cards" data-target="edu-cards" title="طي/فتح">
+          <i class="fas fa-chevron-up"></i>
+        </button>
+      </div>
+      <div class="cards-container collapsed" id="edu-cards">
+        <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sa32sa2/%D8%A3%D9%87%D8%AF%D8%A7%D9%81-%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A7%D9%84%D9%85%D8%A7%D8%AF%D8%A9?authuser=1" data-title="أهداف تعليم المادة">
+          <i class="fas fa-bullseye card-icon"></i>
+          <h3 class="card-title">أهداف تعليم المادة</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/sacsd/dc?authuser=1" data-title="جدول الحصص">
+          <i class="fas fa-calendar-alt card-icon"></i>
+          <h3 class="card-title">جدول الحصص</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/erferx/%D8%AA%D9%88%D8%B2%D9%8A%D8%B9-%D8%A7%D9%84%D9%85%D9%86%D9%87%D8%AC?authuser=1" data-title="توزيع المنهج">
+          <i class="fas fa-book card-icon"></i>
+          <h3 class="card-title">توزيع المنهج</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/sdf6664rf/fg?authuser=1" data-title="الخطة الزمنية">
+          <i class="fas fa-calendar-week card-icon"></i>
+          <h3 class="card-title">الخطة الزمنية</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.25s;" data-url="https://sites.google.com/view/dfgtte2/%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1-%D8%A7%D9%84%D9%85%D9%86%D8%B5%D8%A9?authuser=1" data-title="تحضير المنصة">
+          <i class="fas fa-chalkboard card-icon"></i>
+          <h3 class="card-title">تحضير المنصة</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.3s;" data-url="https://sites.google.com/view/dvfdg78/%D8%A7%D9%84%D9%88%D8%A7%D8%AC%D8%A8%D8%A7%D8%AA?authuser=1" data-title="الواجبات">
+          <i class="fas fa-tasks card-icon"></i>
+          <h3 class="card-title">الواجبات</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.35s;" data-url="https://sites.google.com/view/dfgu55/%D8%B9%D8%B1%D9%88%D8%B6-%D8%AA%D9%82%D8%AF%D9%8A%D9%85%D9%8A%D8%A9?authuser=1" data-title="عروض تقديمية">
+          <i class="fas fa-file-powerpoint card-icon"></i>
+          <h3 class="card-title">عروض تقديمية</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.4s;" data-url="https://sites.google.com/view/sdgvt6/sw?authuser=1" data-title="أوراق العمل">
+          <i class="fas fa-file-alt card-icon"></i>
+          <h3 class="card-title">أوراق العمل</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.45s;" data-url="https://sites.google.com/view/dvfdg33/ss?authuser=1" data-title="استراتيجيات حديثة">
+          <i class="fas fa-lightbulb card-icon"></i>
+          <h3 class="card-title">استراتيجيات حديثة</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.5s;" data-url="https://sites.google.com/view/dfg6654e/we?authuser=1" data-title="تفاعلات الطلاب">
+          <i class="fas fa-comments card-icon"></i>
+          <h3 class="card-title">تفاعلات الطلاب</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.55s;" data-url="https://sites.google.com/view/fghhny8/%D9%85%D8%B4%D8%A7%D8%B1%D9%8A%D8%B9-steam?authuser=1" data-title="STEM">
+          <i class="fas fa-atom card-icon"></i>
+          <h3 class="card-title">STEM</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.6s;" data-url="https://sites.google.com/view/kjjhhjkl6/%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D8%A7%D8%AA?authuser=1" data-title="المسابقات">
+          <i class="fas fa-medal card-icon"></i>
+          <h3 class="card-title">المسابقات</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.65s;" data-url="https://sites.google.com/view/sdsgdfsb6/ee?authuser=1" data-title="البيئة التعليمية">
+          <i class="fas fa-school card-icon"></i>
+          <h3 class="card-title">البيئة التعليمية</h3>
+        </div>
+        <div class="card" style="animation-delay: 0.7s;" data-url="https://sites.google.com/view/sdergrt7/xc?authuser=1" data-title="التقنية والتعليم">
+          <i class="fas fa-laptop-code card-icon"></i>
+          <h3 class="card-title">التقنية والتعليم</h3>
+        </div>
+      </div>
+    </section>
+    <!-- ===== نهاية قسم العمل التعليمي المنقول ===== -->
   </div>
   <!-- ===== نهاية قسم الملف المهني المخفي ===== -->
-
-  <!-- العمل التعليمي -->
-  <section class="section-card fade-in">
-    <div class="section-title" data-title="العمل التعليمي">
-      <div class="title-container">
-        <i class="fas fa-chalkboard section-icon"></i>
-        <span>العمل التعليمي</span>
-      </div>
-      <button class="toggle-cards" data-target="edu-cards" title="طي/فتح">
-        <i class="fas fa-chevron-up"></i>
-      </button>
-    </div>
-    <div class="cards-container collapsed" id="edu-cards">
-      <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/sa32sa2/%D8%A3%D9%87%D8%AF%D8%A7%D9%81-%D8%AA%D8%B9%D9%84%D9%8A%D9%85-%D8%A7%D9%84%D9%85%D8%A7%D8%AF%D8%A9?authuser=1" data-title="أهداف تعليم المادة">
-        <i class="fas fa-bullseye card-icon"></i>
-        <h3 class="card-title">أهداف تعليم المادة</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.1s;" data-url="https://sites.google.com/view/sacsd/dc?authuser=1" data-title="جدول الحصص">
-        <i class="fas fa-calendar-alt card-icon"></i>
-        <h3 class="card-title">جدول الحصص</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.15s;" data-url="https://sites.google.com/view/erferx/%D8%AA%D9%88%D8%B2%D9%8A%D8%B9-%D8%A7%D9%84%D9%85%D9%86%D9%87%D8%AC?authuser=1" data-title="توزيع المنهج">
-        <i class="fas fa-book card-icon"></i>
-        <h3 class="card-title">توزيع المنهج</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.2s;" data-url="https://sites.google.com/view/sdf6664rf/fg?authuser=1" data-title="الخطة الزمنية">
-        <i class="fas fa-calendar-week card-icon"></i>
-        <h3 class="card-title">الخطة الزمنية</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.25s;" data-url="https://sites.google.com/view/dfgtte2/%D8%AA%D8%AD%D8%B6%D9%8A%D8%B1-%D8%A7%D9%84%D9%85%D9%86%D8%B5%D8%A9?authuser=1" data-title="تحضير المنصة">
-        <i class="fas fa-chalkboard card-icon"></i>
-        <h3 class="card-title">تحضير المنصة</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.3s;" data-url="https://sites.google.com/view/dvfdg78/%D8%A7%D9%84%D9%88%D8%A7%D8%AC%D8%A8%D8%A7%D8%AA?authuser=1" data-title="الواجبات">
-        <i class="fas fa-tasks card-icon"></i>
-        <h3 class="card-title">الواجبات</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.35s;" data-url="https://sites.google.com/view/dfgu55/%D8%B9%D8%B1%D9%88%D8%B6-%D8%AA%D9%82%D8%AF%D9%8A%D9%85%D9%8A%D8%A9?authuser=1" data-title="عروض تقديمية">
-        <i class="fas fa-file-powerpoint card-icon"></i>
-        <h3 class="card-title">عروض تقديمية</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.4s;" data-url="https://sites.google.com/view/sdgvt6/sw?authuser=1" data-title="أوراق العمل">
-        <i class="fas fa-file-alt card-icon"></i>
-        <h3 class="card-title">أوراق العمل</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.45s;" data-url="https://sites.google.com/view/dvfdg33/ss?authuser=1" data-title="استراتيجيات حديثة">
-        <i class="fas fa-lightbulb card-icon"></i>
-        <h3 class="card-title">استراتيجيات حديثة</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.5s;" data-url="https://sites.google.com/view/dfg6654e/we?authuser=1" data-title="تفاعلات الطلاب">
-        <i class="fas fa-comments card-icon"></i>
-        <h3 class="card-title">تفاعلات الطلاب</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.55s;" data-url="https://sites.google.com/view/fghhny8/%D9%85%D8%B4%D8%A7%D8%B1%D9%8A%D8%B9-steam?authuser=1" data-title="STEM">
-        <i class="fas fa-atom card-icon"></i>
-        <h3 class="card-title">STEM</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.6s;" data-url="https://sites.google.com/view/kjjhhjkl6/%D8%A7%D9%84%D9%85%D8%B3%D8%A7%D8%A8%D9%82%D8%A7%D8%AA?authuser=1" data-title="المسابقات">
-        <i class="fas fa-medal card-icon"></i>
-        <h3 class="card-title">المسابقات</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.65s;" data-url="https://sites.google.com/view/sdsgdfsb6/ee?authuser=1" data-title="البيئة التعليمية">
-        <i class="fas fa-school card-icon"></i>
-        <h3 class="card-title">البيئة التعليمية</h3>
-      </div>
-      <div class="card" style="animation-delay: 0.7s;" data-url="https://sites.google.com/view/sdergrt7/xc?authuser=1" data-title="التقنية والتعليم">
-        <i class="fas fa-laptop-code card-icon"></i>
-        <h3 class="card-title">التقنية والتعليم</h3>
-      </div>
-    </div>
-  </section>
 
   <!-- تقويم الطلاب -->
   <section class="section-card fade-in">
@@ -3427,8 +3432,6 @@
 <button class="back-to-top" id="backToTop" aria-label="العودة إلى الأعلى">
   <i class="fas fa-chevron-up"></i>
 </button>
-
-<!-- تم حذف نافذة النموذج المنبثقة القديمة -->
 
 <!-- ===== بداية نافذة كلمة المرور المنبثقة ===== -->
 <div id="password-modal" class="portfolio-modal-overlay">
