@@ -3510,14 +3510,14 @@
     // ============================================
 
     function updateCompactDate() {
-      const now = new Date();
-      
-       correctedDate.setDate(correctedDate.getDate() - 1);
-      
-      const hijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', {
-        day: 'numeric',
-        month: 'long'
-      }).format(correctedDate);
+  const now = new Date();
+  const correctedDate = new Date(now);
+  correctedDate.setDate(correctedDate.getDate() - 1);
+  
+  const hijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', {
+    day: 'numeric',
+    month: 'long'
+  }).format(correctedDate);
       
       const gregorian = new Intl.DateTimeFormat('ar-EG', {
         day: 'numeric',
