@@ -1313,9 +1313,13 @@
       color: var(--accent-teal);
     }
 
-    .footer-copyright {
-      font-size: 0.9rem;
-    }
+   .footer-copyright {
+  font-size: 0.9rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+}
 
     /* ========================================= */
     /*          تأثيرات الظهور                  */
@@ -3463,8 +3467,9 @@
       </a>
     </div>
     <div class="footer-copyright">
-      © 2026 جميع الحقوق محفوظة | واجهة المعلم الرقمي - أ. محمد الغامدي
-    </div>
+  <span>© 2026 جميع الحقوق محفوظة | واجهة المعلم الرقمي</span>
+  <span>أ. محمد الغامدي</span>
+</div>
   </div>
 </footer>
 
