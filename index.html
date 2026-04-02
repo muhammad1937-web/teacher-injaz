@@ -3777,7 +3777,7 @@
       const searchButton = document.getElementById('searchButton');
       const searchResults = document.getElementById('searchResults');
       
-      const searchableItems = Array.from(document.querySelectorAll('.card'));
+      const searchableItems = Array.from(document.querySelectorAll('.card:not(#teacher-portfolio .card)'));
       
       function performSearch() {
         const searchTerm = searchInput.value.trim().toLowerCase();
