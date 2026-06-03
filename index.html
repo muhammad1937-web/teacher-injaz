@@ -705,72 +705,25 @@
     .section-main-title.visible .section-description { opacity: 1; transform: translateY(0); }
 
     /* ============================================ */
-    /* ==========   نتائج التصويت - بطاقات   ========== */
+    /* ==========   بطاقة عرض نتائج التصويت   ========== */
     /* ============================================ */
-    .results-cards-container {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-      justify-content: center;
-      margin-top: 2rem;
-    }
-    .result-vote-card {
-      background: var(--pure-white);
-      border-radius: 20px;
-      padding: 1.5rem;
-      width: 280px;
-      text-align: center;
-      transition: var(--transition);
-      border: 1px solid var(--border-color);
-      box-shadow: 0 4px 12px rgba(var(--primary-dark-rgb), 0.08);
-      position: relative;
-      overflow: hidden;
-    }
-    .result-vote-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 12px 25px rgba(var(--primary-dark-rgb), 0.15);
-      border-color: var(--accent-teal);
-    }
-    .result-rank {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
-    .result-project-name {
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-      margin-bottom: 1rem;
-    }
-    .result-votes {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: var(--accent-teal);
-      margin-bottom: 0.25rem;
-    }
-    .result-percentage {
-      font-size: 0.9rem;
-      color: var(--text-light);
-      margin-bottom: 1rem;
-    }
-    .progress-bar-container {
-      background-color: rgba(var(--primary-dark-rgb), 0.1);
-      border-radius: 50px;
-      height: 10px;
-      overflow: hidden;
-      margin-top: 0.5rem;
-    }
-    .progress-bar-fill {
-      background: var(--gradient-accent);
-      width: 0%;
-      height: 100%;
-      border-radius: 50px;
-      transition: width 0.5s ease;
-    }
-    .no-results-message {
-      text-align: center;
-      padding: 2rem;
-      color: var(--text-light);
-    }
+    .results-card { max-width: 500px; margin: 1.5rem auto 0; padding: 1rem; background-color: var(--pure-white); border-radius: 15px; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(var(--primary-dark-rgb), 0.07); overflow: hidden; transition: all 0.3s ease; }
+    .results-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(var(--primary-dark-rgb), 0.1); }
+    .iframe-scroll-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-top: 30px; width: 100%; border-radius: 10px; }
+    .results-card iframe { width: 100%; min-width: 320px; height: 210px; border: none; margin-top: -60px; display: block; }
+    .voting-subtitle { margin: 1.5rem 0 1rem; font-size: 1.1rem; color: var(--primary-dark); text-align: center; font-weight: 600; }
+    .vote-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; font-size: 1rem; font-weight: 600; padding: 1rem 2.5rem; border-radius: 12px; text-decoration: none; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); white-space: nowrap; min-width: 200px; background: var(--accent-teal); color: white; border: 2px solid transparent; box-shadow: 0 4px 15px rgba(var(--accent-teal-rgb), 0.3); position: relative; overflow: hidden; margin: 1rem auto 2rem; }
+    .vote-btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent); opacity: 0; transition: opacity 0.3s ease; }
+    .vote-btn i { font-size: 1.2em; transition: transform 0.3s ease; }
+    .vote-btn:hover { background: var(--ai-teal); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.4); }
+    .vote-btn:hover::before { opacity: 1; }
+    .vote-btn:hover i { transform: translateX(3px); }
+    .vote-btn:active { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(var(--accent-teal-rgb), 0.25); }
+    .results-container { margin-top: 2rem; padding: 1.5rem; background: var(--pure-white); border-radius: 15px; box-shadow: 0 5px 15px rgba(var(--primary-dark-rgb), 0.08); border: 1px solid var(--border-color); }
+    .results-container h3 { color: var(--primary-dark); text-align: center; margin-bottom: 1.2rem; font-size: 1.3rem; }
+    .update-note { text-align: center; font-size: 0.8rem; color: var(--text-light); margin-top: 0.5rem; }
+
+    @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
 
     /* ============================================ */
     /* ==========   الاستعلام عن الدرجات   ========== */
@@ -1105,11 +1058,8 @@
       .unified-student-info { width: 200px; top: -90px; padding: 0.7rem 1rem; }
       .fame-bar-section { padding: 1.2rem 0.8rem 1rem; }
       .back-to-top { bottom: 20px; left: 20px; width: 45px; height: 45px; font-size: 1.2rem; }
-      .results-cards-container { gap: 1rem; }
-      .result-vote-card { width: calc(50% - 0.5rem); padding: 1rem; }
       
       @media (max-width: 480px) {
-        .result-vote-card { width: 100%; }
         .projects-container { flex-direction: row !important; flex-wrap: wrap; justify-content: center; gap: 1rem; }
         .project-btn { min-width: 100px; padding: 0.5rem 0.8rem !important; font-size: 0.8rem; flex: 0 0 auto; margin: 0 !important; display: inline-flex !important; }
         .vote-btn { min-width: 160px; padding: 0.8rem 1.5rem; font-size: 0.9rem; }
@@ -1146,7 +1096,6 @@
         .project-btn { min-width: 130px; padding: 0.6rem 1rem !important; }
         .main-title-text { font-size: 1.7rem; }
         .vote-btn { min-width: 190px; padding: 0.9rem 2rem; }
-        .result-vote-card { width: calc(33.33% - 1rem); }
       }
     }
     @media (min-width: 769px) and (max-width: 1024px) {
@@ -1155,12 +1104,10 @@
       .section-card { width: 320px; }
       .projects-container { gap: 1.5rem; }
       .project-btn { min-width: 150px; padding: 0.8rem 1.2rem; }
-      .result-vote-card { width: calc(33.33% - 1rem); }
     }
     @media (min-width: 1025px) {
       .projects-container { gap: 2rem; }
       .project-btn { min-width: 160px; padding: 0.9rem 1.5rem; font-size: 0.95rem; }
-      .result-vote-card { width: calc(33.33% - 1rem); }
     }
   </style>
 </head>
@@ -1283,14 +1230,14 @@
       <i class="fas fa-vote-yea"></i>
       <span>انقر هنا للتصويت</span>
     </a>
-    
-    <!-- منطقة عرض النتائج الجديدة (بطاقات) -->
     <div class="results-container">
       <h3><i class="fas fa-chart-line" style="margin-left: 8px; color: var(--accent-teal);"></i> النتائج المباشرة</h3>
-      <div id="dynamicResultsArea" class="results-cards-container">
-        <div class="loading"><i class="fas fa-spinner"></i> جاري تحميل النتائج...</div>
+      <div class="results-card">
+        <div class="iframe-scroll-wrapper">
+          <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRb0-DMLmB9c7s7D008Dv7BZy517_eVPQTjv9m9e0SO-J5wHvDMqoOEJz5pYjueQeeGrkoQ7ePyPq4w/pubhtml?gid=240273209&single=true" title="نتائج التصويت المباشرة"></iframe>
+        </div>
       </div>
-      <p class="update-note">يتم تحديث النتائج تلقائياً بعد كل تصويت (قم بتحديث الصفحة).</p>
+      <p class="update-note">يتم تحديث النتائج تلقائياً كل 5 دقائق.</p>
     </div>
   </div>
   
@@ -1787,7 +1734,7 @@
     initNewSections();
 
     // ============================================
-    // 1. نظام الاستعلام عن الدرجات (مع حفظ كصورة وأيقونة القبعة)
+    //      نظام الاستعلام عن الدرجات
     // ============================================
     function initGradesQuery() {
       const API_URL = 'https://script.google.com/macros/s/AKfycbz2Lv81VKdaExbViiNYhUSIQh7yGEsDc-bd0ED66t9S2-294lPBc7W8reJAICBAC-tc/exec';
@@ -1874,67 +1821,6 @@
       studentIdInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') fetchStudentGrade(); });
     }
     initGradesQuery();
-
-    // ============================================
-    // 2. نظام عرض نتائج التصويت (بطاقات أنيقة)
-    // ============================================
-    async function fetchAndDisplayVotingResults() {
-      const resultsArea = document.getElementById('dynamicResultsArea');
-      if(!resultsArea) return;
-      const sheetId = '2PACX-1vRb0-DMLmB9c7s7D008Dv7BZy517_eVPQTjv9m9e0SO-J5wHvDMqoOEJz5pYjueQeeGrkoQ7ePyPq4w';
-      const sheetName = 'responses';
-      const url = `https://docs.google.com/spreadsheets/d/e/${sheetId}/pub?gid=0&single=true&output=csv`;
-      try {
-        const response = await fetch(url);
-        const csvText = await response.text();
-        const rows = csvText.split(/\r?\n/).filter(row => row.trim().length > 0);
-        if(rows.length < 2) throw new Error('لا توجد بيانات كافية');
-        const headers = rows[0].split(',');
-        let projectIndex = -1; let voteIndex = -1;
-        for(let i=0; i<headers.length; i++) {
-          const header = headers[i].toLowerCase();
-          if(header.includes('المشروع') || header.includes('project')) projectIndex = i;
-          if(header.includes('تصويت') || header.includes('vote')) voteIndex = i;
-        }
-        if(projectIndex === -1 || voteIndex === -1) throw new Error('لم يتم العثور على أعمدة المشروع أو التصويت');
-        const projectsMap = new Map();
-        for(let i=1; i<rows.length; i++) {
-          const columns = rows[i].split(',');
-          if(columns.length <= Math.max(projectIndex, voteIndex)) continue;
-          const projectName = columns[projectIndex]?.trim();
-          const voteValue = parseInt(columns[voteIndex]?.trim(), 10);
-          if(projectName && !isNaN(voteValue)) {
-            const currentVotes = projectsMap.get(projectName) || 0;
-            projectsMap.set(projectName, currentVotes + voteValue);
-          }
-        }
-        if(projectsMap.size === 0) throw new Error('لا توجد بيانات تصويت متاحة');
-        let resultsArray = Array.from(projectsMap.entries()).map(([name, votes]) => ({ name, votes }));
-        resultsArray.sort((a,b) => b.votes - a.votes);
-        const totalVotes = resultsArray.reduce((sum, p) => sum + p.votes, 0);
-        const rankEmojis = ['🥇', '🥈', '🥉'];
-        resultsArea.innerHTML = '';
-        resultsArray.forEach((project, idx) => {
-          const percentage = totalVotes > 0 ? ((project.votes / totalVotes) * 100).toFixed(1) : 0;
-          const rankEmoji = idx < 3 ? rankEmojis[idx] : `📌 ${idx+1}`;
-          const card = document.createElement('div');
-          card.className = 'result-vote-card';
-          card.innerHTML = `
-            <div class="result-rank">${rankEmoji}</div>
-            <div class="result-project-name">${escapeHtml(project.name)}</div>
-            <div class="result-votes">${project.votes}</div>
-            <div class="result-percentage">${percentage}%</div>
-            <div class="progress-bar-container"><div class="progress-bar-fill" style="width: ${percentage}%;"></div></div>
-          `;
-          resultsArea.appendChild(card);
-        });
-      } catch(error) {
-        console.error('Error fetching voting results:', error);
-        if(resultsArea) resultsArea.innerHTML = `<div class="no-results-message"><i class="fas fa-chart-simple"></i> لا توجد نتائج تصويت متاحة حالياً.</div>`;
-      }
-    }
-    function escapeHtml(str) { return str.replace(/[&<>]/g, function(m){ if(m === '&') return '&amp;'; if(m === '<') return '&lt;'; if(m === '>') return '&gt;'; return m;}); }
-    fetchAndDisplayVotingResults();
     
     setTimeout(() => window.scrollTo(0, 0), 500);
   });
