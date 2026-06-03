@@ -1687,7 +1687,7 @@
           : '';
         
         const cardHtml = `
-          <div class="result-card">
+          <div class="result-card" id="gradeResultCard">
             <div class="result-header">
               ${logoHtml}
               <div class="school-info">
@@ -1720,12 +1720,39 @@
             </div>
             
             <div class="result-actions">
-              ${settings.allowPdf ? `<button onclick="window.print()"><i class="fas fa-print"></i> طباعة</button>` : ''}
+             <button id="saveGradeAsImageBtn"><i class="fas fa-camera"></i> 📸 حفظ كصورة</button>
             </div>
           </div>
         `;
         
         resultContainer.innerHTML = cardHtml;
+        // إضافة حدث لزر حفظ الصورة
+const saveBtn = document.getElementById('saveGradeAsImageBtn');
+const cardElement = document.getElementById('gradeResultCard');
+if(saveBtn && cardElement) {
+    saveBtn.addEventListener('click', function() {
+        html2canvas(cardElement, {
+            scale: 2,
+            backgroundColor: '#FFFFFF',
+            logging: false,
+            useCORS: true
+        }).then(canvas => {
+            const link = document.createElement('a');
+            const studentName = student.name || 'النتيجة';
+            link.download = `نتيجة_${studentName}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+            
+            // تغيير مؤقت لزر الإرسال كتأثير (اختياري)
+            const originalText = saveBtn.innerHTML;
+            saveBtn.innerHTML = '<i class="fas fa-check"></i> تم الحفظ';
+            setTimeout(() => { saveBtn.innerHTML = originalText; }, 2000);
+        }).catch(error => {
+            console.error('Error saving image:', error);
+            alert('حدث خطأ أثناء حفظ الصورة. يرجى المحاولة مرة أخرى.');
+        });
+    });
+}
       }
       
       function showError(message) {
