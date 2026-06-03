@@ -696,12 +696,23 @@
       border-bottom: 1px solid var(--border-color);
     }
     .school-logo {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  object-fit: cover;  /* هذا هو المفتاح: يجعل الصورة تغطي المساحة بالكامل */
-  object-position: center; /* يركز الصورة في المنتصف */
-  border: 2px solid var(--accent-teal);
+  object-fit: cover;
+  object-position: center;
+  /* border: 2px solid var(--accent-teal);  يمكنك إزالة أو تخفيف الحدود */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* إضافة ظل خفيف بدلاً من الحد */
+}
+
+/* ويمكنك تعديل الـ margin في الـ .result-header */
+.result-header {
+  display: flex;
+  align-items: center;
+  gap: 20px; /* زيادة المسافة بين الشعار والنص */
+  margin-bottom: 1.2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border-color);
 }
     .school-info {
       flex: 1;
