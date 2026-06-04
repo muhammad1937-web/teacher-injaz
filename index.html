@@ -974,6 +974,24 @@
       .results-card { max-width: 500px; }
       .results-card iframe { min-width: 400px; height: 210px; }
     }
+    /* ============================================ */
+/* ==========   CSS التصويت المتقدم   ========= */
+/* ============================================ */
+.loading-results { text-align: center; padding: 2rem; color: var(--text-light); }
+.loading-results i { font-size: 2rem; animation: spin 1s linear infinite; margin-bottom: 1rem; display: inline-block; }
+.results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+.result-project-card { background: var(--pure-white); border-radius: 20px; padding: 1.5rem; text-align: center; transition: all 0.3s ease; border: 2px solid var(--border-color); }
+.result-project-card:hover { transform: translateY(-8px); border-color: var(--accent-teal); }
+.project-icon { font-size: 3rem; margin-bottom: 1rem; display: inline-block; }
+.project-name-result { font-size: 1.2rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 1rem; }
+.votes-count { font-size: 2.5rem; font-weight: 800; color: var(--accent-teal); margin: 0.5rem 0; }
+.votes-label { font-size: 0.85rem; color: var(--text-light); }
+.percentage-bar { width: 100%; height: 8px; background: rgba(var(--primary-dark-rgb), 0.1); border-radius: 10px; margin-top: 1rem; overflow: hidden; }
+.percentage-fill { height: 100%; background: linear-gradient(90deg, var(--accent-teal), var(--secondary-blue)); border-radius: 10px; transition: width 0.8s ease; width: 0%; }
+.total-votes { text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border-color); color: var(--text-medium); font-size: 0.95rem; }
+.last-updated { font-size: 0.75rem; color: var(--text-light); margin-top: 0.5rem; }
+.result-project-card.updated { animation: pulse-vote 0.5s ease; }
+@keyframes pulse-vote { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
   </style>
 </head>
 <body>
@@ -1070,43 +1088,52 @@
   <div class="voting-header">
     <h3 class="voting-title">
       <i class="fas fa-laptop-code"></i>
-      <span>معرض المشاريع الطلابية </span>
+      <span>معرض المشاريع الطلابية</span>
     </h3>
   </div>
   <p class="voting-description">استعرض المشاريع المتنافسة، وادعم إبداع زملائك</p>
   
-  <div id="competition-mode" style="display: none;">
+  <!-- وضع المنافسة (يظهر عند وجود مشاريع للتصويت) -->
+  <div id="competition-mode">
     <div class="projects-container">
       <a href="YOUR_LINK_1_HERE" target="_blank" class="project-btn">
         <i class="fas fa-file-alt"></i>
-        <span>تقرير الأعمال </span>
+        <span>تقرير الأعمال</span>
       </a>
       <a href="YOUR_LINK_2_HERE" target="_blank" class="project-btn">
         <i class="fas fa-palette"></i>
-        <span>التصميم الجرافيكي </span>
+        <span>التصميم الجرافيكي</span>
       </a>
       <a href="YOUR_LINK_3_HERE" target="_blank" class="project-btn">
         <i class="fas fa-code"></i>
-        <span>الموقع الالكتروني </span>
+        <span>الموقع الإلكتروني</span>
       </a>
     </div>
+    
     <h3 class="voting-subtitle">بعد مشاهدة المشاريع، شاركنا رأيك</h3>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeSXj_S80vPffGrlHjm0eKwapGL3Do0Z77lT37yegX02-FwxA/viewform" target="_blank" class="vote-btn">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeTarTJfRZdHmsQVs3mz2WGfuJAEX9QYrEwZpBPq8cvHZhpnQ/viewform" target="_blank" class="vote-btn">
       <i class="fas fa-vote-yea"></i>
       <span>انقر هنا للتصويت</span>
     </a>
-    <div class="results-container">
-      <h3><i class="fas fa-chart-line" style="margin-left: 8px; color: var(--accent-teal);"></i> النتائج المباشرة</h3>
-      <div class="results-card">
-        <div class="iframe-scroll-wrapper">
-          <iframe src="https://docs.google.com/spreadsheets/d/e/2PACX-1vRb0-DMLmB9c7s7D008Dv7BZy517_eVPQTjv9m9e0SO-J5wHvDMqoOEJz5pYjueQeeGrkoQ7ePyPq4w/pubhtml?gid=240273209&single=true" title="نتائج التصويت المباشرة"></iframe>
-        </div>
+    
+    <!-- حاوية عرض النتائج الجديدة (بدلاً من الـ iframe القديم) -->
+    <div id="votingResultsContainer" style="margin-top: 2rem;">
+      <div class="loading-results">
+        <i class="fas fa-chart-line"></i>
+        <span>جاري تحميل النتائج...</span>
       </div>
-      <p class="update-note">يتم تحديث النتائج تلقائياً كل 5 دقائق.</p>
     </div>
+    
+    <div id="liveVoteMessage" style="display: none; text-align: center; margin-top: 1rem; padding: 10px; background: rgba(46,204,113,0.1); border-radius: 10px;">
+      <i class="fas fa-check-circle" style="color: #2ECC71;"></i>
+      <span>تم تحديث النتائج! 🎉</span>
+    </div>
+    
+    <p class="update-note">يتم تحديث النتائج تلقائياً كل 30 ثانية</p>
   </div>
   
-  <div id="intermission-mode">
+  <!-- وضع الاستراحة (يظهر عند عدم وجود مشاريع للتصويت) -->
+  <div id="intermission-mode" style="display: none;">
     <div style="text-align: center; padding: 2rem 0;">
       <i class="fas fa-hourglass-half" style="font-size: 3rem; color: var(--accent-teal); margin-bottom: 1rem;"></i>
       <h3>انتهى التصويت لهذا الشهر!</h3>
@@ -1774,7 +1801,91 @@ if(saveBtn && cardElement) {
     }
     
     initGradesQuery();
+    // ============================================
+//      نظام التصويت المتقدم (عرض النتائج)
+// ============================================
+const VOTING_API_URL = "https://script.google.com/macros/s/AKfycbwlUa3oyj8B-Tq263FXs8heg4bXrcp4vSRqb903-t68vll0cF-6rKpBFyccq88RKX25/exec";
+let previousVotes = {};
+let updateIntervalVotes;
+
+async function fetchVotingResults() {
+  try {
+    const response = await fetch(`${VOTING_API_URL}?t=${Date.now()}`);
+    const data = await response.json();
+    if (data.status === "success") {
+      displayVotingResults(data);
+      checkForUpdates(data.projects);
+    } else {
+      throw new Error("فشل في تحميل البيانات");
+    }
+  } catch (error) {
+    console.error("Error fetching voting results:", error);
+    const container = document.getElementById("votingResultsContainer");
+    if (container) {
+      container.innerHTML = `<div style="text-align: center; padding: 2rem; color: var(--warning-red);">
+        <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem; display: block;"></i>
+        <span>حدث خطأ في تحميل النتائج. سيتم المحاولة مرة أخرى...</span>
+      </div>`;
+    }
+  }
+}
+
+function displayVotingResults(data) {
+  const container = document.getElementById("votingResultsContainer");
+  if (!container) return;
+  
+  const totalVotes = data.totalVotes || 0;
+  const projectColors = ["#2C3A61", "#7D42D3", "#2ECC71"];
+  let html = `<div class="results-grid">`;
+  
+  data.projects.forEach((project, index) => {
+    const percentage = totalVotes > 0 ? (project.votes / totalVotes) * 100 : 0;
+    let iconClass = "fa-file-alt";
+    if (project.name === "تقرير الأعمال") iconClass = "fa-file-alt";
+    else if (project.name === "التصميم الجرافيكي") iconClass = "fa-palette";
+    else if (project.name === "الموقع الإلكتروني") iconClass = "fa-code";
+    const color = projectColors[index % projectColors.length];
     
+    html += `
+      <div class="result-project-card" data-project-name="${project.name}" data-votes="${project.votes}">
+        <div class="project-icon"><i class="fas ${iconClass}" style="color: ${color}"></i></div>
+        <div class="project-name-result">${project.name}</div>
+        <div class="votes-count">${project.votes}</div>
+        <div class="votes-label">صوت</div>
+        <div class="percentage-bar"><div class="percentage-fill" style="width: ${percentage}%; background: ${color}"></div></div>
+        <div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-light);">${percentage.toFixed(1)}%</div>
+      </div>`;
+  });
+  
+  html += `</div><div class="total-votes"><i class="fas fa-chart-simple"></i> إجمالي الأصوات: <strong>${totalVotes}</strong><div class="last-updated"><i class="fas fa-clock"></i> آخر تحديث: ${new Date(data.lastUpdated).toLocaleTimeString('ar-SA')}</div></div>`;
+  container.innerHTML = html;
+}
+
+function checkForUpdates(projects) {
+  let hasUpdates = false;
+  projects.forEach(project => {
+    const previousVote = previousVotes[project.name];
+    if (previousVote !== undefined && previousVote !== project.votes) {
+      hasUpdates = true;
+      setTimeout(() => {
+        const card = document.querySelector(`.result-project-card[data-project-name="${project.name}"]`);
+        if (card) { card.classList.add('updated'); setTimeout(() => card.classList.remove('updated'), 500); }
+      }, 100);
+    }
+    previousVotes[project.name] = project.votes;
+  });
+  if (hasUpdates) {
+    const msgDiv = document.getElementById("liveVoteMessage");
+    if (msgDiv) { msgDiv.style.display = "block"; setTimeout(() => msgDiv.style.display = "none", 3000); }
+  }
+}
+
+function startAutoUpdateVotes() { 
+  fetchVotingResults(); 
+  updateIntervalVotes = setInterval(fetchVotingResults, 30000); 
+}
+
+startAutoUpdateVotes();
     setTimeout(() => window.scrollTo(0, 0), 500);
   });
 </script>
