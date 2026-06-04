@@ -979,19 +979,102 @@
 /* ============================================ */
 .loading-results { text-align: center; padding: 2rem; color: var(--text-light); }
 .loading-results i { font-size: 2rem; animation: spin 1s linear infinite; margin-bottom: 1rem; display: inline-block; }
-.results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
-.result-project-card { background: var(--pure-white); border-radius: 20px; padding: 1.5rem; text-align: center; transition: all 0.3s ease; border: 2px solid var(--border-color); }
-.result-project-card:hover { transform: translateY(-8px); border-color: var(--accent-teal); }
-.project-icon { font-size: 3rem; margin-bottom: 1rem; display: inline-block; }
-.project-name-result { font-size: 1.2rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 1rem; }
-.votes-count { font-size: 2.5rem; font-weight: 800; color: var(--accent-teal); margin: 0.5rem 0; }
-.votes-label { font-size: 0.85rem; color: var(--text-light); }
-.percentage-bar { width: 100%; height: 8px; background: rgba(var(--primary-dark-rgb), 0.1); border-radius: 10px; margin-top: 1rem; overflow: hidden; }
-.percentage-fill { height: 100%; background: linear-gradient(90deg, var(--accent-teal), var(--secondary-blue)); border-radius: 10px; transition: width 0.8s ease; width: 0%; }
-.total-votes { text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border-color); color: var(--text-medium); font-size: 0.95rem; }
-.last-updated { font-size: 0.75rem; color: var(--text-light); margin-top: 0.5rem; }
-.result-project-card.updated { animation: pulse-vote 0.5s ease; }
-@keyframes pulse-vote { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+
+/* تنسيق الحاوية الرئيسية */
+.votes-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* تنسيق كل مشروع على حدة (شريط أفقي) */
+.vote-stat-item {
+  background: var(--pure-white);
+  border-radius: 16px;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+.vote-stat-item:hover {
+  transform: translateX(5px);
+  border-color: var(--accent-teal);
+  box-shadow: 0 4px 12px rgba(var(--accent-teal-rgb), 0.1);
+}
+
+/* السطر العلوي: الاسم + الأيقونة + عدد الأصوات */
+.stat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.stat-title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary-dark);
+}
+.stat-title i {
+  font-size: 1.2rem;
+}
+.stat-votes {
+  font-size: 0.9rem;
+  color: var(--text-medium);
+  background: rgba(var(--primary-dark-rgb), 0.05);
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+}
+.stat-votes strong {
+  color: var(--accent-teal);
+  font-size: 1rem;
+}
+
+/* شريط التقدم */
+.progress-bar-container {
+  width: 100%;
+  height: 8px;
+  background: rgba(var(--primary-dark-rgb), 0.1);
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 0.5rem 0;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* السطر السفلي: النسبة المئوية */
+.stat-percentage {
+  text-align: left;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-top: 0.25rem;
+}
+
+.total-votes {
+  text-align: center;
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border-color);
+  color: var(--text-medium);
+  font-size: 0.9rem;
+}
+.last-updated {
+  font-size: 0.7rem;
+  color: var(--text-light);
+  margin-top: 0.3rem;
+}
+@keyframes pulse-vote { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.02); } }
+.vote-stat-item.updated {
+  animation: pulse-vote 0.5s ease;
+  background: rgba(var(--accent-teal-rgb), 0.05);
+}
   </style>
 </head>
 <body>
@@ -1835,29 +1918,47 @@ function displayVotingResults(data) {
   if (!container) return;
   
   const totalVotes = data.totalVotes || 0;
-  const projectColors = ["#2C3A61", "#7D42D3", "#2ECC71"];
-  let html = `<div class="results-grid">`;
+  const projectColors = ["#7D42D3", "#2C3A61", "#2ECC71"];
+  
+  let html = `<div class="votes-stats">`;
   
   data.projects.forEach((project, index) => {
     const percentage = totalVotes > 0 ? (project.votes / totalVotes) * 100 : 0;
     let iconClass = "fa-file-alt";
+    let iconColor = projectColors[index % projectColors.length];
+    
     if (project.name === "تقرير الأعمال") iconClass = "fa-file-alt";
     else if (project.name === "التصميم الجرافيكي") iconClass = "fa-palette";
     else if (project.name === "الموقع الإلكتروني") iconClass = "fa-code";
-    const color = projectColors[index % projectColors.length];
     
     html += `
-      <div class="result-project-card" data-project-name="${project.name}" data-votes="${project.votes}">
-        <div class="project-icon"><i class="fas ${iconClass}" style="color: ${color}"></i></div>
-        <div class="project-name-result">${project.name}</div>
-        <div class="votes-count">${project.votes}</div>
-        <div class="votes-label">صوت</div>
-        <div class="percentage-bar"><div class="percentage-fill" style="width: ${percentage}%; background: ${color}"></div></div>
-        <div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-light);">${percentage.toFixed(1)}%</div>
+      <div class="vote-stat-item" data-project-name="${project.name}" data-votes="${project.votes}">
+        <div class="stat-header">
+          <div class="stat-title">
+            <i class="fas ${iconClass}" style="color: ${iconColor}"></i>
+            <span>${project.name}</span>
+          </div>
+          <div class="stat-votes">
+            🗳️ <strong>${project.votes}</strong> صوت
+          </div>
+        </div>
+        <div class="progress-bar-container">
+          <div class="progress-fill" style="width: ${percentage}%; background: ${iconColor}"></div>
+        </div>
+        <div class="stat-percentage">
+          ${percentage.toFixed(1)}%
+        </div>
       </div>`;
   });
   
-  html += `</div><div class="total-votes"><i class="fas fa-chart-simple"></i> إجمالي الأصوات: <strong>${totalVotes}</strong><div class="last-updated"><i class="fas fa-clock"></i> آخر تحديث: ${new Date(data.lastUpdated).toLocaleTimeString('ar-SA')}</div></div>`;
+  html += `</div>
+    <div class="total-votes">
+      <i class="fas fa-chart-simple"></i> إجمالي الأصوات: <strong>${totalVotes}</strong>
+      <div class="last-updated">
+        <i class="fas fa-clock"></i> آخر تحديث: ${new Date(data.lastUpdated).toLocaleTimeString('ar-SA')}
+      </div>
+    </div>`;
+  
   container.innerHTML = html;
 }
 
