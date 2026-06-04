@@ -78,6 +78,7 @@
       box-shadow: 0 2px 10px var(--shadow-color);
       border-bottom: 1px solid var(--border-color);
       font-size: 0.9rem;
+      text-align: center;
     }
     .notification-container {
       display: inline-block;
@@ -406,7 +407,7 @@
     @keyframes fadeSlideUp { to { opacity: 1; transform: translateY(0); } }
 
     /* ========================================= */
-    /*      قسم الذكاء الاصطناعي                 */
+    /*      قسم الذكاء الاصطناعي (أيقونة فقط)    */
     /* ========================================= */
     .ai-assistant-container { max-width: 900px; margin: 3rem auto; padding: 2rem; background: var(--gradient-card); border-radius: 20px; box-shadow: 0 10px 30px rgba(var(--primary-dark-rgb), 0.1); position: relative; overflow: hidden; border: 1px solid var(--border-color); }
     .ai-assistant-container::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; }
@@ -424,12 +425,27 @@
     .ai-message:hover .copy-btn { opacity: 1; background: rgba(var(--ai-teal-rgb), 0.2); }
     .copy-btn:active { transform: scale(0.95); }
     .copy-btn .fa-check { color: var(--accent-teal); font-size: 1.1rem; }
-    .ai-input-group { display: flex; gap: 0.75rem; align-items: stretch; margin-top: 0.5rem; }
+    .ai-input-group { display: flex; gap: 0.75rem; align-items: center; margin-top: 0.5rem; }
     .ai-input { flex: 1; padding: 12px 18px; border: 2px solid var(--border-color); border-radius: 30px; font-size: 1rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; background: var(--pure-white); color: var(--text-dark); transition: var(--transition); outline: none; }
     .ai-input:focus { border-color: var(--ai-teal); box-shadow: 0 0 0 3px rgba(var(--ai-teal-rgb), 0.1); }
-    .ai-send-btn { background: var(--accent-teal); color: white; border: none; width: 50px; border-radius: 30px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); font-size: 1.2rem; box-shadow: 0 2px 8px rgba(var(--accent-teal-rgb), 0.3); }
-    .ai-send-btn:hover { background: var(--ai-teal); transform: scale(1.02); box-shadow: 0 4px 12px rgba(var(--accent-teal-rgb), 0.4); }
-    .ai-send-btn:disabled { background: var(--text-light); cursor: not-allowed; transform: none; }
+    /* زر الإرسال - أيقونة فقط بدون دائرة */
+    .ai-send-btn {
+      background: transparent;
+      color: var(--ai-teal);
+      border: none;
+      width: auto;
+      padding: 8px;
+      border-radius: 0;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: var(--transition);
+      font-size: 1.6rem;
+      line-height: 1;
+    }
+    .ai-send-btn:hover { color: var(--accent-teal); transform: scale(1.1); background: transparent; }
+    .ai-send-btn:disabled { color: var(--text-light); cursor: not-allowed; transform: none; }
     .ai-typing-indicator { display: flex; align-items: center; padding: 10px 15px; display: none; }
     .ai-typing-indicator .dot { width: 8px; height: 8px; border-radius: 50%; background-color: var(--ai-teal); margin: 0 3px; animation: typing-bounce 1.4s infinite ease-in-out both; }
     @keyframes typing-bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1.0); } }
@@ -475,26 +491,30 @@
     .fade-in.visible { opacity: 1; transform: translateY(0); }
 
     /* ========================================= */
-    /*   قسم التصويت الجديد - التنسيقات المعدلة  */
+    /*   الفواصل الزخرفية بين الأقسام           */
     /* ========================================= */
-    .loading-results { text-align: center; padding: 2rem; color: var(--text-light); }
-    .loading-results i { font-size: 2rem; animation: spin 1s linear infinite; margin-bottom: 1rem; display: inline-block; }
-    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-    .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
-    .result-project-card { background: var(--pure-white); border-radius: 20px; padding: 1.5rem; text-align: center; transition: all 0.3s ease; border: 2px solid var(--border-color); position: relative; overflow: hidden; animation: fadeSlideUp 0.5s ease forwards; }
-    .result-project-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-color: var(--accent-teal); }
-    .project-icon { font-size: 3rem; margin-bottom: 1rem; display: inline-block; }
-    .project-name-result { font-size: 1.2rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 1rem; }
-    .votes-count { font-size: 2.5rem; font-weight: 800; color: var(--accent-teal); margin: 0.5rem 0; }
-    .votes-label { font-size: 0.85rem; color: var(--text-light); }
-    .percentage-bar { width: 100%; height: 8px; background: rgba(var(--primary-dark-rgb), 0.1); border-radius: 10px; margin-top: 1rem; overflow: hidden; }
-    .percentage-fill { height: 100%; background: linear-gradient(90deg, var(--accent-teal), var(--secondary-blue)); border-radius: 10px; transition: width 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); width: 0%; }
-    .total-votes { text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border-color); color: var(--text-medium); font-size: 0.95rem; }
-    .last-updated { font-size: 0.75rem; color: var(--text-light); margin-top: 0.5rem; }
-    @keyframes pulse-vote { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
-    .result-project-card.updated { animation: pulse-vote 0.5s ease; }
-    
-    /* بطاقات المشاريع - تصميم أفقي مصغر */
+    .section-divider {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 2rem auto;
+      max-width: 80%;
+      height: 1px;
+      position: relative;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .section-divider.visible { opacity: 1; transform: translateY(0); }
+    .divider-line { flex: 1; height: 1px; background: rgba(var(--primary-dark-rgb), 0.15); }
+    .divider-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-teal); margin: 0 15px; position: relative; }
+    .divider-dot::before, .divider-dot::after { content: ''; position: absolute; width: 4px; height: 4px; border-radius: 50%; background: rgba(var(--primary-dark-rgb), 0.3); top: 50%; transform: translateY(-50%); }
+    .divider-dot::before { right: 20px; }
+    .divider-dot::after { left: 20px; }
+
+    /* ========================================= */
+    /*   قسم التصويت - البطاقات الأفقية المصغرة */
+    /* ========================================= */
     .projects-container {
       display: flex;
       justify-content: center;
@@ -520,10 +540,7 @@
       min-width: 140px;
       box-shadow: 0 2px 8px rgba(var(--primary-dark-rgb), 0.05);
     }
-    .project-btn i {
-      font-size: 1.1rem;
-      color: var(--accent-teal);
-    }
+    .project-btn i { font-size: 1.1rem; color: var(--accent-teal); }
     .project-btn:hover {
       transform: translateY(-3px);
       border-color: var(--accent-teal);
@@ -551,21 +568,31 @@
       transform: translateY(-3px);
       box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.4);
     }
-    .voting-subtitle {
-      text-align: center;
-      margin: 1rem 0 0.5rem;
-      font-size: 1rem;
-      color: var(--text-subtitle);
-    }
-    .update-note {
-      font-size: 0.75rem;
-      text-align: center;
-      color: var(--text-light);
-      margin-top: 1rem;
-    }
+    .voting-subtitle { text-align: center; margin: 1rem 0 0.5rem; font-size: 1rem; color: var(--text-subtitle); }
+    .update-note { font-size: 0.75rem; text-align: center; color: var(--text-light); margin-top: 1rem; }
 
     /* ========================================= */
-    /*   قسم الاستعلام عن الدرسات - التعديلات   */
+    /*   نتائج التصويت - عرض أنيق               */
+    /* ========================================= */
+    .loading-results { text-align: center; padding: 2rem; color: var(--text-light); }
+    .loading-results i { font-size: 2rem; animation: spin 1s linear infinite; margin-bottom: 1rem; display: inline-block; }
+    @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    .results-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-top: 1.5rem; }
+    .result-project-card { background: var(--pure-white); border-radius: 20px; padding: 1.5rem; text-align: center; transition: all 0.3s ease; border: 2px solid var(--border-color); position: relative; overflow: hidden; animation: fadeSlideUp 0.5s ease forwards; }
+    .result-project-card:hover { transform: translateY(-8px); box-shadow: 0 15px 35px rgba(0,0,0,0.1); border-color: var(--accent-teal); }
+    .project-icon { font-size: 3rem; margin-bottom: 1rem; display: inline-block; }
+    .project-name-result { font-size: 1.2rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 1rem; }
+    .votes-count { font-size: 2.5rem; font-weight: 800; color: var(--accent-teal); margin: 0.5rem 0; }
+    .votes-label { font-size: 0.85rem; color: var(--text-light); }
+    .percentage-bar { width: 100%; height: 8px; background: rgba(var(--primary-dark-rgb), 0.1); border-radius: 10px; margin-top: 1rem; overflow: hidden; }
+    .percentage-fill { height: 100%; background: linear-gradient(90deg, var(--accent-teal), var(--secondary-blue)); border-radius: 10px; transition: width 0.8s cubic-bezier(0.25, 0.8, 0.25, 1); width: 0%; }
+    .total-votes { text-align: center; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid var(--border-color); color: var(--text-medium); font-size: 0.95rem; }
+    .last-updated { font-size: 0.75rem; color: var(--text-light); margin-top: 0.5rem; }
+    @keyframes pulse-vote { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
+    .result-project-card.updated { animation: pulse-vote 0.5s ease; }
+
+    /* ========================================= */
+    /*   الاستعلام عن الدرجات - التنسيقات       */
     /* ========================================= */
     .grades-query-section { max-width: 900px; margin: 2.5rem auto; padding: 1.5rem 1.8rem; border-radius: 20px; background: var(--gradient-card); box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.08); border: 1px solid var(--border-color); text-align: center; position: relative; overflow: hidden; }
     .grades-query-section::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; transition: height 0.3s ease; }
@@ -589,21 +616,7 @@
     .missing-value { font-size: 0.85rem; color: var(--warning-red); }
     .final-result { background: linear-gradient(135deg, rgba(var(--accent-teal-rgb), 0.1), rgba(var(--primary-dark-rgb), 0.05)); border-radius: 12px; padding: 12px; text-align: center; margin-bottom: 1rem; }
     .final-score { font-size: 1.4rem; font-weight: 800; color: var(--primary-dark); }
-    /* خلفية هادئة لرسالة النتيجة غير المكتملة */
-    .missing-message {
-      background: #F0F2F5;
-      border-radius: 12px;
-      padding: 12px;
-      text-align: center;
-      margin-bottom: 1rem;
-      color: #8B5A2B;
-      font-size: 0.9rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      border: 1px solid #E2E6EA;
-    }
+    .missing-message { background: #F0F2F5; border-radius: 12px; padding: 12px; text-align: center; margin-bottom: 1rem; color: #8B5A2B; font-size: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid #E2E6EA; }
     .error-message { background: rgba(var(--warning-red-rgb), 0.1); border-radius: 12px; padding: 12px; text-align: center; color: var(--warning-red); margin-top: 1rem; }
     .loading { display: flex; align-items: center; justify-content: center; gap: 10px; padding: 20px; color: var(--text-light); }
     .loading i { animation: spin 1s linear infinite; }
@@ -625,8 +638,6 @@
       .results-grid { grid-template-columns: 1fr; gap: 1rem; }
       .ai-assistant-container { padding: 1.2rem; }
       .ai-messages { height: 280px; }
-      .ai-input-group { gap: 0.5rem; }
-      .ai-send-btn { width: 45px; }
     }
     @media (max-width: 480px) {
       .project-btn { min-width: 95px; padding: 0.4rem 0.6rem; font-size: 0.75rem; }
@@ -634,12 +645,13 @@
       .vote-btn { padding: 0.6rem 1.2rem; font-size: 0.85rem; }
       .student-image { width: 75px; height: 75px; }
       .main-title-text { font-size: 1.4rem; }
+      .section-divider { margin: 1rem auto; max-width: 95%; }
     }
   </style>
 </head>
 <body>
 
-<!-- === شريط الإشعارات === -->
+<!-- ========== شريط الإشعارات ========== -->
 <div class="notification-bar fade-in">
   <div class="notification-container">
     <i class="fas fa-bell"></i>
@@ -647,7 +659,7 @@
   </div>
 </div>
 
-<!-- === الهيدر === -->
+<!-- ========== الهيدر ========== -->
 <header class="tech-header fade-in">
   <div class="header-content">
     <div class="header-logo">
@@ -662,7 +674,7 @@
   </div>
 </header>
 
-<!-- الوقت والتاريخ -->
+<!-- ========== الوقت والتاريخ ========== -->
 <div class="date-time-container fade-in">
   <div class="compact-date new-position" dir="rtl">
     <i class="fas fa-calendar-alt" style="color: var(--accent-teal); margin-left: 5px;"></i><span id="hijri-date"></span> 
@@ -673,346 +685,104 @@
   </div>
 </div>
 
-<!-- شريط البحث -->
+<!-- ========== شريط البحث ========== -->
 <div class="search-container fade-in">
   <div class="search-box">
     <input type="text" class="search-input" placeholder="ابحث في المحتوى التعليمي..." id="searchInput">
-    <button class="search-button" id="searchButton">
-      <i class="fas fa-search"></i>
-    </button>
+    <button class="search-button" id="searchButton"><i class="fas fa-search"></i></button>
     <div class="search-results" id="searchResults"></div>
   </div>
 </div>
 
 <!-- ========== قسم التميز ========== -->
 <section class="fame-bar-section fade-in">
-  <div class="fame-bar-title">
-    <i class="fas fa-trophy"></i>
-    <span>صُناع المستقبل </span>
-  </div>
+  <div class="fame-bar-title"><i class="fas fa-trophy"></i><span>صُناع المستقبل</span></div>
   <p class="honors-subtitle"> تكريم شهري لنجوم تُضيء سماء الإبداع الرقمي </p>
   <div class="students-container">
     <div class="students-list" id="studentsList">
-      <div class="student-item" data-index="0">
-        <div class="student-image"><img src="images/hh.jpeg" alt="الطالب المتميز الأول"></div>
-        <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب"><i class="fas fa-plus"></i></button>
-      </div>
-      <div class="student-item" data-index="1">
-        <div class="student-image"><img src="images/ee.png" alt="الطالب المتميز الثاني"></div>
-        <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب"><i class="fas fa-plus"></i></button>
-      </div>
-      <div class="student-item" data-index="2">
-        <div class="student-image"><img src="images/hh.jpeg" alt="الطالب المتميز الثالث"></div>
-        <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب"><i class="fas fa-plus"></i></button>
-      </div>
+      <div class="student-item" data-index="0"><div class="student-image"><img src="images/hh.jpeg" alt="الطالب المتميز الأول"></div><button class="info-toggle-btn"><i class="fas fa-plus"></i></button></div>
+      <div class="student-item" data-index="1"><div class="student-image"><img src="images/ee.png" alt="الطالب المتميز الثاني"></div><button class="info-toggle-btn"><i class="fas fa-plus"></i></button></div>
+      <div class="student-item" data-index="2"><div class="student-image"><img src="images/hh.jpeg" alt="الطالب المتميز الثالث"></div><button class="info-toggle-btn"><i class="fas fa-plus"></i></button></div>
     </div>
-    <div class="unified-student-info" id="unifiedStudentInfo">
-      <h4 id="studentName">اسم الطالب</h4>
-      <p id="studentReason">سبب التميز</p>
-    </div>
+    <div class="unified-student-info" id="unifiedStudentInfo"><h4 id="studentName">اسم الطالب</h4><p id="studentReason">سبب التميز</p></div>
   </div>
 </section>
 
-<!-- ========== الفاصل ========== -->
-<div class="section-divider fade-in">
-  <div class="divider-line"></div>
-  <div class="divider-dot"></div>
-  <div class="divider-line"></div>
-</div>
+<!-- ========== الفاصل الزخرفي ========== -->
+<div class="section-divider fade-in"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
 
-<!-- ========== قسم التصويت المتكامل الجديد (مع بطاقات مصغرة) ========== -->
+<!-- ========== قسم التصويت ========== -->
 <section class="voting-section fade-in">
-  <div class="voting-header">
-    <h3 class="voting-title">
-      <i class="fas fa-laptop-code"></i>
-      <span>معرض المشاريع الطلابية</span>
-    </h3>
-  </div>
+  <div class="voting-header"><h3 class="voting-title"><i class="fas fa-laptop-code"></i><span>معرض المشاريع الطلابية</span></h3></div>
   <p class="voting-description">استعرض المشاريع المتنافسة، وادعم إبداع زملائك</p>
-  
-  <!-- وضع المنافسة (يظهر عند وجود مشاريع) -->
   <div id="competition-mode">
     <div class="projects-container">
-      <a href="#" target="_blank" class="project-btn">
-        <i class="fas fa-file-alt"></i>
-        <span>تقرير الأعمال</span>
-      </a>
-      <a href="#" target="_blank" class="project-btn">
-        <i class="fas fa-palette"></i>
-        <span>التصميم الجرافيكي</span>
-      </a>
-      <a href="#" target="_blank" class="project-btn">
-        <i class="fas fa-code"></i>
-        <span>الموقع الإلكتروني</span>
-      </a>
+      <a href="#" target="_blank" class="project-btn"><i class="fas fa-file-alt"></i><span>تقرير الأعمال</span></a>
+      <a href="#" target="_blank" class="project-btn"><i class="fas fa-palette"></i><span>التصميم الجرافيكي</span></a>
+      <a href="#" target="_blank" class="project-btn"><i class="fas fa-code"></i><span>الموقع الإلكتروني</span></a>
     </div>
-    
     <h3 class="voting-subtitle">بعد مشاهدة المشاريع، شاركنا رأيك</h3>
-    <div style="text-align: center;">
-      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeTarTJfRZdHmsQVs3mz2WGfuJAEX9QYrEwZpBPq8cvHZhpnQ/viewform" target="_blank" class="vote-btn">
-        <i class="fas fa-vote-yea"></i>
-        <span>انقر هنا للتصويت</span>
-      </a>
-    </div>
-    
-    <!-- حاوية عرض النتائج الأنيقة -->
-    <div id="votingResultsContainer" style="margin-top: 2rem;">
-      <div class="loading-results">
-        <i class="fas fa-chart-line"></i>
-        <span>جاري تحميل النتائج...</span>
-      </div>
-    </div>
-    
-    <div id="liveVoteMessage" style="display: none; text-align: center; margin-top: 1rem; padding: 10px; background: rgba(46,204,113,0.1); border-radius: 10px;">
-      <i class="fas fa-check-circle" style="color: #2ECC71;"></i>
-      <span>تم تحديث النتائج! 🎉</span>
-    </div>
-    
-    <p class="update-note" id="updateNote">يتم تحديث النتائج تلقائياً كل 30 ثانية</p>
+    <div style="text-align: center;"><a href="https://docs.google.com/forms/d/e/1FAIpQLSeTarTJfRZdHmsQVs3mz2WGfuJAEX9QYrEwZpBPq8cvHZhpnQ/viewform" target="_blank" class="vote-btn"><i class="fas fa-vote-yea"></i> انقر هنا للتصويت</a></div>
+    <div id="votingResultsContainer" style="margin-top: 2rem;"><div class="loading-results"><i class="fas fa-chart-line"></i><span>جاري تحميل النتائج...</span></div></div>
+    <div id="liveVoteMessage" style="display: none; text-align: center; margin-top: 1rem; padding: 10px; background: rgba(46,204,113,0.1); border-radius: 10px;"><i class="fas fa-check-circle" style="color: #2ECC71;"></i><span>تم تحديث النتائج! 🎉</span></div>
+    <p class="update-note">يتم تحديث النتائج تلقائياً كل 30 ثانية</p>
   </div>
-  
-  <!-- وضع الاستراحة (يظهر عند عدم وجود مشاريع) -->
-  <div id="intermission-mode" style="display: none;">
-    <div style="text-align: center; padding: 2rem 0;">
-      <i class="fas fa-hourglass-half" style="font-size: 3rem; color: var(--accent-teal); margin-bottom: 1rem;"></i>
-      <h3>انتهى التصويت لهذا الشهر!</h3>
-      <p>شكـراً لحمـاسكم وتفـاعلكم .. أنتـظرونا في مشـاريع جديدة <i class="fas fa-hands-clapping" style="margin-right: 8px; color: var(--accent-teal); animation: heartbeat 1s ease infinite;"></i></p>
-    </div>
-  </div>
+  <div id="intermission-mode" style="display: none;"><div style="text-align: center; padding: 2rem 0;"><i class="fas fa-hourglass-half" style="font-size: 3rem; color: var(--accent-teal); margin-bottom: 1rem;"></i><h3>انتهى التصويت لهذا الشهر!</h3><p>شكـراً لحمـاسكم وتفـاعلكم .. أنتـظرونا في مشـاريع جديدة <i class="fas fa-hands-clapping" style="margin-right: 8px; color: var(--accent-teal); animation: heartbeat 1s ease infinite;"></i></p></div></div>
 </section>
 
-<!-- ========== الفاصل ========== -->
-<div class="section-divider fade-in">
-  <div class="divider-line"></div>
-  <div class="divider-dot"></div>
-  <div class="divider-line"></div>
-</div>
+<!-- ========== الفاصل الزخرفي ========== -->
+<div class="section-divider fade-in"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
 
 <!-- ========== قسم ساحة النقاش ========== -->
 <section class="discord-section fade-in">
-  <div class="discord-header">
-    <h3 class="discord-title">
-      <i class="fab fa-discord"></i>
-      <span>ساحة النقاش التفاعلية</span>
-    </h3>
-  </div>
+  <div class="discord-header"><h3 class="discord-title"><i class="fab fa-discord"></i><span>ساحة النقاش التفاعلية</span></h3></div>
   <p class="discord-description">انضم إلى مجتمعنا على ديسكورد للنقاش وطرح الأسئلة.</p>
-  <div style="text-align: center;">
-    <a href="https://discord.gg/Cq9mn7Yr" target="_blank" class="discord-btn">
-      <i class="fas fa-sign-in-alt"></i>
-      <span> مجتمع التقنية الرقمية</span>
-    </a>
-    <p style="font-size: 0.85rem; color: var(--text-light); margin-top: 10px;">
-      <i class="fas fa-info-circle" style="margin-left: 5px;"></i>
-      عند النقر سيتم توجيهك لإنشاء حساب (إن لم يكن لديك)، ثم الدخول مباشرة إلى ساحة النقاش.
-    </p>
-  </div>
+  <div style="text-align: center;"><a href="https://discord.gg/Cq9mn7Yr" target="_blank" class="discord-btn"><i class="fas fa-sign-in-alt"></i> مجتمع التقنية الرقمية</a><p style="font-size: 0.85rem; color: var(--text-light); margin-top: 10px;"><i class="fas fa-info-circle" style="margin-left: 5px;"></i> عند النقر سيتم توجيهك لإنشاء حساب (إن لم يكن لديك)، ثم الدخول مباشرة إلى ساحة النقاش.</p></div>
 </section>
 
-<!-- ========== الفاصل ========== -->
-<div class="section-divider fade-in">
-  <div class="divider-line"></div>
-  <div class="divider-dot"></div>
-  <div class="divider-line"></div>
-</div>
+<!-- ========== الفاصل الزخرفي ========== -->
+<div class="section-divider fade-in"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
 
 <!-- ========== العنوان الرئيسي للمحتوى ========== -->
-<div class="section-main-title fade-in">
-  <div class="main-title-content">
-    <i class="fas fa-folder-open main-title-icon"></i>
-    <h2 class="main-title-text">المحتوى التعليمي</h2>
-    <p class="section-description">
-      مجموعة منظمة من المصادر التعليمية والمكتبة المتكاملة التي تستهدف طلاب المرحلة الثانوية بالإضافة إلى محتويات إثرائية متنوعة.
-    </p>
-  </div>
-</div>
+<div class="section-main-title fade-in"><div class="main-title-content"><i class="fas fa-folder-open main-title-icon"></i><h2 class="main-title-text">المحتوى التعليمي</h2><p class="section-description">مجموعة منظمة من المصادر التعليمية والمكتبة المتكاملة التي تستهدف طلاب المرحلة الثانوية بالإضافة إلى محتويات إثرائية متنوعة.</p></div></div>
 
 <!-- ========== بطاقات المحتوى التعليمي ========== -->
 <div class="container">
-  <section class="section-card fade-in">
-    <div class="section-title" data-title="مكتبة الطالب">
-      <div class="title-container">
-        <i class="fas fa-user-graduate section-icon"></i>
-        <span>مكتبة الطالب</span>
-      </div>
-      <button class="toggle-cards" data-target="library-cards" title="طي/فتح">
-        <i class="fas fa-chevron-up"></i>
-      </button>
-    </div>
-    <div class="cards-container collapsed" id="library-cards">
-      <div class="card" data-url="https://sites.google.com/view/dvdf55/ss?authuser=1" data-title="الأول ثانوي">
-        <i class="fas fa-book card-icon"></i>
-        <h3 class="card-title nowrap-text">الأول ثانوي</h3>
-      </div>
-      <div class="card" data-url="https://sites.google.com/view/dgvgrhbht76/hj?authuser=1" data-title="الثاني ثانوي">
-        <i class="fas fa-book card-icon"></i>
-        <h3 class="card-title nowrap-text">الثاني ثانوي</h3>
-      </div>
-      <div class="card" data-url="https://sites.google.com/view/regf78/ut?authuser=1" data-title="الثالث ثانوي">
-        <i class="fas fa-book card-icon"></i>
-        <h3 class="card-title nowrap-text">الثالث ثانوي</h3>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-card fade-in">
-    <div class="section-title" data-title="الاثراء التقني">
-      <div class="title-container">
-        <i class="fas fa-laptop-code section-icon"></i>
-        <span>الاثراء التقني</span>
-      </div>
-      <button class="toggle-cards" data-target="tech-cards" title="طي/فتح">
-        <i class="fas fa-chevron-up"></i>
-      </button>
-    </div>
-    <div class="cards-container collapsed" id="tech-cards">
-      <div class="card" data-url="https://sites.google.com/view/sdfgbdh77/wc?authuser=1" data-title="كتب التقنية">
-        <i class="fas fa-code card-icon"></i>
-        <h3 class="card-title">كتب التقنية</h3>
-      </div>
-      <div class="card" data-url="https://sites.google.com/view/sdfgdf6/vm?authuser=1" data-title="إنفوجرافيك">
-        <i class="fas fa-image card-icon"></i>
-        <h3 class="card-title">إنفوجرافيك</h3>
-      </div>
-      <div class="card" data-url="https://sites.google.com/view/sdfh77/rt?authuser=1" data-title="فيديوهات قصيرة">
-        <i class="fas fa-video card-icon"></i>
-        <h3 class="card-title">فيديوهات قصيرة</h3>
-      </div>
-    </div>
-  </section>
-
-  <section class="section-card fade-in">
-    <div class="section-title" data-title="معرض الصور">
-      <div class="title-container">
-        <i class="fas fa-camera section-icon"></i>
-        <span>معرض الصور</span>
-      </div>
-      <button class="toggle-cards" data-target="gallery-cards" title="طي/فتح">
-        <i class="fas fa-chevron-up"></i>
-      </button>
-    </div>
-    <div class="cards-container collapsed" id="gallery-cards">
-      <div class="card" data-url="#" data-title="التكريم والجوائز">
-        <i class="fas fa-trophy card-icon"></i>
-        <h3 class="card-title">التكريم والجوائز</h3>
-      </div>
-      <div class="card" data-url="#" data-title="نجوم التقنية">
-        <i class="fas fa-star card-icon"></i>
-        <h3 class="card-title">نجوم التقنية</h3>
-      </div>
-    </div>
-  </section>
+  <section class="section-card fade-in"><div class="section-title"><div class="title-container"><i class="fas fa-user-graduate section-icon"></i><span>مكتبة الطالب</span></div><button class="toggle-cards" data-target="library-cards"><i class="fas fa-chevron-up"></i></button></div><div class="cards-container collapsed" id="library-cards"><div class="card" data-url="https://sites.google.com/view/dvdf55/ss?authuser=1"><i class="fas fa-book card-icon"></i><h3 class="card-title nowrap-text">الأول ثانوي</h3></div><div class="card" data-url="https://sites.google.com/view/dgvgrhbht76/hj?authuser=1"><i class="fas fa-book card-icon"></i><h3 class="card-title nowrap-text">الثاني ثانوي</h3></div><div class="card" data-url="https://sites.google.com/view/regf78/ut?authuser=1"><i class="fas fa-book card-icon"></i><h3 class="card-title nowrap-text">الثالث ثانوي</h3></div></div></section>
+  <section class="section-card fade-in"><div class="section-title"><div class="title-container"><i class="fas fa-laptop-code section-icon"></i><span>الاثراء التقني</span></div><button class="toggle-cards" data-target="tech-cards"><i class="fas fa-chevron-up"></i></button></div><div class="cards-container collapsed" id="tech-cards"><div class="card" data-url="https://sites.google.com/view/sdfgbdh77/wc?authuser=1"><i class="fas fa-code card-icon"></i><h3 class="card-title">كتب التقنية</h3></div><div class="card" data-url="https://sites.google.com/view/sdfgdf6/vm?authuser=1"><i class="fas fa-image card-icon"></i><h3 class="card-title">إنفوجرافيك</h3></div><div class="card" data-url="https://sites.google.com/view/sdfh77/rt?authuser=1"><i class="fas fa-video card-icon"></i><h3 class="card-title">فيديوهات قصيرة</h3></div></div></section>
+  <section class="section-card fade-in"><div class="section-title"><div class="title-container"><i class="fas fa-camera section-icon"></i><span>معرض الصور</span></div><button class="toggle-cards" data-target="gallery-cards"><i class="fas fa-chevron-up"></i></button></div><div class="cards-container collapsed" id="gallery-cards"><div class="card" data-url="#"><i class="fas fa-trophy card-icon"></i><h3 class="card-title">التكريم والجوائز</h3></div><div class="card" data-url="#"><i class="fas fa-star card-icon"></i><h3 class="card-title">نجوم التقنية</h3></div></div></section>
 </div>
 
-<!-- ========== الفاصل ========== -->
-<div class="section-divider fade-in">
-  <div class="divider-line"></div>
-  <div class="divider-dot"></div>
-  <div class="divider-line"></div>
-</div>
+<!-- ========== الفاصل الزخرفي ========== -->
+<div class="section-divider fade-in"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
 
-<!-- ========== الاستعلام عن الدرجات (مع أيقونة دوران) ========== -->
-<section class="grades-query-section fade-in">
-  <div class="grades-query-container">
-    <div class="grades-header">
-      <i class="fas fa-search"></i>
-      <h3>الاستعلام عن الدرجات</h3>
-    </div>
-    <p class="grades-description">أدخل رقمك الخاص للاطلاع على نتيجتك في مادة التقنية الرقمية</p>
-    <div class="query-box">
-      <div class="input-group">
-        <input type="text" id="studentIdInput" class="query-input" placeholder="أدخل رقمك الخاص هنا..." maxlength="20">
-        <button id="queryBtn" class="query-btn">
-          <i class="fas fa-search"></i> استعلام
-        </button>
-      </div>
-      <div id="resultContainer" class="result-container" style="display: none;"></div>
-    </div>
-  </div>
-</section>
+<!-- ========== الاستعلام عن الدرجات ========== -->
+<section class="grades-query-section fade-in"><div class="grades-query-container"><div class="grades-header"><i class="fas fa-search"></i><h3>الاستعلام عن الدرجات</h3></div><p class="grades-description">أدخل رقمك الخاص للاطلاع على نتيجتك في مادة التقنية الرقمية</p><div class="query-box"><div class="input-group"><input type="text" id="studentIdInput" class="query-input" placeholder="أدخل رقمك الخاص هنا..." maxlength="20"><button id="queryBtn" class="query-btn"><i class="fas fa-search"></i> استعلام</button></div><div id="resultContainer" class="result-container" style="display: none;"></div></div></div></section>
 
-<!-- ========== الفاصل ========== -->
-<div class="section-divider fade-in">
-  <div class="divider-line"></div>
-  <div class="divider-dot"></div>
-  <div class="divider-line"></div>
-</div>
+<!-- ========== الفاصل الزخرفي ========== -->
+<div class="section-divider fade-in"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
 
 <!-- ========== قسم الذكاء الاصطناعي ========== -->
-<div id="ai-assistant-section" class="ai-assistant-container fade-in">
-  <h2 class="ai-header">
-    <i class="fas fa-robot ai-icon"></i>
-    <span>الذكاء الاصطناعي</span>
-  </h2>
-  <p class="ai-description"> شريكك الذكي في رحلة التعلم الرقمي.</p>
-  <div class="ai-chat-container">
-    <div style="text-align: left;">
-      <button class="clear-chat-btn" id="clearChatBtn"><i class="fas fa-trash"></i> مسح المحادثة</button>
-    </div>
-    <div class="ai-messages" id="aiMessages">
-      <div class="message ai-message">
-        <strong>الذكاء الاصطناعي:</strong> مرحباً بك! أنا المساعد الرقمي للأستاذ محمد الغامدي، وشريكك في رحلة التعلم، تفضل بطرح سؤالك.
-      </div>
-    </div>
-    <div class="ai-input-group">
-      <input type="text" class="ai-input" id="aiInput" placeholder="أكتب سؤالك هنا..." maxlength="500">
-      <button class="ai-send-btn" id="aiSendBtn"><i class="fas fa-paper-plane"></i></button>
-    </div>
-    <div class="ai-typing-indicator" id="aiTypingIndicator">
-      <div class="dot"></div>
-      <div class="dot"></div>
-      <div class="dot"></div>
-    </div>
-  </div>
-  <div class="ai-disclaimer">
-    <i class="fas fa-info-circle"></i>
-    ملاحظة: الإجابات تعتمد على المعرفة العامة للذكاء الاصطناعي وقد تحتاج لمراجعة المعلم للتأكد من دقتها
-  </div>
-</div>
+<div id="ai-assistant-section" class="ai-assistant-container fade-in"><h2 class="ai-header"><i class="fas fa-robot ai-icon"></i><span>الذكاء الاصطناعي</span></h2><p class="ai-description"> شريكك الذكي في رحلة التعلم الرقمي.</p><div class="ai-chat-container"><div style="text-align: left;"><button class="clear-chat-btn" id="clearChatBtn"><i class="fas fa-trash"></i> مسح المحادثة</button></div><div class="ai-messages" id="aiMessages"><div class="message ai-message"><strong>الذكاء الاصطناعي:</strong> مرحباً بك! أنا المساعد الرقمي للأستاذ محمد الغامدي، وشريكك في رحلة التعلم، تفضل بطرح سؤالك.</div></div><div class="ai-input-group"><input type="text" class="ai-input" id="aiInput" placeholder="أكتب سؤالك هنا..." maxlength="500"><button class="ai-send-btn" id="aiSendBtn"><i class="fas fa-paper-plane"></i></button></div><div class="ai-typing-indicator" id="aiTypingIndicator"><div class="dot"></div><div class="dot"></div><div class="dot"></div></div></div><div class="ai-disclaimer"><i class="fas fa-info-circle"></i> ملاحظة: الإجابات تعتمد على المعرفة العامة للذكاء الاصطناعي وقد تحتاج لمراجعة المعلم للتأكد من دقتها</div></div>
 
-<!-- ========== الفاصل ========== -->
-<div class="section-divider fade-in">
-  <div class="divider-line"></div>
-  <div class="divider-dot"></div>
-  <div class="divider-line"></div>
-</div>
+<!-- ========== الفاصل الزخرفي ========== -->
+<div class="section-divider fade-in"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
 
 <!-- ========== قسم الاستفسارات ========== -->
-<div class="inquiries-container fade-in">
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLScP82hCVuCxuIl_FBXQpZJyGbR6kWGVEuT2Y6oKNPm2TfIwcA/viewform" target="_blank" class="inquiry-btn primary">
-    <i class="fas fa-upload"></i> مشاريع الطلاب التعليمية
-  </a>
-</div>
+<div class="inquiries-container fade-in"><a href="https://docs.google.com/forms/d/e/1FAIpQLScP82hCVuCxuIl_FBXQpZJyGbR6kWGVEuT2Y6oKNPm2TfIwcA/viewform" target="_blank" class="inquiry-btn primary"><i class="fas fa-upload"></i> مشاريع الطلاب التعليمية</a></div>
 
 <!-- ========== زر العودة للأعلى ========== -->
-<button class="back-to-top" id="backToTop" aria-label="العودة إلى الأعلى">
-  <i class="fas fa-chevron-up"></i>
-</button>
+<button class="back-to-top" id="backToTop"><i class="fas fa-chevron-up"></i></button>
 
 <!-- ========== التذييل ========== -->
-<footer class="site-footer">
-  <div class="footer-content">
-    <div class="footer-links">
-      <a href="mailto:mfh713623@gmail.com" class="footer-link"><i class="fas fa-envelope"></i> البريد الإلكتروني</a>
-      <a href="#ai-assistant-section" class="footer-link"><i class="fas fa-robot"></i> مساعد الذكاء الاصطناعي</a>
-    </div>
-    <div class="footer-copyright">
-      <span>© 2026 جميع الحقوق محفوظة | واجهة المعلم الرقمي - أ. محمد الغامدي</span>
-    </div>
-  </div>
-</footer>
+<footer class="site-footer"><div class="footer-content"><div class="footer-links"><a href="mailto:mfh713623@gmail.com" class="footer-link"><i class="fas fa-envelope"></i> البريد الإلكتروني</a><a href="#ai-assistant-section" class="footer-link"><i class="fas fa-robot"></i> مساعد الذكاء الاصطناعي</a></div><div class="footer-copyright"><span>© 2026 جميع الحقوق محفوظة | واجهة المعلم الرقمي - أ. محمد الغامدي</span></div></div></footer>
 
 <script>
   // ============================================
   //          تهيئة الصفحة من الأعلى
   // ============================================
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-  window.addEventListener('load', function() {
-    window.scrollTo(0, 0);
-    setTimeout(() => window.scrollTo(0, 0), 100);
-    document.body.style.overflow = 'hidden';
-    setTimeout(() => document.body.style.overflow = '', 200);
-  });
+  window.addEventListener('load', function() { window.scrollTo(0, 0); setTimeout(() => window.scrollTo(0, 0), 100); document.body.style.overflow = 'hidden'; setTimeout(() => document.body.style.overflow = '', 200); });
   
   document.addEventListener('DOMContentLoaded', function() {
     window.scrollTo(0, 0);
@@ -1028,389 +798,115 @@
       document.getElementById('gregorian-date').textContent = gregorian;
       document.getElementById('live-time').textContent = time;
     }
-    updateCompactDate();
-    setInterval(updateCompactDate, 1000);
+    updateCompactDate(); setInterval(updateCompactDate, 1000);
     
     // الإشعارات
     function fetchNotification() {
       const notificationUrl = 'https://raw.githubusercontent.com/muhammad1937-web/teacher-injaz/refs/heads/main/notification.txt';
       const notificationContent = document.getElementById('notificationContent');
       const timestamp = new Date().getTime();
-      fetch(`${notificationUrl}?t=${timestamp}`)
-        .then(response => response.ok ? response.text() : Promise.reject())
-        .then(text => {
-          if(text.trim()) notificationContent.textContent = text;
-          else notificationContent.textContent = "مرحباً بكم في منصة التعلم الرقمي - أ. محمد الغامدي";
-        })
-        .catch(() => notificationContent.textContent = "مرحباً بكم في منصة التعلم الرقمي - أ. محمد الغامدي");
+      fetch(`${notificationUrl}?t=${timestamp}`).then(response => response.ok ? response.text() : Promise.reject()).then(text => { notificationContent.textContent = text.trim() || "مرحباً بكم في منصة التعلم الرقمي - أ. محمد الغامدي"; }).catch(() => notificationContent.textContent = "مرحباً بكم في منصة التعلم الرقمي - أ. محمد الغامدي");
     }
-    fetchNotification();
-    setInterval(fetchNotification, 5 * 60 * 1000);
+    fetchNotification(); setInterval(fetchNotification, 5 * 60 * 1000);
     
     // إضافة أيقونة للروابط الخارجية في البطاقات
-    document.querySelectorAll('.card[data-url]').forEach(card => {
-      if(card.dataset.url && card.dataset.url !== '#') {
-        const externalIcon = document.createElement('i');
-        externalIcon.className = 'fas fa-external-link-alt external-icon';
-        card.querySelector('.card-title').appendChild(externalIcon);
-        card.addEventListener('click', function() { if(this.dataset.url && this.dataset.url !== '#') window.open(this.dataset.url, '_blank'); });
-      }
-    });
+    document.querySelectorAll('.card[data-url]').forEach(card => { if(card.dataset.url && card.dataset.url !== '#') { const externalIcon = document.createElement('i'); externalIcon.className = 'fas fa-external-link-alt external-icon'; card.querySelector('.card-title').appendChild(externalIcon); card.addEventListener('click', function() { if(this.dataset.url && this.dataset.url !== '#') window.open(this.dataset.url, '_blank'); }); } });
     
     // تأثيرات الظهور
-    function checkFadeElements() {
-      document.querySelectorAll('.fade-in').forEach(el => {
-        if(el.getBoundingClientRect().top < window.innerHeight - 150) el.classList.add('visible');
-      });
-    }
-    window.addEventListener('scroll', checkFadeElements);
-    window.addEventListener('load', checkFadeElements);
+    function checkFadeElements() { document.querySelectorAll('.fade-in').forEach(el => { if(el.getBoundingClientRect().top < window.innerHeight - 150) el.classList.add('visible'); }); }
+    window.addEventListener('scroll', checkFadeElements); window.addEventListener('load', checkFadeElements);
     
     // وظيفة البحث
     function initSearch() {
-      const searchInput = document.getElementById('searchInput');
-      const searchButton = document.getElementById('searchButton');
-      const searchResults = document.getElementById('searchResults');
-      const searchableItems = Array.from(document.querySelectorAll('.card'));
+      const searchInput = document.getElementById('searchInput'), searchButton = document.getElementById('searchButton'), searchResults = document.getElementById('searchResults'), searchableItems = Array.from(document.querySelectorAll('.card'));
       function performSearch() {
         const searchTerm = searchInput.value.trim().toLowerCase();
         if(searchTerm.length < 2) { searchResults.style.display = 'none'; return; }
         const filteredItems = searchableItems.filter(item => item.querySelector('.card-title').textContent.toLowerCase().includes(searchTerm));
         searchResults.innerHTML = '';
         if(filteredItems.length === 0) searchResults.innerHTML = '<div class="no-results">لا توجد نتائج مطابقة</div>';
-        else {
-          filteredItems.forEach(item => {
-            const title = item.querySelector('.card-title').textContent;
-            const resultItem = document.createElement('div');
-            resultItem.className = 'search-result-item';
-            resultItem.innerHTML = `<i class="fas fa-external-link-alt"></i><span>${title}</span>`;
-            resultItem.addEventListener('click', () => { if(item.dataset.url && item.dataset.url !== '#') window.open(item.dataset.url, '_blank'); searchResults.style.display = 'none'; searchInput.value = ''; });
-            searchResults.appendChild(resultItem);
-          });
-          searchResults.style.display = 'block';
-        }
+        else { filteredItems.forEach(item => { const title = item.querySelector('.card-title').textContent; const resultItem = document.createElement('div'); resultItem.className = 'search-result-item'; resultItem.innerHTML = `<i class="fas fa-external-link-alt"></i><span>${title}</span>`; resultItem.addEventListener('click', () => { if(item.dataset.url && item.dataset.url !== '#') window.open(item.dataset.url, '_blank'); searchResults.style.display = 'none'; searchInput.value = ''; }); searchResults.appendChild(resultItem); }); searchResults.style.display = 'block'; }
       }
-      searchInput.addEventListener('input', performSearch);
-      searchButton.addEventListener('click', performSearch);
-      document.addEventListener('click', (e) => { if(!searchInput.contains(e.target) && !searchResults.contains(e.target)) searchResults.style.display = 'none'; });
-      searchInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') performSearch(); });
+      searchInput.addEventListener('input', performSearch); searchButton.addEventListener('click', performSearch); document.addEventListener('click', (e) => { if(!searchInput.contains(e.target) && !searchResults.contains(e.target)) searchResults.style.display = 'none'; }); searchInput.addEventListener('keypress', (e) => { if(e.key === 'Enter') performSearch(); });
     }
     initSearch();
     
     // الذكاء الاصطناعي
     function initAIAssistant() {
-      const aiMessages = document.getElementById('aiMessages');
-      const aiInput = document.getElementById('aiInput');
-      const aiSendBtn = document.getElementById('aiSendBtn');
-      const aiTypingIndicator = document.getElementById('aiTypingIndicator');
-      const clearChatBtn = document.getElementById('clearChatBtn');
-      const API_URL = '/api/gemini';
-      function clearConversation() {
-        aiMessages.innerHTML = `<div class="message ai-message"><strong>الذكاء الاصطناعي:</strong> مرحباً! كيف يمكنني مساعدتك في مواضيع التقنية الرقمية أو أي موضوع آخر؟</div>`;
-      }
+      const aiMessages = document.getElementById('aiMessages'), aiInput = document.getElementById('aiInput'), aiSendBtn = document.getElementById('aiSendBtn'), aiTypingIndicator = document.getElementById('aiTypingIndicator'), clearChatBtn = document.getElementById('clearChatBtn'), API_URL = '/api/gemini';
+      function clearConversation() { aiMessages.innerHTML = `<div class="message ai-message"><strong>الذكاء الاصطناعي:</strong> مرحباً! كيف يمكنني مساعدتك في مواضيع التقنية الرقمية أو أي موضوع آخر؟</div>`; }
       async function sendMessage() {
-        const message = aiInput.value.trim();
-        if (!message) return;
-        addMessage(message, 'user');
-        aiInput.value = '';
-        aiSendBtn.disabled = true;
-        aiTypingIndicator.style.display = 'flex';
-        try {
-          const response = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: message }] }] }) });
-          if (!response.ok) throw new Error('فشل في الاتصال بالخدمة');
-          const data = await response.json();
-          if (data.candidates && data.candidates[0].content.parts[0].text) addMessage(data.candidates[0].content.parts[0].text, 'ai');
-          else throw new Error('لم يتم الحصول على إجابة');
-        } catch (error) { addMessage(`عذراً، حدث خطأ: ${error.message}`, 'ai'); }
-        finally { aiTypingIndicator.style.display = 'none'; aiSendBtn.disabled = false; aiInput.focus(); }
+        const message = aiInput.value.trim(); if (!message) return;
+        addMessage(message, 'user'); aiInput.value = ''; aiSendBtn.disabled = true; aiTypingIndicator.style.display = 'flex';
+        try { const response = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: message }] }] }) }); if (!response.ok) throw new Error('فشل في الاتصال بالخدمة'); const data = await response.json(); if (data.candidates && data.candidates[0].content.parts[0].text) addMessage(data.candidates[0].content.parts[0].text, 'ai'); else throw new Error('لم يتم الحصول على إجابة'); } catch (error) { addMessage(`عذراً، حدث خطأ: ${error.message}`, 'ai'); } finally { aiTypingIndicator.style.display = 'none'; aiSendBtn.disabled = false; aiInput.focus(); }
       }
       function addMessage(text, sender) {
-        const messageDiv = document.createElement('div');
-        messageDiv.className = `message ${sender}-message`;
+        const messageDiv = document.createElement('div'); messageDiv.className = `message ${sender}-message`;
         if (sender === 'user') messageDiv.innerHTML = `<strong>أنت:</strong> ${text}`;
-        else {
-          const copyBtn = document.createElement('button'); copyBtn.className = 'copy-btn'; copyBtn.title = 'نسخ الرد'; copyBtn.innerHTML = "<i class='fas fa-copy'></i>";
-          copyBtn.addEventListener('click', () => { navigator.clipboard.writeText(text).then(() => { copyBtn.innerHTML = "<i class='fas fa-check'></i>"; setTimeout(() => copyBtn.innerHTML = "<i class='fas fa-copy'></i>", 2000); }).catch(err => console.error('فشل نسخ النص: ', err)); });
-          const textContainer = document.createElement('div'); textContainer.innerHTML = `<strong>الذكاء الاصطناعي:</strong> ${text}`;
-          messageDiv.appendChild(copyBtn); messageDiv.appendChild(textContainer);
-        }
+        else { const copyBtn = document.createElement('button'); copyBtn.className = 'copy-btn'; copyBtn.title = 'نسخ الرد'; copyBtn.innerHTML = "<i class='fas fa-copy'></i>"; copyBtn.addEventListener('click', () => { navigator.clipboard.writeText(text).then(() => { copyBtn.innerHTML = "<i class='fas fa-check'></i>"; setTimeout(() => copyBtn.innerHTML = "<i class='fas fa-copy'></i>", 2000); }).catch(err => console.error('فشل نسخ النص: ', err)); }); const textContainer = document.createElement('div'); textContainer.innerHTML = `<strong>الذكاء الاصطناعي:</strong> ${text}`; messageDiv.appendChild(copyBtn); messageDiv.appendChild(textContainer); }
         aiMessages.appendChild(messageDiv); aiMessages.scrollTop = aiMessages.scrollHeight;
       }
-      clearChatBtn.addEventListener('click', clearConversation);
-      aiSendBtn.addEventListener('click', sendMessage);
-      aiInput.addEventListener('keypress', (e) => { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } });
-      aiInput.addEventListener('input', () => { aiSendBtn.disabled = !aiInput.value.trim(); });
+      clearChatBtn.addEventListener('click', clearConversation); aiSendBtn.addEventListener('click', sendMessage); aiInput.addEventListener('keypress', (e) => { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } }); aiInput.addEventListener('input', () => { aiSendBtn.disabled = !aiInput.value.trim(); });
     }
     initAIAssistant();
     
     // طي وفتح البطاقات
-    function initCardToggles() {
-      document.querySelectorAll('.toggle-cards').forEach(button => {
-        const targetId = button.getAttribute('data-target');
-        const cardsContainer = document.getElementById(targetId);
-        if(cardsContainer) {
-          cardsContainer.classList.add('collapsed');
-          button.classList.add('collapsed');
-          button.addEventListener('click', () => { cardsContainer.classList.toggle('collapsed'); button.classList.toggle('collapsed'); });
-        }
-      });
-    }
+    function initCardToggles() { document.querySelectorAll('.toggle-cards').forEach(button => { const targetId = button.getAttribute('data-target'); const cardsContainer = document.getElementById(targetId); if(cardsContainer) { cardsContainer.classList.add('collapsed'); button.classList.add('collapsed'); button.addEventListener('click', () => { cardsContainer.classList.toggle('collapsed'); button.classList.toggle('collapsed'); }); } }); }
     initCardToggles();
     
     // قسم التميز
     function initHonorsSection() {
-      const studentItems = document.querySelectorAll('.student-item');
-      const unifiedInfo = document.getElementById('unifiedStudentInfo');
-      const studentName = document.getElementById('studentName');
-      const studentReason = document.getElementById('studentReason');
-      const studentsData = [
-        { name: "الطالب المتميز الأول", reason: "التميز في مشروع الوحدة الأولى وإبداع في التصميم" },
-        { name: "الطالب المتميز الثاني", reason: "تفوق في الاختبارات العملية وابتكار حلول تقنية" },
-        { name: "الطالب المتميز الثالث", reason: "مشاركة فعالة في الأنشطة الصفية ودعم الزملاء" }
-      ];
-      let activeIndex = null;
-      studentItems.forEach((item, index) => {
-        const toggleBtn = item.querySelector('.info-toggle-btn');
-        const studentImage = item.querySelector('.student-image');
-        if(toggleBtn) {
-          toggleBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const isVisible = unifiedInfo.classList.contains('active');
-            if(isVisible && activeIndex === index) {
-              unifiedInfo.classList.remove('active');
-              toggleBtn.innerHTML = '<i class="fas fa-plus"></i>'; toggleBtn.style.background = 'var(--accent-teal)'; toggleBtn.style.transform = 'rotate(0deg)';
-              item.classList.remove('active'); if(studentImage) studentImage.style.borderColor = 'white';
-              activeIndex = null;
-            } else {
-              studentName.textContent = studentsData[index].name; studentReason.textContent = studentsData[index].reason;
-              studentItems.forEach((otherItem, otherIndex) => {
-                const otherBtn = otherItem.querySelector('.info-toggle-btn'); const otherImage = otherItem.querySelector('.student-image');
-                if(otherBtn) { otherBtn.innerHTML = '<i class="fas fa-plus"></i>'; otherBtn.style.background = 'var(--accent-teal)'; otherBtn.style.transform = 'rotate(0deg)'; otherItem.classList.remove('active'); }
-                if(otherImage) otherImage.style.borderColor = 'white';
-              });
-              unifiedInfo.classList.add('active');
-              toggleBtn.innerHTML = '<i class="fas fa-times"></i>'; toggleBtn.style.background = 'var(--gold-excellence)'; toggleBtn.style.transform = 'rotate(45deg)';
-              item.classList.add('active'); activeIndex = index;
-              if(studentImage) studentImage.style.borderColor = 'var(--gold-excellence)';
-            }
-          });
-          if(studentImage) studentImage.addEventListener('click', function(e) { e.stopPropagation(); toggleBtn.click(); });
-        }
-      });
-      document.addEventListener('click', function(e) {
-        const isClickInside = Array.from(studentItems).some(item => item.contains(e.target));
-        const isClickOnInfo = unifiedInfo.contains(e.target);
-        if(!isClickInside && !isClickOnInfo) {
-          unifiedInfo.classList.remove('active');
-          studentItems.forEach(item => {
-            const toggleBtn = item.querySelector('.info-toggle-btn'); const studentImage = item.querySelector('.student-image');
-            if(toggleBtn) { toggleBtn.innerHTML = '<i class="fas fa-plus"></i>'; toggleBtn.style.background = 'var(--accent-teal)'; toggleBtn.style.transform = 'rotate(0deg)'; item.classList.remove('active'); }
-            if(studentImage) studentImage.style.borderColor = 'white';
-          });
-          activeIndex = null;
-        }
-      });
-      document.addEventListener('keydown', function(e) { if(e.key === 'Escape') { unifiedInfo.classList.remove('active');
-        studentItems.forEach(item => {
-          const toggleBtn = item.querySelector('.info-toggle-btn'); const studentImage = item.querySelector('.student-image');
-          if(toggleBtn) { toggleBtn.innerHTML = '<i class="fas fa-plus"></i>'; toggleBtn.style.background = 'var(--accent-teal)'; toggleBtn.style.transform = 'rotate(0deg)'; item.classList.remove('active'); }
-          if(studentImage) studentImage.style.borderColor = 'white';
-        }); activeIndex = null;
-      }});
+      const studentItems = document.querySelectorAll('.student-item'), unifiedInfo = document.getElementById('unifiedStudentInfo'), studentName = document.getElementById('studentName'), studentReason = document.getElementById('studentReason'), studentsData = [{ name: "الطالب المتميز الأول", reason: "التميز في مشروع الوحدة الأولى وإبداع في التصميم" }, { name: "الطالب المتميز الثاني", reason: "تفوق في الاختبارات العملية وابتكار حلول تقنية" }, { name: "الطالب المتميز الثالث", reason: "مشاركة فعالة في الأنشطة الصفية ودعم الزملاء" }]; let activeIndex = null;
+      studentItems.forEach((item, index) => { const toggleBtn = item.querySelector('.info-toggle-btn'); const studentImage = item.querySelector('.student-image'); if(toggleBtn) { toggleBtn.addEventListener('click', function(e) { e.stopPropagation(); const isVisible = unifiedInfo.classList.contains('active'); if(isVisible && activeIndex === index) { unifiedInfo.classList.remove('active'); toggleBtn.innerHTML = '<i class="fas fa-plus"></i>'; toggleBtn.style.background = 'var(--accent-teal)'; toggleBtn.style.transform = 'rotate(0deg)'; item.classList.remove('active'); if(studentImage) studentImage.style.borderColor = 'white'; activeIndex = null; } else { studentName.textContent = studentsData[index].name; studentReason.textContent = studentsData[index].reason; studentItems.forEach((otherItem, otherIndex) => { const otherBtn = otherItem.querySelector('.info-toggle-btn'); const otherImage = otherItem.querySelector('.student-image'); if(otherBtn) { otherBtn.innerHTML = '<i class="fas fa-plus"></i>'; otherBtn.style.background = 'var(--accent-teal)'; otherBtn.style.transform = 'rotate(0deg)'; otherItem.classList.remove('active'); } if(otherImage) otherImage.style.borderColor = 'white'; }); unifiedInfo.classList.add('active'); toggleBtn.innerHTML = '<i class="fas fa-times"></i>'; toggleBtn.style.background = 'var(--gold-excellence)'; toggleBtn.style.transform = 'rotate(45deg)'; item.classList.add('active'); activeIndex = index; if(studentImage) studentImage.style.borderColor = 'var(--gold-excellence)'; } }); if(studentImage) studentImage.addEventListener('click', function(e) { e.stopPropagation(); toggleBtn.click(); }); } });
+      document.addEventListener('click', function(e) { const isClickInside = Array.from(studentItems).some(item => item.contains(e.target)); const isClickOnInfo = unifiedInfo.contains(e.target); if(!isClickInside && !isClickOnInfo) { unifiedInfo.classList.remove('active'); studentItems.forEach(item => { const toggleBtn = item.querySelector('.info-toggle-btn'); const studentImage = item.querySelector('.student-image'); if(toggleBtn) { toggleBtn.innerHTML = '<i class="fas fa-plus"></i>'; toggleBtn.style.background = 'var(--accent-teal)'; toggleBtn.style.transform = 'rotate(0deg)'; item.classList.remove('active'); } if(studentImage) studentImage.style.borderColor = 'white'; }); activeIndex = null; } });
+      document.addEventListener('keydown', function(e) { if(e.key === 'Escape') { unifiedInfo.classList.remove('active'); studentItems.forEach(item => { const toggleBtn = item.querySelector('.info-toggle-btn'); const studentImage = item.querySelector('.student-image'); if(toggleBtn) { toggleBtn.innerHTML = '<i class="fas fa-plus"></i>'; toggleBtn.style.background = 'var(--accent-teal)'; toggleBtn.style.transform = 'rotate(0deg)'; item.classList.remove('active'); } if(studentImage) studentImage.style.borderColor = 'white'; }); activeIndex = null; } });
     }
     initHonorsSection();
     
     // زر العودة للأعلى
-    function initBackToTop() {
-      const backToTopBtn = document.getElementById('backToTop');
-      window.addEventListener('scroll', () => backToTopBtn.classList.toggle('visible', window.scrollY > 500));
-      backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-    }
+    function initBackToTop() { const backToTopBtn = document.getElementById('backToTop'); window.addEventListener('scroll', () => backToTopBtn.classList.toggle('visible', window.scrollY > 500)); backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' })); }
     initBackToTop();
     
     // الفواصل والعنوان الجديد
-    function initNewSections() {
-      const dividers = document.querySelectorAll('.section-divider');
-      const mainTitle = document.querySelector('.section-main-title');
-      const observerOptions = { threshold: 0.3, rootMargin: '0px 0px -50px 0px' };
-      const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); }); }, observerOptions);
-      dividers.forEach(divider => observer.observe(divider));
-      if(mainTitle) observer.observe(mainTitle);
-    }
+    function initNewSections() { const dividers = document.querySelectorAll('.section-divider'), mainTitle = document.querySelector('.section-main-title'), observerOptions = { threshold: 0.3, rootMargin: '0px 0px -50px 0px' }, observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); }); }, observerOptions); dividers.forEach(divider => observer.observe(divider)); if(mainTitle) observer.observe(mainTitle); }
     initNewSections();
 
     // ============================================
-    //      نظام الاستعلام عن الدرجات (مع أيقونة دوران)
+    //      نظام الاستعلام عن الدرجات
     // ============================================
     function initGradesQuery() {
-      const API_URL = 'https://script.google.com/macros/s/AKfycbz2Lv81VKdaExbViiNYhUSIQh7yGEsDc-bd0ED66t9S2-294lPBc7W8reJAICBAC-tc/exec';
-      const queryBtn = document.getElementById('queryBtn');
-      const studentIdInput = document.getElementById('studentIdInput');
-      const resultContainer = document.getElementById('resultContainer');
-      
+      const API_URL = 'https://script.google.com/macros/s/AKfycbz2Lv81VKdaExbViiNYhUSIQh7yGEsDc-bd0ED66t9S2-294lPBc7W8reJAICBAC-tc/exec', queryBtn = document.getElementById('queryBtn'), studentIdInput = document.getElementById('studentIdInput'), resultContainer = document.getElementById('resultContainer');
       if (!queryBtn) return;
-      
       async function fetchStudentGrade() {
-        const studentId = studentIdInput.value.trim();
-        if (!studentId) {
-          showError('⚠️ الرجاء إدخال رقمك الخاص');
-          return;
-        }
-        resultContainer.style.display = 'block';
-        resultContainer.innerHTML = `<div class="loading"><i class="fas fa-spinner fa-spin"></i><span>جاري البحث عن بياناتك...</span></div>`;
-        try {
-          const response = await fetch(`${API_URL}?id=${encodeURIComponent(studentId)}`);
-          const data = await response.json();
-          if (data.status === 'success') displayResult(data.student, data.settings);
-          else if (data.status === 'closed') showError(data.message || 'النظام غير متاح حالياً');
-          else if (data.status === 'not_found') showError(data.message || '⚠️ رقم غير صحيح. يرجى التأكد من الرقم الخاص والمحاولة مرة أخرى.');
-          else showError('حدث خطأ في النظام. يرجى المحاولة لاحقاً.');
-        } catch (error) {
-          console.error('Error:', error);
-          showError('حدث خطأ في الاتصال. يرجى المحاولة لاحقاً.');
-        }
+        const studentId = studentIdInput.value.trim(); if (!studentId) { showError('⚠️ الرجاء إدخال رقمك الخاص'); return; }
+        resultContainer.style.display = 'block'; resultContainer.innerHTML = `<div class="loading"><i class="fas fa-spinner fa-spin"></i><span>جاري البحث عن بياناتك...</span></div>`;
+        try { const response = await fetch(`${API_URL}?id=${encodeURIComponent(studentId)}`); const data = await response.json(); if (data.status === 'success') displayResult(data.student, data.settings); else if (data.status === 'closed') showError(data.message || 'النظام غير متاح حالياً'); else if (data.status === 'not_found') showError(data.message || '⚠️ رقم غير صحيح. يرجى التأكد من الرقم الخاص والمحاولة مرة أخرى.'); else showError('حدث خطأ في النظام. يرجى المحاولة لاحقاً.'); } catch (error) { console.error('Error:', error); showError('حدث خطأ في الاتصال. يرجى المحاولة لاحقاً.'); }
       }
-      
       function displayResult(student, settings) {
-        const logoHtml = settings.logoUrl 
-          ? `<img src="${settings.logoUrl}" alt="شعار المدرسة" class="school-logo">`
-          : `<div class="school-logo" style="background: var(--accent-teal); display: flex; align-items: center; justify-content: center;"><i class="fas fa-school" style="color: white; font-size: 30px;"></i></div>`;
-        
+        const logoHtml = settings.logoUrl ? `<img src="${settings.logoUrl}" alt="شعار المدرسة" class="school-logo">` : `<div class="school-logo" style="background: var(--accent-teal); display: flex; align-items: center; justify-content: center;"><i class="fas fa-school" style="color: white; font-size: 30px;"></i></div>`;
         const period1Html = (student.period1 !== null && student.period1 !== undefined) ? `<div class="grade-value">${student.period1}</div>` : `<div class="missing-value">بانتظار الرصد</div>`;
         const period2Html = (student.period2 !== null && student.period2 !== undefined) ? `<div class="grade-value">${student.period2}</div>` : `<div class="missing-value">بانتظار الرصد</div>`;
-        
-        let finalHtml = '';
-        if (student.isComplete && student.finalScore) finalHtml = `<div class="final-score">${student.finalScore} درجة</div><div class="final-rating">⭐ التقدير: ${student.rating}</div>`;
-        else finalHtml = `<div class="final-score" style="color: #8B5A2B;">غير مكتملة</div><div class="final-rating" style="color: #8B5A2B;">${student.missingMessage || 'بانتظار اكتمال الدرجات'}</div>`;
-        
-        const missingHtml = (!student.isComplete && student.missingMessage && student.missingMessage !== "لم تُرصد أي درجات حتى الآن") 
-          ? `<div class="missing-message"><i class="fas fa-clock"></i><span>${student.missingMessage}</span></div>` 
-          : '';
-        
-        const cardHtml = `
-          <div class="result-card" id="gradeResultCard">
-            <div class="result-header">
-              ${logoHtml}
-              <div class="school-info">
-                <h4>${settings.schoolName || 'المدرسة'}</h4>
-                <p>${settings.subject || 'التقنية الرقمية'} | ${settings.semester || ''} ${settings.academicYear || ''}</p>
-                <p>👨‍🏫 ${settings.teacherName || 'المعلم'}</p>
-              </div>
-            </div>
-            <div class="student-info">
-              <div class="student-name">👤 ${student.name}</div>
-              <div class="student-details"><i class="fas fa-graduation-cap" style="margin-left: 6px;"></i> ${student.gradeLevel} | الفصل ${student.section}</div>
-            </div>
-            <div class="grades-grid">
-              <div class="grade-card"><span>📖 الفترة الأولى</span>${period1Html}</div>
-              <div class="grade-card"><span>📚 الفترة الثانية</span>${period2Html}</div>
-            </div>
-            ${missingHtml}
-            <div class="final-result">${finalHtml}</div>
-            <div class="result-actions"><button id="saveGradeAsImageBtn"><i class="fas fa-camera"></i> 📸 حفظ كصورة</button></div>
-          </div>`;
+        let finalHtml = ''; if (student.isComplete && student.finalScore) finalHtml = `<div class="final-score">${student.finalScore} درجة</div><div class="final-rating">⭐ التقدير: ${student.rating}</div>`; else finalHtml = `<div class="final-score" style="color: #8B5A2B;">غير مكتملة</div><div class="final-rating" style="color: #8B5A2B;">${student.missingMessage || 'بانتظار اكتمال الدرجات'}</div>`;
+        const missingHtml = (!student.isComplete && student.missingMessage && student.missingMessage !== "لم تُرصد أي درجات حتى الآن") ? `<div class="missing-message"><i class="fas fa-clock"></i><span>${student.missingMessage}</span></div>` : '';
+        const cardHtml = `<div class="result-card" id="gradeResultCard"><div class="result-header">${logoHtml}<div class="school-info"><h4>${settings.schoolName || 'المدرسة'}</h4><p>${settings.subject || 'التقنية الرقمية'} | ${settings.semester || ''} ${settings.academicYear || ''}</p><p>👨‍🏫 ${settings.teacherName || 'المعلم'}</p></div></div><div class="student-info"><div class="student-name">👤 ${student.name}</div><div class="student-details"><i class="fas fa-graduation-cap" style="margin-left: 6px;"></i> ${student.gradeLevel} | الفصل ${student.section}</div></div><div class="grades-grid"><div class="grade-card"><span>📖 الفترة الأولى</span>${period1Html}</div><div class="grade-card"><span>📚 الفترة الثانية</span>${period2Html}</div></div>${missingHtml}<div class="final-result">${finalHtml}</div><div class="result-actions"><button id="saveGradeAsImageBtn"><i class="fas fa-camera"></i> 📸 حفظ كصورة</button></div></div>`;
         resultContainer.innerHTML = cardHtml;
-        const saveBtn = document.getElementById('saveGradeAsImageBtn');
-        const cardElement = document.getElementById('gradeResultCard');
-        if(saveBtn && cardElement) {
-          saveBtn.addEventListener('click', function() {
-            html2canvas(cardElement, { scale: 2, backgroundColor: '#FFFFFF', logging: false, useCORS: true }).then(canvas => {
-              const link = document.createElement('a');
-              link.download = `نتيجة_${student.name}.png`;
-              link.href = canvas.toDataURL();
-              link.click();
-              const originalText = saveBtn.innerHTML;
-              saveBtn.innerHTML = '<i class="fas fa-check"></i> تم الحفظ';
-              setTimeout(() => { saveBtn.innerHTML = originalText; }, 2000);
-            }).catch(error => { console.error('Error saving image:', error); alert('حدث خطأ أثناء حفظ الصورة. يرجى المحاولة مرة أخرى.'); });
-          });
-        }
+        const saveBtn = document.getElementById('saveGradeAsImageBtn'), cardElement = document.getElementById('gradeResultCard');
+        if(saveBtn && cardElement) { saveBtn.addEventListener('click', function() { html2canvas(cardElement, { scale: 2, backgroundColor: '#FFFFFF', logging: false, useCORS: true }).then(canvas => { const link = document.createElement('a'); link.download = `نتيجة_${student.name}.png`; link.href = canvas.toDataURL(); link.click(); const originalText = saveBtn.innerHTML; saveBtn.innerHTML = '<i class="fas fa-check"></i> تم الحفظ'; setTimeout(() => { saveBtn.innerHTML = originalText; }, 2000); }).catch(error => { console.error('Error saving image:', error); alert('حدث خطأ أثناء حفظ الصورة. يرجى المحاولة مرة أخرى.'); }); }); }
       }
-      
       function showError(message) { resultContainer.innerHTML = `<div class="error-message"><i class="fas fa-exclamation-circle"></i><span>${message}</span></div>`; }
-      queryBtn.addEventListener('click', fetchStudentGrade);
-      studentIdInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') fetchStudentGrade(); });
+      queryBtn.addEventListener('click', fetchStudentGrade); studentIdInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') fetchStudentGrade(); });
     }
     initGradesQuery();
     
     // ============================================
-    //      نظام التصويت المتقدم (النسخة النهائية)
+    //      نظام التصويت المتقدم
     // ============================================
     const VOTING_API_URL = "https://script.google.com/macros/s/AKfycbwlUa3oyj8B-Tq263FXs8heg4bXrcp4vSRqb903-t68vll0cF-6rKpBFyccq88RKX25/exec";
-    let previousVotes = {};
-    let updateIntervalVotes;
-    
-    async function fetchVotingResults() {
-      try {
-        const response = await fetch(`${VOTING_API_URL}?t=${Date.now()}`);
-        const data = await response.json();
-        if (data.status === "success") {
-          displayVotingResults(data);
-          checkForUpdates(data.projects);
-        } else {
-          throw new Error("فشل في تحميل البيانات");
-        }
-      } catch (error) {
-        console.error("Error fetching voting results:", error);
-        document.getElementById("votingResultsContainer").innerHTML = `
-          <div style="text-align: center; padding: 2rem; color: var(--warning-red);">
-            <i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem; display: block;"></i>
-            <span>حدث خطأ في تحميل النتائج. سيتم المحاولة مرة أخرى...</span>
-          </div>`;
-      }
-    }
-    
-    function displayVotingResults(data) {
-      const container = document.getElementById("votingResultsContainer");
-      const totalVotes = data.totalVotes || 0;
-      const projectColors = ["#2C3A61", "#7D42D3", "#2ECC71"];
-      let html = `<div class="results-grid">`;
-      data.projects.forEach((project, index) => {
-        const percentage = totalVotes > 0 ? (project.votes / totalVotes) * 100 : 0;
-        let iconClass = "fa-file-alt";
-        if(project.name === "تقرير الأعمال") iconClass = "fa-file-alt";
-        else if(project.name === "التصميم الجرافيكي") iconClass = "fa-palette";
-        else if(project.name === "الموقع الإلكتروني") iconClass = "fa-code";
-        const color = projectColors[index % projectColors.length];
-        html += `
-          <div class="result-project-card" data-project-name="${project.name}" data-votes="${project.votes}">
-            <div class="project-icon"><i class="fas ${iconClass}" style="color: ${color}"></i></div>
-            <div class="project-name-result">${project.name}</div>
-            <div class="votes-count">${project.votes}</div>
-            <div class="votes-label">صوت</div>
-            <div class="percentage-bar"><div class="percentage-fill" style="width: ${percentage}%; background: ${color}"></div></div>
-            <div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-light);">${percentage.toFixed(1)}%</div>
-          </div>`;
-      });
-      html += `</div><div class="total-votes"><i class="fas fa-chart-simple"></i> إجمالي الأصوات: <strong>${totalVotes}</strong><div class="last-updated"><i class="fas fa-clock"></i> آخر تحديث: ${new Date(data.lastUpdated).toLocaleTimeString('ar-SA')}</div></div>`;
-      container.innerHTML = html;
-    }
-    
-    function checkForUpdates(projects) {
-      let hasUpdates = false;
-      projects.forEach(project => {
-        const previousVote = previousVotes[project.name];
-        if (previousVote !== undefined && previousVote !== project.votes) {
-          hasUpdates = true;
-          setTimeout(() => {
-            const card = document.querySelector(`.result-project-card[data-project-name="${project.name}"]`);
-            if (card) { card.classList.add('updated'); setTimeout(() => card.classList.remove('updated'), 500); }
-          }, 100);
-        }
-        previousVotes[project.name] = project.votes;
-      });
-      if (hasUpdates) {
-        const msgDiv = document.getElementById("liveVoteMessage");
-        if(msgDiv) { msgDiv.style.display = "block"; setTimeout(() => msgDiv.style.display = "none", 3000); }
-      }
-    }
-    
-    function startAutoUpdateVotes() { fetchVotingResults(); updateIntervalVotes = setInterval(fetchVotingResults, 30000); }
-    function stopAutoUpdateVotes() { if (updateIntervalVotes) clearInterval(updateIntervalVotes); }
-    
-    startAutoUpdateVotes();
-    window.addEventListener('beforeunload', () => { stopAutoUpdateVotes(); });
-    
+    let previousVotes = {}, updateIntervalVotes;
+    async function fetchVotingResults() { try { const response = await fetch(`${VOTING_API_URL}?t=${Date.now()}`); const data = await response.json(); if (data.status === "success") { displayVotingResults(data); checkForUpdates(data.projects); } else throw new Error("فشل في تحميل البيانات"); } catch (error) { console.error("Error fetching voting results:", error); document.getElementById("votingResultsContainer").innerHTML = `<div style="text-align: center; padding: 2rem; color: var(--warning-red);"><i class="fas fa-exclamation-triangle" style="font-size: 2rem; margin-bottom: 1rem; display: block;"></i><span>حدث خطأ في تحميل النتائج. سيتم المحاولة مرة أخرى...</span></div>`; } }
+    function displayVotingResults(data) { const container = document.getElementById("votingResultsContainer"), totalVotes = data.totalVotes || 0, projectColors = ["#2C3A61", "#7D42D3", "#2ECC71"]; let html = `<div class="results-grid">`; data.projects.forEach((project, index) => { const percentage = totalVotes > 0 ? (project.votes / totalVotes) * 100 : 0; let iconClass = "fa-file-alt"; if(project.name === "تقرير الأعمال") iconClass = "fa-file-alt"; else if(project.name === "التصميم الجرافيكي") iconClass = "fa-palette"; else if(project.name === "الموقع الإلكتروني") iconClass = "fa-code"; const color = projectColors[index % projectColors.length]; html += `<div class="result-project-card" data-project-name="${project.name}" data-votes="${project.votes}"><div class="project-icon"><i class="fas ${iconClass}" style="color: ${color}"></i></div><div class="project-name-result">${project.name}</div><div class="votes-count">${project.votes}</div><div class="votes-label">صوت</div><div class="percentage-bar"><div class="percentage-fill" style="width: ${percentage}%; background: ${color}"></div></div><div style="margin-top: 0.5rem; font-size: 0.85rem; color: var(--text-light);">${percentage.toFixed(1)}%</div></div>`; }); html += `</div><div class="total-votes"><i class="fas fa-chart-simple"></i> إجمالي الأصوات: <strong>${totalVotes}</strong><div class="last-updated"><i class="fas fa-clock"></i> آخر تحديث: ${new Date(data.lastUpdated).toLocaleTimeString('ar-SA')}</div></div>`; container.innerHTML = html; }
+    function checkForUpdates(projects) { let hasUpdates = false; projects.forEach(project => { const previousVote = previousVotes[project.name]; if (previousVote !== undefined && previousVote !== project.votes) { hasUpdates = true; setTimeout(() => { const card = document.querySelector(`.result-project-card[data-project-name="${project.name}"]`); if (card) { card.classList.add('updated'); setTimeout(() => card.classList.remove('updated'), 500); } }, 100); } previousVotes[project.name] = project.votes; }); if (hasUpdates) { const msgDiv = document.getElementById("liveVoteMessage"); if(msgDiv) { msgDiv.style.display = "block"; setTimeout(() => msgDiv.style.display = "none", 3000); } } }
+    function startAutoUpdateVotes() { fetchVotingResults(); updateIntervalVotes = setInterval(fetchVotingResults, 30000); } function stopAutoUpdateVotes() { if (updateIntervalVotes) clearInterval(updateIntervalVotes); } startAutoUpdateVotes(); window.addEventListener('beforeunload', () => { stopAutoUpdateVotes(); });
     setTimeout(() => window.scrollTo(0, 0), 500);
   });
 </script>
