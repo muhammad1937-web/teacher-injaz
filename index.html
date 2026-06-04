@@ -242,6 +242,7 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       gap: 0.8rem;
       max-width: 900px;
       margin: 1.5rem auto 2.5rem auto;
@@ -253,16 +254,17 @@
       box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.08);
       border: 1px solid var(--border-color);
       transition: var(--transition);
+      text-align: center;
     }
     .fame-bar-section::before { content: ''; position: absolute; top: 0; right: 5px; left: 5px; height: 5px; background: var(--gradient-accent); border-radius: 12px 0 0 0; transition: height 0.3s ease; }
     .fame-bar-section:hover::before { height: 6px; }
     .fame-bar-section:hover { box-shadow: 0 15px 35px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); }
-    .fame-bar-title { display: flex; align-items: center; gap: 0.75rem; font-size: 1.2rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 0.1rem; }
+    .fame-bar-title { display: flex; align-items: center; justify-content: center; gap: 0.75rem; font-size: 1.2rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 0.1rem; }
     .fame-bar-title i { font-size: 1.5rem; color: var(--gold-excellence); text-shadow: 0 2px 4px rgba(var(--gold-excellence-rgb), 0.3); }
     .honors-subtitle { margin: 0 0 0.8rem 0; font-size: 0.95rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
     .honors-subtitle:hover { color: var(--tech-blue); transform: none; background: transparent; border: none; box-shadow: none; }
     .students-container { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 0.5rem; }
-    .students-list { display: flex; align-items: center; justify-content: center; gap: 2.5rem; width: 100%; flex-wrap: nowrap; padding: 0.5rem 0; overflow: visible; position: relative; }
+    .students-list { display: flex; align-items: center; justify-content: center; gap: 2.5rem; width: 100%; flex-wrap: wrap; padding: 0.5rem 0; overflow: visible; position: relative; }
     .student-item { position: relative; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
     .student-image { position: relative; width: 95px; height: 95px; border-radius: 50%; overflow: hidden; border: 3px solid white; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); }
     .student-item.active .student-image { border-color: var(--gold-excellence); box-shadow: 0 0 0 3px rgba(var(--gold-excellence-rgb), 0.3), 0 8px 25px rgba(0, 0, 0, 0.25); transform: scale(1.05); }
@@ -428,7 +430,6 @@
     .ai-input-group { display: flex; gap: 0.75rem; align-items: center; margin-top: 0.5rem; }
     .ai-input { flex: 1; padding: 12px 18px; border: 2px solid var(--border-color); border-radius: 30px; font-size: 1rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; background: var(--pure-white); color: var(--text-dark); transition: var(--transition); outline: none; }
     .ai-input:focus { border-color: var(--ai-teal); box-shadow: 0 0 0 3px rgba(var(--ai-teal-rgb), 0.1); }
-    /* زر الإرسال - أيقونة فقط بدون دائرة */
     .ai-send-btn {
       background: transparent;
       color: var(--ai-teal);
@@ -515,6 +516,14 @@
     /* ========================================= */
     /*   قسم التصويت - البطاقات الأفقية المصغرة */
     /* ========================================= */
+    .voting-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+    .voting-header { text-align: center; margin-bottom: 0.5rem; }
+    .voting-title { display: inline-flex; align-items: center; gap: 0.75rem; font-size: 1.2rem; font-weight: 700; color: var(--primary-dark); }
+    .voting-description { text-align: center; color: var(--text-subtitle); margin-bottom: 1.5rem; }
     .projects-container {
       display: flex;
       justify-content: center;
@@ -638,14 +647,17 @@
       .results-grid { grid-template-columns: 1fr; gap: 1rem; }
       .ai-assistant-container { padding: 1.2rem; }
       .ai-messages { height: 280px; }
+      .students-list { gap: 1.5rem; }
+      .student-image { width: 80px; height: 80px; }
     }
     @media (max-width: 480px) {
       .project-btn { min-width: 95px; padding: 0.4rem 0.6rem; font-size: 0.75rem; }
       .project-btn i { font-size: 0.9rem; }
       .vote-btn { padding: 0.6rem 1.2rem; font-size: 0.85rem; }
-      .student-image { width: 75px; height: 75px; }
+      .student-image { width: 70px; height: 70px; }
       .main-title-text { font-size: 1.4rem; }
       .section-divider { margin: 1rem auto; max-width: 95%; }
+      .info-toggle-btn { width: 25px; height: 25px; font-size: 0.7rem; }
     }
   </style>
 </head>
@@ -694,6 +706,9 @@
   </div>
 </div>
 
+<!-- ========== الفاصل الزخرفي ========== -->
+<div class="section-divider fade-in"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
+
 <!-- ========== قسم التميز ========== -->
 <section class="fame-bar-section fade-in">
   <div class="fame-bar-title"><i class="fas fa-trophy"></i><span>صُناع المستقبل</span></div>
@@ -734,7 +749,7 @@
 <div class="section-divider fade-in"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
 
 <!-- ========== قسم ساحة النقاش ========== -->
-<section class="discord-section fade-in">
+<section class="discord-section fade-in" style="max-width: 900px; margin: 0 auto; padding: 1.5rem; text-align: center;">
   <div class="discord-header"><h3 class="discord-title"><i class="fab fa-discord"></i><span>ساحة النقاش التفاعلية</span></h3></div>
   <p class="discord-description">انضم إلى مجتمعنا على ديسكورد للنقاش وطرح الأسئلة.</p>
   <div style="text-align: center;"><a href="https://discord.gg/Cq9mn7Yr" target="_blank" class="discord-btn"><i class="fas fa-sign-in-alt"></i> مجتمع التقنية الرقمية</a><p style="font-size: 0.85rem; color: var(--text-light); margin-top: 10px;"><i class="fas fa-info-circle" style="margin-left: 5px;"></i> عند النقر سيتم توجيهك لإنشاء حساب (إن لم يكن لديك)، ثم الدخول مباشرة إلى ساحة النقاش.</p></div>
@@ -744,7 +759,9 @@
 <div class="section-divider fade-in"><div class="divider-line"></div><div class="divider-dot"></div><div class="divider-line"></div></div>
 
 <!-- ========== العنوان الرئيسي للمحتوى ========== -->
-<div class="section-main-title fade-in"><div class="main-title-content"><i class="fas fa-folder-open main-title-icon"></i><h2 class="main-title-text">المحتوى التعليمي</h2><p class="section-description">مجموعة منظمة من المصادر التعليمية والمكتبة المتكاملة التي تستهدف طلاب المرحلة الثانوية بالإضافة إلى محتويات إثرائية متنوعة.</p></div></div>
+<div class="section-main-title fade-in" style="text-align: center; margin: 2rem auto;">
+  <div class="main-title-content"><i class="fas fa-folder-open main-title-icon"></i><h2 class="main-title-text">المحتوى التعليمي</h2><p class="section-description">مجموعة منظمة من المصادر التعليمية والمكتبة المتكاملة التي تستهدف طلاب المرحلة الثانوية بالإضافة إلى محتويات إثرائية متنوعة.</p></div>
+</div>
 
 <!-- ========== بطاقات المحتوى التعليمي ========== -->
 <div class="container">
@@ -867,7 +884,7 @@
     function initBackToTop() { const backToTopBtn = document.getElementById('backToTop'); window.addEventListener('scroll', () => backToTopBtn.classList.toggle('visible', window.scrollY > 500)); backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' })); }
     initBackToTop();
     
-    // الفواصل والعنوان الجديد
+    // الفواصل
     function initNewSections() { const dividers = document.querySelectorAll('.section-divider'), mainTitle = document.querySelector('.section-main-title'), observerOptions = { threshold: 0.3, rootMargin: '0px 0px -50px 0px' }, observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); }); }, observerOptions); dividers.forEach(divider => observer.observe(divider)); if(mainTitle) observer.observe(mainTitle); }
     initNewSections();
 
