@@ -1180,7 +1180,7 @@
   <div <div id="competition-mode">
     <div class="projects-container">
       <a href="YOUR_LINK_1_HERE" target="_blank" class="project-btn">
-        <i class="fas fa-file-alt"></i>
+        <i class="fas fa-file-powerpoint"></i>
         <span>العرض التقديمي</span>
       </a>
       <a href="YOUR_LINK_2_HERE" target="_blank" class="project-btn">
@@ -1924,10 +1924,10 @@ function displayVotingResults(data) {
   
   data.projects.forEach((project, index) => {
     const percentage = totalVotes > 0 ? (project.votes / totalVotes) * 100 : 0;
-    let iconClass = "fa-file-alt";
+    let iconClass = "fa-file-powerpoint";
     let iconColor = projectColors[index % projectColors.length];
     
-    if (project.name === " العرض التقديمي") iconClass = "fa-file-alt";
+    if (project.name === " العرض التقديمي") iconClass = "fa-file-powerpoint";
     else if (project.name === "التصميم الجرافيكي") iconClass = "fa-palette";
     else if (project.name === "الموقع الإلكتروني") iconClass = "fa-code";
     
