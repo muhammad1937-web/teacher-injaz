@@ -1075,6 +1075,122 @@
   animation: pulse-vote 0.5s ease;
   background: rgba(var(--accent-teal-rgb), 0.05);
 }
+    /* ============================================ */
+/* ==========   نافذة التميز المنبثقة  ========= */
+/* ============================================ */
+
+/* الخلفية الداكنة خلف النافذة */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+/* النافذة البيضاء نفسها */
+.modal-container {
+  background: var(--pure-white);
+  border-radius: 24px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+  padding: 2rem 1.5rem 1.8rem;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--border-color);
+}
+
+.modal-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.modal-overlay.active .modal-container {
+  transform: scale(1);
+}
+
+/* زر الإغلاق ✕ */
+.modal-close {
+  position: absolute;
+  top: 15px;
+  left: 20px;
+  background: transparent;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-light);
+  transition: all 0.2s;
+}
+
+.modal-close:hover {
+  color: var(--warning-red);
+  transform: scale(1.1);
+}
+
+/* صورة الطالب داخل النافذة */
+.modal-image {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--accent-teal);
+  margin: 0 auto 1rem;
+  display: block;
+  box-shadow: 0 8px 20px rgba(var(--accent-teal-rgb), 0.3);
+}
+
+/* وسام الإنجاز */
+.modal-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #FFD700, #FFA500);
+  color: #fff;
+  padding: 0.3rem 1rem;
+  border-radius: 50px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.modal-badge i {
+  margin-left: 5px;
+}
+
+/* اسم الطالب */
+.modal-name {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  margin-bottom: 1rem;
+}
+
+/* سبب التميز */
+.modal-reason {
+  background: rgba(var(--accent-teal-rgb), 0.08);
+  padding: 1rem;
+  border-radius: 16px;
+  color: var(--text-medium);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-top: 0.5rem;
+  border-right: 3px solid var(--accent-teal);
+}
+
+.modal-reason i {
+  color: var(--accent-teal);
+  margin-left: 6px;
+}
   </style>
 </head>
 <body>
@@ -1625,67 +1741,77 @@
     }
     initCardToggles();
     
-    // قسم التميز
-    function initHonorsSection() {
-      const studentItems = document.querySelectorAll('.student-item');
-      const unifiedInfo = document.getElementById('unifiedStudentInfo');
-      const studentName = document.getElementById('studentName');
-      const studentReason = document.getElementById('studentReason');
-      const studentsData = [
-        { name: "الطالب المتميز الأول", reason: "التميز في مشروع الوحدة الأولى وإبداع في التصميم" },
-        { name: "الطالب المتميز الثاني", reason: "تفوق في الاختبارات العملية وابتكار حلول تقنية" },
-        { name: "الطالب المتميز الثالث", reason: "مشاركة فعالة في الأنشطة الصفية ودعم الزملاء" }
-      ];
-      let activeIndex = null;
-      studentItems.forEach((item, index) => {
-        const toggleBtn = item.querySelector('.info-toggle-btn');
-        const studentImage = item.querySelector('.student-image');
-        if(toggleBtn) {
-          toggleBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            const isVisible = unifiedInfo.classList.contains('active');
-            if(isVisible && activeIndex === index) {
-              unifiedInfo.classList.remove('active');
-              toggleBtn.innerHTML = '<i class="fas fa-plus"></i>'; toggleBtn.style.background = 'var(--accent-teal)'; toggleBtn.style.transform = 'rotate(0deg)';
-              item.classList.remove('active'); if(studentImage) studentImage.style.borderColor = 'white';
-              activeIndex = null;
-            } else {
-              studentName.textContent = studentsData[index].name; studentReason.textContent = studentsData[index].reason;
-              studentItems.forEach((otherItem, otherIndex) => {
-                const otherBtn = otherItem.querySelector('.info-toggle-btn'); const otherImage = otherItem.querySelector('.student-image');
-                if(otherBtn) { otherBtn.innerHTML = '<i class="fas fa-plus"></i>'; otherBtn.style.background = 'var(--accent-teal)'; otherBtn.style.transform = 'rotate(0deg)'; otherItem.classList.remove('active'); }
-                if(otherImage) otherImage.style.borderColor = 'white';
-              });
-              unifiedInfo.classList.add('active');
-              toggleBtn.innerHTML = '<i class="fas fa-times"></i>'; toggleBtn.style.background = 'var(--gold-excellence)'; toggleBtn.style.transform = 'rotate(45deg)';
-              item.classList.add('active'); activeIndex = index;
-              if(studentImage) studentImage.style.borderColor = 'var(--gold-excellence)';
-            }
-          });
-          if(studentImage) studentImage.addEventListener('click', function(e) { e.stopPropagation(); toggleBtn.click(); });
-        }
-      });
-      document.addEventListener('click', function(e) {
-        const isClickInside = Array.from(studentItems).some(item => item.contains(e.target));
-        const isClickOnInfo = unifiedInfo.contains(e.target);
-        if(!isClickInside && !isClickOnInfo) {
-          unifiedInfo.classList.remove('active');
-          studentItems.forEach(item => {
-            const toggleBtn = item.querySelector('.info-toggle-btn'); const studentImage = item.querySelector('.student-image');
-            if(toggleBtn) { toggleBtn.innerHTML = '<i class="fas fa-plus"></i>'; toggleBtn.style.background = 'var(--accent-teal)'; toggleBtn.style.transform = 'rotate(0deg)'; item.classList.remove('active'); }
-            if(studentImage) studentImage.style.borderColor = 'white';
-          });
-          activeIndex = null;
-        }
-      });
-      document.addEventListener('keydown', function(e) { if(e.key === 'Escape') { unifiedInfo.classList.remove('active');
-        studentItems.forEach(item => {
-          const toggleBtn = item.querySelector('.info-toggle-btn'); const studentImage = item.querySelector('.student-image');
-          if(toggleBtn) { toggleBtn.innerHTML = '<i class="fas fa-plus"></i>'; toggleBtn.style.background = 'var(--accent-teal)'; toggleBtn.style.transform = 'rotate(0deg)'; item.classList.remove('active'); }
-          if(studentImage) studentImage.style.borderColor = 'white';
-        }); activeIndex = null;
-      }});
+    //  قسم التميز
+   // ============================================
+//      النافذة المنبثقة لقسم التميز
+// ============================================
+const modal = document.getElementById('studentModal');
+const modalCloseBtn = document.getElementById('modalCloseBtn');
+const modalStudentImage = document.getElementById('modalStudentImage');
+const modalStudentName = document.getElementById('modalStudentName');
+const modalStudentReason = document.getElementById('modalStudentReason');
+
+// بيانات الطلاب (نفس البيانات الموجودة)
+const studentsModalData = [
+  { name: "الطالب المتميز الأول", reason: "التميز في مشروع الوحدة الأولى وإبداع في التصميم", imgSrc: "images/hh.jpeg" },
+  { name: "الطالب المتميز الثاني", reason: "تفوق في الاختبارات العملية وابتكار حلول تقنية", imgSrc: "images/ee.png" },
+  { name: "الطالب المتميز الثالث", reason: "مشاركة فعالة في الأنشطة الصفية ودعم الزملاء", imgSrc: "images/hh.jpeg" }
+];
+
+// فتح النافذة عند النقر على علامة +
+function openModal(studentIndex) {
+  const student = studentsModalData[studentIndex];
+  modalStudentImage.src = student.imgSrc;
+  modalStudentName.textContent = student.name;
+  modalStudentReason.textContent = student.reason;
+  modal.classList.add('active');
+}
+
+// إغلاق النافذة
+function closeModal() {
+  modal.classList.remove('active');
+}
+
+// ربط الأحداث بأزرار + لكل طالب
+document.querySelectorAll('.student-item').forEach((item, index) => {
+  const plusBtn = item.querySelector('.info-toggle-btn');
+  if (plusBtn) {
+    // إزالة أي حدث قديم
+    const newBtn = plusBtn.cloneNode(true);
+    plusBtn.parentNode.replaceChild(newBtn, plusBtn);
+    
+    newBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      openModal(index);
+    });
+  }
+});
+
+// إغلاق النافذة عند الضغط على زر ✕
+if (modalCloseBtn) {
+  modalCloseBtn.addEventListener('click', closeModal);
+}
+
+// إغلاق النافذة عند الضغط على الخلفية الداكنة
+if (modal) {
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      closeModal();
     }
+  });
+}
+
+// إغلاق النافذة عند الضغط على زر Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && modal.classList.contains('active')) {
+    closeModal();
+  }
+});
+   function initHonorsSection() {
+  // تم تعطيل المربع القديم واستبداله بالنافذة المنبثقة
+  // جميع التفاعلات تنتقل إلى الأزرار + فقط
+  console.log("قسم التميز يعمل عبر النافذة المنبثقة");
+}
     initHonorsSection();
     
     // زر العودة للأعلى
@@ -1990,5 +2116,28 @@ startAutoUpdateVotes();
     setTimeout(() => window.scrollTo(0, 0), 500);
   });
 </script>
+  <!-- ============================================ -->
+<!-- ==========   نافذة التميز المنبثقة  ========= -->
+<!-- ============================================ -->
+<div id="studentModal" class="modal-overlay">
+  <div class="modal-container">
+    <button class="modal-close" id="modalCloseBtn">
+      <i class="fas fa-times"></i>
+    </button>
+    
+    <img id="modalStudentImage" class="modal-image" src="" alt="صورة الطالب المتميز">
+    
+    <div class="modal-badge">
+      <i class="fas fa-trophy"></i> متميز هذا الشهر
+    </div>
+    
+    <h3 id="modalStudentName" class="modal-name">اسم الطالب</h3>
+    
+    <div class="modal-reason">
+      <i class="fas fa-star"></i>
+      <span id="modalStudentReason">سبب التميز</span>
+    </div>
+  </div>
+</div>
 </body>
 </html>
