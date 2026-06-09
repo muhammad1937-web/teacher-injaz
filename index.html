@@ -1967,8 +1967,9 @@ document.addEventListener('keydown', (e) => {
             </div>
           </div>
         `;
-        bindDetailsButtons(student.details);
         resultContainer.innerHTML = cardHtml;
+        bindDetailsButtons(student.details);
+       
         // إضافة حدث لزر حفظ الصورة
 const saveBtn = document.getElementById('saveGradeAsImageBtn');
 const cardElement = document.getElementById('gradeResultCard');
