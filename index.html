@@ -2122,36 +2122,48 @@ startAutoUpdateVotes();
     // ============================================
 //      نافذة تفاصيل الدرجات المنبثقة
 // ============================================
-function showGradeDetails(period, studentId) {
-  // جلب بيانات الطالب من الشيت (ستقرأ من المتغيرات الموجودة)
-  const periodData = period === 1 ? studentDetails.period1 : studentDetails.period2;
+function showGradeDetails(period, studentDetails) {
+    // التحقق من وجود البيانات
+    if (!studentDetails) {
+        console.error("بيانات الطالب غير متاحة");
+        alert("حدث خطأ: لا يمكن عرض التفاصيل الآن.");
+        return;
+    }
+
+    const periodData = period === 1 ? studentDetails.period1 : studentDetails.period2;
+
+    // التحقق من وجود بيانات الفترة
+    if (!periodData) {
+        alert("لا توجد تفاصيل لهذه الفترة.");
+        return;
+    }
   
-  const detailsHtml = `
+    const detailsHtml = `
     <div style="background: white; border-radius: 20px; padding: 1.5rem; max-width: 350px; margin: 0 auto;">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <h3 style="color: var(--primary-dark); margin: 0;">📊 الفترة ${period === 1 ? 'الأولى' : 'الثانية'}</h3>
+        <h3 style="color: var(--primary-dark); margin: 0;">📊 تفاصيل الفترة ${period === 1 ? 'الأولى' : 'الثانية'}</h3>
         <button onclick="this.closest('.modal-details').remove()" style="background: transparent; border: none; font-size: 1.3rem; cursor: pointer;">✕</button>
       </div>
       <div style="background: rgba(var(--primary-dark-rgb), 0.05); border-radius: 12px; padding: 0.8rem;">
         <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
           <span>📋 المهام (20)</span>
-          <span><strong>${periodData.tasks !== null ? periodData.tasks + '/20' : 'بانتظار الرصد'}</strong></span>
+          <span><strong>${periodData.tasks !== null && periodData.tasks !== undefined ? periodData.tasks + '/20' : 'بانتظار الرصد'}</strong></span>
         </div>
         <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
           <span>🚀 المشروع (10)</span>
-          <span><strong>${periodData.project !== null ? periodData.project + '/10' : 'بانتظار الرصد'}</strong></span>
+          <span><strong>${periodData.project !== null && periodData.project !== undefined ? periodData.project + '/10' : 'بانتظار الرصد'}</strong></span>
         </div>
         <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
           <span>💬 المشاركة (10)</span>
-          <span><strong>${periodData.participation !== null ? periodData.participation + '/10' : 'بانتظار الرصد'}</strong></span>
+          <span><strong>${periodData.participation !== null && periodData.participation !== undefined ? periodData.participation + '/10' : 'بانتظار الرصد'}</strong></span>
         </div>
         <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
           <span>🔧 العملي (40)</span>
-          <span><strong>${periodData.practical !== null ? periodData.practical + '/40' : 'بانتظار الرصد'}</strong></span>
+          <span><strong>${periodData.practical !== null && periodData.practical !== undefined ? periodData.practical + '/40' : 'بانتظار الرصد'}</strong></span>
         </div>
         <div style="display: flex; justify-content: space-between;">
           <span>📝 النظري (20)</span>
-          <span><strong>${periodData.theoretical !== null ? periodData.theoretical + '/20' : 'بانتظار الرصد'}</strong></span>
+          <span><strong>${periodData.theoretical !== null && periodData.theoretical !== undefined ? periodData.theoretical + '/20' : 'بانتظار الرصد'}</strong></span>
         </div>
       </div>
     </div>
@@ -2176,17 +2188,22 @@ function showGradeDetails(period, studentId) {
 
 // ربط أزرار التفاصيل بعد عرض البطاقة
 function bindDetailsButtons(studentDetailsData) {
-  window.studentDetails = studentDetailsData;
+    // تخزين البيانات في متغير عام أو في نطاق الدالة
+    window.currentStudentDetails = studentDetailsData;
   
-  document.querySelectorAll('.details-btn').forEach(btn => {
-    btn.removeEventListener('click', detailsHandler);
-    btn.addEventListener('click', detailsHandler);
-  });
-  
-  function detailsHandler(e) {
-    const period = parseInt(this.dataset.period);
-    showGradeDetails(period);
-  }
+    document.querySelectorAll('.details-btn').forEach(btn => {
+        // إزالة أي مستمع قديم لتجنب التكرار
+        btn.removeEventListener('click', window.detailsClickHandler);
+        
+        // تعريف مستمع جديد
+        window.detailsClickHandler = function(e) {
+            const period = parseInt(this.dataset.period);
+            // استدعاء دالة العرض مع تمرير البيانات الصحيحة
+            showGradeDetails(period, window.currentStudentDetails);
+        };
+        
+        btn.addEventListener('click', window.detailsClickHandler);
+    });
 }
     setTimeout(() => window.scrollTo(0, 0), 500);
   });
