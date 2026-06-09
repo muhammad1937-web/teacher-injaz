@@ -1939,16 +1939,22 @@ document.addEventListener('keydown', (e) => {
              <div class="student-details"><i class="fas fa-graduation-cap" style="margin-left: 6px;"></i> ${student.gradeLevel} | الفصل ${student.section}</div>
             </div>
             
-            <div class="grades-grid">
-              <div class="grade-card">
-                <span>📖 الفترة الأولى</span>
-                ${period1Html}
-              </div>
-              <div class="grade-card">
-                <span>📚 الفترة الثانية</span>
-                ${period2Html}
-              </div>
-            </div>
+           <div class="grades-grid">
+  <div class="grade-card">
+    <span>📖 الفترة الأولى</span>
+    ${period1Html}
+    <button class="details-btn" data-period="1" data-student-id="${student.id || ''}" style="margin-top: 10px; background: var(--accent-teal); color: white; border: none; padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 0.7rem;">
+      <i class="fas fa-eye"></i> التفاصيل
+    </button>
+  </div>
+  <div class="grade-card">
+    <span>📚 الفترة الثانية</span>
+    ${period2Html}
+    <button class="details-btn" data-period="2" data-student-id="${student.id || ''}" style="margin-top: 10px; background: var(--accent-teal); color: white; border: none; padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 0.7rem;">
+      <i class="fas fa-eye"></i> التفاصيل
+    </button>
+  </div>
+</div>
             
             ${missingHtml}
             
@@ -1961,7 +1967,7 @@ document.addEventListener('keydown', (e) => {
             </div>
           </div>
         `;
-        
+        bindDetailsButtons(student.details);
         resultContainer.innerHTML = cardHtml;
         // إضافة حدث لزر حفظ الصورة
 const saveBtn = document.getElementById('saveGradeAsImageBtn');
@@ -2113,6 +2119,75 @@ function startAutoUpdateVotes() {
 }
 
 startAutoUpdateVotes();
+    // ============================================
+//      نافذة تفاصيل الدرجات المنبثقة
+// ============================================
+function showGradeDetails(period, studentId) {
+  // جلب بيانات الطالب من الشيت (ستقرأ من المتغيرات الموجودة)
+  const periodData = period === 1 ? studentDetails.period1 : studentDetails.period2;
+  
+  const detailsHtml = `
+    <div style="background: white; border-radius: 20px; padding: 1.5rem; max-width: 350px; margin: 0 auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+        <h3 style="color: var(--primary-dark); margin: 0;">📊 الفترة ${period === 1 ? 'الأولى' : 'الثانية'}</h3>
+        <button onclick="this.closest('.modal-details').remove()" style="background: transparent; border: none; font-size: 1.3rem; cursor: pointer;">✕</button>
+      </div>
+      <div style="background: rgba(var(--primary-dark-rgb), 0.05); border-radius: 12px; padding: 0.8rem;">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span>📋 المهام (20)</span>
+          <span><strong>${periodData.tasks !== null ? periodData.tasks + '/20' : 'بانتظار الرصد'}</strong></span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span>🚀 المشروع (10)</span>
+          <span><strong>${periodData.project !== null ? periodData.project + '/10' : 'بانتظار الرصد'}</strong></span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span>💬 المشاركة (10)</span>
+          <span><strong>${periodData.participation !== null ? periodData.participation + '/10' : 'بانتظار الرصد'}</strong></span>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span>🔧 العملي (40)</span>
+          <span><strong>${periodData.practical !== null ? periodData.practical + '/40' : 'بانتظار الرصد'}</strong></span>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span>📝 النظري (20)</span>
+          <span><strong>${periodData.theoretical !== null ? periodData.theoretical + '/20' : 'بانتظار الرصد'}</strong></span>
+        </div>
+      </div>
+    </div>
+  `;
+  
+  // إنشاء overlay مؤقت
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-details';
+  overlay.style.cssText = `
+    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.7); display: flex; align-items: center;
+    justify-content: center; z-index: 10001;
+  `;
+  overlay.innerHTML = detailsHtml;
+  document.body.appendChild(overlay);
+  
+  // إغلاق النافذة عند الضغط على الخلفية
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) overlay.remove();
+  });
+}
+
+// ربط أزرار التفاصيل بعد عرض البطاقة
+function bindDetailsButtons(studentDetailsData) {
+  window.studentDetails = studentDetailsData;
+  
+  document.querySelectorAll('.details-btn').forEach(btn => {
+    btn.removeEventListener('click', detailsHandler);
+    btn.addEventListener('click', detailsHandler);
+  });
+  
+  function detailsHandler(e) {
+    const period = parseInt(this.dataset.period);
+    showGradeDetails(period);
+  }
+}
     setTimeout(() => window.scrollTo(0, 0), 500);
   });
 </script>
