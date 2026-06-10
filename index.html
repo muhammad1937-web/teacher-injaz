@@ -700,16 +700,20 @@
   padding-bottom: 0.3rem;
   border-bottom: 1px solid var(--border-color);
 }
- .school-logo {
-  width: 160px;
-  height: 160px;
+.school-logo {
+  width: auto;
+  height: auto;
+  max-width: 120px;
+  max-height: 120px;
   border-radius: 50%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
   border: 1px solid var(--pure-white);
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
   margin: 0;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: var(--pure-white);
+  padding: 5px;
 }
 
 .school-logo:hover {
