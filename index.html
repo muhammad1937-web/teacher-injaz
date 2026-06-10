@@ -2133,58 +2133,85 @@ function showGradeDetails(period, studentDetails) {
 
     const periodData = period === 1 ? studentDetails.period1 : studentDetails.period2;
 
-    // التحقق من وجود بيانات الفترة
     if (!periodData) {
         alert("لا توجد تفاصيل لهذه الفترة.");
         return;
     }
-  
+    
+    // تعريف الألوان والأيقونات
+    const items = [
+        { name: "المهام", icon: "📋", key: "tasks", max: 20, color: "#2C3A61" },
+        { name: "المشروع", icon: "📁", key: "project", max: 10, color: "#7D42D3" },
+        { name: "المشاركة", icon: "✋", key: "participation", max: 10, color: "#2ECC71" },
+        { name: "العملي", icon: "💻", key: "practical", max: 40, color: "#F39C12" },
+        { name: "النظري", icon: "📝", key: "theoretical", max: 20, color: "#E88282" }
+    ];
+    
+    let itemsHtml = '';
+    let totalEarned = 0;
+    let totalMax = 0;
+    
+    items.forEach(item => {
+        const score = periodData[item.key];
+        const isScored = (score !== null && score !== undefined);
+        const earned = isScored ? score : 0;
+        const percentage = isScored ? (earned / item.max) * 100 : 0;
+        
+        totalEarned += earned;
+        totalMax += item.max;
+        
+        itemsHtml += `
+            <div style="margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.3rem;">
+                    <span style="font-size: 0.9rem;">${item.icon} ${item.name}</span>
+                    <span style="font-size: 0.85rem; font-weight: 500;">${isScored ? earned + '/' + item.max : 'بانتظار الرصد'}</span>
+                </div>
+                ${isScored ? `
+                <div style="background: #E2E8F0; border-radius: 8px; height: 6px; overflow: hidden; margin-bottom: 0.2rem;">
+                    <div style="width: ${percentage}%; height: 100%; background: ${item.color}; border-radius: 8px; transition: width 0.5s ease;"></div>
+                </div>
+                <div style="font-size: 0.7rem; color: #666; text-align: left;">${percentage.toFixed(1)}%</div>
+                ` : `
+                <div style="background: #E2E8F0; border-radius: 8px; height: 6px; margin-bottom: 0.2rem;">
+                    <div style="width: 0%; height: 100%; background: #CCC; border-radius: 8px;"></div>
+                </div>
+                <div style="font-size: 0.7rem; color: #999; text-align: left;">بانتظار الرصد</div>
+                `}
+            </div>
+        `;
+    });
+    
     const detailsHtml = `
-    <div style="background: white; border-radius: 20px; padding: 1.5rem; max-width: 350px; margin: 0 auto;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <h3 style="color: var(--primary-dark); margin: 0;">📊 تفاصيل الفترة ${period === 1 ? 'الأولى' : 'الثانية'}</h3>
-        <button onclick="this.closest('.modal-details').remove()" style="background: transparent; border: none; font-size: 1.3rem; cursor: pointer;">✕</button>
-      </div>
-      <div style="background: rgba(var(--primary-dark-rgb), 0.05); border-radius: 12px; padding: 0.8rem;">
-        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-          <span>📋 المهام (20)</span>
-          <span><strong>${periodData.tasks !== null && periodData.tasks !== undefined ? periodData.tasks + '/20' : 'بانتظار الرصد'}</strong></span>
+        <div style="background: white; border-radius: 20px; width: 90%; max-width: 400px; margin: 0 auto; box-shadow: 0 20px 35px rgba(0,0,0,0.2);">
+            <div style="padding: 1.2rem 1.2rem 0.8rem 1.2rem; border-bottom: 2px solid #E2E8F0;">
+                <h3 style="margin: 0; color: #2C3A61; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;">
+                    <span>📊</span> تفاصيل الفترة ${period === 1 ? 'الأولى' : 'الثانية'}
+                </h3>
+            </div>
+            <div style="padding: 1rem 1.2rem;">
+                ${itemsHtml}
+            </div>
+            <div style="padding: 0.8rem 1.2rem 1.2rem 1.2rem; text-align: center;">
+                <button onclick="this.closest('.modal-details').remove()" style="background: #7D42D3; color: white; border: none; padding: 8px 20px; border-radius: 30px; cursor: pointer; font-size: 0.85rem;">
+                    إغلاق
+                </button>
+            </div>
         </div>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-          <span>🚀 المشروع (10)</span>
-          <span><strong>${periodData.project !== null && periodData.project !== undefined ? periodData.project + '/10' : 'بانتظار الرصد'}</strong></span>
-        </div>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-          <span>💬 المشاركة (10)</span>
-          <span><strong>${periodData.participation !== null && periodData.participation !== undefined ? periodData.participation + '/10' : 'بانتظار الرصد'}</strong></span>
-        </div>
-        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
-          <span>🔧 العملي (40)</span>
-          <span><strong>${periodData.practical !== null && periodData.practical !== undefined ? periodData.practical + '/40' : 'بانتظار الرصد'}</strong></span>
-        </div>
-        <div style="display: flex; justify-content: space-between;">
-          <span>📝 النظري (20)</span>
-          <span><strong>${periodData.theoretical !== null && periodData.theoretical !== undefined ? periodData.theoretical + '/20' : 'بانتظار الرصد'}</strong></span>
-        </div>
-      </div>
-    </div>
-  `;
-  
-  // إنشاء overlay مؤقت
-  const overlay = document.createElement('div');
-  overlay.className = 'modal-details';
-  overlay.style.cssText = `
-    position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-    background: rgba(0,0,0,0.7); display: flex; align-items: center;
-    justify-content: center; z-index: 10001;
-  `;
-  overlay.innerHTML = detailsHtml;
-  document.body.appendChild(overlay);
-  
-  // إغلاق النافذة عند الضغط على الخلفية
-  overlay.addEventListener('click', (e) => {
-    if (e.target === overlay) overlay.remove();
-  });
+    `;
+    
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-details';
+    overlay.style.cssText = `
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.7); display: flex; align-items: center;
+        justify-content: center; z-index: 10001;
+    `;
+    overlay.innerHTML = detailsHtml;
+    document.body.appendChild(overlay);
+    
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) overlay.remove();
+    });
 }
 
 // ربط أزرار التفاصيل بعد عرض البطاقة
