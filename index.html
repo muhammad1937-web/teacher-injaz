@@ -700,15 +700,21 @@
   padding-bottom: 0.3rem;
   border-bottom: 1px solid var(--border-color);
 }
-  .school-logo {
+ .school-logo {
   width: 160px;
   height: 160px;
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
-  border: none;
-  box-shadow: none;
-    margin: 0;
+  border: 3px solid var(--pure-white);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  margin: 0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.school-logo:hover {
+  transform: scale(1.02);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
 }
 
 /* ويمكنك تعديل الـ margin في الـ .result-header */
