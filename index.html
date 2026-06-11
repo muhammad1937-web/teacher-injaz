@@ -710,47 +710,43 @@
   border-bottom: 1px solid var(--border-color);
 }
 .school-logo {
-  width: 70px;
-  height: 70px;
-  border-radius: 50%;
-  object-fit: cover;
-  object-position: center;
-  border: 2px solid var(--border-color);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 52px;
+  height: 52px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
   flex-shrink: 0;
+  opacity: 0.95;
 }
 
 .school-logo:hover {
-  transform: scale(1.02);
-  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.2);
+  opacity: 1;
 }
 
 /* ويمكنك تعديل الـ margin في الـ .result-header */
 .result-header {
+  background: linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%);
   display: flex;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 1rem;
-  padding: 0.8rem;
-  background: rgba(var(--primary-dark-rgb), 0.03);
-  border-radius: 12px;
+  gap: 16px;
+  padding: 1.2rem 1.4rem;
+  margin: -0.5rem -1.5rem 1.2rem -1.5rem;
   border-bottom: none;
 }
     .school-info {
       flex: 1;
       margin-top: -10px;
     }
-    .school-info h4 {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-      margin: 0 0 4px 0;
-    }
-    .school-info p {
-      font-size: 0.85rem;
-      color: var(--text-light);
-      margin: 0;
-    }
+.school-info h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: white;
+  margin: 0 0 4px 0;
+}
+.school-info p {
+  font-size: 0.82rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin: 0 0 3px 0;
+}
     .student-info {
       background: rgba(var(--primary-dark-rgb), 0.04);
       padding: 12px 15px;
@@ -1918,7 +1914,8 @@ document.addEventListener('keydown', (e) => {
       
       function displayResult(student, settings) {
         const logoHtml = settings.logoUrl 
-          ? `<img src="${settings.logoUrl}" alt="شعار المدرسة" class="school-logo">`
+            ? `<img src="${settings.logoUrl}" alt="شعار المدرسة" class="school-logo">`
+  : `<i class="fas fa-school" style="color: white; font-size: 30px; opacity: 0.9;"></i>`;
           : `<div class="school-logo" style="background: var(--accent-teal); display: flex; align-items: center; justify-content: center;">
                <i class="fas fa-school" style="color: white; font-size: 30px;"></i>
              </div>`;
@@ -1959,14 +1956,15 @@ document.addEventListener('keydown', (e) => {
         
         const cardHtml = `
           <div class="result-card" id="gradeResultCard">
-            <div class="result-header">
-              ${logoHtml}
-              <div class="school-info">
-                <h4>${settings.schoolName || 'المدرسة'}</h4>
-                <p>${settings.subject || 'التقنية الرقمية'} | ${settings.semester || ''} ${settings.academicYear || ''}</p>
-                <p>👨‍🏫 ${settings.teacherName || 'المعلم'}</p>
-              </div>
-            </div>
+           <div class="result-header">
+  ${logoHtml}
+  <div style="width:1px; height:40px; background:rgba(255,255,255,0.2); flex-shrink:0;"></div>
+  <div class="school-info">
+    <h4>${settings.schoolName || 'المدرسة'}</h4>
+    <p>${settings.subject || 'التقنية الرقمية'} | ${settings.semester || ''} ${settings.academicYear || ''}</p>
+    <p>👨‍🏫 ${settings.teacherName || 'المعلم'}</p>
+  </div>
+</div>
             
             <div class="student-info">
               <div class="student-name">👤 ${student.name}</div>
