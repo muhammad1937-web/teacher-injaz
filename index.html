@@ -710,8 +710,8 @@
   border-bottom: 1px solid var(--border-color);
 }
 .school-logo {
-  width: 52px;
-  height: 52px;
+  width: 75px;
+  height: 75px;
   object-fit: contain;
   filter: brightness(0) invert(1);
   flex-shrink: 0;
@@ -730,22 +730,54 @@
   gap: 16px;
   padding: 1.2rem 1.4rem;
   margin: -0.5rem -1.5rem 1.2rem -1.5rem;
+  border-radius: 20px 20px 0 0;
   border-bottom: none;
+  flex-wrap: nowrap;
 }
-    .school-info {
-      flex: 1;
-      margin-top: -10px;
-    }
+
+.school-info {
+  flex: 1;
+  margin-top: 0;
+  min-width: 0;
+}
+
 .school-info h4 {
   font-size: 1rem;
   font-weight: 600;
   color: white;
   margin: 0 0 4px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
+
 .school-info p {
   font-size: 0.82rem;
   color: rgba(255, 255, 255, 0.75);
   margin: 0 0 3px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 768px) {
+  .result-header {
+    gap: 12px;
+    padding: 1rem;
+  }
+
+  .school-logo {
+    width: 60px;
+    height: 60px;
+  }
+
+  .school-info h4 {
+    font-size: 0.9rem;
+  }
+
+  .school-info p {
+    font-size: 0.75rem;
+  }
 }
     .student-info {
       background: rgba(var(--primary-dark-rgb), 0.04);
