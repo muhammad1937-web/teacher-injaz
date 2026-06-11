@@ -2063,13 +2063,13 @@ document.addEventListener('keydown', (e) => {
     <div class="school-info">
       <h4>${settings.schoolName || 'المدرسة'}</h4>
       <p>${settings.subject || 'التقنية الرقمية'} | ${settings.semester || ''} ${settings.academicYear || ''}</p>
-      <p><i class="fas fa-user-graduate" style="margin-left: 5px; color: rgba(255,255,255,0.85);"></i> ${settings.teacherName || 'المعلم'}</p>
+      <p><i class="fas fa-user-circle" style="margin-left: 5px; color: rgba(255,255,255,0.85);"></i> ${settings.teacherName || 'المعلم'}</p>
     </div>
   </div>
 </div>
             
             <div class="student-info">
-              <div class="student-name">👤 ${student.name}</div>
+              <div class="student-name"><i class="fas fa-user-graduate" style="margin-left: 8px; color: var(--accent-teal);"></i> ${student.name}</div>
              <div class="student-details"><i class="fas fa-graduation-cap" style="margin-left: 6px;"></i> ${student.gradeLevel} | الفصل ${student.section}</div>
             </div>
             
