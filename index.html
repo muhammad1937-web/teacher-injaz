@@ -1235,6 +1235,84 @@
   color: var(--accent-teal);
   margin-left: 6px;
 }
+  /* تنسيق الهيدر الجديد */
+.result-header {
+  background: linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%);
+  padding: 0.8rem 1.2rem;
+  margin: -0.5rem -1.5rem 1.2rem -1.5rem;
+  border-radius: 20px 20px 0 0;
+}
+
+.header-content-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 15px;
+  flex-wrap: nowrap;
+}
+
+/* الشعار */
+.school-logo {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.5);
+  flex-shrink: 0;
+}
+
+/* الخط الفاصل العمودي */
+.vertical-divider {
+  width: 1px;
+  height: 70px;
+  background: rgba(255, 255, 255, 0.4);
+  flex-shrink: 0;
+}
+
+/* النص */
+.school-info {
+  text-align: right;
+  flex: 1;
+}
+
+.school-info h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  margin: 0 0 5px 0;
+  line-height: 1.4;
+}
+
+.school-info p {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.85);
+  margin: 3px 0;
+  line-height: 1.4;
+}
+
+/* للشاشات الصغيرة */
+@media (max-width: 550px) {
+  .school-logo {
+    width: 65px;
+    height: 65px;
+  }
+  
+  .vertical-divider {
+    height: 60px;
+  }
+  
+  .school-info h4 {
+    font-size: 0.85rem;
+  }
+  
+  .school-info p {
+    font-size: 0.7rem;
+  }
+  
+  .header-content-wrapper {
+    gap: 10px;
+  }
+}  
   </style>
 </head>
 <body>
@@ -1978,11 +2056,11 @@ document.addEventListener('keydown', (e) => {
           : '';
         
         const cardHtml = `
-          <div class="result-card" id="gradeResultCard">
           <div class="result-header">
-  <div style="display:flex; align-items:center; justify-content:center; gap:20px; width:100%;">
+  <div class="header-content-wrapper">
     ${logoHtml}
-    <div class="school-info" style="text-align:right;">
+    <div class="vertical-divider"></div>
+    <div class="school-info">
       <h4>${settings.schoolName || 'المدرسة'}</h4>
       <p>${settings.subject || 'التقنية الرقمية'} | ${settings.semester || ''} ${settings.academicYear || ''}</p>
       <p>👨‍🏫 ${settings.teacherName || 'المعلم'}</p>
