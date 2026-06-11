@@ -720,20 +720,27 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
-  padding: 0.8rem 1.5rem;
+  justify-content: space-evenly;
+  gap: 10px;
+  padding: 1rem;
   margin: -0.5rem -1.5rem 1rem -1.5rem;
   border-radius: 20px 20px 0 0;
   border-bottom: none;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
+}
+
+.result-header > div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
 .school-info {
-  flex: 0 1 auto;
+  flex: 1;
   margin: 0;
   padding: 0;
-  min-width: 0;
   text-align: right;
 }
 
@@ -742,18 +749,16 @@
   font-weight: 600;
   color: white;
   margin: 0 0 4px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  white-space: normal;
+  word-break: break-word;
 }
 
 .school-info p {
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   color: rgba(255, 255, 255, 0.75);
-  margin: 0 0 3px 0;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  margin: 0 0 2px 0;
+  white-space: normal;
+  word-break: break-word;
 }
 
 @media (max-width: 768px) {
