@@ -1914,11 +1914,8 @@ document.addEventListener('keydown', (e) => {
       
       function displayResult(student, settings) {
         const logoHtml = settings.logoUrl 
-            ? `<img src="${settings.logoUrl}" alt="شعار المدرسة" class="school-logo">`
+  ? `<img src="${settings.logoUrl}" alt="شعار المدرسة" class="school-logo">`
   : `<i class="fas fa-school" style="color: white; font-size: 30px; opacity: 0.9;"></i>`;
-          : `<div class="school-logo" style="background: var(--accent-teal); display: flex; align-items: center; justify-content: center;">
-               <i class="fas fa-school" style="color: white; font-size: 30px;"></i>
-             </div>`;
         
         let period1Html, period2Html;
         
