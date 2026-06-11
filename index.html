@@ -1981,13 +1981,15 @@ document.addEventListener('keydown', (e) => {
         
         const cardHtml = `
           <div class="result-card" id="gradeResultCard">
-           <div class="result-header">
-  ${logoHtml}
-  <div style="width:1px; height:40px; background:rgba(255,255,255,0.2); flex-shrink:0;"></div>
-  <div class="school-info">
-    <h4>${settings.schoolName || 'المدرسة'}</h4>
-    <p>${settings.subject || 'التقنية الرقمية'} | ${settings.semester || ''} ${settings.academicYear || ''}</p>
-    <p>👨‍🏫 ${settings.teacherName || 'المعلم'}</p>
+          <div class="result-header">
+  <div style="display:flex; align-items:center; justify-content:center; gap:20px; width:100%;">
+    ${logoHtml}
+    <div style="width:1px; height:60px; background:rgba(255,255,255,0.3); flex-shrink:0;"></div>
+    <div class="school-info" style="text-align:right;">
+      <h4>${settings.schoolName || 'المدرسة'}</h4>
+      <p>${settings.subject || 'التقنية الرقمية'} | ${settings.semester || ''} ${settings.academicYear || ''}</p>
+      <p>👨‍🏫 ${settings.teacherName || 'المعلم'}</p>
+    </div>
   </div>
 </div>
             
