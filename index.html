@@ -710,15 +710,14 @@
   border-bottom: 1px solid var(--border-color);
 }
 .school-logo {
-  width: 120px;
-  height: 120px;
+  width: 70px;
+  height: 70px;
   border-radius: 50%;
   object-fit: cover;
   object-position: center;
-  border: 2px solid var(--pure-white);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-  margin: 0;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 2px solid var(--border-color);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  flex-shrink: 0;
 }
 
 .school-logo:hover {
@@ -730,10 +729,12 @@
 .result-header {
   display: flex;
   align-items: center;
-  gap: 20px; /* زيادة المسافة بين الشعار والنص */
-  margin-bottom: 1.2rem;
-  padding-bottom: 1rem;
-  border-bottom: 1px solid var(--border-color);
+  gap: 14px;
+  margin-bottom: 1rem;
+  padding: 0.8rem;
+  background: rgba(var(--primary-dark-rgb), 0.03);
+  border-radius: 12px;
+  border-bottom: none;
 }
     .school-info {
       flex: 1;
