@@ -715,7 +715,6 @@
   opacity: 1;
 }
 
-/* ويمكنك تعديل الـ margin في الـ .result-header */
 .result-header {
   background: linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%);
   display: flex;
@@ -727,21 +726,6 @@
   border-radius: 20px 20px 0 0;
   border-bottom: none;
   flex-wrap: nowrap;
-  min-height: unset;
-}
-
-@media (max-width: 768px) {
-  .result-header {
-    flex-direction: row !important;
-    align-items: center;
-    gap: 10px;
-    padding: 0.9rem 1rem;
-  }
-
-  .school-logo {
-    width: 150px;
-    height: 150px;
-  }
 }
 
 .school-info {
@@ -771,13 +755,14 @@
 
 @media (max-width: 768px) {
   .result-header {
+    flex-direction: row !important;
     gap: 12px;
     padding: 1rem;
   }
 
   .school-logo {
-    width: 60px;
-    height: 60px;
+    width: 120px;
+    height: 120px;
   }
 
   .school-info h4 {
