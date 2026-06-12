@@ -2400,9 +2400,9 @@ function bindDetailsButtons(studentDetailsData) {
         const seconds = Math.floor((diff % 60000) / 1000);
         
         let result = '';
-        if (days > 0) result += `${days} ي `;
-        if (hours > 0 || days > 0) result += `${hours} س `;
-        result += `${minutes} د ${seconds} ث`;
+if (days > 0) result += `${days} ي  `;
+if (hours > 0 || days > 0) result += `${hours} س  `;
+result += `${minutes} د  ${seconds} ث`;
         
         countdownElement.innerHTML = result;
       }
