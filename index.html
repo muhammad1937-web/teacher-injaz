@@ -2375,7 +2375,43 @@ function bindDetailsButtons(studentDetailsData) {
         btn.addEventListener('click', window.detailsClickHandler);
     });
 }
-    
+       // ============================================
+    //      العد التنازلي الجديد
+    // ============================================
+    function startCountdown() {
+      const countdownElement = document.getElementById('countdown');
+      if (!countdownElement) return;
+
+      // عدد أيام التصويت (عدّل الرقم كما تشاء)
+      const totalDays = 18;
+
+      // حساب تاريخ الانتهاء
+      const endDate = new Date();
+      endDate.setDate(endDate.getDate() + totalDays);
+      endDate.setHours(23, 59, 59, 59);
+
+      function updateCountdown() {
+        const now = new Date();
+        const diff = endDate - now;
+
+        if (diff <= 0) {
+          countdownElement.innerHTML = '0 ي 0 س 0 د 0 ث';
+          return;
+        }
+
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (86400000)) / (3600000));
+        const minutes = Math.floor((diff % 3600000) / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
+
+        countdownElement.innerHTML = days + ' ي  ' + hours + ' س  ' + minutes + ' د  ' + seconds + ' ث';
+      }
+
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    }
+
+    startCountdown(); 
     setTimeout(() => window.scrollTo(0, 0), 500);
   });
 </script>
