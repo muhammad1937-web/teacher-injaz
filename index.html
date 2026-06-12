@@ -2375,50 +2375,52 @@ function bindDetailsButtons(studentDetailsData) {
         btn.addEventListener('click', window.detailsClickHandler);
     });
 }
-    // ============================================
-//      العد التنازلي (يعتمد على عدد الأيام)
+// ============================================
+//      العد التنازلي - ترتيب واضح
 // ============================================
 function startCountdown() {
   const countdownElement = document.getElementById('countdown');
   if (!countdownElement) return;
-  
-  // ⬅️ غير هذا الرقم فقط لتحديد مدة التصويت (بالأيام)
-  const totalDays = 18;  // 18 يوم (عدله كما تشاء)
-  
-  // حساب تاريخ الانتهاء بناءً على اليوم الحقيقي + totalDays
+
+  // عدد أيام التصويت (عدّل الرقم كما تشاء)
+  const totalDays = 18;
+
+  // حساب تاريخ الانتهاء
   const endDate = new Date();
   endDate.setDate(endDate.getDate() + totalDays);
   endDate.setHours(23, 59, 59, 59);
-  
+
   function updateCountdown() {
     const now = new Date();
     const diff = endDate - now;
-    
+
     if (diff <= 0) {
       countdownElement.innerHTML = '0 ي 0 س 0 د 0 ث';
       return;
     }
-    
+
+    // حساب المدة المتبقية
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (86400000)) / (3600000));
     const minutes = Math.floor((diff % 3600000) / 60000);
     const seconds = Math.floor((diff % 60000) / 1000);
-    
-    // ترتيب العرض: أيام ← ساعات ← دقائق ← ثواني
+
+    // بناء النص بالترتيب الصحيح
     let result = '';
-    result += `${days} ي  `;
-    result += `${hours} س  `;
-    result += `${minutes} د  `;
-    result += `${seconds} ث`;
-    
+    result += days + ' ي  ';
+    result += hours + ' س  ';
+    result += minutes + ' د  ';
+    result += seconds + ' ث';
+
     countdownElement.innerHTML = result;
   }
-  
+
   updateCountdown();
   setInterval(updateCountdown, 1000);
 }
 
-startCountdown();
+// تأكد من تشغيل المؤقت بعد تحميل الصفحة
+document.addEventListener('DOMContentLoaded', startCountdown);
     
     setTimeout(() => window.scrollTo(0, 0), 500);
   });
