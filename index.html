@@ -1416,12 +1416,12 @@
   
   <!-- وضع المنافسة (يظهر عند وجود مشاريع للتصويت) -->
   <div <div id="competition-mode">
-    <!-- المؤقت البسيط -->
-<div id="votingTimer" style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
-  <div style="background: rgba(125, 66, 211, 0.08); border: 1px solid rgba(125, 66, 211, 0.2); border-radius: 60px; padding: 0.5rem 1.2rem; display: inline-flex; align-items: center; gap: 12px; backdrop-filter: blur(4px);">
-    <i class="fas fa-clock" style="color: #7D42D3; font-size: 1.1rem;"></i>
-    <span style="font-size: 0.85rem; color: var(--text-medium);">الوقت المتبقي للتصويت</span>
-    <span id="countdown" style="font-weight: 700; color: #7D42D3; direction: ltr; display: inline-block; font-size: 0.9rem; background: rgba(125, 66, 211, 0.1); padding: 0.2rem 0.7rem; border-radius: 30px;"></span>
+    <!-- مؤقت أنيق على شكل عداد -->
+<div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
+  <div style="background: white; border: 1px solid rgba(44,58,97,0.12); border-radius: 30px; padding: 0.35rem 1.2rem; display: inline-flex; align-items: center; gap: 12px; box-shadow: 0 2px 8px rgba(44,58,97,0.06);">
+    <i class="fas fa-hourglass-half" style="color: #7D42D3; font-size: 0.85rem;"></i>
+    <span style="font-size: 0.8rem; color: #2C3A61; font-weight: 500;">الوقت المتبقي</span>
+    <span id="countdown" style="font-weight: 700; color: #7D42D3; font-size: 0.85rem; direction: ltr; background: rgba(125,66,211,0.08); padding: 0.2rem 0.7rem; border-radius: 30px;"></span>
   </div>
 </div>
     <div class="projects-container">
@@ -2375,47 +2375,44 @@ function bindDetailsButtons(studentDetailsData) {
         btn.addEventListener('click', window.detailsClickHandler);
     });
 }
-   // ============================================
-//      العد التنازلي للتصويت (نسخة أنيقة)
-// ============================================
-function startCountdown() {
-  const countdownElement = document.getElementById('countdown');
-  if (!countdownElement) return;
-  
-  // تاريخ الانتهاء (عدله عند الحاجة)
-  const endDate = new Date(2026, 5, 30, 23, 59, 59);
-  
-  function updateCountdown() {
-    const now = new Date();
-    const diff = endDate - now;
-    
-    if (diff <= 0) {
-      countdownElement.innerHTML = 'انتهى';
-      const timerDiv = document.getElementById('votingTimer');
-      if (timerDiv) {
-        timerDiv.style.opacity = '0.6';
+      // ============================================
+    //      العد التنازلي الأنيق
+    // ============================================
+    function startCountdown() {
+      const countdownElement = document.getElementById('countdown');
+      if (!countdownElement) return;
+      
+      // غير التاريخ هنا عند الحاجة
+      const endDate = new Date(2026, 5, 30, 23, 59, 59);
+      
+      function updateCountdown() {
+        const now = new Date();
+        const diff = endDate - now;
+        
+        if (diff <= 0) {
+          countdownElement.innerHTML = 'انتهى';
+          return;
+        }
+        
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (86400000)) / (3600000));
+        const minutes = Math.floor((diff % 3600000) / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
+        
+        let result = '';
+        if (days > 0) result += `${days} ي `;
+        if (hours > 0 || days > 0) result += `${hours} س `;
+        result += `${minutes} د ${seconds} ث`;
+        
+        countdownElement.innerHTML = result;
       }
-      return;
+      
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
     }
     
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (86400000)) / (3600000));
-    const minutes = Math.floor((diff % 3600000) / 60000);
-    const seconds = Math.floor((diff % 60000) / 1000);
+    startCountdown();
     
-    let result = '';
-    if (days > 0) result += `${days} يوم `;
-    if (hours > 0 || days > 0) result += `${hours} س `;
-    result += `${minutes} د ${seconds} ث`;
-    
-    countdownElement.innerHTML = result;
-  }
-  
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
-}
-
-startCountdown();
     setTimeout(() => window.scrollTo(0, 0), 500);
   });
 </script>
