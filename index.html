@@ -2352,14 +2352,13 @@ function startAutoUpdateVotes() {
 }
 
 startAutoUpdateVotes();
-    // ============================================
+// ============================================
 //         مؤقت التصويت التفاعلي
 // ============================================
 function initVotingTimer() {
-  const DAYS_REMAINING = 5; // ← غير هذا الرقم فقط
-
-  const now = new Date();
-  const endDate = new Date(now.getTime() + DAYS_REMAINING * 24 * 60 * 60 * 1000);
+  // ← غير هذا التاريخ فقط عند بدء تصويت جديد
+  // الصيغة: السنة, الشهر-1, اليوم, الساعة, الدقيقة
+  const endDate = new Date(2026, 5, 20, 23, 59);
 
   function updateTimer() {
     const remaining = endDate - new Date();
