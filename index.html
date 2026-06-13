@@ -1121,6 +1121,75 @@
 }
     .voting-timer {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin: 0 auto 1.2rem;
+}
+
+.voting-timer-label {
+  font-size: 0.85rem;
+  color: var(--text-subtitle);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.voting-timer-label i {
+  color: var(--accent-teal);
+  animation: pulse 2s infinite;
+}
+
+.timer-boxes {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.timer-box {
+  background: linear-gradient(135deg, #2C3A61, #7D42D3);
+  border-radius: 12px;
+  padding: 8px 12px;
+  text-align: center;
+  min-width: 58px;
+  box-shadow: 0 4px 12px rgba(44,58,97,0.2);
+}
+
+.timer-box .timer-value {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: white;
+  display: block;
+  line-height: 1.2;
+}
+
+.timer-box .timer-unit {
+  font-size: 0.7rem;
+  color: rgba(255,255,255,0.75);
+  display: block;
+  margin-top: 2px;
+}
+
+.timer-separator {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--accent-teal);
+  margin-bottom: 14px;
+}
+
+@media (max-width: 480px) {
+  .timer-box {
+    min-width: 50px;
+    padding: 6px 10px;
+  }
+  .timer-box .timer-value {
+    font-size: 1.2rem;
+  }
+}
+    .voting-timer {
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
@@ -1439,6 +1508,33 @@
     </h3>
   </div>
   <p class="voting-description">استعرض المشاريع المتنافسة، وادعم إبداع زملائك</p>
+  <div class="voting-timer" id="votingTimer">
+  <div class="voting-timer-label">
+    <i class="fas fa-hourglass-half"></i>
+    <span>ينتهي التصويت خلال</span>
+  </div>
+  <div class="timer-boxes">
+    <div class="timer-box">
+      <span class="timer-value" id="t-days">00</span>
+      <span class="timer-unit">يوم</span>
+    </div>
+    <span class="timer-separator">:</span>
+    <div class="timer-box">
+      <span class="timer-value" id="t-hours">00</span>
+      <span class="timer-unit">ساعة</span>
+    </div>
+    <span class="timer-separator">:</span>
+    <div class="timer-box">
+      <span class="timer-value" id="t-minutes">00</span>
+      <span class="timer-unit">دقيقة</span>
+    </div>
+    <span class="timer-separator">:</span>
+    <div class="timer-box">
+      <span class="timer-value" id="t-seconds">00</span>
+      <span class="timer-unit">ثانية</span>
+    </div>
+  </div>
+</div>
   <div class="voting-timer" id="votingTimer">
   <i class="fas fa-hourglass-half"></i>
   <span>ينتهي التصويت خلال</span>
@@ -2286,6 +2382,39 @@ function startAutoUpdateVotes() {
 }
 
 startAutoUpdateVotes();
+    // ============================================
+//         مؤقت التصويت التفاعلي
+// ============================================
+function initVotingTimer() {
+  const DAYS_REMAINING = 5; // ← غير هذا الرقم فقط
+
+  const now = new Date();
+  const endDate = new Date(now.getTime() + DAYS_REMAINING * 24 * 60 * 60 * 1000);
+
+  function updateTimer() {
+    const remaining = endDate - new Date();
+    if (remaining <= 0) {
+      document.getElementById('t-days').textContent = '00';
+      document.getElementById('t-hours').textContent = '00';
+      document.getElementById('t-minutes').textContent = '00';
+      document.getElementById('t-seconds').textContent = '00';
+      return;
+    }
+    const days = Math.floor(remaining / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((remaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((remaining % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((remaining % (1000 * 60)) / 1000);
+
+    document.getElementById('t-days').textContent = String(days).padStart(2, '0');
+    document.getElementById('t-hours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('t-minutes').textContent = String(minutes).padStart(2, '0');
+    document.getElementById('t-seconds').textContent = String(seconds).padStart(2, '0');
+  }
+
+  updateTimer();
+  setInterval(updateTimer, 1000);
+}
+initVotingTimer();
     // ============================================
 //         مؤقت التصويت
 // ============================================
