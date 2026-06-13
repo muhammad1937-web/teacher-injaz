@@ -1188,32 +1188,7 @@
     font-size: 1.2rem;
   }
 }
-    .voting-timer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  background: linear-gradient(135deg, rgba(44,58,97,0.06), rgba(125,66,211,0.06));
-  border: 1px solid rgba(125,66,211,0.2);
-  border-radius: 50px;
-  padding: 0.5rem 1.2rem;
-  margin: 0 auto 1.2rem;
-  width: fit-content;
-  font-size: 0.9rem;
-  color: var(--primary-dark);
-  font-weight: 600;
-}
 
-.voting-timer i {
-  color: var(--accent-teal);
-  animation: pulse 2s infinite;
-}
-
-.timer-days {
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--accent-teal);
-}
     /* ============================================ */
 /* ==========   نافذة التميز المنبثقة  ========= */
 /* ============================================ */
@@ -1535,12 +1510,7 @@
     </div>
   </div>
 </div>
-  <div class="voting-timer" id="votingTimer">
-  <i class="fas fa-hourglass-half"></i>
-  <span>ينتهي التصويت خلال</span>
-  <span class="timer-days" id="timerDays">--</span>
-  <span>يوم</span>
-</div>
+  
   
   <!-- وضع المنافسة (يظهر عند وجود مشاريع للتصويت) -->
   <div <div id="competition-mode">
@@ -2415,16 +2385,7 @@ function initVotingTimer() {
   setInterval(updateTimer, 1000);
 }
 initVotingTimer();
-    // ============================================
-//         مؤقت التصويت
-// ============================================
-function initVotingTimer() {
-  const DAYS_REMAINING = 5; // ← غير هذا الرقم فقط
-  const timerDays = document.getElementById('timerDays');
-  if (!timerDays) return;
-  timerDays.textContent = DAYS_REMAINING;
-}
-initVotingTimer();
+
     // ============================================
 //      نافذة تفاصيل الدرجات المنبثقة
 // ============================================
