@@ -1305,84 +1305,113 @@
   color: var(--accent-teal);
   margin-left: 6px;
 }
-  /* تنسيق الهيدر الجديد */
 .result-header {
-  background: linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%);
-  padding: 0.8rem 1.2rem;
-  margin: -0.5rem -1.5rem 1.2rem -1.5rem;
+  background: #2C3A61;
+  padding: 0;
+  margin: -0.5rem -1.5rem 0 -1.5rem;
   border-radius: 20px 20px 0 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.result-header::before {
+  content: '';
+  position: absolute;
+  top: -30px;
+  left: -30px;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: rgba(125,66,211,0.15);
+}
+
+.result-header::after {
+  content: '';
+  position: absolute;
+  bottom: -20px;
+  right: 60px;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: rgba(125,66,211,0.1);
 }
 
 .header-content-wrapper {
+  position: relative;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
-  gap: 15px;
-  flex-wrap: nowrap;
+  padding: 1.2rem 1.4rem;
+  gap: 16px;
 }
 
-/* الشعار */
-.school-logo {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  border: 2px solid rgba(255, 255, 255, 0.5);
+.header-bottom-bar {
+  height: 4px;
+  background: linear-gradient(90deg, #7D42D3, #A0B2E8);
+}
+
+.school-logo-box {
+  width: 80px;
+  height: 80px;
+  background: rgba(255,255,255,0.12);
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
+  overflow: hidden;
 }
 
-/* الخط الفاصل العمودي */
+.school-logo-box img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.95;
+}
+
 .vertical-divider {
   width: 1px;
-  height: 85px;
-  background: rgba(255, 255, 255, 0.4);
+  height: 60px;
+  background: rgba(255,255,255,0.2);
   flex-shrink: 0;
 }
 
-/* النص */
 .school-info {
-  text-align: right;
   flex: 1;
+  min-width: 0;
+  text-align: right;
 }
 
 .school-info h4 {
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 600;
   color: white;
-  margin: 0 0 8px 0;
-  line-height: 1.4;
+  margin: 0 0 4px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .school-info p {
   font-size: 0.8rem;
-  color: rgba(255, 255, 255, 0.85);
-  margin: 3px 0;
-  line-height: 1.4;
+  color: rgba(255,255,255,0.75);
+  margin: 0 0 3px 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* للشاشات الصغيرة */
 @media (max-width: 550px) {
-  .school-logo {
-    width: 65px;
-    height: 65px;
-  }
-  
-  .vertical-divider {
+  .school-logo-box {
+    width: 60px;
     height: 60px;
+    border-radius: 12px;
   }
-  
-  .school-info h4 {
-    font-size: 0.85rem;
-  }
-  
-  .school-info p {
-    font-size: 0.7rem;
-  }
-  
-  .header-content-wrapper {
-    gap: 10px;
-  }
-}  
+  .school-info h4 { font-size: 0.88rem; }
+  .school-info p { font-size: 0.75rem; }
+  .header-content-wrapper { gap: 10px; padding: 1rem; }
+}
   </style>
 </head>
 <body>
@@ -2092,9 +2121,9 @@ document.addEventListener('keydown', (e) => {
       }
       
       function displayResult(student, settings) {
-        const logoHtml = settings.logoUrl 
-  ? `<img src="${settings.logoUrl}" alt="شعار المدرسة" class="school-logo">`
-  : `<i class="fas fa-school" style="color: white; font-size: 30px; opacity: 0.9;"></i>`;
+const logoHtml = settings.logoUrl
+  ? `<div class="school-logo-box"><img src="${settings.logoUrl}" alt="شعار المدرسة"></div>`
+  : `<div class="school-logo-box"><i class="fas fa-school" style="font-size:36px; color:white; opacity:0.9;"></i></div>`;
         
         let period1Html, period2Html;
         
@@ -2130,18 +2159,19 @@ document.addEventListener('keydown', (e) => {
              </div>`
           : '';
         
-        const cardHtml = `
-          <div class="result-header">
-  <div class="header-content-wrapper">
-    ${logoHtml}
-    <div class="vertical-divider"></div>
-    <div class="school-info">
-      <h4>${settings.schoolName || 'المدرسة'}</h4>
-      <p>${settings.subject || 'التقنية الرقمية'} | ${settings.semester || ''} ${settings.academicYear || ''}</p>
-      <p><i class="fas fa-user-circle" style="margin-left: 5px; color: rgba(255,255,255,0.85);"></i> ${settings.teacherName || 'المعلم'}</p>
+const cardHtml = `
+  <div class="result-header">
+    <div class="header-content-wrapper">
+      ${logoHtml}
+      <div class="vertical-divider"></div>
+      <div class="school-info">
+        <h4>${settings.schoolName || 'المدرسة'}</h4>
+        <p>${settings.subject || 'التقنية الرقمية'} | ${settings.semester || ''} ${settings.academicYear || ''}</p>
+        <p>${settings.teacherName || 'المعلم'}</p>
+      </div>
     </div>
+    <div class="header-bottom-bar"></div>
   </div>
-</div>
             
             <div class="student-info">
              <div class="student-name"><i class="fas fa-user-graduate" style="margin-left: 8px; color: var(--primary-dark);"></i> ${student.name}</div>
