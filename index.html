@@ -2470,6 +2470,12 @@ function bindDetailsButtons(studentDetailsData) {
 //      عدّ الأرقام المتحرك
 // ============================================
 function animateNumber(element, target, duration = 1000) {
+    // إذا كانت القيمة 0، اعرض 0 مباشرة بدون عد
+    if (target === 0) {
+        element.textContent = '0';
+        return;
+    }
+    
     let start = 0;
     const step = Math.ceil(target / (duration / 20));
     const timer = setInterval(() => {
