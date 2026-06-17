@@ -2106,17 +2106,17 @@ const logoHtml = settings.logoUrl
         
         let period1Html, period2Html;
         
-        if (student.period1 !== null && student.period1 !== undefined) {
-          period1Html = `<div class="grade-value" id="p1">0</div>`;
-        } else {
-          period1Html = `<div class="missing-value">بانتظار الرصد</div>`;
-        }
-        
-        if (student.period2 !== null && student.period2 !== undefined) {
-          period2Html = `<div class="grade-value" id="p2">0</div>`;
-        } else {
-          period2Html = `<div class="missing-value">بانتظار الرصد</div>`;
-        }
+if (student.period1 !== null && student.period1 !== undefined) {
+  period1Html = `<div class="grade-value" id="p1">0</div>`;
+} else {
+  period1Html = `<div class="missing-value">بانتظار الرصد</div>`;
+}
+
+if (student.period2 !== null && student.period2 !== undefined) {
+  period2Html = `<div class="grade-value" id="p2">0</div>`;
+} else {
+  period2Html = `<div class="missing-value">بانتظار الرصد</div>`;
+}
         
         let finalHtml = '';
         if (student.isComplete && student.finalScore) {
