@@ -2106,13 +2106,13 @@ const logoHtml = settings.logoUrl
         
         let period1Html, period2Html;
         
-if (student.period1 !== null && student.period1 !== undefined) {
+if (student.period1 !== null && student.period1 !== undefined && student.period1 !== '') {
   period1Html = `<div class="grade-value" id="p1">0</div>`;
 } else {
   period1Html = `<div class="missing-value">بانتظار الرصد</div>`;
 }
 
-if (student.period2 !== null && student.period2 !== undefined) {
+if (student.period2 !== null && student.period2 !== undefined && student.period2 !== '') {
   period2Html = `<div class="grade-value" id="p2">0</div>`;
 } else {
   period2Html = `<div class="missing-value">بانتظار الرصد</div>`;
@@ -2190,10 +2190,10 @@ bindDetailsButtons(student.details);
 setTimeout(() => {
     const p1 = document.getElementById('p1');
     const p2 = document.getElementById('p2');
-    if (p1 && student.period1 !== null && student.period1 !== undefined) {
+    if (p1 && student.period1 !== null && student.period1 !== undefined && student.period1 !== '') {
         animateNumber(p1, student.period1);
     }
-    if (p2 && student.period2 !== null && student.period2 !== undefined) {
+    if (p2 && student.period2 !== null && student.period2 !== undefined && student.period2 !== '') {
         animateNumber(p2, student.period2);
     }
 }, 300);
