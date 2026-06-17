@@ -2188,15 +2188,23 @@ const cardHtml = `
         bindDetailsButtons(student.details);
        
         // إضافة حدث لزر حفظ الصورة
+// زر حفظ الصورة
 const saveBtn = document.getElementById('saveGradeAsImageBtn');
-const cardElement = document.getElementById('gradeResultCard');
-if(saveBtn && cardElement) {
+if (saveBtn) {
     saveBtn.addEventListener('click', function() {
+        // نبحث عن البطاقة بشكل مباشر
+        const cardElement = document.querySelector('.result-card');
+        if (!cardElement) {
+            alert('حدث خطأ: لم يتم العثور على البطاقة.');
+            return;
+        }
+        
         html2canvas(cardElement, {
             scale: 2,
             backgroundColor: '#FFFFFF',
             logging: false,
-            useCORS: true
+            useCORS: true,
+            allowTaint: true
         }).then(canvas => {
             const link = document.createElement('a');
             const studentName = student.name || 'النتيجة';
@@ -2204,7 +2212,6 @@ if(saveBtn && cardElement) {
             link.href = canvas.toDataURL();
             link.click();
             
-            // تغيير مؤقت لزر الإرسال كتأثير (اختياري)
             const originalText = saveBtn.innerHTML;
             saveBtn.innerHTML = '<i class="fas fa-check"></i> تم الحفظ';
             setTimeout(() => { saveBtn.innerHTML = originalText; }, 2000);
