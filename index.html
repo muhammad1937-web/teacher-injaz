@@ -2179,48 +2179,13 @@ const cardHtml = `
               ${finalHtml}
             </div>
             
-            <div class="result-actions">
-             <button id="saveGradeAsImageBtn"><i class="fas fa-camera"></i> 📸 حفظ كصورة</button>
-            </div>
+           
           </div>
         `;
         resultContainer.innerHTML = cardHtml;
         bindDetailsButtons(student.details);
        
-        // إضافة حدث لزر حفظ الصورة
-// زر حفظ الصورة
-const saveBtn = document.getElementById('saveGradeAsImageBtn');
-if (saveBtn) {
-    saveBtn.addEventListener('click', function() {
-        // نبحث عن البطاقة بشكل مباشر
-        const cardElement = document.getElementById('gradeResultCard');
-        if (!cardElement) {
-            alert('حدث خطأ: لم يتم العثور على البطاقة.');
-            return;
-        }
-        
-        html2canvas(cardElement, {
-            scale: 2,
-            backgroundColor: '#FFFFFF',
-            logging: false,
-            useCORS: true,
-            allowTaint: true
-        }).then(canvas => {
-            const link = document.createElement('a');
-            const studentName = student.name || 'النتيجة';
-            link.download = `نتيجة_${studentName}.png`;
-            link.href = canvas.toDataURL();
-            link.click();
-            
-            const originalText = saveBtn.innerHTML;
-            saveBtn.innerHTML = '<i class="fas fa-check"></i> تم الحفظ';
-            setTimeout(() => { saveBtn.innerHTML = originalText; }, 2000);
-        }).catch(error => {
-            console.error('Error saving image:', error);
-            alert('حدث خطأ أثناء حفظ الصورة. يرجى المحاولة مرة أخرى.');
-        });
-    });
-}
+      
       }
       
       function showError(message) {
