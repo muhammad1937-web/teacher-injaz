@@ -1390,20 +1390,7 @@
   .school-info p { font-size: 0.75rem; }
   .header-content-wrapper { gap: 10px; padding: 1rem; }
 }
-    /* ============================================ */
-/*      خلفية متحركة بتدرجات الموقع             */
-/* ============================================ */
-body {
-  background: linear-gradient(-45deg, #2C3A61, #7D42D3, #A0B2E8, #2C3A61);
-  background-size: 400% 400%;
-  animation: gradientMove 15s ease infinite;
-}
-
-@keyframes gradientMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+   
   </style>
 </head>
 <body>
@@ -2120,13 +2107,13 @@ const logoHtml = settings.logoUrl
         let period1Html, period2Html;
         
         if (student.period1 !== null && student.period1 !== undefined) {
-          period1Html = `<div class="grade-value">${student.period1}</div>`;
+          period1Html = `<div class="grade-value" id="p1">0</div>`;
         } else {
           period1Html = `<div class="missing-value">بانتظار الرصد</div>`;
         }
         
         if (student.period2 !== null && student.period2 !== undefined) {
-          period2Html = `<div class="grade-value">${student.period2}</div>`;
+          period2Html = `<div class="grade-value" id="p2">0</div>`;
         } else {
           period2Html = `<div class="missing-value">بانتظار الرصد</div>`;
         }
@@ -2196,10 +2183,20 @@ const cardHtml = `
            
           </div>
         `;
-        resultContainer.innerHTML = cardHtml;
-        bindDetailsButtons(student.details);
-       
-      
+resultContainer.innerHTML = cardHtml;
+bindDetailsButtons(student.details);
+
+// تشغيل العد التصاعدي للدرجات بعد ظهور البطاقة
+setTimeout(() => {
+    const p1 = document.getElementById('p1');
+    const p2 = document.getElementById('p2');
+    if (p1 && student.period1 !== null && student.period1 !== undefined) {
+        animateNumber(p1, student.period1);
+    }
+    if (p2 && student.period2 !== null && student.period2 !== undefined) {
+        animateNumber(p2, student.period2);
+    }
+}, 300);
       }
       
       function showError(message) {
@@ -2468,6 +2465,21 @@ function bindDetailsButtons(studentDetailsData) {
         
         btn.addEventListener('click', window.detailsClickHandler);
     });
+}
+    // ============================================
+//      عدّ الأرقام المتحرك
+// ============================================
+function animateNumber(element, target, duration = 1000) {
+    let start = 0;
+    const step = Math.ceil(target / (duration / 20));
+    const timer = setInterval(() => {
+        start += step;
+        if (start >= target) {
+            start = target;
+            clearInterval(timer);
+        }
+        element.textContent = start;
+    }, 20);
 }
     setTimeout(() => window.scrollTo(0, 0), 500);
   });
