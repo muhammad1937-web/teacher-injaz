@@ -2193,7 +2193,7 @@ const saveBtn = document.getElementById('saveGradeAsImageBtn');
 if (saveBtn) {
     saveBtn.addEventListener('click', function() {
         // نبحث عن البطاقة بشكل مباشر
-        const cardElement = document.querySelector('.result-card');
+        const cardElement = document.getElementById('gradeResultCard');
         if (!cardElement) {
             alert('حدث خطأ: لم يتم العثور على البطاقة.');
             return;
