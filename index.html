@@ -1390,6 +1390,20 @@
   .school-info p { font-size: 0.75rem; }
   .header-content-wrapper { gap: 10px; padding: 1rem; }
 }
+    /* ============================================ */
+/*      خلفية متحركة بتدرجات الموقع             */
+/* ============================================ */
+body {
+  background: linear-gradient(-45deg, #2C3A61, #7D42D3, #A0B2E8, #2C3A61);
+  background-size: 400% 400%;
+  animation: gradientMove 15s ease infinite;
+}
+
+@keyframes gradientMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
   </style>
 </head>
 <body>
