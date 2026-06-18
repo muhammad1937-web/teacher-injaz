@@ -567,7 +567,59 @@
     .iframe-scroll-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-top: 30px; width: 100%; border-radius: 10px; }
     .results-card iframe { width: 100%; min-width: 320px; height: 210px; border: none; margin-top: -60px; display: block; }
     .voting-subtitle { margin: 1.5rem 0 1rem; font-size: 1.1rem; color: var(--primary-dark); text-align: center; font-weight: 600; }
-    .vote-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; font-size: 1rem; font-weight: 600; padding: 1rem 2.5rem; border-radius: 12px; text-decoration: none; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); white-space: nowrap; min-width: 200px; background: var(--accent-teal); color: white; border: 2px solid transparent; box-shadow: 0 4px 15px rgba(var(--accent-teal-rgb), 0.3); position: relative; overflow: hidden; margin: 1rem auto 2rem; }
+   .vote-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 0.9rem 2.5rem;
+  border-radius: 50px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+  white-space: nowrap;
+  min-width: 200px;
+  background: linear-gradient(135deg, #7D42D3 0%, #2C3A61 100%);
+  color: white;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 8px 25px rgba(125, 66, 211, 0.35);
+  position: relative;
+  overflow: hidden;
+  margin: 1rem auto 2rem;
+}
+
+.vote-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.vote-btn:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 35px rgba(125, 66, 211, 0.45);
+}
+
+.vote-btn:hover::before {
+  opacity: 1;
+}
+
+.vote-btn:hover i {
+  transform: translateX(4px);
+}
+
+.vote-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(125, 66, 211, 0.3);
+}
     .vote-btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent); opacity: 0; transition: opacity 0.3s ease; }
     .vote-btn i { font-size: 1.2em; transition: transform 0.3s ease; }
     .vote-btn:hover { background: var(--ai-teal); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.4); }
