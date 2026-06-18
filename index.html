@@ -2107,23 +2107,15 @@ const logoHtml = settings.logoUrl
         let period1Html, period2Html;
         
 // الفترة الأولى
-if (student.period1 !== null && student.period1 !== undefined && student.period1 !== '') {
-    if (student.period1 === 0) {
-        period1Html = `<div class="grade-value">0</div>`;
-    } else {
-        period1Html = `<div class="grade-value" id="p1">0</div>`;
-    }
+if (student.period1 !== null && student.period1 !== undefined && student.period1 !== '' && student.period1 !== 0) {
+    period1Html = `<div class="grade-value" id="p1">0</div>`;
 } else {
     period1Html = `<div class="missing-value">بانتظار الرصد</div>`;
 }
 
 // الفترة الثانية
-if (student.period2 !== null && student.period2 !== undefined && student.period2 !== '') {
-    if (student.period2 === 0) {
-        period2Html = `<div class="grade-value">0</div>`;
-    } else {
-        period2Html = `<div class="grade-value" id="p2">0</div>`;
-    }
+if (student.period2 !== null && student.period2 !== undefined && student.period2 !== '' && student.period2 !== 0) {
+    period2Html = `<div class="grade-value" id="p2">0</div>`;
 } else {
     period2Html = `<div class="missing-value">بانتظار الرصد</div>`;
 }
