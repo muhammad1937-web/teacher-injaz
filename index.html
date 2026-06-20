@@ -613,25 +613,24 @@
     /* ============================================ */
     /* ==========   الفواصل الجديدة      ========== */
     /* ============================================ */
-    .section-divider { display: flex; justify-content: center; align-items: center; margin: 2rem auto; max-width: 80%; height: 1px; position: relative; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
-    .section-divider.visible { opacity: 1; transform: translateY(0); }
-    .divider-line { flex: 1; height: 1px; background: rgba(var(--primary-dark-rgb), 0.1); }
-   .divider-dot {
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, var(--primary-dark), var(--accent-teal));
-  margin: 0 15px;
-  position: relative;
+.section-divider {
   display: flex;
-  align-items: center;
   justify-content: center;
-  box-shadow: 0 0 12px rgba(125, 66, 211, 0.4);
+  align-items: center;
+  margin: 2rem auto;
+  max-width: 80%;
+  height: 1px;
+  position: relative;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
-.divider-dot::before {
-  content: '✦';
-  color: white;
-  font-size: 11px;
+.section-divider.visible { opacity: 1; transform: translateY(0); }
+.divider-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent-teal), transparent);
+  opacity: 0.5;
 }
 
     /* ============================================ */
@@ -1632,7 +1631,6 @@
 <!-- ============================================ -->
 <div class="section-divider fade-in">
   <div class="divider-line"></div>
-  <div class="divider-dot"></div>
   <div class="divider-line"></div>
 </div>
 
@@ -1733,7 +1731,6 @@
 <!-- ============================================ -->
 <div class="section-divider fade-in">
   <div class="divider-line"></div>
-  <div class="divider-dot"></div>
   <div class="divider-line"></div>
 </div>
 
@@ -1765,7 +1762,6 @@
 <!-- ============================================ -->
 <div class="section-divider fade-in">
   <div class="divider-line"></div>
-  <div class="divider-dot"></div>
   <div class="divider-line"></div>
 </div>
 
@@ -1846,7 +1842,6 @@
 <!-- ============================================ -->
 <div class="section-divider fade-in">
   <div class="divider-line"></div>
-  <div class="divider-dot"></div>
   <div class="divider-line"></div>
 </div>
 
@@ -1880,7 +1875,6 @@
 <!-- ============================================ -->
 <div class="section-divider fade-in">
   <div class="divider-line"></div>
-  <div class="divider-dot"></div>
   <div class="divider-line"></div>
 </div>
 
@@ -1919,7 +1913,6 @@
 <!-- ============================================ -->
 <div class="section-divider fade-in">
   <div class="divider-line"></div>
-  <div class="divider-dot"></div>
   <div class="divider-line"></div>
 </div>
 
