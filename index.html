@@ -616,10 +616,23 @@
     .section-divider { display: flex; justify-content: center; align-items: center; margin: 2rem auto; max-width: 80%; height: 1px; position: relative; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .section-divider.visible { opacity: 1; transform: translateY(0); }
     .divider-line { flex: 1; height: 1px; background: rgba(var(--primary-dark-rgb), 0.1); }
-    .divider-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--accent-teal); margin: 0 15px; position: relative; }
-    .divider-dot::before, .divider-dot::after { content: ''; position: absolute; width: 4px; height: 4px; border-radius: 50%; background: rgba(var(--primary-dark-rgb), 0.3); top: 50%; transform: translateY(-50%); }
-    .divider-dot::before { right: 20px; }
-    .divider-dot::after { left: 20px; }
+   .divider-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--primary-dark), var(--accent-teal));
+  margin: 0 15px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 12px rgba(125, 66, 211, 0.4);
+}
+.divider-dot::before {
+  content: '✦';
+  color: white;
+  font-size: 11px;
+}
 
     /* ============================================ */
     /* ==========   العنوان الرئيسي المعدل   ========== */
