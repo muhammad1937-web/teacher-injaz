@@ -2621,7 +2621,7 @@ function showGradeDetails(period, studentDetails) {
     let totalEarned = 0;
     let totalMax = 0;
     
-    items.forEach(item => {
+  items.forEach(item => {
         const score = periodData[item.key];
         const isScored = (score !== null && score !== undefined);
         const earned = isScored ? score : 0;
@@ -2629,6 +2629,12 @@ function showGradeDetails(period, studentDetails) {
         
         totalEarned += earned;
         totalMax += item.max;
+        
+        let barColor = '#2ECC71';
+        if (isScored) {
+          if (percentage < 60) barColor = '#E74C3C';
+          else if (percentage < 75) barColor = '#F39C12';
+        }
         
         itemsHtml += `
             <div style="margin-bottom: 1rem;">
@@ -2638,9 +2644,9 @@ function showGradeDetails(period, studentDetails) {
                 </div>
                 ${isScored ? `
                 <div style="background: #E2E8F0; border-radius: 8px; height: 6px; overflow: hidden; margin-bottom: 0.2rem;">
-                    <div style="width: ${percentage}%; height: 100%; background: ${item.color}; border-radius: 8px; transition: width 0.5s ease;"></div>
+                    <div style="width: ${percentage}%; height: 100%; background: ${barColor}; border-radius: 8px; transition: width 0.5s ease;"></div>
                 </div>
-                <div style="font-size: 0.7rem; color: #666; text-align: left;">${percentage.toFixed(1)}%</div>
+                <div style="font-size: 0.7rem; color: ${barColor}; text-align: left; font-weight: 600;">${percentage.toFixed(1)}%</div>
                 ` : `
                 <div style="background: #E2E8F0; border-radius: 8px; height: 6px; margin-bottom: 0.2rem;">
                     <div style="width: 0%; height: 100%; background: #CCC; border-radius: 8px;"></div>
