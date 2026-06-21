@@ -998,13 +998,10 @@
       margin-bottom: 5px;
     }
     .final-rating {
-  font-size: 1rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--accent-teal);
+    }
     .missing-message {
       background: rgba(var(--warning-red-rgb), 0.1);
       border-radius: 12px;
@@ -1018,35 +1015,6 @@
       justify-content: center;
       gap: 8px;
     }
-    .attendance-box {
-  display: flex;
-  gap: 0.8rem;
-  margin-bottom: 1.2rem;
-  flex-wrap: wrap;
-}
-.attendance-item {
-  flex: 1;
-  background: rgba(var(--primary-dark-rgb), 0.03);
-  border-radius: 12px;
-  padding: 10px;
-  text-align: center;
-  border: 1px solid var(--border-color);
-}
-.attendance-item i {
-  font-size: 1.2rem;
-  display: block;
-  margin-bottom: 4px;
-}
-.attendance-item span {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: var(--primary-dark);
-  display: block;
-}
-.attendance-item small {
-  font-size: 0.75rem;
-  color: var(--text-light);
-}
     .result-actions {
       display: flex;
       gap: 1rem;
@@ -1096,13 +1064,12 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-@media (max-width: 768px) {
-  .grades-grid { flex-direction: row; gap: 0.7rem; }
-  .grade-card { padding: 8px; }
-  .input-group { flex-direction: column; }
-  .result-header { flex-direction: column; text-align: center; }
-  .result-actions { flex-direction: column; }
-}
+    @media (max-width: 768px) {
+      .grades-grid { flex-direction: column; }
+      .input-group { flex-direction: column; }
+      .result-header { flex-direction: column; text-align: center; }
+      .result-actions { flex-direction: column; }
+    }
 
     /* ========================================= */
     /*        تحسينات للاستجابة                 */
@@ -2318,29 +2285,17 @@ if (student.period2 !== null && student.period2 !== undefined && student.period2
 }
         
         let finalHtml = '';
-if (student.isComplete && student.finalScore) {
-  let ratingIcon = 'fa-medal';
-  let ratingColor = '#2ECC71';
-  if (student.rating === 'ممتاز') { ratingIcon = 'fa-trophy'; ratingColor = '#C9971C'; }
-  else if (student.rating === 'جيد جداً') { ratingIcon = 'fa-medal'; ratingColor = '#2ECC71'; }
-  else if (student.rating === 'جيد') { ratingIcon = 'fa-thumbs-up'; ratingColor = '#3498DB'; }
-  else if (student.rating === 'مقبول') { ratingIcon = 'fa-circle-exclamation'; ratingColor = '#F39C12'; }
-  else { ratingIcon = 'fa-triangle-exclamation'; ratingColor = 'var(--warning-red)'; }
-
-  finalHtml = `
-    <div class="final-score">${student.finalScore} <small style="font-size:0.6em; font-weight:500;">درجة</small></div>
-    <div class="final-rating" style="color:${ratingColor};">
-      <i class="fas ${ratingIcon}"></i> التقدير: ${student.rating}
-    </div>
-  `;
-} else {
-  finalHtml = `
-    <div class="final-score" style="color: var(--warning-red);">غير مكتملة</div>
-    <div class="final-rating" style="color: var(--warning-red);">
-      <i class="fas fa-hourglass-half"></i> ${student.missingMessage || 'بانتظار اكتمال الدرجات'}
-    </div>
-  `;
-}
+        if (student.isComplete && student.finalScore) {
+          finalHtml = `
+            <div class="final-score">${student.finalScore} درجة</div>
+            <div class="final-rating">⭐ التقدير: ${student.rating}</div>
+          `;
+        } else {
+          finalHtml = `
+            <div class="final-score" style="color: var(--warning-red);">غير مكتملة</div>
+            <div class="final-rating" style="color: var(--warning-red);">${student.missingMessage || 'بانتظار اكتمال الدرجات'}</div>
+          `;
+        }
         
         const missingHtml = (!student.isComplete && student.missingMessage && student.missingMessage !== "لم تُرصد أي درجات حتى الآن")
           ? `<div class="missing-message">
@@ -2348,31 +2303,7 @@ if (student.isComplete && student.finalScore) {
                <span>${student.missingMessage}</span>
              </div>`
           : '';
-        let percentageColor = '#2ECC71';
-if (student.attendance) {
-  if (student.attendance.percentage < 75) percentageColor = 'var(--warning-red)';
-  else if (student.attendance.percentage < 90) percentageColor = '#F39C12';
-}
-
-const attendanceHtml = student.attendance ? `
-  <div class="attendance-box">
-    <div class="attendance-item">
-      <i class="fas fa-check-circle" style="color:#2ECC71;"></i>
-      <span>${student.attendance.present}</span>
-      <small>حضور</small>
-    </div>
-    <div class="attendance-item">
-      <i class="fas fa-times-circle" style="color:var(--warning-red);"></i>
-      <span>${student.attendance.absent}</span>
-      <small>غياب</small>
-    </div>
-    <div class="attendance-item" style="border-color:${percentageColor};">
-      <i class="fas fa-calendar-check" style="color:${percentageColor};"></i>
-      <span style="color:${percentageColor};">${student.attendance.percentage}%</span>
-      <small>نسبة الحضور</small>
-    </div>
-  </div>
-` : '';
+        
 const cardHtml = `
   <div class="result-header">
     <div class="header-content-wrapper">
@@ -2396,21 +2327,21 @@ const cardHtml = `
   <div class="grade-card">
     <span><i class="fas fa-medal" style="margin-left: 6px; color: var(--primary-dark);"></i> الفترة الأولى</span>
     ${period1Html}
-   <button class="details-btn" data-period="1" data-student-id="${student.id || ''}" style="margin-top: 10px; background: transparent; color: var(--accent-teal); border: 1px solid var(--accent-teal); padding: 4px 10px; border-radius: 15px; cursor: pointer; font-size: 0.7rem;">
+    <button class="details-btn" data-period="1" data-student-id="${student.id || ''}" style="margin-top: 10px; background: var(--accent-teal); color: white; border: none; padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 0.7rem;">
       <i class="fas fa-eye"></i> التفاصيل
     </button>
   </div>
   <div class="grade-card">
     <span><i class="fas fa-medal" style="margin-left: 6px; color: var(--primary-dark);"></i> الفترة الثانية</span>
     ${period2Html}
-    <button class="details-btn" data-period="1" data-student-id="${student.id || ''}" style="margin-top: 10px; background: transparent; color: var(--accent-teal); border: 1px solid var(--accent-teal); padding: 4px 10px; border-radius: 15px; cursor: pointer; font-size: 0.7rem;">
+    <button class="details-btn" data-period="2" data-student-id="${student.id || ''}" style="margin-top: 10px; background: var(--accent-teal); color: white; border: none; padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 0.7rem;">
       <i class="fas fa-eye"></i> التفاصيل
     </button>
   </div>
 </div>
             
             ${missingHtml}
-            ${attendanceHtml}
+            
             <div class="final-result">
               ${finalHtml}
             </div>
