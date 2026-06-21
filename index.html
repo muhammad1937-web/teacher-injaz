@@ -2333,7 +2333,13 @@ if (student.period2 !== null && student.period2 !== undefined && student.period2
                <span>${student.missingMessage}</span>
              </div>`
           : '';
-        const attendanceHtml = student.attendance ? `
+        let percentageColor = '#2ECC71';
+if (student.attendance) {
+  if (student.attendance.percentage < 75) percentageColor = 'var(--warning-red)';
+  else if (student.attendance.percentage < 90) percentageColor = '#F39C12';
+}
+
+const attendanceHtml = student.attendance ? `
   <div class="attendance-box">
     <div class="attendance-item">
       <i class="fas fa-check-circle" style="color:#2ECC71;"></i>
@@ -2345,9 +2351,9 @@ if (student.period2 !== null && student.period2 !== undefined && student.period2
       <span>${student.attendance.absent}</span>
       <small>غياب</small>
     </div>
-    <div class="attendance-item">
-      <i class="fas fa-percentage" style="color:var(--accent-teal);"></i>
-      <span>${student.attendance.percentage}%</span>
+    <div class="attendance-item" style="border-color:${percentageColor};">
+      <i class="fas fa-percentage" style="color:${percentageColor};"></i>
+      <span style="color:${percentageColor};">${student.attendance.percentage}%</span>
       <small>نسبة الحضور</small>
     </div>
   </div>
