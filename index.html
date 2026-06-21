@@ -954,11 +954,12 @@
       color: var(--text-medium);
       margin: 0;
     }
-    .grades-grid {
+   .grades-grid {
       display: flex;
       gap: 1rem;
       margin-bottom: 1.2rem;
       flex-wrap: wrap;
+      align-items: stretch;
     }
     .grade-card {
       flex: 1;
@@ -967,6 +968,9 @@
       padding: 12px;
       text-align: center;
       border: 1px solid var(--border-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
     .grade-card span:first-child {
       font-size: 0.85rem;
