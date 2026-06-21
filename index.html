@@ -2617,29 +2617,10 @@ function showGradeDetails(period, studentDetails) {
         { name: "الإختبار النظري", icon: "📝", key: "theoretical", max: 20, color: "#E74C3C" }
     ];
     
-    let itemsHtml = '';
+let itemsHtml = '';
     let totalEarned = 0;
     let totalMax = 0;
     
- 
-    
-    const detailsHtml = `
-        <div style="background: white; border-radius: 20px; width: 90%; max-width: 400px; margin: 0 auto; box-shadow: 0 20px 35px rgba(0,0,0,0.2);">
-            <div style="padding: 1.2rem 1.2rem 0.8rem 1.2rem; border-bottom: 2px solid #E2E8F0;">
-                <h3 style="margin: 0; color: #2C3A61; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;">
-                    <span>📊</span> تفاصيل الفترة ${period === 1 ? 'الأولى' : 'الثانية'}
-                </h3>
-            </div>
-            <div style="padding: 1rem 1.2rem;">
-                ${itemsHtml}
-            </div>
-            <div style="padding: 0.8rem 1.2rem 1.2rem 1.2rem; text-align: center;">
-                <button onclick="this.closest('.modal-details').remove()" style="background: #7D42D3; color: white; border: none; padding: 8px 20px; border-radius: 30px; cursor: pointer; font-size: 0.85rem;">
-                    إغلاق
-                </button>
-            </div>
-        </div>
-    `;
     items.forEach(item => {
         const score = periodData[item.key];
         const isScored = (score !== null && score !== undefined);
@@ -2669,6 +2650,24 @@ function showGradeDetails(period, studentDetails) {
             </div>
         `;
     });
+    
+    const detailsHtml = `
+        <div style="background: white; border-radius: 20px; width: 90%; max-width: 400px; margin: 0 auto; box-shadow: 0 20px 35px rgba(0,0,0,0.2);">
+            <div style="padding: 1.2rem 1.2rem 0.8rem 1.2rem; border-bottom: 2px solid #E2E8F0;">
+                <h3 style="margin: 0; color: #2C3A61; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;">
+                    <span>📊</span> تفاصيل الفترة ${period === 1 ? 'الأولى' : 'الثانية'}
+                </h3>
+            </div>
+            <div style="padding: 1rem 1.2rem;">
+                ${itemsHtml}
+            </div>
+            <div style="padding: 0.8rem 1.2rem 1.2rem 1.2rem; text-align: center;">
+                <button onclick="this.closest('.modal-details').remove()" style="background: #7D42D3; color: white; border: none; padding: 8px 20px; border-radius: 30px; cursor: pointer; font-size: 0.85rem;">
+                    إغلاق
+                </button>
+            </div>
+        </div>
+    `;
     const overlay = document.createElement('div');
     overlay.className = 'modal-details';
     overlay.style.cssText = `
