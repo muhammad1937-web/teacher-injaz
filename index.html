@@ -1015,6 +1015,35 @@
       justify-content: center;
       gap: 8px;
     }
+    .attendance-box {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+.attendance-item {
+  flex: 1;
+  background: rgba(var(--primary-dark-rgb), 0.03);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+}
+.attendance-item i {
+  font-size: 1.2rem;
+  display: block;
+  margin-bottom: 4px;
+}
+.attendance-item span {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  display: block;
+}
+.attendance-item small {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
     .result-actions {
       display: flex;
       gap: 1rem;
@@ -2303,7 +2332,25 @@ if (student.period2 !== null && student.period2 !== undefined && student.period2
                <span>${student.missingMessage}</span>
              </div>`
           : '';
-        
+        const attendanceHtml = student.attendance ? `
+  <div class="attendance-box">
+    <div class="attendance-item">
+      <i class="fas fa-check-circle" style="color:#2ECC71;"></i>
+      <span>${student.attendance.present}</span>
+      <small>حضور</small>
+    </div>
+    <div class="attendance-item">
+      <i class="fas fa-times-circle" style="color:var(--warning-red);"></i>
+      <span>${student.attendance.absent}</span>
+      <small>غياب</small>
+    </div>
+    <div class="attendance-item">
+      <i class="fas fa-percentage" style="color:var(--accent-teal);"></i>
+      <span>${student.attendance.percentage}%</span>
+      <small>نسبة الحضور</small>
+    </div>
+  </div>
+` : '';
 const cardHtml = `
   <div class="result-header">
     <div class="header-content-wrapper">
@@ -2341,42 +2388,15 @@ const cardHtml = `
 </div>
             
             ${missingHtml}
-            
+            ${attendanceHtml}
             <div class="final-result">
               ${finalHtml}
             </div>
-                        
-            <!-- بداية قسم الحضور -->
-            <div class="attendance-section" style="margin-top: 1rem; padding: 0.8rem; background: rgba(44,58,97,0.04); border-radius: 12px; border-right: 3px solid #7D42D3;">
-              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.5rem;">
-                <span style="font-size: 0.85rem; font-weight: 600; color: #2C3A61;"><i class="fas fa-calendar-check" style="color: #7D42D3; margin-left: 6px;"></i> الحضور والغياب</span>
-                <span style="font-size: 0.85rem; font-weight: 600; color: #2C3A61;" id="attendance-percentage">0%</span>
-              </div>
-              <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: #3D4B81; margin-bottom: 0.4rem;">
-                <span>✅ الحضور: <strong id="attendance-present">0</strong></span>
-                <span>❌ الغياب: <strong id="attendance-absent">0</strong></span>
-                <span>📚 المجموع: <strong id="attendance-total">0</strong></span>
-              </div>
-              <!-- شريط التقدم -->
-              <div style="width: 100%; height: 6px; background: #E2E8F0; border-radius: 10px; overflow: hidden;">
-                <div id="attendance-bar" style="width: 0%; height: 100%; background: linear-gradient(90deg, #2ECC71, #7D42D3); border-radius: 10px; transition: width 0.8s ease;"></div>
-              </div>
-            </div>
-            <!-- نهاية قسم الحضور -->
+            
            
           </div>
         `;
 resultContainer.innerHTML = cardHtml;
-        // ربط بيانات الحضور
-if (student.attendance) {
-    const att = student.attendance;
-    document.getElementById('attendance-present').textContent = att.present || 0;
-    document.getElementById('attendance-absent').textContent = att.absent || 0;
-    document.getElementById('attendance-total').textContent = att.total || 0;
-    const percentage = att.percentage || 0;
-    document.getElementById('attendance-percentage').textContent = percentage + '%';
-    document.getElementById('attendance-bar').style.width = percentage + '%';
-}
 bindDetailsButtons(student.details);
 
 // تشغيل العد التصاعدي للدرجات بعد ظهور البطاقة
