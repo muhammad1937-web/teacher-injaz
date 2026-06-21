@@ -970,9 +970,7 @@
       border: 1px solid var(--border-color);
       display: flex;
       flex-direction: column;
-      justify-content: flex-start;
-      gap: 8px;
-     height: 100%;
+      justify-content: space-between;
     }
     .grade-card span:first-child {
       font-size: 0.85rem;
@@ -2402,14 +2400,14 @@ const cardHtml = `
   <div class="grade-card">
     <span><i class="fas fa-medal" style="margin-left: 6px; color: var(--primary-dark);"></i> الفترة الأولى</span>
     ${period1Html}
-    <button class="details-btn" data-period="1" data-student-id="${student.id || ''}" style="margin-top: auto; background: var(--accent-teal); color: white; border: none; padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 0.7rem;">
+    <button class="details-btn" data-period="1" data-student-id="${student.id || ''}" style="margin-top: 10px; background: var(--accent-teal); color: white; border: none; padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 0.7rem;">
       <i class="fas fa-eye"></i> التفاصيل
     </button>
   </div>
   <div class="grade-card">
     <span><i class="fas fa-medal" style="margin-left: 6px; color: var(--primary-dark);"></i> الفترة الثانية</span>
     ${period2Html}
-    <button class="details-btn" data-period="2" data-student-id="${student.id || ''}" style="margin-top: auto; background: var(--accent-teal); color: white; border: none; padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 0.7rem;">
+    <button class="details-btn" data-period="2" data-student-id="${student.id || ''}" style="margin-top: 10px; background: var(--accent-teal); color: white; border: none; padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 0.7rem;">
       <i class="fas fa-eye"></i> التفاصيل
     </button>
   </div>
