@@ -2601,10 +2601,12 @@ function showGradeDetails(period, studentDetails) {
 
     const periodData = period === 1 ? studentDetails.period1 : studentDetails.period2;
 
-    if (!periodData) {
-        alert("لا توجد تفاصيل لهذه الفترة.");
-        return;
-    }
+    // التأكد من وجود بيانات الفترة وأنها ليست كلها فارغة
+const hasData = periodData && Object.values(periodData).some(value => value !== null && value !== undefined);
+if (!hasData) {
+    alert("لا توجد تفاصيل لهذه الفترة.");
+    return;
+}
     
     // تعريف الألوان والأيقونات
     const items = [
