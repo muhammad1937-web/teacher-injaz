@@ -2621,41 +2621,7 @@ function showGradeDetails(period, studentDetails) {
     let totalEarned = 0;
     let totalMax = 0;
     
-  items.forEach(item => {
-        const score = periodData[item.key];
-        const isScored = (score !== null && score !== undefined);
-        const earned = isScored ? score : 0;
-        const percentage = isScored ? (earned / item.max) * 100 : 0;
-        
-        totalEarned += earned;
-        totalMax += item.max;
-        
-        let barColor = '#2ECC71';
-        if (isScored) {
-          if (percentage < 60) barColor = '#E74C3C';
-          else if (percentage < 75) barColor = '#F39C12';
-        }
-        
-        itemsHtml += `
-            <div style="margin-bottom: 1rem;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.3rem;">
-                    <span style="font-size: 0.9rem;">${item.icon} ${item.name}</span>
-                    <span style="font-size: 0.85rem; font-weight: 500;">${isScored ? earned + '/' + item.max : 'بانتظار الرصد'}</span>
-                </div>
-                ${isScored ? `
-                <div style="background: #E2E8F0; border-radius: 8px; height: 6px; overflow: hidden; margin-bottom: 0.2rem;">
-                    <div style="width: ${percentage}%; height: 100%; background: ${barColor}; border-radius: 8px; transition: width 0.5s ease;"></div>
-                </div>
-                <div style="font-size: 0.7rem; color: ${barColor}; text-align: left; font-weight: 600;">${percentage.toFixed(1)}%</div>
-                ` : `
-                <div style="background: #E2E8F0; border-radius: 8px; height: 6px; margin-bottom: 0.2rem;">
-                    <div style="width: 0%; height: 100%; background: #CCC; border-radius: 8px;"></div>
-                </div>
-                <div style="font-size: 0.7rem; color: #999; text-align: left;">بانتظار الرصد</div>
-                `}
-            </div>
-        `;
-    });
+ 
     
     const detailsHtml = `
         <div style="background: white; border-radius: 20px; width: 90%; max-width: 400px; margin: 0 auto; box-shadow: 0 20px 35px rgba(0,0,0,0.2);">
@@ -2674,7 +2640,35 @@ function showGradeDetails(period, studentDetails) {
             </div>
         </div>
     `;
-    
+    items.forEach(item => {
+        const score = periodData[item.key];
+        const isScored = (score !== null && score !== undefined);
+        const earned = isScored ? score : 0;
+        const percentage = isScored ? (earned / item.max) * 100 : 0;
+        
+        totalEarned += earned;
+        totalMax += item.max;
+        
+        itemsHtml += `
+            <div style="margin-bottom: 1rem;">
+                <div style="display: flex; justify-content: space-between; margin-bottom: 0.3rem;">
+                    <span style="font-size: 0.9rem;">${item.icon} ${item.name}</span>
+                    <span style="font-size: 0.85rem; font-weight: 500;">${isScored ? earned + '/' + item.max : 'بانتظار الرصد'}</span>
+                </div>
+                ${isScored ? `
+                <div style="background: #E2E8F0; border-radius: 8px; height: 6px; overflow: hidden; margin-bottom: 0.2rem;">
+                    <div style="width: ${percentage}%; height: 100%; background: ${item.color}; border-radius: 8px; transition: width 0.5s ease;"></div>
+                </div>
+                <div style="font-size: 0.7rem; color: #666; text-align: left;">${percentage.toFixed(1)}%</div>
+                ` : `
+                <div style="background: #E2E8F0; border-radius: 8px; height: 6px; margin-bottom: 0.2rem;">
+                    <div style="width: 0%; height: 100%; background: #CCC; border-radius: 8px;"></div>
+                </div>
+                <div style="font-size: 0.7rem; color: #999; text-align: left;">بانتظار الرصد</div>
+                `}
+            </div>
+        `;
+    });
     const overlay = document.createElement('div');
     overlay.className = 'modal-details';
     overlay.style.cssText = `
