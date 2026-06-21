@@ -1015,6 +1015,35 @@
       justify-content: center;
       gap: 8px;
     }
+    .attendance-box {
+  display: flex;
+  gap: 0.8rem;
+  margin-bottom: 1.2rem;
+  flex-wrap: wrap;
+}
+.attendance-item {
+  flex: 1;
+  background: rgba(var(--primary-dark-rgb), 0.03);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  border: 1px solid var(--border-color);
+}
+.attendance-item i {
+  font-size: 1.2rem;
+  display: block;
+  margin-bottom: 4px;
+}
+.attendance-item span {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--primary-dark);
+  display: block;
+}
+.attendance-item small {
+  font-size: 0.75rem;
+  color: var(--text-light);
+}
     .result-actions {
       display: flex;
       gap: 1rem;
@@ -2303,7 +2332,25 @@ if (student.period2 !== null && student.period2 !== undefined && student.period2
                <span>${student.missingMessage}</span>
              </div>`
           : '';
-        
+        const attendanceHtml = student.attendance ? `
+  <div class="attendance-box">
+    <div class="attendance-item">
+      <i class="fas fa-check-circle" style="color:#2ECC71;"></i>
+      <span>${student.attendance.present}</span>
+      <small>حضور</small>
+    </div>
+    <div class="attendance-item">
+      <i class="fas fa-times-circle" style="color:var(--warning-red);"></i>
+      <span>${student.attendance.absent}</span>
+      <small>غياب</small>
+    </div>
+    <div class="attendance-item">
+      <i class="fas fa-percentage" style="color:var(--accent-teal);"></i>
+      <span>${student.attendance.percentage}%</span>
+      <small>نسبة الحضور</small>
+    </div>
+  </div>
+` : '';
 const cardHtml = `
   <div class="result-header">
     <div class="header-content-wrapper">
@@ -2341,7 +2388,7 @@ const cardHtml = `
 </div>
             
             ${missingHtml}
-            
+            ${attendanceHtml}
             <div class="final-result">
               ${finalHtml}
             </div>
