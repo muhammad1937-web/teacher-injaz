@@ -1093,12 +1093,13 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
-    @media (max-width: 768px) {
-      .grades-grid { flex-direction: column; }
-      .input-group { flex-direction: column; }
-      .result-header { flex-direction: column; text-align: center; }
-      .result-actions { flex-direction: column; }
-    }
+@media (max-width: 768px) {
+  .grades-grid { flex-direction: row; gap: 0.7rem; }
+  .grade-card { padding: 8px; }
+  .input-group { flex-direction: column; }
+  .result-header { flex-direction: column; text-align: center; }
+  .result-actions { flex-direction: column; }
+}
 
     /* ========================================= */
     /*        تحسينات للاستجابة                 */
