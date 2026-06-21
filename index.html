@@ -944,13 +944,20 @@
       margin-bottom: 1.2rem;
     }
     .student-name {
-      font-size: 1.1rem;
+      font-size: 1.2rem;
       font-weight: 700;
       color: var(--primary-dark);
-      margin: 0 0 4px 0;
+      margin: 0 0 6px 0;
+    }
+    .student-divider {
+      width: 40px;
+      height: 2px;
+      background: var(--accent-teal);
+      opacity: 0.3;
+      margin: 0 0 6px 0;
     }
     .student-details {
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       color: var(--text-medium);
       margin: 0;
     }
@@ -2389,7 +2396,8 @@ const cardHtml = `
             
             <div class="student-info">
              <div class="student-name"><i class="fas fa-user-graduate" style="margin-left: 8px; color: var(--primary-dark);"></i> ${student.name}</div>
-             <div class="student-details"><i class="fas fa-graduation-cap" style="margin-left: 6px;"></i> ${student.gradeLevel} | الفصل ${student.section}</div>
+             <div class="student-divider"></div>
+             <div class="student-details"><i class="fas fa-layer-group" style="margin-left: 6px;"></i> ${student.gradeLevel} | الفصل ${student.section}</div>
             </div>
             
            <div class="grades-grid">
