@@ -998,10 +998,13 @@
       margin-bottom: 5px;
     }
     .final-rating {
-      font-size: 1rem;
-      font-weight: 600;
-      color: var(--accent-teal);
-    }
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
     .missing-message {
       background: rgba(var(--warning-red-rgb), 0.1);
       border-radius: 12px;
@@ -2315,17 +2318,29 @@ if (student.period2 !== null && student.period2 !== undefined && student.period2
 }
         
         let finalHtml = '';
-        if (student.isComplete && student.finalScore) {
-          finalHtml = `
-            <div class="final-score">${student.finalScore} درجة</div>
-            <div class="final-rating">⭐ التقدير: ${student.rating}</div>
-          `;
-        } else {
-          finalHtml = `
-            <div class="final-score" style="color: var(--warning-red);">غير مكتملة</div>
-            <div class="final-rating" style="color: var(--warning-red);">${student.missingMessage || 'بانتظار اكتمال الدرجات'}</div>
-          `;
-        }
+if (student.isComplete && student.finalScore) {
+  let ratingIcon = 'fa-medal';
+  let ratingColor = '#2ECC71';
+  if (student.rating === 'ممتاز') { ratingIcon = 'fa-trophy'; ratingColor = '#FFD700'; }
+  else if (student.rating === 'جيد جداً') { ratingIcon = 'fa-medal'; ratingColor = '#2ECC71'; }
+  else if (student.rating === 'جيد') { ratingIcon = 'fa-thumbs-up'; ratingColor = '#3498DB'; }
+  else if (student.rating === 'مقبول') { ratingIcon = 'fa-circle-exclamation'; ratingColor = '#F39C12'; }
+  else { ratingIcon = 'fa-triangle-exclamation'; ratingColor = 'var(--warning-red)'; }
+
+  finalHtml = `
+    <div class="final-score">${student.finalScore} <small style="font-size:0.6em; font-weight:500;">درجة</small></div>
+    <div class="final-rating" style="color:${ratingColor};">
+      <i class="fas ${ratingIcon}"></i> التقدير: ${student.rating}
+    </div>
+  `;
+} else {
+  finalHtml = `
+    <div class="final-score" style="color: var(--warning-red);">غير مكتملة</div>
+    <div class="final-rating" style="color: var(--warning-red);">
+      <i class="fas fa-hourglass-half"></i> ${student.missingMessage || 'بانتظار اكتمال الدرجات'}
+    </div>
+  `;
+}
         
         const missingHtml = (!student.isComplete && student.missingMessage && student.missingMessage !== "لم تُرصد أي درجات حتى الآن")
           ? `<div class="missing-message">
