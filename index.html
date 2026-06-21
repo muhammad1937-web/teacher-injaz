@@ -2403,7 +2403,7 @@ const cardHtml = `
   <div class="grade-card">
     <span><i class="fas fa-medal" style="margin-left: 6px; color: var(--primary-dark);"></i> الفترة الثانية</span>
     ${period2Html}
-    <button class="details-btn" data-period="1" data-student-id="${student.id || ''}" style="margin-top: 10px; background: var(--accent-teal); color: white; border: none; padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 0.7rem;">
+    <button class="details-btn" data-period="2" data-student-id="${student.id || ''}" style="margin-top: 10px; background: var(--accent-teal); color: white; border: none; padding: 5px 10px; border-radius: 15px; cursor: pointer; font-size: 0.7rem;">
       <i class="fas fa-eye"></i> التفاصيل
     </button>
   </div>
@@ -2601,12 +2601,10 @@ function showGradeDetails(period, studentDetails) {
 
     const periodData = period === 1 ? studentDetails.period1 : studentDetails.period2;
 
-    // التأكد من وجود بيانات الفترة وأنها ليست كلها فارغة
-const hasData = periodData && Object.values(periodData).some(value => value !== null && value !== undefined);
-if (!hasData) {
-    alert("لا توجد تفاصيل لهذه الفترة.");
-    return;
-}
+    if (!periodData) {
+        alert("لا توجد تفاصيل لهذه الفترة.");
+        return;
+    }
     
     // تعريف الألوان والأيقونات
     const items = [
