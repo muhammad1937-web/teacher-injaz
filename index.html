@@ -563,10 +563,10 @@
     .project-btn:nth-child(2) { border-color: rgba(var(--accent-teal-rgb), 0.3); }
     .project-btn:nth-child(2) i { color: var(--accent-teal); }
     .project-btn:nth-child(2):hover { border-color: var(--accent-teal); background: linear-gradient(135deg, rgba(var(--accent-teal-rgb), 0.1), rgba(255, 255, 255, 0.9)); }
-    .project-btn:nth-child(3) { border-color: rgba(46, 204, 113, 0.3); }
-    .project-btn:nth-child(3) i { color: #2ECC71; }
-    .project-btn:nth-child(3):hover { border-color: #2ECC71; background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(255, 255, 255, 0.9)); }
-    .project-btn:nth-child(3):hover i { color: #27AE60; }
+    .project-btn:nth-child(3) { border-color: rgba(52, 152, 219, 0.3); }
+    .project-btn:nth-child(3) i { color: #3498DB; }
+    .project-btn:nth-child(3):hover { border-color: #3498DB; background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(255, 255, 255, 0.9)); }
+    .project-btn:nth-child(3):hover i { color: #2E86C1; }
     #disqus_thread { background-color: var(--pure-white); padding: 1rem; border-radius: 15px; border: 1px solid var(--border-color); }
     .discord-section { max-width: 900px; margin: 2.5rem auto; padding: 1.5rem 1.8rem; border-radius: 20px; background: var(--gradient-card); border: 1px solid var(--border-color); text-align: center; box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.08); position: relative; overflow: hidden; }
     .discord-section::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; transition: height 0.3s ease; }
@@ -1746,7 +1746,7 @@
       </a>
       <a href="YOUR_LINK_3_HERE" target="_blank" class="project-btn" style="flex-direction: column;">
         <span style="display: flex; align-items: center; gap: 6px;"><i class="fas fa-globe"></i> الموقع الإلكتروني</span>
-        <small style="font-size: 0.65rem; color: var(--text-light); margin-top: 4px; display: flex; align-items: center; gap: 4px;"><i class="fas fa-eye" style="color: #2ECC71;"></i> انقر للمشاهدة</small>
+        <small style="font-size: 0.65rem; color: var(--text-light); margin-top: 4px; display: flex; align-items: center; gap: 4px;"><i class="fas fa-eye" style="color: #3498DB;"></i> انقر للمشاهدة</small>
       </a>
     </div>
     
@@ -2502,7 +2502,7 @@ function displayVotingResults(data) {
   if (!container) return;
   
   const totalVotes = data.totalVotes || 0;
-  const projectColors = ["#2C3A61", "#7D42D3", "#2ECC71"];
+  const projectColors = ["#2C3A61", "#7D42D3", "#3498DB"];
   
   let html = `<div class="votes-stats">`;
   
