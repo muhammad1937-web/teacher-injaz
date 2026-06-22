@@ -857,12 +857,13 @@
     .result-card {
       background: var(--pure-white);
       border-radius: 20px;
-     padding: 0.5rem 1.5rem 0.5rem 1.5rem;
+      padding: 0;
       margin-top: 1rem;
       border: 1px solid var(--border-color);
       box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.1);
       text-align: right;
       animation: fadeSlideUp 0.4s ease forwards;
+      overflow: hidden;
     }
 
 .school-logo {
@@ -936,73 +937,92 @@
     font-size: 0.75rem;
   }
 }
-    .student-info {
-      background: rgba(var(--primary-dark-rgb), 0.04);
-      padding: 12px 15px;
-      border-radius: 12px;
-      margin-top: 1rem;
-      margin-bottom: 1.2rem;
+.student-info {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 1.1rem 1.3rem 0.6rem;
+    }
+    .student-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(var(--primary-dark-rgb), 0.06);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .student-avatar i {
+      font-size: 1.1rem;
+      color: var(--text-medium);
     }
     .student-name {
-      font-size: 1.1rem;
+      font-size: 1rem;
       font-weight: 700;
       color: var(--primary-dark);
-      margin: 0 0 4px 0;
-    }
-    .student-details {
-      font-size: 0.9rem;
-      color: var(--text-medium);
       margin: 0;
     }
-   .grades-grid {
-      display: flex;
-      gap: 1rem;
-      margin-bottom: 1.2rem;
-      flex-wrap: wrap;
-      align-items: stretch;
+    .student-details {
+      font-size: 0.82rem;
+      color: var(--text-medium);
+      margin: 3px 0 0 0;
     }
-   .grade-card {
-      flex: 1;
-      background: rgba(var(--primary-dark-rgb), 0.03);
-      border-radius: 12px;
-      padding: 12px 8px;
-      text-align: center;
-      border: 1px solid var(--border-color);
+   .grades-section-label {
+      font-size: 0.78rem;
+      color: var(--text-light);
+      font-weight: 600;
+      margin: 0 0 8px 0;
+      padding: 0 1.3rem;
+    }
+    .grades-grid {
       display: flex;
-      flex-direction: column;
-      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 0;
+      flex-wrap: wrap;
+      padding: 0 1.3rem;
+    }
+    .grade-card {
+      flex: 1;
+      background: rgba(var(--primary-dark-rgb), 0.04);
+      border-radius: 12px;
+      padding: 14px 10px;
+      text-align: center;
     }
     .grade-card span:first-child {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       color: var(--text-light);
       display: block;
-      margin-bottom: 5px;
+      margin-bottom: 6px;
     }
     .grade-card .grade-value {
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: 700;
       color: var(--primary-dark);
+      margin-bottom: 8px;
     }
     .grade-card .missing-value {
-      font-size: 0.85rem;
-      color: var(--warning-red);
+      font-size: 0.82rem;
+      color: var(--text-light);
       font-weight: 500;
+      margin: 14px 0;
+      display: block;
     }
-    .final-result {
-      background: linear-gradient(135deg, rgba(var(--accent-teal-rgb), 0.1), rgba(var(--primary-dark-rgb), 0.05));
+   .final-result {
+      background: linear-gradient(135deg, rgba(125,66,211,0.08), rgba(44,58,97,0.05));
       border-radius: 12px;
-      padding: 12px;
+      padding: 16px;
       text-align: center;
-      margin-bottom: 1.2rem;
+      margin: 1.1rem 1.3rem 1.1rem;
     }
     .final-score {
-      font-size: 1.4rem;
+      font-size: 1.6rem;
       font-weight: 800;
       color: var(--primary-dark);
-      margin-bottom: 5px;
+      margin-bottom: 6px;
     }
     .final-rating {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -1022,34 +1042,39 @@
       justify-content: center;
       gap: 8px;
     }
-    .attendance-box {
+   .attendance-section-label {
+  font-size: 0.78rem;
+  color: var(--text-light);
+  font-weight: 600;
+  margin: 1.1rem 0 8px 0;
+  padding: 0 1.3rem;
+}
+.attendance-box {
   display: flex;
-  gap: 0.8rem;
-  margin-bottom: 1.2rem;
+  gap: 8px;
+  margin-bottom: 0;
   flex-wrap: wrap;
+  padding: 0 1.3rem;
 }
 .attendance-item {
   flex: 1;
-  background: rgba(var(--primary-dark-rgb), 0.03);
   border-radius: 12px;
-  padding: 10px;
+  padding: 12px 8px;
   text-align: center;
-  border: 1px solid var(--border-color);
 }
 .attendance-item i {
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   display: block;
-  margin-bottom: 4px;
+  margin-bottom: 5px;
 }
 .attendance-item span {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
-  color: var(--primary-dark);
   display: block;
 }
 .attendance-item small {
-  font-size: 0.75rem;
-  color: var(--text-light);
+  font-size: 0.72rem;
+  opacity: 0.85;
 }
     .result-actions {
       display: flex;
@@ -1507,9 +1532,9 @@
   margin-left: 6px;
 }
 .result-header {
-  background: linear-gradient(135deg, #7D42D3 0%, #2C3A61 100%);
+  background: linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%);
   padding: 0;
-  margin: -0.5rem -1.5rem 0 -1.5rem;
+  margin: 0;
   border-radius: 20px 20px 0 0;
   position: relative;
   overflow: hidden;
@@ -1519,21 +1544,15 @@
   position: relative;
   display: flex;
   align-items: center;
-  padding: 1.2rem 1.4rem;
-  gap: 16px;
-}
-
-.header-bottom-bar {
-  height: 4px;
-  background: linear-gradient(90deg, #7D42D3, #A0B2E8);
+  padding: 1.1rem 1.3rem;
+  gap: 14px;
 }
 
 .school-logo-box {
-  width: 80px;
-  height: 80px;
-  background: rgba(255,255,255,0.12);
-  border-radius: 16px;
-  border: 1px solid rgba(255,255,255,0.2);
+  width: 64px;
+  height: 64px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 14px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1549,13 +1568,6 @@
   opacity: 0.95;
 }
 
-.vertical-divider {
-  width: 1px;
-  height: 60px;
-  background: rgba(255,255,255,0.2);
-  flex-shrink: 0;
-}
-
 .school-info {
   flex: 1;
   min-width: 0;
@@ -1563,7 +1575,7 @@
 }
 
 .school-info h4 {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: white;
   margin: 0 0 4px 0;
@@ -1573,23 +1585,18 @@
 }
 
 .school-info p {
-  font-size: 0.8rem;
-  color: rgba(255,255,255,0.75);
-  margin: 0 0 3px 0;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.8);
+  margin: 0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
 @media (max-width: 550px) {
-  .school-logo-box {
-    width: 60px;
-    height: 60px;
-    border-radius: 12px;
-  }
-  .school-info h4 { font-size: 0.88rem; }
-  .school-info p { font-size: 0.75rem; }
-  .header-content-wrapper { gap: 10px; padding: 1rem; }
+  .school-logo-box { width: 52px; height: 52px; border-radius: 12px; }
+  .school-info h4 { font-size: 0.85rem; }
+  .school-info p { font-size: 0.72rem; }
 }
    
   </style>
@@ -2352,28 +2359,30 @@ if (student.isComplete && student.finalScore) {
                <span>${student.missingMessage}</span>
              </div>`
           : '';
-      let percentageColor = '#2ECC71';
+      let percentageColor = '#1D9E75';
+let percentageBg = 'rgba(29,158,117,0.08)';
 if (student.attendance) {
-  if (student.attendance.percentage < 75) percentageColor = 'var(--warning-red)';
-  else if (student.attendance.percentage < 90) percentageColor = '#F39C12';
+  if (student.attendance.percentage < 75) { percentageColor = '#993C1D'; percentageBg = 'rgba(216,90,48,0.1)'; }
+  else if (student.attendance.percentage < 90) { percentageColor = '#854F0B'; percentageBg = 'rgba(239,159,39,0.12)'; }
 }
 
 const attendanceHtml = student.attendance ? `
+  <p class="attendance-section-label">الحضور</p>
   <div class="attendance-box">
-    <div class="attendance-item">
-      <i class="fas fa-check-circle" style="color:#2ECC71;"></i>
-      <span>${student.attendance.present}</span>
-      <small>حضور</small>
+    <div class="attendance-item" style="background: rgba(29,158,117,0.08);">
+      <i class="fas fa-check-circle" style="color:#1D9E75;"></i>
+      <span style="color:#1D9E75;">${student.attendance.present}</span>
+      <small style="color:#1D9E75;">حضور</small>
     </div>
-    <div class="attendance-item">
-      <i class="fas fa-times-circle" style="color:var(--warning-red);"></i>
-      <span>${student.attendance.absent}</span>
-      <small>غياب</small>
+    <div class="attendance-item" style="background: rgba(216,90,48,0.08);">
+      <i class="fas fa-times-circle" style="color:#993C1D;"></i>
+      <span style="color:#993C1D;">${student.attendance.absent}</span>
+      <small style="color:#993C1D;">غياب</small>
     </div>
-    <div class="attendance-item" style="border-color:${percentageColor};">
-      <i class="fas fa-percentage" style="color:${percentageColor};"></i>
+    <div class="attendance-item" style="background:${percentageBg};">
+      <i class="fas fa-calendar-check" style="color:${percentageColor};"></i>
       <span style="color:${percentageColor};">${student.attendance.percentage}%</span>
-      <small>نسبة الحضور</small>
+      <small style="color:${percentageColor};">نسبة الحضور</small>
     </div>
   </div>
 ` : '';
@@ -2381,33 +2390,36 @@ const cardHtml = `
   <div class="result-header">
     <div class="header-content-wrapper">
       ${logoHtml}
-      <div class="vertical-divider"></div>
       <div class="school-info">
         <h4>${settings.schoolName || 'المدرسة'}</h4>
         <p>${settings.subject || 'التقنية الرقمية'} | ${settings.semester || ''} ${settings.academicYear || ''}</p>
-        <p><i class="fas fa-user-circle" style="margin-left: 5px; color: rgba(255,255,255,0.85);"></i> ${settings.teacherName || 'المعلم'}</p>
       </div>
     </div>
-    <div class="header-bottom-bar"></div>
   </div>
             
             <div class="student-info">
-             <div class="student-name"><i class="fas fa-user-graduate" style="margin-left: 8px; color: var(--primary-dark);"></i> ${student.name}</div>
-             <div class="student-details"><i class="fas fa-graduation-cap" style="margin-left: 6px;"></i> ${student.gradeLevel} | الفصل ${student.section}</div>
+              <div class="student-avatar">
+                <i class="fas fa-user"></i>
+              </div>
+              <div>
+                <p class="student-name">${student.name}</p>
+                <p class="student-details">${student.gradeLevel} | الفصل ${student.section}</p>
+              </div>
             </div>
             
+           <p class="grades-section-label">الدرجات</p>
            <div class="grades-grid">
   <div class="grade-card">
-    <span><i class="fas fa-medal" style="margin-left: 6px; color: var(--primary-dark);"></i> الفترة الأولى</span>
+    <span>الفترة الأولى</span>
     ${period1Html}
-   <button class="details-btn" data-period="1" data-student-id="${student.id || ''}" style="margin-top: 10px; background: var(--accent-teal); color: white; border: none; padding: 8px 22px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+    <button class="details-btn" data-period="1" data-student-id="${student.id || ''}" style="background: var(--accent-teal); color: white; border: none; padding: 7px 16px; border-radius: 15px; cursor: pointer; font-size: 0.78rem; font-weight: 600;">
       <i class="fas fa-eye"></i> التفاصيل
     </button>
   </div>
   <div class="grade-card">
-    <span><i class="fas fa-medal" style="margin-left: 6px; color: var(--primary-dark);"></i> الفترة الثانية</span>
+    <span>الفترة الثانية</span>
     ${period2Html}
-    <button class="details-btn" data-period="2" data-student-id="${student.id || ''}" style="margin-top: 10px; background: var(--accent-teal); color: white; border: none; padding: 8px 22px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+    <button class="details-btn" data-period="2" data-student-id="${student.id || ''}" style="background: var(--accent-teal); color: white; border: none; padding: 7px 16px; border-radius: 15px; cursor: pointer; font-size: 0.78rem; font-weight: 600;">
       <i class="fas fa-eye"></i> التفاصيل
     </button>
   </div>
