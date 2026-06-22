@@ -939,21 +939,27 @@
 }
 .student-info {
       display: flex;
-      align-items: flex-start;
-      gap: 10px;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
       margin: 1.1rem 1.3rem 0.8rem;
-      padding: 12px 14px;
+      padding: 18px 14px;
       background: rgba(var(--primary-dark-rgb), 0.04);
       border-radius: 12px;
+      text-align: center;
     }
   .student-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: rgba(var(--primary-dark-rgb), 0.07);
       display: flex;
       align-items: center;
+      justify-content: center;
       flex-shrink: 0;
-      margin-top: 1px;
     }
     .student-avatar i {
-      font-size: 1rem;
+      font-size: 1.6rem;
       color: var(--primary-dark);
     }
     .student-name {
@@ -965,9 +971,7 @@
    .student-details {
       font-size: 0.82rem;
       color: var(--text-medium);
-      margin: 3px 0 0 0;
-      display: flex;
-      align-items: center;
+      margin: 0;
     }
    .grades-section-label {
       font-size: 0.78rem;
@@ -2400,12 +2404,10 @@ const cardHtml = `
             
            <div class="student-info">
               <div class="student-avatar">
-                <i class="fas fa-user"></i>
+                <i class="fas fa-user-graduate"></i>
               </div>
-              <div>
-                <p class="student-name">${student.name}</p>
-                <p class="student-details"><i class="fas fa-layer-group" style="margin-left: 5px;"></i>${student.gradeLevel} | الفصل ${student.section}</p>
-              </div>
+              <p class="student-name">${student.name}</p>
+              <p class="student-details">${student.gradeLevel} | الفصل ${student.section}</p>
             </div>
             
            <p class="grades-section-label">الدرجات</p>
