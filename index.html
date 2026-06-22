@@ -2372,7 +2372,7 @@ if (student.attendance) {
 }
 
 const attendanceHtml = student.attendance ? `
-  <p class="attendance-section-label">الحضور</p>
+  <p class="attendance-section-label"><i class="fas fa-calendar-days" style="margin-left: 5px;"></i>الحضور</p>
   <div class="attendance-box">
     <div class="attendance-item" style="background: rgba(29,158,117,0.08);">
       <i class="fas fa-check-circle" style="color:#1D9E75;"></i>
@@ -2410,7 +2410,7 @@ const cardHtml = `
               <p class="student-details">${student.gradeLevel} | الفصل ${student.section}</p>
             </div>
             
-           <p class="grades-section-label">الدرجات</p>
+           <p class="grades-section-label"><i class="fas fa-chart-simple" style="margin-left: 5px;"></i>الدرجات</p>
            <div class="grades-grid">
   <div class="grade-card">
     <span>الفترة الأولى</span>
