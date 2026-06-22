@@ -946,19 +946,19 @@
       background: rgba(var(--primary-dark-rgb), 0.04);
       border-radius: 12px;
     }
-    .student-avatar {
-      width: 36px;
-      height: 36px;
+   .student-avatar {
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      background: rgba(var(--primary-dark-rgb), 0.06);
+      background: rgba(var(--primary-dark-rgb), 0.08);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
     }
     .student-avatar i {
-      font-size: 1.1rem;
-      color: var(--text-medium);
+      font-size: 1.3rem;
+      color: var(--primary-dark);
     }
     .student-name {
       font-size: 1rem;
@@ -2400,13 +2400,13 @@ const cardHtml = `
     </div>
   </div>
             
-            <div class="student-info">
+           <div class="student-info">
               <div class="student-avatar">
                 <i class="fas fa-user"></i>
               </div>
               <div>
                 <p class="student-name">${student.name}</p>
-                <p class="student-details">${student.gradeLevel} | الفصل ${student.section}</p>
+                <p class="student-details"><i class="fas fa-layer-group" style="margin-left: 5px;"></i>${student.gradeLevel} | الفصل ${student.section}</p>
               </div>
             </div>
             
