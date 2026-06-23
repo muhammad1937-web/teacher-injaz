@@ -2380,13 +2380,12 @@ if (student.isComplete && student.finalScore) {
                <span>${student.missingMessage}</span>
              </div>`
           : '';
-      let percentageColor = '#1D9E75';
+let percentageColor = '#1D9E75';
 let percentageBg = 'rgba(29,158,117,0.08)';
 if (student.attendance) {
-  if (student.attendance.percentage < 75) { percentageColor = '#993C1D'; percentageBg = 'rgba(216,90,48,0.1)'; }
-  else if (student.attendance.percentage < 90) { percentageColor = '#854F0B'; percentageBg = 'rgba(239,159,39,0.12)'; }
+  if (student.attendance.percentage < 75) { percentageColor = '#D6427D'; percentageBg = 'rgba(214,66,125,0.08)'; }
+  else if (student.attendance.percentage < 90) { percentageColor = '#D98C1F'; percentageBg = 'rgba(217,140,31,0.1)'; }
 }
-
 const attendanceHtml = student.attendance ? `
   <p class="attendance-section-label"><i class="fas fa-calendar-days" style="margin-left: 5px;"></i>الحضور</p>
   <div class="attendance-box">
