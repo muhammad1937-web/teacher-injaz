@@ -116,14 +116,14 @@
     /* ========================================= */
     /*      الهيدر الجديد - مع خلفية صورة      */
     /* ========================================= */
-    .tech-header {
+.tech-header {
       background-image: url('images/22.png');
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
       color: white;
       text-align: center;
-      padding: 1.6rem 1rem 1.3rem;
+      padding: 1.4rem 1rem;
       position: relative;
       border-bottom-left-radius: 25px;
       border-bottom-right-radius: 25px;
@@ -131,21 +131,15 @@
       margin: 0;
       overflow: hidden;
       z-index: 1;
-      min-height: 170px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
     }
-    .tech-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.4); z-index: 1; }
-    .header-content { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.8rem; width: 100%; }
-    .header-logo { margin-bottom: 0.3rem; }
-    .header-logo img { height: 86px !important; width: auto; filter: brightness(0) invert(1); transition: transform 0.3s ease; }
+    .tech-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(44,58,97,0.75), rgba(125,66,211,0.65)); z-index: 1; }
+    .header-content { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; }
+    .header-logo { margin-bottom: 0.2rem; }
+    .header-logo img { height: 56px !important; width: auto; filter: brightness(0) invert(1); transition: transform 0.3s ease; }
     .header-logo img:hover { transform: scale(1.05); }
     .header-text-content { text-align: center; width: 100%; position: relative; z-index: 2; }
-    .tech-header h1 { font-size: 2.2rem; font-weight: 800; margin: 0 0 0.6rem 0; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5); color: white; letter-spacing: -0.5px; }
-    .tech-header h2 { font-size: 1.6rem; font-weight: 700; margin: 0 0 0.4rem 0; color: rgba(255, 255, 255, 0.95); text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3); }
-    .tech-header p { font-size: 1.2rem; font-weight: 600; margin: 0 0 0.5rem 0; color: rgba(255, 255, 255, 0.9); }
-    .tech-header span { font-size: 1.05rem; font-weight: 400; color: rgba(255, 255, 255, 0.85); display: block; max-width: 700px; margin: 0 auto; line-height: 1.5; padding: 0 1rem; }
+    .tech-header h1 { font-size: 1.5rem; font-weight: 800; margin: 0 0 0.3rem 0; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); color: white; letter-spacing: -0.5px; }
+    .tech-header p { font-size: 0.9rem; font-weight: 500; margin: 0; color: rgba(255, 255, 255, 0.9); }
 
     /* ========================================= */
     /*         الوقت والتاريخ                   */
@@ -1639,9 +1633,7 @@
     </div>
     <div class="header-text-content">
       <h1>واجهـة المعلـم الرقمـي</h1>
-      <h2>أ. محمد حمدان الغامدي</h2>
-      <p>معلم التقنية الرقمية</p>
-      <span>جهود مهنية ومحتوى تعليمي لجيل مبدع</span>
+      <p>أ. محمد حمدان الغامدي | معلم التقنية الرقمية</p>
     </div>
   </div>
 </header>
