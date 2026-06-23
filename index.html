@@ -574,7 +574,7 @@
     .discord-description { margin: 0 0 1.5rem 0; font-size: 0.95rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
     .discord-description:hover { color: var(--tech-blue); transform: none; background: transparent; border: none; box-shadow: none; }
     .discord-btn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
   gap: 0.75rem;
@@ -587,7 +587,8 @@
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   white-space: nowrap;
-  min-width: 200px;
+  max-width: 280px;
+  width: fit-content;
   background: linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%);
   color: white;
   border: 1px solid rgba(255,255,255,0.15);
@@ -1808,7 +1809,7 @@
     </h3>
   </div>
   <p class="discord-description">انضم إلى مجتمعنا على ديسكورد للنقاش وطرح الأسئلة.</p>
-  <div class="projects-container">
+  <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
     <a href="https://discord.gg/Cq9mn7Yr" target="_blank" class="discord-btn">
       <i class="fas fa-sign-in-alt"></i>
       <span> مجتمع التقنية الرقمية</span>
