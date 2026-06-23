@@ -1836,7 +1836,7 @@
 <!-- ============================================ -->
 <div class="section-main-title fade-in">
   <div class="main-title-content">
-    <i class="fas fa-folder-open main-title-icon"></i>
+    <i class="fas fa-layer-group main-title-icon"></i>
     <h2 class="main-title-text">المكتبة والمعرض</h2>
   </div>
 </div>
@@ -1951,7 +1951,7 @@
   </h2>
   <p class="ai-description"> شريكك الذكي في رحلة التعلم الرقمي.</p>
   <div class="ai-chat-container">
-    <button class="clear-chat-btn" id="clearChatBtn"><i class="fas fa-trash"></i> مسح المحادثة</button>
+    <button class="clear-chat-btn" id="clearChatBtn" style="display: none;"><i class="fas fa-trash"></i> مسح المحادثة</button>
     <div class="ai-messages" id="aiMessages">
       <div class="message ai-message">
         <strong>الذكاء الاصطناعي:</strong> مرحباً بك! أنا المساعد الرقمي للأستاذ محمد الغامدي، وشريكك في رحلة التعلم، تفضل بطرح سؤالك.
@@ -1967,10 +1967,12 @@
       <div class="dot"></div>
     </div>
   </div>
-  <div class="ai-disclaimer">
-    <i class="fas fa-info-circle"></i>
-    ملاحظة: الإجابات تعتمد على المعرفة العامة للذكاء الاصطناعي وقد تحتاج لمراجعة المعلم للتأكد من دقتها
-  </div>
+  <div style="background: rgba(125,66,211,0.06); border-radius: 12px; padding: 10px 16px; margin-top: 14px; width: 100%; max-width: 450px; text-align: center; margin-left: auto; margin-right: auto;">
+      <p style="font-size: 0.85rem; color: var(--text-medium); margin: 0; line-height: 1.5;">
+        <i class="fas fa-info-circle" style="margin-left: 5px; color: var(--accent-teal);"></i>
+        ملاحظة: الإجابات تعتمد على المعرفة العامة للذكاء الاصطناعي وقد تحتاج لمراجعة المعلم للتأكد من دقتها
+      </p>
+    </div>
 </div>
 
 <!-- ============================================ -->
@@ -2127,6 +2129,7 @@
       async function sendMessage() {
         const message = aiInput.value.trim();
         if (!message) return;
+        clearChatBtn.style.display = 'flex';
         addMessage(message, 'user');
         aiInput.value = '';
         aiSendBtn.disabled = true;
