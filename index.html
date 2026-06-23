@@ -640,18 +640,11 @@
     /* ============================================ */
     /* ==========   العنوان الرئيسي المعدل   ========== */
     /* ============================================ */
-    .section-main-title { text-align: center; margin: 2.5rem auto 2.5rem; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; width: 100%; position: relative; }
+   .section-main-title { text-align: center; margin: 1.5rem auto 1.2rem; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; width: 100%; position: relative; }
     .section-main-title.visible { opacity: 1; transform: translateY(0); }
-    .main-title-content { display: flex; flex-direction: column; align-items: center; gap: 0.7rem; max-width: 100%; padding: 1.5rem 1.5rem; background: transparent; position: relative; overflow: hidden; box-shadow: none; backdrop-filter: none; -webkit-backdrop-filter: none; border: none; }
-    .main-title-content::before, .main-title-content::after { display: none; }
-    .main-title-icon { font-size: 2.2rem; background: linear-gradient(135deg, var(--accent-teal) 0%, var(--secondary-blue) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: gentle-pulse 3s infinite ease-in-out; margin-bottom: 0.3rem; transition: var(--transition); position: relative; z-index: 2; text-shadow: 0 2px 4px rgba(var(--accent-teal-rgb), 0.2); }
-    .main-title-content:hover .main-title-icon { transform: rotate(10deg) scale(1.1); background: linear-gradient(135deg, var(--ai-teal) 0%, var(--tech-blue) 100%); -webkit-background-clip: text; background-clip: text; }
-    @keyframes gentle-pulse { 0%, 100% { transform: scale(1); opacity: 0.9; } 50% { transform: scale(1.05); opacity: 1; } }
-    .main-title-text { font-size: 2.2rem; font-weight: 900; color: var(--primary-dark); letter-spacing: -0.8px; text-shadow: 0 3px 6px rgba(var(--primary-dark-rgb), 0.15); text-align: center; line-height: 1.3; margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; position: relative; z-index: 2; padding: 0 0.5rem; }
-    .main-title-content:hover { border: none; box-shadow: none; transform: none; }
-    .section-description { text-align: center; color: var(--text-medium); font-size: 1.1rem; line-height: 1.6; max-width: 800px; margin: 0.8rem auto 0; padding: 0 1.5rem; font-weight: 400; opacity: 0.95; transition: all 0.3s ease; opacity: 0; transform: translateY(10px); transition: opacity 0.6s ease 0.2s, transform 0.6s ease 0.2s; }
-    .section-main-title.visible .section-description { opacity: 1; transform: translateY(0); }
-
+    .main-title-content { display: flex; align-items: center; justify-content: center; gap: 0.6rem; max-width: 100%; padding: 0 1rem; }
+    .main-title-icon { font-size: 1.3rem; color: var(--accent-teal); }
+    .main-title-text { font-size: 1.3rem; font-weight: 700; color: var(--primary-dark); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
     /* ============================================ */
     /* ==========   بطاقة عرض نتائج التصويت   ========== */
     /* ============================================ */
@@ -1844,10 +1837,7 @@
 <div class="section-main-title fade-in">
   <div class="main-title-content">
     <i class="fas fa-folder-open main-title-icon"></i>
-    <h2 class="main-title-text">مصادر التعلم الرقمي</h2>
-    <p class="section-description">
-  منظومة رقمية متكاملة تجمع بين مصادر التعلم لمنهج التقنية الرقمية، ومعرض للإنجازات يوثق إبداعات الطلاب وتميزهم خلال رحلتهم التعليمية.
-    </p>
+    <h2 class="main-title-text">المكتبة والمعرض</h2>
   </div>
 </div>
 
