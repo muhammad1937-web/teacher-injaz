@@ -2639,18 +2639,18 @@ function showGradeDetails(period, studentDetails) {
     
     // تعريف الألوان والأيقونات
     const items = [
-        { name: "أوراق العمل والواجبات", icon: "📋", key: "tasks", max: 20, color: "#2C3A61" },
-        { name: "المشروع", icon: "📁", key: "project", max: 10, color: "#7D42D3" },
-        { name: "المشاركة", icon: "✋", key: "participation", max: 10, color: "#2ECC71" },
-        { name: "الإختبار العملي", icon: "💻", key: "practical", max: 40, color: "#F39C12" },
-        { name: "الإختبار النظري", icon: "📝", key: "theoretical", max: 20, color: "#E74C3C" }
+        { name: "أوراق العمل والواجبات", icon: "fa-clipboard-list", key: "tasks", max: 20 },
+        { name: "المشروع", icon: "fa-diagram-project", key: "project", max: 10 },
+        { name: "المشاركة", icon: "fa-comments", key: "participation", max: 10 },
+        { name: "الإختبار العملي", icon: "fa-laptop-code", key: "practical", max: 40 },
+        { name: "الإختبار النظري", icon: "fa-book-open", key: "theoretical", max: 20 }
     ];
     
     let itemsHtml = '';
     let totalEarned = 0;
     let totalMax = 0;
     
-    items.forEach(item => {
+   items.forEach(item => {
         const score = periodData[item.key];
         const isScored = (score !== null && score !== undefined);
         const earned = isScored ? score : 0;
@@ -2658,40 +2658,52 @@ function showGradeDetails(period, studentDetails) {
         
         totalEarned += earned;
         totalMax += item.max;
-        
+
+        let barColor = '#1D9E75';
+        let bgColor = 'rgba(29,158,117,0.08)';
+        if (isScored) {
+            if (percentage < 50) { barColor = '#D6427D'; bgColor = 'rgba(214,66,125,0.08)'; }
+            else if (percentage < 75) { barColor = '#D98C1F'; bgColor = 'rgba(217,140,31,0.1)'; }
+        }
+
         itemsHtml += `
-            <div style="margin-bottom: 1rem;">
-                <div style="display: flex; justify-content: space-between; margin-bottom: 0.3rem;">
-                    <span style="font-size: 0.9rem;">${item.icon} ${item.name}</span>
-                    <span style="font-size: 0.85rem; font-weight: 500;">${isScored ? earned + '/' + item.max : 'بانتظار الرصد'}</span>
+            <div style="background: ${isScored ? bgColor : 'rgba(0,0,0,0.03)'}; border-radius: 12px; padding: 10px 12px; margin-bottom: 10px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+                    <span style="font-size: 0.85rem; color: #5D6D9E; display: flex; align-items: center; gap: 6px;">
+                        <i class="fas ${item.icon}" style="color: ${isScored ? barColor : '#B0B8CC'}; font-size: 0.9rem;"></i>
+                        ${item.name}
+                    </span>
+                    <span style="font-size: 0.9rem; font-weight: 700; color: ${isScored ? barColor : '#B0B8CC'};">
+                        ${isScored ? earned + '/' + item.max : 'بانتظار الرصد'}
+                    </span>
                 </div>
                 ${isScored ? `
-                <div style="background: #E2E8F0; border-radius: 8px; height: 6px; overflow: hidden; margin-bottom: 0.2rem;">
-                    <div style="width: ${percentage}%; height: 100%; background: ${item.color}; border-radius: 8px; transition: width 0.5s ease;"></div>
+                <div style="background: rgba(0,0,0,0.08); border-radius: 8px; height: 6px; overflow: hidden; margin-bottom: 4px;">
+                    <div style="width: ${percentage}%; height: 100%; background: ${barColor}; border-radius: 8px; transition: width 0.6s ease;"></div>
                 </div>
-                <div style="font-size: 0.7rem; color: #666; text-align: left;">${percentage.toFixed(1)}%</div>
+                <div style="font-size: 0.72rem; color: ${barColor}; font-weight: 600; text-align: left;">${percentage.toFixed(1)}%</div>
                 ` : `
-                <div style="background: #E2E8F0; border-radius: 8px; height: 6px; margin-bottom: 0.2rem;">
-                    <div style="width: 0%; height: 100%; background: #CCC; border-radius: 8px;"></div>
+                <div style="background: rgba(0,0,0,0.06); border-radius: 8px; height: 6px;">
+                    <div style="width: 0%; height: 100%; border-radius: 8px;"></div>
                 </div>
-                <div style="font-size: 0.7rem; color: #999; text-align: left;">بانتظار الرصد</div>
                 `}
             </div>
         `;
     });
     
-    const detailsHtml = `
-        <div style="background: white; border-radius: 20px; width: 90%; max-width: 400px; margin: 0 auto; box-shadow: 0 20px 35px rgba(0,0,0,0.2);">
-            <div style="padding: 1.2rem 1.2rem 0.8rem 1.2rem; border-bottom: 2px solid #E2E8F0;">
-                <h3 style="margin: 0; color: #2C3A61; font-size: 1.2rem; display: flex; align-items: center; gap: 8px;">
-                    <span>📊</span> تفاصيل الفترة ${period === 1 ? 'الأولى' : 'الثانية'}
+  const detailsHtml = `
+        <div style="background: white; border-radius: 20px; width: 90%; max-width: 400px; margin: 0 auto; box-shadow: 0 20px 35px rgba(0,0,0,0.2); overflow: hidden;">
+            <div style="background: linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%); padding: 1rem 1.2rem;">
+                <h3 style="margin: 0; color: white; font-size: 1rem; display: flex; align-items: center; gap: 8px;">
+                    <i class="fas fa-chart-bar" style="font-size: 1rem;"></i>
+                    تفاصيل الفترة ${period === 1 ? 'الأولى' : 'الثانية'}
                 </h3>
             </div>
             <div style="padding: 1rem 1.2rem;">
                 ${itemsHtml}
             </div>
-            <div style="padding: 0.8rem 1.2rem 1.2rem 1.2rem; text-align: center;">
-                <button onclick="this.closest('.modal-details').remove()" style="background: #7D42D3; color: white; border: none; padding: 8px 20px; border-radius: 30px; cursor: pointer; font-size: 0.85rem;">
+            <div style="padding: 0.6rem 1.2rem 1rem; text-align: center;">
+                <button onclick="this.closest('.modal-details').remove()" style="background: transparent; color: #7D42D3; border: 1px solid rgba(125,66,211,0.35); padding: 7px 24px; border-radius: 20px; cursor: pointer; font-size: 0.82rem; font-weight: 600;">
                     إغلاق
                 </button>
             </div>
