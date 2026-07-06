@@ -2330,8 +2330,8 @@ document.addEventListener('keydown', (e) => {
       
       function displayResult(student, settings) {
 const logoHtml = settings.logoUrl
-  ? `<div class="school-logo-box" style="width:80px; height:80px;"><img src="${settings.logoUrl}" alt="شعار المدرسة"></div>`
-  : `<div class="school-logo-box" style="width:80px; height:80px;"><i class="fas fa-school" style="font-size:40px; color:white; opacity:0.9;"></i></div>`;
+  ? `<img src="${settings.logoUrl}" alt="شعار المدرسة" style="height:70px; width:auto; filter:brightness(0) invert(1); opacity:0.95; flex-shrink:0;">`
+  : `<i class="fas fa-school" style="font-size:44px; color:white; opacity:0.9; flex-shrink:0;"></i>`;
         
         let period1Html, period2Html;
         
@@ -2410,6 +2410,7 @@ const cardHtml = `
   <div class="result-header">
     <div class="header-content-wrapper">
       ${logoHtml}
+      <div style="width:1px; height:55px; background:rgba(255,255,255,0.25); flex-shrink:0;"></div>
       <div class="school-info">
         <h4>${settings.schoolName || 'المدرسة'}</h4>
         <p>${settings.subject || 'التقنية الرقمية'} | ${settings.semester || ''} ${settings.academicYear || ''}</p>
