@@ -1548,7 +1548,7 @@
   display: flex;
   align-items: center;
   padding: 1.1rem 1.3rem;
-  gap: 20px;
+  gap: 10px;
 }
 
 .school-logo-box {
@@ -2409,7 +2409,9 @@ const attendanceHtml = student.attendance ? `
 const cardHtml = `
   <div class="result-header">
     <div class="header-content-wrapper">
-      ${logoHtml}
+            <div style="margin-left: 6px;">
+        ${logoHtml}
+      </div>
       <div style="width:1px; height:55px; background:rgba(255,255,255,0.25); flex-shrink:0;"></div>
       <div class="school-info">
         <h4>${settings.schoolName || 'المدرسة'}</h4>
