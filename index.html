@@ -1785,16 +1785,25 @@
   </div>
   
   <!-- وضع الاستراحة (يظهر عند عدم وجود مشاريع للتصويت) -->
-  <div id="intermission-mode" style="display: block;">
-    <div style="text-align: center; padding: 2rem 0;">
-      <i class="fas fa-hourglass-half" style="font-size: 3rem; color: var(--accent-teal); margin-bottom: 1rem;"></i>
-      <h3>انتهى التصويت لهذا الشهر!</h3>
-      <p>
-        شكـراً لحمـاسكم وتفـاعلكم .. أنتـظرونا في مشـاريع جديدة 
-        <i class="fas fa-hands-clapping" style="margin-right: 8px; color: var(--accent-teal); animation: heartbeat 1s ease infinite;"></i>
-      </p>
+ <div id="intermission-mode" style="display: block;">
+  <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding:2rem 1rem; gap:16px; text-align:center;">
+    
+    <div style="width:70px; height:70px; border-radius:50%; background:linear-gradient(135deg, rgba(44,58,97,0.1), rgba(125,66,211,0.15)); border:1px solid rgba(125,66,211,0.2); display:flex; align-items:center; justify-content:center;">
+      <i class="fas fa-hourglass-half" style="font-size:28px; color:var(--accent-teal); opacity:0.9;"></i>
     </div>
+
+    <div>
+      <h3 style="font-size:1.1rem; font-weight:700; color:var(--primary-dark); margin:0 0 6px;">استعد للجولة القادمة!</h3>
+      <p style="font-size:0.85rem; color:var(--text-medium); margin:0; line-height:1.6;">لا يوجد تصويت حالياً — ابدأ بإعداد مشروعك المميز وكن جاهزاً للمنافسة القادمة.</p>
+    </div>
+
+    <div style="display:flex; align-items:center; gap:8px; background:rgba(125,66,211,0.06); border-radius:20px; padding:8px 20px;">
+      <i class="fas fa-rocket" style="font-size:0.85rem; color:var(--accent-teal);"></i>
+      <span style="font-size:0.82rem; color:var(--accent-teal); font-weight:600;">قريباً</span>
+    </div>
+
   </div>
+</div>
 </section>
 
 <!-- ============================================ -->
