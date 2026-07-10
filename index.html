@@ -2413,7 +2413,7 @@ const attendanceHtml = student.attendance ? `
         let pointsButtonHtml = '';
 if (student.points) {
   pointsButtonHtml = `
-    <button class="points-btn" data-student-id="${student.id || ''}" style="width:100%; margin:0 1.3rem; margin-top:4px; background:linear-gradient(135deg, #2C3A61, #7D42D3); color:white; border:none; padding:11px; border-radius:12px; cursor:pointer; font-size:0.9rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; width:calc(100% - 2.6rem);">
+    <button class="points-btn" data-student-id="${student.id || ''}" style="margin:4px 1.3rem 0; background:rgba(125,66,211,0.06); color:#7D42D3; border:1px solid rgba(125,66,211,0.25); padding:11px; border-radius:12px; cursor:pointer; font-size:0.9rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; width:calc(100% - 2.6rem);">
       <i class="fas fa-trophy"></i> نقاطي وترتيبي
     </button>
   `;
