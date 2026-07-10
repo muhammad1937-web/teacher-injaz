@@ -855,7 +855,6 @@
       background: var(--pure-white);
       border-radius: 20px;
       padding: 0;
-      position: relative;
       margin-top: 1rem;
       border: 1px solid var(--border-color);
       box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.1);
@@ -2420,9 +2419,6 @@ if (student.points) {
   `;
 }
 const cardHtml = `
-<button onclick="this.closest('.result-card').remove()" style="position:absolute; top:10px; left:10px; z-index:9999; width:30px; height:30px; border-radius:50%; background:rgba(0,0,0,0.25); border:none; color:white; cursor:pointer; display:flex; align-items:center; justify-content:center; font-size:0.85rem; padding:0;">
-  <i class="fas fa-times"></i>
-</button>
 <div class="result-header">
     <div style="display:flex; flex-direction:row; align-items:center; padding:0.9rem 1.3rem; gap:12px; width:100%;">
       <div style="width:52px; height:52px; border-radius:50%; background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); display:flex; align-items:center; justify-content:center; flex-shrink:0;">
