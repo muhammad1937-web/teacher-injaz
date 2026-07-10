@@ -2467,6 +2467,7 @@ const cardHtml = `
         `;
 resultContainer.innerHTML = cardHtml;
 bindDetailsButtons(student.details);
+window.currentStudentFull = student;
 
 // تشغيل العد التصاعدي للدرجات بعد ظهور البطاقة
 setTimeout(() => {
@@ -2821,10 +2822,10 @@ function bindDetailsButtons(studentDetailsData) {
 btn.addEventListener('click', window.detailsClickHandler);
     });
 
-    // ربط زر النقاط
+   // ربط زر النقاط
     document.querySelectorAll('.points-btn').forEach(btn => {
         btn.addEventListener('click', function() {
-            showPointsModal(window.currentStudentDetails);
+            showPointsModal(window.currentStudentFull);
         });
     });
 }
