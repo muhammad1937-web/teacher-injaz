@@ -1615,6 +1615,14 @@
     padding: 0.8rem 0.6rem !important;
   }
 } 
+    .points-btn-hover {
+  transition: all 0.3s ease;
+}
+.points-btn-hover:hover {
+  background: rgba(125,66,211,0.12) !important;
+  border-color: rgba(125,66,211,0.45) !important;
+  transform: translateY(-1px);
+}
   </style>
 </head>
 <body>
@@ -2413,8 +2421,8 @@ const attendanceHtml = student.attendance ? `
         let pointsButtonHtml = '';
 if (student.points) {
   pointsButtonHtml = `
-    <button class="points-btn" data-student-id="${student.id || ''}" style="margin:4px 1.3rem 0; background:rgba(125,66,211,0.06); color:#7D42D3; border:1px solid rgba(125,66,211,0.25); padding:11px; border-radius:12px; cursor:pointer; font-size:0.9rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; width:calc(100% - 2.6rem); font-family:inherit;">
-      <i class="fas fa-trophy"></i> النقاط والمخالفات
+    <button class="points-btn points-btn-hover" data-student-id="${student.id || ''}" style="margin:4px 1.3rem 0; background:rgba(125,66,211,0.06); color:#7D42D3; border:1px solid rgba(125,66,211,0.25); padding:11px; border-radius:12px; cursor:pointer; font-size:0.9rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; width:calc(100% - 2.6rem); font-family:inherit;">
+      <i class="fas fa-award"></i> النقاط والمخالفات 
     </button>
   `;
 }
