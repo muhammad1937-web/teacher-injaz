@@ -2410,6 +2410,14 @@ const attendanceHtml = student.attendance ? `
     </div>
   </div>
 ` : '';
+        let pointsButtonHtml = '';
+if (student.points) {
+  pointsButtonHtml = `
+    <button class="points-btn" data-student-id="${student.id || ''}" style="width:100%; margin:0 1.3rem; margin-top:4px; background:linear-gradient(135deg, #2C3A61, #7D42D3); color:white; border:none; padding:11px; border-radius:12px; cursor:pointer; font-size:0.9rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; width:calc(100% - 2.6rem);">
+      <i class="fas fa-trophy"></i> نقاطي وترتيبي
+    </button>
+  `;
+}
 const cardHtml = `
 <div class="result-header">
     <div style="display:flex; flex-direction:row; align-items:center; padding:0.9rem 1.3rem; gap:12px; width:100%;">
@@ -2449,6 +2457,7 @@ const cardHtml = `
             
             ${missingHtml}
             ${attendanceHtml}
+            ${pointsButtonHtml}
             <div class="final-result">
               ${finalHtml}
             </div>
@@ -2625,7 +2634,68 @@ function initVotingTimer() {
   setInterval(updateTimer, 1000);
 }
 initVotingTimer();
+function showPointsModal(data) {
+    if (!data || !data.points) return;
+    const p = data.points;
 
+    // تحديد الشارة حسب الدرجات المكتسبة
+    let badgeName = 'متدرب', badgeColor = '#94A3B8', badgeIcon = 'fa-seedling';
+    const g = p.grade;
+    if (g >= 7.5) { badgeName = 'مبدع'; badgeColor = '#C9971C'; badgeIcon = 'fa-crown'; }
+    else if (g >= 5) { badgeName = 'متميز'; badgeColor = '#7D42D3'; badgeIcon = 'fa-star'; }
+    else if (g >= 2.5) { badgeName = 'مجتهد'; badgeColor = '#3498DB'; badgeIcon = 'fa-medal'; }
+
+    const modalHtml = `
+        <div style="background:white; border-radius:20px; width:90%; max-width:400px; margin:0 auto; box-shadow:0 20px 35px rgba(0,0,0,0.2); overflow:hidden;">
+            <div style="background:linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%); padding:1.2rem; text-align:center;">
+                <h3 style="margin:0; color:white; font-size:1rem; display:flex; align-items:center; justify-content:center; gap:8px;">
+                    <i class="fas fa-trophy"></i> نقاط المشاركة والتفاعل
+                </h3>
+            </div>
+
+            <div style="padding:1.2rem;">
+
+                <div style="text-align:center; margin-bottom:1.2rem;">
+                    <div style="font-size:2.5rem; font-weight:800; color:#2C3A61; line-height:1;">${p.totalPoints}</div>
+                    <div style="font-size:0.85rem; color:#5D6D9E; margin-top:4px;">نقطة مشاركة</div>
+                    <div style="display:inline-flex; align-items:center; gap:6px; margin-top:10px; background:${badgeColor}1A; color:${badgeColor}; padding:5px 16px; border-radius:20px; font-size:0.85rem; font-weight:700;">
+                        <i class="fas ${badgeIcon}"></i> ${badgeName}
+                    </div>
+                </div>
+
+                <div style="display:flex; gap:10px; margin-bottom:0.5rem;">
+                    <div style="flex:1; background:rgba(29,158,117,0.08); border-radius:12px; padding:12px; text-align:center;">
+                        <div style="font-size:1.3rem; font-weight:700; color:#1D9E75;">${p.grade}</div>
+                        <div style="font-size:0.72rem; color:#1D9E75; margin-top:2px;">درجة مكتسبة</div>
+                    </div>
+                    <div style="flex:1; background:rgba(214,66,125,0.08); border-radius:12px; padding:12px; text-align:center;">
+                        <div style="font-size:1.3rem; font-weight:700; color:#D6427D;">${p.totalViolations}</div>
+                        <div style="font-size:0.72rem; color:#D6427D; margin-top:2px;">مخالفة</div>
+                    </div>
+                </div>
+
+                ${p.totalViolations > 0 ? `
+                <div style="background:rgba(214,66,125,0.06); border-radius:10px; padding:8px 12px; text-align:center; font-size:0.75rem; color:#D6427D;">
+                    <i class="fas fa-circle-exclamation"></i> يُخصم ${p.violationDeduction} درجة من بند المشاركة
+                </div>` : ''}
+
+            </div>
+
+            <div style="padding:0.6rem 1.2rem 1.2rem; text-align:center;">
+                <button onclick="this.closest('.modal-details').remove()" style="background:transparent; color:#7D42D3; border:1px solid rgba(125,66,211,0.35); padding:7px 24px; border-radius:20px; cursor:pointer; font-size:0.82rem; font-weight:600;">
+                    إغلاق
+                </button>
+            </div>
+        </div>
+    `;
+
+    const overlay = document.createElement('div');
+    overlay.className = 'modal-details';
+    overlay.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; z-index:10000; padding:1rem;';
+    overlay.innerHTML = modalHtml;
+    overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
+    document.body.appendChild(overlay);
+}
     // ============================================
 //      نافذة تفاصيل الدرجات المنبثقة
 // ============================================
@@ -2748,7 +2818,14 @@ function bindDetailsButtons(studentDetailsData) {
             showGradeDetails(period, window.currentStudentDetails);
         };
         
-        btn.addEventListener('click', window.detailsClickHandler);
+btn.addEventListener('click', window.detailsClickHandler);
+    });
+
+    // ربط زر النقاط
+    document.querySelectorAll('.points-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            showPointsModal(window.currentStudentDetails);
+        });
     });
 }
     // ============================================
