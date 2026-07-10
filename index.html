@@ -2414,7 +2414,7 @@ const attendanceHtml = student.attendance ? `
 if (student.points) {
   pointsButtonHtml = `
     <button class="points-btn" data-student-id="${student.id || ''}" style="margin:4px 1.3rem 0; background:rgba(125,66,211,0.06); color:#7D42D3; border:1px solid rgba(125,66,211,0.25); padding:11px; border-radius:12px; cursor:pointer; font-size:0.9rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; width:calc(100% - 2.6rem);">
-      <i class="fas fa-trophy"></i> نقاطي وترتيبي
+      <i class="fas fa-trophy"></i> النقاط والمخالفات
     </button>
   `;
 }
@@ -2650,7 +2650,7 @@ function showPointsModal(data) {
         <div style="background:white; border-radius:20px; width:90%; max-width:400px; margin:0 auto; box-shadow:0 20px 35px rgba(0,0,0,0.2); overflow:hidden;">
             <div style="background:linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%); padding:1.2rem; text-align:center;">
                 <h3 style="margin:0; color:white; font-size:1rem; display:flex; align-items:center; justify-content:center; gap:8px;">
-                    <i class="fas fa-trophy"></i> نقاط المشاركة والتفاعل
+                    <i class="fas fa-trophy"></i> نظام النقاط والمخالفات
                 </h3>
             </div>
 
