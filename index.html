@@ -2651,9 +2651,11 @@ function showPointsModal(data) {
     let badgeName = 'متدرب', badgeColor = '#94A3B8', badgeIcon = 'fa-seedling';
     let nextThreshold = 10, prevThreshold = 0, nextName = 'مجتهد', isMax = false;
     const pts = p.totalPoints;
+   let nextIcon = 'fa-medal', nextColor = '#3498DB';
     if (pts >= 30) { badgeName = 'مبدع'; badgeColor = '#C9971C'; badgeIcon = 'fa-crown'; isMax = true; }
-    else if (pts >= 20) { badgeName = 'متميز'; badgeColor = '#7D42D3'; badgeIcon = 'fa-star'; prevThreshold = 20; nextThreshold = 30; nextName = 'مبدع'; }
-    else if (pts >= 10) { badgeName = 'مجتهد'; badgeColor = '#3498DB'; badgeIcon = 'fa-medal'; prevThreshold = 10; nextThreshold = 20; nextName = 'متميز'; }
+    else if (pts >= 20) { badgeName = 'متميز'; badgeColor = '#7D42D3'; badgeIcon = 'fa-star'; prevThreshold = 20; nextThreshold = 30; nextName = 'مبدع'; nextIcon = 'fa-crown'; nextColor = '#C9971C'; }
+    else if (pts >= 10) { badgeName = 'مجتهد'; badgeColor = '#3498DB'; badgeIcon = 'fa-medal'; prevThreshold = 10; nextThreshold = 20; nextName = 'متميز'; nextIcon = 'fa-star'; nextColor = '#7D42D3'; }
+    else { nextIcon = 'fa-medal'; nextColor = '#3498DB'; }
 
     let progressHtml = '';
     if (isMax) {
@@ -2668,8 +2670,8 @@ function showPointsModal(data) {
         progressHtml = `
         <div style="margin-top:1rem;">
             <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:#5D6D9E; margin-bottom:5px;">
-                <span>${badgeName}</span>
-                <span>${nextName}</span>
+                <span><i class="fas ${badgeIcon}" style="color:${badgeColor};"></i> ${badgeName}</span>
+                <span><i class="fas ${nextIcon}" style="color:${nextColor};"></i> ${nextName}</span>
             </div>
             <div style="background:rgba(0,0,0,0.06); border-radius:8px; height:8px; overflow:hidden;">
                 <div style="width:${filled}%; height:100%; background:linear-gradient(90deg, #7D42D3, #2C3A61); border-radius:8px; transition:width 0.6s ease;"></div>
