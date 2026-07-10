@@ -2413,7 +2413,7 @@ const attendanceHtml = student.attendance ? `
         let pointsButtonHtml = '';
 if (student.points) {
   pointsButtonHtml = `
-    <button class="points-btn" data-student-id="${student.id || ''}" style="margin:4px 1.3rem 0; background:rgba(125,66,211,0.06); color:#7D42D3; border:1px solid rgba(125,66,211,0.25); padding:11px; border-radius:12px; cursor:pointer; font-size:0.9rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; width:calc(100% - 2.6rem);">
+    <button class="points-btn" data-student-id="${student.id || ''}" style="margin:4px 1.3rem 0; background:rgba(125,66,211,0.06); color:#7D42D3; border:1px solid rgba(125,66,211,0.25); padding:11px; border-radius:12px; cursor:pointer; font-size:0.9rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; width:calc(100% - 2.6rem); font-family:inherit;">
       <i class="fas fa-trophy"></i> النقاط والمخالفات
     </button>
   `;
@@ -2667,7 +2667,7 @@ function showPointsModal(data) {
                 <div style="width:${filled}%; height:100%; background:linear-gradient(90deg, #7D42D3, #2C3A61); border-radius:8px; transition:width 0.6s ease;"></div>
             </div>
             <div style="text-align:center; font-size:0.75rem; color:#7D42D3; font-weight:600; margin-top:6px;">
-                <i class="fas fa-bullseye"></i> تبقّى ${remaining} نقطة لتصبح ${nextName}
+                <i class="fas fa-bullseye"></i> تبقّى ${remaining} نقاط لتصبح ${nextName}
             </div>
         </div>`;
     }
@@ -2684,7 +2684,7 @@ function showPointsModal(data) {
 
                 <div style="text-align:center; margin-bottom:1.2rem;">
                     <div style="font-size:2.5rem; font-weight:800; color:#2C3A61; line-height:1;">${p.totalPoints}</div>
-                    <div style="font-size:0.85rem; color:#5D6D9E; margin-top:4px;">نقطة مشاركة</div>
+                    <div style="font-size:0.85rem; color:#5D6D9E; margin-top:4px;">نقاط مشاركة</div>
                     <div style="display:inline-flex; align-items:center; gap:6px; margin-top:10px; background:${badgeColor}1A; color:${badgeColor}; padding:5px 16px; border-radius:20px; font-size:0.85rem; font-weight:700;">
                         <i class="fas ${badgeIcon}"></i> ${badgeName}
                     </div>
