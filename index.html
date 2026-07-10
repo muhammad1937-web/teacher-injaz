@@ -2639,12 +2639,38 @@ function showPointsModal(data) {
     if (!data || !data.points) return;
     const p = data.points;
 
-    // تحديد الشارة حسب الدرجات المكتسبة
+   // تحديد الشارة حسب النقاط
     let badgeName = 'متدرب', badgeColor = '#94A3B8', badgeIcon = 'fa-seedling';
-    const g = p.grade;
-    if (g >= 7.5) { badgeName = 'مبدع'; badgeColor = '#C9971C'; badgeIcon = 'fa-crown'; }
-    else if (g >= 5) { badgeName = 'متميز'; badgeColor = '#7D42D3'; badgeIcon = 'fa-star'; }
-    else if (g >= 2.5) { badgeName = 'مجتهد'; badgeColor = '#3498DB'; badgeIcon = 'fa-medal'; }
+    let nextThreshold = 10, prevThreshold = 0, nextName = 'مجتهد', isMax = false;
+    const pts = p.totalPoints;
+    if (pts >= 30) { badgeName = 'مبدع'; badgeColor = '#C9971C'; badgeIcon = 'fa-crown'; isMax = true; }
+    else if (pts >= 20) { badgeName = 'متميز'; badgeColor = '#7D42D3'; badgeIcon = 'fa-star'; prevThreshold = 20; nextThreshold = 30; nextName = 'مبدع'; }
+    else if (pts >= 10) { badgeName = 'مجتهد'; badgeColor = '#3498DB'; badgeIcon = 'fa-medal'; prevThreshold = 10; nextThreshold = 20; nextName = 'متميز'; }
+
+    let progressHtml = '';
+    if (isMax) {
+        progressHtml = `
+        <div style="background:rgba(201,151,28,0.08); border-radius:12px; padding:12px; text-align:center; margin-top:1rem;">
+            <span style="font-size:0.82rem; color:#C9971C; font-weight:600;"><i class="fas fa-crown"></i> وصلت لأعلى مستوى!</span>
+        </div>`;
+    } else {
+        const remaining = nextThreshold - pts;
+        const range = nextThreshold - prevThreshold;
+        const filled = ((pts - prevThreshold) / range) * 100;
+        progressHtml = `
+        <div style="margin-top:1rem;">
+            <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:#5D6D9E; margin-bottom:5px;">
+                <span>${badgeName}</span>
+                <span>${nextName}</span>
+            </div>
+            <div style="background:rgba(0,0,0,0.06); border-radius:8px; height:8px; overflow:hidden;">
+                <div style="width:${filled}%; height:100%; background:linear-gradient(90deg, #7D42D3, #2C3A61); border-radius:8px; transition:width 0.6s ease;"></div>
+            </div>
+            <div style="text-align:center; font-size:0.75rem; color:#7D42D3; font-weight:600; margin-top:6px;">
+                <i class="fas fa-bullseye"></i> تبقّى ${remaining} نقطة لتصبح ${nextName}
+            </div>
+        </div>`;
+    }
 
     const modalHtml = `
         <div style="background:white; border-radius:20px; width:90%; max-width:400px; margin:0 auto; box-shadow:0 20px 35px rgba(0,0,0,0.2); overflow:hidden;">
@@ -2679,6 +2705,8 @@ function showPointsModal(data) {
                 <div style="background:rgba(214,66,125,0.06); border-radius:10px; padding:8px 12px; text-align:center; font-size:0.75rem; color:#D6427D;">
                     <i class="fas fa-circle-exclamation"></i> يُخصم ${p.violationDeduction} درجة من بند المشاركة
                 </div>` : ''}
+
+                ${progressHtml}
 
             </div>
 
