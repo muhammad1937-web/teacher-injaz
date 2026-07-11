@@ -946,14 +946,18 @@
       text-align: center;
     }
   .student-avatar {
-      width: 42px;
-      height: 42px;
+      width: 38px;
+      height: 38px;
       border-radius: 50%;
       background: rgba(var(--primary-dark-rgb), 0.07);
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
+    }
+    .student-avatar i {
+      font-size: 1.05rem;
+      color: var(--primary-dark);
     }
     .student-avatar i {
       font-size: 1.2rem;
@@ -2442,10 +2446,12 @@ const cardHtml = `
   </div>
             
            <div class="student-info">
-              <div class="student-avatar">
-                <i class="fas fa-user-graduate"></i>
+              <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                <div class="student-avatar">
+                  <i class="fas fa-user-graduate"></i>
+                </div>
+                <p class="student-name">${student.name}</p>
               </div>
-              <p class="student-name">${student.name}</p>
               <p class="student-details">${student.gradeLevel} | الفصل ${student.section}</p>
             </div>
             
