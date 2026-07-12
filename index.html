@@ -1627,6 +1627,56 @@
   border-color: rgba(125,66,211,0.45) !important;
   transform: translateY(-1px);
 }
+ /* ===== إصلاح تجاوز الخانات على شاشات الجوال ===== */
+.query-input,
+.ai-input {
+  min-width: 0 !important;
+  box-sizing: border-box !important;
+  max-width: 100% !important;
+}
+
+.input-group,
+.ai-input-group,
+.query-box,
+.grades-query-container,
+.ai-assistant-container {
+  max-width: 100% !important;
+  box-sizing: border-box !important;
+}
+
+.ai-input-group {
+  flex-wrap: nowrap !important;
+}
+
+@media (max-width: 768px) {
+  .input-group {
+    flex-direction: column !important;
+  }
+  .query-input,
+  .query-btn {
+    width: 100% !important;
+  }
+  .ai-input-group {
+    gap: 6px !important;
+  }
+  .ai-send-btn {
+    width: 38px !important;
+    height: 38px !important;
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 400px) {
+  .query-input,
+  .ai-input {
+    padding: 10px 12px !important;
+    font-size: 0.9rem !important;
+  }
+  .ai-send-btn {
+    width: 36px !important;
+    height: 36px !important;
+  }
+}   
   </style>
 </head>
 <body>
