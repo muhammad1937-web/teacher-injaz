@@ -994,6 +994,10 @@
       border-radius: 12px;
       padding: 11px 10px;
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 118px;
     }
     .grade-card span:first-child {
       font-size: 0.8rem;
@@ -1006,13 +1010,20 @@
       font-weight: 700;
       color: var(--primary-dark);
       margin-bottom: 8px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-   .grade-card .missing-value {
-      font-size: 0.82rem;
+    .grade-card .missing-value {
+      font-size: 0.85rem;
       color: var(--warning-red);
       font-weight: 500;
-      margin: 11px 0;
-      display: block;
+      margin: 0;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   .final-result {
       background: linear-gradient(135deg, rgba(125,66,211,0.08), rgba(44,58,97,0.05));
