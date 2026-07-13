@@ -1842,10 +1842,10 @@
     </div>
     
     <h3 class="voting-subtitle">بعد مشاهدة المشاريع، شاركنا رأيك</h3>
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeTarTJfRZdHmsQVs3mz2WGfuJAEX9QYrEwZpBPq8cvHZhpnQ/viewform" target="_blank" class="vote-btn">
+    <button onclick="showVoteModal()" class="vote-btn" style="font-family:inherit;">
       <i class="fas fa-vote-yea"></i>
       <span>انقر هنا للتصويت</span>
-    </a>
+    </button>
     
     <!-- حاوية عرض النتائج الجديدة (بدلاً من الـ iframe القديم) -->
     <div id="votingResultsContainer" style="margin-top: 2rem;">
@@ -2720,6 +2720,121 @@ function initVotingTimer() {
   setInterval(updateTimer, 1000);
 }
 initVotingTimer();
+    // ============================================
+//      نافذة التصويت على المشاريع
+// ============================================
+const VOTING_API = 'https://script.google.com/macros/s/AKfycbx3aUUhzb4nHFVV0fiR-bqNYAWrrmrGOrIggleJONU35xdiQfSGrZ8NFz49rHTKDzSU/exec';
+
+const VOTING_PROJECTS = [
+  { name: 'العرض التقديمي', icon: 'fa-file-powerpoint', color: '#2C3A61' },
+  { name: 'التصميم الجرافيكي', icon: 'fa-palette', color: '#7D42D3' },
+  { name: 'الموقع الإلكتروني', icon: 'fa-globe', color: '#3498DB' }
+];
+
+let selectedProject = null;
+
+function showVoteModal() {
+  selectedProject = null;
+
+  const projectsHtml = VOTING_PROJECTS.map((p, i) => `
+    <div class="vote-option" data-project="${p.name}" style="display:flex; align-items:center; gap:10px; padding:12px; border:1.5px solid var(--border-color); border-radius:12px; margin-bottom:8px; cursor:pointer; transition:all 0.25s ease;">
+      <i class="fas ${p.icon}" style="color:${p.color}; font-size:1.1rem; width:22px; text-align:center;"></i>
+      <span style="font-size:0.9rem; font-weight:600; color:var(--primary-dark);">${p.name}</span>
+    </div>
+  `).join('');
+
+  const modalHtml = `
+    <div style="background:white; border-radius:20px; width:90%; max-width:400px; margin:0 auto; box-shadow:0 20px 35px rgba(0,0,0,0.2); overflow:hidden;">
+      <div style="background:linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%); padding:1.1rem; text-align:center;">
+        <h3 style="margin:0; color:white; font-size:1rem; display:flex; align-items:center; justify-content:center; gap:8px;">
+          <i class="fas fa-check-to-slot"></i> التصويت للمشاريع
+        </h3>
+      </div>
+
+      <div style="padding:1.2rem;">
+        <input type="text" id="voteStudentId" placeholder="أدخل رقمك الخاص هنا..." maxlength="20"
+          style="width:100%; box-sizing:border-box; padding:11px 14px; border:2px solid var(--border-color); border-radius:12px; font-size:0.95rem; font-family:inherit; text-align:right; outline:none; margin-bottom:1rem;">
+
+        <p style="font-size:0.8rem; color:var(--text-light); font-weight:600; margin:0 0 8px;">اختر المشروع:</p>
+        ${projectsHtml}
+
+        <div id="voteMessage" style="display:none; border-radius:10px; padding:10px; text-align:center; font-size:0.82rem; margin-top:10px;"></div>
+      </div>
+
+      <div style="padding:0.4rem 1.2rem 1.2rem; display:flex; gap:8px; justify-content:center;">
+        <button id="confirmVoteBtn" style="background:linear-gradient(135deg,#2C3A61,#7D42D3); color:white; border:none; padding:9px 24px; border-radius:20px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
+          <i class="fas fa-paper-plane"></i> تأكيد التصويت
+        </button>
+        <button onclick="this.closest('.modal-details').remove()" style="background:transparent; color:#7D42D3; border:1px solid rgba(125,66,211,0.35); padding:9px 22px; border-radius:20px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
+          إغلاق
+        </button>
+      </div>
+    </div>
+  `;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-details';
+  overlay.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; z-index:10000; padding:1rem;';
+  overlay.innerHTML = modalHtml;
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+  document.body.appendChild(overlay);
+
+  // اختيار المشروع
+  overlay.querySelectorAll('.vote-option').forEach(opt => {
+    opt.addEventListener('click', function() {
+      overlay.querySelectorAll('.vote-option').forEach(o => {
+        o.style.borderColor = 'var(--border-color)';
+        o.style.background = 'transparent';
+      });
+      this.style.borderColor = '#7D42D3';
+      this.style.background = 'rgba(125,66,211,0.06)';
+      selectedProject = this.dataset.project;
+    });
+  });
+
+  // تأكيد التصويت
+  overlay.querySelector('#confirmVoteBtn').addEventListener('click', () => submitVoteToServer(overlay));
+}
+ async function submitVoteToServer(overlay) {
+  const idInput = overlay.querySelector('#voteStudentId');
+  const msgBox = overlay.querySelector('#voteMessage');
+  const btn = overlay.querySelector('#confirmVoteBtn');
+  const studentId = idInput.value.trim();
+
+  function showMsg(text, isError) {
+    msgBox.style.display = 'block';
+    msgBox.style.background = isError ? 'rgba(214,66,125,0.08)' : 'rgba(29,158,117,0.08)';
+    msgBox.style.color = isError ? '#D6427D' : '#1D9E75';
+    msgBox.innerHTML = `<i class="fas ${isError ? 'fa-circle-exclamation' : 'fa-circle-check'}"></i> ${text}`;
+  }
+
+  if (!studentId) { showMsg('الرجاء إدخال رقمك الخاص', true); return; }
+  if (!selectedProject) { showMsg('الرجاء اختيار مشروع', true); return; }
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جارٍ التسجيل...';
+
+  try {
+    const url = `${VOTING_API}?action=vote&id=${encodeURIComponent(studentId)}&project=${encodeURIComponent(selectedProject)}`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (data.status === 'success') {
+      showMsg(data.message, false);
+      btn.style.display = 'none';
+      if (typeof updateVotingResults === 'function') updateVotingResults();
+      setTimeout(() => overlay.remove(), 2500);
+    } else {
+      showMsg(data.message, true);
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> تأكيد التصويت';
+    }
+  } catch (err) {
+    showMsg('حدث خطأ، حاول مرة أخرى', true);
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> تأكيد التصويت';
+  }
+}   
 function showPointsModal(data) {
     if (!data || !data.points) return;
     const p = data.points;
