@@ -2594,7 +2594,7 @@ let updateIntervalVotes;
 
 async function fetchVotingResults() {
   try {
-    const response = await fetch(`${VOTING_API_URL}?t=${Date.now()}`);
+    const response = await fetch(`${VOTING_API}?action=getVotes&t=${Date.now()}`);
     const data = await response.json();
     if (data.status === "success") {
       displayVotingResults(data);
