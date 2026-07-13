@@ -2733,7 +2733,7 @@ const VOTING_PROJECTS = [
 
 let selectedProject = null;
 
-function showVoteModal() {
+window.showVoteModal = function() {
   selectedProject = null;
 
   const projectsHtml = VOTING_PROJECTS.map((p, i) => `
@@ -2794,7 +2794,7 @@ function showVoteModal() {
 
   // تأكيد التصويت
   overlay.querySelector('#confirmVoteBtn').addEventListener('click', () => submitVoteToServer(overlay));
-}
+};
  async function submitVoteToServer(overlay) {
   const idInput = overlay.querySelector('#voteStudentId');
   const msgBox = overlay.querySelector('#voteMessage');
