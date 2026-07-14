@@ -2081,9 +2081,9 @@
 
 <!-- قسم الاستفسارات -->
 <div class="inquiries-container fade-in">
-  <a href="https://docs.google.com/forms/d/e/1FAIpQLScP82hCVuCxuIl_FBXQpZJyGbR6kWGVEuT2Y6oKNPm2TfIwcA/viewform" target="_blank" class="inquiry-btn primary">
+  <button onclick="showUploadModal()" class="inquiry-btn primary" style="font-family:inherit;">
     <i class="fas fa-upload"></i> مشاريع الطلاب التعليمية
-  </a>
+  </button>
 </div>
 
 <!-- زر العودة للأعلى -->
@@ -2733,7 +2733,98 @@ const VOTING_PROJECTS = [
 ];
 
 let selectedProject = null;
+// ============================================
+//      نافذة رفع المشاريع
+// ============================================
+const UPLOAD_FORM_BASE = 'https://docs.google.com/forms/d/e/1FAIpQLSdS-QVnWMr-gd8P574tdEDEpQ5_rx-k-roUA-Qbkx86uQY4kQ/viewform?usp=pp_url';
+const UPLOAD_ENTRIES = {
+  name: 'entry.1571122304',
+  grade: 'entry.1816558351',
+  section: 'entry.1812195562'
+};
 
+window.showUploadModal = function() {
+  const modalHtml = `
+    <div id="uploadModalBox" style="background:white; border-radius:20px; width:90%; max-width:420px; margin:0 auto; box-shadow:0 20px 35px rgba(0,0,0,0.2); overflow:hidden;">
+      <div style="background:linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%); padding:1.1rem; text-align:center;">
+        <h3 style="margin:0; color:white; font-size:1rem; display:flex; align-items:center; justify-content:center; gap:8px;">
+          <i class="fas fa-cloud-arrow-up"></i> رفع المشروع
+        </h3>
+      </div>
+
+      <div id="uploadStep1" style="padding:1.3rem;">
+        <p style="font-size:0.85rem; color:var(--text-medium); margin:0 0 12px; text-align:center;">أدخل رقمك الخاص للمتابعة</p>
+        <input type="text" id="uploadStudentId" placeholder="رقمك الخاص..." maxlength="20"
+          style="width:100%; box-sizing:border-box; padding:11px 14px; border:2px solid var(--border-color); border-radius:12px; font-size:0.95rem; font-family:inherit; text-align:right; outline:none;">
+        <div id="uploadMessage" style="display:none; border-radius:10px; padding:10px; text-align:center; font-size:0.82rem; margin-top:12px;"></div>
+      </div>
+
+      <div id="uploadStep2" style="display:none; padding:0;">
+        <iframe id="uploadFrame" src="" style="width:100%; height:460px; border:none;"></iframe>
+      </div>
+
+      <div style="padding:0.4rem 1.3rem 1.3rem; display:flex; gap:8px; justify-content:center;">
+        <button id="uploadContinueBtn" style="background:linear-gradient(135deg,#2C3A61,#7D42D3); color:white; border:none; padding:9px 24px; border-radius:20px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
+          <i class="fas fa-arrow-left"></i> متابعة
+        </button>
+        <button onclick="this.closest('.modal-details').remove()" style="background:transparent; color:#7D42D3; border:1px solid rgba(125,66,211,0.35); padding:9px 22px; border-radius:20px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
+          إغلاق
+        </button>
+      </div>
+    </div>
+  `;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-details';
+  overlay.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; z-index:10000; padding:1rem; overflow-y:auto;';
+  overlay.innerHTML = modalHtml;
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+  document.body.appendChild(overlay);
+
+  overlay.querySelector('#uploadContinueBtn').addEventListener('click', () => verifyAndOpenForm(overlay));
+};
+
+async function verifyAndOpenForm(overlay) {
+  const idInput = overlay.querySelector('#uploadStudentId');
+  const msgBox = overlay.querySelector('#uploadMessage');
+  const btn = overlay.querySelector('#uploadContinueBtn');
+  const studentId = idInput.value.trim();
+
+  function showMsg(text, isError) {
+    msgBox.style.display = 'block';
+    msgBox.style.background = isError ? 'rgba(214,66,125,0.08)' : 'rgba(29,158,117,0.08)';
+    msgBox.style.color = isError ? '#D6427D' : '#1D9E75';
+    msgBox.innerHTML = `<i class="fas ${isError ? 'fa-circle-exclamation' : 'fa-circle-check'}"></i> ${text}`;
+  }
+
+  if (!studentId) { showMsg('الرجاء إدخال رقمك الخاص', true); return; }
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جارٍ التحقق...';
+
+  try {
+    const url = `${VOTING_API}?action=checkUpload&id=${encodeURIComponent(studentId)}`;
+    const res = await fetch(url);
+    const data = await res.json();
+
+    if (data.status === 'success') {
+      const formUrl = `${UPLOAD_FORM_BASE}&${UPLOAD_ENTRIES.name}=${encodeURIComponent(data.name)}&${UPLOAD_ENTRIES.grade}=${encodeURIComponent(data.gradeLevel)}&${UPLOAD_ENTRIES.section}=${encodeURIComponent(data.section)}&embedded=true`;
+      overlay.querySelector('#uploadFrame').src = formUrl;
+      overlay.querySelector('#uploadStep1').style.display = 'none';
+      overlay.querySelector('#uploadStep2').style.display = 'block';
+      btn.style.display = 'none';
+      overlay.querySelector('#uploadModalBox').style.maxWidth = '480px';
+    } else {
+      showMsg(data.message, true);
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-arrow-left"></i> متابعة';
+    }
+  } catch (err) {
+    showMsg('حدث خطأ، حاول مرة أخرى', true);
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-arrow-left"></i> متابعة';
+  }
+}
 window.showVoteModal = function() {
   selectedProject = null;
 
