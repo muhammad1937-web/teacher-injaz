@@ -2734,21 +2734,21 @@ const VOTING_PROJECTS = [
 
 let selectedProject = null;
 // ============================================
-//      نافذة رفع المشاريع
+//      نافذة تسليم المشاريع (رفع داخلي)
 // ============================================
-const UPLOAD_FORM_BASE = 'https://docs.google.com/forms/d/e/1FAIpQLSdS-QVnWMr-gd8P574tdEDEpQ5_rx-k-roUA-Qbkx86uQY4kQ/viewform?usp=pp_url';
-const UPLOAD_ENTRIES = {
-  name: 'entry.1571122304',
-  grade: 'entry.1816558351',
-  section: 'entry.1812195562'
-};
+const MAX_FILE_SIZE = 30 * 1024 * 1024; // 30 ميجابايت
+let uploadStudentData = null;
+let uploadSelectedType = null;
 
 window.showUploadModal = function() {
+  uploadStudentData = null;
+  uploadSelectedType = null;
+
   const modalHtml = `
     <div id="uploadModalBox" style="background:white; border-radius:20px; width:90%; max-width:420px; margin:0 auto; box-shadow:0 20px 35px rgba(0,0,0,0.2); overflow:hidden;">
       <div style="background:linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%); padding:1.1rem; text-align:center;">
         <h3 style="margin:0; color:white; font-size:1rem; display:flex; align-items:center; justify-content:center; gap:8px;">
-          <i class="fas fa-cloud-arrow-up"></i> رفع المشروع
+          <i class="fas fa-cloud-arrow-up"></i> تسليم المشروع
         </h3>
       </div>
 
@@ -2759,12 +2759,28 @@ window.showUploadModal = function() {
         <div id="uploadMessage" style="display:none; border-radius:10px; padding:10px; text-align:center; font-size:0.82rem; margin-top:12px;"></div>
       </div>
 
-      <div id="uploadStep2" style="display:none; padding:0;">
-        <iframe id="uploadFrame" src="" style="width:100%; height:460px; border:none;"></iframe>
+      <div id="uploadStep2" style="display:none; padding:1.3rem;">
+        <div style="background:rgba(44,58,97,0.05); border-radius:12px; padding:12px; text-align:center; margin-bottom:14px;">
+          <p id="uploadStudentName" style="font-size:0.95rem; font-weight:700; color:var(--primary-dark); margin:0 0 3px;"></p>
+          <p id="uploadStudentClass" style="font-size:0.8rem; color:var(--text-medium); margin:0;"></p>
+        </div>
+
+        <p style="font-size:0.8rem; color:var(--text-light); font-weight:600; margin:0 0 8px;">نوع المشروع:</p>
+        <div id="uploadTypeOptions" style="margin-bottom:14px;"></div>
+
+        <p style="font-size:0.8rem; color:var(--text-light); font-weight:600; margin:0 0 8px;">ملف المشروع:</p>
+        <label for="uploadFileInput" style="display:flex; align-items:center; justify-content:center; gap:8px; padding:14px; border:2px dashed rgba(125,66,211,0.35); border-radius:12px; cursor:pointer; color:#7D42D3; font-size:0.85rem; font-weight:600;">
+          <i class="fas fa-paperclip"></i> <span id="uploadFileLabel">اختر ملف مشروعك</span>
+        </label>
+        <input type="file" id="uploadFileInput" style="display:none;">
+
+        <p style="font-size:0.7rem; color:var(--text-light); text-align:center; margin:8px 0 0;">الحد الأقصى 30 ميجابايت — للفيديو صوّر بجودة 720p</p>
+
+        <div id="uploadMessage2" style="display:none; border-radius:10px; padding:10px; text-align:center; font-size:0.82rem; margin-top:12px;"></div>
       </div>
 
       <div style="padding:0.4rem 1.3rem 1.3rem; display:flex; gap:8px; justify-content:center;">
-        <button id="uploadContinueBtn" style="background:linear-gradient(135deg,#2C3A61,#7D42D3); color:white; border:none; padding:9px 24px; border-radius:20px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
+        <button id="uploadActionBtn" style="background:linear-gradient(135deg,#2C3A61,#7D42D3); color:white; border:none; padding:9px 24px; border-radius:20px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
           <i class="fas fa-arrow-left"></i> متابعة
         </button>
         <button onclick="this.closest('.modal-details').remove()" style="background:transparent; color:#7D42D3; border:1px solid rgba(125,66,211,0.35); padding:9px 22px; border-radius:20px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
@@ -2781,13 +2797,22 @@ window.showUploadModal = function() {
   overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
   document.body.appendChild(overlay);
 
-  overlay.querySelector('#uploadContinueBtn').addEventListener('click', () => verifyAndOpenForm(overlay));
+  overlay.querySelector('#uploadActionBtn').addEventListener('click', () => handleUploadAction(overlay));
 };
+    async function handleUploadAction(overlay) {
+  const step2 = overlay.querySelector('#uploadStep2');
+  // إذا كنا في الخطوة الثانية → إرسال، وإلا → تحقق
+  if (step2.style.display === 'block') {
+    submitProjectFile(overlay);
+  } else {
+    verifyStudentForUpload(overlay);
+  }
+}
 
-async function verifyAndOpenForm(overlay) {
+async function verifyStudentForUpload(overlay) {
   const idInput = overlay.querySelector('#uploadStudentId');
   const msgBox = overlay.querySelector('#uploadMessage');
-  const btn = overlay.querySelector('#uploadContinueBtn');
+  const btn = overlay.querySelector('#uploadActionBtn');
   const studentId = idInput.value.trim();
 
   function showMsg(text, isError) {
@@ -2803,17 +2828,38 @@ async function verifyAndOpenForm(overlay) {
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جارٍ التحقق...';
 
   try {
-    const url = `${VOTING_API}?action=checkUpload&id=${encodeURIComponent(studentId)}`;
+    const url = `${VOTING_API}?action=checkSubmit&id=${encodeURIComponent(studentId)}&t=${Date.now()}`;
     const res = await fetch(url);
     const data = await res.json();
 
     if (data.status === 'success') {
-      const formUrl = `${UPLOAD_FORM_BASE}&${UPLOAD_ENTRIES.name}=${encodeURIComponent(data.name)}&${UPLOAD_ENTRIES.grade}=${encodeURIComponent(data.gradeLevel)}&${UPLOAD_ENTRIES.section}=${encodeURIComponent(data.section)}&embedded=true`;
-      overlay.querySelector('#uploadFrame').src = formUrl;
+      uploadStudentData = { id: studentId, name: data.name, gradeLevel: data.gradeLevel, section: data.section };
+      // عرض بيانات الطالب
+      overlay.querySelector('#uploadStudentName').textContent = data.name;
+      overlay.querySelector('#uploadStudentClass').textContent = `${data.gradeLevel} - الشعبة ${data.section}`;
+      // بناء خيارات نوع المشروع
+      const types = ['عرض تقديمي', 'صورة', 'بحث علمي', 'مقطع فيديو'];
+      const typeIcons = { 'عرض تقديمي': 'fa-file-powerpoint', 'صورة': 'fa-image', 'بحث علمي': 'fa-book', 'مقطع فيديو': 'fa-video' };
+      overlay.querySelector('#uploadTypeOptions').innerHTML = types.map(t => `
+        <div class="upload-type-opt" data-type="${t}" style="display:flex; align-items:center; gap:8px; padding:10px; border:1.5px solid var(--border-color); border-radius:10px; margin-bottom:6px; cursor:pointer; font-size:0.85rem;">
+          <i class="fas ${typeIcons[t]}" style="color:#7D42D3; width:20px; text-align:center;"></i> ${t}
+        </div>
+      `).join('');
+
+      overlay.querySelectorAll('.upload-type-opt').forEach(opt => {
+        opt.addEventListener('click', function() {
+          overlay.querySelectorAll('.upload-type-opt').forEach(o => { o.style.borderColor = 'var(--border-color)'; o.style.background = 'transparent'; });
+          this.style.borderColor = '#7D42D3';
+          this.style.background = 'rgba(125,66,211,0.06)';
+          uploadSelectedType = this.dataset.type;
+        });
+      });
+
+      // الانتقال للخطوة الثانية
       overlay.querySelector('#uploadStep1').style.display = 'none';
       overlay.querySelector('#uploadStep2').style.display = 'block';
-      btn.style.display = 'none';
-      overlay.querySelector('#uploadModalBox').style.maxWidth = '480px';
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال';
     } else {
       showMsg(data.message, true);
       btn.disabled = false;
@@ -2825,6 +2871,76 @@ async function verifyAndOpenForm(overlay) {
     btn.innerHTML = '<i class="fas fa-arrow-left"></i> متابعة';
   }
 }
+    async function submitProjectFile(overlay) {
+  const msgBox = overlay.querySelector('#uploadMessage2');
+  const btn = overlay.querySelector('#uploadActionBtn');
+  const fileInput = overlay.querySelector('#uploadFileInput');
+
+  function showMsg(text, isError) {
+    msgBox.style.display = 'block';
+    msgBox.style.background = isError ? 'rgba(214,66,125,0.08)' : 'rgba(29,158,117,0.08)';
+    msgBox.style.color = isError ? '#D6427D' : '#1D9E75';
+    msgBox.innerHTML = `<i class="fas ${isError ? 'fa-circle-exclamation' : 'fa-circle-check'}"></i> ${text}`;
+  }
+
+  if (!uploadSelectedType) { showMsg('الرجاء اختيار نوع المشروع', true); return; }
+  if (!fileInput.files || fileInput.files.length === 0) { showMsg('الرجاء اختيار ملف مشروعك', true); return; }
+
+  const file = fileInput.files[0];
+  if (file.size > MAX_FILE_SIZE) {
+    showMsg(`حجم الملف ${(file.size / 1024 / 1024).toFixed(1)} ميجا — الحد الأقصى 30 ميجا`, true);
+    return;
+  }
+
+  btn.disabled = true;
+  btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جارٍ الرفع...';
+
+  try {
+    // تحويل الملف إلى Base64
+    const base64 = await new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(',')[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
+
+    const payload = {
+      studentId: uploadStudentData.id,
+      projectType: uploadSelectedType,
+      fileData: base64,
+      fileName: file.name,
+      mimeType: file.type || 'application/octet-stream'
+    };
+
+    const res = await fetch(VOTING_API, {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
+    const data = await res.json();
+
+    if (data.status === 'success') {
+      showMsg(data.message, false);
+      btn.style.display = 'none';
+      setTimeout(() => overlay.remove(), 2800);
+    } else {
+      showMsg(data.message, true);
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال';
+    }
+  } catch (err) {
+    showMsg('حدث خطأ أثناء الرفع، حاول مرة أخرى', true);
+    btn.disabled = false;
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال';
+  }
+}
+    document.addEventListener('change', function(e) {
+  if (e.target && e.target.id === 'uploadFileInput') {
+    const label = document.getElementById('uploadFileLabel');
+    if (label && e.target.files.length > 0) {
+      label.textContent = e.target.files[0].name;
+    }
+  }
+});
 window.showVoteModal = function() {
   selectedProject = null;
 
