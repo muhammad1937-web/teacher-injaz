@@ -13,35 +13,35 @@
     /*     متغيرات الألوان - الأفق الرقمي        */
     /* ========================================= */
     :root {
-      --primary-dark: #2C3A61;
-      --primary-dark-rgb: 44, 58, 97;
-      --tech-blue: #2C3A61;
-      --tech-blue-rgb: 44, 58, 97;
-      --accent-teal: #7D42D3;
-      --accent-teal-rgb: 125, 66, 211;
-      --ai-teal: #6A35B2;
-      --ai-teal-rgb: 106, 53, 178;
-      --secondary-blue: #A0B2E8;
-      --secondary-blue-rgb: 160, 178, 232;
-      --light-bg: #F7F9FF;
-      --light-bg-rgb: 247, 249, 255;
+      --primary-dark: #16324F;
+      --primary-dark-rgb: 22, 50, 79;
+      --tech-blue: #16324F;
+      --tech-blue-rgb: 22, 50, 79;
+      --accent-teal: #0E9594;
+      --accent-teal-rgb: 14, 149, 148;
+      --ai-teal: #0B7A79;
+      --ai-teal-rgb: 11, 122, 121;
+      --secondary-blue: #7FC4C3;
+      --secondary-blue-rgb: 127, 196, 195;
+      --light-bg: #F7F9FA;
+      --light-bg-rgb: 247, 249, 250;
       --pure-white: #FFFFFF;
       --pure-white-rgb: 255, 255, 255;
-      --gold-excellence: #7D42D3;
-      --gold-excellence-rgb: 125, 66, 211;
-      --warning-red: #D6427D;
-      --warning-red-rgb: 214, 66, 125;
-      --text-dark: #2C3A61;
-      --text-medium: #3D4B81;
-      --text-light: #7B8AB8;
-      --text-subtitle: #5D6D9E;
-      --shadow-color: rgba(44, 58, 97, 0.08);
-      --border-color: rgba(44, 58, 97, 0.1);
-      --hover-color: rgba(125, 66, 211, 0.1);
-      --gradient-primary: linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%);
-      --gradient-accent: linear-gradient(135deg, #7D42D3 0%, #A0B2E8 100%);
-      --gradient-card: linear-gradient(to bottom, #FFFFFF, #F7F9FF);
-      --gradient-subtle: linear-gradient(135deg, rgba(125, 66, 211, 0.1), rgba(160, 178, 232, 0.05));
+      --gold-excellence: #E8A33D;
+      --gold-excellence-rgb: 232, 163, 61;
+      --warning-red: #C0392B;
+      --warning-red-rgb: 192, 57, 43;
+      --text-dark: #16324F;
+      --text-medium: #3E5570;
+      --text-light: #7A8B9E;
+      --text-subtitle: #5C7489;
+      --shadow-color: rgba(22, 50, 79, 0.08);
+      --border-color: rgba(22, 50, 79, 0.1);
+      --hover-color: rgba(14, 149, 148, 0.1);
+      --gradient-primary: linear-gradient(135deg, #16324F 0%, #0E9594 100%);
+      --gradient-accent: linear-gradient(135deg, #0E9594 0%, #7FC4C3 100%);
+      --gradient-card: linear-gradient(to bottom, #FFFFFF, #F7F9FA);
+      --gradient-subtle: linear-gradient(135deg, rgba(14, 149, 148, 0.1), rgba(127, 196, 195, 0.05));
       --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     }
 
@@ -59,8 +59,8 @@
       min-height: 100vh;
       padding-bottom: 3rem;
       background-image: 
-        radial-gradient(circle at 90% 10%, rgba(44, 58, 97, 0.03) 0%, transparent 20%),
-        radial-gradient(circle at 10% 90%, rgba(125, 66, 211, 0.03) 0%, transparent 20%);
+        radial-gradient(circle at 90% 10%, rgba(22, 50, 79, 0.03) 0%, transparent 20%),
+        radial-gradient(circle at 10% 90%, rgba(14, 149, 148, 0.03) 0%, transparent 20%);
       transition: background-color 0.5s ease, color 0.5s ease;
       overflow-x: hidden;
     }
@@ -77,7 +77,7 @@
       width: 100%;
       box-shadow: 0 2px 10px var(--shadow-color);
       border-bottom: 1px solid var(--border-color);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
     .notification-container {
       display: inline-block;
@@ -94,7 +94,7 @@
       color: var(--accent-teal);
       animation: ring 4s 0.7s ease-in-out infinite;
       transform-origin: 50% 4px;
-      font-size: 0.9rem;
+      font-size: 0.85rem;
     }
     @keyframes scroll { 0% { transform: translateX(0); } 100% { transform: translateX(100%); } }
     @keyframes ring {
@@ -127,19 +127,19 @@
       position: relative;
       border-bottom-left-radius: 25px;
       border-bottom-right-radius: 25px;
-      box-shadow: 0 10px 30px rgba(var(--primary-dark-rgb), 0.2);
+      box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.2);
       margin: 0;
       overflow: hidden;
       z-index: 1;
     }
-    .tech-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(44,58,97,0.75), rgba(125,66,211,0.65)); z-index: 1; }
+    .tech-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(22,50,79,0.75), rgba(14,149,148,0.65)); z-index: 1; }
     .header-content { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; }
     .header-logo { margin-bottom: 0.2rem; }
     .header-logo img { height: 56px !important; width: auto; filter: brightness(0) invert(1); transition: transform 0.3s ease; }
     .header-logo img:hover { transform: scale(1.05); }
     .header-text-content { text-align: center; width: 100%; position: relative; z-index: 2; }
-    .tech-header h1 { font-size: 1.5rem; font-weight: 800; margin: 0 0 0.3rem 0; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); color: white; letter-spacing: -0.5px; }
-    .tech-header p { font-size: 0.9rem; font-weight: 500; margin: 0; color: rgba(255, 255, 255, 0.9); }
+    .tech-header h1 { font-size: 1.4rem; font-weight: 800; margin: 0 0 0.3rem 0; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); color: white; letter-spacing: -0.5px; }
+    .tech-header p { font-size: 0.85rem; font-weight: 500; margin: 0; color: rgba(255, 255, 255, 0.9); }
     .tech-header .header-subtitle { color: rgba(255, 255, 255, 0.75); }
 
     /* ========================================= */
@@ -149,21 +149,26 @@
     .compact-date.new-position {
       background: rgba(var(--primary-dark-rgb), 0.05);
       color: var(--text-dark);
-      padding: 8px 18px;
-      border-radius: 25px;
-      font-size: 0.9rem;
+      padding: 8px 20px;
+      border-radius: 24px;
+      font-size: 0.85rem;
       font-weight: 700;
-      box-shadow: 0 4px 15px rgba(var(--primary-dark-rgb), 0.1);
+      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.1);
       border: 1px solid var(--border-color);
       position: static;
       transform: none;
       margin: 0 auto;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     }
-    .compact-date.new-position:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(var(--primary-dark-rgb), 0.15); background: rgba(var(--primary-dark-rgb), 0.08); }
-    .compact-date .separator { margin: 0 8px; opacity: 0.5; color: var(--accent-teal); }
+    .compact-date.new-position:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.15); background: rgba(var(--primary-dark-rgb), 0.08); }
+    .date-chip { display: inline-flex; align-items: center; gap: 6px; }
+    .date-chip i { color: var(--accent-teal); font-size: 0.95em; }
+    .date-divider { width: 1px; height: 14px; background: var(--border-color); flex-shrink: 0; }
 
     /* ========================================= */
     /*           شريط البحث                     */
@@ -174,18 +179,18 @@
       width: 100%;
       padding: 12px 50px 12px 20px;
       border: 2px solid var(--border-color);
-      border-radius: 30px;
+      border-radius: 24px;
       font-size: 1rem;
       font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
       background: var(--pure-white);
       color: var(--text-dark);
-      box-shadow: 0 4px 15px rgba(var(--primary-dark-rgb), 0.08);
+      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08);
       transition: var(--transition);
       outline: none;
       position: relative;
       z-index: 1002;
     }
-    .search-input:focus { border-color: var(--accent-teal); box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.15); padding-right: 55px; }
+    .search-input:focus { border-color: var(--accent-teal); box-shadow: 0 8px 20px rgba(var(--accent-teal-rgb), 0.15); padding-right: 55px; }
     .search-button {
       position: absolute;
       left: 10px;
@@ -203,9 +208,9 @@
       justify-content: center;
       transition: var(--transition);
       z-index: 1003;
-      box-shadow: 0 3px 10px rgba(var(--accent-teal-rgb), 0.3);
+      box-shadow: 0 2px 8px rgba(var(--accent-teal-rgb), 0.3);
     }
-    .search-button:hover { background: var(--ai-teal); transform: translateY(-50%) scale(1.05); box-shadow: 0 5px 15px rgba(var(--accent-teal-rgb), 0.4); }
+    .search-button:hover { background: var(--ai-teal); transform: translateY(-50%) scale(1.05); box-shadow: 0 8px 20px rgba(var(--accent-teal-rgb), 0.4); }
     .search-results {
       position: absolute;
       top: 100%;
@@ -213,8 +218,8 @@
       right: 0;
       background: var(--pure-white);
       color: var(--text-dark);
-      border-radius: 15px;
-      box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.15);
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.15);
       margin-top: 5px;
       z-index: 10000;
       max-height: 300px;
@@ -225,7 +230,7 @@
     .search-result-item { padding: 12px 20px; border-bottom: 1px solid rgba(var(--primary-dark-rgb), 0.08); cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 10px; }
     .search-result-item:last-child { border-bottom: none; }
     .search-result-item:hover { background: rgba(var(--accent-teal-rgb), 0.05); }
-    .search-result-item i { color: var(--accent-teal); font-size: 0.9rem; }
+    .search-result-item i { color: var(--accent-teal); font-size: 0.85rem; }
     .search-result-item span { flex: 1; }
     .no-results { padding: 15px 20px; text-align: center; color: var(--text-light); }
 
@@ -240,20 +245,20 @@
       max-width: 900px;
       margin: 1.5rem auto 2.5rem auto;
       padding: 1.5rem 1.8rem 1.3rem;
-      border-radius: 20px;
+      border-radius: 24px;
       position: relative;
       overflow: hidden;
       background: var(--gradient-card);
-      box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.08);
+      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08);
       border: 1px solid var(--border-color);
       transition: var(--transition);
     }
     .fame-bar-section::before { content: ''; position: absolute; top: 0; right: 5px; left: 5px; height: 5px; background: var(--gradient-accent); border-radius: 12px 0 0 0; transition: height 0.3s ease; }
     .fame-bar-section:hover::before { height: 6px; }
-    .fame-bar-section:hover { box-shadow: 0 15px 35px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); }
-    .fame-bar-title { display: flex; align-items: center; gap: 0.75rem; font-size: 1.2rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 0.1rem; }
-    .fame-bar-title i { font-size: 1.5rem; color: var(--gold-excellence); text-shadow: 0 2px 4px rgba(var(--gold-excellence-rgb), 0.3); }
-    .honors-subtitle { margin: 0 0 0.8rem 0; font-size: 0.95rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
+    .fame-bar-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); }
+    .fame-bar-title { display: flex; align-items: center; gap: 0.75rem; font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 0.1rem; }
+    .fame-bar-title i { font-size: 1.4rem; color: var(--gold-excellence); text-shadow: 0 2px 4px rgba(var(--gold-excellence-rgb), 0.3); }
+    .honors-subtitle { margin: 0 0 0.8rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
     .honors-subtitle:hover { color: var(--tech-blue); transform: none; background: transparent; border: none; box-shadow: none; }
     .students-container { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 0.5rem; }
     .students-list { display: flex; align-items: center; justify-content: center; gap: 2.5rem; width: 100%; flex-wrap: nowrap; padding: 0.5rem 0; overflow: visible; position: relative; }
@@ -264,13 +269,14 @@
   height: 95px;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0 6px 20px rgba(44, 58, 97, 0.25);
+  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.25);
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
+
     .student-item.active .student-image { border-color: var(--gold-excellence); box-shadow: 0 0 0 3px rgba(var(--gold-excellence-rgb), 0.3), 0 8px 25px rgba(0, 0, 0, 0.25); transform: scale(1.05); }
 .student-image:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(44, 58, 97, 0.3), 0 0 18px rgba(125, 66, 211, 0.3);
+  box-shadow: 0 8px 25px rgba(22, 50, 79, 0.3), 0 0 18px rgba(14, 149, 148, 0.3);
 }
     .student-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
     .student-image:hover img { transform: scale(1.1); }
@@ -289,13 +295,13 @@
       font-size: 0.85rem;
       font-weight: bold;
       transition: all 0.3s ease;
-      box-shadow: 0 3px 10px rgba(var(--accent-teal-rgb), 0.4);
+      box-shadow: 0 2px 8px rgba(var(--accent-teal-rgb), 0.4);
       z-index: 10;
       margin-top: 0.2rem;
     }
-    .info-toggle-btn:hover { background: var(--ai-teal); transform: scale(1.1); box-shadow: 0 5px 15px rgba(var(--accent-teal-rgb), 0.6); }
-    .student-item.active .info-toggle-btn { background: var(--gold-excellence); transform: rotate(45deg); box-shadow: 0 3px 10px rgba(var(--gold-excellence-rgb), 0.6); }
-    .student-item.active .info-toggle-btn:hover { background: #6A35B2; transform: rotate(45deg) scale(1.1); box-shadow: 0 5px 15px rgba(var(--gold-excellence-rgb), 0.8); }
+    .info-toggle-btn:hover { background: var(--ai-teal); transform: scale(1.1); box-shadow: 0 8px 20px rgba(var(--accent-teal-rgb), 0.6); }
+    .student-item.active .info-toggle-btn { background: var(--gold-excellence); transform: rotate(45deg); box-shadow: 0 2px 8px rgba(var(--gold-excellence-rgb), 0.6); }
+    .student-item.active .info-toggle-btn:hover { background: var(--ai-teal); transform: rotate(45deg) scale(1.1); box-shadow: 0 8px 20px rgba(var(--gold-excellence-rgb), 0.8); }
     .unified-student-info {
       position: absolute;
       top: -100px;
@@ -304,10 +310,10 @@
       background: var(--primary-dark);
       color: white;
       padding: 0.9rem 1.1rem;
-      border-radius: 12px;
+      border-radius: 16px;
       width: 240px;
       text-align: center;
-      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
       z-index: 1005;
       opacity: 0;
       visibility: hidden;
@@ -324,8 +330,8 @@
     .container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem 3rem; display: flex; flex-wrap: wrap; gap: 2rem; justify-content: center; }
     .section-card {
       background: var(--gradient-card);
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.1);
+      border-radius: 24px;
+      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.1);
       padding: 2rem 2rem 1.5rem;
       width: 350px;
       display: flex;
@@ -339,9 +345,9 @@
     }
     .section-card::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; transition: height 0.3s ease; }
     .section-card:hover::before { height: 6px; }
-    .section-card:hover { box-shadow: 0 15px 35px rgba(var(--primary-dark-rgb), 0.15); transform: translateY(-7px); border-color: rgba(var(--primary-dark-rgb), 0.2); }
+    .section-card:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.15); transform: translateY(-7px); border-color: rgba(var(--primary-dark-rgb), 0.2); }
     .section-title {
-      font-size: 1.65rem;
+      font-size: 2rem;
       color: var(--primary-dark);
       margin-bottom: 1.5rem;
       padding-right: 0.8rem;
@@ -356,7 +362,7 @@
       text-shadow: 0 1px 2px rgba(var(--primary-dark-rgb), 0.1);
     }
     .title-container { display: flex; align-items: center; gap: 0.8rem; flex: 1; min-width: 0; }
-    .section-icon { font-size: 1.5rem; color: var(--tech-blue); opacity: 0.9; transition: var(--transition); user-select: none; flex-shrink: 0; }
+    .section-icon { font-size: 1.4rem; color: var(--tech-blue); opacity: 0.9; transition: var(--transition); user-select: none; flex-shrink: 0; }
     .section-title:hover .section-icon { opacity: 1; transform: scale(1.1) rotate(5deg); color: var(--primary-dark); }
     .toggle-cards {
       background: transparent;
@@ -375,7 +381,7 @@
       flex-shrink: 0;
       position: relative;
     }
-    .toggle-cards:hover { background: rgba(var(--primary-dark-rgb), 0.08); color: var(--tech-blue); transform: scale(1.1); box-shadow: 0 3px 10px rgba(var(--primary-dark-rgb), 0.1); }
+    .toggle-cards:hover { background: rgba(var(--primary-dark-rgb), 0.08); color: var(--tech-blue); transform: scale(1.1); box-shadow: 0 2px 8px rgba(var(--primary-dark-rgb), 0.1); }
     .toggle-cards i { transition: transform 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); }
     .toggle-cards.collapsed i { transform: rotate(180deg); }
     .toggle-cards.collapsed { background: rgba(var(--primary-dark-rgb), 0.08); color: var(--tech-blue); }
@@ -385,7 +391,7 @@
       background: var(--pure-white);
       border-radius: 16px;
       padding: 1.2rem 1.4rem;
-      box-shadow: 0 4px 12px rgba(var(--primary-dark-rgb), 0.08);
+      box-shadow: 0 2px 8px rgba(var(--primary-dark-rgb), 0.08);
       border: 1.5px solid var(--border-color);
       display: flex;
       align-items: center;
@@ -402,7 +408,7 @@
     .card::before { content: ''; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: rgba(var(--accent-teal-rgb), 0.03); opacity: 0; transition: opacity 0.3s ease; }
     .card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.15); border-color: var(--accent-teal); background: var(--pure-white); }
     .card:hover::before { opacity: 1; }
-    .card-icon { font-size: 1.7rem; color: var(--tech-blue); min-width: 38px; text-align: center; transition: var(--transition); opacity: 0.9; user-select: none; text-shadow: 0 1px 2px rgba(var(--tech-blue-rgb), 0.2); flex-shrink: 0; }
+    .card-icon { font-size: 2rem; color: var(--tech-blue); min-width: 38px; text-align: center; transition: var(--transition); opacity: 0.9; user-select: none; text-shadow: 0 1px 2px rgba(var(--tech-blue-rgb), 0.2); flex-shrink: 0; }
     .card:hover .card-icon { transform: scale(1.2) rotate(5deg); color: var(--accent-teal); opacity: 1; text-shadow: 0 2px 4px rgba(var(--accent-teal-rgb), 0.3); }
     .card-title { font-size: 1.15rem; font-weight: 600; color: var(--text-dark); transition: color 0.3s ease; word-break: keep-all; display: flex; align-items: center; gap: 8px; position: relative; overflow: visible; white-space: nowrap; text-overflow: ellipsis; flex: 1; min-width: 0; }
     .card:hover .card-title { color: var(--tech-blue); }
@@ -414,15 +420,14 @@
     /* ========================================= */
     /*      قسم الذكاء الاصطناعي                 */
     /* ========================================= */
-    .ai-assistant-container { max-width: 800px; margin: 3rem auto; padding: 2.5rem; background: var(--gradient-card); border-radius: 20px; box-shadow: 0 10px 30px rgba(var(--primary-dark-rgb), 0.1); position: relative; overflow: hidden; border: 1px solid var(--border-color); }
+    .ai-assistant-container { max-width: 800px; margin: 3rem auto; padding: 2.5rem; background: var(--gradient-card); border-radius: 24px; box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.1); position: relative; overflow: hidden; border: 1px solid var(--border-color); }
     .ai-assistant-container::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; }
-    .ai-header { color: var(--primary-dark); text-align: center; margin-bottom: 2rem; font-size: 1.7rem; position: relative; font-weight: 700; display: flex; align-items: baseline; justify-content: center; gap: 1rem; }
-    .ai-icon { font-size: 2rem; background: linear-gradient(135deg, var(--tech-blue) 0%, var(--ai-teal) 50%, var(--accent-teal) 100%); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; animation: pulse 2s infinite; transform: translateY(5px); }
+    .ai-header { color: var(--primary-dark); text-align: center; margin-bottom: 2rem; font-size: 2rem; position: relative; font-weight: 700; display: flex; align-items: baseline; justify-content: center; gap: 1rem; }
     @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
     .ai-description {
       text-align: center;
       margin-bottom: 2rem;
-      font-size: 1.3rem;
+      font-size: 1.4rem;
       font-weight: 600;
       line-height: 1.6;
       background: linear-gradient(135deg, var(--tech-blue) 0%, var(--accent-teal) 100%);
@@ -430,21 +435,21 @@
       background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .ai-chat-container { background: var(--pure-white); border-radius: 15px; padding: 1.5rem; box-shadow: 0 4px 15px rgba(var(--primary-dark-rgb), 0.08); border: 1px solid var(--border-color); margin-bottom: 1.5rem; }
+    .ai-chat-container { background: var(--pure-white); border-radius: 16px; padding: 1.5rem; box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08); border: 1px solid var(--border-color); margin-bottom: 1.5rem; }
     .ai-messages { height: 300px; overflow-y: auto; margin-bottom: 1rem; padding: 1rem; background: var(--pure-white); border-radius: 10px; border: 1px solid var(--border-color); }
-    .message { margin-bottom: 1rem; padding: 0.8rem 1rem; border-radius: 12px; max-width: 85%; word-wrap: break-word; transform: scale(0.95); opacity: 0; transform-origin: bottom left; animation: pop-in 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
+    .message { margin-bottom: 1rem; padding: 0.8rem 1rem; border-radius: 16px; max-width: 85%; word-wrap: break-word; transform: scale(0.95); opacity: 0; transform-origin: bottom left; animation: pop-in 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
     @keyframes pop-in { to { transform: scale(1); opacity: 1; } }
-    .user-message { background: rgba(var(--primary-dark-rgb), 0.05); color: var(--text-dark); margin-right: auto; border-bottom-right-radius: 4px; border: 1px solid rgba(var(--primary-dark-rgb), 0.1); box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05); transform-origin: bottom left; }
-    .ai-message { background: rgba(var(--ai-teal-rgb), 0.05); color: var(--text-dark); margin-left: auto; border: 1px solid rgba(var(--ai-teal-rgb), 0.2); border-bottom-left-radius: 4px; box-shadow: 0 3px 10px rgba(var(--ai-teal-rgb), 0.1); transform-origin: bottom right; position: relative; padding-left: 45px; }
-    .copy-btn { position: absolute; top: 10px; left: 10px; background: rgba(var(--ai-teal-rgb), 0.15); color: var(--ai-teal); border: none; width: 30px; height: 30px; border-radius: 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.9rem; opacity: 0.5; transition: opacity 0.3s ease, background-color 0.3s ease; }
+    .user-message { background: rgba(var(--primary-dark-rgb), 0.05); color: var(--text-dark); margin-right: auto; border-bottom-right-radius: 4px; border: 1px solid rgba(var(--primary-dark-rgb), 0.1); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); transform-origin: bottom left; }
+    .ai-message { background: rgba(var(--ai-teal-rgb), 0.05); color: var(--text-dark); margin-left: auto; border: 1px solid rgba(var(--ai-teal-rgb), 0.2); border-bottom-left-radius: 4px; box-shadow: 0 2px 8px rgba(var(--ai-teal-rgb), 0.1); transform-origin: bottom right; position: relative; padding-left: 45px; }
+    .copy-btn { position: absolute; top: 10px; left: 10px; background: rgba(var(--ai-teal-rgb), 0.15); color: var(--ai-teal); border: none; width: 30px; height: 30px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.3s ease, background-color 0.3s ease; }
     .ai-message:hover .copy-btn { opacity: 1; background: rgba(var(--ai-teal-rgb), 0.2); }
     .copy-btn:active { transform: scale(0.95); }
-    .copy-btn .fa-check { color: var(--accent-teal); font-size: 1.1rem; }
+    .copy-btn .fa-check { color: var(--accent-teal); font-size: 1.15rem; }
     .ai-input-group { display: flex; gap: 0.5rem; align-items: center; }
-    .ai-input { flex: 1; padding: 12px 15px; border: 2px solid var(--border-color); border-radius: 25px; font-size: 1rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; background: var(--pure-white); color: var(--text-dark); transition: var(--transition); outline: none; }
+    .ai-input { flex: 1; padding: 12px 15px; border: 2px solid var(--border-color); border-radius: 24px; font-size: 1rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; background: var(--pure-white); color: var(--text-dark); transition: var(--transition); outline: none; }
     .ai-input:focus { border-color: var(--ai-teal); box-shadow: 0 0 0 3px rgba(var(--ai-teal-rgb), 0.1); }
-    .ai-send-btn { background: var(--accent-teal); color: white; border: none; width: 42px; height: 42px; padding: 0; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); font-size: 1.1rem; box-shadow: 0 3px 10px rgba(var(--accent-teal-rgb), 0.3); line-height: 1; flex-shrink: 0; }
-    .ai-send-btn:hover { background: var(--ai-teal); transform: scale(1.05); box-shadow: 0 5px 15px rgba(var(--accent-teal-rgb), 0.4); }
+    .ai-send-btn { background: var(--accent-teal); color: white; border: none; width: 42px; height: 42px; padding: 0; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); font-size: 1.15rem; box-shadow: 0 2px 8px rgba(var(--accent-teal-rgb), 0.3); line-height: 1; flex-shrink: 0; }
+    .ai-send-btn:hover { background: var(--ai-teal); transform: scale(1.05); box-shadow: 0 8px 20px rgba(var(--accent-teal-rgb), 0.4); }
     .ai-send-btn:disabled { color: var(--text-light); cursor: not-allowed; transform: none; }
     .ai-typing-indicator { display: flex; align-items: center; padding: 10px 15px; display: none; }
     .ai-typing-indicator .dot { width: 8px; height: 8px; border-radius: 50%; background-color: var(--ai-teal); margin: 0 3px; animation: typing-bounce 1.4s infinite ease-in-out both; }
@@ -457,8 +462,25 @@
     /* ========================================= */
     /*      قسم الاستفسارات                     */
     /* ========================================= */
-    .inquiries-container { display: flex; justify-content: center; align-items: center; gap: 1rem; padding: 2rem; margin: 2rem auto; flex-wrap: wrap; max-width: 800px; }
-    .inquiry-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; font-size: 1.1rem; font-weight: 700; padding: 0.9rem 1.8rem; border-radius: 50px; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
+    .submit-project-section {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      padding: 1.5rem 1.8rem;
+      border-radius: 24px;
+      background: var(--gradient-card);
+      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08);
+      border: 1px solid var(--border-color);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .submit-project-section::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; }
+    .submit-project-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); }
+    .submit-project-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin: 0 0 0.6rem; }
+    .submit-project-description { margin: 0 0 1.2rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; line-height: 1.5; }
+    .inquiries-container { display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .inquiry-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; font-size: 1.15rem; font-weight: 700; padding: 0.9rem 1.8rem; border-radius: 999px; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
     .inquiry-btn i { font-size: 1.2em; }
 .inquiry-btn.primary {
   display: inline-flex;
@@ -469,17 +491,17 @@
   font-size: 1rem;
   font-weight: 600;
   padding: 0.6rem 1.5rem;
-  border-radius: 50px;
+  border-radius: 999px;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   white-space: nowrap;
   width: auto;
   max-width: 90%;
-  background: linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%);
+  background: var(--primary-dark);
   color: white;
   border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 4px 15px rgba(125, 66, 211, 0.25);
+  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.25);
   position: relative;
   overflow: hidden;
 }
@@ -499,7 +521,7 @@
 
 .inquiry-btn.primary:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(125, 66, 211, 0.3);
+  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.3);
 }
 
 .inquiry-btn.primary:hover::before {
@@ -513,15 +535,15 @@
 
 .inquiry-btn.primary:active {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(125, 66, 211, 0.2);
+  box-shadow: 0 2px 8px rgba(22, 50, 79, 0.2);
 }
 
     /* ========================================= */
     /*          زر العودة للأعلى                 */
     /* ========================================= */
-    .back-to-top { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: rgba(var(--primary-dark-rgb), 0.85); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.3rem; cursor: pointer; z-index: 999; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); border: 2px solid rgba(255, 255, 255, 0.3); box-shadow: 0 5px 20px rgba(var(--primary-dark-rgb), 0.3); }
+    .back-to-top { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: rgba(var(--primary-dark-rgb), 0.85); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.4rem; cursor: pointer; z-index: 999; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); border: 2px solid rgba(255, 255, 255, 0.3); box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.3); }
     .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
-    .back-to-top:hover { background: rgba(var(--primary-dark-rgb), 0.95); transform: translateY(-5px) scale(1.05); box-shadow: 0 8px 25px rgba(var(--primary-dark-rgb), 0.4); }
+    .back-to-top:hover { background: rgba(var(--primary-dark-rgb), 0.95); transform: translateY(-5px) scale(1.05); box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.4); }
     .back-to-top:active { transform: translateY(-2px) scale(0.98); }
 
     /* ========================================= */
@@ -533,7 +555,7 @@
     .footer-link { color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 1rem; transition: var(--transition); display: flex; align-items: center; gap: 0.5rem; }
     .footer-link:hover { color: var(--accent-teal); transform: translateY(-2px); }
     .footer-link i { color: var(--accent-teal); }
-    .footer-copyright { font-size: 0.9rem; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .footer-copyright { font-size: 0.85rem; display: flex; flex-direction: column; align-items: center; gap: 5px; }
 
     /* ========================================= */
     /*          تأثيرات الظهور                  */
@@ -544,23 +566,23 @@
     /* ============================================ */
     /* ==========   قسم مواضيع التصويت   ========== */
     /* ============================================ */
-    .voting-section { max-width: 900px; margin: 2.5rem auto; padding: 1.5rem 1.8rem; border-radius: 20px; background: var(--gradient-card); box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.08); border: 1px solid var(--border-color); text-align: center; position: relative; overflow: hidden; }
+    .voting-section { max-width: 900px; margin: 3rem auto; padding: 1.5rem 1.8rem; border-radius: 24px; background: var(--gradient-card); box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08); border: 1px solid var(--border-color); text-align: center; position: relative; overflow: hidden; }
     .voting-section::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; transition: height 0.3s ease; }
     .voting-section:hover::before { height: 6px; }
-    .voting-section:hover { box-shadow: 0 15px 35px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); }
+    .voting-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); }
     .voting-header { display: flex; justify-content: center; align-items: center; margin-bottom: 0.8rem; }
-    .voting-title { display: flex; align-items: center; gap: 0.75rem; font-size: 1.2rem; font-weight: 700; color: var(--primary-dark); margin: 0; }
-    .voting-title i { font-size: 1.5rem; color: var(--accent-teal); }
-    .voting-description { margin: 0 0 1.5rem 0; font-size: 0.95rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
+    .voting-title { display: flex; align-items: center; gap: 0.75rem; font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin: 0; }
+    .voting-title i { font-size: 1.4rem; color: var(--accent-teal); }
+    .voting-description { margin: 0 0 1.5rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
     .voting-description:hover { color: var(--tech-blue); transform: none; background: transparent; border: none; box-shadow: none; }
     .projects-container { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-    .project-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; font-size: 0.95rem; font-weight: 600; padding: 0.9rem 1.5rem; border-radius: 12px; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); white-space: nowrap; min-width: 160px; background: rgba(255, 255, 255, 0.7); color: var(--text-medium); border: 1.5px solid var(--border-color); box-shadow: 0 4px 12px rgba(var(--primary-dark-rgb), 0.08); position: relative; overflow: hidden; text-align: center; flex: 1; }
+    .project-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; font-size: 1rem; font-weight: 600; padding: 0.9rem 1.5rem; border-radius: 16px; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); white-space: nowrap; min-width: 160px; background: rgba(255, 255, 255, 0.7); color: var(--text-medium); border: 1.5px solid var(--border-color); box-shadow: 0 2px 8px rgba(var(--primary-dark-rgb), 0.08); position: relative; overflow: hidden; text-align: center; flex: 1; }
     .project-btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(var(--accent-teal-rgb), 0.05); opacity: 0; transition: opacity 0.3s ease; }
     .project-btn i { font-size: 1em; transition: all 0.3s ease; }
-    .project-btn:hover { transform: translateY(-3px); box-shadow: 0 6px 18px rgba(var(--primary-dark-rgb), 0.12); border-color: var(--accent-teal); background: rgba(255, 255, 255, 0.9); color: var(--primary-dark); }
+    .project-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.12); border-color: var(--accent-teal); background: rgba(255, 255, 255, 0.9); color: var(--primary-dark); }
     .project-btn:hover::before { opacity: 1; }
     .project-btn:hover i { transform: translateX(3px); }
-    .project-btn:active { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(var(--primary-dark-rgb), 0.1); }
+    .project-btn:active { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(var(--primary-dark-rgb), 0.1); }
     .project-btn span { font-weight: 600; color: var(--text-medium); text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); }
     .project-btn:nth-child(1) { border-color: rgba(var(--tech-blue-rgb), 0.3); }
     .project-btn:nth-child(1) i { color: var(--tech-blue); }
@@ -572,16 +594,16 @@
     .project-btn:nth-child(3) i { color: #3498DB; }
     .project-btn:nth-child(3):hover { border-color: #3498DB; background: linear-gradient(135deg, rgba(52, 152, 219, 0.1), rgba(255, 255, 255, 0.9)); }
     .project-btn:nth-child(3):hover i { color: #2E86C1; }
-    #disqus_thread { background-color: var(--pure-white); padding: 1rem; border-radius: 15px; border: 1px solid var(--border-color); }
-    .discord-section { max-width: 900px; margin: 2.5rem auto; padding: 1.5rem 1.8rem; border-radius: 20px; background: var(--gradient-card); border: 1px solid var(--border-color); text-align: center; box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.08); position: relative; overflow: hidden; }
+    #disqus_thread { background-color: var(--pure-white); padding: 1rem; border-radius: 16px; border: 1px solid var(--border-color); }
+    .discord-section { max-width: 900px; margin: 3rem auto; padding: 1.5rem 1.8rem; border-radius: 24px; background: var(--gradient-card); border: 1px solid var(--border-color); text-align: center; box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08); position: relative; overflow: hidden; }
     .discord-section::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; transition: height 0.3s ease; }
     .discord-section:hover::before { height: 6px; }
-    .discord-section:hover { box-shadow: 0 15px 35px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); }
+    .discord-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); }
     .discord-header { display: flex; justify-content: center; align-items: center; margin-bottom: 0.8rem; }
-    .discord-title { display: flex; align-items: center; gap: 0.75rem; font-size: 1.2rem; font-weight: 700; color: var(--primary-dark); margin: 0; }
-    .discord-title i { font-size: 1.5rem; color: var(--tech-blue); opacity: 0.9; transition: all 0.3s ease; }
+    .discord-title { display: flex; align-items: center; gap: 0.75rem; font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin: 0; }
+    .discord-title i { font-size: 1.4rem; color: var(--tech-blue); opacity: 0.9; transition: all 0.3s ease; }
     .discord-title:hover i { opacity: 1; transform: scale(1.1) rotate(5deg); }
-    .discord-description { margin: 0 0 1.5rem 0; font-size: 0.95rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
+    .discord-description { margin: 0 0 1.5rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
     .discord-description:hover { color: var(--tech-blue); transform: none; background: transparent; border: none; box-shadow: none; }
     .discord-btn {
   display: flex;
@@ -592,29 +614,29 @@
   font-size: 1rem;
   font-weight: 600;
   padding: 0.9rem 2.5rem;
-  border-radius: 50px;
+  border-radius: 999px;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   white-space: nowrap;
   max-width: 280px;
   width: fit-content;
-  background: linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%);
+  background: var(--primary-dark);
   color: white;
   border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 4px 15px rgba(125, 66, 211, 0.25);
+  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.25);
   position: relative;
   overflow: hidden;
   margin: 0 auto;
 }
     .discord-btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent); opacity: 0; transition: opacity 0.3s ease; }
     .discord-btn i { font-size: 1.2em; transition: transform 0.3s ease; }
-    .discord-btn:hover { background: var(--ai-teal); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.4); }
+    .discord-btn:hover { background: var(--ai-teal); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(var(--accent-teal-rgb), 0.4); }
     .discord-btn:hover::before { opacity: 1; }
     .discord-btn:hover i { transform: translateX(3px); }
-    .discord-btn:active { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(var(--accent-teal-rgb), 0.25); }
-    .clear-chat-btn { background: var(--warning-red); color: white; border: none; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.9rem; margin-bottom: 10px; transition: all 0.3s; display: flex; align-items: center; gap: 5px; margin: 0 auto 10px; }
-    .clear-chat-btn:hover { background: #c13562; transform: translateY(-2px); box-shadow: 0 4px 12px rgba(var(--warning-red-rgb), 0.3); }
+    .discord-btn:active { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(var(--accent-teal-rgb), 0.25); }
+    .clear-chat-btn { background: var(--warning-red); color: white; border: none; padding: 8px 15px; border-radius: 24px; cursor: pointer; font-size: 0.85rem; margin-bottom: 10px; transition: all 0.3s; display: flex; align-items: center; gap: 5px; margin: 0 auto 10px; }
+    .clear-chat-btn:hover { background: #A93226; transform: translateY(-2px); box-shadow: 0 2px 8px rgba(var(--warning-red-rgb), 0.3); }
 
     /* ============================================ */
     /* ==========   الفواصل الجديدة      ========== */
@@ -639,7 +661,7 @@
   opacity: 0.5;
 }
 .divider-icon {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   color: var(--accent-teal);
   opacity: 0.5;
   margin: 0 14px;
@@ -649,19 +671,19 @@
     /* ============================================ */
     /* ==========   العنوان الرئيسي المعدل   ========== */
     /* ============================================ */
-   .section-main-title { text-align: center; margin: 1.5rem auto 1.2rem; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; width: 100%; position: relative; }
+   .section-main-title { text-align: center; margin: 2rem auto 1.5rem; opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; width: 100%; position: relative; }
     .section-main-title.visible { opacity: 1; transform: translateY(0); }
     .main-title-content { display: flex; align-items: center; justify-content: center; gap: 0.6rem; max-width: 100%; padding: 0 1rem; }
-    .main-title-icon { font-size: 1.3rem; color: var(--accent-teal); }
-    .main-title-text { font-size: 1.3rem; font-weight: 700; color: var(--primary-dark); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
+    .main-title-icon { font-size: 1.4rem; color: var(--accent-teal); }
+    .main-title-text { font-size: 1.4rem; font-weight: 700; color: var(--primary-dark); margin: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%; }
     /* ============================================ */
     /* ==========   بطاقة عرض نتائج التصويت   ========== */
     /* ============================================ */
-    .results-card { max-width: 500px; margin: 1.5rem auto 0; padding: 1rem; background-color: var(--pure-white); border-radius: 15px; border: 1px solid var(--border-color); box-shadow: 0 8px 25px rgba(var(--primary-dark-rgb), 0.07); overflow: hidden; transition: all 0.3s ease; }
-    .results-card:hover { transform: translateY(-5px); box-shadow: 0 12px 30px rgba(var(--primary-dark-rgb), 0.1); }
+    .results-card { max-width: 500px; margin: 1.5rem auto 0; padding: 1rem; background-color: var(--pure-white); border-radius: 16px; border: 1px solid var(--border-color); box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.07); overflow: hidden; transition: all 0.3s ease; }
+    .results-card:hover { transform: translateY(-5px); box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.1); }
     .iframe-scroll-wrapper { overflow-x: auto; -webkit-overflow-scrolling: touch; padding-top: 30px; width: 100%; border-radius: 10px; }
     .results-card iframe { width: 100%; min-width: 320px; height: 210px; border: none; margin-top: -60px; display: block; }
-    .voting-subtitle { margin: 1.5rem 0 1rem; font-size: 1.1rem; color: var(--primary-dark); text-align: center; font-weight: 600; }
+    .voting-subtitle { margin: 1.5rem 0 1rem; font-size: 1.15rem; color: var(--primary-dark); text-align: center; font-weight: 600; }
    .vote-btn {
   display: inline-flex;
   align-items: center;
@@ -671,16 +693,16 @@
   font-size: 1rem;
   font-weight: 600;
   padding: 0.9rem 2.5rem;
-  border-radius: 50px;
+  border-radius: 999px;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   white-space: nowrap;
   min-width: 200px;
-  background: linear-gradient(135deg, #7D42D3 0%, #2C3A61 100%);
+  background: var(--primary-dark);
   color: white;
   border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 4px 15px rgba(125, 66, 211, 0.25);
+  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.25);
   position: relative;
   overflow: hidden;
   margin: 1rem auto 2rem;
@@ -700,7 +722,7 @@
 
 .vote-btn:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(125, 66, 211, 0.3);
+  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.3);
 }
 
 .vote-btn:hover::before {
@@ -713,17 +735,17 @@
 
 .vote-btn:active {
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(125, 66, 211, 0.3);
+  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.3);
 }
     .vote-btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent); opacity: 0; transition: opacity 0.3s ease; }
     .vote-btn i { font-size: 1.2em; transition: transform 0.3s ease; }
-    .vote-btn:hover { background: var(--ai-teal); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(var(--accent-teal-rgb), 0.4); }
+    .vote-btn:hover { background: var(--ai-teal); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(var(--accent-teal-rgb), 0.4); }
     .vote-btn:hover::before { opacity: 1; }
     .vote-btn:hover i { transform: translateX(3px); }
-    .vote-btn:active { transform: translateY(-1px); box-shadow: 0 3px 10px rgba(var(--accent-teal-rgb), 0.25); }
-    .results-container { margin-top: 2rem; padding: 1.5rem; background: var(--pure-white); border-radius: 15px; box-shadow: 0 5px 15px rgba(var(--primary-dark-rgb), 0.08); border: 1px solid var(--border-color); }
-    .results-container h3 { color: var(--primary-dark); text-align: center; margin-bottom: 1.2rem; font-size: 1.3rem; }
-    .update-note { text-align: center; font-size: 0.8rem; color: var(--text-light); margin-top: 0.5rem; }
+    .vote-btn:active { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(var(--accent-teal-rgb), 0.25); }
+    .results-container { margin-top: 2rem; padding: 1.5rem; background: var(--pure-white); border-radius: 16px; box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08); border: 1px solid var(--border-color); }
+    .results-container h3 { color: var(--primary-dark); text-align: center; margin-bottom: 1.2rem; font-size: 1.4rem; }
+    .update-note { text-align: center; font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem; }
 
     @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
 
@@ -734,9 +756,9 @@
       max-width: 900px;
       margin: 2.5rem auto;
       padding: 1.5rem 1.8rem;
-      border-radius: 20px;
+      border-radius: 24px;
       background: var(--gradient-card);
-      box-shadow: 0 10px 25px rgba(var(--primary-dark-rgb), 0.08);
+      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08);
       border: 1px solid var(--border-color);
       text-align: center;
       position: relative;
@@ -757,7 +779,7 @@
       height: 6px;
     }
     .grades-query-section:hover {
-      box-shadow: 0 15px 35px rgba(var(--primary-dark-rgb), 0.12);
+      box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12);
       transform: translateY(-2px);
     }
     .grades-header {
@@ -768,18 +790,18 @@
       margin-bottom: 0.8rem;
     }
     .grades-header i {
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       color: var(--accent-teal);
     }
     .grades-header h3 {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       font-weight: 700;
       color: var(--primary-dark);
       margin: 0;
     }
     .grades-description {
       margin: 0 0 1.5rem 0;
-      font-size: 0.95rem;
+      font-size: 1rem;
       color: var(--text-subtitle);
       font-weight: 400;
       text-align: center;
@@ -800,7 +822,7 @@
       flex: 1;
       padding: 12px 18px;
       border: 2px solid var(--border-color);
-      border-radius: 30px;
+      border-radius: 24px;
       font-size: 1rem;
       font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
       background: var(--pure-white);
@@ -823,16 +845,16 @@
   font-size: 1rem;
   font-weight: 600;
  padding: 0.6rem 1.8rem;
-  border-radius: 50px;
+  border-radius: 999px;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
   white-space: nowrap;
   min-width: 120px;
-  background: linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%);
+  background: var(--primary-dark);
   color: white;
   border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 4px 15px rgba(125, 66, 211, 0.25);
+  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.25);
   position: relative;
   overflow: hidden;
   width: auto;
@@ -840,7 +862,7 @@
 
 .query-btn:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(125, 66, 211, 0.3);
+  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.3);
 }
 
 .query-btn:hover i {
@@ -849,11 +871,11 @@
 
 .query-btn:active {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(125, 66, 211, 0.2);
+  box-shadow: 0 2px 8px rgba(22, 50, 79, 0.2);
 }
     .result-card {
       background: var(--pure-white);
-      border-radius: 20px;
+      border-radius: 24px;
       padding: 0;
       margin-top: 1rem;
       border: 1px solid var(--border-color);
@@ -877,7 +899,7 @@
 }
 
 .result-header {
-  background: linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%);
+  background: var(--primary-dark);
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -885,7 +907,7 @@
   gap: 15px;
   padding: 0.8rem 1.5rem;
   margin: -0.5rem -1.5rem 1rem -1.5rem;
-  border-radius: 20px 20px 0 0;
+  border-radius: 24px 24px 0 0;
   border-bottom: none;
   flex-wrap: nowrap;
 }
@@ -898,7 +920,7 @@
 }
 
 .school-info h4 {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   font-weight: 600;
   color: white;
   margin: 0 0 5px 0;
@@ -927,7 +949,7 @@
   }
 
   .school-info h4 {
-    font-size: 0.9rem;
+    font-size: 0.85rem;
   }
 
   .school-info p {
@@ -942,7 +964,7 @@
       margin: 0.7rem 1.3rem 0.6rem;
       padding: 10px 14px;
       background: rgba(var(--primary-dark-rgb), 0.04);
-      border-radius: 12px;
+      border-radius: 16px;
       text-align: center;
     }
  .student-avatar {
@@ -960,7 +982,7 @@
       color: var(--primary-dark);
     }
     .student-avatar i {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
       color: var(--primary-dark);
     }
     .student-name {
@@ -970,12 +992,12 @@
       margin: 0;
     }
    .student-details {
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       color: var(--text-medium);
       margin: 0;
     }
    .grades-section-label {
-      font-size: 0.78rem;
+      font-size: 0.75rem;
       color: var(--text-light);
       font-weight: 600;
       margin: 0 0 6px 0;
@@ -991,7 +1013,7 @@
     .grade-card {
       flex: 1;
       background: rgba(var(--primary-dark-rgb), 0.04);
-      border-radius: 12px;
+      border-radius: 16px;
       padding: 11px 10px;
       text-align: center;
       display: flex;
@@ -1000,7 +1022,7 @@
       min-height: 118px;
     }
     .grade-card span:first-child {
-      font-size: 0.8rem;
+      font-size: 0.85rem;
       color: var(--text-light);
       display: block;
       margin-bottom: 6px;
@@ -1026,20 +1048,20 @@
       justify-content: center;
     }
   .final-result {
-      background: linear-gradient(135deg, rgba(125,66,211,0.08), rgba(44,58,97,0.05));
-      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(14,149,148,0.08), rgba(22,50,79,0.05));
+      border-radius: 16px;
       padding: 13px;
       text-align: center;
       margin: 0.85rem 1.3rem 0.9rem;
     }
     .final-score {
-      font-size: 1.6rem;
+      font-size: 1.4rem;
       font-weight: 800;
       color: var(--primary-dark);
       margin-bottom: 6px;
     }
     .final-rating {
-  font-size: 0.95rem;
+  font-size: 1rem;
   font-weight: 600;
   display: flex;
   align-items: center;
@@ -1048,19 +1070,19 @@
 }
     .missing-message {
       background: rgba(var(--warning-red-rgb), 0.1);
-      border-radius: 12px;
+      border-radius: 16px;
       padding: 10px;
       text-align: center;
       margin-bottom: 1.2rem;
       color: var(--warning-red);
-      font-size: 0.9rem;
+      font-size: 0.85rem;
       display: flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
     }
   .attendance-section-label {
-  font-size: 0.78rem;
+  font-size: 0.75rem;
   color: var(--text-light);
   font-weight: 600;
   margin: 0.85rem 0 6px 0;
@@ -1075,22 +1097,22 @@
 }
 .attendance-item {
   flex: 1;
-  border-radius: 12px;
+  border-radius: 16px;
   padding: 10px 8px;
   text-align: center;
 }
 .attendance-item i {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   display: block;
   margin-bottom: 3px;
 }
 .attendance-item span {
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 700;
   display: block;
 }
 .attendance-item small {
-  font-size: 0.72rem;
+  font-size: 0.75rem;
   opacity: 0.85;
 }
     .result-actions {
@@ -1103,7 +1125,7 @@
       background: transparent;
       border: 1px solid var(--border-color);
       padding: 8px 16px;
-      border-radius: 25px;
+      border-radius: 24px;
       cursor: pointer;
       font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
       font-size: 0.85rem;
@@ -1120,11 +1142,11 @@
     }
     .error-message {
       background: rgba(var(--warning-red-rgb), 0.1);
-      border-radius: 12px;
+      border-radius: 16px;
       padding: 12px;
       text-align: center;
       color: var(--warning-red);
-      font-size: 0.95rem;
+      font-size: 1rem;
       margin-top: 1rem;
     }
     .loading {
@@ -1156,69 +1178,69 @@
     @media (max-width: 768px) {
       .tech-header { padding: 1.3rem 1rem 1rem; min-height: 140px; background-position: center; }
       .header-logo img { height: 65px !important; }
-      .tech-header h1 { font-size: 1.7rem; margin-bottom: 0.4rem; }
-      .tech-header h2 { font-size: 1.3rem; margin-bottom: 0.3rem; }
-      .tech-header p { font-size: 1.1rem; margin-bottom: 0.4rem; }
-      .tech-header span { font-size: 0.95rem; padding: 0 0.5rem; }
-      .section-title { font-size: 1.35rem; gap: 0.6rem; }
-      .main-title-text { font-size: 1.7rem; font-weight: 800; }
-      .main-title-icon { font-size: 1.8rem; }
+      .tech-header h1 { font-size: 2rem; margin-bottom: 0.4rem; }
+      .tech-header h2 { font-size: 1.4rem; margin-bottom: 0.3rem; }
+      .tech-header p { font-size: 1.15rem; margin-bottom: 0.4rem; }
+      .tech-header span { font-size: 1rem; padding: 0 0.5rem; }
+      .section-title { font-size: 1.4rem; gap: 0.6rem; }
+      .main-title-text { font-size: 2rem; font-weight: 800; }
+      .main-title-icon { font-size: 2rem; }
       .main-title-content { padding: 1rem 0.5rem; }
       .section-description { font-size: 1rem; padding: 0 1rem; line-height: 1.5; margin-top: 0.6rem; }
       .section-card { width: 95% !important; padding: 1.5rem 1.5rem 1rem !important; margin: 0 auto 1.2rem !important; }
       .card { padding: 1rem 1.2rem !important; gap: 0.8rem; }
-      .card-icon { min-width: 32px; font-size: 1.5rem; }
-      .card-title { font-size: 1.05rem; gap: 6px; }
+      .card-icon { min-width: 32px; font-size: 1.4rem; }
+      .card-title { font-size: 1rem; gap: 6px; }
       .search-container { padding: 0 1rem; margin-bottom: 1.5rem; }
-      .search-input { padding: 10px 45px 10px 15px; font-size: 0.95rem; }
+      .search-input { padding: 10px 45px 10px 15px; font-size: 1rem; }
       .search-button { width: 32px; height: 32px; }
       .compact-date.new-position { padding: 6px 15px; font-size: 0.85rem; }
       .ai-assistant-container { padding: 1.5rem; }
       .ai-messages { height: 250px; }
       .inquiries-container { flex-direction: column; }
       .inquiry-btn { width: 100%; max-width: 300px; }
-      .section-icon { font-size: 1.3rem; }
+      .section-icon { font-size: 1.4rem; }
       .voting-section { padding: 1.3rem 1rem 1.2rem; }
-      .vote-btn { min-width: 180px; padding: 0.9rem 2rem; font-size: 0.95rem; }
+      .vote-btn { min-width: 180px; padding: 0.9rem 2rem; font-size: 1rem; }
       .results-container { padding: 1rem; }
       .results-card { max-width: 100%; padding: 0.8rem; margin: 1rem auto 0; }
       .iframe-scroll-wrapper { padding-top: 25px; }
       .results-card iframe { min-width: 300px; height: 190px; margin-top: -55px; }
       .discord-section { padding: 1.3rem 1rem 1.2rem; }
-      .discord-btn { min-width: 200px; padding: 0.8rem 1.5rem; font-size: 0.95rem; }
+      .discord-btn { min-width: 200px; padding: 0.8rem 1.5rem; font-size: 1rem; }
       .section-divider { max-width: 90%; margin: 1.5rem auto; }
       .divider-dot { width: 5px; height: 5px; margin: 0 12px; }
       .divider-dot::before { right: 15px; }
       .divider-dot::after { left: 15px; }
       .students-list { gap: 1.5rem; }
       .student-image { width: 85px; height: 85px; }
-      .info-toggle-btn { width: 28px; height: 28px; font-size: 0.8rem; }
+      .info-toggle-btn { width: 28px; height: 28px; font-size: 0.85rem; }
       .unified-student-info { width: 200px; top: -90px; padding: 0.7rem 1rem; }
       .fame-bar-section { padding: 1.2rem 0.8rem 1rem; }
       .projects-container { flex-direction: row !important; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
-      .project-btn { width: auto !important; max-width: none !important; min-width: 140px; padding: 0.8rem 1.2rem !important; flex: 0 0 auto; font-size: 0.9rem; margin: 0 !important; display: inline-flex !important; }
-      .back-to-top { bottom: 20px; left: 20px; width: 45px; height: 45px; font-size: 1.2rem; }
+      .project-btn { width: auto !important; max-width: none !important; min-width: 140px; padding: 0.8rem 1.2rem !important; flex: 0 0 auto; font-size: 0.85rem; margin: 0 !important; display: inline-flex !important; }
+      .back-to-top { bottom: 20px; left: 20px; width: 45px; height: 45px; font-size: 1.15rem; }
       
       @media (max-width: 480px) {
         .projects-container { flex-direction: row !important; flex-wrap: wrap; justify-content: center; gap: 1.2rem; }
         .project-btn { min-width: 120px; padding: 0.7rem 1rem !important; font-size: 0.85rem; flex: 0 0 auto; }
-        .vote-btn { min-width: 160px; padding: 0.8rem 1.5rem; font-size: 0.9rem; }
+        .vote-btn { min-width: 160px; padding: 0.8rem 1.5rem; font-size: 0.85rem; }
         .results-card { padding: 0.6rem; margin: 0.8rem auto 0; }
         .iframe-scroll-wrapper { padding-top: 20px; }
         .results-card iframe { min-width: 280px; height: 170px; margin-top: -50px; }
         .main-title-text { font-size: 1.4rem; }
-        .main-title-icon { font-size: 1.5rem; }
-        .section-description { font-size: 0.95rem; padding: 0 0.8rem; margin-top: 0.5rem; }
+        .main-title-icon { font-size: 1.4rem; }
+        .section-description { font-size: 1rem; padding: 0 0.8rem; margin-top: 0.5rem; }
         .tech-header { padding: 1.1rem 0.5rem 0.9rem; min-height: 130px; }
         .header-logo img { height: 55px !important; }
-        .tech-header h1 { font-size: 1.5rem; margin-bottom: 0.3rem; }
-        .tech-header h2 { font-size: 1.2rem; margin-bottom: 0.2rem; }
+        .tech-header h1 { font-size: 1.4rem; margin-bottom: 0.3rem; }
+        .tech-header h2 { font-size: 1.15rem; margin-bottom: 0.2rem; }
         .tech-header p { font-size: 1rem; margin-bottom: 0.3rem; }
-        .tech-header span { font-size: 0.9rem; line-height: 1.4; }
-        .compact-date.new-position { font-size: 0.8rem; padding: 6px 12px; }
+        .tech-header span { font-size: 0.85rem; line-height: 1.4; }
+        .compact-date.new-position { font-size: 0.85rem; padding: 6px 12px; }
         .card-title { font-size: 1rem; }
-        .section-title { font-size: 1.25rem; }
-        .notification-bar { font-size: 0.8rem; padding: 7px 0; }
+        .section-title { font-size: 1.15rem; }
+        .notification-bar { font-size: 0.85rem; padding: 7px 0; }
         .students-list { gap: 1.2rem; }
         .student-image { width: 75px; height: 75px; }
         .info-toggle-btn { width: 26px; height: 26px; font-size: 0.75rem; }
@@ -1229,20 +1251,20 @@
         .results-card { margin: 0.5rem auto 0; padding: 0.6rem; }
         .iframe-scroll-wrapper { padding-top: 20px; }
         .results-card iframe { min-width: 280px; height: 170px; margin-top: -50px; }
-        .main-title-icon { font-size: 1.5rem; }
+        .main-title-icon { font-size: 1.4rem; }
         .main-title-text { font-size: 1.4rem; padding: 0 0.3rem; letter-spacing: -0.5px; }
         .main-title-content { padding: 0.8rem 0.5rem; }
-        .back-to-top { bottom: 15px; left: 15px; width: 40px; height: 40px; font-size: 1.1rem; }
+        .back-to-top { bottom: 15px; left: 15px; width: 40px; height: 40px; font-size: 1.15rem; }
       }
       @media (min-width: 481px) and (max-width: 768px) {
         .tech-header { min-height: 200px; padding: 1.8rem 1rem 1.5rem; }
         .header-logo img { height: 70px !important; }
-        .tech-header h1 { font-size: 1.8rem; }
+        .tech-header h1 { font-size: 2rem; }
         .tech-header h2 { font-size: 1.4rem; }
         .results-card { max-width: 100%; }
         .results-card iframe { min-width: 300px; height: 190px; }
         .project-btn { min-width: 150px; padding: 0.8rem 1.2rem !important; }
-        .main-title-text { font-size: 1.7rem; }
+        .main-title-text { font-size: 2rem; }
         .vote-btn { min-width: 190px; padding: 0.9rem 2rem; }
       }
     }
@@ -1257,7 +1279,7 @@
     }
     @media (min-width: 1025px) {
       .projects-container { gap: 2rem; }
-      .project-btn { min-width: 160px; padding: 0.9rem 1.5rem; font-size: 0.95rem; }
+      .project-btn { min-width: 160px; padding: 0.9rem 1.5rem; font-size: 1rem; }
       .results-card { max-width: 500px; }
       .results-card iframe { min-width: 400px; height: 210px; }
     }
@@ -1286,7 +1308,7 @@
 .vote-stat-item:hover {
   transform: translateX(5px);
   border-color: var(--accent-teal);
-  box-shadow: 0 4px 12px rgba(var(--accent-teal-rgb), 0.1);
+  box-shadow: 0 2px 8px rgba(var(--accent-teal-rgb), 0.1);
 }
 
 /* السطر العلوي: الاسم + الأيقونة + عدد الأصوات */
@@ -1307,14 +1329,14 @@
   color: var(--primary-dark);
 }
 .stat-title i {
-  font-size: 1.2rem;
+  font-size: 1.15rem;
 }
 .stat-votes {
-  font-size: 0.9rem;
+  font-size: 0.85rem;
   color: var(--text-medium);
   background: rgba(var(--primary-dark-rgb), 0.05);
   padding: 0.2rem 0.6rem;
-  border-radius: 20px;
+  border-radius: 24px;
 }
 .stat-votes strong {
   color: var(--accent-teal);
@@ -1350,10 +1372,10 @@
   padding-top: 1rem;
   border-top: 1px solid var(--border-color);
   color: var(--text-medium);
-  font-size: 0.9rem;
+  font-size: 0.85rem;
 }
 .last-updated {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: var(--text-light);
   margin-top: 0.3rem;
 }
@@ -1392,12 +1414,12 @@
 }
 
 .timer-box {
-  background: linear-gradient(135deg, #2C3A61, #7D42D3);
-  border-radius: 12px;
+  background: var(--primary-dark);
+  border-radius: 16px;
   padding: 8px 12px;
   text-align: center;
   min-width: 58px;
-  box-shadow: 0 4px 12px rgba(44,58,97,0.2);
+  box-shadow: 0 2px 8px rgba(22,50,79,0.2);
 }
 
 .timer-box .timer-value {
@@ -1409,7 +1431,7 @@
 }
 
 .timer-box .timer-unit {
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   color: rgba(255,255,255,0.75);
   display: block;
   margin-top: 2px;
@@ -1428,7 +1450,7 @@
     padding: 6px 10px;
   }
   .timer-box .timer-value {
-    font-size: 1.2rem;
+    font-size: 1.15rem;
   }
 }
 
@@ -1464,7 +1486,7 @@
   padding: 2rem 1.5rem 1.8rem;
   transform: scale(0.9);
   transition: transform 0.3s ease;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
   border: 1px solid var(--border-color);
 }
 
@@ -1484,7 +1506,7 @@
   left: 20px;
   background: transparent;
   border: none;
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   cursor: pointer;
   color: var(--text-light);
   transition: all 0.2s;
@@ -1503,17 +1525,17 @@
   object-fit: cover;
   margin: 0 auto 1rem;
   display: block;
-  box-shadow: 0 8px 24px rgba(var(--accent-teal-rgb), 0.35);
+  box-shadow: 0 8px 20px rgba(var(--accent-teal-rgb), 0.35);
 }
 
 /* وسام الإنجاز */
 .modal-badge {
   display: inline-block;
-  background: linear-gradient(135deg, #C9971C, #B8860B);
+  background: linear-gradient(135deg, #E8A33D, #B8860B);
   color: #fff;
   padding: 0.3rem 1rem;
-  border-radius: 50px;
-  font-size: 0.8rem;
+  border-radius: 999px;
+  font-size: 0.85rem;
   font-weight: 600;
   margin-bottom: 1rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
@@ -1537,7 +1559,7 @@
   padding: 1rem;
   border-radius: 16px;
   color: var(--text-medium);
-  font-size: 0.95rem;
+  font-size: 1rem;
   line-height: 1.6;
   margin-top: 0.5rem;
   border-right: 3px solid var(--accent-teal);
@@ -1548,10 +1570,10 @@
   margin-left: 6px;
 }
 .result-header {
-  background: linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%);
+  background: var(--primary-dark);
   padding: 0;
   margin: 0;
-  border-radius: 20px 20px 0 0;
+  border-radius: 24px 24px 0 0;
   position: relative;
   overflow: hidden;
 }
@@ -1568,7 +1590,7 @@
   width: 80px;
   height: 80px;
   background: rgba(255,255,255,0.15);
-  border-radius: 14px;
+  border-radius: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -1591,7 +1613,7 @@
 }
 
 .school-info h4 {
-  font-size: 1.05rem;
+  font-size: 1rem;
   font-weight: 600;
   color: white;
   margin: 0 0 4px 0;
@@ -1610,9 +1632,9 @@
 }
 
 @media (max-width: 550px) {
-  .school-logo-box { width: 52px; height: 52px; border-radius: 12px; }
+  .school-logo-box { width: 52px; height: 52px; border-radius: 16px; }
   .school-info h4 { font-size: 0.85rem; }
-  .school-info p { font-size: 0.72rem; }
+  .school-info p { font-size: 0.75rem; }
 }
   .tech-header {
   min-height: 130px !important;
@@ -1634,8 +1656,8 @@
   transition: all 0.3s ease;
 }
 .points-btn-hover:hover {
-  background: rgba(125,66,211,0.12) !important;
-  border-color: rgba(125,66,211,0.45) !important;
+  background: rgba(14,149,148,0.12) !important;
+  border-color: rgba(14,149,148,0.45) !important;
   transform: translateY(-1px);
 }
  /* ===== إصلاح تجاوز الخانات على شاشات الجوال ===== */
@@ -1685,7 +1707,7 @@
   .query-input,
   .ai-input {
     padding: 10px 12px !important;
-    font-size: 0.9rem !important;
+    font-size: 0.85rem !important;
   }
   .ai-send-btn {
     width: 36px !important;
@@ -1721,7 +1743,7 @@
     <div class="header-text-content">
       <h1>واجهـة المعلـم الرقمـي</h1>
       <p>أ. محمد حمدان الغامدي | معلم التقنية الرقمية</p>
-        <p style="font-size: 0.78rem; font-weight: 400; opacity: 0.75; margin-top: 4px;">جيل رقمي يبتكر الحلول ويصنع المستقبل</p>
+        <p style="font-size: 0.75rem; font-weight: 400; opacity: 0.75; margin-top: 4px;">جيل رقمي يبتكر الحلول ويصنع المستقبل</p>
     </div>
   </div>
 </header>
@@ -1729,13 +1751,11 @@
 <!-- الوقت والتاريخ -->
 <div class="date-time-container fade-in">
   <div class="compact-date new-position" dir="rtl">
-    <i class="fas fa-calendar-alt" style="color: var(--accent-teal); margin-left: 5px;"></i><span id="hijri-date"></span> 
-    <span class="separator">•</span>
-    <span id="gregorian-date"></span>
-    <span class="separator">•</span>
-    <span style="background: rgba(125,66,211,0.08); padding: 3px 10px; border-radius: 12px; display: inline-flex; align-items: center;">
-      <i class="fas fa-clock" style="color: var(--accent-teal); margin-left: 5px;"></i><span id="live-time"></span>
-    </span>
+    <span class="date-chip"><i class="fas fa-calendar-alt"></i><span id="hijri-date"></span></span>
+    <span class="date-divider"></span>
+    <span class="date-chip"><i class="fas fa-calendar-day"></i><span id="gregorian-date"></span></span>
+    <span class="date-divider"></span>
+    <span class="date-chip"><i class="fas fa-clock"></i><span id="live-time"></span></span>
   </div>
 </div>
 
@@ -1755,7 +1775,6 @@
 <!-- ============================================ -->
 <section class="fame-bar-section fade-in">
   <div class="fame-bar-title">
-    <i class="fas fa-trophy"></i>
     <span>صُناع المستقبل </span>
   </div>
   <p class="honors-subtitle"> نجوم يضيئون سماء الإبداع الرقمي </p>
@@ -1796,7 +1815,6 @@
 <section class="voting-section fade-in">
   <div class="voting-header">
     <h3 class="voting-title">
-      <i class="fas fa-laptop-code"></i>
       <span>معرض المشاريع الطلابية</span>
     </h3>
   </div>
@@ -1836,15 +1854,15 @@
     <div class="projects-container">
       <a href="YOUR_LINK_1_HERE" target="_blank" class="project-btn" style="flex-direction: column;">
         <span style="display: flex; align-items: center; gap: 6px;"><i class="fas fa-file-powerpoint"></i> العرض التقديمي</span>
-        <small style="font-size: 0.65rem; color: var(--text-light); margin-top: 4px; display: flex; align-items: center; gap: 4px;"><i class="fas fa-eye"></i> انقر للمشاهدة</small>
+        <small style="font-size: 0.75rem; color: var(--text-light); margin-top: 4px; display: flex; align-items: center; gap: 4px;"><i class="fas fa-eye"></i> انقر للمشاهدة</small>
       </a>
       <a href="YOUR_LINK_2_HERE" target="_blank" class="project-btn" style="flex-direction: column;">
         <span style="display: flex; align-items: center; gap: 6px;"><i class="fas fa-palette"></i> التصميم الجرافيكي</span>
-        <small style="font-size: 0.65rem; color: var(--text-light); margin-top: 4px; display: flex; align-items: center; gap: 4px;"><i class="fas fa-eye" style="color: var(--accent-teal);"></i> انقر للمشاهدة</small>
+        <small style="font-size: 0.75rem; color: var(--text-light); margin-top: 4px; display: flex; align-items: center; gap: 4px;"><i class="fas fa-eye" style="color: var(--accent-teal);"></i> انقر للمشاهدة</small>
       </a>
       <a href="YOUR_LINK_3_HERE" target="_blank" class="project-btn" style="flex-direction: column;">
         <span style="display: flex; align-items: center; gap: 6px;"><i class="fas fa-globe"></i> الموقع الإلكتروني</span>
-        <small style="font-size: 0.65rem; color: var(--text-light); margin-top: 4px; display: flex; align-items: center; gap: 4px;"><i class="fas fa-eye" style="color: #3498DB;"></i> انقر للمشاهدة</small>
+        <small style="font-size: 0.75rem; color: var(--text-light); margin-top: 4px; display: flex; align-items: center; gap: 4px;"><i class="fas fa-eye" style="color: #3498DB;"></i> انقر للمشاهدة</small>
       </a>
     </div>
     
@@ -1864,7 +1882,7 @@
     
     <div id="liveVoteMessage" style="display: none; text-align: center; margin-top: 1rem; padding: 10px; background: rgba(46,204,113,0.1); border-radius: 10px;">
       <i class="fas fa-check-circle" style="color: #2ECC71;"></i>
-      <span>تم تحديث النتائج! 🎉</span>
+      <span>تم تحديث النتائج!</span>
     </div>
     
     <p class="update-note">يتم تحديث النتائج تلقائياً كل 30 ثانية</p>
@@ -1877,13 +1895,13 @@
     <i class="fas fa-hourglass-half" style="font-size:36px; color:var(--accent-teal); opacity:0.9; transform:rotate(-15deg); display:inline-block;"></i>
 
     <div>
-      <h3 style="font-size:1.1rem; font-weight:700; color:var(--primary-dark); margin:0 0 6px;">استعد للجولة القادمة!</h3>
+      <h3 style="font-size:1.15rem; font-weight:700; color:var(--primary-dark); margin:0 0 6px;">استعد للجولة القادمة!</h3>
       <p style="font-size:0.85rem; color:var(--text-medium); margin:0; line-height:1.6;">لا يوجد تصويت حالياً — ابدأ بإعداد مشروعك المميز وكن جاهزاً للمنافسة القادمة.</p>
     </div>
 
-    <div style="display:flex; align-items:center; gap:8px; background:rgba(125,66,211,0.06); border-radius:20px; padding:8px 20px;">
+    <div style="display:flex; align-items:center; gap:8px; background:rgba(14,149,148,0.06); border-radius:24px; padding:8px 20px;">
       <i class="fas fa-rocket" style="font-size:0.85rem; color:var(--accent-teal);"></i>
-      <span style="font-size:0.82rem; color:var(--accent-teal); font-weight:600;">قريباً</span>
+      <span style="font-size:0.85rem; color:var(--accent-teal); font-weight:600;">قريباً</span>
     </div>
 
   </div>
@@ -1915,9 +1933,8 @@
       <i class="fas fa-sign-in-alt"></i>
       <span> مجتمع التقنية الرقمية</span>
     </a>
-    <div style="background: rgba(125,66,211,0.06); border-radius: 12px; padding: 10px 16px; margin-top: 14px; width: 100%; max-width: 450px; text-align: center;">
+    <div style="background: rgba(14,149,148,0.06); border-radius: 16px; padding: 10px 16px; margin-top: 14px; width: 100%; max-width: 450px; text-align: center;">
       <p style="font-size: 0.85rem; color: var(--text-medium); margin: 0; line-height: 1.5;">
-        <i class="fas fa-info-circle" style="margin-left: 5px; color: var(--accent-teal);"></i>
         عند النقر سيتم توجيهك لإنشاء حساب (إن لم يكن لديك)، ثم الدخول مباشرة إلى ساحة النقاش.
       </p>
     </div>
@@ -1951,14 +1968,13 @@
   <section class="section-card fade-in">
     <div class="section-title" data-title="مكتبة الطالب">
       <div class="title-container">
-        <i class="fas fa-user-graduate section-icon"></i>
         <span>مكتبة الطالب</span>
       </div>
       <button class="toggle-cards" data-target="library-cards" title="طي/فتح">
         <i class="fas fa-chevron-up"></i>
       </button>
     </div>
-    <div class="cards-container collapsed" id="library-cards">
+    <div class="cards-container" id="library-cards">
       <div class="card" style="animation-delay: 0.05s;" data-url="https://sites.google.com/view/dvdf55/ss?authuser=1" data-title="الأول ثانوي">
         <i class="fas fa-book card-icon"></i>
         <h3 class="card-title nowrap-text">الأول ثانوي</h3>
@@ -1978,7 +1994,6 @@
   <section class="section-card fade-in">
     <div class="section-title" data-title="معرض الصور">
       <div class="title-container">
-        <i class="fas fa-camera section-icon"></i>
         <span>معرض الصور</span>
       </div>
       <button class="toggle-cards" data-target="gallery-cards" title="طي/فتح">
@@ -2017,7 +2032,6 @@
 <section class="grades-query-section fade-in">
   <div class="grades-query-container">
     <div class="grades-header">
-      <i class="fas fa-search"></i>
       <h3>الاستعلام عن الدرجات</h3>
     </div>
     <p class="grades-description">أدخل رقمك الخاص للاطلاع على نتيجتك في مادة التقنية الرقمية</p>
@@ -2048,7 +2062,6 @@
 <!-- قسم الذكاء الاصطناعي -->
 <div id="ai-assistant-section" class="ai-assistant-container fade-in">
   <h2 class="ai-header">
-    <i class="fas fa-robot ai-icon"></i>
     <span>الذكاء الاصطناعي</span>
   </h2>
   <p class="ai-description"> شريكك الذكي في رحلة التعلم الرقمي.</p>
@@ -2069,9 +2082,8 @@
       <div class="dot"></div>
     </div>
   </div>
-  <div style="background: rgba(125,66,211,0.06); border-radius: 12px; padding: 10px 16px; margin-top: 14px; width: 100%; max-width: 450px; text-align: center; margin-left: auto; margin-right: auto;">
+  <div style="background: rgba(14,149,148,0.06); border-radius: 16px; padding: 10px 16px; margin-top: 14px; width: 100%; max-width: 450px; text-align: center; margin-left: auto; margin-right: auto;">
       <p style="font-size: 0.85rem; color: var(--text-medium); margin: 0; line-height: 1.5;">
-        <i class="fas fa-info-circle" style="margin-left: 5px; color: var(--accent-teal);"></i>
         ملاحظة: الإجابات تعتمد على المعرفة العامة للذكاء الاصطناعي وقد تحتاج لمراجعة المعلم للتأكد من دقتها
       </p>
     </div>
@@ -2086,11 +2098,15 @@
   <div class="divider-line"></div>
 </div>
 
-<!-- قسم الاستفسارات -->
-<div class="inquiries-container fade-in">
-  <button onclick="showUploadModal()" class="inquiry-btn primary" style="font-family:inherit;">
-    <i class="fas fa-upload"></i> مشاريع الطلاب التعليمية
-  </button>
+<!-- قسم تسليم المشاريع -->
+<div class="submit-project-section fade-in">
+  <h3 class="submit-project-title">تسليم المشاريع</h3>
+  <p class="submit-project-description">سلّم مشروعك التعليمي مباشرة من هنا، وسيصل للمعلم للمراجعة والتقييم.</p>
+  <div class="inquiries-container">
+    <button onclick="showUploadModal()" class="inquiry-btn primary" style="font-family:inherit;">
+      <i class="fas fa-upload"></i> مشاريع الطلاب التعليمية
+    </button>
+  </div>
 </div>
 
 <!-- زر العودة للأعلى -->
@@ -2103,18 +2119,17 @@
   <div class="footer-content">
     <div class="footer-links">
       <a href="mailto:mfh713623@gmail.com" class="footer-link"><i class="fas fa-envelope"></i> البريد الإلكتروني</a>
-      <a href="#ai-assistant-section" class="footer-link"><i class="fas fa-robot"></i> مساعد الذكاء الاصطناعي</a>
     </div>
     <div class="footer-copyright">
       <span>© 2026 جميع الحقوق محفوظة | واجهة المعلم الرقمي - أ. محمد الغامدي</span>
 <div style="margin-top: 12px; display:flex; justify-content:center;">
-  <div style="background: white; border: 1px solid rgba(44,58,97,0.12); border-radius: 12px; padding: 0.4rem 1rem; display:flex; align-items:center; gap: 8px; box-shadow: 0 3px 8px rgba(44,58,97,0.06);">
-    <div style="width:28px; height:28px; border-radius:50%; background:rgba(44,58,97,0.07); display:flex; align-items:center; justify-content:center;">
-      <i class="fas fa-eye" style="color:#2C3A61; font-size:13px;"></i>
+  <div style="background: white; border: 1px solid rgba(22,50,79,0.12); border-radius: 16px; padding: 0.4rem 1rem; display:flex; align-items:center; gap: 8px; box-shadow: 0 2px 8px rgba(22,50,79,0.06);">
+    <div style="width:28px; height:28px; border-radius:50%; background:rgba(22,50,79,0.07); display:flex; align-items:center; justify-content:center;">
+      <i class="fas fa-eye" style="color:#16324F; font-size:13px;"></i>
     </div>
     <div style="display:flex; align-items:center; gap:8px;">
-      <p style="font-size:11px; color:#7B8AB8; margin:0; font-family:'IBM Plex Sans Arabic',sans-serif;">عدد الزيارات</p>
-      <img src="https://hits.sh/teacher-injaz.vercel.app.svg?style=flat&label=&color=2C3A61&labelColor=2C3A61" 
+      <p style="font-size:11px; color:#7A8B9E; margin:0; font-family:'IBM Plex Sans Arabic',sans-serif;">عدد الزيارات</p>
+      <img src="https://hits.sh/teacher-injaz.vercel.app.svg?style=flat&label=&color=16324F&labelColor=16324F" 
            alt="عداد الزيارات" style="height:18px; display:block;">
     </div>
   </div>
@@ -2270,8 +2285,10 @@
         const targetId = button.getAttribute('data-target');
         const cardsContainer = document.getElementById(targetId);
         if(cardsContainer) {
-          cardsContainer.classList.add('collapsed');
-          button.classList.add('collapsed');
+          if (targetId !== 'library-cards') {
+            cardsContainer.classList.add('collapsed');
+            button.classList.add('collapsed');
+          }
           button.addEventListener('click', () => { cardsContainer.classList.toggle('collapsed'); button.classList.toggle('collapsed'); });
         }
       });
@@ -2441,11 +2458,11 @@ if (student.period2 !== null && student.period2 !== undefined && student.period2
        let finalHtml = '';
 if (student.isComplete && student.finalScore) {
   let ratingIcon = 'fa-medal';
-  let ratingColor = '#2ECC71';
- if (student.rating === 'ممتاز') { ratingIcon = 'fa-trophy'; ratingColor = '#C9971C'; }
-  else if (student.rating === 'جيد جداً') { ratingIcon = 'fa-medal'; ratingColor = '#2ECC71'; }
+  let ratingColor = '#1D9E75';
+ if (student.rating === 'ممتاز') { ratingIcon = 'fa-trophy'; ratingColor = '#E8A33D'; }
+  else if (student.rating === 'جيد جداً') { ratingIcon = 'fa-medal'; ratingColor = '#1D9E75'; }
   else if (student.rating === 'جيد') { ratingIcon = 'fa-thumbs-up'; ratingColor = '#3498DB'; }
-  else if (student.rating === 'مقبول') { ratingIcon = 'fa-circle-exclamation'; ratingColor = '#F39C12'; }
+  else if (student.rating === 'مقبول') { ratingIcon = 'fa-circle-exclamation'; ratingColor = '#D98C1F'; }
   else { ratingIcon = 'fa-triangle-exclamation'; ratingColor = 'var(--warning-red)'; }
 
   finalHtml = `
@@ -2472,7 +2489,7 @@ if (student.isComplete && student.finalScore) {
 let percentageColor = '#1D9E75';
 let percentageBg = 'rgba(29,158,117,0.08)';
 if (student.attendance) {
-  if (student.attendance.percentage < 75) { percentageColor = '#D6427D'; percentageBg = 'rgba(214,66,125,0.08)'; }
+  if (student.attendance.percentage < 75) { percentageColor = '#C0392B'; percentageBg = 'rgba(192,57,43,0.08)'; }
   else if (student.attendance.percentage < 90) { percentageColor = '#D98C1F'; percentageBg = 'rgba(217,140,31,0.1)'; }
 }
 const attendanceHtml = student.attendance ? `
@@ -2483,10 +2500,10 @@ const attendanceHtml = student.attendance ? `
       <span style="color:#1D9E75;">${student.attendance.present}</span>
       <small style="color:#1D9E75;">حضور</small>
     </div>
-    <div class="attendance-item" style="background: rgba(214,66,125,0.08);">
-      <i class="fas fa-times-circle" style="color:#D6427D;"></i>
-      <span style="color:#D6427D;">${student.attendance.absent}</span>
-      <small style="color:#D6427D;">غياب</small>
+    <div class="attendance-item" style="background: rgba(192,57,43,0.08);">
+      <i class="fas fa-times-circle" style="color:#C0392B;"></i>
+      <span style="color:#C0392B;">${student.attendance.absent}</span>
+      <small style="color:#C0392B;">غياب</small>
     </div>
     <div class="attendance-item" style="background:${percentageBg};">
       <i class="fas fa-calendar-check" style="color:${percentageColor};"></i>
@@ -2498,7 +2515,7 @@ const attendanceHtml = student.attendance ? `
         let pointsButtonHtml = '';
 if (student.points) {
   pointsButtonHtml = `
-    <button class="points-btn points-btn-hover" data-student-id="${student.id || ''}" style="margin:4px 1.3rem 0; background:rgba(125,66,211,0.06); color:#7D42D3; border:1px solid rgba(125,66,211,0.25); padding:11px; border-radius:12px; cursor:pointer; font-size:0.9rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; width:calc(100% - 2.6rem); font-family:inherit;">
+    <button class="points-btn points-btn-hover" data-student-id="${student.id || ''}" style="margin:4px 1.3rem 0; background:rgba(14,149,148,0.06); color:#0E9594; border:1px solid rgba(14,149,148,0.25); padding:11px; border-radius:16px; cursor:pointer; font-size:0.85rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; width:calc(100% - 2.6rem); font-family:inherit;">
       <i class="fas fa-award"></i> النقاط والمخالفات 
     </button>
   `;
@@ -2512,7 +2529,7 @@ const cardHtml = `
       <div style="width:1px; height:45px; background:rgba(255,255,255,0.2); flex-shrink:0;"></div>
       <div style="flex:1; min-width:0; text-align:right;">
         <h4 style="font-size:1rem; font-weight:700; color:white; margin:0 0 8px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${settings.schoolName || 'المدرسة'}</h4>
-        <p style="font-size:0.8rem; color:rgba(255,255,255,0.85); margin:0 0 2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${settings.subject || 'التقنية الرقمية'} | ${settings.semester || ''} ${settings.academicYear || ''}</p>
+        <p style="font-size:0.85rem; color:rgba(255,255,255,0.85); margin:0 0 2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${settings.subject || 'التقنية الرقمية'} | ${settings.semester || ''} ${settings.academicYear || ''}</p>
         <p style="font-size:0.75rem; color:rgba(255,255,255,0.75); margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><i class="fas fa-user" style="margin-left:5px;"></i>${settings.teacherName || 'أ.محمد حمدان الغامدي'}</p>
       </div>
     </div>
@@ -2533,14 +2550,14 @@ const cardHtml = `
   <div class="grade-card">
     <span>الفترة الأولى</span>
     ${period1Html}
-    <button class="details-btn" data-period="1" data-student-id="${student.id || ''}" style="background: transparent; color: var(--text-light); border: 1px solid var(--border-color); padding: 5px 14px; border-radius: 15px; cursor: pointer; font-size: 0.72rem; font-weight: 500; align-self: center;">
+    <button class="details-btn" data-period="1" data-student-id="${student.id || ''}" style="background: transparent; color: var(--text-light); border: 1px solid var(--border-color); padding: 5px 14px; border-radius: 16px; cursor: pointer; font-size: 0.75rem; font-weight: 500; align-self: center;">
       <i class="fas fa-eye"></i> التفاصيل
     </button>
   </div>
   <div class="grade-card">
     <span>الفترة الثانية</span>
     ${period2Html}
-    <button class="details-btn" data-period="2" data-student-id="${student.id || ''}" style="background: transparent; color: var(--text-light); border: 1px solid var(--border-color); padding: 5px 14px; border-radius: 15px; cursor: pointer; font-size: 0.72rem; font-weight: 500; align-self: center;">
+    <button class="details-btn" data-period="2" data-student-id="${student.id || ''}" style="background: transparent; color: var(--text-light); border: 1px solid var(--border-color); padding: 5px 14px; border-radius: 16px; cursor: pointer; font-size: 0.75rem; font-weight: 500; align-self: center;">
       <i class="fas fa-eye"></i> التفاصيل
     </button>
   </div>
@@ -2627,7 +2644,7 @@ function displayVotingResults(data) {
   if (!container) return;
   
   const totalVotes = data.totalVotes || 0;
-  const projectColors = ["#2C3A61", "#7D42D3", "#3498DB"];
+  const projectColors = ["#16324F", "#0E9594", "#3498DB"];
   
   let html = `<div class="votes-stats">`;
   
@@ -2734,8 +2751,8 @@ initVotingTimer();
 
 
 const VOTING_PROJECTS = [
-  { name: 'العرض التقديمي', icon: 'fa-file-powerpoint', color: '#2C3A61' },
-  { name: 'التصميم الجرافيكي', icon: 'fa-palette', color: '#7D42D3' },
+  { name: 'العرض التقديمي', icon: 'fa-file-powerpoint', color: '#16324F' },
+  { name: 'التصميم الجرافيكي', icon: 'fa-palette', color: '#0E9594' },
   { name: 'الموقع الإلكتروني', icon: 'fa-globe', color: '#3498DB' }
 ];
 
@@ -2752,8 +2769,8 @@ window.showUploadModal = function() {
   uploadSelectedType = null;
 
   const modalHtml = `
-    <div id="uploadModalBox" style="background:white; border-radius:20px; width:90%; max-width:420px; margin:0 auto; box-shadow:0 20px 35px rgba(0,0,0,0.2); overflow:hidden;">
-      <div style="background:linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%); padding:1.1rem; text-align:center;">
+    <div id="uploadModalBox" style="background:white; border-radius:24px; width:90%; max-width:420px; margin:0 auto; box-shadow: 0 16px 32px rgba(0,0,0,0.2); overflow:hidden;">
+      <div style="background:var(--primary-dark); padding:1.1rem; text-align:center;">
         <h3 style="margin:0; color:white; font-size:1rem; display:flex; align-items:center; justify-content:center; gap:8px;">
           <i class="fas fa-cloud-arrow-up"></i> تسليم المشروع
         </h3>
@@ -2762,35 +2779,35 @@ window.showUploadModal = function() {
       <div id="uploadStep1" style="padding:1.3rem;">
         <p style="font-size:0.85rem; color:var(--text-medium); margin:0 0 12px; text-align:center;">أدخل رقمك الخاص للمتابعة</p>
         <input type="text" id="uploadStudentId" placeholder="رقمك الخاص..." maxlength="20"
-          style="width:100%; box-sizing:border-box; padding:11px 14px; border:2px solid var(--border-color); border-radius:12px; font-size:0.95rem; font-family:inherit; text-align:right; outline:none;">
-        <div id="uploadMessage" style="display:none; border-radius:10px; padding:10px; text-align:center; font-size:0.82rem; margin-top:12px;"></div>
+          style="width:100%; box-sizing:border-box; padding:11px 14px; border:2px solid var(--border-color); border-radius:16px; font-size:1rem; font-family:inherit; text-align:right; outline:none;">
+        <div id="uploadMessage" style="display:none; border-radius:10px; padding:10px; text-align:center; font-size:0.85rem; margin-top:12px;"></div>
       </div>
 
       <div id="uploadStep2" style="display:none; padding:1.3rem;">
-        <div style="background:rgba(44,58,97,0.05); border-radius:12px; padding:12px; text-align:center; margin-bottom:14px;">
-          <p id="uploadStudentName" style="font-size:0.95rem; font-weight:700; color:var(--primary-dark); margin:0 0 3px;"></p>
-          <p id="uploadStudentClass" style="font-size:0.8rem; color:var(--text-medium); margin:0;"></p>
+        <div style="background:rgba(22,50,79,0.05); border-radius:16px; padding:12px; text-align:center; margin-bottom:14px;">
+          <p id="uploadStudentName" style="font-size:1rem; font-weight:700; color:var(--primary-dark); margin:0 0 3px;"></p>
+          <p id="uploadStudentClass" style="font-size:0.85rem; color:var(--text-medium); margin:0;"></p>
         </div>
 
-        <p style="font-size:0.8rem; color:var(--text-light); font-weight:600; margin:0 0 8px;">نوع المشروع:</p>
+        <p style="font-size:0.85rem; color:var(--text-light); font-weight:600; margin:0 0 8px;">نوع المشروع:</p>
         <div id="uploadTypeOptions" style="margin-bottom:14px;"></div>
 
-        <p style="font-size:0.8rem; color:var(--text-light); font-weight:600; margin:0 0 8px;">ملف المشروع:</p>
-        <label for="uploadFileInput" style="display:flex; align-items:center; justify-content:center; gap:8px; padding:14px; border:2px dashed rgba(125,66,211,0.35); border-radius:12px; cursor:pointer; color:#7D42D3; font-size:0.85rem; font-weight:600;">
+        <p style="font-size:0.85rem; color:var(--text-light); font-weight:600; margin:0 0 8px;">ملف المشروع:</p>
+        <label for="uploadFileInput" style="display:flex; align-items:center; justify-content:center; gap:8px; padding:14px; border:2px dashed rgba(14,149,148,0.35); border-radius:16px; cursor:pointer; color:#0E9594; font-size:0.85rem; font-weight:600;">
           <i class="fas fa-paperclip"></i> <span id="uploadFileLabel">اختر ملف مشروعك</span>
         </label>
         <input type="file" id="uploadFileInput" style="display:none;">
 
-        <p style="font-size:0.7rem; color:var(--text-light); text-align:center; margin:8px 0 0;">الحد الأقصى 30 ميجابايت — للفيديو صوّر بجودة 720p</p>
+        <p style="font-size:0.75rem; color:var(--text-light); text-align:center; margin:8px 0 0;">الحد الأقصى 30 ميجابايت — للفيديو صوّر بجودة 720p</p>
 
-        <div id="uploadMessage2" style="display:none; border-radius:10px; padding:10px; text-align:center; font-size:0.82rem; margin-top:12px;"></div>
+        <div id="uploadMessage2" style="display:none; border-radius:10px; padding:10px; text-align:center; font-size:0.85rem; margin-top:12px;"></div>
       </div>
 
       <div style="padding:0.4rem 1.3rem 1.3rem; display:flex; gap:8px; justify-content:center;">
-        <button id="uploadActionBtn" style="background:linear-gradient(135deg,#2C3A61,#7D42D3); color:white; border:none; padding:9px 24px; border-radius:20px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
+        <button id="uploadActionBtn" style="background:var(--accent-teal); color:white; border:none; padding:9px 24px; border-radius:24px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
           <i class="fas fa-arrow-left"></i> متابعة
         </button>
-        <button onclick="this.closest('.modal-details').remove()" style="background:transparent; color:#7D42D3; border:1px solid rgba(125,66,211,0.35); padding:9px 22px; border-radius:20px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
+        <button onclick="this.closest('.modal-details').remove()" style="background:transparent; color:#0E9594; border:1px solid rgba(14,149,148,0.35); padding:9px 22px; border-radius:24px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
           إغلاق
         </button>
       </div>
@@ -2824,8 +2841,8 @@ async function verifyStudentForUpload(overlay) {
 
   function showMsg(text, isError) {
     msgBox.style.display = 'block';
-    msgBox.style.background = isError ? 'rgba(214,66,125,0.08)' : 'rgba(29,158,117,0.08)';
-    msgBox.style.color = isError ? '#D6427D' : '#1D9E75';
+    msgBox.style.background = isError ? 'rgba(192,57,43,0.08)' : 'rgba(29,158,117,0.08)';
+    msgBox.style.color = isError ? '#C0392B' : '#1D9E75';
     msgBox.innerHTML = `<i class="fas ${isError ? 'fa-circle-exclamation' : 'fa-circle-check'}"></i> ${text}`;
   }
 
@@ -2849,15 +2866,15 @@ async function verifyStudentForUpload(overlay) {
       const typeIcons = { 'عرض تقديمي': 'fa-file-powerpoint', 'صورة': 'fa-image', 'بحث علمي': 'fa-book', 'مقطع فيديو': 'fa-video' };
       overlay.querySelector('#uploadTypeOptions').innerHTML = types.map(t => `
         <div class="upload-type-opt" data-type="${t}" style="display:flex; align-items:center; gap:8px; padding:10px; border:1.5px solid var(--border-color); border-radius:10px; margin-bottom:6px; cursor:pointer; font-size:0.85rem;">
-          <i class="fas ${typeIcons[t]}" style="color:#7D42D3; width:20px; text-align:center;"></i> ${t}
+          <i class="fas ${typeIcons[t]}" style="color:#0E9594; width:20px; text-align:center;"></i> ${t}
         </div>
       `).join('');
 
       overlay.querySelectorAll('.upload-type-opt').forEach(opt => {
         opt.addEventListener('click', function() {
           overlay.querySelectorAll('.upload-type-opt').forEach(o => { o.style.borderColor = 'var(--border-color)'; o.style.background = 'transparent'; });
-          this.style.borderColor = '#7D42D3';
-          this.style.background = 'rgba(125,66,211,0.06)';
+          this.style.borderColor = '#0E9594';
+          this.style.background = 'rgba(14,149,148,0.06)';
           uploadSelectedType = this.dataset.type;
         });
       });
@@ -2885,8 +2902,8 @@ async function verifyStudentForUpload(overlay) {
 
   function showMsg(text, isError) {
     msgBox.style.display = 'block';
-    msgBox.style.background = isError ? 'rgba(214,66,125,0.08)' : 'rgba(29,158,117,0.08)';
-    msgBox.style.color = isError ? '#D6427D' : '#1D9E75';
+    msgBox.style.background = isError ? 'rgba(192,57,43,0.08)' : 'rgba(29,158,117,0.08)';
+    msgBox.style.color = isError ? '#C0392B' : '#1D9E75';
     msgBox.innerHTML = `<i class="fas ${isError ? 'fa-circle-exclamation' : 'fa-circle-check'}"></i> ${text}`;
   }
 
@@ -2952,15 +2969,15 @@ window.showVoteModal = function() {
   selectedProject = null;
 
   const projectsHtml = VOTING_PROJECTS.map((p, i) => `
-    <div class="vote-option" data-project="${p.name}" style="display:flex; align-items:center; gap:10px; padding:12px; border:1.5px solid var(--border-color); border-radius:12px; margin-bottom:8px; cursor:pointer; transition:all 0.25s ease;">
-      <i class="fas ${p.icon}" style="color:${p.color}; font-size:1.1rem; width:22px; text-align:center;"></i>
-      <span style="font-size:0.9rem; font-weight:600; color:var(--primary-dark);">${p.name}</span>
+    <div class="vote-option" data-project="${p.name}" style="display:flex; align-items:center; gap:10px; padding:12px; border:1.5px solid var(--border-color); border-radius:16px; margin-bottom:8px; cursor:pointer; transition:all 0.25s ease;">
+      <i class="fas ${p.icon}" style="color:${p.color}; font-size:1.15rem; width:22px; text-align:center;"></i>
+      <span style="font-size:0.85rem; font-weight:600; color:var(--primary-dark);">${p.name}</span>
     </div>
   `).join('');
 
   const modalHtml = `
-    <div style="background:white; border-radius:20px; width:90%; max-width:400px; margin:0 auto; box-shadow:0 20px 35px rgba(0,0,0,0.2); overflow:hidden;">
-      <div style="background:linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%); padding:1.1rem; text-align:center;">
+    <div style="background:white; border-radius:24px; width:90%; max-width:400px; margin:0 auto; box-shadow: 0 16px 32px rgba(0,0,0,0.2); overflow:hidden;">
+      <div style="background:var(--primary-dark); padding:1.1rem; text-align:center;">
         <h3 style="margin:0; color:white; font-size:1rem; display:flex; align-items:center; justify-content:center; gap:8px;">
           <i class="fas fa-check-to-slot"></i> التصويت للمشاريع
         </h3>
@@ -2968,19 +2985,19 @@ window.showVoteModal = function() {
 
       <div style="padding:1.2rem;">
         <input type="text" id="voteStudentId" placeholder="أدخل رقمك الخاص هنا..." maxlength="20"
-          style="width:100%; box-sizing:border-box; padding:11px 14px; border:2px solid var(--border-color); border-radius:12px; font-size:0.95rem; font-family:inherit; text-align:right; outline:none; margin-bottom:1rem;">
+          style="width:100%; box-sizing:border-box; padding:11px 14px; border:2px solid var(--border-color); border-radius:16px; font-size:1rem; font-family:inherit; text-align:right; outline:none; margin-bottom:1rem;">
 
-        <p style="font-size:0.8rem; color:var(--text-light); font-weight:600; margin:0 0 8px;">اختر المشروع:</p>
+        <p style="font-size:0.85rem; color:var(--text-light); font-weight:600; margin:0 0 8px;">اختر المشروع:</p>
         ${projectsHtml}
 
-        <div id="voteMessage" style="display:none; border-radius:10px; padding:10px; text-align:center; font-size:0.82rem; margin-top:10px;"></div>
+        <div id="voteMessage" style="display:none; border-radius:10px; padding:10px; text-align:center; font-size:0.85rem; margin-top:10px;"></div>
       </div>
 
       <div style="padding:0.4rem 1.2rem 1.2rem; display:flex; gap:8px; justify-content:center;">
-        <button id="confirmVoteBtn" style="background:linear-gradient(135deg,#2C3A61,#7D42D3); color:white; border:none; padding:9px 24px; border-radius:20px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
+        <button id="confirmVoteBtn" style="background:var(--accent-teal); color:white; border:none; padding:9px 24px; border-radius:24px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
           <i class="fas fa-paper-plane"></i> تأكيد التصويت
         </button>
-        <button onclick="this.closest('.modal-details').remove()" style="background:transparent; color:#7D42D3; border:1px solid rgba(125,66,211,0.35); padding:9px 22px; border-radius:20px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
+        <button onclick="this.closest('.modal-details').remove()" style="background:transparent; color:#0E9594; border:1px solid rgba(14,149,148,0.35); padding:9px 22px; border-radius:24px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
           إغلاق
         </button>
       </div>
@@ -3001,8 +3018,8 @@ window.showVoteModal = function() {
         o.style.borderColor = 'var(--border-color)';
         o.style.background = 'transparent';
       });
-      this.style.borderColor = '#7D42D3';
-      this.style.background = 'rgba(125,66,211,0.06)';
+      this.style.borderColor = '#0E9594';
+      this.style.background = 'rgba(14,149,148,0.06)';
       selectedProject = this.dataset.project;
     });
   });
@@ -3018,8 +3035,8 @@ window.showVoteModal = function() {
 
   function showMsg(text, isError) {
     msgBox.style.display = 'block';
-    msgBox.style.background = isError ? 'rgba(214,66,125,0.08)' : 'rgba(29,158,117,0.08)';
-    msgBox.style.color = isError ? '#D6427D' : '#1D9E75';
+    msgBox.style.background = isError ? 'rgba(192,57,43,0.08)' : 'rgba(29,158,117,0.08)';
+    msgBox.style.color = isError ? '#C0392B' : '#1D9E75';
     msgBox.innerHTML = `<i class="fas ${isError ? 'fa-circle-exclamation' : 'fa-circle-check'}"></i> ${text}`;
   }
 
@@ -3058,17 +3075,17 @@ function showPointsModal(data) {
     let badgeName = 'متدرب', badgeColor = '#94A3B8', badgeIcon = 'fa-seedling';
     let nextThreshold = 10, prevThreshold = 0, nextName = 'مجتهد', isMax = false;
     const pts = p.totalPoints;
-   let nextIcon = 'fa-medal', nextColor = '#3498DB';
-    if (pts >= 30) { badgeName = 'مبدع'; badgeColor = '#C9971C'; badgeIcon = 'fa-crown'; isMax = true; }
-    else if (pts >= 20) { badgeName = 'متميز'; badgeColor = '#7D42D3'; badgeIcon = 'fa-star'; prevThreshold = 20; nextThreshold = 30; nextName = 'مبدع'; nextIcon = 'fa-crown'; nextColor = '#C9971C'; }
-    else if (pts >= 10) { badgeName = 'مجتهد'; badgeColor = '#3498DB'; badgeIcon = 'fa-medal'; prevThreshold = 10; nextThreshold = 20; nextName = 'متميز'; nextIcon = 'fa-star'; nextColor = '#7D42D3'; }
-    else { nextIcon = 'fa-medal'; nextColor = '#3498DB'; }
+   let nextIcon = 'fa-medal', nextColor = '#0E9594';
+    if (pts >= 30) { badgeName = 'مبدع'; badgeColor = '#E8A33D'; badgeIcon = 'fa-crown'; isMax = true; }
+    else if (pts >= 20) { badgeName = 'متميز'; badgeColor = '#16324F'; badgeIcon = 'fa-star'; prevThreshold = 20; nextThreshold = 30; nextName = 'مبدع'; nextIcon = 'fa-crown'; nextColor = '#E8A33D'; }
+    else if (pts >= 10) { badgeName = 'مجتهد'; badgeColor = '#0E9594'; badgeIcon = 'fa-medal'; prevThreshold = 10; nextThreshold = 20; nextName = 'متميز'; nextIcon = 'fa-star'; nextColor = '#16324F'; }
+    else { nextIcon = 'fa-medal'; nextColor = '#0E9594'; }
 
     let progressHtml = '';
     if (isMax) {
         progressHtml = `
-        <div style="background:rgba(201,151,28,0.08); border-radius:12px; padding:12px; text-align:center; margin-top:1rem;">
-            <span style="font-size:0.82rem; color:#C9971C; font-weight:600;"><i class="fas fa-crown"></i> وصلت لأعلى مستوى!</span>
+        <div style="background:rgba(201,151,28,0.08); border-radius:16px; padding:12px; text-align:center; margin-top:1rem;">
+            <span style="font-size:0.85rem; color:#E8A33D; font-weight:600;"><i class="fas fa-crown"></i> وصلت لأعلى مستوى!</span>
         </div>`;
     } else {
         const remaining = nextThreshold - pts;
@@ -3076,50 +3093,50 @@ function showPointsModal(data) {
         const filled = ((pts - prevThreshold) / range) * 100;
         progressHtml = `
         <div style="margin-top:1rem;">
-            <div style="display:flex; justify-content:space-between; font-size:0.72rem; color:#5D6D9E; margin-bottom:5px;">
+            <div style="display:flex; justify-content:space-between; font-size:0.75rem; color:#5C7489; margin-bottom:5px;">
                 <span><i class="fas ${badgeIcon}" style="color:${badgeColor};"></i> ${badgeName}</span>
                 <span><i class="fas ${nextIcon}" style="color:${nextColor};"></i> ${nextName}</span>
             </div>
-            <div style="background:rgba(0,0,0,0.06); border-radius:8px; height:8px; overflow:hidden;">
-                <div style="width:${filled}%; height:100%; background:linear-gradient(90deg, #7D42D3, #2C3A61); border-radius:8px; transition:width 0.6s ease;"></div>
+            <div style="background:rgba(0,0,0,0.06); border-radius:10px; height:8px; overflow:hidden;">
+                <div style="width:${filled}%; height:100%; background:var(--accent-teal); border-radius:10px; transition:width 0.6s ease;"></div>
             </div>
-            <div style="text-align:center; font-size:0.75rem; color:#7D42D3; font-weight:600; margin-top:6px;">
+            <div style="text-align:center; font-size:0.75rem; color:#0E9594; font-weight:600; margin-top:6px;">
                 <i class="fas fa-bullseye"></i> تبقّى ${remaining} نقاط لتصبح ${nextName}
             </div>
         </div>`;
     }
 
     const modalHtml = `
-        <div style="background:white; border-radius:20px; width:90%; max-width:400px; margin:0 auto; box-shadow:0 20px 35px rgba(0,0,0,0.2); overflow:hidden;">
-            <div style="background:linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%); padding:1.2rem; text-align:center;">
+        <div style="background:white; border-radius:24px; width:90%; max-width:400px; margin:0 auto; box-shadow: 0 16px 32px rgba(0,0,0,0.2); overflow:hidden;">
+            <div style="background:var(--primary-dark); padding:1.2rem; text-align:center;">
                 <h3 style="margin:0; color:white; font-size:1rem; display:flex; align-items:center; justify-content:center; gap:8px;">
-                    <i class="fas fa-trophy"></i> نظام النقاط والمخالفات
+                    نظام النقاط والمخالفات
                 </h3>
             </div>
 
             <div style="padding:1.2rem;">
 
                 <div style="text-align:center; margin-bottom:1.2rem;">
-                    <div style="font-size:2.5rem; font-weight:800; color:#2C3A61; line-height:1;">${p.totalPoints}</div>
-                    <div style="font-size:0.85rem; color:#5D6D9E; margin-top:4px;">نقاط مشاركة</div>
-                    <div style="display:inline-flex; align-items:center; gap:6px; margin-top:10px; background:${badgeColor}1A; color:${badgeColor}; padding:5px 16px; border-radius:20px; font-size:0.85rem; font-weight:700;">
+                    <div style="font-size:2rem; font-weight:800; color:#16324F; line-height:1;">${p.totalPoints}</div>
+                    <div style="font-size:0.85rem; color:#5C7489; margin-top:4px;">نقاط مشاركة</div>
+                    <div style="display:inline-flex; align-items:center; gap:6px; margin-top:10px; background:${badgeColor}1A; color:${badgeColor}; padding:5px 16px; border-radius:24px; font-size:0.85rem; font-weight:700;">
                         <i class="fas ${badgeIcon}"></i> ${badgeName}
                     </div>
                 </div>
 
                 <div style="display:flex; gap:10px; margin-bottom:0.5rem;">
-                    <div style="flex:1; background:rgba(29,158,117,0.08); border-radius:12px; padding:12px; text-align:center;">
-                        <div style="font-size:1.3rem; font-weight:700; color:#1D9E75;">${p.grade}</div>
-                        <div style="font-size:0.72rem; color:#1D9E75; margin-top:2px;">درجة مكتسبة</div>
+                    <div style="flex:1; background:rgba(29,158,117,0.08); border-radius:16px; padding:12px; text-align:center;">
+                        <div style="font-size:1.4rem; font-weight:700; color:#1D9E75;">${p.grade}</div>
+                        <div style="font-size:0.75rem; color:#1D9E75; margin-top:2px;">درجة مكتسبة</div>
                     </div>
-                    <div style="flex:1; background:rgba(214,66,125,0.08); border-radius:12px; padding:12px; text-align:center;">
-                        <div style="font-size:1.3rem; font-weight:700; color:#D6427D;">${p.totalViolations}</div>
-                        <div style="font-size:0.72rem; color:#D6427D; margin-top:2px;">مخالفة</div>
+                    <div style="flex:1; background:rgba(192,57,43,0.08); border-radius:16px; padding:12px; text-align:center;">
+                        <div style="font-size:1.4rem; font-weight:700; color:#C0392B;">${p.totalViolations}</div>
+                        <div style="font-size:0.75rem; color:#C0392B; margin-top:2px;">مخالفة</div>
                     </div>
                 </div>
 
                 ${p.totalViolations > 0 ? `
-                <div style="background:rgba(214,66,125,0.06); border-radius:10px; padding:8px 12px; text-align:center; font-size:0.75rem; color:#D6427D;">
+                <div style="background:rgba(192,57,43,0.06); border-radius:10px; padding:8px 12px; text-align:center; font-size:0.75rem; color:#C0392B;">
                     <i class="fas fa-circle-exclamation"></i> يُخصم ${p.violationDeduction} درجة من بند المشاركة
                 </div>` : ''}
 
@@ -3128,7 +3145,7 @@ function showPointsModal(data) {
             </div>
 
             <div style="padding:0.6rem 1.2rem 1.2rem; text-align:center;">
-                <button onclick="this.closest('.modal-details').remove()" style="background:transparent; color:#7D42D3; border:1px solid rgba(125,66,211,0.35); padding:7px 24px; border-radius:20px; cursor:pointer; font-size:0.82rem; font-weight:600;">
+                <button onclick="this.closest('.modal-details').remove()" style="background:transparent; color:#0E9594; border:1px solid rgba(14,149,148,0.35); padding:7px 24px; border-radius:24px; cursor:pointer; font-size:0.85rem; font-weight:600;">
                     إغلاق
                 </button>
             </div>
@@ -3185,29 +3202,29 @@ function showGradeDetails(period, studentDetails) {
         let barColor = '#1D9E75';
         let bgColor = 'rgba(29,158,117,0.08)';
         if (isScored) {
-            if (percentage < 50) { barColor = '#D6427D'; bgColor = 'rgba(214,66,125,0.08)'; }
+            if (percentage < 50) { barColor = '#C0392B'; bgColor = 'rgba(192,57,43,0.08)'; }
             else if (percentage < 75) { barColor = '#D98C1F'; bgColor = 'rgba(217,140,31,0.1)'; }
         }
 
         itemsHtml += `
-            <div style="background: ${isScored ? bgColor : 'rgba(0,0,0,0.03)'}; border-radius: 12px; padding: 10px 12px; margin-bottom: 10px;">
+            <div style="background: ${isScored ? bgColor : 'rgba(0,0,0,0.03)'}; border-radius: 16px; padding: 10px 12px; margin-bottom: 10px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
-                    <span style="font-size: 0.85rem; color: #5D6D9E; display: flex; align-items: center; gap: 6px;">
-                        <i class="fas ${item.icon}" style="color: ${isScored ? barColor : '#B0B8CC'}; font-size: 0.9rem;"></i>
+                    <span style="font-size: 0.85rem; color: #5C7489; display: flex; align-items: center; gap: 6px;">
+                        <i class="fas ${item.icon}" style="color: ${isScored ? barColor : '#B0B8CC'}; font-size: 0.85rem;"></i>
                         ${item.name}
                     </span>
-                    <span style="font-size: 0.9rem; font-weight: 700; color: ${isScored ? barColor : '#B0B8CC'};">
+                    <span style="font-size: 0.85rem; font-weight: 700; color: ${isScored ? barColor : '#B0B8CC'};">
                         ${isScored ? earned + '/' + item.max : 'بانتظار الرصد'}
                     </span>
                 </div>
                 ${isScored ? `
-                <div style="background: rgba(0,0,0,0.08); border-radius: 8px; height: 6px; overflow: hidden; margin-bottom: 4px;">
-                    <div style="width: ${percentage}%; height: 100%; background: ${barColor}; border-radius: 8px; transition: width 0.6s ease;"></div>
+                <div style="background: rgba(0,0,0,0.08); border-radius: 10px; height: 6px; overflow: hidden; margin-bottom: 4px;">
+                    <div style="width: ${percentage}%; height: 100%; background: ${barColor}; border-radius: 10px; transition: width 0.6s ease;"></div>
                 </div>
-                <div style="font-size: 0.72rem; color: ${barColor}; font-weight: 600; text-align: left;">${percentage.toFixed(1)}%</div>
+                <div style="font-size: 0.75rem; color: ${barColor}; font-weight: 600; text-align: left;">${percentage.toFixed(1)}%</div>
                 ` : `
-                <div style="background: rgba(0,0,0,0.06); border-radius: 8px; height: 6px;">
-                    <div style="width: 0%; height: 100%; border-radius: 8px;"></div>
+                <div style="background: rgba(0,0,0,0.06); border-radius: 10px; height: 6px;">
+                    <div style="width: 0%; height: 100%; border-radius: 10px;"></div>
                 </div>
                 `}
             </div>
@@ -3215,8 +3232,8 @@ function showGradeDetails(period, studentDetails) {
     });
     
   const detailsHtml = `
-        <div style="background: white; border-radius: 20px; width: 90%; max-width: 400px; margin: 0 auto; box-shadow: 0 20px 35px rgba(0,0,0,0.2); overflow: hidden;">
-            <div style="background: linear-gradient(135deg, #2C3A61 0%, #7D42D3 100%); padding: 1rem 1.2rem;">
+        <div style="background: white; border-radius: 24px; width: 90%; max-width: 400px; margin: 0 auto; box-shadow: 0 16px 32px rgba(0,0,0,0.2); overflow: hidden;">
+            <div style="background: var(--primary-dark); padding: 1rem 1.2rem;">
                 <h3 style="margin: 0; color: white; font-size: 1rem; display: flex; align-items: center; gap: 8px;">
                     <i class="fas fa-list-check" style="font-size: 1rem;"></i>
                     تفاصيل الفترة ${period === 1 ? 'الأولى' : 'الثانية'}
@@ -3226,7 +3243,7 @@ function showGradeDetails(period, studentDetails) {
                 ${itemsHtml}
             </div>
             <div style="padding: 0.6rem 1.2rem 1rem; text-align: center;">
-                <button onclick="this.closest('.modal-details').remove()" style="background: transparent; color: #7D42D3; border: 1px solid rgba(125,66,211,0.35); padding: 7px 24px; border-radius: 20px; cursor: pointer; font-size: 0.82rem; font-weight: 600;">
+                <button onclick="this.closest('.modal-details').remove()" style="background: transparent; color: #0E9594; border: 1px solid rgba(14,149,148,0.35); padding: 7px 24px; border-radius: 24px; cursor: pointer; font-size: 0.85rem; font-weight: 600;">
                     إغلاق
                 </button>
             </div>
