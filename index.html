@@ -1027,12 +1027,10 @@
   justify-content: center;
   gap: 6px;
 }
-    .rating-medallion { display: flex; flex-direction: row; align-items: center; justify-content: center; gap: 1rem; }
-    .medallion-icon { width: 64px; height: 64px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; flex-shrink: 0; }
-    .medallion-text { display: flex; flex-direction: column; align-items: center; gap: 0.35rem; }
-    .medallion-score { font-size: 1.9rem; font-weight: 800; color: var(--primary-dark); display: flex; align-items: baseline; gap: 5px; }
-    .medallion-score-unit { font-size: 0.5em; font-weight: 500; color: var(--text-light); }
-    .medallion-badge { font-size: 0.85rem; font-weight: 700; padding: 4px 18px; border-radius: 8px; border: 1.5px solid; }
+    .rating-medallion { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    .medallion-score { font-size: 2.6rem; font-weight: 800; color: var(--primary-dark); display: flex; align-items: baseline; gap: 6px; }
+    .medallion-score-unit { font-size: 0.4em; font-weight: 500; color: var(--text-light); }
+    .medallion-badge { font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 6px; }
     .result-close-btn { background: transparent; color: #0E9594; border: 1px solid rgba(14,149,148,0.35); padding: 9px 22px; border-radius: 24px; cursor: pointer; font-size: 0.85rem; font-weight: 600; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; transition: var(--transition); }
     .result-close-btn:hover { background: rgba(14,149,148,0.08); }
     .missing-message {
@@ -2364,22 +2362,16 @@ if (student.period2 !== null && student.period2 !== undefined && student.period2
 if (student.isComplete && student.finalScore) {
   let ratingIcon = 'fa-medal';
   let ratingColor = '#1D9E75';
-  let ratingGlow = 'rgba(29,158,117,0.14)';
- if (student.rating === 'ممتاز') { ratingIcon = 'fa-trophy'; ratingColor = '#E8A33D'; ratingGlow = 'rgba(232,163,61,0.16)'; }
-  else if (student.rating === 'جيد جداً') { ratingIcon = 'fa-medal'; ratingColor = '#1D9E75'; ratingGlow = 'rgba(29,158,117,0.14)'; }
-  else if (student.rating === 'جيد') { ratingIcon = 'fa-thumbs-up'; ratingColor = '#3498DB'; ratingGlow = 'rgba(52,152,219,0.14)'; }
-  else if (student.rating === 'مقبول') { ratingIcon = 'fa-circle-exclamation'; ratingColor = '#D98C1F'; ratingGlow = 'rgba(217,140,31,0.14)'; }
-  else { ratingIcon = 'fa-triangle-exclamation'; ratingColor = '#C0392B'; ratingGlow = 'rgba(192,57,43,0.14)'; }
+ if (student.rating === 'ممتاز') { ratingIcon = 'fa-trophy'; ratingColor = '#E8A33D'; }
+  else if (student.rating === 'جيد جداً') { ratingIcon = 'fa-medal'; ratingColor = '#1D9E75'; }
+  else if (student.rating === 'جيد') { ratingIcon = 'fa-thumbs-up'; ratingColor = '#3498DB'; }
+  else if (student.rating === 'مقبول') { ratingIcon = 'fa-circle-exclamation'; ratingColor = '#D98C1F'; }
+  else { ratingIcon = 'fa-triangle-exclamation'; ratingColor = '#C0392B'; }
 
   finalHtml = `
     <div class="rating-medallion">
-      <div class="medallion-icon" style="color:${ratingColor}; background:${ratingGlow}; box-shadow:0 0 0 6px ${ratingGlow};">
-        <i class="fas ${ratingIcon}"></i>
-      </div>
-      <div class="medallion-text">
-        <div class="medallion-score">${student.finalScore}<span class="medallion-score-unit">درجة</span></div>
-        <div class="medallion-badge" style="color:${ratingColor}; background:${ratingGlow}; border-color:${ratingColor};">${student.rating}</div>
-      </div>
+      <div class="medallion-score">${student.finalScore}<span class="medallion-score-unit">درجة</span></div>
+      <div class="medallion-badge" style="color:${ratingColor};"><i class="fas ${ratingIcon}"></i> ${student.rating}</div>
     </div>
   `;
 } else {
