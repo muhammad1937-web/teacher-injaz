@@ -144,11 +144,9 @@
     }
     .tech-header::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(22,50,79,0.75), rgba(14,149,148,0.65)); z-index: 1; }
     .header-content { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; }
-    .header-logo { margin-bottom: 0.2rem; display: flex; align-items: center; justify-content: center; gap: 10px; }
+    .header-logo { margin-bottom: 0.2rem; }
     .header-logo img { height: 56px !important; width: auto; filter: brightness(0) invert(1); transition: transform 0.3s ease; }
     .header-logo img:hover { transform: scale(1.05); }
-    .header-logo img.header-brand-mark { height: 30px !important; opacity: 0.9; }
-    .header-logo-divider { width: 1px; height: 20px; background: rgba(255, 255, 255, 0.3); flex-shrink: 0; }
     .header-text-content { text-align: center; width: 100%; position: relative; z-index: 2; }
     .tech-header h1 { font-size: 1.4rem; font-weight: 800; margin: 0 0 0.3rem 0; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); color: white; letter-spacing: -0.5px; }
     .tech-header p { font-size: 0.85rem; font-weight: 500; margin: 0; color: rgba(255, 255, 255, 0.9); }
@@ -1148,7 +1146,6 @@
     @media (max-width: 768px) {
       .tech-header { padding: 1.3rem 1rem 1rem; min-height: 140px; background-position: center; }
       .header-logo img { height: 65px !important; }
-      .header-logo img.header-brand-mark { height: 34px !important; }
       .tech-header h1 { font-size: 2rem; margin-bottom: 0.4rem; }
       .tech-header h2 { font-size: 1.4rem; margin-bottom: 0.3rem; }
       .tech-header p { font-size: 1.15rem; margin-bottom: 0.4rem; }
@@ -1198,7 +1195,6 @@
         .section-description { font-size: 1rem; padding: 0 0.8rem; margin-top: 0.5rem; }
         .tech-header { padding: 1.1rem 0.5rem 0.9rem; min-height: 130px; }
         .header-logo img { height: 55px !important; }
-        .header-logo img.header-brand-mark { height: 30px !important; }
         .tech-header h1 { font-size: 1.4rem; margin-bottom: 0.3rem; }
         .tech-header h2 { font-size: 1.15rem; margin-bottom: 0.2rem; }
         .tech-header p { font-size: 1rem; margin-bottom: 0.3rem; }
@@ -1223,7 +1219,6 @@
       @media (min-width: 481px) and (max-width: 768px) {
         .tech-header { min-height: 200px; padding: 1.8rem 1rem 1.5rem; }
         .header-logo img { height: 70px !important; }
-        .header-logo img.header-brand-mark { height: 36px !important; }
         .tech-header h1 { font-size: 2rem; }
         .tech-header h2 { font-size: 1.4rem; }
         .results-card { max-width: 100%; }
@@ -1702,9 +1697,7 @@
 <header class="tech-header fade-in">
   <div class="header-content">
     <div class="header-logo">
-      <img src="images/brand-mark.png" alt="شعار واجهة المعلم الرقمي" class="header-brand-mark">
-      <span class="header-logo-divider"></span>
-      <img src="images/logo.png" alt="شعار وزارة التعليم">
+      <img src="images/logo.png" alt="شعار واجهة المعلم الرقمي">
     </div>
     <div class="header-text-content">
       <h1>واجهـة المعلـم الرقمـي</h1>
