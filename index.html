@@ -1009,6 +1009,9 @@
       align-items: center;
       justify-content: center;
     }
+    .grade-card .grade-status { font-size: 0.75rem; font-weight: 600; margin-bottom: 8px; }
+    .grade-card .grade-status-complete { color: #1D9E75; }
+    .grade-card .grade-status-partial { color: #D98C1F; }
   .final-result {
       background: linear-gradient(135deg, rgba(14,149,148,0.08), rgba(22,50,79,0.05));
       border-radius: 16px;
@@ -2347,19 +2350,31 @@ document.addEventListener('keydown', (e) => {
       
       function displayResult(student, settings) {
 const logoHtml = '';
-        
+
         let period1Html, period2Html;
-        
+
+        function isPeriodComplete(periodDetails) {
+            if (!periodDetails) return false;
+            return ['tasks', 'project', 'participation', 'practical', 'theoretical'].every(
+                key => periodDetails[key] !== null && periodDetails[key] !== undefined
+            );
+        }
+        function gradeStatusHtml(periodDetails) {
+            return isPeriodComplete(periodDetails)
+                ? `<div class="grade-status grade-status-complete">✅ اكتمل الرصد</div>`
+                : `<div class="grade-status grade-status-partial">⏳ بانتظار اكتمال الرصد</div>`;
+        }
+
 // الفترة الأولى
 if (student.period1 !== null && student.period1 !== undefined && student.period1 !== '' && student.period1 !== 0) {
-    period1Html = `<div class="grade-value" id="p1">0</div>`;
+    period1Html = `<div class="grade-value" id="p1">0</div>${gradeStatusHtml(student.details && student.details.period1)}`;
 } else {
     period1Html = `<div class="missing-value">بانتظار الرصد</div>`;
 }
 
 // الفترة الثانية
 if (student.period2 !== null && student.period2 !== undefined && student.period2 !== '' && student.period2 !== 0) {
-    period2Html = `<div class="grade-value" id="p2">0</div>`;
+    period2Html = `<div class="grade-value" id="p2">0</div>${gradeStatusHtml(student.details && student.details.period2)}`;
 } else {
     period2Html = `<div class="missing-value">بانتظار الرصد</div>`;
 }
