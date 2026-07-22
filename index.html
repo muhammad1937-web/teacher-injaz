@@ -1009,9 +1009,10 @@
       align-items: center;
       justify-content: center;
     }
-    .grade-card .grade-status { font-size: 0.75rem; font-weight: 600; margin-bottom: 8px; }
+    .grade-card .grade-status { font-size: 0.75rem; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 4px; }
     .grade-card .grade-status-complete { color: #1D9E75; }
     .grade-card .grade-status-partial { color: #D98C1F; }
+    .grade-status-icon-circle { display: inline-flex; align-items: center; justify-content: center; width: 13px; height: 13px; border-radius: 50%; border: 1.5px solid currentColor; font-size: 0.65em; flex-shrink: 0; }
   .final-result {
       background: linear-gradient(135deg, rgba(14,149,148,0.08), rgba(22,50,79,0.05));
       border-radius: 16px;
@@ -2361,8 +2362,8 @@ const logoHtml = '';
         }
         function gradeStatusHtml(periodDetails) {
             return isPeriodComplete(periodDetails)
-                ? `<div class="grade-status grade-status-complete">✅ اكتمل الرصد</div>`
-                : `<div class="grade-status grade-status-partial">⏳ بانتظار اكتمال الرصد</div>`;
+                ? `<div class="grade-status grade-status-complete"><i class="fas fa-check-circle"></i> اكتمل الرصد</div>`
+                : `<div class="grade-status grade-status-partial"><span class="grade-status-icon-circle"><i class="fas fa-hourglass-half"></i></span> بانتظار اكتمال الرصد</div>`;
         }
 
 // الفترة الأولى
@@ -2439,7 +2440,7 @@ const attendanceHtml = student.attendance ? `
         let pointsButtonHtml = '';
 if (student.points) {
   pointsButtonHtml = `
-    <button class="points-btn points-btn-hover" data-student-id="${student.id || ''}" style="margin:4px 1.3rem 0; background:rgba(14,149,148,0.06); color:#0E9594; border:1px solid rgba(14,149,148,0.25); padding:11px; border-radius:16px; cursor:pointer; font-size:0.85rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; width:calc(100% - 2.6rem); font-family:inherit;">
+    <button class="points-btn points-btn-hover" data-student-id="${student.id || ''}" style="margin:4px 1.3rem 0; background:rgba(14,149,148,0.06); color:#0E9594; border:1px solid transparent; padding:11px; border-radius:16px; cursor:pointer; font-size:0.85rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; width:calc(100% - 2.6rem); font-family:inherit;">
       <i class="fas fa-award"></i> النقاط والمخالفات 
     </button>
   `;
