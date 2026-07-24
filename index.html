@@ -2316,7 +2316,7 @@ document.addEventListener('keydown', (e) => {
         const studentId = studentIdInput.value.trim();
         
         if (!studentId) {
-          showError('⚠️ الرجاء إدخال رقمك الخاص');
+          showError('الرجاء إدخال رقمك الخاص');
           return;
         }
         
@@ -2337,7 +2337,7 @@ document.addEventListener('keydown', (e) => {
           } else if (data.status === 'closed') {
             showError(data.message || 'النظام غير متاح حالياً');
           } else if (data.status === 'not_found') {
-            showError(data.message || '⚠️ رقم غير صحيح. يرجى التأكد من الرقم الخاص والمحاولة مرة أخرى.');
+            showError(data.message || 'رقم غير صحيح. يرجى التأكد من الرقم الخاص والمحاولة مرة أخرى.');
           } else {
             showError('حدث خطأ في النظام. يرجى المحاولة لاحقاً.');
           }
@@ -2598,7 +2598,7 @@ function displayVotingResults(data) {
             <span>${project.name}</span>
           </div>
           <div class="stat-votes">
-            🗳️ <strong>${project.votes}</strong> صوت
+            <i class="fas fa-check-to-slot"></i> <strong>${project.votes}</strong> صوت
           </div>
         </div>
         <div class="progress-bar-container">
