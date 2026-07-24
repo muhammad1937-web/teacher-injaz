@@ -1739,7 +1739,7 @@
     <span>صُناع المستقبل </span>
   </div>
   <p class="honors-subtitle"> نجوم يضيئون سماء الإبداع الرقمي </p>
-  <div class="students-container">
+  <div class="students-container" style="display: none;">
     <div class="students-list" id="studentsList">
       <div class="student-item" data-index="0">
         <div class="student-image"><img src="images/hh.jpeg" alt="الطالب المتميز الأول"></div>
@@ -1761,7 +1761,7 @@
   </div>
 
   <!-- وضع عدم التفعيل (يُفعّل يدوياً عند عدم وجود متميزين) -->
-  <div id="fame-inactive-mode" style="display: none;">
+  <div id="fame-inactive-mode" style="display: block;">
     <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0.8rem 1rem 0.2rem; gap:14px; text-align:center;">
       <i class="fas fa-star" style="font-size:36px; color:var(--gold-excellence); opacity:0.9; display:inline-block;"></i>
       <p style="font-size:0.85rem; color:var(--text-medium); margin:0; line-height:1.6; max-width:420px;">لم يُعلن عن المتميزين لهذا الفصل بعد — قريباً نجوم يتألقون في سماء الإبداع الرقمي، وربما تكون أحدهم.</p>
@@ -2652,7 +2652,7 @@ startAutoUpdateVotes();
 function initVotingTimer() {
   // ← غير هذا التاريخ فقط عند بدء تصويت جديد
   // الصيغة: السنة, الشهر-1, اليوم, الساعة, الدقيقة
-  const endDate = new Date(2026, 5, 20, 23, 59);
+  const endDate = new Date(2026, 6, 31, 23, 59);
   const easternArabicDigits = ['٠','١','٢','٣','٤','٥','٦','٧','٨','٩'];
   function toArabicDigits(str) {
     return String(str).replace(/[0-9]/g, d => easternArabicDigits[d]);
