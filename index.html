@@ -998,11 +998,10 @@
       align-items: center;
       justify-content: center;
     }
-    .grade-card .missing-value {
-      font-size: 0.85rem;
+    .grade-card .missing-icon {
+      font-size: 1.3rem;
       color: var(--warning-red);
-      font-weight: 500;
-      margin: 0;
+      opacity: 0.75;
       flex: 1;
       display: flex;
       align-items: center;
@@ -1011,6 +1010,7 @@
     .grade-card .grade-status { font-size: 0.75rem; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 4px; }
     .grade-card .grade-status-complete { color: #1D9E75; }
     .grade-card .grade-status-partial { color: #D98C1F; }
+    .grade-card .grade-status-missing { color: var(--warning-red); }
   .final-result {
       background: linear-gradient(135deg, rgba(14,149,148,0.08), rgba(22,50,79,0.05));
       border-radius: 16px;
@@ -2368,14 +2368,14 @@ const logoHtml = '';
 if (student.period1 !== null && student.period1 !== undefined && student.period1 !== '' && student.period1 !== 0) {
     period1Html = `<div class="grade-value" id="p1">0</div>${gradeStatusHtml(student.details && student.details.period1)}`;
 } else {
-    period1Html = `<div class="missing-value">بانتظار الرصد</div>`;
+    period1Html = `<div class="missing-icon"><i class="fas fa-hourglass-half"></i></div><div class="grade-status grade-status-missing">بانتظار الرصد</div>`;
 }
 
 // الفترة الثانية
 if (student.period2 !== null && student.period2 !== undefined && student.period2 !== '' && student.period2 !== 0) {
     period2Html = `<div class="grade-value" id="p2">0</div>${gradeStatusHtml(student.details && student.details.period2)}`;
 } else {
-    period2Html = `<div class="missing-value">بانتظار الرصد</div>`;
+    period2Html = `<div class="missing-icon"><i class="fas fa-hourglass-half"></i></div><div class="grade-status grade-status-missing">بانتظار الرصد</div>`;
 }
         
        let finalHtml = '';
