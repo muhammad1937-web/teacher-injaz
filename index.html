@@ -1686,7 +1686,7 @@
   /* ========== لوحة الشرف ========== */
     .honor-section {
       max-width: 900px;
-      margin: 2.5rem auto;
+      margin: 2rem auto;
       padding: 1.5rem 1.8rem;
       border-radius: 24px;
       background: var(--gradient-card);
@@ -1701,7 +1701,7 @@
     .honor-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); }
     .honor-title { text-align:center; font-size:1.15rem; font-weight:700; color:var(--primary-dark); margin:0; }
     .honor-sub { text-align:center; font-size:0.85rem; color:var(--text-subtitle); margin-top:0.4rem; }
-    .honor-tabs { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:1.2rem 0 1.4rem; }
+    .honor-tabs { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:0.9rem 0 1rem; }
     .honor-tab { font-size:0.85rem; padding:7px 18px; border-radius:20px; background:var(--light-bg); color:var(--text-subtitle); border:1px solid transparent; cursor:pointer; font-family:inherit; transition:var(--transition); }
     .honor-tab:hover:not(.active) { background:var(--hover-color); color:var(--accent-teal); border-color:rgba(var(--accent-teal-rgb),0.25); }
     .honor-tab.active { background:var(--accent-teal); color:#fff; font-weight:600; }
@@ -1709,11 +1709,11 @@
     @keyframes honorFadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
     .honor-col { border:1px solid var(--border-color); border-radius:16px; overflow:hidden; background:var(--pure-white); box-shadow: 0 4px 12px rgba(var(--primary-dark-rgb), 0.05); }
     .honor-col-head { background:rgba(var(--accent-teal-rgb),0.08); border-bottom:1px solid var(--border-color); padding:10px 15px; font-size:0.9rem; font-weight:700; color:var(--accent-teal); }
-    .honor-row { display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid rgba(22,50,79,0.05); }
+    .honor-row { display:flex; align-items:center; gap:10px; padding:8px 14px; border-bottom:1px solid rgba(22,50,79,0.05); }
     .honor-row:last-child { border-bottom:none; }
     .honor-rank { width:27px; height:27px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.78rem; font-weight:700; flex-shrink:0; background:rgba(22,50,79,0.07); color:var(--text-subtitle); }
     .honor-rank.gold { background:var(--gold-excellence); color:#fff; }
-    .honor-rank.att { background:rgba(29,158,117,0.12); color:#0F6E56; }
+    .honor-rank.att { background:rgba(29,158,117,0.12); color:#1D9E75; }
     .honor-name { flex:1; font-size:0.85rem; font-weight:500; color:var(--text-dark); line-height:1.5; }
     .honor-sec { font-size:0.72rem; color:var(--text-light); }
     .honor-val { font-size:0.95rem; font-weight:700; }
@@ -2645,7 +2645,7 @@ function renderHonorBody() {
   const rows = function (list, kind) {
     return list.map(function (s, i) {
       const cls = kind === 'p' ? (i === 0 ? 'gold' : '') : 'att';
-      const col = kind === 'p' ? (i === 0 ? 'var(--gold-excellence)' : 'var(--text-subtitle)') : '#0F6E56';
+      const col = kind === 'p' ? (i === 0 ? 'var(--gold-excellence)' : 'var(--text-subtitle)') : '#1D9E75';
       const val = kind === 'p' ? s.net : s.present + '/' + s.total;
       return '<div class="honor-row"><span class="honor-rank ' + cls + '">' + rank[i] + '</span>' +
              '<span class="honor-name">' + s.name + '<br><span class="honor-sec">' +
