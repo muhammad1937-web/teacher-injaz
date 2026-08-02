@@ -1683,6 +1683,27 @@
     margin-left: auto !important;
   }
 }
+  /* ========== لوحة الشرف ========== */
+    .honor-section { padding: 1.5rem 1rem; max-width: 1000px; margin: 0 auto; }
+    .honor-title { text-align:center; font-size:1.4rem; font-weight:700; color:var(--text-dark); }
+    .honor-sub { text-align:center; font-size:0.85rem; color:var(--text-subtitle); margin-top:0.3rem; }
+    .honor-tabs { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:1rem 0 1.2rem; }
+    .honor-tab { font-size:0.85rem; padding:7px 18px; border-radius:20px; background:var(--light-bg); color:var(--text-subtitle); border:none; cursor:pointer; font-family:inherit; transition:all .2s; }
+    .honor-tab.active { background:var(--accent-teal); color:#fff; font-weight:600; }
+    .honor-cols { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
+    .honor-col { border:1px solid var(--border-color); border-radius:12px; overflow:hidden; background:var(--pure-white); }
+    .honor-col-head { background:var(--light-bg); border-bottom:1px solid var(--border-color); padding:10px 15px; font-size:0.9rem; font-weight:700; color:var(--accent-teal); }
+    .honor-row { display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid rgba(22,50,79,0.05); }
+    .honor-row:last-child { border-bottom:none; }
+    .honor-rank { width:27px; height:27px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.78rem; font-weight:700; flex-shrink:0; background:rgba(22,50,79,0.07); color:var(--text-subtitle); }
+    .honor-rank.gold { background:var(--gold-excellence); color:#fff; }
+    .honor-rank.att { background:rgba(29,158,117,0.12); color:#0F6E56; }
+    .honor-name { flex:1; font-size:0.85rem; font-weight:500; color:var(--text-dark); line-height:1.5; }
+    .honor-sec { font-size:0.72rem; color:var(--text-light); }
+    .honor-val { font-size:0.95rem; font-weight:700; }
+    .honor-empty { padding:2rem 1rem; text-align:center; color:var(--text-light); font-size:0.85rem; line-height:1.8; }
+    .honor-note { text-align:center; font-size:0.78rem; color:var(--text-subtitle); background:var(--light-bg); border-radius:10px; padding:10px; margin-top:14px; }
+    @media (max-width:600px) { .honor-cols { grid-template-columns:1fr; } }  
   </style>
 </head>
 <body>
@@ -1781,7 +1802,22 @@
   <span class="divider-icon">· · ·</span>
   <div class="divider-line"></div>
 </div>
+<!-- ============================================ -->
+<!-- ==========      لوحة الشرف       ========== -->
+<!-- ============================================ -->
+<section class="honor-section fade-in" id="honor-section" style="display:none;">
+  <div class="honor-title">لوحة الشرف</div>
+  <div class="honor-sub" id="honorSub"></div>
+  <div class="honor-tabs" id="honorTabs"></div>
+  <div id="honorBody"></div>
+  <div class="honor-note">النقاط من مشاركات الطالب · الحضور بعدد الحصص</div>
+</section>
 
+<div class="section-divider fade-in" id="honorDivider" style="display:none;">
+  <div class="divider-line"></div>
+  <span class="divider-icon">· · ·</span>
+  <div class="divider-line"></div>
+</div>
 <!-- ============================================ -->
 <!-- ==========   قسم مواضيع التصويت   ========== -->
 <!-- ============================================ -->
@@ -2547,6 +2583,71 @@ setTimeout(() => {
 // ============================================
 const VOTING_API_URL = 'https://script.google.com/macros/s/AKfycbwlUa3oyj8B-Tq263FXs8heg4bXrcp4vSRqb903-t68vll0cF-6rKpBFyccq88RKX25/exec';
 const VOTING_API = 'https://script.google.com/macros/s/AKfycbx3aUUhzb4nHFVV0fiR-bqNYAWrrmrGOrIggleJONU35xdiQfSGrZ8NFz49rHTKDzSU/exec';
+// ============================================
+//      لوحة الشرف
+// ============================================
+let honorData = null, honorActive = 0;
+
+async function loadHonorBoard() {
+  try {
+    const res = await fetch(`${VOTING_API}?action=honorBoard&t=${Date.now()}`);
+    const data = await res.json();
+    if (data.status !== "on" || !data.grades || !data.grades.length) return;
+    honorData = data;
+    document.getElementById('honorSub').textContent = 'متصدرو ' + data.title;
+    document.getElementById('honor-section').style.display = 'block';
+    document.getElementById('honorDivider').style.display = 'flex';
+    renderHonorTabs();
+    renderHonorBody();
+  } catch (err) {
+    console.error('honor board', err);
+  }
+}
+
+function renderHonorTabs() {
+  document.getElementById('honorTabs').innerHTML = honorData.grades.map(function (g, i) {
+    return '<button class="honor-tab' + (i === honorActive ? ' active' : '') +
+           '" onclick="switchHonor(' + i + ')">' + g.grade + '</button>';
+  }).join('');
+}
+
+function switchHonor(i) { honorActive = i; renderHonorTabs(); renderHonorBody(); }
+window.switchHonor = switchHonor;
+
+function renderHonorBody() {
+  const g = honorData.grades[honorActive];
+  const box = document.getElementById('honorBody');
+
+  if (g.state !== 'ok') {
+    box.innerHTML = '<div class="honor-col"><div class="honor-empty">لا تُدرَّس التقنية الرقمية<br>لـ' +
+                    g.grade + ' في هذا الفصل</div></div>';
+    return;
+  }
+
+  const rank = ['١', '٢', '٣'];
+  const rows = function (list, kind) {
+    return list.map(function (s, i) {
+      const cls = kind === 'p' ? (i === 0 ? 'gold' : '') : 'att';
+      const col = kind === 'p' ? (i === 0 ? 'var(--gold-excellence)' : 'var(--text-subtitle)') : '#0F6E56';
+      const val = kind === 'p' ? s.net : s.present + '/' + s.total;
+      return '<div class="honor-row"><span class="honor-rank ' + cls + '">' + rank[i] + '</span>' +
+             '<span class="honor-name">' + s.name + '<br><span class="honor-sec">' +
+             g.grade + ' ' + s.section + '</span></span>' +
+             '<span class="honor-val" style="color:' + col + '">' + val + '</span></div>';
+    }).join('');
+  };
+
+  box.innerHTML =
+    '<div class="honor-cols"><div class="honor-col">' +
+    '<div class="honor-col-head">متصدرو النقاط</div>' +
+    (g.pointsReady ? rows(g.points, 'p') : '<div class="honor-empty">لم تُرصد مشاركات كافية بعد</div>') +
+    '</div><div class="honor-col">' +
+    '<div class="honor-col-head">متصدرو الحضور</div>' +
+    (g.attendReady ? rows(g.attendance, 'a') : '<div class="honor-empty">تُعرض بعد رصد عدد كافٍ من الحصص</div>') +
+    '</div></div>';
+}
+
+loadHonorBoard();    
 let previousVotes = {};
 let updateIntervalVotes;
 
