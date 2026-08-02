@@ -1684,15 +1684,31 @@
   }
 }
   /* ========== لوحة الشرف ========== */
-    .honor-section { padding: 1.5rem 1rem; max-width: 1000px; margin: 0 auto; }
-    .honor-title { text-align:center; font-size:1.4rem; font-weight:700; color:var(--text-dark); }
-    .honor-sub { text-align:center; font-size:0.85rem; color:var(--text-subtitle); margin-top:0.3rem; }
-    .honor-tabs { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:1rem 0 1.2rem; }
-    .honor-tab { font-size:0.85rem; padding:7px 18px; border-radius:20px; background:var(--light-bg); color:var(--text-subtitle); border:none; cursor:pointer; font-family:inherit; transition:all .2s; }
+    .honor-section {
+      max-width: 900px;
+      margin: 2.5rem auto;
+      padding: 1.5rem 1.8rem;
+      border-radius: 24px;
+      background: var(--gradient-card);
+      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08);
+      border: 1px solid var(--border-color);
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .honor-section::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; transition: height 0.3s ease; }
+    .honor-section:hover::before { height: 6px; }
+    .honor-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); }
+    .honor-title { text-align:center; font-size:1.15rem; font-weight:700; color:var(--primary-dark); margin:0; }
+    .honor-sub { text-align:center; font-size:0.85rem; color:var(--text-subtitle); margin-top:0.4rem; }
+    .honor-tabs { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:1.2rem 0 1.4rem; }
+    .honor-tab { font-size:0.85rem; padding:7px 18px; border-radius:20px; background:var(--light-bg); color:var(--text-subtitle); border:1px solid transparent; cursor:pointer; font-family:inherit; transition:var(--transition); }
+    .honor-tab:hover:not(.active) { background:var(--hover-color); color:var(--accent-teal); border-color:rgba(var(--accent-teal-rgb),0.25); }
     .honor-tab.active { background:var(--accent-teal); color:#fff; font-weight:600; }
-    .honor-cols { display:grid; grid-template-columns:1fr 1fr; gap:14px; }
-    .honor-col { border:1px solid var(--border-color); border-radius:12px; overflow:hidden; background:var(--pure-white); }
-    .honor-col-head { background:var(--light-bg); border-bottom:1px solid var(--border-color); padding:10px 15px; font-size:0.9rem; font-weight:700; color:var(--accent-teal); }
+    .honor-cols { display:grid; grid-template-columns:1fr 1fr; gap:14px; animation: honorFadeIn 0.35s ease; }
+    @keyframes honorFadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+    .honor-col { border:1px solid var(--border-color); border-radius:16px; overflow:hidden; background:var(--pure-white); box-shadow: 0 4px 12px rgba(var(--primary-dark-rgb), 0.05); }
+    .honor-col-head { background:rgba(var(--accent-teal-rgb),0.08); border-bottom:1px solid var(--border-color); padding:10px 15px; font-size:0.9rem; font-weight:700; color:var(--accent-teal); }
     .honor-row { display:flex; align-items:center; gap:10px; padding:11px 14px; border-bottom:1px solid rgba(22,50,79,0.05); }
     .honor-row:last-child { border-bottom:none; }
     .honor-rank { width:27px; height:27px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.78rem; font-weight:700; flex-shrink:0; background:rgba(22,50,79,0.07); color:var(--text-subtitle); }
@@ -1701,9 +1717,10 @@
     .honor-name { flex:1; font-size:0.85rem; font-weight:500; color:var(--text-dark); line-height:1.5; }
     .honor-sec { font-size:0.72rem; color:var(--text-light); }
     .honor-val { font-size:0.95rem; font-weight:700; }
-    .honor-empty { padding:2rem 1rem; text-align:center; color:var(--text-light); font-size:0.85rem; line-height:1.8; }
+    .honor-empty { padding:2rem 1rem; text-align:center; color:var(--text-light); font-size:0.85rem; line-height:1.8; animation: honorFadeIn 0.35s ease; }
+    .honor-empty i { display:block; font-size:1.4rem; margin-bottom:0.6rem; color:var(--text-light); opacity:0.7; }
     .honor-note { text-align:center; font-size:0.78rem; color:var(--text-subtitle); background:var(--light-bg); border-radius:10px; padding:10px; margin-top:14px; }
-    @media (max-width:600px) { .honor-cols { grid-template-columns:1fr; } }  
+    @media (max-width:600px) { .honor-cols { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -2619,7 +2636,7 @@ function renderHonorBody() {
   const box = document.getElementById('honorBody');
 
   if (g.state !== 'ok') {
-    box.innerHTML = '<div class="honor-col"><div class="honor-empty">لا تُدرَّس التقنية الرقمية<br>لـ' +
+    box.innerHTML = '<div class="honor-col"><div class="honor-empty"><i class="fas fa-circle-info"></i>لا تُدرَّس التقنية الرقمية<br>لـ' +
                     g.grade + ' في هذا الفصل</div></div>';
     return;
   }
@@ -2640,10 +2657,10 @@ function renderHonorBody() {
   box.innerHTML =
     '<div class="honor-cols"><div class="honor-col">' +
     '<div class="honor-col-head">متصدرو النقاط</div>' +
-    (g.pointsReady ? rows(g.points, 'p') : '<div class="honor-empty">لم تُرصد مشاركات كافية بعد</div>') +
+    (g.pointsReady ? rows(g.points, 'p') : '<div class="honor-empty"><i class="fas fa-hourglass-half"></i>لم تُرصد مشاركات كافية بعد</div>') +
     '</div><div class="honor-col">' +
     '<div class="honor-col-head">متصدرو الحضور</div>' +
-    (g.attendReady ? rows(g.attendance, 'a') : '<div class="honor-empty">تُعرض بعد رصد عدد كافٍ من الحصص</div>') +
+    (g.attendReady ? rows(g.attendance, 'a') : '<div class="honor-empty"><i class="fas fa-hourglass-half"></i>تُعرض بعد رصد عدد كافٍ من الحصص</div>') +
     '</div></div>';
 }
 
