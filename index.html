@@ -1776,7 +1776,7 @@
   <div class="fame-bar-title">
     <span>صُناع المستقبل </span>
   </div>
-  <p class="honors-subtitle"> نجوم يضيئون سماء الإبداع الرقمي </p>
+  <p class="honors-subtitle"> أسماء صنعت الفرق </p>
   <div class="students-container" style="display: none;">
     <div class="students-list" id="studentsList">
       <div class="student-item" data-index="0">
@@ -1802,7 +1802,7 @@
   <div id="fame-inactive-mode" style="display: block;">
     <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0.8rem 1rem 0.2rem; gap:14px; text-align:center;">
       <i class="fas fa-star" style="font-size:36px; color:var(--gold-excellence); opacity:0.9; display:inline-block;"></i>
-      <p style="font-size:0.85rem; color:var(--text-medium); margin:0; line-height:1.6; max-width:420px;">لم يُعلن عن المتميزين لهذا الفصل بعد — قريباً نجوم يتألقون في سماء الإبداع الرقمي، وربما تكون أحدهم.</p>
+      <p style="font-size:0.85rem; color:var(--text-medium); margin:0; line-height:1.6; max-width:420px;">لم يُعلن عن المتميزين لهذا الفصل بعد — المكان محفوظ لمن يصنع تميّزه، وربما تكون أنت.</p>
       <div style="display:flex; align-items:center; gap:8px; background:rgba(232,163,61,0.08); border-radius:24px; padding:8px 20px;">
         <i class="fas fa-hourglass-half" style="font-size:0.85rem; color:var(--gold-excellence);"></i>
         <span style="font-size:0.85rem; color:var(--gold-excellence); font-weight:600;">قريباً</span>
@@ -1823,7 +1823,7 @@
 <!-- ==========      لوحة الشرف       ========== -->
 <!-- ============================================ -->
 <section class="honor-section fade-in" id="honor-section" style="display:none;">
-  <div class="honor-title">لوحة الشرف</div>
+  <div class="honor-title">الصدارة الرقمية</div>
   <div class="honor-sub" id="honorSub"></div>
   <div class="honor-tabs" id="honorTabs"></div>
   <div id="honorBody"></div>
@@ -2611,7 +2611,7 @@ async function loadHonorBoard() {
     const data = await res.json();
     if (data.status !== "on" || !data.grades || !data.grades.length) return;
     honorData = data;
-    document.getElementById('honorSub').textContent = 'متصدرو ' + data.title;
+    document.getElementById('honorSub').textContent = data.title;
     document.getElementById('honor-section').style.display = 'block';
     document.getElementById('honorDivider').style.display = 'flex';
     renderHonorTabs();
