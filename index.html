@@ -2612,8 +2612,14 @@ async function loadHonorBoard() {
     if (data.status !== "on" || !data.grades || !data.grades.length) return;
     honorData = data;
     document.getElementById('honorSub').textContent = data.title;
-    document.getElementById('honor-section').style.display = 'block';
-    document.getElementById('honorDivider').style.display = 'flex';
+    const sec = document.getElementById('honor-section');
+    const div = document.getElementById('honorDivider');
+    sec.style.display = 'block';
+    div.style.display = 'flex';
+    requestAnimationFrame(function () {
+      sec.classList.add('visible');
+      div.classList.add('visible');
+    });
     renderHonorTabs();
     renderHonorBody();
   } catch (err) {
