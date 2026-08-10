@@ -555,6 +555,12 @@
     .project-btn:nth-child(3) i { color: var(--gold-excellence); }
     .project-btn:nth-child(3):hover { border-color: var(--gold-excellence); background: linear-gradient(135deg, rgba(var(--gold-excellence-rgb), 0.12), rgba(255, 255, 255, 0.9)); }
     .project-btn:nth-child(3):hover i { color: var(--gold-excellence); }
+    .project-btn-disabled { cursor: not-allowed; opacity: 0.55; }
+    .project-btn-disabled:hover { transform: none !important; box-shadow: 0 2px 8px rgba(var(--primary-dark-rgb), 0.08) !important; border-color: inherit !important; background: rgba(255, 255, 255, 0.7) !important; color: var(--text-medium) !important; }
+    .project-btn-disabled:hover i { transform: none !important; }
+    .project-viewer-box { background: white; border-radius: 24px; width: 95%; max-width: 800px; height: 75vh; margin: 0 auto; box-shadow: 0 16px 32px rgba(0,0,0,0.2); overflow: hidden; display: flex; flex-direction: column; }
+    .project-viewer-frame { flex: 1; min-height: 0; }
+    .project-viewer-frame iframe, .project-viewer-frame img { display: block; }
     #disqus_thread { background-color: var(--pure-white); padding: 1rem; border-radius: 16px; border: 1px solid var(--border-color); }
     .discord-section { max-width: 900px; margin: 3rem auto; padding: 1.5rem 1.8rem; border-radius: 24px; background: var(--gradient-card); border: 1px solid var(--border-color); text-align: center; box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08); position: relative; overflow: hidden; }
     .discord-section::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; transition: height 0.3s ease; }
@@ -1879,18 +1885,18 @@
   <div id="competition-mode">
     <p class="voting-description">استعرض المشاريع المتنافسة، وادعم إبداع زملائك</p>
     <div class="projects-container">
-      <a href="YOUR_LINK_1_HERE" target="_blank" rel="noopener" class="project-btn" style="flex-direction: column;">
+      <button type="button" id="projectBtn1" class="project-btn" style="flex-direction: column;">
         <span style="display: flex; align-items: center; gap: 6px;"><i class="fas fa-file-powerpoint"></i> العرض التقديمي</span>
         <small style="font-size: 0.75rem; color: var(--text-light); margin-top: 4px; display: flex; align-items: center; gap: 4px;"><i class="fas fa-eye"></i> انقر للمشاهدة</small>
-      </a>
-      <a href="YOUR_LINK_2_HERE" target="_blank" rel="noopener" class="project-btn" style="flex-direction: column;">
+      </button>
+      <button type="button" id="projectBtn2" class="project-btn" style="flex-direction: column;">
         <span style="display: flex; align-items: center; gap: 6px;"><i class="fas fa-palette"></i> التصميم الجرافيكي</span>
         <small style="font-size: 0.75rem; color: var(--text-light); margin-top: 4px; display: flex; align-items: center; gap: 4px;"><i class="fas fa-eye" style="color: var(--accent-teal);"></i> انقر للمشاهدة</small>
-      </a>
-      <a href="YOUR_LINK_3_HERE" target="_blank" rel="noopener" class="project-btn" style="flex-direction: column;">
+      </button>
+      <button type="button" id="projectBtn3" class="project-btn" style="flex-direction: column;">
         <span style="display: flex; align-items: center; gap: 6px;"><i class="fas fa-globe"></i> الموقع الإلكتروني</span>
         <small style="font-size: 0.75rem; color: var(--text-light); margin-top: 4px; display: flex; align-items: center; gap: 4px;"><i class="fas fa-eye" style="color: var(--gold-excellence);"></i> انقر للمشاهدة</small>
-      </a>
+      </button>
     </div>
     
     <h3 class="voting-subtitle">بعد مشاهدة المشاريع، شاركنا رأيك</h3>
@@ -2157,13 +2163,20 @@
       const notificationUrl = 'https://raw.githubusercontent.com/muhammad1937-web/teacher-injaz/refs/heads/main/notification.txt';
       const notificationContent = document.getElementById('notificationContent');
       const timestamp = new Date().getTime();
+      function restartMarquee() {
+        const track = notificationContent.parentElement;
+        track.style.animation = 'none';
+        void track.offsetWidth;
+        track.style.animation = '';
+      }
       fetch(`${notificationUrl}?t=${timestamp}`)
         .then(response => response.ok ? response.text() : Promise.reject())
         .then(text => {
           if(text.trim()) notificationContent.textContent = text;
           else notificationContent.textContent = "مرحباً بكم في منصة التعلم الرقمي - أ. محمد الغامدي";
+          restartMarquee();
         })
-        .catch(() => notificationContent.textContent = "مرحباً بكم في منصة التعلم الرقمي - أ. محمد الغامدي");
+        .catch(() => { notificationContent.textContent = "مرحباً بكم في منصة التعلم الرقمي - أ. محمد الغامدي"; restartMarquee(); });
     }
     fetchNotification();
     setInterval(fetchNotification, 5 * 60 * 1000);
@@ -2819,6 +2832,119 @@ const VOTING_PROJECTS = [
 ];
 
 let selectedProject = null;
+
+// ============================================
+//      نافذة عرض المشاريع الموحّدة (competition-mode)
+// ============================================
+const PROJECT_1 = { url: '', type: 'pdf'   };  // العرض التقديمي
+const PROJECT_2 = { url: '', type: 'image' };  // التصميم الجرافيكي
+const PROJECT_3 = { url: '', type: 'site'  };  // الموقع الإلكتروني
+
+function extractDriveFileId(url) {
+  if (!url) return null;
+  let m = url.match(/\/d\/([a-zA-Z0-9_-]+)/);
+  if (m) return m[1];
+  m = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+  if (m) return m[1];
+  return null;
+}
+
+function openProjectViewer(project, title) {
+  if (!project || !project.url) return;
+
+  const isPptx = /\.pptx(\?|$)/i.test(project.url);
+  const driveId = extractDriveFileId(project.url);
+  let frameHtml = '';
+
+  if (isPptx) {
+    frameHtml = `
+      <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; height:100%; text-align:center; padding:1rem;">
+        <i class="fas fa-file-powerpoint" style="font-size:2.5rem; color:var(--text-light); opacity:0.6;"></i>
+        <p style="margin:0; color:var(--text-medium); font-size:0.9rem;">هذا الملف يحتاج تحميلًا لعرضه</p>
+        <a href="${project.url}" target="_blank" rel="noopener" style="background:var(--accent-teal); color:#fff; padding:9px 22px; border-radius:24px; text-decoration:none; font-size:0.85rem; font-weight:600; display:inline-flex; align-items:center; gap:6px;">
+          <i class="fas fa-download"></i> تحميل الملف
+        </a>
+      </div>`;
+  } else if (project.type === 'image') {
+    const imgSrc = driveId ? `https://drive.google.com/thumbnail?id=${driveId}&sz=w1200` : project.url;
+    frameHtml = `
+      <div id="projectImageWrap" style="display:flex; align-items:center; justify-content:center; height:100%; background:rgba(0,0,0,0.03);">
+        <img id="projectImageEl" src="${imgSrc}" alt="${title}" style="max-width:100%; max-height:100%; object-fit:contain;">
+      </div>`;
+  } else if (project.type === 'slides') {
+    frameHtml = `<iframe src="${project.url}" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>`;
+  } else if (project.type === 'pdf') {
+    const embedSrc = driveId ? `https://drive.google.com/file/d/${driveId}/preview` : project.url;
+    frameHtml = `<iframe src="${embedSrc}" style="width:100%; height:100%; border:none;" allow="autoplay"></iframe>`;
+  } else {
+    frameHtml = `<iframe src="${project.url}" style="width:100%; height:100%; border:none;"></iframe>`;
+  }
+
+  const quietLinkHtml = isPptx ? '' : `
+      <div style="text-align:center; padding:8px; flex-shrink:0; border-top:1px solid var(--border-color);">
+        <a href="${project.url}" target="_blank" rel="noopener" style="font-size:0.72rem; color:var(--text-light); text-decoration:none;">
+          <i class="fas fa-arrow-up-right-from-square"></i> افتح في تبويب جديد
+        </a>
+      </div>`;
+
+  const modalHtml = `
+    <div class="project-viewer-box">
+      <div style="background:var(--primary-dark); padding:1rem 1.2rem; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
+        <h3 style="margin:0; color:white; font-size:0.95rem; font-weight:700;">${title}</h3>
+        <button id="closeProjectViewer" type="button" style="background:transparent; border:none; color:white; font-size:1.2rem; cursor:pointer; line-height:1; padding:4px;">
+          <i class="fas fa-xmark"></i>
+        </button>
+      </div>
+      <div class="project-viewer-frame">${frameHtml}</div>
+      ${quietLinkHtml}
+    </div>
+  `;
+
+  const overlay = document.createElement('div');
+  overlay.className = 'modal-details';
+  overlay.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; z-index:10000; padding:1rem;';
+  overlay.innerHTML = modalHtml;
+  document.body.appendChild(overlay);
+
+  function closeViewer() {
+    overlay.remove();
+    document.removeEventListener('keydown', escHandler);
+  }
+  function escHandler(e) { if (e.key === 'Escape') closeViewer(); }
+
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeViewer(); });
+  overlay.querySelector('#closeProjectViewer').addEventListener('click', closeViewer);
+  document.addEventListener('keydown', escHandler);
+
+  if (project.type === 'image' && !isPptx) {
+    const imgEl = overlay.querySelector('#projectImageEl');
+    imgEl.addEventListener('error', function () {
+      document.getElementById('projectImageWrap').innerHTML =
+        '<div style="display:flex; flex-direction:column; align-items:center; gap:10px; color:var(--text-light);">' +
+        '<i class="fas fa-image" style="font-size:2rem; opacity:0.5;"></i>' +
+        '<span style="font-size:0.85rem;">تعذّر عرض الصورة</span></div>';
+    });
+  }
+}
+
+function initProjectButtons() {
+  const configs = [
+    { btn: document.getElementById('projectBtn1'), project: PROJECT_1, title: 'العرض التقديمي' },
+    { btn: document.getElementById('projectBtn2'), project: PROJECT_2, title: 'التصميم الجرافيكي' },
+    { btn: document.getElementById('projectBtn3'), project: PROJECT_3, title: 'الموقع الإلكتروني' }
+  ];
+  configs.forEach(function (c) {
+    if (!c.btn) return;
+    const small = c.btn.querySelector('small');
+    if (c.project.url) {
+      c.btn.addEventListener('click', function () { openProjectViewer(c.project, c.title); });
+    } else {
+      c.btn.classList.add('project-btn-disabled');
+      if (small) small.innerHTML = 'لم يُرفع بعد';
+    }
+  });
+}
+initProjectButtons();
 // ============================================
 //      نافذة تسليم المشاريع (رفع داخلي)
 // ============================================
