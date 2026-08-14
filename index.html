@@ -1070,28 +1070,15 @@
   .final-result {
       background: linear-gradient(135deg, rgba(14,149,148,0.08), rgba(22,50,79,0.05));
       border-radius: 16px;
-      padding: 13px;
+      padding: 10px;
       text-align: center;
-      margin: 0.85rem 1.3rem 0.9rem;
+      margin: 0.6rem 1.3rem 0.6rem;
     }
-    .final-score {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: var(--primary-dark);
-      margin-bottom: 6px;
-    }
-    .final-rating {
-  font-size: 1rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-}
-    .rating-medallion { display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
-    .medallion-score { font-size: 2.6rem; font-weight: 800; color: var(--primary-dark); display: flex; align-items: baseline; gap: 6px; }
-    .medallion-score-unit { font-size: 0.4em; font-weight: 500; color: var(--text-light); }
-    .medallion-badge { font-size: 1rem; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+    .rating-medallion { display: flex; flex-direction: row; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 8px; }
+    .medallion-score { font-size: 1.7rem; font-weight: 800; color: var(--primary-dark); display: inline-flex; align-items: baseline; gap: 4px; }
+    .medallion-score-unit { font-size: 0.5em; font-weight: 500; color: var(--text-light); }
+    .medallion-sep { font-size: 1rem; font-weight: 700; color: var(--text-light); }
+    .medallion-badge { font-size: 0.95rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
     .result-close-btn { background: transparent; color: #0E9594; border: 1px solid rgba(14,149,148,0.35); padding: 9px 22px; border-radius: 24px; cursor: pointer; font-size: 0.85rem; font-weight: 600; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; transition: var(--transition); }
     .result-close-btn:hover { background: rgba(14,149,148,0.08); }
     .missing-message {
@@ -2220,7 +2207,7 @@
     function updateCompactDate() {
       const now = new Date();
       const correctedDate = new Date(now);
-      const hijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic', { day: 'numeric', month: 'long' }).format(correctedDate);
+      const hijri = new Intl.DateTimeFormat('ar-SA-u-ca-islamic-umalqura', { day: 'numeric', month: 'long' }).format(correctedDate);
       const gregorian = new Intl.DateTimeFormat('ar-EG', { day: 'numeric', month: 'numeric', year: 'numeric' }).format(now);
       const time = new Date().toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
       document.getElementById('hijri-date').textContent = hijri;
@@ -2581,15 +2568,17 @@ if (student.isComplete && student.finalScore) {
 
   finalHtml = `
     <div class="rating-medallion">
-      <div class="medallion-score">${student.finalScore}<span class="medallion-score-unit">درجة</span></div>
-      <div class="medallion-badge" style="color:${ratingColor};"><i class="fas ${ratingIcon}"></i> ${student.rating}</div>
+      <span class="medallion-score">${student.finalScore}<span class="medallion-score-unit">درجة</span></span>
+      <span class="medallion-sep">·</span>
+      <span class="medallion-badge" style="color:${ratingColor};"><i class="fas ${ratingIcon}"></i> ${student.rating}</span>
     </div>
   `;
 } else {
   finalHtml = `
-    <div class="final-score" style="color: var(--warning-red);">غير مكتملة</div>
-    <div class="final-rating" style="color: var(--warning-red);">
-      <i class="fas fa-hourglass-half"></i> ${student.missingMessage || 'بانتظار اكتمال الدرجات'}
+    <div class="rating-medallion">
+      <span class="medallion-score" style="font-size:1rem; color: var(--warning-red);">غير مكتملة</span>
+      <span class="medallion-sep">·</span>
+      <span class="medallion-badge" style="color: var(--warning-red);"><i class="fas fa-hourglass-half"></i> ${student.missingMessage || 'بانتظار اكتمال الدرجات'}</span>
     </div>
   `;
 }
