@@ -85,6 +85,7 @@
       background: linear-gradient(90deg, rgba(var(--primary-dark-rgb), 0.05) 0%, rgba(var(--accent-teal-rgb), 0.03) 100%);
       color: var(--text-dark);
       padding: 8px 0;
+      margin-top: env(safe-area-inset-top, 0px);
       overflow: hidden;
       position: relative;
       width: 100%;
@@ -142,7 +143,6 @@
       border-bottom-right-radius: 25px;
       box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.2);
       margin: 0;
-      margin-top: env(safe-area-inset-top, 0px);
       overflow: hidden;
       z-index: 1;
     }
@@ -535,12 +535,12 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
       gap: 3px;
       height: 60px;
       background: none;
       border: none;
-      padding: 0;
+      padding: 10px 0 0;
       margin: 0;
       color: var(--text-medium);
       font-family: inherit;
