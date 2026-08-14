@@ -2,13 +2,17 @@
 <html lang="ar" dir="rtl">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
   <title>واجهة المعلم الرقمي - الطلاب</title>
   <meta name="description" content="موقع تعليمي تفاعلي مخصص لمادة التقنية الرقمية، يستهدف طلاب المرحلة الثانوية لتبسيط التعلم ورفع مستوى المنافسة وإطلاع الطلاب على نتائجهم">
   <meta name="theme-color" content="#16324F">
   <link rel="icon" type="image/png" sizes="32x32" href="images/favicon32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="images/favicon16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="images/appletouchicon.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="واجهة المعلم الرقمي">
+  <link rel="manifest" href="/manifest.json">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://teacher-injaz.vercel.app/">
   <meta property="og:title" content="واجهة المعلم الرقمي - أ. محمد الغامدي">
@@ -138,6 +142,7 @@
       border-bottom-right-radius: 25px;
       box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.2);
       margin: 0;
+      margin-top: env(safe-area-inset-top, 0px);
       overflow: hidden;
       z-index: 1;
     }
@@ -371,6 +376,10 @@
       -webkit-touch-callout: none;
     }
     .library-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.15); border-color: var(--accent-teal); }
+    .library-card.pressed { transform: scale(0.97); transition: transform 0.12s ease; }
+    @media (prefers-reduced-motion: reduce) {
+      .library-card.pressed { transform: none; }
+    }
     .library-card-number { display: block; font-size: 2.2rem; font-weight: 800; line-height: 1; margin-bottom: 0.5rem; }
     .library-card-1 .library-card-number { color: var(--tech-blue); }
     .library-card-2 .library-card-number { color: var(--accent-teal); }
@@ -504,6 +513,45 @@
     .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
     .back-to-top:hover { background: rgba(var(--primary-dark-rgb), 0.95); transform: translateY(-5px) scale(1.05); box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.4); }
     .back-to-top:active { transform: translateY(-2px) scale(0.98); }
+
+    /* ========================================= */
+    /*        شريط التنقل السفلي (جوال فقط)      */
+    /* ========================================= */
+    .bottom-nav {
+      display: none;
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      height: 60px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-top: 1px solid var(--border-color);
+      z-index: 998;
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+      box-shadow: 0 -2px 10px rgba(var(--primary-dark-rgb), 0.06);
+    }
+    .bottom-nav-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      height: 60px;
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0;
+      color: var(--text-medium);
+      font-family: inherit;
+      font-size: 0.68rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: color 0.2s ease;
+    }
+    .bottom-nav-item i { font-size: 1.05rem; }
+    .bottom-nav-item.active { color: #0E9594; }
+    .bottom-nav-item[hidden] { display: none; }
 
     /* ========================================= */
     /*          تذييل الصفحة                    */
@@ -1189,8 +1237,10 @@
       .fame-bar-section { padding: 1.2rem 0.8rem 1rem; }
       .projects-container { flex-direction: row !important; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
       .project-btn { width: auto !important; max-width: none !important; min-width: 140px; padding: 0.8rem 1.2rem !important; flex: 0 0 auto; font-size: 0.85rem; margin: 0 !important; display: inline-flex !important; }
-      .back-to-top { bottom: 20px; left: 20px; width: 45px; height: 45px; font-size: 1.15rem; }
-      
+      .back-to-top { bottom: 80px; left: 20px; width: 45px; height: 45px; font-size: 1.15rem; }
+      .bottom-nav { display: flex; }
+      body { padding-bottom: 60px; }
+
       @media (max-width: 480px) {
         .projects-container { flex-direction: row !important; flex-wrap: wrap; justify-content: center; gap: 1.2rem; }
         .project-btn { min-width: 120px; padding: 0.7rem 1rem !important; font-size: 0.85rem; flex: 0 0 auto; }
@@ -1222,7 +1272,7 @@
         .main-title-icon { font-size: 1.4rem; }
         .main-title-text { font-size: 1.4rem; padding: 0 0.3rem; letter-spacing: -0.5px; }
         .main-title-content { padding: 0.8rem 0.5rem; }
-        .back-to-top { bottom: 15px; left: 15px; width: 40px; height: 40px; font-size: 1.15rem; }
+        .back-to-top { bottom: 75px; left: 15px; width: 40px; height: 40px; font-size: 1.15rem; }
       }
       @media (min-width: 481px) and (max-width: 768px) {
         .tech-header { min-height: 200px; padding: 1.8rem 1rem 1.5rem; }
@@ -1845,7 +1895,7 @@
 <!-- ============================================ -->
 <!-- ==========   قسم مواضيع التصويت   ========== -->
 <!-- ============================================ -->
-<section class="voting-section fade-in">
+<section class="voting-section fade-in" id="projects-section">
   <div class="voting-header">
     <h3 class="voting-title">
       <span>معرض المشاريع الطلابية</span>
@@ -1986,7 +2036,7 @@
 <!-- ========================================= -->
 <!--            مكتبة الطالب                   -->
 <!-- ========================================= -->
-<section class="library-section fade-in">
+<section class="library-section fade-in" id="library-section">
   <h3 class="library-title">مكتبة الطالب</h3>
   <div class="library-cards-row">
     <div class="library-card library-card-1" data-url="https://sites.google.com/view/dvdf55/ss?authuser=1" data-title="الأول ثانوي">
@@ -2016,7 +2066,7 @@
 <!-- ============================================ -->
 <!-- ==========   الاستعلام عن الدرجات   ========== -->
 <!-- ============================================ -->
-<section class="grades-query-section fade-in">
+<section class="grades-query-section fade-in" id="grades-section">
   <div class="grades-query-container">
     <div class="grades-header">
       <h3>الاستعلام عن الدرجات</h3>
@@ -2095,6 +2145,26 @@
     </button>
   </div>
 </div>
+
+<!-- شريط التنقل السفلي (جوال فقط) -->
+<nav class="bottom-nav" id="bottomNav" aria-label="التنقل السريع">
+  <button type="button" class="bottom-nav-item" data-target="grades-section">
+    <i class="fas fa-clipboard-list"></i>
+    <span>درجاتي</span>
+  </button>
+  <button type="button" class="bottom-nav-item" id="bottomNavHonor" data-target="honor-section" hidden>
+    <i class="fas fa-trophy"></i>
+    <span>الصدارة</span>
+  </button>
+  <button type="button" class="bottom-nav-item" data-target="projects-section">
+    <i class="fas fa-check-to-slot"></i>
+    <span>المشاريع</span>
+  </button>
+  <button type="button" class="bottom-nav-item" data-target="library-section">
+    <i class="fas fa-book-open"></i>
+    <span>المكتبة</span>
+  </button>
+</nav>
 
 <!-- زر العودة للأعلى -->
 <button class="back-to-top" id="backToTop" aria-label="العودة إلى الأعلى">
@@ -2183,8 +2253,55 @@
     
     // معالجة النقر على بطاقات المكتبة
     document.querySelectorAll('.library-card[data-url]').forEach(card => {
-      card.addEventListener('click', function() { if(this.dataset.url) window.location.href = this.dataset.url; });
+      card.addEventListener('click', function() { if(this.dataset.url) window.open(this.dataset.url, '_blank', 'noopener'); });
     });
+
+    // أثر الضغط اللمسي على بطاقات المكتبة
+    document.querySelectorAll('.library-card').forEach(card => {
+      const press = () => card.classList.add('pressed');
+      const release = () => card.classList.remove('pressed');
+      card.addEventListener('touchstart', press, { passive: true });
+      card.addEventListener('touchend', release);
+      card.addEventListener('touchcancel', release);
+      card.addEventListener('mousedown', press);
+      card.addEventListener('mouseup', release);
+      card.addEventListener('mouseleave', release);
+    });
+
+    // شريط التنقل السفلي
+    (function initBottomNav() {
+      const navItems = Array.from(document.querySelectorAll('.bottom-nav-item'));
+      if (!navItems.length) return;
+
+      navItems.forEach(btn => {
+        btn.addEventListener('click', function () {
+          const target = document.getElementById(this.dataset.target);
+          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      });
+
+      const sectionIds = ['grades-section', 'honor-section', 'projects-section', 'library-section'];
+      const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+      const setActive = id => {
+        navItems.forEach(btn => btn.classList.toggle('active', btn.dataset.target === id));
+      };
+      const sectionObserver = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) setActive(entry.target.id);
+        });
+      }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+      sections.forEach(sec => sectionObserver.observe(sec));
+
+      const honorSection = document.getElementById('honor-section');
+      const honorNavBtn = document.getElementById('bottomNavHonor');
+      if (honorSection && honorNavBtn) {
+        const syncHonorVisibility = () => {
+          honorNavBtn.hidden = (honorSection.style.display === 'none');
+        };
+        syncHonorVisibility();
+        new MutationObserver(syncHonorVisibility).observe(honorSection, { attributes: true, attributeFilter: ['style'] });
+      }
+    })();
     
     // تأثيرات الظهور
     function checkFadeElements() {
@@ -2213,7 +2330,7 @@
             const resultItem = document.createElement('div');
             resultItem.className = 'search-result-item';
             resultItem.innerHTML = `<i class="fas fa-external-link-alt"></i><span>${title}</span>`;
-            resultItem.addEventListener('click', () => { window.location.href = item.dataset.url; searchResults.style.display = 'none'; searchInput.value = ''; });
+            resultItem.addEventListener('click', () => { window.open(item.dataset.url, '_blank', 'noopener'); searchResults.style.display = 'none'; searchInput.value = ''; });
             searchResults.appendChild(resultItem);
           });
           searchResults.style.display = 'block';
