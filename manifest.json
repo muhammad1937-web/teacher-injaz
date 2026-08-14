@@ -1,0 +1,18 @@
+{
+  "name": "واجهة المعلم الرقمي",
+  "short_name": "إنجاز",
+  "display": "standalone",
+  "start_url": "/",
+  "background_color": "#16324F",
+  "theme_color": "#16324F",
+  "dir": "rtl",
+  "lang": "ar",
+  "icons": [
+    {
+      "src": "images/appletouchicon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
