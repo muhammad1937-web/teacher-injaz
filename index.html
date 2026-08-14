@@ -529,6 +529,8 @@
       z-index: 998;
       padding-bottom: env(safe-area-inset-bottom, 0px);
       box-shadow: 0 -2px 10px rgba(var(--primary-dark-rgb), 0.06);
+      transform: translateZ(0);
+      will-change: transform;
     }
     .bottom-nav-item {
       flex: 1;
@@ -2273,11 +2275,16 @@
       const navItems = Array.from(document.querySelectorAll('.bottom-nav-item'));
       if (!navItems.length) return;
 
+      const goToSection = function (btn) {
+        const target = document.getElementById(btn.dataset.target);
+        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      };
       navItems.forEach(btn => {
-        btn.addEventListener('click', function () {
-          const target = document.getElementById(this.dataset.target);
-          if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
+        btn.addEventListener('touchend', function (e) {
+          e.preventDefault();
+          goToSection(this);
+        }, { passive: false });
+        btn.addEventListener('click', function () { goToSection(this); });
       });
 
       const sectionIds = ['grades-section', 'honor-section', 'projects-section', 'library-section'];
