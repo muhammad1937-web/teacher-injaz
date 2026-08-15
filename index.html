@@ -2944,9 +2944,9 @@ let selectedProject = null;
 // ============================================
 //      نافذة عرض المشاريع الموحّدة (competition-mode)
 // ============================================
-const PROJECT_1 = { url: '', type: 'pdf'   };  // العرض التقديمي
-const PROJECT_2 = { url: '', type: 'image' };  // التصميم الجرافيكي
-const PROJECT_3 = { url: '', type: 'site'  };  // الموقع الإلكتروني
+const PROJECT_1 = { url: 'https://docs.google.com/presentation/d/1a3_hIchZcqAN8jHNllK6QZ0Q7yTru_V1/edit?usp=drive_link&ouid=107816790127502451067&rtpof=true&sd=true', type: 'slides' };  // العرض التقديمي
+const PROJECT_2 = { url: 'https://drive.google.com/file/d/1-RIWGoP0GcltVOT54SS6F8D7927XLS27/view?usp=drive_link', type: 'image' };  // التصميم الجرافيكي
+const PROJECT_3 = { url: 'https://teacher-injaz.vercel.app', type: 'site' };  // الموقع الإلكتروني
 
 function extractDriveFileId(url) {
   if (!url) return null;
@@ -2980,7 +2980,8 @@ function openProjectViewer(project, title) {
         <img id="projectImageEl" src="${imgSrc}" alt="${title}" style="max-width:100%; max-height:100%; object-fit:contain;">
       </div>`;
   } else if (project.type === 'slides') {
-    frameHtml = `<iframe src="${project.url}" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>`;
+    const embedSrc = driveId ? `https://docs.google.com/presentation/d/${driveId}/embed` : project.url;
+    frameHtml = `<iframe src="${embedSrc}" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>`;
   } else if (project.type === 'pdf') {
     const embedSrc = driveId ? `https://drive.google.com/file/d/${driveId}/preview` : project.url;
     frameHtml = `<iframe src="${embedSrc}" style="width:100%; height:100%; border:none;" allow="autoplay"></iframe>`;
@@ -3027,7 +3028,9 @@ function openProjectViewer(project, title) {
   if (project.type === 'image' && !isPptx) {
     const imgEl = overlay.querySelector('#projectImageEl');
     imgEl.addEventListener('error', function () {
-      document.getElementById('projectImageWrap').innerHTML =
+      const wrap = document.getElementById('projectImageWrap');
+      if (!wrap) return;
+      wrap.innerHTML =
         '<div style="display:flex; flex-direction:column; align-items:center; gap:10px; color:var(--text-light);">' +
         '<i class="fas fa-image" style="font-size:2rem; opacity:0.5;"></i>' +
         '<span style="font-size:0.85rem;">تعذّر عرض الصورة</span></div>';
