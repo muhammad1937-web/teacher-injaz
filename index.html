@@ -380,6 +380,14 @@
     @media (prefers-reduced-motion: reduce) {
       .library-card.pressed { transform: none; }
     }
+    @keyframes soonPulse {
+      0%, 100% { transform: scale(1); opacity: 0.85; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+    .soon-badge-icon { animation: soonPulse 2s ease-in-out infinite; display: inline-block; }
+    @media (prefers-reduced-motion: reduce) {
+      .soon-badge-icon { animation: none; }
+    }
     .library-card-number { display: block; font-size: 2.2rem; font-weight: 800; line-height: 1; margin-bottom: 0.5rem; }
     .library-card-1 .library-card-number { color: var(--tech-blue); }
     .library-card-2 .library-card-number { color: var(--accent-teal); }
@@ -1849,7 +1857,7 @@
       <i class="fas fa-star" style="font-size:36px; color:var(--gold-excellence); opacity:0.9; display:inline-block;"></i>
       <p style="font-size:0.85rem; color:var(--text-medium); margin:0; line-height:1.6; max-width:420px;">لم يُعلن عن المتميزين لهذا الفصل بعد — المكان محفوظ لمن يصنع تميّزه، وربما تكون أنت.</p>
       <div style="display:flex; align-items:center; gap:8px; background:rgba(14,149,148,0.06); border-radius:24px; padding:8px 20px;">
-        <i class="fas fa-hourglass-half" style="font-size:0.85rem; color:var(--accent-teal);"></i>
+        <i class="fas fa-clock soon-badge-icon" style="font-size:0.85rem; color:var(--accent-teal);"></i>
         <span style="font-size:0.85rem; color:var(--accent-teal); font-weight:600;">قريباً</span>
       </div>
     </div>
@@ -1971,7 +1979,7 @@
     </div>
 
     <div style="display:flex; align-items:center; gap:8px; background:rgba(14,149,148,0.06); border-radius:24px; padding:8px 20px;">
-      <i class="fas fa-rocket" style="font-size:0.85rem; color:var(--accent-teal);"></i>
+      <i class="fas fa-clock soon-badge-icon" style="font-size:0.85rem; color:var(--accent-teal);"></i>
       <span style="font-size:0.85rem; color:var(--accent-teal); font-weight:600;">قريباً</span>
     </div>
 
