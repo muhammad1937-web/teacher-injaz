@@ -385,6 +385,9 @@
     .library-card-2 .library-card-number { color: var(--accent-teal); }
     .library-card-3 .library-card-number { color: var(--gold-excellence); }
     .library-card-title { font-size: 1rem; font-weight: 600; color: var(--text-dark); margin: 0; }
+    .library-card-note { font-size: 0.7rem; color: var(--text-light); margin: 4px 0 0; }
+    .library-card-disabled { cursor: not-allowed; opacity: 0.55; }
+    .library-card-disabled:hover { transform: none; box-shadow: none; border-color: var(--border-color); }
 
     /* ========================================= */
     /*      قسم الذكاء الاصطناعي                 */
@@ -1887,7 +1890,7 @@
     </h3>
   </div>
   
-  <div class="voting-timer" id="votingTimer">
+  <div class="voting-timer" id="votingTimer" style="display: none;">
   <div class="voting-timer-label">
     <i class="fas fa-hourglass-half"></i>
     <span>ينتهي التصويت خلال</span>
@@ -1917,7 +1920,7 @@
   
   
   <!-- وضع المنافسة (يظهر عند وجود مشاريع للتصويت) -->
-  <div id="competition-mode">
+  <div id="competition-mode" style="display: none;">
     <p class="voting-description">استعرض المشاريع المتنافسة، وادعم إبداع زملائك</p>
     <div class="projects-container">
       <button type="button" id="projectBtn1" class="project-btn" style="flex-direction: column;">
@@ -1957,7 +1960,7 @@
   </div>
   
   <!-- وضع الاستراحة (يظهر عند عدم وجود مشاريع للتصويت) -->
- <div id="intermission-mode" style="display: none;">
+ <div id="intermission-mode">
   <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding:2rem 1rem; gap:16px; text-align:center;">
     
     <i class="fas fa-hourglass-half" style="font-size:36px; color:var(--accent-teal); opacity:0.9; transform:rotate(-15deg); display:inline-block;"></i>
@@ -2028,9 +2031,10 @@
       <span class="library-card-number">١</span>
       <h3 class="library-card-title">الأول ثانوي</h3>
     </div>
-    <div class="library-card library-card-2" data-url="https://sites.google.com/view/dgvgrhbht76/hj?authuser=1" data-title="الثاني ثانوي">
+    <div class="library-card library-card-2 library-card-disabled" data-title="الثاني ثانوي">
       <span class="library-card-number">٢</span>
       <h3 class="library-card-title">الثاني ثانوي</h3>
+      <p class="library-card-note">غير مطروحة هذا الفصل</p>
     </div>
     <div class="library-card library-card-3" data-url="https://sites.google.com/view/regf78/ut?authuser=1" data-title="الثالث ثانوي">
       <span class="library-card-number">٣</span>
@@ -2242,7 +2246,7 @@
     });
 
     // أثر الضغط اللمسي على بطاقات المكتبة
-    document.querySelectorAll('.library-card').forEach(card => {
+    document.querySelectorAll('.library-card:not(.library-card-disabled)').forEach(card => {
       const press = () => card.classList.add('pressed');
       const release = () => card.classList.remove('pressed');
       card.addEventListener('touchstart', press, { passive: true });
@@ -2307,7 +2311,7 @@
       const searchInput = document.getElementById('searchInput');
       const searchButton = document.getElementById('searchButton');
       const searchResults = document.getElementById('searchResults');
-      const searchableItems = Array.from(document.querySelectorAll('.library-card'));
+      const searchableItems = Array.from(document.querySelectorAll('.library-card:not(.library-card-disabled)'));
       function performSearch() {
         const searchTerm = searchInput.value.trim().toLowerCase();
         if(searchTerm.length < 2) { searchResults.style.display = 'none'; return; }
