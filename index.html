@@ -1881,11 +1881,7 @@
   <p class="ai-description"> شريكك الذكي في رحلة التعلم الرقمي.</p>
   <div class="ai-chat-container">
     <button class="clear-chat-btn" id="clearChatBtn" style="display: none;"><i class="fas fa-trash"></i> مسح المحادثة</button>
-    <div class="ai-messages" id="aiMessages">
-      <div class="message ai-message">
-        <strong>الذكاء الاصطناعي:</strong> مرحباً بك! أنا المساعد الرقمي للأستاذ محمد الغامدي، وشريكك في رحلة التعلم، تفضل بطرح سؤالك.
-      </div>
-    </div>
+    <div class="ai-messages" id="aiMessages"></div>
     <div class="ai-input-group">
       <input type="text" class="ai-input" id="aiInput" placeholder="أكتب سؤالك هنا..." maxlength="500">
       <button class="ai-send-btn" id="aiSendBtn"><i class="fas fa-paper-plane"></i></button>
@@ -2152,8 +2148,9 @@
       const aiTypingIndicator = document.getElementById('aiTypingIndicator');
       const clearChatBtn = document.getElementById('clearChatBtn');
       const API_URL = '/api/gemini';
+      const CHAT_WELCOME = 'مرحبًا بك! أنا المساعد الرقمي في موقع أ. محمد الغامدي. اسألني عن أي درس أو مفهوم في التقنية الرقمية.';
       function clearConversation() {
-        aiMessages.innerHTML = `<div class="message ai-message"><strong>الذكاء الاصطناعي:</strong> مرحباً! كيف يمكنني مساعدتك في مواضيع التقنية الرقمية أو أي موضوع آخر؟</div>`;
+        aiMessages.innerHTML = `<div class="message ai-message"><strong>الذكاء الاصطناعي:</strong> ${CHAT_WELCOME}</div>`;
       }
       async function sendMessage() {
         const message = aiInput.value.trim();
@@ -2188,6 +2185,7 @@
       aiSendBtn.addEventListener('click', sendMessage);
       aiInput.addEventListener('keypress', (e) => { if(e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); } });
       aiInput.addEventListener('input', () => { aiSendBtn.disabled = !aiInput.value.trim(); });
+      clearConversation();
     }
     initAIAssistant();
 
