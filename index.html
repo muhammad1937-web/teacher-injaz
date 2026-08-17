@@ -455,7 +455,7 @@
     .submit-project-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin: 0 0 0.6rem; }
     .submit-project-description { margin: 0 0 1.2rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; line-height: 1.5; }
     .inquiries-container { display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap; }
-    .inquiry-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; font-size: 1.15rem; font-weight: 700; padding: 0.9rem 1.8rem; border-radius: 999px; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; }
+    .inquiry-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; font-size: 1.15rem; font-weight: 700; padding: 0.9rem 1.8rem; border-radius: 999px; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.2; }
     .inquiry-btn i { font-size: 1.2em; }
 .inquiry-btn.primary {
   display: inline-flex;
@@ -626,36 +626,6 @@
     .discord-title:hover i { opacity: 1; transform: scale(1.1) rotate(5deg); }
     .discord-description { margin: 0 0 1.5rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
     .discord-description:hover { color: var(--tech-blue); transform: none; background: transparent; border: none; box-shadow: none; }
-    .discord-btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
-  font-size: 1rem;
-  font-weight: 600;
-  padding: 0.9rem 2.5rem;
-  border-radius: 999px;
-  text-decoration: none;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
-  white-space: nowrap;
-  max-width: 280px;
-  width: fit-content;
-  background: var(--primary-dark);
-  color: white;
-  border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.25);
-  position: relative;
-  overflow: hidden;
-  margin: 0 auto;
-}
-    .discord-btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent); opacity: 0; transition: opacity 0.3s ease; }
-    .discord-btn i { font-size: 1.2em; transition: transform 0.3s ease; }
-    .discord-btn:hover { background: var(--ai-teal); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(var(--accent-teal-rgb), 0.4); }
-    .discord-btn:hover::before { opacity: 1; }
-    .discord-btn:hover i { transform: translateX(3px); }
-    .discord-btn:active { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(var(--accent-teal-rgb), 0.25); }
     .clear-chat-btn { background: var(--warning-red); color: white; border: none; padding: 8px 15px; border-radius: 24px; cursor: pointer; font-size: 0.85rem; margin-bottom: 10px; transition: all 0.3s; display: flex; align-items: center; gap: 5px; margin: 0 auto 10px; }
     .clear-chat-btn:hover { background: #A93226; transform: translateY(-2px); box-shadow: 0 2px 8px rgba(var(--warning-red-rgb), 0.3); }
 
@@ -1113,7 +1083,6 @@
       .voting-section { padding: 1.3rem 1rem 1.2rem; }
       .vote-btn { min-width: 180px; padding: 0.9rem 2rem; font-size: 1rem; }
       .discord-section { padding: 1.3rem 1rem 1.2rem; }
-      .discord-btn { min-width: 200px; padding: 0.8rem 1.5rem; font-size: 1rem; }
       .section-divider { max-width: 90%; margin: 1.5rem auto; }
       .students-list { gap: 1.5rem; }
       .student-image { width: 85px; height: 85px; }
@@ -1819,7 +1788,7 @@
   </div>
   <p class="discord-description">انضم إلى مجتمعنا على ديسكورد للنقاش وطرح الأسئلة.</p>
   <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-    <a href="https://discord.gg/YWtXrf32A3" target="_blank" rel="noopener" class="discord-btn">
+    <a href="https://discord.gg/YWtXrf32A3" target="_blank" rel="noopener" class="inquiry-btn primary">
       <i class="fas fa-sign-in-alt"></i>
       <span> مجتمع التقنية الرقمية</span>
     </a>
