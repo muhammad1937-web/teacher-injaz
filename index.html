@@ -1877,9 +1877,9 @@
 <!-- قسم الذكاء الاصطناعي -->
 <div id="ai-assistant-section" class="ai-assistant-container fade-in">
   <h2 class="ai-header">
-    <span>الذكاء الاصطناعي</span>
+    <span>المساعد الرقمي</span>
   </h2>
-  <p class="ai-description"> شريكك الذكي في رحلة التعلم الرقمي.</p>
+  <p class="ai-description"> مساعد التقنية الرقمية — يجيب عن أسئلتك ويشرح المفاهيم</p>
   <div class="ai-chat-container">
     <button class="clear-chat-btn" id="clearChatBtn" style="display: none;"><i class="fas fa-trash"></i> مسح المحادثة</button>
     <div class="ai-messages" id="aiMessages"></div>
@@ -1895,7 +1895,7 @@
   </div>
   <div style="background: rgba(14,149,148,0.06); border-radius: 16px; padding: 10px 16px; margin-top: 14px; width: 100%; max-width: 450px; text-align: center; margin-left: auto; margin-right: auto;">
       <p style="font-size: 0.85rem; color: var(--text-medium); margin: 0; line-height: 1.5;">
-        ملاحظة: الإجابات تعتمد على المعرفة العامة للذكاء الاصطناعي وقد تحتاج لمراجعة المعلم للتأكد من دقتها
+        الإجابات مبنية على منهج المادة، وقد تحتاج لمراجعة المعلم للتأكد
       </p>
     </div>
 </div>
@@ -2150,8 +2150,9 @@
       const clearChatBtn = document.getElementById('clearChatBtn');
       const API_URL = '/api/gemini';
       const CHAT_WELCOME = 'مرحبًا بك! أنا المساعد الرقمي في موقع أ. محمد الغامدي. اسألني عن أي درس أو مفهوم في التقنية الرقمية.';
+      const AI_LABEL = 'المساعد:';
       function clearConversation() {
-        aiMessages.innerHTML = `<div class="message ai-message"><strong>الذكاء الاصطناعي:</strong> ${CHAT_WELCOME}</div>`;
+        aiMessages.innerHTML = `<div class="message ai-message"><strong>${AI_LABEL}</strong> ${CHAT_WELCOME}</div>`;
       }
       async function sendMessage() {
         const message = aiInput.value.trim();
@@ -2178,7 +2179,7 @@
           const copyBtn = document.createElement('button'); copyBtn.className = 'copy-btn'; copyBtn.title = 'نسخ الرد'; copyBtn.innerHTML = "<i class='fas fa-copy'></i>";
           copyBtn.addEventListener('click', () => { navigator.clipboard.writeText(text).then(() => { copyBtn.innerHTML = "<i class='fas fa-check'></i>"; setTimeout(() => copyBtn.innerHTML = "<i class='fas fa-copy'></i>", 2000); }).catch(err => console.error('فشل نسخ النص: ', err)); });
           const textContainer = document.createElement('div');
-          const aiLabel = document.createElement('strong'); aiLabel.textContent = 'الذكاء الاصطناعي:';
+          const aiLabel = document.createElement('strong'); aiLabel.textContent = AI_LABEL;
           textContainer.appendChild(aiLabel);
           textContainer.appendChild(document.createTextNode(' ' + text));
           messageDiv.appendChild(copyBtn); messageDiv.appendChild(textContainer);
