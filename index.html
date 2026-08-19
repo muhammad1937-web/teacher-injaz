@@ -419,6 +419,9 @@
     @keyframes pop-in { to { transform: scale(1); opacity: 1; } }
     .user-message { background: rgba(var(--primary-dark-rgb), 0.05); color: var(--text-dark); margin-right: auto; border-bottom-right-radius: 4px; border: 1px solid rgba(var(--primary-dark-rgb), 0.1); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); transform-origin: bottom left; }
     .ai-message { background: rgba(var(--ai-teal-rgb), 0.05); color: var(--text-dark); margin-left: auto; border: 1px solid rgba(var(--ai-teal-rgb), 0.2); border-bottom-left-radius: 4px; box-shadow: 0 2px 8px rgba(var(--ai-teal-rgb), 0.1); transform-origin: bottom right; position: relative; padding-left: 45px; white-space: pre-wrap; }
+    .ai-label-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
+    .ai-avatar-icon { width: 28px; height: 28px; border-radius: 50%; background: #16324F; color: #0E9594; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ai-avatar-icon i { font-size: 14px; }
     .copy-btn { position: absolute; top: 10px; left: 10px; background: rgba(var(--ai-teal-rgb), 0.15); color: var(--ai-teal); border: none; width: 30px; height: 30px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.3s ease, background-color 0.3s ease; }
     .ai-message:hover .copy-btn { opacity: 1; background: rgba(var(--ai-teal-rgb), 0.2); }
     .copy-btn:active { transform: scale(0.95); }
@@ -2151,8 +2154,9 @@
       const API_URL = '/api/gemini';
       const CHAT_WELCOME = 'مرحبًا بك! أنا المساعد الرقمي في موقع أ. محمد الغامدي. اسألني عن أي درس أو مفهوم في التقنية الرقمية.';
       const AI_LABEL = 'المساعد:';
+      const AI_LABEL_ROW_INNER_HTML = `<span class="ai-avatar-icon"><i class="fas fa-graduation-cap"></i></span><strong>${AI_LABEL}</strong>`;
       function clearConversation() {
-        aiMessages.innerHTML = `<div class="message ai-message"><strong>${AI_LABEL}</strong> ${CHAT_WELCOME}</div>`;
+        aiMessages.innerHTML = `<div class="message ai-message"><div class="ai-label-row">${AI_LABEL_ROW_INNER_HTML}</div><div class="ai-reply-text">${CHAT_WELCOME}</div></div>`;
       }
       async function sendMessage() {
         const message = aiInput.value.trim();
@@ -2178,11 +2182,13 @@
         else {
           const copyBtn = document.createElement('button'); copyBtn.className = 'copy-btn'; copyBtn.title = 'نسخ الرد'; copyBtn.innerHTML = "<i class='fas fa-copy'></i>";
           copyBtn.addEventListener('click', () => { navigator.clipboard.writeText(text).then(() => { copyBtn.innerHTML = "<i class='fas fa-check'></i>"; setTimeout(() => copyBtn.innerHTML = "<i class='fas fa-copy'></i>", 2000); }).catch(err => console.error('فشل نسخ النص: ', err)); });
+          const labelRow = document.createElement('div');
+          labelRow.className = 'ai-label-row';
+          labelRow.innerHTML = AI_LABEL_ROW_INNER_HTML;
           const textContainer = document.createElement('div');
-          const aiLabel = document.createElement('strong'); aiLabel.textContent = AI_LABEL;
-          textContainer.appendChild(aiLabel);
-          textContainer.appendChild(document.createTextNode(' ' + text));
-          messageDiv.appendChild(copyBtn); messageDiv.appendChild(textContainer);
+          textContainer.className = 'ai-reply-text';
+          textContainer.textContent = text;
+          messageDiv.appendChild(copyBtn); messageDiv.appendChild(labelRow); messageDiv.appendChild(textContainer);
         }
         aiMessages.appendChild(messageDiv); aiMessages.scrollTop = aiMessages.scrollHeight;
       }
