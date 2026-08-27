@@ -149,20 +149,18 @@
     .tech-header::before {
       content: '';
       position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background-image: radial-gradient(circle, rgba(255,255,255,0.08) 0.75px, transparent 0.75px), linear-gradient(135deg, rgba(22,50,79,0.75), rgba(14,149,148,0.65));
+      background-image: radial-gradient(circle, rgba(255,255,255,0.08) 0.75px, transparent 0.75px), linear-gradient(135deg, rgba(22,50,79,0.62), rgba(14,149,148,0.52));
       background-size: 22px 22px, cover;
       background-position: 0 0, center;
       background-repeat: repeat, no-repeat;
       z-index: 1;
     }
     .header-content { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; }
-    .header-greeting { font-size: 0.8rem; font-weight: 500; color: rgba(255, 255, 255, 0.7); text-align: center; margin: 0; }
     .header-logo { margin-bottom: 0.2rem; }
     .header-logo img { height: 56px !important; width: auto; filter: brightness(0) invert(1); transition: transform 0.3s ease; }
     .header-logo img:hover { transform: scale(1.05); }
     .header-text-content { text-align: center; width: 100%; position: relative; z-index: 2; }
     .tech-header h1 { font-size: 1.4rem; font-weight: 800; margin: 0 0 0.3rem 0; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); color: white; letter-spacing: 0.5px; }
-    .header-gold-divider { width: 40px; height: 2px; background: #E8A33D; border-radius: 2px; margin: 6px auto; }
     .header-school-badge { font-size: 0.68rem; font-weight: 400; display: inline-block; padding: 3px 12px; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 12px; opacity: 0.55; margin-top: 8px; }
     .tech-header p { font-size: 0.85rem; font-weight: 500; margin: 0; color: rgba(255, 255, 255, 0.9); }
 
@@ -1586,13 +1584,11 @@
 <!-- === الهيدر الجديد مع خلفية صورة === -->
 <header class="tech-header fade-in">
   <div class="header-content">
-    <p id="greetingLine" class="header-greeting"></p>
     <div class="header-logo">
       <img src="images/logo.png" alt="شعار واجهة المعلم الرقمي">
     </div>
     <div class="header-text-content">
       <h1>واجهـة المعلـم الرقمـي</h1>
-      <div class="header-gold-divider"></div>
       <p>أ. محمد الغامدي | معلم التقنية الرقمية</p>
         <p style="font-size: 0.75rem; font-weight: 400; opacity: 0.75; margin-top: 4px;">جيل رقمي يبتكر الحلول ويصنع المستقبل</p>
                 <p style="text-align: center; margin-top: 8px;"><span class="header-school-badge">ثانوية الإمام النووي</span></p>
@@ -2010,17 +2006,6 @@
   document.addEventListener('DOMContentLoaded', function() {
     window.scrollTo(0, 0);
     if (window.location.hash) history.replaceState(null, null, window.location.pathname);
-
-    // سطر الترحيب حسب وقت الزيارة
-    try {
-      const hour = new Date().getHours();
-      let greeting = '';
-      if (hour >= 5 && hour < 12) greeting = 'صباح الخير';
-      else if (hour >= 12 && hour < 24) greeting = 'مساء الخير';
-      else greeting = 'أهلًا بك';
-      const greetingLine = document.getElementById('greetingLine');
-      if (greetingLine) greetingLine.textContent = greeting;
-    } catch (e) {}
 
     // التاريخ والوقت
     function updateCompactDate() {
