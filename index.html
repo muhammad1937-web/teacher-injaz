@@ -632,16 +632,16 @@
     .project-viewer-box { background: white; border-radius: 24px; width: 95%; max-width: 800px; height: 75vh; margin: 0 auto; box-shadow: 0 16px 32px rgba(0,0,0,0.2); overflow: hidden; display: flex; flex-direction: column; }
     .project-viewer-frame { flex: 1; min-height: 0; }
     .project-viewer-frame iframe, .project-viewer-frame img { display: block; }
-    .discord-section { max-width: 900px; margin: 3rem auto; padding: 1.5rem 1.8rem; border-radius: 24px; background: var(--gradient-card); border: 1px solid var(--border-color); text-align: center; box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08); position: relative; overflow: hidden; }
-    .discord-section::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; transition: height 0.3s ease; }
-    .discord-section:hover::before { height: 6px; }
-    .discord-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); }
-    .discord-header { display: flex; justify-content: center; align-items: center; margin-bottom: 0.8rem; }
-    .discord-title { display: flex; align-items: center; gap: 0.75rem; font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin: 0; }
-    .discord-title i { font-size: 1.4rem; color: var(--tech-blue); opacity: 0.9; transition: all 0.3s ease; }
-    .discord-title:hover i { opacity: 1; transform: scale(1.1) rotate(5deg); }
-    .discord-description { margin: 0 0 1.5rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
-    .discord-description:hover { color: var(--tech-blue); transform: none; background: transparent; border: none; box-shadow: none; }
+    .chat-section { max-width: 900px; margin: 3rem auto; padding: 1.5rem 1.8rem; border-radius: 24px; background: var(--gradient-card); border: 1px solid var(--border-color); text-align: center; box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08); position: relative; overflow: hidden; }
+    .chat-section::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; transition: height 0.3s ease; }
+    .chat-section:hover::before { height: 6px; }
+    .chat-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); }
+    .chat-header { display: flex; justify-content: center; align-items: center; margin-bottom: 0.8rem; }
+    .chat-title { display: flex; align-items: center; gap: 0.75rem; font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin: 0; }
+    .chat-title i { font-size: 1.4rem; color: var(--tech-blue); opacity: 0.9; transition: all 0.3s ease; }
+    .chat-title:hover i { opacity: 1; transform: scale(1.1) rotate(5deg); }
+    .chat-description { margin: 0 0 1.5rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
+    .chat-description:hover { color: var(--tech-blue); transform: none; background: transparent; border: none; box-shadow: none; }
     .clear-chat-btn { background: var(--warning-red); color: white; border: none; padding: 8px 15px; border-radius: 24px; cursor: pointer; font-size: 0.85rem; margin-bottom: 10px; transition: all 0.3s; display: flex; align-items: center; gap: 5px; margin: 0 auto 10px; }
     .clear-chat-btn:hover { background: #A93226; transform: translateY(-2px); box-shadow: 0 2px 8px rgba(var(--warning-red-rgb), 0.3); }
 
@@ -1098,7 +1098,7 @@
       .inquiry-btn { width: 100%; max-width: 300px; }
       .voting-section { padding: 1.3rem 1rem 1.2rem; }
       .vote-btn { min-width: 180px; padding: 0.9rem 2rem; font-size: 1rem; }
-      .discord-section { padding: 1.3rem 1rem 1.2rem; }
+      .chat-section { padding: 1.3rem 1rem 1.2rem; }
       .section-divider { max-width: 90%; margin: 1.5rem auto; }
       .students-list { gap: 1.5rem; }
       .student-image { width: 85px; height: 85px; }
@@ -1795,22 +1795,22 @@
 <!-- ============================================ -->
 <!-- ==========   قسم ساحة النقاش   ========== -->
 <!-- ============================================ -->
-<section class="discord-section fade-in">
-  <div class="discord-header">
-    <h3 class="discord-title">
-      <i class="fab fa-discord"></i>
+<section class="chat-section fade-in">
+  <div class="chat-header">
+    <h3 class="chat-title">
+      <i class="fab fa-telegram"></i>
       <span>ساحة النقاش التفاعلية</span>
     </h3>
   </div>
-  <p class="discord-description">انضم إلى مجتمعنا على ديسكورد للنقاش وطرح الأسئلة.</p>
+  <p class="chat-description">انضم إلى مجموعة المادة على تيليجرام للنقاش وطرح الأسئلة.</p>
   <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
-    <a href="https://discord.gg/YWtXrf32A3" target="_blank" rel="noopener" class="inquiry-btn primary">
+    <a href="https://t.me/+wSI6ZR6AvcEyYjk0" target="_blank" rel="noopener" class="inquiry-btn primary">
       <i class="fas fa-sign-in-alt"></i>
       <span> مجتمع التقنية الرقمية</span>
     </a>
     <div style="background: rgba(14,149,148,0.06); border-radius: 16px; padding: 10px 16px; margin-top: 14px; width: 100%; max-width: 450px; text-align: center;">
       <p style="font-size: 0.85rem; color: var(--text-medium); margin: 0; line-height: 1.5;">
-        عند النقر سيتم توجيهك لإنشاء حساب (إن لم يكن لديك)، ثم الدخول مباشرة إلى ساحة النقاش.
+        عند النقر سيفتح تطبيق تيليجرام مباشرة على المجموعة.
       </p>
     </div>
   </div>
