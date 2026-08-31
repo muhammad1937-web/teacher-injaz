@@ -1563,10 +1563,10 @@
     .honor-row { display:flex; align-items:center; gap:10px; padding:10px 14px; margin-bottom:8px; background:var(--pure-white); border:1px solid var(--border-color); border-radius:14px; box-shadow:0 2px 8px rgba(var(--primary-dark-rgb),0.05); transition:all 0.3s ease; }
     .honor-row:last-child { margin-bottom:0; }
     .honor-row:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(var(--primary-dark-rgb),0.12); }
-    .honor-row.first { background:#FDF6E9; border-right:3px solid var(--gold-excellence); }
+    .honor-row.first { border-right-width:3px; border-right-style:solid; }
     .honor-rank { width:27px; height:27px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.78rem; font-weight:700; flex-shrink:0; background:rgba(22,50,79,0.07); color:var(--text-subtitle); }
     .honor-rank.gold { background:var(--gold-excellence); color:#fff; }
-    .honor-rank.att { background:rgba(29,158,117,0.12); color:#1D9E75; }
+    .honor-rank.green { background:#1D9E75; color:#fff; }
     .honor-row.first .honor-rank { width:31px; height:31px; }
     .honor-name { flex:1; min-width:0; font-size:0.85rem; font-weight:500; color:var(--text-dark); line-height:1.5; }
     .honor-sec { font-size:0.72rem; color:var(--text-light); }
@@ -1576,12 +1576,6 @@
     .honor-val { flex-shrink:0; font-size:0.95rem; font-weight:700; display:flex; flex-direction:column; align-items:center; gap:2px; }
     .honor-val-num { font-size:0.95rem; font-weight:700; }
     .honor-val-unit { font-size:0.65rem; font-weight:400; color:var(--text-light); white-space:nowrap; }
-    .honor-progress { width:44px; height:3px; border-radius:2px; overflow:hidden; margin-top:2px; }
-    .honor-progress-fill { height:100%; border-radius:2px; }
-    .honor-progress.pts { background:rgba(232,163,61,0.15); }
-    .honor-progress.pts .honor-progress-fill { background:var(--gold-excellence); }
-    .honor-progress.att { background:rgba(29,158,117,0.15); }
-    .honor-progress.att .honor-progress-fill { background:#1D9E75; }
     .honor-empty { padding:2rem 1rem; text-align:center; color:var(--text-light); font-size:0.85rem; line-height:1.8; animation: honorFadeIn 0.35s ease; }
     .honor-empty i { display:block; font-size:1.4rem; margin-bottom:0.6rem; color:var(--text-light); opacity:0.7; }
     .honor-note { text-align:center; font-size:0.78rem; color:var(--text-subtitle); background:var(--light-bg); border-radius:10px; padding:10px; margin-top:14px; }
@@ -2654,26 +2648,24 @@ function renderHonorBody() {
 
   const rank = ['1', '2', '3'];
   const rows = function (list, kind) {
-    const leaderPoints = (kind === 'p' && list.length) ? list[0].net : 0;
     return list.map(function (s, i) {
       const isFirst = i === 0;
-      const cls = kind === 'p' ? (isFirst ? 'gold' : '') : 'att';
-      const col = kind === 'p' ? (isFirst ? 'var(--gold-excellence)' : 'var(--text-subtitle)') : '#1D9E75';
+      const accentColor = kind === 'p' ? 'var(--gold-excellence)' : '#1D9E75';
+      const cls = isFirst ? (kind === 'p' ? 'gold' : 'green') : '';
+      const col = isFirst ? accentColor : 'var(--text-subtitle)';
+      const rowStyle = isFirst ? ' style="border-right-color:' + accentColor + '"' : '';
       let badgeHtml = '';
       let valHtml;
       if (kind === 'p') {
         const badge = getStudentBadge(s.net);
         badgeHtml = '<span class="honor-badge-sep">·</span><span class="honor-badge" style="color:' + badge.color + '"><i class="fas ' + badge.icon + '"></i>' + badge.name + '</span>';
-        const ptsPct = leaderPoints ? Math.round((s.net / leaderPoints) * 100) : 0;
-        valHtml = '<span class="honor-val-num">' + s.net + '</span><span class="honor-val-unit">' + pointsUnitLabel(s.net) + '</span>' +
-                  '<span class="honor-progress pts"><span class="honor-progress-fill" style="width:' + ptsPct + '%"></span></span>';
+        valHtml = '<span class="honor-val-num">' + s.net + '</span><span class="honor-val-unit">' + pointsUnitLabel(s.net) + '</span>';
       } else {
         const pct = s.total ? Math.round((s.present / s.total) * 100) : 0;
         valHtml = '<span class="honor-val-num">' + pct + '%</span>' +
-                  '<span class="honor-val-unit">' + s.present + ' من ' + s.total + '</span>' +
-                  '<span class="honor-progress att"><span class="honor-progress-fill" style="width:' + pct + '%"></span></span>';
+                  '<span class="honor-val-unit">' + s.present + ' من ' + s.total + '</span>';
       }
-      return '<div class="honor-row' + (isFirst ? ' first' : '') + '"><span class="honor-rank ' + cls + '">' + rank[i] + '</span>' +
+      return '<div class="honor-row' + (isFirst ? ' first' : '') + '"' + rowStyle + '><span class="honor-rank ' + cls + '">' + rank[i] + '</span>' +
              '<span class="honor-name">' + s.name + '<br><span class="honor-sec">' +
              g.grade + ' ' + s.section + badgeHtml + '</span></span>' +
              '<span class="honor-val" style="color:' + col + '">' + valHtml + '</span></div>';
