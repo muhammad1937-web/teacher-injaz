@@ -1549,35 +1549,42 @@
     .honor-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); }
     .honor-title { text-align:center; font-size:1.15rem; font-weight:700; color:var(--primary-dark); margin:0; }
     .honor-sub { text-align:center; font-size:0.85rem; color:var(--text-subtitle); margin-top:0.4rem; }
-    .honor-tabs { display:flex; gap:8px; justify-content:center; flex-wrap:wrap; margin:0.9rem 0 1rem; }
-    .honor-tab { font-size:0.85rem; padding:7px 18px; border-radius:20px; background:var(--light-bg); color:var(--text-subtitle); border:1px solid transparent; cursor:pointer; font-family:inherit; transition:var(--transition); }
-    .honor-tab:hover:not(.active) { background:var(--hover-color); color:var(--accent-teal); border-color:rgba(var(--accent-teal-rgb),0.25); }
-    .honor-tab.active { background:var(--accent-teal); color:#fff; font-weight:600; }
-    .honor-cols { display:grid; grid-template-columns:1fr 1fr; gap:14px; animation: honorFadeIn 0.35s ease; }
+    .honor-tabs { position:relative; display:flex; gap:4px; justify-content:center; background:var(--light-bg); border-radius:22px; padding:4px; margin:0.9rem 0 1rem; }
+    .honor-tab-indicator { position:absolute; top:4px; bottom:4px; right:0; background:var(--accent-teal); border-radius:18px; transition:right 0.3s ease, width 0.3s ease; }
+    @media (prefers-reduced-motion: reduce) { .honor-tab-indicator { transition:none; } }
+    .honor-tab { position:relative; z-index:1; flex:1; font-size:0.85rem; padding:7px 18px; border-radius:18px; background:none; color:var(--text-subtitle); border:none; cursor:pointer; font-family:inherit; transition:color 0.3s ease; }
+    .honor-tab:hover:not(.active) { color:var(--accent-teal); }
+    .honor-tab.active { color:#fff; font-weight:600; }
+    .honor-cols { display:grid; grid-template-columns:1fr; gap:14px; animation: honorFadeIn 0.35s ease; }
     @keyframes honorFadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
     .honor-col { border:1px solid var(--border-color); border-radius:16px; overflow:hidden; background:var(--pure-white); box-shadow: 0 4px 12px rgba(var(--primary-dark-rgb), 0.05); }
     .honor-col-head { background:rgba(var(--accent-teal-rgb),0.08); border-bottom:1px solid var(--border-color); padding:10px 15px; font-size:0.9rem; font-weight:700; color:var(--accent-teal); }
-    .honor-row { display:flex; align-items:center; gap:10px; padding:8px 14px; border-bottom:1px solid rgba(22,50,79,0.05); }
-    .honor-row:last-child { border-bottom:none; }
-    .honor-row.first { background:#FDF6E9; border-right:1px solid var(--gold-excellence); }
+    .honor-col-body { padding:10px; }
+    .honor-row { display:flex; align-items:center; gap:10px; padding:10px 14px; margin-bottom:8px; background:var(--pure-white); border:1px solid var(--border-color); border-radius:14px; box-shadow:0 2px 8px rgba(var(--primary-dark-rgb),0.05); transition:all 0.3s ease; }
+    .honor-row:last-child { margin-bottom:0; }
+    .honor-row:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(var(--primary-dark-rgb),0.12); }
+    .honor-row.first { background:#FDF6E9; border-right:3px solid var(--gold-excellence); }
     .honor-rank { width:27px; height:27px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.78rem; font-weight:700; flex-shrink:0; background:rgba(22,50,79,0.07); color:var(--text-subtitle); }
     .honor-rank.gold { background:var(--gold-excellence); color:#fff; }
     .honor-rank.att { background:rgba(29,158,117,0.12); color:#1D9E75; }
     .honor-row.first .honor-rank { width:31px; height:31px; }
-    .honor-name { flex:1; font-size:0.85rem; font-weight:500; color:var(--text-dark); line-height:1.5; }
+    .honor-name { flex:1; min-width:0; font-size:0.85rem; font-weight:500; color:var(--text-dark); line-height:1.5; }
     .honor-sec { font-size:0.72rem; color:var(--text-light); }
     .honor-badge-sep { color:var(--text-light); opacity:0.5; margin:0 3px; }
-    .honor-badge { font-size:0.68rem; font-weight:600; }
+    .honor-badge { font-size:0.68rem; font-weight:600; white-space:nowrap; }
     .honor-badge i { font-size:0.7rem; margin-left:3px; }
-    .honor-val { font-size:0.95rem; font-weight:700; display:flex; flex-direction:column; align-items:center; gap:2px; }
+    .honor-val { flex-shrink:0; font-size:0.95rem; font-weight:700; display:flex; flex-direction:column; align-items:center; gap:2px; }
     .honor-val-num { font-size:0.95rem; font-weight:700; }
-    .honor-val-unit { font-size:0.65rem; font-weight:400; color:var(--text-light); }
-    .honor-progress { width:44px; height:3px; border-radius:2px; background:rgba(29,158,117,0.15); overflow:hidden; margin-top:2px; }
-    .honor-progress-fill { height:100%; background:#1D9E75; border-radius:2px; }
+    .honor-val-unit { font-size:0.65rem; font-weight:400; color:var(--text-light); white-space:nowrap; }
+    .honor-progress { width:44px; height:3px; border-radius:2px; overflow:hidden; margin-top:2px; }
+    .honor-progress-fill { height:100%; border-radius:2px; }
+    .honor-progress.pts { background:rgba(232,163,61,0.15); }
+    .honor-progress.pts .honor-progress-fill { background:var(--gold-excellence); }
+    .honor-progress.att { background:rgba(29,158,117,0.15); }
+    .honor-progress.att .honor-progress-fill { background:#1D9E75; }
     .honor-empty { padding:2rem 1rem; text-align:center; color:var(--text-light); font-size:0.85rem; line-height:1.8; animation: honorFadeIn 0.35s ease; }
     .honor-empty i { display:block; font-size:1.4rem; margin-bottom:0.6rem; color:var(--text-light); opacity:0.7; }
     .honor-note { text-align:center; font-size:0.78rem; color:var(--text-subtitle); background:var(--light-bg); border-radius:10px; padding:10px; margin-top:14px; }
-    @media (max-width:600px) { .honor-cols { grid-template-columns:1fr; } }
   </style>
 </head>
 <body>
@@ -2610,11 +2617,27 @@ function pointsUnitLabel(n) {
 }
 
 function renderHonorTabs() {
-  document.getElementById('honorTabs').innerHTML = honorData.grades.map(function (g, i) {
-    return '<button class="honor-tab' + (i === honorActive ? ' active' : '') +
+  const tabsHtml = honorData.grades.map(function (g, i) {
+    return '<button type="button" class="honor-tab' + (i === honorActive ? ' active' : '') +
            '" onclick="switchHonor(' + i + ')">' + g.grade + '</button>';
   }).join('');
+  document.getElementById('honorTabs').innerHTML = '<span class="honor-tab-indicator"></span>' + tabsHtml;
+  positionHonorTabIndicator();
 }
+
+function positionHonorTabIndicator() {
+  const container = document.getElementById('honorTabs');
+  if (!container) return;
+  const activeTab = container.querySelector('.honor-tab.active');
+  const indicator = container.querySelector('.honor-tab-indicator');
+  if (!activeTab || !indicator) return;
+  const containerRect = container.getBoundingClientRect();
+  const tabRect = activeTab.getBoundingClientRect();
+  indicator.style.width = tabRect.width + 'px';
+  indicator.style.right = (containerRect.right - tabRect.right) + 'px';
+}
+window.addEventListener('resize', positionHonorTabIndicator);
+window.addEventListener('orientationchange', positionHonorTabIndicator);
 
 function switchHonor(i) { honorActive = i; renderHonorTabs(); renderHonorBody(); }
 window.switchHonor = switchHonor;
@@ -2631,6 +2654,7 @@ function renderHonorBody() {
 
   const rank = ['1', '2', '3'];
   const rows = function (list, kind) {
+    const leaderPoints = (kind === 'p' && list.length) ? list[0].net : 0;
     return list.map(function (s, i) {
       const isFirst = i === 0;
       const cls = kind === 'p' ? (isFirst ? 'gold' : '') : 'att';
@@ -2640,12 +2664,14 @@ function renderHonorBody() {
       if (kind === 'p') {
         const badge = getStudentBadge(s.net);
         badgeHtml = '<span class="honor-badge-sep">·</span><span class="honor-badge" style="color:' + badge.color + '"><i class="fas ' + badge.icon + '"></i>' + badge.name + '</span>';
-        valHtml = '<span class="honor-val-num">' + s.net + '</span><span class="honor-val-unit">' + pointsUnitLabel(s.net) + '</span>';
+        const ptsPct = leaderPoints ? Math.round((s.net / leaderPoints) * 100) : 0;
+        valHtml = '<span class="honor-val-num">' + s.net + '</span><span class="honor-val-unit">' + pointsUnitLabel(s.net) + '</span>' +
+                  '<span class="honor-progress pts"><span class="honor-progress-fill" style="width:' + ptsPct + '%"></span></span>';
       } else {
         const pct = s.total ? Math.round((s.present / s.total) * 100) : 0;
         valHtml = '<span class="honor-val-num">' + pct + '%</span>' +
                   '<span class="honor-val-unit">' + s.present + ' من ' + s.total + '</span>' +
-                  '<span class="honor-progress"><span class="honor-progress-fill" style="width:' + pct + '%"></span></span>';
+                  '<span class="honor-progress att"><span class="honor-progress-fill" style="width:' + pct + '%"></span></span>';
       }
       return '<div class="honor-row' + (isFirst ? ' first' : '') + '"><span class="honor-rank ' + cls + '">' + rank[i] + '</span>' +
              '<span class="honor-name">' + s.name + '<br><span class="honor-sec">' +
@@ -2663,10 +2689,10 @@ function renderHonorBody() {
   box.innerHTML =
     '<div class="honor-cols"><div class="honor-col">' +
     '<div class="honor-col-head">متصدرو النقاط</div>' +
-    (g.pointsReady ? rows(g.points, 'p') : '<div class="honor-empty"><i class="fas fa-hourglass-half"></i>لم تُرصد مشاركات كافية بعد</div>') +
+    (g.pointsReady ? '<div class="honor-col-body">' + rows(g.points, 'p') + '</div>' : '<div class="honor-empty"><i class="fas fa-hourglass-half"></i>لم تُرصد مشاركات كافية بعد</div>') +
     '</div><div class="honor-col">' +
     '<div class="honor-col-head">متصدرو الحضور</div>' +
-    (g.attendReady ? rows(attendanceSorted, 'a') : '<div class="honor-empty"><i class="fas fa-hourglass-half"></i>تُعرض بعد رصد عدد كافٍ من الحصص</div>') +
+    (g.attendReady ? '<div class="honor-col-body">' + rows(attendanceSorted, 'a') + '</div>' : '<div class="honor-empty"><i class="fas fa-hourglass-half"></i>تُعرض بعد رصد عدد كافٍ من الحصص</div>') +
     '</div></div>';
 }
 
