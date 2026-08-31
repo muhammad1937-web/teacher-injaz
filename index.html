@@ -2600,8 +2600,8 @@ async function loadHonorBoard() {
 function getStudentBadge(pts) {
   if (pts >= 30) return { name: 'مبدع', color: '#E8A33D', icon: 'fa-crown' };
   if (pts >= 20) return { name: 'متميز', color: '#16324F', icon: 'fa-star' };
-  if (pts >= 10) return { name: 'مجتهد', color: '#0E9594', icon: 'fa-medal' };
-  return { name: 'متدرب', color: '#94A3B8', icon: 'fa-seedling' };
+  if (pts >= 10) return { name: 'متقدم', color: '#0E9594', icon: 'fa-medal' };
+  return { name: 'منطلق', color: '#94A3B8', icon: 'fa-seedling' };
 }
 
 function pointsUnitLabel(n) {
@@ -3270,7 +3270,7 @@ function showPointsModal(data) {
     const pts = p.totalPoints;
     const currentBadge = getStudentBadge(pts);
     let badgeName = currentBadge.name, badgeColor = currentBadge.color, badgeIcon = currentBadge.icon;
-    let nextThreshold = 10, prevThreshold = 0, nextName = 'مجتهد', isMax = false;
+    let nextThreshold = 10, prevThreshold = 0, nextName = 'متقدم', isMax = false;
    let nextIcon = 'fa-medal', nextColor = '#0E9594';
     if (pts >= 30) { isMax = true; }
     else if (pts >= 20) { prevThreshold = 20; nextThreshold = 30; nextName = 'مبدع'; nextIcon = 'fa-crown'; nextColor = '#E8A33D'; }
