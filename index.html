@@ -1559,12 +1559,21 @@
     .honor-col-head { background:rgba(var(--accent-teal-rgb),0.08); border-bottom:1px solid var(--border-color); padding:10px 15px; font-size:0.9rem; font-weight:700; color:var(--accent-teal); }
     .honor-row { display:flex; align-items:center; gap:10px; padding:8px 14px; border-bottom:1px solid rgba(22,50,79,0.05); }
     .honor-row:last-child { border-bottom:none; }
+    .honor-row.first { background:#FDF6E9; border-right:1px solid var(--gold-excellence); }
     .honor-rank { width:27px; height:27px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.78rem; font-weight:700; flex-shrink:0; background:rgba(22,50,79,0.07); color:var(--text-subtitle); }
     .honor-rank.gold { background:var(--gold-excellence); color:#fff; }
     .honor-rank.att { background:rgba(29,158,117,0.12); color:#1D9E75; }
+    .honor-row.first .honor-rank { width:31px; height:31px; }
     .honor-name { flex:1; font-size:0.85rem; font-weight:500; color:var(--text-dark); line-height:1.5; }
     .honor-sec { font-size:0.72rem; color:var(--text-light); }
-    .honor-val { font-size:0.95rem; font-weight:700; }
+    .honor-badge-sep { color:var(--text-light); opacity:0.5; margin:0 3px; }
+    .honor-badge { font-size:0.68rem; font-weight:600; }
+    .honor-badge i { font-size:0.7rem; margin-left:3px; }
+    .honor-val { font-size:0.95rem; font-weight:700; display:flex; flex-direction:column; align-items:center; gap:2px; }
+    .honor-val-num { font-size:0.95rem; font-weight:700; }
+    .honor-val-unit { font-size:0.65rem; font-weight:400; color:var(--text-light); }
+    .honor-progress { width:44px; height:3px; border-radius:2px; background:rgba(29,158,117,0.15); overflow:hidden; margin-top:2px; }
+    .honor-progress-fill { height:100%; background:#1D9E75; border-radius:2px; }
     .honor-empty { padding:2rem 1rem; text-align:center; color:var(--text-light); font-size:0.85rem; line-height:1.8; animation: honorFadeIn 0.35s ease; }
     .honor-empty i { display:block; font-size:1.4rem; margin-bottom:0.6rem; color:var(--text-light); opacity:0.7; }
     .honor-note { text-align:center; font-size:0.78rem; color:var(--text-subtitle); background:var(--light-bg); border-radius:10px; padding:10px; margin-top:14px; }
@@ -2587,6 +2596,19 @@ async function loadHonorBoard() {
   }
 }
 
+function getStudentBadge(pts) {
+  if (pts >= 30) return { name: 'مبدع', color: '#E8A33D', icon: 'fa-crown' };
+  if (pts >= 20) return { name: 'متميز', color: '#16324F', icon: 'fa-star' };
+  if (pts >= 10) return { name: 'مجتهد', color: '#0E9594', icon: 'fa-medal' };
+  return { name: 'متدرب', color: '#94A3B8', icon: 'fa-seedling' };
+}
+
+function pointsUnitLabel(n) {
+  if (n === 1) return 'نقطة';
+  if (n === 2) return 'نقطتان';
+  return 'نقاط';
+}
+
 function renderHonorTabs() {
   document.getElementById('honorTabs').innerHTML = honorData.grades.map(function (g, i) {
     return '<button class="honor-tab' + (i === honorActive ? ' active' : '') +
@@ -2607,18 +2629,36 @@ function renderHonorBody() {
     return;
   }
 
-  const rank = ['١', '٢', '٣'];
+  const rank = ['1', '2', '3'];
   const rows = function (list, kind) {
     return list.map(function (s, i) {
-      const cls = kind === 'p' ? (i === 0 ? 'gold' : '') : 'att';
-      const col = kind === 'p' ? (i === 0 ? 'var(--gold-excellence)' : 'var(--text-subtitle)') : '#1D9E75';
-      const val = kind === 'p' ? s.net : s.present + '/' + s.total;
-      return '<div class="honor-row"><span class="honor-rank ' + cls + '">' + rank[i] + '</span>' +
+      const isFirst = i === 0;
+      const cls = kind === 'p' ? (isFirst ? 'gold' : '') : 'att';
+      const col = kind === 'p' ? (isFirst ? 'var(--gold-excellence)' : 'var(--text-subtitle)') : '#1D9E75';
+      let badgeHtml = '';
+      let valHtml;
+      if (kind === 'p') {
+        const badge = getStudentBadge(s.net);
+        badgeHtml = '<span class="honor-badge-sep">·</span><span class="honor-badge" style="color:' + badge.color + '"><i class="fas ' + badge.icon + '"></i>' + badge.name + '</span>';
+        valHtml = '<span class="honor-val-num">' + s.net + '</span><span class="honor-val-unit">' + pointsUnitLabel(s.net) + '</span>';
+      } else {
+        const pct = s.total ? Math.round((s.present / s.total) * 100) : 0;
+        valHtml = '<span class="honor-val-num">' + pct + '%</span>' +
+                  '<span class="honor-val-unit">' + s.present + ' من ' + s.total + '</span>' +
+                  '<span class="honor-progress"><span class="honor-progress-fill" style="width:' + pct + '%"></span></span>';
+      }
+      return '<div class="honor-row' + (isFirst ? ' first' : '') + '"><span class="honor-rank ' + cls + '">' + rank[i] + '</span>' +
              '<span class="honor-name">' + s.name + '<br><span class="honor-sec">' +
-             g.grade + ' ' + s.section + '</span></span>' +
-             '<span class="honor-val" style="color:' + col + '">' + val + '</span></div>';
+             g.grade + ' ' + s.section + badgeHtml + '</span></span>' +
+             '<span class="honor-val" style="color:' + col + '">' + valHtml + '</span></div>';
     }).join('');
   };
+  const attendanceSorted = g.attendReady ? g.attendance.slice().sort(function (a, b) {
+    const pa = a.total ? a.present / a.total : 0;
+    const pb = b.total ? b.present / b.total : 0;
+    if (pb !== pa) return pb - pa;
+    return b.total - a.total;
+  }) : g.attendance;
 
   box.innerHTML =
     '<div class="honor-cols"><div class="honor-col">' +
@@ -2626,7 +2666,7 @@ function renderHonorBody() {
     (g.pointsReady ? rows(g.points, 'p') : '<div class="honor-empty"><i class="fas fa-hourglass-half"></i>لم تُرصد مشاركات كافية بعد</div>') +
     '</div><div class="honor-col">' +
     '<div class="honor-col-head">متصدرو الحضور</div>' +
-    (g.attendReady ? rows(g.attendance, 'a') : '<div class="honor-empty"><i class="fas fa-hourglass-half"></i>تُعرض بعد رصد عدد كافٍ من الحصص</div>') +
+    (g.attendReady ? rows(attendanceSorted, 'a') : '<div class="honor-empty"><i class="fas fa-hourglass-half"></i>تُعرض بعد رصد عدد كافٍ من الحصص</div>') +
     '</div></div>';
 }
 
@@ -3209,13 +3249,14 @@ function showPointsModal(data) {
     const p = data.points;
 
    // تحديد الشارة حسب النقاط
-    let badgeName = 'متدرب', badgeColor = '#94A3B8', badgeIcon = 'fa-seedling';
-    let nextThreshold = 10, prevThreshold = 0, nextName = 'مجتهد', isMax = false;
     const pts = p.totalPoints;
+    const currentBadge = getStudentBadge(pts);
+    let badgeName = currentBadge.name, badgeColor = currentBadge.color, badgeIcon = currentBadge.icon;
+    let nextThreshold = 10, prevThreshold = 0, nextName = 'مجتهد', isMax = false;
    let nextIcon = 'fa-medal', nextColor = '#0E9594';
-    if (pts >= 30) { badgeName = 'مبدع'; badgeColor = '#E8A33D'; badgeIcon = 'fa-crown'; isMax = true; }
-    else if (pts >= 20) { badgeName = 'متميز'; badgeColor = '#16324F'; badgeIcon = 'fa-star'; prevThreshold = 20; nextThreshold = 30; nextName = 'مبدع'; nextIcon = 'fa-crown'; nextColor = '#E8A33D'; }
-    else if (pts >= 10) { badgeName = 'مجتهد'; badgeColor = '#0E9594'; badgeIcon = 'fa-medal'; prevThreshold = 10; nextThreshold = 20; nextName = 'متميز'; nextIcon = 'fa-star'; nextColor = '#16324F'; }
+    if (pts >= 30) { isMax = true; }
+    else if (pts >= 20) { prevThreshold = 20; nextThreshold = 30; nextName = 'مبدع'; nextIcon = 'fa-crown'; nextColor = '#E8A33D'; }
+    else if (pts >= 10) { prevThreshold = 10; nextThreshold = 20; nextName = 'متميز'; nextIcon = 'fa-star'; nextColor = '#16324F'; }
     else { nextIcon = 'fa-medal'; nextColor = '#0E9594'; }
 
     let progressHtml = '';
