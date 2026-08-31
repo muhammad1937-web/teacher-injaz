@@ -610,6 +610,8 @@
     .projects-container { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
     .project-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; font-size: 1rem; font-weight: 600; padding: 0.9rem 1.5rem; border-radius: 16px; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); white-space: nowrap; min-width: 160px; background: rgba(255, 255, 255, 0.7); color: var(--text-medium); border: 1.5px solid var(--border-color); box-shadow: 0 2px 8px rgba(var(--primary-dark-rgb), 0.08); position: relative; overflow: hidden; text-align: center; flex: 1; }
     .project-btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(var(--accent-teal-rgb), 0.05); opacity: 0; transition: opacity 0.3s ease; }
+    .project-btn { opacity: 0; }
+    @media (prefers-reduced-motion: reduce) { .project-btn { opacity: 1; } }
     .project-btn i { font-size: 1em; transition: all 0.3s ease; }
     .project-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.12); border-color: var(--accent-teal); background: rgba(255, 255, 255, 0.9); color: var(--primary-dark); }
     .project-btn:hover::before { opacity: 1; }
@@ -1070,6 +1072,17 @@
       0% { transform: rotate(0deg); }
       100% { transform: rotate(360deg); }
     }
+    /* الهيكل العظمي أثناء التحميل */
+    .skeleton { display:block; background:rgba(22,50,79,0.07); border-radius:6px; animation:skeletonPulse 1.4s ease-in-out infinite; }
+    @keyframes skeletonPulse { 0%, 100% { opacity:1; } 50% { opacity:0.55; } }
+    @media (prefers-reduced-motion: reduce) { .skeleton { animation:none; opacity:0.85; } }
+    .skel-header { height:78px; border-radius:24px 24px 0 0; margin:-0.5rem -1.3rem 1rem -1.3rem; }
+    .skel-line { margin:0 auto; }
+    .skel-box { border-radius:16px; }
+    /* الظهور المتتابع للبطاقات */
+    @keyframes staggerFadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    .stagger-item { animation:staggerFadeIn 0.4s ease both; }
+    @media (prefers-reduced-motion: reduce) { .stagger-item { animation:none !important; opacity:1 !important; transform:none !important; } }
     @media (max-width: 768px) {
   .grades-grid { flex-direction: row; gap: 0.7rem; }
   .grade-card { padding: 8px; }
@@ -2128,6 +2141,20 @@
         syncHonorVisibility();
         new MutationObserver(syncHonorVisibility).observe(honorSection, { attributes: true, attributeFilter: ['style'] });
       }
+
+      const votingSection = document.querySelector('.voting-section');
+      if (votingSection) {
+        const projectBtns = votingSection.querySelectorAll('.project-btn');
+        const votingBtnObserver = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              staggerReveal(projectBtns);
+              votingBtnObserver.disconnect();
+            }
+          });
+        }, { threshold: 0.1 });
+        votingBtnObserver.observe(votingSection);
+      }
     })();
     
     // تأثيرات الظهور
@@ -2342,9 +2369,32 @@ document.addEventListener('keydown', (e) => {
         
         resultContainer.style.display = 'block';
         resultContainer.innerHTML = `
-          <div class="loading">
-            <i class="fas fa-spinner"></i>
-            <span>جاري البحث عن بياناتك...</span>
+          <div class="skeleton skel-header" style="height:105px;"></div>
+          <div style="text-align:center; padding-top:8px; margin-bottom:14px;">
+            <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:8px;">
+              <span class="skeleton" style="width:34px; height:34px; border-radius:50%; flex-shrink:0;"></span>
+              <span class="skeleton skel-line" style="width:120px; height:15px;"></span>
+            </div>
+            <div class="skeleton skel-line" style="width:100px; height:11px; margin:0 auto;"></div>
+          </div>
+          <div style="padding:0 1.3rem; margin-bottom:14px;">
+            <div class="skeleton skel-line" style="width:90px; height:13px; margin-bottom:10px;"></div>
+            <div style="display:flex; gap:10px;">
+              <div class="skeleton skel-box" style="flex:1; height:141px;"></div>
+              <div class="skeleton skel-box" style="flex:1; height:141px;"></div>
+            </div>
+          </div>
+          <div style="padding:0 1.3rem; margin-bottom:14px;">
+            <div class="skeleton skel-line" style="width:70px; height:13px; margin-bottom:10px;"></div>
+            <div class="skeleton skel-box" style="width:100%; height:100px;"></div>
+          </div>
+          <div style="padding:0 1.3rem; margin-bottom:14px;">
+            <div class="skeleton skel-line" style="width:90px; height:13px; margin-bottom:10px;"></div>
+            <div class="skeleton skel-box" style="width:100%; height:40px; margin-bottom:14px;"></div>
+            <div class="skeleton skel-box" style="width:100%; height:64px;"></div>
+          </div>
+          <div style="padding:0 1.3rem 1.3rem; text-align:center;">
+            <div class="skeleton" style="width:90px; height:30px; border-radius:24px; margin:0 auto;"></div>
           </div>
         `;
         
@@ -2385,14 +2435,14 @@ document.addEventListener('keydown', (e) => {
 
 // الفترة الأولى
 if (student.period1 !== null && student.period1 !== undefined && student.period1 !== '' && student.period1 !== 0) {
-    period1Html = `<div class="grade-value" id="p1">0</div>${gradeStatusHtml(student.details && student.details.period1)}`;
+    period1Html = `<div class="grade-value">${student.period1}</div>${gradeStatusHtml(student.details && student.details.period1)}`;
 } else {
     period1Html = `<div class="missing-icon"><i class="fas fa-clock"></i></div><div class="grade-status grade-status-missing">بانتظار الرصد</div>`;
 }
 
 // الفترة الثانية
 if (student.period2 !== null && student.period2 !== undefined && student.period2 !== '' && student.period2 !== 0) {
-    period2Html = `<div class="grade-value" id="p2">0</div>${gradeStatusHtml(student.details && student.details.period2)}`;
+    period2Html = `<div class="grade-value">${student.period2}</div>${gradeStatusHtml(student.details && student.details.period2)}`;
 } else {
     period2Html = `<div class="missing-icon"><i class="fas fa-clock"></i></div><div class="grade-status grade-status-missing">بانتظار الرصد</div>`;
 }
@@ -2409,7 +2459,7 @@ if (student.isComplete && student.finalScore) {
 
   finalHtml = `
     <div class="rating-medallion">
-      <span class="medallion-score">${student.finalScore}<span class="medallion-score-unit">درجة</span></span>
+      <span class="medallion-score"><span id="finalScoreVal">0</span><span class="medallion-score-unit">درجة</span></span>
       <span class="medallion-sep">·</span>
       <span class="medallion-badge" style="color:${ratingColor};"><i class="fas ${ratingIcon}"></i> ${student.rating}</span>
     </div>
@@ -2451,7 +2501,7 @@ const attendanceHtml = student.attendance ? `
     </div>
     <div class="attendance-item" style="background:${percentageBg};">
       <i class="fas fa-calendar-check" style="color:${percentageColor};"></i>
-      <span style="color:${percentageColor};">${student.attendance.percentage}%</span>
+      <span style="color:${percentageColor};"><span id="attendancePctVal">0</span>%</span>
       <small style="color:${percentageColor};">نسبة الحضور</small>
     </div>
   </div>
@@ -2534,17 +2584,18 @@ if (resultCloseBtn) {
   });
 }
 
-// تشغيل العد التصاعدي للدرجات بعد ظهور البطاقة
+// ظهور بنود الدرجات بالتتابع، وعدّ الأرقام الكبيرة تصاعدياً
 setTimeout(() => {
-    const p1 = document.getElementById('p1');
-    const p2 = document.getElementById('p2');
-    if (p1 && student.period1 !== null && student.period1 !== undefined && student.period1 !== '') {
-        animateNumber(p1, student.period1);
+    staggerReveal(document.querySelectorAll('.grades-grid .grade-card'));
+    const finalScoreEl = document.getElementById('finalScoreVal');
+    if (finalScoreEl && student.isComplete && student.finalScore) {
+        animateNumber(finalScoreEl, parseFloat(student.finalScore));
     }
-    if (p2 && student.period2 !== null && student.period2 !== undefined && student.period2 !== '') {
-        animateNumber(p2, student.period2);
+    const attendancePctEl = document.getElementById('attendancePctVal');
+    if (attendancePctEl && student.attendance) {
+        animateNumber(attendancePctEl, parseFloat(student.attendance.percentage));
     }
-}, 300);
+}, 50);
       }
       
       function showError(message) {
@@ -2575,25 +2626,44 @@ const VOTING_API = 'https://script.google.com/macros/s/AKfycbx3aUUhzb4nHFVV0fiR-
 // ============================================
 let honorData = null, honorActive = 0;
 
+function renderHonorSkeleton() {
+  const skelRow = '<div class="honor-row"><span class="skeleton" style="width:27px; height:27px; border-radius:50%; flex-shrink:0;"></span>' +
+    '<span class="honor-name"><span class="skeleton skel-line" style="width:70%; height:11px;"></span><br>' +
+    '<span class="skeleton skel-line" style="width:40%; height:8px; margin-top:6px;"></span></span>' +
+    '<span class="honor-val"><span class="skeleton skel-line" style="width:26px; height:16px;"></span>' +
+    '<span class="skeleton skel-line" style="width:20px; height:8px; margin-top:4px;"></span></span></div>';
+  const skelCol = function (title) {
+    return '<div class="honor-col"><div class="honor-col-head">' + title + '</div><div class="honor-col-body">' + skelRow.repeat(3) + '</div></div>';
+  };
+  document.getElementById('honorBody').innerHTML = '<div class="honor-cols">' + skelCol('متصدرو النقاط') + skelCol('متصدرو الحضور') + '</div>';
+}
+
 async function loadHonorBoard() {
+  const sec = document.getElementById('honor-section');
+  const div = document.getElementById('honorDivider');
+  renderHonorSkeleton();
+  sec.style.display = 'block';
+  requestAnimationFrame(function () { sec.classList.add('visible'); });
   try {
     const res = await fetch(`${VOTING_API}?action=honorBoard&t=${Date.now()}`);
     const data = await res.json();
-    if (data.status !== "on" || !data.grades || !data.grades.length) return;
+    if (data.status !== "on" || !data.grades || !data.grades.length) {
+      sec.style.display = 'none';
+      sec.classList.remove('visible');
+      return;
+    }
     honorData = data;
     document.getElementById('honorSub').textContent = data.title;
-    const sec = document.getElementById('honor-section');
-    const div = document.getElementById('honorDivider');
-    sec.style.display = 'block';
     div.style.display = 'flex';
     requestAnimationFrame(function () {
-      sec.classList.add('visible');
       div.classList.add('visible');
     });
     renderHonorTabs();
     renderHonorBody();
   } catch (err) {
     console.error('honor board', err);
+    sec.style.display = 'none';
+    sec.classList.remove('visible');
   }
 }
 
@@ -2686,6 +2756,7 @@ function renderHonorBody() {
     '<div class="honor-col-head">متصدرو الحضور</div>' +
     (g.attendReady ? '<div class="honor-col-body">' + rows(attendanceSorted, 'a') + '</div>' : '<div class="honor-empty"><i class="fas fa-hourglass-half"></i>تُعرض بعد رصد عدد كافٍ من الحصص</div>') +
     '</div></div>';
+  staggerReveal(box.querySelectorAll('.honor-row'));
 }
 
 loadHonorBoard();    
@@ -3313,7 +3384,7 @@ function showPointsModal(data) {
             <div style="padding:1.2rem;">
 
                 <div style="text-align:center; margin-bottom:1.2rem;">
-                    <div style="font-size:2rem; font-weight:800; color:#16324F; line-height:1;">${p.totalPoints}</div>
+                    <div id="modalTotalPoints" style="font-size:2rem; font-weight:800; color:#16324F; line-height:1;">0</div>
                     <div style="font-size:0.85rem; color:#5C7489; margin-top:4px;">نقاط مشاركة</div>
                     <div style="display:inline-flex; align-items:center; gap:6px; margin-top:10px; background:${badgeColor}1A; color:${badgeColor}; padding:5px 16px; border-radius:24px; font-size:0.85rem; font-weight:700;">
                         <i class="fas ${badgeIcon}"></i> ${badgeName}
@@ -3354,6 +3425,8 @@ function showPointsModal(data) {
     overlay.innerHTML = modalHtml;
     overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
     document.body.appendChild(overlay);
+    const modalTotalPointsEl = document.getElementById('modalTotalPoints');
+    if (modalTotalPointsEl) animateNumber(modalTotalPointsEl, pts);
 }
     // ============================================
 //      نافذة تفاصيل الدرجات المنبثقة
@@ -3490,23 +3563,40 @@ btn.addEventListener('click', window.detailsClickHandler);
     // ============================================
 //      عدّ الأرقام المتحرك
 // ============================================
-function animateNumber(element, target, duration = 1000) {
-    // إذا كانت القيمة 0، اعرض 0 مباشرة بدون عد
-    if (target === 0) {
-        element.textContent = '0';
+const activeNumberAnimations = new WeakMap();
+function animateNumber(element, target, duration = 500) {
+    if (!element || isNaN(target)) return;
+    if (activeNumberAnimations.has(element)) {
+        cancelAnimationFrame(activeNumberAnimations.get(element));
+        activeNumberAnimations.delete(element);
+    }
+    const decimals = (String(target).split('.')[1] || '').length;
+    const format = n => decimals ? n.toFixed(decimals) : String(Math.round(n));
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        element.textContent = format(target);
         return;
     }
-    
-    let start = 0;
-    const step = Math.ceil(target / (duration / 20));
-    const timer = setInterval(() => {
-        start += step;
-        if (start >= target) {
-            start = target;
-            clearInterval(timer);
+    const startTime = performance.now();
+    function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+    function step(now) {
+        const progress = Math.min((now - startTime) / duration, 1);
+        const current = target * easeOutCubic(progress);
+        element.textContent = format(current);
+        if (progress < 1) {
+            activeNumberAnimations.set(element, requestAnimationFrame(step));
+        } else {
+            element.textContent = format(target);
+            activeNumberAnimations.delete(element);
         }
-        element.textContent = start;
-    }, 20);
+    }
+    activeNumberAnimations.set(element, requestAnimationFrame(step));
+}
+
+function staggerReveal(items) {
+    items.forEach((el, i) => {
+        el.style.animationDelay = Math.min(i * 0.05, 0.4) + 's';
+        el.classList.add('stagger-item');
+    });
 }
     setTimeout(() => window.scrollTo(0, 0), 500);
   });
