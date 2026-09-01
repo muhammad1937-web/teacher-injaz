@@ -1053,6 +1053,22 @@
       background: rgba(var(--warning-red-rgb), 0.04) !important;
       transition: border-color 0.2s ease, background-color 0.2s ease;
     }
+    .closed-state-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--light-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      padding: 12px 16px;
+      margin-bottom: 1rem;
+      color: var(--text-subtitle);
+      font-size: 0.9rem;
+    }
+    .closed-state-card i {
+      color: var(--text-subtitle);
+      font-size: 1rem;
+    }
     .loading {
       display: flex;
       align-items: center;
@@ -1938,6 +1954,10 @@
     <p class="grades-description">أدخل رقمك الخاص للاطلاع على نتيجتك في مادة التقنية الرقمية</p>
     
     <div class="query-box">
+      <div id="gradesClosedCard" class="closed-state-card" style="display:none;">
+        <i class="fas fa-lock"></i>
+        <span id="gradesClosedText"></span>
+      </div>
       <div class="input-group">
         <input type="text" id="studentIdInput" class="query-input" placeholder="أدخل رقمك الخاص هنا..." maxlength="20">
         <button id="queryBtn" class="query-btn">
@@ -2405,14 +2425,65 @@ document.addEventListener('keydown', (e) => {
       const queryBtn = document.getElementById('queryBtn');
       const studentIdInput = document.getElementById('studentIdInput');
       const resultContainer = document.getElementById('resultContainer');
-      
+      const gradesClosedCard = document.getElementById('gradesClosedCard');
+      const gradesClosedText = document.getElementById('gradesClosedText');
+
       if (!queryBtn) return;
-      
+
+      function setGradesClosed(isClosed, message) {
+        if (isClosed) {
+          studentIdInput.classList.remove('input-error');
+          gradesClosedText.textContent = message || 'الاستعلام عن الدرجات مغلق حالياً';
+          gradesClosedCard.style.display = 'flex';
+          studentIdInput.disabled = true;
+          studentIdInput.style.opacity = '0.5';
+          studentIdInput.style.cursor = 'not-allowed';
+          queryBtn.disabled = true;
+          queryBtn.style.opacity = '0.5';
+          queryBtn.style.cursor = 'not-allowed';
+        } else {
+          gradesClosedCard.style.display = 'none';
+          studentIdInput.disabled = false;
+          studentIdInput.style.opacity = '';
+          studentIdInput.style.cursor = '';
+          queryBtn.disabled = false;
+          queryBtn.style.opacity = '';
+          queryBtn.style.cursor = '';
+        }
+      }
+
+      async function checkGradesSystemStatus() {
+        try {
+          const response = await fetch(`${API_URL}?id=`);
+          const data = await response.json();
+          if (data.status === 'closed') {
+            setGradesClosed(true, data.message);
+          }
+        } catch (e) {
+          // فشل الجلب عند التحميل: اترك القسم يعمل عادةً
+        }
+      }
+
+      function showFieldError(message) {
+        resultContainer.style.display = 'none';
+        resultContainer.innerHTML = '';
+        studentIdInput.classList.add('input-error');
+        showToast(message, 'error');
+        hapticFeedback([10, 40, 10]);
+      }
+
+      function showToastError(message) {
+        resultContainer.style.display = 'none';
+        resultContainer.innerHTML = '';
+        showToast(message, 'error');
+        hapticFeedback([10, 40, 10]);
+      }
+
       async function fetchStudentGrade() {
         const studentId = studentIdInput.value.trim();
-        
+
         if (!studentId) {
-          showError('الرجاء إدخال رقمك الخاص');
+          showFieldError('الرجاء إدخال رقمك الخاص');
           return;
         }
         
@@ -2456,15 +2527,18 @@ document.addEventListener('keydown', (e) => {
             studentIdInput.classList.remove('input-error');
             displayResult(data.student, data.settings);
           } else if (data.status === 'closed') {
-            showError(data.message || 'النظام غير متاح حالياً');
+            resultContainer.style.display = 'none';
+            resultContainer.innerHTML = '';
+            showToast(data.message || 'النظام غير متاح حالياً', 'error');
+            setGradesClosed(true, data.message);
           } else if (data.status === 'not_found') {
-            showError(data.message || 'رقم غير صحيح. يرجى التأكد من الرقم الخاص والمحاولة مرة أخرى.');
+            showFieldError(data.message || 'رقم غير صحيح. يرجى التأكد من الرقم الخاص والمحاولة مرة أخرى.');
           } else {
-            showError('حدث خطأ في النظام. يرجى المحاولة لاحقاً.');
+            showToastError('حدث خطأ في النظام. يرجى المحاولة لاحقاً.');
           }
         } catch (error) {
           console.error('Error:', error);
-          showError('حدث خطأ في الاتصال. يرجى المحاولة لاحقاً.');
+          showToastError('حدث خطأ في الاتصال. يرجى المحاولة لاحقاً.');
         }
       }
       
@@ -2649,14 +2723,6 @@ setTimeout(() => {
 }, 50);
       }
       
-      function showError(message) {
-        resultContainer.style.display = 'none';
-        resultContainer.innerHTML = '';
-        studentIdInput.classList.add('input-error');
-        showToast(message, 'error');
-        hapticFeedback([10, 40, 10]);
-      }
-
       queryBtn.addEventListener('click', fetchStudentGrade);
       studentIdInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
@@ -2667,6 +2733,7 @@ setTimeout(() => {
         studentIdInput.classList.remove('input-error');
       });
       window.__refreshGrade = fetchStudentGrade;
+      checkGradesSystemStatus();
     }
     
     initGradesQuery();
@@ -3189,14 +3256,25 @@ async function verifyStudentForUpload(overlay) {
   const btn = overlay.querySelector('#uploadActionBtn');
   const studentId = idInput.value.trim();
 
-  function showFixedMsg(text) {
+  function showClosed(text) {
+    idInput.classList.remove('input-error');
     msgBox.style.display = 'block';
-    msgBox.style.background = 'rgba(192,57,43,0.08)';
-    msgBox.style.color = '#C0392B';
-    msgBox.innerHTML = `<i class="fas fa-circle-exclamation"></i> ${text}`;
+    msgBox.style.background = 'var(--light-bg)';
+    msgBox.style.color = 'var(--text-subtitle)';
+    msgBox.innerHTML = `<i class="fas fa-lock"></i> ${text}`;
+    idInput.disabled = true;
+    idInput.style.opacity = '0.5';
+    idInput.style.cursor = 'not-allowed';
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    btn.style.cursor = 'not-allowed';
   }
   function showErr(text) {
     idInput.classList.add('input-error');
+    showToast(text, 'error');
+    hapticFeedback([10, 40, 10]);
+  }
+  function showToastErr(text) {
     showToast(text, 'error');
     hapticFeedback([10, 40, 10]);
   }
@@ -3241,16 +3319,14 @@ async function verifyStudentForUpload(overlay) {
       btn.disabled = false;
       btn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال';
     } else if (data.status === 'closed') {
-      showFixedMsg(data.message);
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fas fa-arrow-left"></i> متابعة';
+      showClosed(data.message || 'استقبال المشاريع مغلق حالياً');
     } else {
       showErr(data.message);
       btn.disabled = false;
       btn.innerHTML = '<i class="fas fa-arrow-left"></i> متابعة';
     }
   } catch (err) {
-    showErr('حدث خطأ، حاول مرة أخرى');
+    showToastErr('حدث خطأ، حاول مرة أخرى');
     btn.disabled = false;
     btn.innerHTML = '<i class="fas fa-arrow-left"></i> متابعة';
   }
@@ -3260,11 +3336,15 @@ async function verifyStudentForUpload(overlay) {
   const btn = overlay.querySelector('#uploadActionBtn');
   const fileInput = overlay.querySelector('#uploadFileInput');
 
-  function showFixedMsg(text) {
+  function showClosed(text) {
     msgBox.style.display = 'block';
-    msgBox.style.background = 'rgba(192,57,43,0.08)';
-    msgBox.style.color = '#C0392B';
-    msgBox.innerHTML = `<i class="fas fa-circle-exclamation"></i> ${text}`;
+    msgBox.style.background = 'var(--light-bg)';
+    msgBox.style.color = 'var(--text-subtitle)';
+    msgBox.innerHTML = `<i class="fas fa-lock"></i> ${text}`;
+    fileInput.disabled = true;
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    btn.style.cursor = 'not-allowed';
   }
   function showErr(text) {
     showToast(text, 'error');
@@ -3312,9 +3392,7 @@ async function verifyStudentForUpload(overlay) {
       btn.style.display = 'none';
       setTimeout(() => overlay.remove(), 2800);
     } else if (data.status === 'closed') {
-      showFixedMsg(data.message);
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال';
+      showClosed(data.message || 'استقبال المشاريع مغلق حالياً');
     } else {
       showErr(data.message);
       btn.disabled = false;
@@ -3406,11 +3484,18 @@ window.showVoteModal = function() {
   const btn = overlay.querySelector('#confirmVoteBtn');
   const studentId = idInput.value.trim();
 
-  function showFixedMsg(text) {
+  function showClosed(text) {
+    idInput.classList.remove('input-error');
     msgBox.style.display = 'block';
-    msgBox.style.background = 'rgba(192,57,43,0.08)';
-    msgBox.style.color = '#C0392B';
-    msgBox.innerHTML = `<i class="fas fa-circle-exclamation"></i> ${text}`;
+    msgBox.style.background = 'var(--light-bg)';
+    msgBox.style.color = 'var(--text-subtitle)';
+    msgBox.innerHTML = `<i class="fas fa-lock"></i> ${text}`;
+    idInput.disabled = true;
+    idInput.style.opacity = '0.5';
+    idInput.style.cursor = 'not-allowed';
+    btn.disabled = true;
+    btn.style.opacity = '0.5';
+    btn.style.cursor = 'not-allowed';
   }
   function showErr(text) {
     idInput.classList.add('input-error');
@@ -3441,16 +3526,14 @@ window.showVoteModal = function() {
       if (typeof updateVotingResults === 'function') updateVotingResults();
       setTimeout(() => overlay.remove(), 2500);
     } else if (data.status === 'closed') {
-      showFixedMsg(data.message);
-      btn.disabled = false;
-      btn.innerHTML = '<i class="fas fa-paper-plane"></i> تأكيد التصويت';
+      showClosed(data.message || 'التصويت مغلق حالياً');
     } else {
       showErr(data.message);
       btn.disabled = false;
       btn.innerHTML = '<i class="fas fa-paper-plane"></i> تأكيد التصويت';
     }
   } catch (err) {
-    showErr('حدث خطأ، حاول مرة أخرى');
+    showToastErr('حدث خطأ، حاول مرة أخرى');
     btn.disabled = false;
     btn.innerHTML = '<i class="fas fa-paper-plane"></i> تأكيد التصويت';
   }
