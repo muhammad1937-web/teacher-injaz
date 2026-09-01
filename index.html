@@ -62,7 +62,7 @@
     /* ========================================= */
     * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
     img { -webkit-touch-callout: none; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overscroll-behavior-y: contain; }
     body {
       font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
       background-color: var(--light-bg);
@@ -1083,6 +1083,54 @@
     @keyframes staggerFadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
     .stagger-item { animation:staggerFadeIn 0.4s ease both; }
     @media (prefers-reduced-motion: reduce) { .stagger-item { animation:none !important; opacity:1 !important; transform:none !important; } }
+    /* رسالة عائمة */
+    .app-toast {
+      position: fixed;
+      bottom: calc(78px + env(safe-area-inset-bottom, 0px));
+      left: 50%;
+      transform: translateX(-50%) translateY(20px);
+      background: var(--primary-dark);
+      color: #fff;
+      border-radius: 24px;
+      padding: 12px 22px;
+      font-size: 0.85rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      max-width: 90%;
+      width: max-content;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      opacity: 0;
+      pointer-events: none;
+      z-index: 10001;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+    .app-toast.visible { transform: translateX(-50%) translateY(0); opacity: 1; }
+    @media (prefers-reduced-motion: reduce) {
+      .app-toast { transition: opacity 0.01s linear; transform: translateX(-50%) translateY(0); }
+    }
+    /* سحب للتحديث */
+    .ptr-indicator {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      width: 40px;
+      height: 40px;
+      margin-top: -50px;
+      background: #fff;
+      border-radius: 50%;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--accent-teal);
+      font-size: 1.1rem;
+      z-index: 10002;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .ptr-indicator.spinning i { animation: ptrSpin 0.7s linear infinite; }
+    @keyframes ptrSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
     @media (max-width: 768px) {
   .grades-grid { flex-direction: row; gap: 0.7rem; }
   .grade-card { padding: 8px; }
@@ -2113,6 +2161,7 @@
       if (!navItems.length) return;
 
       const goToSection = function (btn) {
+        hapticFeedback(8);
         const target = document.getElementById(btn.dataset.target);
         if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
       };
@@ -2407,6 +2456,7 @@ document.addEventListener('keydown', (e) => {
           const data = await response.json();
           
           if (data.status === 'success') {
+            hapticFeedback(10);
             displayResult(data.student, data.settings);
           } else if (data.status === 'closed') {
             showError(data.message || 'النظام غير متاح حالياً');
@@ -2609,6 +2659,8 @@ setTimeout(() => {
             <span>${message}</span>
           </div>
         `;
+        showToast(message, 'error');
+        hapticFeedback([10, 40, 10]);
       }
       
       queryBtn.addEventListener('click', fetchStudentGrade);
@@ -2617,6 +2669,7 @@ setTimeout(() => {
           fetchStudentGrade();
         }
       });
+      window.__refreshGrade = fetchStudentGrade;
     }
     
     initGradesQuery();
@@ -2719,6 +2772,7 @@ window.addEventListener('orientationchange', function () { positionHonorTabIndic
 
 function switchHonor(i) {
   if (i === honorActive) return;
+  hapticFeedback(8);
   honorActive = i;
   renderHonorTabs();
   const box = document.getElementById('honorBody');
@@ -3465,14 +3519,14 @@ function showGradeDetails(period, studentDetails) {
     // التحقق من وجود البيانات
     if (!studentDetails) {
         console.error("بيانات الطالب غير متاحة");
-        alert("حدث خطأ: لا يمكن عرض التفاصيل الآن.");
+        showToast("حدث خطأ: لا يمكن عرض التفاصيل الآن.", 'error');
         return;
     }
 
     const periodData = period === 1 ? studentDetails.period1 : studentDetails.period2;
 
     if (!periodData) {
-        alert("لا توجد تفاصيل لهذه الفترة.");
+        showToast("لا توجد تفاصيل لهذه الفترة.", 'error');
         return;
     }
     
@@ -3629,6 +3683,120 @@ function staggerReveal(items) {
         el.classList.add('stagger-item');
     });
 }
+
+// اهتزاز لمسي خفيف
+function hapticFeedback(pattern) {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    try {
+        if (navigator.vibrate) navigator.vibrate(pattern);
+    } catch (e) {}
+}
+window.hapticFeedback = hapticFeedback;
+
+// رسالة عائمة بدل alert
+let toastEl = null;
+let toastTimer = null;
+function showToast(message, type) {
+    if (!toastEl) {
+        toastEl = document.createElement('div');
+        toastEl.className = 'app-toast';
+        document.body.appendChild(toastEl);
+    }
+    const isError = type === 'error';
+    const iconClass = isError ? 'fa-exclamation-circle' : 'fa-check-circle';
+    const iconColor = isError ? 'var(--warning-red)' : '#1D9E75';
+    toastEl.innerHTML = '<i class="fas ' + iconClass + '" style="color:' + iconColor + ';"></i><span>' + message + '</span>';
+    if (toastTimer) clearTimeout(toastTimer);
+    requestAnimationFrame(function () { toastEl.classList.add('visible'); });
+    toastTimer = setTimeout(function () {
+        toastEl.classList.remove('visible');
+        toastTimer = null;
+    }, 2500);
+}
+window.showToast = showToast;
+
+// سحب للتحديث
+(function initPullToRefresh() {
+    if (!window.matchMedia('(pointer: coarse)').matches) return;
+
+    const THRESHOLD = 70;
+    let startY = 0, active = false, refreshing = false, crossed = false;
+
+    const indicator = document.createElement('div');
+    indicator.className = 'ptr-indicator';
+    indicator.innerHTML = '<i class="fas fa-arrow-rotate-right"></i>';
+    document.body.appendChild(indicator);
+    const icon = indicator.querySelector('i');
+
+    function resetIndicator() {
+        indicator.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
+        indicator.style.opacity = '0';
+        indicator.style.transform = 'translateX(-50%) translateY(0px)';
+        setTimeout(function () { indicator.style.transition = 'none'; }, 260);
+    }
+
+    function performRefresh() {
+        const tasks = [];
+        const honorSection = document.getElementById('honor-section');
+        if (honorSection && honorSection.style.display !== 'none' && typeof loadHonorBoard === 'function') {
+            tasks.push(Promise.resolve(loadHonorBoard()));
+        }
+        const resultContainer = document.getElementById('resultContainer');
+        if (resultContainer && resultContainer.style.display !== 'none' && typeof window.__refreshGrade === 'function') {
+            tasks.push(Promise.resolve(window.__refreshGrade()));
+        }
+        return tasks.length ? Promise.all(tasks) : Promise.resolve();
+    }
+
+    document.addEventListener('touchstart', function (e) {
+        if (refreshing || window.scrollY !== 0) { active = false; return; }
+        startY = e.touches[0].clientY;
+        active = true;
+        crossed = false;
+        indicator.style.transition = 'none';
+    }, { passive: true });
+
+    document.addEventListener('touchmove', function (e) {
+        if (!active || refreshing) return;
+        if (window.scrollY !== 0) { active = false; resetIndicator(); document.body.style.marginTop = ''; return; }
+        const delta = e.touches[0].clientY - startY;
+        if (delta <= 0) return;
+        const contentOffset = Math.min(delta, THRESHOLD);
+        document.body.style.marginTop = contentOffset + 'px';
+        indicator.style.opacity = String(Math.min(delta / THRESHOLD, 1));
+        indicator.style.transform = 'translateX(-50%) translateY(' + Math.min(delta, THRESHOLD + 20) + 'px)';
+        icon.style.transform = 'rotate(' + (delta * 2.5) + 'deg)';
+        if (delta >= THRESHOLD && !crossed) {
+            crossed = true;
+            hapticFeedback(10);
+        } else if (delta < THRESHOLD && crossed) {
+            crossed = false;
+        }
+    }, { passive: true });
+
+    document.addEventListener('touchend', function () {
+        if (!active) return;
+        active = false;
+        document.body.style.transition = 'margin-top 0.25s ease';
+        document.body.style.marginTop = '0px';
+        setTimeout(function () { document.body.style.transition = ''; }, 260);
+        if (crossed) {
+            refreshing = true;
+            indicator.style.transition = 'transform 0.2s ease';
+            indicator.style.transform = 'translateX(-50%) translateY(' + THRESHOLD + 'px)';
+            indicator.style.opacity = '1';
+            indicator.classList.add('spinning');
+            performRefresh().finally(function () {
+                refreshing = false;
+                indicator.classList.remove('spinning');
+                resetIndicator();
+            });
+        } else {
+            resetIndicator();
+        }
+    }, { passive: true });
+})();
+
     setTimeout(() => window.scrollTo(0, 0), 500);
   });
 </script>
