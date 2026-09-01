@@ -1563,15 +1563,16 @@
     .honor-title { text-align:center; font-size:1.15rem; font-weight:700; color:var(--primary-dark); margin:0; }
     .honor-sub { text-align:center; font-size:0.85rem; color:var(--text-subtitle); margin-top:0.4rem; }
     .honor-tabs { position:relative; display:flex; gap:4px; justify-content:center; background:var(--light-bg); border-radius:22px; padding:4px; margin:0.9rem 0 1rem; }
-    .honor-tab-indicator { position:absolute; top:4px; bottom:4px; right:0; background:var(--accent-teal); border-radius:18px; transition:right 0.3s ease, width 0.3s ease; }
+    .honor-tab-indicator { position:absolute; top:4px; bottom:4px; right:0; background:var(--accent-teal); border-radius:18px; transform:translateX(0); transition:transform 0.42s cubic-bezier(0.4, 0, 0.2, 1), width 0.42s cubic-bezier(0.4, 0, 0.2, 1); }
     @media (prefers-reduced-motion: reduce) { .honor-tab-indicator { transition:none; } }
-    .honor-tab { position:relative; z-index:1; flex:1; font-size:0.85rem; padding:7px 18px; border-radius:18px; background:none; color:var(--text-subtitle); border:none; cursor:pointer; font-family:inherit; transition:color 0.3s ease; }
+    .honor-tab { position:relative; z-index:1; flex:1; font-size:0.85rem; padding:7px 18px; border-radius:18px; background:none; color:var(--text-subtitle); border:none; cursor:pointer; font-family:inherit; transition:color 0.25s ease, font-weight 0.25s ease; }
     .honor-tab:hover:not(.active) { color:var(--accent-teal); }
     .honor-tab.active { color:#fff; font-weight:600; }
     .honor-cols { display:grid; grid-template-columns:1fr; gap:14px; animation: honorFadeIn 0.35s ease; }
     @keyframes honorFadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
     .honor-col { border:1px solid var(--border-color); border-radius:16px; overflow:hidden; background:var(--pure-white); box-shadow: 0 4px 12px rgba(var(--primary-dark-rgb), 0.05); }
     .honor-col-head { background:rgba(var(--accent-teal-rgb),0.08); border-bottom:1px solid var(--border-color); padding:10px 15px; font-size:0.9rem; font-weight:700; color:var(--accent-teal); }
+    .honor-col-head.pts { background:rgba(232,163,61,0.12); color:var(--gold-excellence); }
     .honor-col-body { padding:10px; }
     .honor-row { display:flex; align-items:center; gap:10px; padding:10px 14px; margin-bottom:8px; background:var(--pure-white); border:1px solid var(--border-color); border-radius:14px; box-shadow:0 2px 8px rgba(var(--primary-dark-rgb),0.05); transition:all 0.3s ease; }
     .honor-row:last-child { margin-bottom:0; }
@@ -1697,7 +1698,10 @@
 <section class="honor-section fade-in" id="honor-section" style="display:none;">
   <div class="honor-title">الصدارة الرقمية</div>
   <div class="honor-sub" id="honorSub"></div>
-  <div class="honor-tabs" id="honorTabs"></div>
+  <div class="honor-tabs" id="honorTabs">
+    <span class="honor-tab-indicator" id="honorTabIndicator"></span>
+    <div class="honor-tab-buttons" id="honorTabButtons" style="display:contents;"></div>
+  </div>
   <div id="honorBody"></div>
   <div class="honor-note">النقاط من مشاركات الطالب · الحضور بعدد الحصص</div>
 </section>
@@ -2685,23 +2689,33 @@ function renderHonorTabs() {
     return '<button type="button" class="honor-tab' + (i === honorActive ? ' active' : '') +
            '" onclick="switchHonor(' + i + ')">' + g.grade + '</button>';
   }).join('');
-  document.getElementById('honorTabs').innerHTML = '<span class="honor-tab-indicator"></span>' + tabsHtml;
-  positionHonorTabIndicator();
+  document.getElementById('honorTabButtons').innerHTML = tabsHtml;
+  positionHonorTabIndicator(!honorTabsRenderedOnce);
+  honorTabsRenderedOnce = true;
 }
+let honorTabsRenderedOnce = false;
 
-function positionHonorTabIndicator() {
+function positionHonorTabIndicator(instant) {
   const container = document.getElementById('honorTabs');
   if (!container) return;
   const activeTab = container.querySelector('.honor-tab.active');
-  const indicator = container.querySelector('.honor-tab-indicator');
+  const indicator = document.getElementById('honorTabIndicator');
   if (!activeTab || !indicator) return;
   const containerRect = container.getBoundingClientRect();
   const tabRect = activeTab.getBoundingClientRect();
+  const offsetFromRight = containerRect.right - tabRect.right;
+  if (instant) {
+    indicator.style.transition = 'none';
+  }
   indicator.style.width = tabRect.width + 'px';
-  indicator.style.right = (containerRect.right - tabRect.right) + 'px';
+  indicator.style.transform = 'translateX(' + (-offsetFromRight) + 'px)';
+  if (instant) {
+    indicator.offsetHeight; // إجبار إعادة الرسم قبل استعادة الانتقال
+    indicator.style.transition = '';
+  }
 }
-window.addEventListener('resize', positionHonorTabIndicator);
-window.addEventListener('orientationchange', positionHonorTabIndicator);
+window.addEventListener('resize', function () { positionHonorTabIndicator(true); });
+window.addEventListener('orientationchange', function () { positionHonorTabIndicator(true); });
 
 function switchHonor(i) {
   if (i === honorActive) return;
@@ -2766,7 +2780,7 @@ function renderHonorBody(applyStagger) {
 
   box.innerHTML =
     '<div class="honor-cols"><div class="honor-col">' +
-    '<div class="honor-col-head">متصدرو النقاط</div>' +
+    '<div class="honor-col-head pts">متصدرو النقاط</div>' +
     (g.pointsReady ? '<div class="honor-col-body">' + rows(g.points, 'p') + '</div>' : '<div class="honor-empty"><i class="fas fa-hourglass-half"></i>لم تُرصد مشاركات كافية بعد</div>') +
     '</div><div class="honor-col">' +
     '<div class="honor-col-head">متصدرو الحضور</div>' +
