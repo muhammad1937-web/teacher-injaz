@@ -1056,6 +1056,8 @@
     .closed-state-card {
       display: flex;
       align-items: center;
+      justify-content: center;
+      text-align: center;
       gap: 10px;
       background: var(--light-bg);
       border: 1px solid var(--border-color);
@@ -3239,6 +3241,7 @@ window.showUploadModal = function() {
   overlay.querySelector('#uploadStudentId').addEventListener('input', function() {
     this.classList.remove('input-error');
   });
+  checkUploadStatus(overlay);
 };
     async function handleUploadAction(overlay) {
   const step2 = overlay.querySelector('#uploadStep2');
@@ -3250,25 +3253,43 @@ window.showUploadModal = function() {
   }
 }
 
+function applyUploadClosedState(overlay, message) {
+  const idInput = overlay.querySelector('#uploadStudentId');
+  const msgBox = overlay.querySelector('#uploadMessage');
+  const btn = overlay.querySelector('#uploadActionBtn');
+  idInput.classList.remove('input-error');
+  msgBox.style.display = 'block';
+  msgBox.style.background = 'var(--light-bg)';
+  msgBox.style.color = 'var(--text-subtitle)';
+  msgBox.innerHTML = `<i class="fas fa-lock"></i> ${message || 'استقبال المشاريع مغلق حالياً'}`;
+  idInput.disabled = true;
+  idInput.style.opacity = '0.5';
+  idInput.style.cursor = 'not-allowed';
+  btn.disabled = true;
+  btn.style.opacity = '0.5';
+  btn.style.cursor = 'not-allowed';
+  btn.innerHTML = '<i class="fas fa-arrow-left"></i> متابعة';
+}
+
+async function checkUploadStatus(overlay) {
+  try {
+    const url = `${VOTING_API}?action=checkSubmit&id=&t=${Date.now()}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data.status === 'closed') {
+      applyUploadClosedState(overlay, data.message);
+    }
+  } catch (e) {
+    // فشل الجلب عند فتح النافذة: اترك النموذج يعمل عادةً
+  }
+}
+
 async function verifyStudentForUpload(overlay) {
   const idInput = overlay.querySelector('#uploadStudentId');
   const msgBox = overlay.querySelector('#uploadMessage');
   const btn = overlay.querySelector('#uploadActionBtn');
   const studentId = idInput.value.trim();
 
-  function showClosed(text) {
-    idInput.classList.remove('input-error');
-    msgBox.style.display = 'block';
-    msgBox.style.background = 'var(--light-bg)';
-    msgBox.style.color = 'var(--text-subtitle)';
-    msgBox.innerHTML = `<i class="fas fa-lock"></i> ${text}`;
-    idInput.disabled = true;
-    idInput.style.opacity = '0.5';
-    idInput.style.cursor = 'not-allowed';
-    btn.disabled = true;
-    btn.style.opacity = '0.5';
-    btn.style.cursor = 'not-allowed';
-  }
   function showErr(text) {
     idInput.classList.add('input-error');
     showToast(text, 'error');
@@ -3319,7 +3340,7 @@ async function verifyStudentForUpload(overlay) {
       btn.disabled = false;
       btn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال';
     } else if (data.status === 'closed') {
-      showClosed(data.message || 'استقبال المشاريع مغلق حالياً');
+      applyUploadClosedState(overlay, data.message);
     } else {
       showErr(data.message);
       btn.disabled = false;
@@ -3345,6 +3366,7 @@ async function verifyStudentForUpload(overlay) {
     btn.disabled = true;
     btn.style.opacity = '0.5';
     btn.style.cursor = 'not-allowed';
+    btn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال';
   }
   function showErr(text) {
     showToast(text, 'error');
@@ -3461,6 +3483,7 @@ window.showVoteModal = function() {
   overlay.querySelector('#voteStudentId').addEventListener('input', function() {
     this.classList.remove('input-error');
   });
+  checkVoteStatus(overlay);
 
   // اختيار المشروع
   overlay.querySelectorAll('.vote-option').forEach(opt => {
@@ -3478,25 +3501,43 @@ window.showVoteModal = function() {
   // تأكيد التصويت
   overlay.querySelector('#confirmVoteBtn').addEventListener('click', () => submitVoteToServer(overlay));
 };
- async function submitVoteToServer(overlay) {
+function applyVoteClosedState(overlay, message) {
+  const idInput = overlay.querySelector('#voteStudentId');
+  const msgBox = overlay.querySelector('#voteMessage');
+  const btn = overlay.querySelector('#confirmVoteBtn');
+  idInput.classList.remove('input-error');
+  msgBox.style.display = 'block';
+  msgBox.style.background = 'var(--light-bg)';
+  msgBox.style.color = 'var(--text-subtitle)';
+  msgBox.innerHTML = `<i class="fas fa-lock"></i> ${message || 'التصويت مغلق حالياً'}`;
+  idInput.disabled = true;
+  idInput.style.opacity = '0.5';
+  idInput.style.cursor = 'not-allowed';
+  btn.disabled = true;
+  btn.style.opacity = '0.5';
+  btn.style.cursor = 'not-allowed';
+  btn.innerHTML = '<i class="fas fa-paper-plane"></i> تأكيد التصويت';
+}
+
+async function checkVoteStatus(overlay) {
+  try {
+    const url = `${VOTING_API}?action=vote&id=&project=&t=${Date.now()}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    if (data.status === 'closed') {
+      applyVoteClosedState(overlay, data.message);
+    }
+  } catch (e) {
+    // فشل الجلب عند فتح النافذة: اترك النموذج يعمل عادةً
+  }
+}
+
+async function submitVoteToServer(overlay) {
   const idInput = overlay.querySelector('#voteStudentId');
   const msgBox = overlay.querySelector('#voteMessage');
   const btn = overlay.querySelector('#confirmVoteBtn');
   const studentId = idInput.value.trim();
 
-  function showClosed(text) {
-    idInput.classList.remove('input-error');
-    msgBox.style.display = 'block';
-    msgBox.style.background = 'var(--light-bg)';
-    msgBox.style.color = 'var(--text-subtitle)';
-    msgBox.innerHTML = `<i class="fas fa-lock"></i> ${text}`;
-    idInput.disabled = true;
-    idInput.style.opacity = '0.5';
-    idInput.style.cursor = 'not-allowed';
-    btn.disabled = true;
-    btn.style.opacity = '0.5';
-    btn.style.cursor = 'not-allowed';
-  }
   function showErr(text) {
     idInput.classList.add('input-error');
     showToast(text, 'error');
@@ -3526,7 +3567,7 @@ window.showVoteModal = function() {
       if (typeof updateVotingResults === 'function') updateVotingResults();
       setTimeout(() => overlay.remove(), 2500);
     } else if (data.status === 'closed') {
-      showClosed(data.message || 'التصويت مغلق حالياً');
+      applyVoteClosedState(overlay, data.message);
     } else {
       showErr(data.message);
       btn.disabled = false;
