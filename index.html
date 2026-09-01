@@ -1048,14 +1048,10 @@
   font-size: 0.75rem;
   opacity: 0.85;
 }
-    .error-message {
-      background: rgba(var(--warning-red-rgb), 0.1);
-      border-radius: 16px;
-      padding: 12px;
-      text-align: center;
-      color: var(--warning-red);
-      font-size: 1rem;
-      margin-top: 1rem;
+    .input-error {
+      border: 1.5px solid var(--warning-red) !important;
+      background: rgba(var(--warning-red-rgb), 0.04) !important;
+      transition: border-color 0.2s ease, background-color 0.2s ease;
     }
     .loading {
       display: flex;
@@ -2457,6 +2453,7 @@ document.addEventListener('keydown', (e) => {
           
           if (data.status === 'success') {
             hapticFeedback(10);
+            studentIdInput.classList.remove('input-error');
             displayResult(data.student, data.settings);
           } else if (data.status === 'closed') {
             showError(data.message || 'النظام غير متاح حالياً');
@@ -2653,21 +2650,21 @@ setTimeout(() => {
       }
       
       function showError(message) {
-        resultContainer.innerHTML = `
-          <div class="error-message">
-            <i class="fas fa-exclamation-circle"></i>
-            <span>${message}</span>
-          </div>
-        `;
+        resultContainer.style.display = 'none';
+        resultContainer.innerHTML = '';
+        studentIdInput.classList.add('input-error');
         showToast(message, 'error');
         hapticFeedback([10, 40, 10]);
       }
-      
+
       queryBtn.addEventListener('click', fetchStudentGrade);
       studentIdInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
           fetchStudentGrade();
         }
+      });
+      studentIdInput.addEventListener('input', () => {
+        studentIdInput.classList.remove('input-error');
       });
       window.__refreshGrade = fetchStudentGrade;
     }
@@ -3172,6 +3169,9 @@ window.showUploadModal = function() {
   document.body.appendChild(overlay);
 
   overlay.querySelector('#uploadActionBtn').addEventListener('click', () => handleUploadAction(overlay));
+  overlay.querySelector('#uploadStudentId').addEventListener('input', function() {
+    this.classList.remove('input-error');
+  });
 };
     async function handleUploadAction(overlay) {
   const step2 = overlay.querySelector('#uploadStep2');
@@ -3189,14 +3189,19 @@ async function verifyStudentForUpload(overlay) {
   const btn = overlay.querySelector('#uploadActionBtn');
   const studentId = idInput.value.trim();
 
-  function showMsg(text, isError) {
+  function showFixedMsg(text) {
     msgBox.style.display = 'block';
-    msgBox.style.background = isError ? 'rgba(192,57,43,0.08)' : 'rgba(29,158,117,0.08)';
-    msgBox.style.color = isError ? '#C0392B' : '#1D9E75';
-    msgBox.innerHTML = `<i class="fas ${isError ? 'fa-circle-exclamation' : 'fa-circle-check'}"></i> ${text}`;
+    msgBox.style.background = 'rgba(192,57,43,0.08)';
+    msgBox.style.color = '#C0392B';
+    msgBox.innerHTML = `<i class="fas fa-circle-exclamation"></i> ${text}`;
+  }
+  function showErr(text) {
+    idInput.classList.add('input-error');
+    showToast(text, 'error');
+    hapticFeedback([10, 40, 10]);
   }
 
-  if (!studentId) { showMsg('الرجاء إدخال رقمك الخاص', true); return; }
+  if (!studentId) { showErr('الرجاء إدخال رقمك الخاص'); return; }
 
   btn.disabled = true;
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جارٍ التحقق...';
@@ -3207,6 +3212,7 @@ async function verifyStudentForUpload(overlay) {
     const data = await res.json();
 
     if (data.status === 'success') {
+      idInput.classList.remove('input-error');
       uploadStudentData = { id: studentId, name: data.name, gradeLevel: data.gradeLevel, section: data.section };
       // عرض بيانات الطالب
       overlay.querySelector('#uploadStudentName').textContent = data.name;
@@ -3234,13 +3240,17 @@ async function verifyStudentForUpload(overlay) {
       overlay.querySelector('#uploadStep2').style.display = 'block';
       btn.disabled = false;
       btn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال';
+    } else if (data.status === 'closed') {
+      showFixedMsg(data.message);
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-arrow-left"></i> متابعة';
     } else {
-      showMsg(data.message, true);
+      showErr(data.message);
       btn.disabled = false;
       btn.innerHTML = '<i class="fas fa-arrow-left"></i> متابعة';
     }
   } catch (err) {
-    showMsg('حدث خطأ، حاول مرة أخرى', true);
+    showErr('حدث خطأ، حاول مرة أخرى');
     btn.disabled = false;
     btn.innerHTML = '<i class="fas fa-arrow-left"></i> متابعة';
   }
@@ -3250,19 +3260,23 @@ async function verifyStudentForUpload(overlay) {
   const btn = overlay.querySelector('#uploadActionBtn');
   const fileInput = overlay.querySelector('#uploadFileInput');
 
-  function showMsg(text, isError) {
+  function showFixedMsg(text) {
     msgBox.style.display = 'block';
-    msgBox.style.background = isError ? 'rgba(192,57,43,0.08)' : 'rgba(29,158,117,0.08)';
-    msgBox.style.color = isError ? '#C0392B' : '#1D9E75';
-    msgBox.innerHTML = `<i class="fas ${isError ? 'fa-circle-exclamation' : 'fa-circle-check'}"></i> ${text}`;
+    msgBox.style.background = 'rgba(192,57,43,0.08)';
+    msgBox.style.color = '#C0392B';
+    msgBox.innerHTML = `<i class="fas fa-circle-exclamation"></i> ${text}`;
+  }
+  function showErr(text) {
+    showToast(text, 'error');
+    hapticFeedback([10, 40, 10]);
   }
 
-  if (!uploadSelectedType) { showMsg('الرجاء اختيار نوع المشروع', true); return; }
-  if (!fileInput.files || fileInput.files.length === 0) { showMsg('الرجاء اختيار ملف مشروعك', true); return; }
+  if (!uploadSelectedType) { showErr('الرجاء اختيار نوع المشروع'); return; }
+  if (!fileInput.files || fileInput.files.length === 0) { showErr('الرجاء اختيار ملف مشروعك'); return; }
 
   const file = fileInput.files[0];
   if (file.size > MAX_FILE_SIZE) {
-    showMsg(`حجم الملف ${(file.size / 1024 / 1024).toFixed(1)} ميجا — الحد الأقصى 30 ميجا`, true);
+    showErr(`حجم الملف ${(file.size / 1024 / 1024).toFixed(1)} ميجا — الحد الأقصى 30 ميجا`);
     return;
   }
 
@@ -3293,16 +3307,21 @@ async function verifyStudentForUpload(overlay) {
     const data = await res.json();
 
     if (data.status === 'success') {
-      showMsg(data.message, false);
+      showToast(data.message, 'success');
+      hapticFeedback(10);
       btn.style.display = 'none';
       setTimeout(() => overlay.remove(), 2800);
+    } else if (data.status === 'closed') {
+      showFixedMsg(data.message);
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال';
     } else {
-      showMsg(data.message, true);
+      showErr(data.message);
       btn.disabled = false;
       btn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال';
     }
   } catch (err) {
-    showMsg('حدث خطأ أثناء الرفع، حاول مرة أخرى', true);
+    showErr('حدث خطأ أثناء الرفع، حاول مرة أخرى');
     btn.disabled = false;
     btn.innerHTML = '<i class="fas fa-paper-plane"></i> إرسال';
   }
@@ -3361,6 +3380,10 @@ window.showVoteModal = function() {
   overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
   document.body.appendChild(overlay);
 
+  overlay.querySelector('#voteStudentId').addEventListener('input', function() {
+    this.classList.remove('input-error');
+  });
+
   // اختيار المشروع
   overlay.querySelectorAll('.vote-option').forEach(opt => {
     opt.addEventListener('click', function() {
@@ -3383,15 +3406,24 @@ window.showVoteModal = function() {
   const btn = overlay.querySelector('#confirmVoteBtn');
   const studentId = idInput.value.trim();
 
-  function showMsg(text, isError) {
+  function showFixedMsg(text) {
     msgBox.style.display = 'block';
-    msgBox.style.background = isError ? 'rgba(192,57,43,0.08)' : 'rgba(29,158,117,0.08)';
-    msgBox.style.color = isError ? '#C0392B' : '#1D9E75';
-    msgBox.innerHTML = `<i class="fas ${isError ? 'fa-circle-exclamation' : 'fa-circle-check'}"></i> ${text}`;
+    msgBox.style.background = 'rgba(192,57,43,0.08)';
+    msgBox.style.color = '#C0392B';
+    msgBox.innerHTML = `<i class="fas fa-circle-exclamation"></i> ${text}`;
+  }
+  function showErr(text) {
+    idInput.classList.add('input-error');
+    showToast(text, 'error');
+    hapticFeedback([10, 40, 10]);
+  }
+  function showToastErr(text) {
+    showToast(text, 'error');
+    hapticFeedback([10, 40, 10]);
   }
 
-  if (!studentId) { showMsg('الرجاء إدخال رقمك الخاص', true); return; }
-  if (!selectedProject) { showMsg('الرجاء اختيار مشروع', true); return; }
+  if (!studentId) { showErr('الرجاء إدخال رقمك الخاص'); return; }
+  if (!selectedProject) { showToastErr('الرجاء اختيار مشروع'); return; }
 
   btn.disabled = true;
   btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جارٍ التسجيل...';
@@ -3402,21 +3434,27 @@ window.showVoteModal = function() {
     const data = await res.json();
 
     if (data.status === 'success') {
-      showMsg(data.message, false);
+      idInput.classList.remove('input-error');
+      showToast(data.message, 'success');
+      hapticFeedback(10);
       btn.style.display = 'none';
       if (typeof updateVotingResults === 'function') updateVotingResults();
       setTimeout(() => overlay.remove(), 2500);
+    } else if (data.status === 'closed') {
+      showFixedMsg(data.message);
+      btn.disabled = false;
+      btn.innerHTML = '<i class="fas fa-paper-plane"></i> تأكيد التصويت';
     } else {
-      showMsg(data.message, true);
+      showErr(data.message);
       btn.disabled = false;
       btn.innerHTML = '<i class="fas fa-paper-plane"></i> تأكيد التصويت';
     }
   } catch (err) {
-    showMsg('حدث خطأ، حاول مرة أخرى', true);
+    showErr('حدث خطأ، حاول مرة أخرى');
     btn.disabled = false;
     btn.innerHTML = '<i class="fas fa-paper-plane"></i> تأكيد التصويت';
   }
-}   
+}
 function showPointsModal(data) {
     if (!data || !data.points) return;
     const p = data.points;
