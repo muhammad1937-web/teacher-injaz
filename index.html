@@ -43,6 +43,8 @@
       --gold-excellence-rgb: 232, 163, 61;
       --warning-red: #C0392B;
       --warning-red-rgb: 192, 57, 43;
+      --toast-error: #FF6B5B;
+      --toast-success: #34D399;
       --text-dark: #16324F;
       --text-medium: #3E5570;
       --text-light: #7A8B9E;
@@ -3866,8 +3868,15 @@ function showToast(message, type) {
     }
     const isError = type === 'error';
     const iconClass = isError ? 'fa-exclamation-circle' : 'fa-check-circle';
-    const iconColor = isError ? 'var(--warning-red)' : '#1D9E75';
-    toastEl.innerHTML = '<i class="fas ' + iconClass + '" style="color:' + iconColor + ';"></i><span>' + message + '</span>';
+    const iconColor = isError ? 'var(--toast-error)' : 'var(--toast-success)';
+    toastEl.textContent = '';
+    const icon = document.createElement('i');
+    icon.className = 'fas ' + iconClass;
+    icon.style.color = iconColor;
+    const textSpan = document.createElement('span');
+    textSpan.textContent = message;
+    toastEl.appendChild(icon);
+    toastEl.appendChild(textSpan);
     if (toastTimer) clearTimeout(toastTimer);
     requestAnimationFrame(function () { toastEl.classList.add('visible'); });
     toastTimer = setTimeout(function () {
