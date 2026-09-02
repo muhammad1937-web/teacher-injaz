@@ -1787,6 +1787,45 @@
     .student-item {
       -webkit-tap-highlight-color: transparent;
     }
+
+    /* ========================================= */
+    /*   نافذة منزلقة من الأسفل (Bottom Sheet)   */
+    /* ========================================= */
+    .bottom-sheet-overlay {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0, 0, 0, 0);
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      z-index: 10000;
+      transition: background-color 0.3s ease;
+    }
+    .bottom-sheet-overlay.open { background: rgba(0, 0, 0, 0.5); }
+    .bottom-sheet {
+      background: var(--pure-white);
+      width: 100%;
+      max-width: 480px;
+      max-height: 90vh;
+      overflow-y: auto;
+      border-radius: 20px 20px 0 0;
+      box-shadow: 0 -8px 30px rgba(0, 0, 0, 0.25);
+      transform: translateY(100%);
+      transition: transform 0.32s cubic-bezier(0.32, 0.72, 0, 1);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    .bottom-sheet.open { transform: translateY(0); }
+    .bottom-sheet-handle {
+      width: 36px;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(22, 50, 79, 0.18);
+      margin: 10px auto 8px;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bottom-sheet-overlay, .bottom-sheet { transition: none; }
+    }
   </style>
 </head>
 <body>
@@ -3299,6 +3338,27 @@ function initProjectButtons() {
 }
 initProjectButtons();
 // ============================================
+//      نافذة منزلقة من الأسفل (Bottom Sheet)
+// ============================================
+function openBottomSheet(overlay) {
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      overlay.classList.add('open');
+      const sheet = overlay.querySelector('.bottom-sheet');
+      if (sheet) sheet.classList.add('open');
+    });
+  });
+}
+function closeBottomSheet(overlay) {
+  if (!overlay) return;
+  overlay.classList.remove('open');
+  const sheet = overlay.querySelector('.bottom-sheet');
+  if (sheet) sheet.classList.remove('open');
+  setTimeout(() => overlay.remove(), 320);
+}
+window.closeBottomSheet = closeBottomSheet;
+
+// ============================================
 //      نافذة تسليم المشاريع (رفع داخلي)
 // ============================================
 const MAX_FILE_SIZE = 30 * 1024 * 1024; // 30 ميجابايت
@@ -3310,7 +3370,8 @@ window.showUploadModal = function() {
   uploadSelectedType = null;
 
   const modalHtml = `
-    <div id="uploadModalBox" style="background:white; border-radius:24px; width:90%; max-width:420px; margin:0 auto; box-shadow: 0 16px 32px rgba(0,0,0,0.2); overflow:hidden;">
+    <div id="uploadModalBox" class="bottom-sheet">
+      <div class="bottom-sheet-handle"></div>
       <div style="background:var(--primary-dark); padding:1.1rem; text-align:center;">
         <h3 style="margin:0; color:white; font-size:1rem; display:flex; align-items:center; justify-content:center; gap:8px;">
           <i class="fas fa-cloud-arrow-up"></i> تسليم المشروع
@@ -3348,7 +3409,7 @@ window.showUploadModal = function() {
         <button id="uploadActionBtn" style="background:var(--accent-teal); color:white; border:none; padding:9px 24px; border-radius:24px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
           <i class="fas fa-arrow-left"></i> متابعة
         </button>
-        <button onclick="this.closest('.modal-details').remove()" style="background:transparent; color:#0E9594; border:1px solid rgba(14,149,148,0.35); padding:9px 22px; border-radius:24px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
+        <button onclick="closeBottomSheet(this.closest('.modal-details'))" style="background:transparent; color:#0E9594; border:1px solid rgba(14,149,148,0.35); padding:9px 22px; border-radius:24px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
           إغلاق
         </button>
       </div>
@@ -3356,11 +3417,11 @@ window.showUploadModal = function() {
   `;
 
   const overlay = document.createElement('div');
-  overlay.className = 'modal-details';
-  overlay.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; z-index:10000; padding:1rem; overflow-y:auto;';
+  overlay.className = 'modal-details bottom-sheet-overlay';
   overlay.innerHTML = modalHtml;
-  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeBottomSheet(overlay); });
   document.body.appendChild(overlay);
+  openBottomSheet(overlay);
 
   overlay.querySelector('#uploadActionBtn').addEventListener('click', () => handleUploadAction(overlay));
   overlay.querySelector('#uploadStudentId').addEventListener('input', function() {
@@ -3537,7 +3598,7 @@ async function verifyStudentForUpload(overlay) {
       showToast(data.message, 'success');
       hapticFeedback(10);
       btn.style.display = 'none';
-      setTimeout(() => overlay.remove(), 2800);
+      setTimeout(() => closeBottomSheet(overlay), 2800);
     } else if (data.status === 'closed') {
       showClosed(data.message || 'استقبال المشاريع مغلق حالياً');
     } else {
@@ -3570,7 +3631,8 @@ window.showVoteModal = function() {
   `).join('');
 
   const modalHtml = `
-    <div style="background:white; border-radius:24px; width:90%; max-width:400px; margin:0 auto; box-shadow: 0 16px 32px rgba(0,0,0,0.2); overflow:hidden;">
+    <div class="bottom-sheet">
+      <div class="bottom-sheet-handle"></div>
       <div style="background:var(--primary-dark); padding:1.1rem; text-align:center;">
         <h3 style="margin:0; color:white; font-size:1rem; display:flex; align-items:center; justify-content:center; gap:8px;">
           <i class="fas fa-check-to-slot"></i> التصويت للمشاريع
@@ -3591,7 +3653,7 @@ window.showVoteModal = function() {
         <button id="confirmVoteBtn" style="background:var(--accent-teal); color:white; border:none; padding:9px 24px; border-radius:24px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
           <i class="fas fa-paper-plane"></i> تأكيد التصويت
         </button>
-        <button onclick="this.closest('.modal-details').remove()" style="background:transparent; color:#0E9594; border:1px solid rgba(14,149,148,0.35); padding:9px 22px; border-radius:24px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
+        <button onclick="closeBottomSheet(this.closest('.modal-details'))" style="background:transparent; color:#0E9594; border:1px solid rgba(14,149,148,0.35); padding:9px 22px; border-radius:24px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
           إغلاق
         </button>
       </div>
@@ -3599,11 +3661,11 @@ window.showVoteModal = function() {
   `;
 
   const overlay = document.createElement('div');
-  overlay.className = 'modal-details';
-  overlay.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; z-index:10000; padding:1rem;';
+  overlay.className = 'modal-details bottom-sheet-overlay';
   overlay.innerHTML = modalHtml;
-  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+  overlay.addEventListener('click', e => { if (e.target === overlay) closeBottomSheet(overlay); });
   document.body.appendChild(overlay);
+  openBottomSheet(overlay);
 
   overlay.querySelector('#voteStudentId').addEventListener('input', function() {
     this.classList.remove('input-error');
@@ -3690,7 +3752,7 @@ async function submitVoteToServer(overlay) {
       hapticFeedback(10);
       btn.style.display = 'none';
       if (typeof updateVotingResults === 'function') updateVotingResults();
-      setTimeout(() => overlay.remove(), 2500);
+      setTimeout(() => closeBottomSheet(overlay), 2500);
     } else if (data.status === 'closed') {
       applyVoteClosedState(overlay, data.message);
     } else {
