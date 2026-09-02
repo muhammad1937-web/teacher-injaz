@@ -608,14 +608,16 @@
     /* ========================================= */
     .site-footer { background: var(--pure-white); color: var(--text-medium); padding: 2rem 1.5rem; text-align: center; margin-top: 3rem; border-top: 1px solid var(--border-color); }
     .footer-content { max-width: 1200px; margin: 0 auto; }
-    .footer-links { margin-bottom: 1.5rem; display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap; }
+    .footer-links { margin-bottom: 18px; display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap; }
     .footer-link { color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 1rem; transition: var(--transition); display: flex; align-items: center; gap: 0.5rem; }
     @media (hover: hover) and (pointer: fine) {
     .footer-link:hover { color: var(--accent-teal); transform: translateY(-2px); } }
     .footer-link i { color: var(--accent-teal); }
-    .footer-copyright { font-size: 0.85rem; display: flex; flex-direction: column; align-items: center; gap: 5px; }
+    .footer-copyright { font-size: 0.85rem; display: flex; flex-direction: column; align-items: center; }
     .footer-brand { display: block; text-align: center; }
-    .footer-brand-logo { height: 18px; width: 18px; border-radius: 5px; vertical-align: middle; margin-left: 6px; }
+    .footer-brand-logo { display: block; height: 34px; width: 34px; border-radius: 9px; margin: 0 auto 10px; }
+    .footer-visits { margin-top: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--text-light); font-size: 0.7rem; }
+    .footer-visits img { height: 16px; display: block; }
 
     /* ========================================= */
     /*          تأثيرات الظهور                  */
@@ -2198,18 +2200,11 @@
         <img src="images/appletouchicon.png" alt="شعار واجهة المعلم الرقمي" class="footer-brand-logo">
         © 2026 جميع الحقوق محفوظة | واجهة المعلم الرقمي - أ. محمد الغامدي
       </span>
-<div style="margin-top: 12px; display:flex; justify-content:center;">
-  <div style="background: white; border: 1px solid rgba(22,50,79,0.12); border-radius: 16px; padding: 0.4rem 1rem; display:flex; align-items:center; gap: 8px; box-shadow: 0 2px 8px rgba(22,50,79,0.06);">
-    <div style="width:28px; height:28px; border-radius:50%; background:rgba(22,50,79,0.07); display:flex; align-items:center; justify-content:center;">
-      <i class="fas fa-eye" style="color:#16324F; font-size:13px;"></i>
-    </div>
-    <div style="display:flex; align-items:center; gap:8px;">
-      <p style="font-size:11px; color:#7A8B9E; margin:0; font-family:'IBM Plex Sans Arabic',sans-serif;">عدد الزيارات</p>
-      <img src="https://hits.sh/teacher-injaz.vercel.app.svg?style=flat&label=&color=16324F&labelColor=16324F" 
-           alt="عداد الزيارات" style="height:18px; display:block;">
-    </div>
-  </div>
-</div>
+      <div class="footer-visits">
+        <i class="fas fa-eye"></i>
+        <span>عدد الزيارات</span>
+        <img src="https://hits.sh/teacher-injaz.vercel.app.svg?style=flat&label=&color=16324F&labelColor=16324F" alt="عداد الزيارات">
+      </div>
     </div>
   </div>
 </footer>
