@@ -1984,7 +1984,7 @@
   
   
   <!-- وضع المنافسة (يظهر عند وجود مشاريع للتصويت) -->
-  <div id="competition-mode" style="display: block;">
+  <div id="competition-mode" style="display: none;">
     <p class="voting-description">استعرض المشاريع المتنافسة، وادعم إبداع زملائك</p>
     <div class="projects-container">
       <button type="button" id="projectBtn1" class="project-btn" style="flex-direction: column;">
@@ -2024,7 +2024,7 @@
   </div>
   
   <!-- وضع الاستراحة (يظهر عند عدم وجود مشاريع للتصويت) -->
- <div id="intermission-mode">
+ <div id="intermission-mode" style="display: block;">
   <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding:2rem 1rem; gap:16px; text-align:center;">
     
     <i class="fas fa-circle-nodes" style="font-size:36px; color:var(--gold-excellence); opacity:0.9; display:inline-block;"></i>
@@ -2324,6 +2324,16 @@
       const comp = document.getElementById('competition-mode');
       if (timer && comp) {
         timer.style.display = (comp.style.display === 'none') ? 'none' : '';
+      }
+    })();
+
+    // مزامنة رسالة "استعد للجولة القادمة" مع ظهور وضع المنافسة الفعلي
+    (function syncVotingIntermission() {
+      const comp = document.getElementById('competition-mode');
+      const intermission = document.getElementById('intermission-mode');
+      if (comp && intermission) {
+        const compVisible = comp.style.display !== 'none';
+        intermission.style.display = compVisible ? 'none' : '';
       }
     })();
 
