@@ -3083,7 +3083,7 @@ function renderHonorBody(applyStagger) {
   if (applyStagger) staggerReveal(box.querySelectorAll('.honor-row'));
 }
 
-loadHonorBoard();    
+setTimeout(loadHonorBoard, 150);
 let previousVotes = {};
 let updateIntervalVotes;
 
@@ -3177,12 +3177,14 @@ function checkForUpdates(projects) {
   }
 }
 
-function startAutoUpdateVotes() { 
-  fetchVotingResults(); 
-  updateIntervalVotes = setInterval(fetchVotingResults, 30000); 
+function startAutoUpdateVotes() {
+  const comp = document.getElementById('competition-mode');
+  if (comp && comp.style.display === 'none') return; // القسم مخفٍ حاليًا (وضع الاستراحة)، فلا داعي لجلب النتائج
+  fetchVotingResults();
+  updateIntervalVotes = setInterval(fetchVotingResults, 30000);
 }
 
-startAutoUpdateVotes();
+setTimeout(startAutoUpdateVotes, 450);
 // ============================================
 //         مؤقت التصويت التفاعلي
 // ============================================
