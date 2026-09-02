@@ -1757,12 +1757,33 @@
     .vote-btn:active,
     .inquiry-btn.primary:active,
     .points-btn-hover:active {
-      transform: scale(0.97);
+      /* !important: بعض هذه العناصر (مثل project-btn) يحمل صنف stagger-item،
+         وحركة ظهوره تنتهي بقيمة transform ثابتة (fill-mode: both) تتفوق على
+         قاعدة :active العادية في ترتيب المنشأ ما لم تُستخدم !important. */
+      transform: scale(0.97) !important;
       transition: transform 0.12s ease;
     }
     .library-card:not(.library-card-disabled):active {
-      transform: scale(0.985);
-      transition: transform 0.12s ease;
+      transform: translateY(-2px);
+      border-color: var(--accent-teal);
+      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.15);
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+    .honor-row:active,
+    .vote-stat-item:active {
+      /* !important: .honor-row يحمل صنف stagger-item لنفس السبب أعلاه */
+      transform: translateY(-2px) !important;
+      box-shadow: 0 6px 16px rgba(var(--primary-dark-rgb), 0.12);
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .student-item:active .student-image {
+      transform: translateY(-2px);
+      transition: transform 0.15s ease;
+    }
+    .honor-row,
+    .vote-stat-item,
+    .student-item {
+      -webkit-tap-highlight-color: transparent;
     }
   </style>
 </head>
