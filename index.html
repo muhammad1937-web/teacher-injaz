@@ -1696,8 +1696,8 @@
     .honor-cols { display:grid; grid-template-columns:1fr; gap:14px; animation: honorFadeIn 0.35s ease; }
     @keyframes honorFadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
     .honor-col { border:1px solid var(--border-color); border-radius:16px; overflow:hidden; background:var(--pure-white); box-shadow: 0 4px 12px rgba(var(--primary-dark-rgb), 0.05); }
-    .honor-col-head { background:rgba(var(--accent-teal-rgb),0.08); border-bottom:1px solid var(--border-color); padding:10px 15px; font-size:0.9rem; font-weight:700; color:var(--accent-teal); }
-    .honor-col-head.pts { background:rgba(232,163,61,0.12); color:var(--gold-excellence); }
+    .honor-col-head { border-bottom:1px solid var(--border-color); padding:10px 15px; font-size:0.9rem; font-weight:700; color:var(--accent-teal); }
+    .honor-col-head.pts { color:#C9862A; }
     .honor-col-body { padding:10px; }
     .honor-row { display:flex; align-items:center; gap:10px; padding:10px 14px; margin-bottom:8px; background:var(--pure-white); border:1px solid var(--border-color); border-radius:14px; box-shadow:0 2px 8px rgba(var(--primary-dark-rgb),0.05); transition:all 0.3s ease; }
     .honor-row:last-child { margin-bottom:0; }
@@ -2233,6 +2233,7 @@
   <div class="footer-content">
     <div class="footer-links">
       <a href="mailto:mfh713623@gmail.com" class="footer-link"><i class="fas fa-envelope"></i> البريد الإلكتروني</a>
+      <button type="button" class="footer-link" id="shareSiteBtn" style="background:none; border:none; cursor:pointer; font-family:inherit; padding:0; margin:0;"><i class="fas fa-share-nodes"></i> مشاركة الموقع</button>
     </div>
     <div class="footer-copyright">
       <span class="footer-brand">
@@ -2345,6 +2346,30 @@
         const containerVisible = container.style.display !== 'none';
         inactive.style.display = containerVisible ? 'none' : '';
       }
+    })();
+
+    // زر مشاركة الموقع في التذييل
+    (function initShareButton() {
+      const btn = document.getElementById('shareSiteBtn');
+      if (!btn) return;
+      btn.addEventListener('click', async function () {
+        hapticFeedback(10);
+        const shareData = { title: document.title, url: window.location.origin };
+        if (navigator.share) {
+          try {
+            await navigator.share(shareData);
+          } catch (err) {
+            // المستخدم ألغى المشاركة أو حدث خطأ غير متوقع — تجاهله بصمت
+          }
+          return;
+        }
+        try {
+          await navigator.clipboard.writeText(window.location.origin);
+          showToast('تم نسخ رابط الموقع', 'success');
+        } catch (err) {
+          showToast('تعذّر نسخ الرابط', 'error');
+        }
+      });
     })();
 
     // شريط التنقل السفلي
