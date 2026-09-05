@@ -2124,7 +2124,7 @@
     <div class="grades-header">
       <h3>الاستعلام عن الدرجات</h3>
     </div>
-    <p class="grades-description">أدخل رقمك الخاص للاطلاع على نتيجتك في مادة التقنية الرقمية</p>
+    <p class="grades-description">أدخل رقمك الخاص للاطلاع على تقدمك في مادة التقنية الرقمية</p>
     
     <div class="query-box">
       <div id="gradesClosedCard" class="closed-state-card" style="display:none;">
@@ -2158,7 +2158,7 @@
   <h2 class="ai-header">
     <span>المساعد الرقمي</span>
   </h2>
-  <p class="ai-description"> مساعد التقنية الرقمية — يجيب عن أسئلتك ويشرح المفاهيم</p>
+  <p class="ai-description">مساعد التقنية الرقمية — يجيب عن أسئلتك ويبسط المفاهيم</p>
   <div class="ai-chat-container">
     <button class="clear-chat-btn" id="clearChatBtn" style="display: none;"><i class="fas fa-trash"></i> مسح المحادثة</button>
     <div class="ai-messages" id="aiMessages"></div>
@@ -2793,9 +2793,7 @@ if (student.isComplete && student.finalScore) {
 } else {
   finalHtml = `
     <div class="rating-medallion">
-      <span class="medallion-score" style="font-size:1rem; color: var(--warning-red);">غير مكتملة</span>
-      <span class="medallion-sep">·</span>
-      <span class="medallion-badge" style="color: var(--warning-red);"><i class="fas fa-hourglass-half"></i> ${student.missingMessage || 'بانتظار اكتمال الدرجات'}</span>
+      <span class="medallion-badge" style="color:#D98C1F; font-size:0.8rem; white-space:nowrap;"><i class="fas fa-hourglass-half"></i> الدرجة النهائية بعد اكتمال رصد الفترتين</span>
     </div>
   `;
 }
@@ -3148,7 +3146,7 @@ function displayVotingResults(data) {
     let iconClass = "fa-file-powerpoint";
     let iconColor = projectColors[index % projectColors.length];
     
-    if (project.name === "العرض التقديمي") iconClass = "fa-file-powerpoint";
+    if (project.name === " العرض التقديمي") iconClass = "fa-file-powerpoint";
     else if (project.name === "التصميم الجرافيكي") iconClass = "fa-palette";
     else if (project.name === "الموقع الإلكتروني") iconClass = "fa-globe";
     
