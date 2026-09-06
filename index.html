@@ -214,19 +214,19 @@
       font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
       background: var(--pure-white);
       color: var(--text-dark);
-      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08);
+      box-shadow: var(--shadow-md);
       transition: var(--transition);
       outline: none;
       position: relative;
       z-index: 1002;
     }
-    .search-input:focus { border-color: var(--accent-teal); box-shadow: 0 8px 20px rgba(var(--accent-teal-rgb), 0.15); padding-right: 55px; }
+    .search-input:focus { border-color: var(--accent-teal); box-shadow: var(--shadow-lg); padding-right: 55px; }
     .search-button {
       position: absolute;
       left: 10px;
       top: 50%;
       transform: translateY(-50%);
-      background: var(--accent-teal);
+      background: var(--gradient-primary);
       color: white;
       border: none;
       width: 36px;
@@ -238,10 +238,10 @@
       justify-content: center;
       transition: var(--transition);
       z-index: 1003;
-      box-shadow: 0 2px 8px rgba(var(--accent-teal-rgb), 0.3);
+      box-shadow: var(--shadow-sm);
     }
     @media (hover: hover) and (pointer: fine) {
-    .search-button:hover { background: var(--ai-teal); transform: translateY(-50%) scale(1.05); box-shadow: 0 8px 20px rgba(var(--accent-teal-rgb), 0.4); } }
+    .search-button:hover { transform: translateY(-50%) scale(1.08); box-shadow: var(--shadow-md); } }
     .search-results {
       position: absolute;
       top: 100%;
@@ -291,7 +291,7 @@
     @media (hover: hover) and (pointer: fine) {
     .fame-bar-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); } }
     .fame-bar-title { display: flex; align-items: center; gap: 0.75rem; font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 0.1rem; letter-spacing: 0.3px; }
-    .fame-bar-title i { font-size: 1.4rem; color: var(--gold-excellence); text-shadow: 0 2px 4px rgba(var(--gold-excellence-rgb), 0.3); }
+    .fame-bar-title .section-icon-badge { background: linear-gradient(135deg, #C6861F 0%, var(--gold-excellence) 100%); }
     .honors-subtitle { margin: 0 0 0.8rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
     @media (hover: hover) and (pointer: fine) {
     .honors-subtitle:hover { color: var(--tech-blue); transform: none; background: transparent; border: none; box-shadow: none; } }
@@ -389,7 +389,7 @@
     .library-section:hover::before { height: 6px; } }
     @media (hover: hover) and (pointer: fine) {
     .library-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); } }
-    .library-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin: 0 0 1.2rem; text-align: center; letter-spacing: 0.3px; }
+    .library-title { display: flex; align-items: center; justify-content: center; gap: 0.75rem; font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin: 0 0 1.2rem; text-align: center; letter-spacing: 0.3px; }
     .library-cards-row { display: flex; gap: 1.2rem; flex-wrap: wrap; }
     .library-card {
       flex: 1;
@@ -417,10 +417,12 @@
     @media (prefers-reduced-motion: reduce) {
       .soon-badge-icon { animation: none; }
     }
-    .library-card-number { display: block; font-size: 2.2rem; font-weight: 800; line-height: 1; margin-bottom: 0.5rem; }
-    .library-card-1 .library-card-number { color: var(--tech-blue); }
-    .library-card-2 .library-card-number { color: var(--accent-teal); }
-    .library-card-3 .library-card-number { color: var(--gold-excellence); }
+    .library-card-number { display: flex; align-items: center; justify-content: center; width: 52px; height: 52px; margin: 0 auto 0.7rem; border-radius: 16px; font-size: 1.6rem; font-weight: 800; line-height: 1; color: #fff; box-shadow: var(--shadow-sm); transition: var(--transition); }
+    .library-card-1 .library-card-number { background: var(--tech-blue); }
+    .library-card-2 .library-card-number { background: var(--accent-teal); }
+    .library-card-3 .library-card-number { background: linear-gradient(135deg, #C6861F 0%, var(--gold-excellence) 100%); }
+    @media (hover: hover) and (pointer: fine) {
+    .library-card:not(.library-card-disabled):hover .library-card-number { transform: scale(1.08); box-shadow: var(--shadow-md); } }
     .library-card-title { font-size: 1rem; font-weight: 600; color: var(--text-dark); margin: 0; }
     .library-card-note { font-size: 0.7rem; color: var(--text-light); margin: 4px 0 0; }
     .library-card-disabled { cursor: not-allowed; opacity: 0.55; }
@@ -436,7 +438,7 @@
     .ai-assistant-container:hover::before { height: 6px; } }
     @media (hover: hover) and (pointer: fine) {
     .ai-assistant-container:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); } }
-    .ai-header { color: var(--primary-dark); text-align: center; margin-bottom: 0.8rem; font-size: 1.15rem; position: relative; font-weight: 700; display: flex; align-items: baseline; justify-content: center; gap: 1rem; letter-spacing: 0.3px; }
+    .ai-header { color: var(--primary-dark); text-align: center; margin-bottom: 0.8rem; font-size: 1.15rem; position: relative; font-weight: 700; display: flex; align-items: center; justify-content: center; gap: 0.75rem; letter-spacing: 0.3px; }
     @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
     .ai-description {
       margin: 0 0 1.5rem 0;
@@ -492,7 +494,7 @@
     .submit-project-section::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; }
     @media (hover: hover) and (pointer: fine) {
     .submit-project-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); } }
-    .submit-project-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin: 0 0 0.6rem; letter-spacing: 0.3px; }
+    .submit-project-title { display: flex; align-items: center; justify-content: center; gap: 0.75rem; font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin: 0 0 0.6rem; letter-spacing: 0.3px; }
     .submit-project-description { margin: 0 0 1.2rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; line-height: 1.5; }
     .inquiries-container { display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap; }
     .inquiry-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; font-size: 1.15rem; font-weight: 700; padding: 0.9rem 1.8rem; border-radius: 999px; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.2; }
@@ -513,10 +515,10 @@
   white-space: nowrap;
   width: auto;
   max-width: 90%;
-  background: var(--primary-dark);
+  background: var(--gradient-primary);
   color: white;
   border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.25);
+  box-shadow: var(--shadow-lg);
   position: relative;
   overflow: hidden;
 }
@@ -641,7 +643,6 @@
     .voting-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); } }
     .voting-header { display: flex; justify-content: center; align-items: center; margin-bottom: 0.8rem; }
     .voting-title { display: flex; align-items: center; gap: 0.75rem; font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin: 0; letter-spacing: 0.3px; }
-    .voting-title i { font-size: 1.4rem; color: var(--accent-teal); }
     .voting-description { margin: 0 0 1.5rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
     @media (hover: hover) and (pointer: fine) {
     .voting-description:hover { color: var(--tech-blue); transform: none; background: transparent; border: none; box-shadow: none; } }
@@ -689,12 +690,14 @@
     .chat-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); } }
     .chat-header { display: flex; justify-content: center; align-items: center; margin-bottom: 0.8rem; }
     .chat-title { display: flex; align-items: center; gap: 0.45rem; font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin: 0; letter-spacing: 0.3px; }
-    .chat-title i { font-size: 1.75rem; color: var(--tech-blue); opacity: 0.9; transition: all 0.3s ease; }
     @media (hover: hover) and (pointer: fine) {
-    .chat-title:hover i { opacity: 1; transform: scale(1.1) rotate(5deg); } }
+    .chat-title:hover .section-icon-badge { transform: scale(1.08) rotate(5deg); } }
     .chat-description { margin: 0 0 1.5rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
     @media (hover: hover) and (pointer: fine) {
     .chat-description:hover { color: var(--tech-blue); transform: none; background: transparent; border: none; box-shadow: none; } }
+    .chat-cta-card { display: flex; flex-direction: column; align-items: center; gap: 0.9rem; background: rgba(14,149,148,0.05); border: 1px solid rgba(14,149,148,0.14); border-radius: 20px; padding: 1.4rem 1.2rem; margin: 0 auto; width: 100%; max-width: 450px; text-align: center; }
+    .chat-cta-card .inquiry-btn.primary { width: 100%; max-width: 100%; }
+    .chat-cta-note { font-size: 0.85rem; color: var(--text-medium); margin: 0; line-height: 1.5; }
     .clear-chat-btn { background: var(--warning-red); color: white; border: none; padding: 8px 15px; border-radius: 24px; cursor: pointer; font-size: 0.85rem; margin-bottom: 10px; transition: all 0.3s; display: flex; align-items: center; gap: 5px; margin: 0 auto 10px; }
     @media (hover: hover) and (pointer: fine) {
     .clear-chat-btn:hover { background: #A93226; transform: translateY(-2px); box-shadow: 0 2px 8px rgba(var(--warning-red-rgb), 0.3); } }
@@ -727,6 +730,20 @@
   opacity: 0.6;
   margin: 0 14px;
   letter-spacing: 6px;
+}
+.section-icon-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 13px;
+  background: var(--gradient-primary);
+  color: #fff;
+  font-size: 1.05rem;
+  box-shadow: var(--shadow-md);
+  flex-shrink: 0;
+  transition: transform 0.3s var(--ease-premium);
 }
 
     /* ============================================ */
@@ -849,10 +866,6 @@
       align-items: center;
       gap: 0.75rem;
       margin-bottom: 0.8rem;
-    }
-    .grades-header i {
-      font-size: 1.4rem;
-      color: var(--accent-teal);
     }
     .grades-header h3 {
       font-size: 1.15rem;
@@ -1690,7 +1703,8 @@
     .honor-section:hover::before { height: 6px; } }
     @media (hover: hover) and (pointer: fine) {
     .honor-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); } }
-    .honor-title { text-align:center; font-size:1.15rem; font-weight:700; color:var(--primary-dark); margin:0; letter-spacing:0.3px; }
+    .honor-title { display:flex; align-items:center; justify-content:center; gap:0.75rem; text-align:center; font-size:1.15rem; font-weight:700; color:var(--primary-dark); margin:0; letter-spacing:0.3px; }
+    .honor-title .section-icon-badge { background: linear-gradient(135deg, #C6861F 0%, var(--gold-excellence) 100%); }
     .honor-sub { text-align:center; font-size:0.85rem; color:var(--text-subtitle); margin-top:0.4rem; }
     .honor-tabs { position:relative; display:flex; gap:4px; justify-content:center; background:var(--light-bg); border-radius:22px; padding:4px; margin:0.9rem 0 1rem; }
     .honor-tab-indicator { position:absolute; top:4px; bottom:4px; right:0; background:var(--accent-teal); border-radius:18px; transform:translateX(0); transition:transform 0.42s cubic-bezier(0.4, 0, 0.2, 1), width 0.42s cubic-bezier(0.4, 0, 0.2, 1); }
@@ -1886,6 +1900,7 @@
 <!-- ============================================ -->
 <section class="fame-bar-section fade-in">
   <div class="fame-bar-title">
+    <span class="section-icon-badge"><i class="fas fa-crown"></i></span>
     <span>صُناع المستقبل </span>
   </div>
   <p class="honors-subtitle"> أسماء صنعت الفرق وتركت أثراً </p>
@@ -1935,7 +1950,7 @@
 <!-- ==========      لوحة الشرف       ========== -->
 <!-- ============================================ -->
 <section class="honor-section fade-in" id="honor-section" style="display:none;">
-  <div class="honor-title">الصدارة الرقمية</div>
+  <div class="honor-title"><span class="section-icon-badge"><i class="fas fa-trophy"></i></span><span>الصدارة الرقمية</span></div>
   <div class="honor-sub" id="honorSub"></div>
   <div class="honor-tabs" id="honorTabs">
     <span class="honor-tab-indicator" id="honorTabIndicator"></span>
@@ -1956,6 +1971,7 @@
 <section class="voting-section fade-in" id="projects-section">
   <div class="voting-header">
     <h3 class="voting-title">
+      <span class="section-icon-badge"><i class="fas fa-check-to-slot"></i></span>
       <span>معرض المشاريع الطلابية</span>
     </h3>
   </div>
@@ -2064,21 +2080,17 @@
 <section class="chat-section fade-in">
   <div class="chat-header">
     <h3 class="chat-title">
-      <i class="fab fa-telegram"></i>
+      <span class="section-icon-badge"><i class="fab fa-telegram"></i></span>
       <span>ساحة النقاش التفاعلية</span>
     </h3>
   </div>
   <p class="chat-description">انضم إلى مجموعة المادة على تيليجرام للنقاش وطرح الأسئلة.</p>
-  <div style="display: flex; flex-direction: column; align-items: center; gap: 0.5rem;">
+  <div class="chat-cta-card">
     <a href="https://t.me/+wSI6ZR6AvcEyYjk0" target="_blank" rel="noopener" class="inquiry-btn primary">
       <i class="fas fa-sign-in-alt"></i>
       <span> مجتمع التقنية الرقمية</span>
     </a>
-    <div style="background: rgba(14,149,148,0.06); border-radius: 16px; padding: 10px 16px; margin-top: 14px; width: 100%; max-width: 450px; text-align: center;">
-      <p style="font-size: 0.85rem; color: var(--text-medium); margin: 0; line-height: 1.5;">
-        عند النقر سيفتح تطبيق تيليجرام مباشرة على المجموعة.
-      </p>
-    </div>
+    <p class="chat-cta-note">عند النقر سيفتح تطبيق تيليجرام مباشرة على المجموعة.</p>
   </div>
 </section>
 
@@ -2095,7 +2107,7 @@
 <!--            مكتبة الطالب                   -->
 <!-- ========================================= -->
 <section class="library-section fade-in" id="library-section">
-  <h3 class="library-title">مكتبة الطالب</h3>
+  <h3 class="library-title"><span class="section-icon-badge"><i class="fas fa-book-open"></i></span><span>مكتبة الطالب</span></h3>
   <div class="library-cards-row">
     <div class="library-card library-card-1" data-url="https://sites.google.com/view/dvdf55/ss?authuser=1" data-title="الأول ثانوي">
       <span class="library-card-number">١</span>
@@ -2128,6 +2140,7 @@
 <section class="grades-query-section fade-in" id="grades-section">
   <div class="grades-query-container">
     <div class="grades-header">
+      <span class="section-icon-badge"><i class="fas fa-clipboard-list"></i></span>
       <h3>الاستعلام عن الدرجات</h3>
     </div>
     <p class="grades-description">أدخل رقمك الخاص للاطلاع على تقدمك في مادة التقنية الرقمية</p>
@@ -2162,6 +2175,7 @@
 <!-- قسم الذكاء الاصطناعي -->
 <div id="ai-assistant-section" class="ai-assistant-container fade-in">
   <h2 class="ai-header">
+    <span class="section-icon-badge"><i class="fas fa-graduation-cap"></i></span>
     <span>المساعد الرقمي</span>
   </h2>
   <p class="ai-description">مساعد التقنية الرقمية — يجيب عن أسئلتك ويبسط المفاهيم</p>
@@ -2196,7 +2210,7 @@
 
 <!-- قسم تسليم المشاريع -->
 <div class="submit-project-section fade-in">
-  <h3 class="submit-project-title">تسليم المشاريع</h3>
+  <h3 class="submit-project-title"><span class="section-icon-badge"><i class="fas fa-upload"></i></span><span>تسليم المشاريع</span></h3>
   <p class="submit-project-description">سلّم مشروعك التعليمي مباشرة من هنا، وسيصل للمعلم للمراجعة والتقييم.</p>
   <div class="inquiries-container">
     <button onclick="showUploadModal()" class="inquiry-btn primary" style="font-family:inherit;">
