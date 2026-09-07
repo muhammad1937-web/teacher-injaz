@@ -175,6 +175,9 @@
     /* ========================================= */
     .hero-intro { max-width: 700px; margin: 0 auto; padding: 32px 1.2rem; text-align: center; }
     .hero-title { font-size: 1.6rem; font-weight: 800; color: var(--primary-dark); margin: 0 0 10px; }
+    /* تصغير محسوب ليبقى العنوان في سطر واحد على الشاشات الضيقة */
+    @media (max-width: 389px) { .hero-title { font-size: 1.45rem; } }
+    @media (max-width: 339px) { .hero-title { font-size: 1.3rem; } }
     .hero-subtitle { font-size: 0.85rem; font-weight: 400; color: var(--text-medium); max-width: 90%; margin: 0 auto 22px; line-height: 1.6; }
     .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
     .hero-btn-primary, .hero-btn-secondary {
@@ -218,21 +221,25 @@
     .services-grid {
       max-width: 700px;
       margin: 0 auto 32px;
-      padding: 0 1.2rem;
+      padding: 0 16px;
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 12px;
+      grid-auto-rows: 1fr;
+      align-items: stretch;
+      column-gap: 12px;
+      row-gap: 12px;
     }
     .service-card {
       display: flex;
       flex-direction: column;
       align-items: center;
+      justify-content: center;
       text-align: center;
-      gap: 4px;
+      gap: 5px;
       background: var(--pure-white);
       border: 1px solid rgba(22,50,79,0.06);
       border-radius: 16px;
-      padding: 16px;
+      padding: 20px 14px;
       box-shadow: var(--shadow-soft);
       cursor: pointer;
       font-family: inherit;
@@ -240,7 +247,7 @@
     }
     @media (hover: hover) and (pointer: fine) {
     .service-card:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
-    .service-card i { font-size: 1.3rem; color: var(--accent-teal); margin-bottom: 2px; }
+    .service-card i { font-size: 1.3rem; color: var(--accent-teal); margin-bottom: 5px; }
     .service-name { font-size: 0.85rem; font-weight: 600; color: var(--primary-dark); }
     .service-desc { font-size: 0.68rem; color: var(--text-light); }
 
@@ -1988,7 +1995,7 @@
 
 <!-- واجهة الاستقبال -->
 <section class="hero-intro fade-in">
-  <h2 class="hero-title">كل ما تحتاجه في مادة التقنية الرقمية</h2>
+  <h2 class="hero-title">كل ما تحتاجه في التقنية الرقمية</h2>
   <p class="hero-subtitle">درجاتك وحضورك ومشاريعك ومصادر المادة، في مكان واحد.</p>
   <div class="hero-actions">
     <button type="button" class="hero-btn-primary" data-scroll-target="grades-section">استعلم عن درجاتك</button>
@@ -2015,22 +2022,22 @@
   <button type="button" class="service-card" data-scroll-target="grades-section">
     <i class="fas fa-clipboard-list"></i>
     <span class="service-name">درجاتي</span>
-    <span class="service-desc">تابع تقدمك في الفترتين</span>
+    <span class="service-desc">تابع تقدم مستواك</span>
   </button>
   <button type="button" class="service-card" data-scroll-target="library-section">
     <i class="fas fa-book-open"></i>
     <span class="service-name">مكتبتي</span>
-    <span class="service-desc">دروس ومصادر صفك</span>
+    <span class="service-desc">المصادر والمعلومات</span>
   </button>
   <button type="button" class="service-card" data-scroll-target="projects-section">
     <i class="fas fa-diagram-project"></i>
     <span class="service-name">المشاريع</span>
-    <span class="service-desc">التسليم والتصويت</span>
+    <span class="service-desc">التصويت والمنافسة</span>
   </button>
   <button type="button" class="service-card" data-scroll-target="ai-assistant-section">
     <i class="fas fa-graduation-cap"></i>
     <span class="service-name">المساعد الرقمي</span>
-    <span class="service-desc">اسأل عن أي مفهوم</span>
+    <span class="service-desc">أسأل عن مفاهيم التقنية</span>
   </button>
 </div>
 
