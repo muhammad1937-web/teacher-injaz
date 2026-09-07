@@ -142,7 +142,7 @@
       background-repeat: no-repeat;
       color: white;
       text-align: center;
-      padding: calc(26px + env(safe-area-inset-top, 0px)) 1rem 30px;
+      padding: calc(24px + env(safe-area-inset-top, 0px)) 1rem 30px;
       position: relative;
       border-bottom-left-radius: 25px;
       border-bottom-right-radius: 25px;
@@ -165,37 +165,43 @@
     }
     .header-content { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; }
 
-    /* ١ — سطر الهوية: الهوية يمينًا والشعار يسارًا */
-    .header-identity {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 20px;
-      width: 100%;
-      padding: 0 18px;
-      margin-bottom: 22px;
-    }
-    .header-logo { display: flex; align-items: center; flex-shrink: 0; }
+    /* ١ — شعار وزارة التعليم */
+    /* 13px بدل 16px: تقليل الفاصل الرأسي لإبقاء الجزء العلوي أقصر من السابق */
+    .header-logo { display: flex; align-items: center; justify-content: center; margin-bottom: 13px; }
     .header-logo img { height: 48px; width: auto; display: block; filter: brightness(0) invert(1); transition: transform 0.3s ease; }
     @media (hover: hover) and (pointer: fine) {
     .header-logo img:hover { transform: scale(1.05); } }
-    .header-identity-text { display: flex; flex-direction: column; align-items: flex-start; text-align: right; line-height: 1.35; }
-    .header-identity-title { font-size: 1.05rem; font-weight: 700; color: #fff; letter-spacing: 0.3px; }
-    .header-identity-sub { font-size: 0.72rem; font-weight: 400; color: #fff; opacity: 0.68; margin-top: 3px; }
 
-    /* شارة اسم المدرسة — جزء من كتلة الهوية */
-    .tech-header .header-school-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.6rem; font-weight: 400; padding: 5px 12px; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 10px; opacity: 0.6; letter-spacing: 0.5px; margin-top: 9px; }
-    .tech-header .header-school-badge i { font-size: 0.55rem; }
-
-    /* الجوال الضيق: الشعار في سطر مستقل فوق الهوية.
-       العتبة محسوبة من عرض المحتوى الفعلي (نص 154px + شعار 63px + فجوة 20px + حشو 68px):
-       الصف يتزاحم فعليًا دون 305px فقط، ويتسع بلا ضيق عند 320px فما فوق. */
-    @media (max-width: 304px) {
-      .header-identity { flex-direction: column; gap: 12px; padding: 0 12px; }
-      .header-logo { order: -1; }
-      .header-logo img { height: 42px; }
-      .header-identity-text { align-items: center; text-align: center; }
+    /* ٢ — شريط التعريف: المعلم | المادة | المدرسة */
+    .header-meta {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      column-gap: 12px;
+      row-gap: 8px;
+      margin-bottom: 18px;
+      padding: 0 12px;
     }
+    .header-meta-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: rgba(255, 255, 255, 0.78);
+    }
+    .header-meta-item i { font-size: 0.62rem; color: rgba(255, 255, 255, 0.55); }
+    /* الفاصل جزء من العنصر الذي يليه، ويُخفى إذا صار العنصر أول عنصر في سطره */
+    .header-meta-item::before {
+      content: '';
+      width: 1px;
+      height: 12px;
+      background: rgba(255, 255, 255, 0.22);
+      margin-inline-end: 6px;
+      flex-shrink: 0;
+    }
+    .header-meta-item.at-line-start::before { display: none; }
 
     /* ٣ — العنوان الكبير */
     .header-headline { font-size: 1.55rem; font-weight: 800; color: #fff; letter-spacing: 0.5px; line-height: 1.5; max-width: 92%; margin: 0 0 10px; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); }
@@ -1962,16 +1968,16 @@
 <header class="tech-header fade-in">
   <div class="header-content">
 
-    <!-- ١ — سطر الهوية -->
-    <div class="header-identity">
-      <div class="header-identity-text">
-        <span class="header-identity-title">واجهة المعلم الرقمي</span>
-        <span class="header-identity-sub">أ. محمد الغامدي · التقنية الرقمية</span>
-        <span class="header-school-badge"><i class="fas fa-school"></i>ثانوية الإمام النووي</span>
-      </div>
-      <div class="header-logo">
-        <img src="images/logo.png" alt="شعار واجهة المعلم الرقمي">
-      </div>
+    <!-- ١ — شعار وزارة التعليم -->
+    <div class="header-logo">
+      <img src="images/logo.png" alt="شعار وزارة التعليم">
+    </div>
+
+    <!-- ٢ — شريط التعريف -->
+    <div class="header-meta">
+      <span class="header-meta-item"><i class="fas fa-user"></i>أ. محمد الغامدي</span>
+      <span class="header-meta-item"><i class="fas fa-laptop-code"></i>التقنية الرقمية</span>
+      <span class="header-meta-item"><i class="fas fa-school"></i>ثانوية الإمام النووي</span>
     </div>
 
     <!-- ٢ — العنوان الكبير -->
@@ -2789,6 +2795,26 @@ document.addEventListener('keydown', (e) => {
       });
     }
     initHeroScrollButtons();
+
+    // شريط التعريف: إخفاء الفاصل عن أول عنصر في كل سطر عند الالتفاف
+    function syncHeaderMetaSeparators() {
+      const items = document.querySelectorAll('.header-meta-item');
+      let prevTop = null;
+      items.forEach((el, i) => {
+        const top = el.offsetTop;
+        el.classList.toggle('at-line-start', i === 0 || top !== prevTop);
+        prevTop = top;
+      });
+    }
+    syncHeaderMetaSeparators();
+    let metaSepTimer;
+    window.addEventListener('resize', () => {
+      clearTimeout(metaSepTimer);
+      metaSepTimer = setTimeout(syncHeaderMetaSeparators, 120);
+    });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(syncHeaderMetaSeparators);
+    }
     
     // الفواصل والعنوان الجديد
     function initNewSections() {
