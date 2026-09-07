@@ -57,6 +57,9 @@
       --gradient-card: linear-gradient(to bottom, #FFFFFF, #F7F9FA);
       --gradient-subtle: linear-gradient(135deg, rgba(14, 149, 148, 0.1), rgba(127, 196, 195, 0.05));
       --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      --shadow-soft: 0 1px 3px rgba(22,50,79,0.04), 0 4px 16px rgba(22,50,79,0.04);
+      --shadow-soft-lift: 0 4px 20px rgba(22,50,79,0.08);
+      --border-soft: 1px solid rgba(22,50,79,0.06);
     }
 
     /* ========================================= */
@@ -91,7 +94,7 @@
       overflow: hidden;
       position: relative;
       width: 100%;
-      box-shadow: 0 2px 10px var(--shadow-color);
+      box-shadow: var(--shadow-soft);
       border-bottom: 1px solid var(--border-color);
       font-size: 0.85rem;
     }
@@ -168,6 +171,80 @@
     .tech-header p { font-size: 0.85rem; font-weight: 500; margin: 0; color: rgba(255, 255, 255, 0.9); }
 
     /* ========================================= */
+    /*         واجهة الاستقبال                   */
+    /* ========================================= */
+    .hero-intro { max-width: 700px; margin: 0 auto; padding: 32px 1.2rem; text-align: center; }
+    .hero-title { font-size: 1.6rem; font-weight: 800; color: var(--primary-dark); margin: 0 0 10px; }
+    .hero-subtitle { font-size: 0.85rem; font-weight: 400; color: var(--text-medium); max-width: 90%; margin: 0 auto 22px; line-height: 1.6; }
+    .hero-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .hero-btn-primary, .hero-btn-secondary {
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      padding: 0.7rem 1.6rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .hero-btn-primary { background: var(--accent-teal); color: #fff; border: none; box-shadow: var(--shadow-soft); }
+    @media (hover: hover) and (pointer: fine) {
+    .hero-btn-primary:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
+    .hero-btn-secondary { background: transparent; color: var(--accent-teal); border: 1px solid rgba(14,149,148,0.35); }
+    @media (hover: hover) and (pointer: fine) {
+    .hero-btn-secondary:hover { background: rgba(14,149,148,0.06); } }
+
+    /* ========================================= */
+    /*         لوحة الحالة الحيّة                */
+    /* ========================================= */
+    .status-strip {
+      max-width: 700px;
+      margin: 0 auto 28px;
+      padding: 0 1.2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1.8rem;
+      flex-wrap: wrap;
+    }
+    .status-item { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--text-medium); }
+    .status-item i { color: var(--accent-teal); font-size: 0.85rem; }
+    .status-value { display: inline-flex; align-items: center; gap: 5px; font-weight: 600; }
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    .status-dot-available { background: #1D9E75; }
+    .status-dot-closed { background: var(--text-light); }
+
+    /* ========================================= */
+    /*         شبكة خدمات الطالب                 */
+    /* ========================================= */
+    .services-grid {
+      max-width: 700px;
+      margin: 0 auto 32px;
+      padding: 0 1.2rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .service-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 4px;
+      background: var(--pure-white);
+      border: 1px solid rgba(22,50,79,0.06);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: var(--shadow-soft);
+      cursor: pointer;
+      font-family: inherit;
+      transition: var(--transition);
+    }
+    @media (hover: hover) and (pointer: fine) {
+    .service-card:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
+    .service-card i { font-size: 1.3rem; color: var(--accent-teal); margin-bottom: 2px; }
+    .service-name { font-size: 0.85rem; font-weight: 600; color: var(--primary-dark); }
+    .service-desc { font-size: 0.68rem; color: var(--text-light); }
+
+    /* ========================================= */
     /*         الوقت والتاريخ                   */
     /* ========================================= */
     .date-time-container { text-align: center; margin-bottom: 10px; margin-top: 20px; }
@@ -175,11 +252,10 @@
       background: rgba(var(--primary-dark-rgb), 0.05);
       color: var(--text-dark);
       padding: 8px 20px;
-      border-radius: 24px;
+      border-radius: 10px;
       font-size: 0.85rem;
       font-weight: 700;
-      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.1);
-      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-soft);
       position: static;
       transform: none;
       margin: 0 auto;
@@ -191,7 +267,7 @@
       -webkit-backdrop-filter: blur(10px);
     }
     @media (hover: hover) and (pointer: fine) {
-    .compact-date.new-position:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.15); background: rgba(var(--primary-dark-rgb), 0.08); } }
+    .compact-date.new-position:hover { transform: translateY(-3px); box-shadow: var(--shadow-soft-lift); background: rgba(var(--primary-dark-rgb), 0.08); } }
     .date-chip { display: inline-flex; align-items: center; gap: 6px; }
     .date-chip i { color: var(--accent-teal); font-size: 0.95em; }
     .date-divider { width: 1px; height: 14px; background: var(--border-color); flex-shrink: 0; }
@@ -205,12 +281,12 @@
       width: 100%;
       padding: 12px 50px 12px 20px;
       border: 2px solid var(--border-color);
-      border-radius: 24px;
+      border-radius: 10px;
       font-size: 1rem;
       font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
       background: var(--pure-white);
       color: var(--text-dark);
-      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08);
+      box-shadow: var(--shadow-soft);
       transition: var(--transition);
       outline: none;
       position: relative;
@@ -227,17 +303,17 @@
       border: none;
       width: 36px;
       height: 36px;
-      border-radius: 50%;
+      border-radius: 10px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
       transition: var(--transition);
       z-index: 1003;
-      box-shadow: 0 2px 8px rgba(var(--accent-teal-rgb), 0.3);
+      box-shadow: var(--shadow-soft);
     }
     @media (hover: hover) and (pointer: fine) {
-    .search-button:hover { background: var(--ai-teal); transform: translateY(-50%) scale(1.05); box-shadow: 0 8px 20px rgba(var(--accent-teal-rgb), 0.4); } }
+    .search-button:hover { background: var(--ai-teal); transform: translateY(-50%) scale(1.05); box-shadow: var(--shadow-soft-lift); } }
     .search-results {
       position: absolute;
       top: 100%;
@@ -246,13 +322,12 @@
       background: var(--pure-white);
       color: var(--text-dark);
       border-radius: 16px;
-      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.15);
+      box-shadow: var(--shadow-soft);
       margin-top: 5px;
       z-index: 10000;
       max-height: 300px;
       overflow-y: auto;
       display: none;
-      border: 1px solid var(--border-color);
     }
     .search-result-item { padding: 12px 20px; border-bottom: 1px solid rgba(var(--primary-dark-rgb), 0.08); cursor: pointer; transition: var(--transition); display: flex; align-items: center; gap: 10px; }
     .search-result-item:last-child { border-bottom: none; }
@@ -272,20 +347,19 @@
       gap: 0.8rem;
       max-width: 900px;
       margin: 1.5rem auto 2.5rem auto;
-      padding: 1.5rem 1.8rem 1.3rem;
-      border-radius: 24px;
+      padding: 1.9rem 2.25rem 1.6rem;
+      border-radius: 16px;
       position: relative;
       overflow: hidden;
       background: var(--gradient-card);
-      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08);
-      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-soft);
       transition: var(--transition);
     }
     .fame-bar-section::before { content: ''; position: absolute; top: 0; right: 5px; left: 5px; height: 5px; background: var(--gradient-accent); border-radius: 12px 0 0 0; transition: height 0.3s ease; }
     @media (hover: hover) and (pointer: fine) {
     .fame-bar-section:hover::before { height: 6px; } }
     @media (hover: hover) and (pointer: fine) {
-    .fame-bar-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); } }
+    .fame-bar-section:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .fame-bar-title { display: flex; align-items: center; gap: 0.75rem; font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin-bottom: 0.1rem; }
     .fame-bar-title i { font-size: 1.4rem; color: var(--gold-excellence); text-shadow: 0 2px 4px rgba(var(--gold-excellence-rgb), 0.3); }
     .honors-subtitle { margin: 0 0 0.8rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
@@ -300,7 +374,7 @@
   height: 95px;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.25);
+  box-shadow: var(--shadow-soft);
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -308,7 +382,7 @@
     @media (hover: hover) and (pointer: fine) {
 .student-image:hover {
   transform: scale(1.05);
-  box-shadow: 0 8px 25px rgba(22, 50, 79, 0.3), 0 0 18px rgba(14, 149, 148, 0.3);
+  box-shadow: var(--shadow-soft);
 } }
     .student-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
     @media (hover: hover) and (pointer: fine) {
@@ -318,7 +392,7 @@
     .info-toggle-btn {
       width: 30px;
       height: 30px;
-      border-radius: 50%;
+      border-radius: 10px;
       background: var(--accent-teal);
       color: white;
       border: 2px solid white;
@@ -329,15 +403,15 @@
       font-size: 0.85rem;
       font-weight: bold;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(var(--accent-teal-rgb), 0.4);
+      box-shadow: var(--shadow-soft);
       z-index: 10;
       margin-top: 0.2rem;
     }
     @media (hover: hover) and (pointer: fine) {
-    .info-toggle-btn:hover { background: var(--ai-teal); transform: scale(1.1); box-shadow: 0 8px 20px rgba(var(--accent-teal-rgb), 0.6); } }
-    .student-item.active .info-toggle-btn { background: var(--gold-excellence); transform: rotate(45deg); box-shadow: 0 2px 8px rgba(var(--gold-excellence-rgb), 0.6); }
+    .info-toggle-btn:hover { background: var(--ai-teal); transform: scale(1.1); box-shadow: var(--shadow-soft-lift); } }
+    .student-item.active .info-toggle-btn { background: var(--gold-excellence); transform: rotate(45deg); box-shadow: var(--shadow-soft-lift); }
     @media (hover: hover) and (pointer: fine) {
-    .student-item.active .info-toggle-btn:hover { background: var(--ai-teal); transform: rotate(45deg) scale(1.1); box-shadow: 0 8px 20px rgba(var(--gold-excellence-rgb), 0.8); } }
+    .student-item.active .info-toggle-btn:hover { background: var(--ai-teal); transform: rotate(45deg) scale(1.1); box-shadow: var(--shadow-soft-lift); } }
     .unified-student-info {
       position: absolute;
       top: -100px;
@@ -349,7 +423,7 @@
       border-radius: 16px;
       width: 240px;
       text-align: center;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+      box-shadow: var(--shadow-soft);
       z-index: 1005;
       opacity: 0;
       visibility: hidden;
@@ -370,12 +444,11 @@
     /* ============================================ */
     .library-section {
       max-width: 900px;
-      margin: 2.5rem auto;
-      padding: 1.5rem 1.8rem;
-      border-radius: 24px;
+      margin: 3.5rem auto;
+      padding: 1.9rem 2.25rem;
+      border-radius: 16px;
       background: var(--gradient-card);
-      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08);
-      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-soft);
       position: relative;
       overflow: hidden;
       transition: var(--transition);
@@ -384,23 +457,24 @@
     @media (hover: hover) and (pointer: fine) {
     .library-section:hover::before { height: 6px; } }
     @media (hover: hover) and (pointer: fine) {
-    .library-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); } }
+    .library-section:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .library-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin: 0 0 1.2rem; text-align: center; }
-    .library-cards-row { display: flex; gap: 1.2rem; flex-wrap: wrap; }
+    .library-cards-row { display: flex; gap: 1.7rem; flex-wrap: wrap; }
     .library-card {
       flex: 1;
       min-width: 140px;
       background: var(--pure-white);
       border-radius: 16px;
       padding: 1.4rem 1rem;
-      border: 1.5px solid var(--border-color);
+      border: 1px solid rgba(22,50,79,0.06);
+      box-shadow: var(--shadow-soft);
       text-align: center;
       cursor: pointer;
       transition: var(--transition);
       -webkit-touch-callout: none;
     }
     @media (hover: hover) and (pointer: fine) {
-    .library-card:hover { transform: translateY(-5px); box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.15); border-color: var(--accent-teal); } }
+    .library-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-soft-lift); border-color: var(--accent-teal); } }
     .library-card.pressed { transform: scale(0.97); transition: transform 0.12s ease; }
     @media (prefers-reduced-motion: reduce) {
       .library-card.pressed { transform: none; }
@@ -421,17 +495,17 @@
     .library-card-note { font-size: 0.7rem; color: var(--text-light); margin: 4px 0 0; }
     .library-card-disabled { cursor: not-allowed; opacity: 0.55; }
     @media (hover: hover) and (pointer: fine) {
-    .library-card-disabled:hover { transform: none; box-shadow: none; border-color: var(--border-color); } }
+    .library-card-disabled:hover { transform: none; box-shadow: none; border-color: rgba(22,50,79,0.06); } }
 
     /* ========================================= */
     /*      قسم الذكاء الاصطناعي                 */
     /* ========================================= */
-    .ai-assistant-container { max-width: 900px; margin: 2.5rem auto; padding: 1.5rem 1.8rem; background: var(--gradient-card); border-radius: 24px; box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08); position: relative; overflow: hidden; border: 1px solid var(--border-color); transition: var(--transition); }
+    .ai-assistant-container { max-width: 900px; margin: 3.5rem auto; padding: 1.9rem 2.25rem; background: var(--gradient-card); border-radius: 16px; box-shadow: var(--shadow-soft); position: relative; overflow: hidden; transition: var(--transition); }
     .ai-assistant-container::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; transition: height 0.3s ease; }
     @media (hover: hover) and (pointer: fine) {
     .ai-assistant-container:hover::before { height: 6px; } }
     @media (hover: hover) and (pointer: fine) {
-    .ai-assistant-container:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); } }
+    .ai-assistant-container:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .ai-header { color: var(--primary-dark); text-align: center; margin-bottom: 0.8rem; font-size: 1.15rem; position: relative; font-weight: 700; display: flex; align-items: baseline; justify-content: center; gap: 1rem; }
     @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
     .ai-description {
@@ -442,14 +516,14 @@
       text-align: center;
       line-height: 1.5;
     }
-    .ai-chat-container { background: var(--pure-white); border-radius: 16px; padding: 1.5rem; box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08); border: 1px solid var(--border-color); margin-bottom: 1.5rem; }
-    .ai-messages { height: 300px; overflow-y: auto; margin-bottom: 1rem; padding: 1rem; background: var(--pure-white); border-radius: 10px; border: 1px solid var(--border-color); }
+    .ai-chat-container { background: var(--pure-white); border-radius: 16px; padding: 1.5rem; box-shadow: var(--shadow-soft); margin-bottom: 1.5rem; }
+    .ai-messages { height: 300px; overflow-y: auto; margin-bottom: 1rem; padding: 1rem; background: var(--pure-white); border-radius: 10px; border: 1px solid rgba(22,50,79,0.06); }
     .message { margin-bottom: 1rem; padding: 0.8rem 1rem; border-radius: 16px; max-width: 85%; word-wrap: break-word; transform: scale(0.95); opacity: 0; transform-origin: bottom left; animation: pop-in 0.4s cubic-bezier(0.25, 0.8, 0.25, 1) forwards; }
     @keyframes pop-in { to { transform: scale(1); opacity: 1; } }
-    .user-message { background: rgba(var(--primary-dark-rgb), 0.05); color: var(--text-dark); margin-right: auto; border-bottom-right-radius: 4px; border: 1px solid rgba(var(--primary-dark-rgb), 0.1); box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); transform-origin: bottom left; }
-    .ai-message { background: rgba(var(--ai-teal-rgb), 0.05); color: var(--text-dark); margin-left: auto; border: 1px solid rgba(var(--ai-teal-rgb), 0.2); border-bottom-left-radius: 4px; box-shadow: 0 2px 8px rgba(var(--ai-teal-rgb), 0.1); transform-origin: bottom right; position: relative; padding-left: 45px; white-space: pre-wrap; }
+    .user-message { background: rgba(var(--primary-dark-rgb), 0.05); color: var(--text-dark); margin-right: auto; border-bottom-right-radius: 4px; border: 1px solid rgba(var(--primary-dark-rgb), 0.1); box-shadow: var(--shadow-soft); transform-origin: bottom left; }
+    .ai-message { background: rgba(var(--ai-teal-rgb), 0.05); color: var(--text-dark); margin-left: auto; border: 1px solid rgba(var(--ai-teal-rgb), 0.2); border-bottom-left-radius: 4px; box-shadow: var(--shadow-soft); transform-origin: bottom right; position: relative; padding-left: 45px; white-space: pre-wrap; }
     .ai-label-row { display: flex; align-items: center; gap: 8px; margin-bottom: 6px; }
-    .ai-avatar-icon { width: 28px; height: 28px; border-radius: 50%; background: rgba(14, 149, 148, 0.08); color: #16324F; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ai-avatar-icon { width: 28px; height: 28px; border-radius: 10px; background: rgba(14, 149, 148, 0.08); color: #16324F; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
     .ai-avatar-icon i { font-size: 14px; }
     .copy-btn { position: absolute; top: 10px; left: 10px; background: rgba(var(--ai-teal-rgb), 0.15); color: var(--ai-teal); border: none; width: 30px; height: 30px; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 0.85rem; opacity: 0.5; transition: opacity 0.3s ease, background-color 0.3s ease; }
     @media (hover: hover) and (pointer: fine) {
@@ -457,11 +531,11 @@
     .copy-btn:active { transform: scale(0.95); }
     .copy-btn .fa-check { color: var(--accent-teal); font-size: 1.15rem; }
     .ai-input-group { display: flex; gap: 0.5rem; align-items: center; }
-    .ai-input { flex: 1; padding: 12px 15px; border: 2px solid var(--border-color); border-radius: 24px; font-size: 1rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; background: var(--pure-white); color: var(--text-dark); transition: var(--transition); outline: none; }
+    .ai-input { flex: 1; padding: 12px 15px; border: 2px solid var(--border-color); border-radius: 10px; font-size: 1rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; background: var(--pure-white); color: var(--text-dark); transition: var(--transition); outline: none; }
     .ai-input:focus { border-color: var(--ai-teal); box-shadow: 0 0 0 3px rgba(var(--ai-teal-rgb), 0.1); }
-    .ai-send-btn { background: var(--accent-teal); color: white; border: none; width: 42px; height: 42px; padding: 0; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); font-size: 1.15rem; box-shadow: 0 2px 8px rgba(var(--accent-teal-rgb), 0.3); line-height: 1; flex-shrink: 0; }
+    .ai-send-btn { background: var(--accent-teal); color: white; border: none; width: 42px; height: 42px; padding: 0; border-radius: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: var(--transition); font-size: 1.15rem; box-shadow: var(--shadow-soft); line-height: 1; flex-shrink: 0; }
     @media (hover: hover) and (pointer: fine) {
-    .ai-send-btn:hover { background: var(--ai-teal); transform: scale(1.05); box-shadow: 0 8px 20px rgba(var(--accent-teal-rgb), 0.4); } }
+    .ai-send-btn:hover { background: var(--ai-teal); transform: scale(1.05); box-shadow: var(--shadow-soft-lift); } }
     .ai-send-btn:disabled { color: var(--text-light); cursor: not-allowed; transform: none; }
     .ai-typing-indicator { display: flex; align-items: center; padding: 10px 15px; display: none; }
     .ai-typing-indicator .dot { width: 8px; height: 8px; border-radius: 50%; background-color: var(--ai-teal); margin: 0 3px; animation: typing-bounce 1.4s infinite ease-in-out both; }
@@ -474,12 +548,11 @@
     /* ========================================= */
     .submit-project-section {
       max-width: 900px;
-      margin: 2.5rem auto;
-      padding: 1.5rem 1.8rem;
-      border-radius: 24px;
+      margin: 3.5rem auto;
+      padding: 1.9rem 2.25rem;
+      border-radius: 16px;
       background: var(--gradient-card);
-      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08);
-      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-soft);
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -487,11 +560,11 @@
     }
     .submit-project-section::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; }
     @media (hover: hover) and (pointer: fine) {
-    .submit-project-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); } }
+    .submit-project-section:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .submit-project-title { font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin: 0 0 0.6rem; }
     .submit-project-description { margin: 0 0 1.2rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; line-height: 1.5; }
     .inquiries-container { display: flex; justify-content: center; align-items: center; gap: 1rem; flex-wrap: wrap; }
-    .inquiry-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; font-size: 1.15rem; font-weight: 700; padding: 0.9rem 1.8rem; border-radius: 999px; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.2; }
+    .inquiry-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.75rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; font-size: 1.15rem; font-weight: 700; padding: 0.9rem 1.8rem; border-radius: 10px; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: all 0.3s ease; white-space: nowrap; line-height: 1.2; }
     .inquiry-btn i { font-size: 1.2em; }
 .inquiry-btn.primary {
   display: inline-flex;
@@ -502,7 +575,7 @@
   font-size: 1rem;
   font-weight: 600;
   padding: 0.6rem 1.5rem;
-  border-radius: 999px;
+  border-radius: 10px;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -512,7 +585,7 @@
   background: var(--primary-dark);
   color: white;
   border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.25);
+  box-shadow: var(--shadow-soft);
   position: relative;
   overflow: hidden;
 }
@@ -533,7 +606,7 @@
 
 .inquiry-btn.primary:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.3);
+  box-shadow: var(--shadow-soft);
 } }
     @media (hover: hover) and (pointer: fine) {
 
@@ -549,16 +622,16 @@
 
 .inquiry-btn.primary:active {
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(22, 50, 79, 0.2);
+  box-shadow: var(--shadow-soft);
 }
 
     /* ========================================= */
     /*          زر العودة للأعلى                 */
     /* ========================================= */
-    .back-to-top { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: rgba(var(--primary-dark-rgb), 0.85); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.4rem; cursor: pointer; z-index: 999; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); border: 2px solid rgba(255, 255, 255, 0.3); box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.3); }
+    .back-to-top { position: fixed; bottom: 30px; left: 30px; width: 50px; height: 50px; background: rgba(var(--primary-dark-rgb), 0.85); border-radius: 10px; display: flex; align-items: center; justify-content: center; color: white; font-size: 1.4rem; cursor: pointer; z-index: 999; opacity: 0; visibility: hidden; transform: translateY(20px); transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); border: 2px solid rgba(255, 255, 255, 0.3); box-shadow: var(--shadow-soft); }
     .back-to-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
     @media (hover: hover) and (pointer: fine) {
-    .back-to-top:hover { background: rgba(var(--primary-dark-rgb), 0.95); transform: translateY(-5px) scale(1.05); box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.4); } }
+    .back-to-top:hover { background: rgba(var(--primary-dark-rgb), 0.95); transform: translateY(-5px) scale(1.05); box-shadow: var(--shadow-soft-lift); } }
     .back-to-top:active { transform: translateY(-2px) scale(0.98); }
 
     /* ========================================= */
@@ -615,7 +688,7 @@
     .footer-link i { color: var(--accent-teal); }
     .footer-copyright { font-size: 0.85rem; display: flex; flex-direction: column; align-items: center; }
     .footer-brand { display: block; text-align: center; }
-    .footer-brand-logo { display: block; height: 34px; width: 34px; border-radius: 9px; margin: 0 auto 10px; }
+    .footer-brand-logo { display: block; height: 34px; width: 34px; border-radius: 10px; margin: 0 auto 10px; }
     .footer-visits { margin-top: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--text-light); font-size: 0.7rem; }
     .footer-visits img { height: 16px; display: block; }
 
@@ -628,12 +701,12 @@
     /* ============================================ */
     /* ==========   قسم مواضيع التصويت   ========== */
     /* ============================================ */
-    .voting-section { max-width: 900px; margin: 3rem auto; padding: 1.5rem 1.8rem; border-radius: 24px; background: var(--gradient-card); box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08); border: 1px solid var(--border-color); text-align: center; position: relative; overflow: hidden; }
+    .voting-section { max-width: 900px; margin: 4.2rem auto; padding: 1.9rem 2.25rem; border-radius: 16px; background: var(--gradient-card); box-shadow: var(--shadow-soft); text-align: center; position: relative; overflow: hidden; }
     .voting-section::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; transition: height 0.3s ease; }
     @media (hover: hover) and (pointer: fine) {
     .voting-section:hover::before { height: 6px; } }
     @media (hover: hover) and (pointer: fine) {
-    .voting-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); } }
+    .voting-section:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .voting-header { display: flex; justify-content: center; align-items: center; margin-bottom: 0.8rem; }
     .voting-title { display: flex; align-items: center; gap: 0.75rem; font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin: 0; }
     .voting-title i { font-size: 1.4rem; color: var(--accent-teal); }
@@ -641,18 +714,18 @@
     @media (hover: hover) and (pointer: fine) {
     .voting-description:hover { color: var(--tech-blue); transform: none; background: transparent; border: none; box-shadow: none; } }
     .projects-container { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-    .project-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; font-size: 1rem; font-weight: 600; padding: 0.9rem 1.5rem; border-radius: 16px; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); white-space: nowrap; min-width: 160px; background: rgba(255, 255, 255, 0.7); color: var(--text-medium); border: 1.5px solid var(--border-color); box-shadow: 0 2px 8px rgba(var(--primary-dark-rgb), 0.08); position: relative; overflow: hidden; text-align: center; flex: 1; }
+    .project-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; font-size: 1rem; font-weight: 600; padding: 0.9rem 1.5rem; border-radius: 16px; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); white-space: nowrap; min-width: 160px; background: rgba(255, 255, 255, 0.7); color: var(--text-medium); box-shadow: var(--shadow-soft); position: relative; overflow: hidden; text-align: center; flex: 1; }
     .project-btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(var(--accent-teal-rgb), 0.05); opacity: 0; transition: opacity 0.3s ease; }
     .project-btn { opacity: 0; }
     @media (prefers-reduced-motion: reduce) { .project-btn { opacity: 1; } }
     .project-btn i { font-size: 1em; transition: all 0.3s ease; }
     @media (hover: hover) and (pointer: fine) {
-    .project-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.12); border-color: var(--accent-teal); background: rgba(255, 255, 255, 0.9); color: var(--primary-dark); } }
+    .project-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-soft-lift); border-color: var(--accent-teal); background: rgba(255, 255, 255, 0.9); color: var(--primary-dark); } }
     @media (hover: hover) and (pointer: fine) {
     .project-btn:hover::before { opacity: 1; } }
     @media (hover: hover) and (pointer: fine) {
     .project-btn:hover i { transform: translateX(3px); } }
-    .project-btn:active { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(var(--primary-dark-rgb), 0.1); }
+    .project-btn:active { transform: translateY(-1px); box-shadow: var(--shadow-soft-lift); }
     .project-btn span { font-weight: 600; color: var(--text-medium); text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); }
     .project-btn:nth-child(1) { border-color: rgba(var(--tech-blue-rgb), 0.3); }
     .project-btn:nth-child(1) i { color: var(--tech-blue); }
@@ -670,18 +743,22 @@
     .project-btn:nth-child(3):hover i { color: var(--gold-excellence); } }
     .project-btn-disabled { cursor: not-allowed; opacity: 0.55; }
     @media (hover: hover) and (pointer: fine) {
-    .project-btn-disabled:hover { transform: none !important; box-shadow: 0 2px 8px rgba(var(--primary-dark-rgb), 0.08) !important; border-color: inherit !important; background: rgba(255, 255, 255, 0.7) !important; color: var(--text-medium) !important; } }
+    .project-btn-disabled:hover { transform: none !important; box-shadow: var(--shadow-soft-lift); border-color: inherit !important; background: rgba(255, 255, 255, 0.7) !important; color: var(--text-medium) !important; } }
     @media (hover: hover) and (pointer: fine) {
     .project-btn-disabled:hover i { transform: none !important; } }
-    .project-viewer-box { background: white; border-radius: 24px; width: 95%; max-width: 800px; height: 75vh; margin: 0 auto; box-shadow: 0 16px 32px rgba(0,0,0,0.2); overflow: hidden; display: flex; flex-direction: column; }
+    .project-viewer-box { background: white; border-radius: 16px; width: 95%; max-width: 800px; height: 75vh; margin: 0 auto; box-shadow: var(--shadow-soft); overflow: hidden; display: flex; flex-direction: column; }
+    .project-viewer-box.bottom-sheet { width: 95%; max-width: 800px; height: 75vh; max-height: 75vh; border-radius: 16px 16px 0 0; }
+    @media (min-width: 769px) {
+      .project-viewer-box.bottom-sheet { border-radius: 16px; }
+    }
     .project-viewer-frame { flex: 1; min-height: 0; }
     .project-viewer-frame iframe, .project-viewer-frame img { display: block; }
-    .chat-section { max-width: 900px; margin: 3rem auto; padding: 1.5rem 1.8rem; border-radius: 24px; background: var(--gradient-card); border: 1px solid var(--border-color); text-align: center; box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08); position: relative; overflow: hidden; }
+    .chat-section { max-width: 900px; margin: 4.2rem auto; padding: 1.9rem 2.25rem; border-radius: 16px; background: var(--gradient-card); text-align: center; box-shadow: var(--shadow-soft); position: relative; overflow: hidden; }
     .chat-section::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; transition: height 0.3s ease; }
     @media (hover: hover) and (pointer: fine) {
     .chat-section:hover::before { height: 6px; } }
     @media (hover: hover) and (pointer: fine) {
-    .chat-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); } }
+    .chat-section:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .chat-header { display: flex; justify-content: center; align-items: center; margin-bottom: 0.8rem; }
     .chat-title { display: flex; align-items: center; gap: 0.45rem; font-size: 1.15rem; font-weight: 700; color: var(--primary-dark); margin: 0; }
     .chat-title i { font-size: 1.75rem; color: var(--tech-blue); opacity: 0.9; transition: all 0.3s ease; }
@@ -690,9 +767,9 @@
     .chat-description { margin: 0 0 1.5rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
     @media (hover: hover) and (pointer: fine) {
     .chat-description:hover { color: var(--tech-blue); transform: none; background: transparent; border: none; box-shadow: none; } }
-    .clear-chat-btn { background: var(--warning-red); color: white; border: none; padding: 8px 15px; border-radius: 24px; cursor: pointer; font-size: 0.85rem; margin-bottom: 10px; transition: all 0.3s; display: flex; align-items: center; gap: 5px; margin: 0 auto 10px; }
+    .clear-chat-btn { background: var(--warning-red); color: white; border: none; padding: 8px 15px; border-radius: 10px; cursor: pointer; font-size: 0.85rem; margin-bottom: 10px; transition: all 0.3s; display: flex; align-items: center; gap: 5px; margin: 0 auto 10px; }
     @media (hover: hover) and (pointer: fine) {
-    .clear-chat-btn:hover { background: #A93226; transform: translateY(-2px); box-shadow: 0 2px 8px rgba(var(--warning-red-rgb), 0.3); } }
+    .clear-chat-btn:hover { background: #A93226; transform: translateY(-2px); box-shadow: var(--shadow-soft-lift); } }
 
     /* ============================================ */
     /* ==========   الفواصل الجديدة      ========== */
@@ -701,7 +778,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 2rem auto;
+  margin: 2.8rem auto;
   max-width: 80%;
   height: 1px;
   position: relative;
@@ -743,7 +820,7 @@
   font-size: 1rem;
   font-weight: 600;
   padding: 0.9rem 2.5rem;
-  border-radius: 999px;
+  border-radius: 10px;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -752,7 +829,7 @@
   background: var(--primary-dark);
   color: white;
   border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.25);
+  box-shadow: var(--shadow-soft);
   position: relative;
   overflow: hidden;
   margin: 1rem auto 2rem;
@@ -773,7 +850,7 @@
 
 .vote-btn:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.3);
+  box-shadow: var(--shadow-soft);
 } }
     @media (hover: hover) and (pointer: fine) {
 
@@ -788,17 +865,17 @@
 
 .vote-btn:active {
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.3);
+  box-shadow: var(--shadow-soft);
 }
     .vote-btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), transparent); opacity: 0; transition: opacity 0.3s ease; }
     .vote-btn i { font-size: 1.2em; transition: transform 0.3s ease; }
     @media (hover: hover) and (pointer: fine) {
-    .vote-btn:hover { background: var(--ai-teal); transform: translateY(-3px); box-shadow: 0 8px 20px rgba(var(--accent-teal-rgb), 0.4); } }
+    .vote-btn:hover { background: var(--ai-teal); transform: translateY(-3px); box-shadow: var(--shadow-soft-lift); } }
     @media (hover: hover) and (pointer: fine) {
     .vote-btn:hover::before { opacity: 1; } }
     @media (hover: hover) and (pointer: fine) {
     .vote-btn:hover i { transform: translateX(3px); } }
-    .vote-btn:active { transform: translateY(-1px); box-shadow: 0 2px 8px rgba(var(--accent-teal-rgb), 0.25); }
+    .vote-btn:active { transform: translateY(-1px); box-shadow: var(--shadow-soft-lift); }
     .update-note { text-align: center; font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem; }
 
     @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
@@ -808,12 +885,11 @@
     /* ============================================ */
     .grades-query-section {
       max-width: 900px;
-      margin: 2.5rem auto;
-      padding: 1.5rem 1.8rem;
-      border-radius: 24px;
+      margin: 3.5rem auto;
+      padding: 1.9rem 2.25rem;
+      border-radius: 16px;
       background: var(--gradient-card);
-      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08);
-      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-soft);
       text-align: center;
       position: relative;
       overflow: hidden;
@@ -835,7 +911,7 @@
     } }
     @media (hover: hover) and (pointer: fine) {
     .grades-query-section:hover {
-      box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12);
+      box-shadow: var(--shadow-soft);
       transform: translateY(-2px);
     } }
     .grades-header {
@@ -878,7 +954,7 @@
       flex: 1;
       padding: 12px 18px;
       border: 2px solid var(--border-color);
-      border-radius: 24px;
+      border-radius: 10px;
       font-size: 1rem;
       font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
       background: var(--pure-white);
@@ -901,7 +977,7 @@
   font-size: 1rem;
   font-weight: 600;
  padding: 0.6rem 1.8rem;
-  border-radius: 999px;
+  border-radius: 10px;
   text-decoration: none;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
@@ -910,7 +986,7 @@
   background: var(--primary-dark);
   color: white;
   border: 1px solid rgba(255,255,255,0.15);
-  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.25);
+  box-shadow: var(--shadow-soft);
   position: relative;
   overflow: hidden;
   width: auto;
@@ -919,7 +995,7 @@
 
 .query-btn:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(22, 50, 79, 0.3);
+  box-shadow: var(--shadow-soft);
 } }
     @media (hover: hover) and (pointer: fine) {
 
@@ -929,7 +1005,7 @@
 
 .query-btn:active {
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(22, 50, 79, 0.2);
+  box-shadow: var(--shadow-soft);
 }
 .result-header {
   background: var(--primary-dark);
@@ -940,7 +1016,7 @@
   gap: 15px;
   padding: 0.8rem 1.5rem;
   margin: -0.5rem -1.5rem 1rem -1.5rem;
-  border-radius: 24px 24px 0 0;
+  border-radius: 16px 16px 0 0;
   border-bottom: none;
   flex-wrap: nowrap;
 }
@@ -966,7 +1042,7 @@
  .student-avatar {
       width: 30px;
       height: 30px;
-      border-radius: 50%;
+      border-radius: 10px;
       background: rgba(var(--primary-dark-rgb), 0.07);
       display: flex;
       align-items: center;
@@ -1147,9 +1223,9 @@
     .skeleton { display:block; background:rgba(22,50,79,0.07); border-radius:6px; animation:skeletonPulse 1.4s ease-in-out infinite; }
     @keyframes skeletonPulse { 0%, 100% { opacity:1; } 50% { opacity:0.55; } }
     @media (prefers-reduced-motion: reduce) { .skeleton { animation:none; opacity:0.85; } }
-    .skel-header { height:78px; border-radius:24px 24px 0 0; margin:-0.5rem -1.3rem 1rem -1.3rem; }
+    .skel-header { height:78px; border-radius: 16px 16px 0 0; margin:-0.5rem -1.3rem 1rem -1.3rem; }
     .skel-line { margin:0 auto; }
-    .skel-box { border-radius:16px; }
+    .skel-box { border-radius: 16px; }
     /* الظهور المتتابع للبطاقات */
     @keyframes staggerFadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
     .stagger-item { animation:staggerFadeIn 0.4s ease both; }
@@ -1162,7 +1238,7 @@
       transform: translateX(-50%) translateY(20px);
       background: var(--primary-dark);
       color: #fff;
-      border-radius: 24px;
+      border-radius: 10px;
       padding: 12px 22px;
       font-size: 0.85rem;
       display: flex;
@@ -1170,7 +1246,7 @@
       gap: 8px;
       max-width: 90%;
       width: max-content;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      box-shadow: var(--shadow-soft);
       opacity: 0;
       pointer-events: none;
       z-index: 10001;
@@ -1190,7 +1266,7 @@
       margin-top: -50px;
       background: #fff;
       border-radius: 50%;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      box-shadow: var(--shadow-soft);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -1302,14 +1378,14 @@
   background: var(--pure-white);
   border-radius: 16px;
   padding: 0.8rem 1rem;
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(22,50,79,0.06);
   transition: all 0.3s ease;
 }
     @media (hover: hover) and (pointer: fine) {
 .vote-stat-item:hover {
   transform: translateX(5px);
   border-color: var(--accent-teal);
-  box-shadow: 0 2px 8px rgba(var(--accent-teal-rgb), 0.1);
+  box-shadow: var(--shadow-soft);
 } }
 
 /* السطر العلوي: الاسم + الأيقونة + عدد الأصوات */
@@ -1337,7 +1413,7 @@
   color: var(--text-light);
   background: rgba(var(--primary-dark-rgb), 0.05);
   padding: 0.2rem 0.6rem;
-  border-radius: 24px;
+  border-radius: 16px;
 }
 .stat-votes strong {
   color: var(--accent-teal);
@@ -1420,7 +1496,7 @@
   padding: 8px 12px;
   text-align: center;
   min-width: 58px;
-  box-shadow: 0 2px 8px rgba(22,50,79,0.2);
+  box-shadow: var(--shadow-soft);
 }
 
 .timer-box .timer-value {
@@ -1480,7 +1556,7 @@
 /* النافذة البيضاء نفسها */
 .modal-container {
   background: var(--pure-white);
-  border-radius: 24px;
+  border-radius: 16px;
   width: 90%;
   max-width: 400px;
   text-align: center;
@@ -1488,8 +1564,7 @@
   padding: 2rem 1.5rem 1.8rem;
   transform: scale(0.9);
   transition: transform 0.3s ease;
-  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.3);
-  border: 1px solid var(--border-color);
+  box-shadow: var(--shadow-soft);
 }
 
 .modal-overlay.active {
@@ -1576,7 +1651,7 @@
   background: var(--primary-dark);
   padding: 0;
   margin: 0;
-  border-radius: 24px 24px 0 0;
+  border-radius: 16px 16px 0 0;
   position: relative;
   overflow: hidden;
 }
@@ -1669,12 +1744,11 @@
   /* ========== لوحة الشرف ========== */
     .honor-section {
       max-width: 900px;
-      margin: 2rem auto;
-      padding: 1.5rem 1.8rem;
-      border-radius: 24px;
+      margin: 2.8rem auto;
+      padding: 1.9rem 2.25rem;
+      border-radius: 16px;
       background: var(--gradient-card);
-      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.08);
-      border: 1px solid var(--border-color);
+      box-shadow: var(--shadow-soft);
       position: relative;
       overflow: hidden;
       transition: var(--transition);
@@ -1683,28 +1757,30 @@
     @media (hover: hover) and (pointer: fine) {
     .honor-section:hover::before { height: 6px; } }
     @media (hover: hover) and (pointer: fine) {
-    .honor-section:hover { box-shadow: 0 16px 32px rgba(var(--primary-dark-rgb), 0.12); transform: translateY(-2px); } }
+    .honor-section:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .honor-title { text-align:center; font-size:1.15rem; font-weight:700; color:var(--primary-dark); margin:0; }
+    .live-update-badge { display:inline-flex; align-items:center; gap:4px; font-size:0.62rem; font-weight:600; background:rgba(232,163,61,0.1); color:#B87A20; border-radius:8px; padding:3px 10px; margin-right:8px; vertical-align:middle; }
+    .live-update-badge i { font-size:0.6rem; }
     .honor-sub { text-align:center; font-size:0.85rem; color:var(--text-subtitle); margin-top:0.4rem; }
-    .honor-tabs { position:relative; display:flex; gap:4px; justify-content:center; background:var(--light-bg); border-radius:22px; padding:4px; margin:0.9rem 0 1rem; }
-    .honor-tab-indicator { position:absolute; top:4px; bottom:4px; right:0; background:var(--accent-teal); border-radius:18px; transform:translateX(0); transition:transform 0.42s cubic-bezier(0.4, 0, 0.2, 1), width 0.42s cubic-bezier(0.4, 0, 0.2, 1); }
+    .honor-tabs { position:relative; display:flex; gap:4px; justify-content:center; background:var(--light-bg); border-radius: 10px; padding:4px; margin:0.9rem 0 1rem; }
+    .honor-tab-indicator { position:absolute; top:4px; bottom:4px; right:0; background:var(--accent-teal); border-radius: 10px; transform:translateX(0); transition:transform 0.42s cubic-bezier(0.4, 0, 0.2, 1), width 0.42s cubic-bezier(0.4, 0, 0.2, 1); }
     @media (prefers-reduced-motion: reduce) { .honor-tab-indicator { transition:none; } }
-    .honor-tab { position:relative; z-index:1; flex:1; font-size:0.85rem; padding:7px 18px; border-radius:18px; background:none; color:var(--text-subtitle); border:none; cursor:pointer; font-family:inherit; transition:color 0.25s ease, font-weight 0.25s ease; }
+    .honor-tab { position:relative; z-index:1; flex:1; font-size:0.85rem; padding:7px 18px; border-radius: 10px; background:none; color:var(--text-subtitle); border:none; cursor:pointer; font-family:inherit; transition:color 0.25s ease, font-weight 0.25s ease; }
     @media (hover: hover) and (pointer: fine) {
     .honor-tab:hover:not(.active) { color:var(--accent-teal); } }
     .honor-tab.active { color:#fff; font-weight:600; }
     .honor-cols { display:grid; grid-template-columns:1fr; gap:14px; animation: honorFadeIn 0.35s ease; }
     @keyframes honorFadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
-    .honor-col { border:1px solid var(--border-color); border-radius:16px; overflow:hidden; background:var(--pure-white); box-shadow: 0 4px 12px rgba(var(--primary-dark-rgb), 0.05); }
+    .honor-col { border-radius: 16px; overflow:hidden; background:var(--pure-white); box-shadow: var(--shadow-soft); }
     .honor-col-head { background:rgba(22, 50, 79, 0.04); border-bottom:1px solid var(--border-color); padding:10px 15px; font-size:0.9rem; font-weight:700; color:var(--accent-teal); }
     .honor-col-head.pts { color:#B87A20; }
     .honor-col-body { padding:10px; }
-    .honor-row { display:flex; align-items:center; gap:10px; padding:10px 14px; margin-bottom:8px; background:var(--pure-white); border:1px solid var(--border-color); border-radius:14px; box-shadow:0 2px 8px rgba(var(--primary-dark-rgb),0.05); transition:all 0.3s ease; }
+    .honor-row { display:flex; align-items:center; gap:10px; padding:10px 14px; margin-bottom:8px; background:var(--pure-white); border-radius: 10px; box-shadow: var(--shadow-soft); transition:all 0.3s ease; }
     .honor-row:last-child { margin-bottom:0; }
     @media (hover: hover) and (pointer: fine) {
-    .honor-row:hover { transform:translateY(-2px); box-shadow:0 6px 16px rgba(var(--primary-dark-rgb),0.12); } }
+    .honor-row:hover { transform:translateY(-2px); box-shadow: var(--shadow-soft-lift); } }
     .honor-row.first { border-right-width:3px; border-right-style:solid; }
-    .honor-rank { width:27px; height:27px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:0.78rem; font-weight:700; flex-shrink:0; background:rgba(22,50,79,0.07); color:var(--text-subtitle); }
+    .honor-rank { width:27px; height:27px; border-radius:10px; display:flex; align-items:center; justify-content:center; font-size:0.78rem; font-weight:700; flex-shrink:0; background:rgba(22,50,79,0.07); color:var(--text-subtitle); }
     .honor-rank.gold { background:var(--gold-excellence); color:#fff; }
     .honor-rank.green { background:#1D9E75; color:#fff; }
     .honor-row.first .honor-rank { width:31px; height:31px; }
@@ -1718,7 +1794,7 @@
     .honor-val-unit { font-size:0.65rem; font-weight:400; color:var(--text-light); white-space:nowrap; }
     .honor-empty { padding:2rem 1rem; text-align:center; color:var(--text-light); font-size:0.85rem; line-height:1.8; animation: honorFadeIn 0.35s ease; }
     .honor-empty i { display:block; font-size:1.4rem; margin-bottom:0.6rem; color:var(--text-light); opacity:0.7; }
-    .honor-note { text-align:center; font-size:0.78rem; color:var(--text-subtitle); background:var(--light-bg); border-radius:10px; padding:10px; margin-top:14px; }
+    .honor-note { text-align:center; font-size:0.78rem; color:var(--text-subtitle); background:var(--light-bg); border-radius: 10px; padding:10px; margin-top:14px; }
 
     /* ========================================= */
     /*   استجابة اللمس: انكماش عند الضغط          */
@@ -1768,14 +1844,14 @@
     .library-card:not(.library-card-disabled):active {
       transform: translateY(-2px);
       border-color: var(--accent-teal);
-      box-shadow: 0 8px 20px rgba(var(--primary-dark-rgb), 0.15);
+      box-shadow: var(--shadow-soft);
       transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
     .honor-row:active,
     .vote-stat-item:active {
       /* !important: .honor-row يحمل صنف stagger-item لنفس السبب أعلاه */
       transform: translateY(-2px) !important;
-      box-shadow: 0 6px 16px rgba(var(--primary-dark-rgb), 0.12);
+      box-shadow: var(--shadow-soft);
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
     .student-item:active .student-image {
@@ -1802,7 +1878,7 @@
       z-index: 10000;
       transition: background-color 0.3s ease;
     }
-    .bottom-sheet-overlay.open { background: rgba(0, 0, 0, 0.5); }
+    .bottom-sheet-overlay.open { background: rgba(11, 25, 40, 0.4); }
     .bottom-sheet {
       background: var(--pure-white);
       width: 100%;
@@ -1825,6 +1901,63 @@
     }
     @media (prefers-reduced-motion: reduce) {
       .bottom-sheet-overlay, .bottom-sheet { transition: none; }
+    }
+    @media (min-width: 769px) {
+      .bottom-sheet-overlay { align-items: center; }
+      .bottom-sheet {
+        border-radius: 16px;
+        transform: none;
+        opacity: 0;
+        transition: opacity 0.25s ease;
+      }
+      .bottom-sheet.open { opacity: 1; transform: none; }
+      .bottom-sheet-handle { display: none; }
+    }
+
+    /* ========================================= */
+    /*   نظام موحّد لعناوين الأقسام               */
+    /* ========================================= */
+    .grades-header h3,
+    .honor-title,
+    .fame-bar-title,
+    .voting-title,
+    .library-title,
+    .chat-title,
+    .ai-header {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+    .grades-description,
+    .honor-sub,
+    .honors-subtitle,
+    .voting-description,
+    .library-subtitle,
+    .chat-description,
+    .ai-description {
+      font-size: 0.75rem;
+      font-weight: 400;
+      color: var(--text-light);
+      margin-top: 4px;
+      margin-bottom: 0;
+    }
+    .grades-header, .honor-title, .fame-bar-title, .voting-header, .chat-header {
+      margin-bottom: 4px;
+    }
+    .library-title { margin-bottom: 4px; }
+    .ai-header { margin-bottom: 4px; }
+    .library-subtitle {
+      display: block;
+      text-align: center;
+      margin: 0 0 20px;
+    }
+    .grades-query-section .grades-description,
+    .honor-section .honor-sub,
+    .fame-bar-section .honors-subtitle,
+    .voting-section .voting-description,
+    .chat-section .chat-description,
+    .ai-assistant-container .ai-description {
+      margin-bottom: 20px;
     }
   </style>
 </head>
@@ -1852,6 +1985,54 @@
     </div>
   </div>
 </header>
+
+<!-- واجهة الاستقبال -->
+<section class="hero-intro fade-in">
+  <h2 class="hero-title">كل ما تحتاجه في مادة التقنية الرقمية</h2>
+  <p class="hero-subtitle">درجاتك وحضورك ومشاريعك ومصادر المادة، في مكان واحد.</p>
+  <div class="hero-actions">
+    <button type="button" class="hero-btn-primary" data-scroll-target="grades-section">استعلم عن درجاتك</button>
+    <button type="button" class="hero-btn-secondary" data-scroll-target="library-section">تصفح المكتبة</button>
+  </div>
+</section>
+
+<!-- لوحة حالة حيّة -->
+<div class="status-strip fade-in" id="statusStrip">
+  <div class="status-item" id="statusGrades">
+    <i class="fas fa-clipboard-list"></i>
+    <span class="status-name">الاستعلام عن الدرجات</span>
+    <span class="status-value"><span class="status-dot status-dot-available"></span><span class="status-text">متاح</span></span>
+  </div>
+  <div class="status-item" id="statusAi">
+    <i class="fas fa-graduation-cap"></i>
+    <span class="status-name">المساعد الرقمي</span>
+    <span class="status-value"><span class="status-dot status-dot-available"></span><span class="status-text">جاهز</span></span>
+  </div>
+</div>
+
+<!-- شبكة خدمات الطالب -->
+<div class="services-grid fade-in">
+  <button type="button" class="service-card" data-scroll-target="grades-section">
+    <i class="fas fa-clipboard-list"></i>
+    <span class="service-name">درجاتي</span>
+    <span class="service-desc">تابع تقدمك في الفترتين</span>
+  </button>
+  <button type="button" class="service-card" data-scroll-target="library-section">
+    <i class="fas fa-book-open"></i>
+    <span class="service-name">مكتبتي</span>
+    <span class="service-desc">دروس ومصادر صفك</span>
+  </button>
+  <button type="button" class="service-card" data-scroll-target="projects-section">
+    <i class="fas fa-diagram-project"></i>
+    <span class="service-name">المشاريع</span>
+    <span class="service-desc">التسليم والتصويت</span>
+  </button>
+  <button type="button" class="service-card" data-scroll-target="ai-assistant-section">
+    <i class="fas fa-graduation-cap"></i>
+    <span class="service-name">المساعد الرقمي</span>
+    <span class="service-desc">اسأل عن أي مفهوم</span>
+  </button>
+</div>
 
 <!-- الوقت والتاريخ -->
 <div class="date-time-container fade-in">
@@ -1909,7 +2090,7 @@
     <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0.8rem 1rem 0.2rem; gap:14px; text-align:center;">
       <i class="fas fa-crown" style="font-size:36px; color:var(--gold-excellence); opacity:0.9; display:inline-block;"></i>
       <p style="font-size:0.85rem; color:var(--text-medium); margin:0; line-height:1.6; max-width:420px;">لم يُعلن عن المتميزين لهذا الفصل بعد — المكان محفوظ لمن يصنع تميّزه، وربما تكون أنت.</p>
-      <div style="display:flex; align-items:center; gap:8px; background:rgba(14,149,148,0.06); border-radius:24px; padding:8px 20px;">
+      <div style="display:flex; align-items:center; gap:8px; background:rgba(14,149,148,0.06); border-radius: 8px; padding:8px 20px;">
         <i class="fas fa-clock soon-badge-icon" style="font-size:0.85rem; color:var(--accent-teal);"></i>
         <span style="font-size:0.85rem; color:var(--accent-teal); font-weight:600;">قريباً</span>
       </div>
@@ -1929,7 +2110,7 @@
 <!-- ==========      لوحة الشرف       ========== -->
 <!-- ============================================ -->
 <section class="honor-section fade-in" id="honor-section" style="display:none;">
-  <div class="honor-title">الصدارة الرقمية</div>
+  <div class="honor-title">الصدارة الرقمية <span class="live-update-badge"><i class="fas fa-crown"></i>تحديث مباشر</span></div>
   <div class="honor-sub" id="honorSub"></div>
   <div class="honor-tabs" id="honorTabs">
     <span class="honor-tab-indicator" id="honorTabIndicator"></span>
@@ -2034,7 +2215,7 @@
       <p style="font-size:0.85rem; color:var(--text-medium); margin:0; line-height:1.6;">لا يوجد تصويت حالياً — ابدأ بإعداد مشروعك المميز وكن جاهزاً للمنافسة القادمة.</p>
     </div>
 
-    <div style="display:flex; align-items:center; gap:8px; background:rgba(14,149,148,0.06); border-radius:24px; padding:8px 20px;">
+    <div style="display:flex; align-items:center; gap:8px; background:rgba(14,149,148,0.06); border-radius: 8px; padding:8px 20px;">
       <i class="fas fa-clock soon-badge-icon" style="font-size:0.85rem; color:var(--accent-teal);"></i>
       <span style="font-size:0.85rem; color:var(--accent-teal); font-weight:600;">قريباً</span>
     </div>
@@ -2090,6 +2271,7 @@
 <!-- ========================================= -->
 <section class="library-section fade-in" id="library-section">
   <h3 class="library-title">مكتبة الطالب</h3>
+  <p class="library-subtitle">مصادر المادة مرتبة حسب الصف</p>
   <div class="library-cards-row">
     <div class="library-card library-card-1" data-url="https://sites.google.com/view/dvdf55/ss?authuser=1" data-title="الأول ثانوي">
       <span class="library-card-number">١</span>
@@ -2603,6 +2785,19 @@ document.addEventListener('keydown', (e) => {
       backToTopBtn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
     }
     initBackToTop();
+
+    // واجهة الاستقبال: أزرار التمرير إلى الأقسام
+    function initHeroScrollButtons() {
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.querySelectorAll('[data-scroll-target]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const target = document.getElementById(btn.dataset.scrollTarget);
+          if (!target) return;
+          target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+        });
+      });
+    }
+    initHeroScrollButtons();
     
     // الفواصل والعنوان الجديد
     function initNewSections() {
@@ -2651,6 +2846,20 @@ document.addEventListener('keydown', (e) => {
           queryBtn.style.opacity = '';
           queryBtn.style.cursor = '';
         }
+        const statusGrades = document.getElementById('statusGrades');
+        if (statusGrades) {
+          const dot = statusGrades.querySelector('.status-dot');
+          const text = statusGrades.querySelector('.status-text');
+          if (isClosed) {
+            dot.classList.remove('status-dot-available');
+            dot.classList.add('status-dot-closed');
+            text.textContent = 'مغلق';
+          } else {
+            dot.classList.remove('status-dot-closed');
+            dot.classList.add('status-dot-available');
+            text.textContent = 'متاح';
+          }
+        }
       }
 
       async function checkGradesSystemStatus() {
@@ -2693,7 +2902,7 @@ document.addEventListener('keydown', (e) => {
           <div class="skeleton skel-header" style="height:105px;"></div>
           <div style="text-align:center; padding-top:8px; margin-bottom:14px;">
             <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:8px;">
-              <span class="skeleton" style="width:34px; height:34px; border-radius:50%; flex-shrink:0;"></span>
+              <span class="skeleton" style="width:34px; height:34px; border-radius:10px; flex-shrink:0;"></span>
               <span class="skeleton skel-line" style="width:120px; height:15px;"></span>
             </div>
             <div class="skeleton skel-line" style="width:100px; height:11px; margin:0 auto;"></div>
@@ -2715,7 +2924,7 @@ document.addEventListener('keydown', (e) => {
             <div class="skeleton skel-box" style="width:100%; height:64px;"></div>
           </div>
           <div style="padding:0 1.3rem 1.3rem; text-align:center;">
-            <div class="skeleton" style="width:90px; height:30px; border-radius:24px; margin:0 auto;"></div>
+            <div class="skeleton" style="width:90px; height:30px; border-radius: 10px; margin:0 auto;"></div>
           </div>
         `;
         
@@ -2833,7 +3042,7 @@ const attendanceHtml = student.attendance ? `
         let pointsButtonHtml = '';
 if (student.points) {
   pointsButtonHtml = `
-    <button class="points-btn points-btn-hover" data-student-id="${student.id || ''}" style="margin:4px 1.3rem 0; background:rgba(14,149,148,0.06); color:#0E9594; border:1px solid transparent; padding:11px; border-radius:16px; cursor:pointer; font-size:0.85rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; width:calc(100% - 2.6rem); font-family:inherit;">
+    <button class="points-btn points-btn-hover" data-student-id="${student.id || ''}" style="margin:4px 1.3rem 0; background:rgba(14,149,148,0.06); color:#0E9594; border:1px solid transparent; padding:11px; border-radius: 16px; cursor:pointer; font-size:0.85rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; width:calc(100% - 2.6rem); font-family:inherit;">
       <i class="fas fa-award"></i> النقاط والمخالفات 
     </button>
   `;
@@ -2890,7 +3099,7 @@ const cardHtml = `
             </div>
 
             <div style="padding: 0 1.3rem 0.3rem; text-align: center;">
-              <button id="resultCloseBtn" type="button" style="background: transparent; color: #0E9594; border: 1px solid rgba(14,149,148,0.35); padding: 7px 24px; border-radius: 24px; cursor: pointer; font-size: 0.85rem; font-weight: 600;">
+              <button id="resultCloseBtn" type="button" style="background: transparent; color: #0E9594; border: 1px solid rgba(14,149,148,0.35); padding: 7px 24px; border-radius: 10px; cursor: pointer; font-size: 0.85rem; font-weight: 600;">
                 إغلاق
               </button>
             </div>
@@ -2947,7 +3156,7 @@ const VOTING_API = 'https://script.google.com/macros/s/AKfycbx3aUUhzb4nHFVV0fiR-
 let honorData = null, honorActive = 0;
 
 function renderHonorSkeleton() {
-  const skelRow = '<div class="honor-row"><span class="skeleton" style="width:27px; height:27px; border-radius:50%; flex-shrink:0;"></span>' +
+  const skelRow = '<div class="honor-row"><span class="skeleton" style="width:27px; height:27px; border-radius:10px; flex-shrink:0;"></span>' +
     '<span class="honor-name"><span class="skeleton skel-line" style="width:70%; height:11px;"></span><br>' +
     '<span class="skeleton skel-line" style="width:40%; height:8px; margin-top:6px;"></span></span>' +
     '<span class="honor-val"><span class="skeleton skel-line" style="width:26px; height:16px;"></span>' +
@@ -3285,7 +3494,7 @@ function openProjectViewer(project, title) {
       <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; height:100%; text-align:center; padding:1rem;">
         <i class="fas fa-file-powerpoint" style="font-size:2.5rem; color:var(--text-light); opacity:0.6;"></i>
         <p style="margin:0; color:var(--text-medium); font-size:0.9rem;">هذا الملف يحتاج تحميلًا لعرضه</p>
-        <a href="${project.url}" target="_blank" rel="noopener" style="background:var(--accent-teal); color:#fff; padding:9px 22px; border-radius:24px; text-decoration:none; font-size:0.85rem; font-weight:600; display:inline-flex; align-items:center; gap:6px;">
+        <a href="${project.url}" target="_blank" rel="noopener" style="background:var(--accent-teal); color:#fff; padding:9px 22px; border-radius: 10px; text-decoration:none; font-size:0.85rem; font-weight:600; display:inline-flex; align-items:center; gap:6px;">
           <i class="fas fa-download"></i> تحميل الملف
         </a>
       </div>`;
@@ -3313,7 +3522,8 @@ function openProjectViewer(project, title) {
       </div>`;
 
   const modalHtml = `
-    <div class="project-viewer-box">
+    <div class="project-viewer-box bottom-sheet">
+      <div class="bottom-sheet-handle"></div>
       <div style="background:var(--primary-dark); padding:1rem 1.2rem; display:flex; align-items:center; justify-content:space-between; flex-shrink:0;">
         <h3 style="margin:0; color:white; font-size:0.95rem; font-weight:700;">${title}</h3>
         <button id="closeProjectViewer" type="button" style="background:transparent; border:none; color:white; font-size:1.2rem; cursor:pointer; line-height:1; padding:4px;">
@@ -3326,13 +3536,13 @@ function openProjectViewer(project, title) {
   `;
 
   const overlay = document.createElement('div');
-  overlay.className = 'modal-details';
-  overlay.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; z-index:10000; padding:1rem;';
+  overlay.className = 'modal-details bottom-sheet-overlay';
   overlay.innerHTML = modalHtml;
   document.body.appendChild(overlay);
+  openBottomSheet(overlay);
 
   function closeViewer() {
-    overlay.remove();
+    closeBottomSheet(overlay);
     document.removeEventListener('keydown', escHandler);
   }
   function escHandler(e) { if (e.key === 'Escape') closeViewer(); }
@@ -3375,7 +3585,10 @@ initProjectButtons();
 // ============================================
 //      نافذة منزلقة من الأسفل (Bottom Sheet)
 // ============================================
+let __openSheetsCount = 0;
 function openBottomSheet(overlay) {
+  __openSheetsCount++;
+  document.body.style.overflow = 'hidden';
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       overlay.classList.add('open');
@@ -3390,6 +3603,8 @@ function closeBottomSheet(overlay) {
   const sheet = overlay.querySelector('.bottom-sheet');
   if (sheet) sheet.classList.remove('open');
   setTimeout(() => overlay.remove(), 320);
+  __openSheetsCount = Math.max(0, __openSheetsCount - 1);
+  if (__openSheetsCount === 0) document.body.style.overflow = '';
 }
 window.closeBottomSheet = closeBottomSheet;
 
@@ -3416,12 +3631,12 @@ window.showUploadModal = function() {
       <div id="uploadStep1" style="padding:1.3rem;">
         <p style="font-size:0.85rem; color:var(--text-medium); margin:0 0 12px; text-align:center;">أدخل رقمك الخاص للمتابعة</p>
         <input type="text" id="uploadStudentId" placeholder="رقمك الخاص..." maxlength="20"
-          style="width:100%; box-sizing:border-box; padding:11px 14px; border:2px solid var(--border-color); border-radius:16px; font-size:1rem; font-family:inherit; text-align:right; outline:none;">
-        <div id="uploadMessage" style="display:none; border-radius:10px; padding:10px; text-align:center; font-size:0.85rem; margin-top:12px;"></div>
+          style="width:100%; box-sizing:border-box; padding:11px 14px; border:2px solid var(--border-color); border-radius: 16px; font-size:1rem; font-family:inherit; text-align:right; outline:none;">
+        <div id="uploadMessage" style="display:none; border-radius: 10px; padding:10px; text-align:center; font-size:0.85rem; margin-top:12px;"></div>
       </div>
 
       <div id="uploadStep2" style="display:none; padding:1.3rem;">
-        <div style="background:rgba(22,50,79,0.05); border-radius:16px; padding:12px; text-align:center; margin-bottom:14px;">
+        <div style="background:rgba(22,50,79,0.05); border-radius: 16px; padding:12px; text-align:center; margin-bottom:14px;">
           <p id="uploadStudentName" style="font-size:1rem; font-weight:700; color:var(--primary-dark); margin:0 0 3px;"></p>
           <p id="uploadStudentClass" style="font-size:0.85rem; color:var(--text-medium); margin:0;"></p>
         </div>
@@ -3430,21 +3645,21 @@ window.showUploadModal = function() {
         <div id="uploadTypeOptions" style="margin-bottom:14px;"></div>
 
         <p style="font-size:0.85rem; color:var(--text-light); font-weight:600; margin:0 0 8px;">ملف المشروع:</p>
-        <label for="uploadFileInput" style="display:flex; align-items:center; justify-content:center; gap:8px; padding:14px; border:2px dashed rgba(14,149,148,0.35); border-radius:16px; cursor:pointer; color:#0E9594; font-size:0.85rem; font-weight:600;">
+        <label for="uploadFileInput" style="display:flex; align-items:center; justify-content:center; gap:8px; padding:14px; border:2px dashed rgba(14,149,148,0.35); border-radius: 16px; cursor:pointer; color:#0E9594; font-size:0.85rem; font-weight:600;">
           <i class="fas fa-paperclip"></i> <span id="uploadFileLabel">اختر ملف مشروعك</span>
         </label>
         <input type="file" id="uploadFileInput" style="display:none;">
 
         <p style="font-size:0.75rem; color:var(--text-light); text-align:center; margin:8px 0 0;">الحد الأقصى 30 ميجابايت — للفيديو صوّر بجودة 720p</p>
 
-        <div id="uploadMessage2" style="display:none; border-radius:10px; padding:10px; text-align:center; font-size:0.85rem; margin-top:12px;"></div>
+        <div id="uploadMessage2" style="display:none; border-radius: 10px; padding:10px; text-align:center; font-size:0.85rem; margin-top:12px;"></div>
       </div>
 
       <div style="padding:0.4rem 1.3rem 1.3rem; display:flex; gap:8px; justify-content:center;">
-        <button id="uploadActionBtn" style="background:var(--accent-teal); color:white; border:none; padding:9px 24px; border-radius:24px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
+        <button id="uploadActionBtn" style="background:var(--accent-teal); color:white; border:none; padding:9px 24px; border-radius: 10px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
           <i class="fas fa-arrow-left"></i> متابعة
         </button>
-        <button onclick="closeBottomSheet(this.closest('.modal-details'))" style="background:transparent; color:#0E9594; border:1px solid rgba(14,149,148,0.35); padding:9px 22px; border-radius:24px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
+        <button onclick="closeBottomSheet(this.closest('.modal-details'))" style="background:transparent; color:#0E9594; border:1px solid rgba(14,149,148,0.35); padding:9px 22px; border-radius: 10px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
           إغلاق
         </button>
       </div>
@@ -3541,14 +3756,14 @@ async function verifyStudentForUpload(overlay) {
       const types = ['عرض تقديمي', 'صورة', 'بحث علمي', 'مقطع فيديو'];
       const typeIcons = { 'عرض تقديمي': 'fa-file-powerpoint', 'صورة': 'fa-image', 'بحث علمي': 'fa-book', 'مقطع فيديو': 'fa-video' };
       overlay.querySelector('#uploadTypeOptions').innerHTML = types.map(t => `
-        <div class="upload-type-opt" data-type="${t}" style="display:flex; align-items:center; gap:8px; padding:10px; border:1.5px solid var(--border-color); border-radius:10px; margin-bottom:6px; cursor:pointer; font-size:0.85rem;">
+        <div class="upload-type-opt" data-type="${t}" style="display:flex; align-items:center; gap:8px; padding:10px; border:1px solid rgba(22,50,79,0.06); border-radius: 10px; margin-bottom:6px; cursor:pointer; font-size:0.85rem;">
           <i class="fas ${typeIcons[t]}" style="color:#0E9594; width:20px; text-align:center;"></i> ${t}
         </div>
       `).join('');
 
       overlay.querySelectorAll('.upload-type-opt').forEach(opt => {
         opt.addEventListener('click', function() {
-          overlay.querySelectorAll('.upload-type-opt').forEach(o => { o.style.borderColor = 'var(--border-color)'; o.style.background = 'transparent'; });
+          overlay.querySelectorAll('.upload-type-opt').forEach(o => { o.style.borderColor = 'rgba(22,50,79,0.06)'; o.style.background = 'transparent'; });
           this.style.borderColor = '#0E9594';
           this.style.background = 'rgba(14,149,148,0.06)';
           uploadSelectedType = this.dataset.type;
@@ -3659,7 +3874,7 @@ window.showVoteModal = function() {
   selectedProject = null;
 
   const projectsHtml = VOTING_PROJECTS.map((p, i) => `
-    <div class="vote-option" data-project="${p.name}" style="display:flex; align-items:center; gap:10px; padding:12px; border:1.5px solid var(--border-color); border-radius:16px; margin-bottom:8px; cursor:pointer; transition:all 0.25s ease;">
+    <div class="vote-option" data-project="${p.name}" style="display:flex; align-items:center; gap:10px; padding:12px; border:1px solid rgba(22,50,79,0.06); border-radius: 10px; margin-bottom:8px; cursor:pointer; transition:all 0.25s ease;">
       <i class="fas ${p.icon}" style="color:${p.color}; font-size:1.15rem; width:22px; text-align:center;"></i>
       <span style="font-size:0.85rem; font-weight:600; color:var(--primary-dark);">${p.name}</span>
     </div>
@@ -3676,19 +3891,19 @@ window.showVoteModal = function() {
 
       <div style="padding:1.2rem;">
         <input type="text" id="voteStudentId" placeholder="أدخل رقمك الخاص هنا..." maxlength="20"
-          style="width:100%; box-sizing:border-box; padding:11px 14px; border:2px solid var(--border-color); border-radius:16px; font-size:1rem; font-family:inherit; text-align:right; outline:none; margin-bottom:1rem;">
+          style="width:100%; box-sizing:border-box; padding:11px 14px; border:2px solid var(--border-color); border-radius: 16px; font-size:1rem; font-family:inherit; text-align:right; outline:none; margin-bottom:1rem;">
 
         <p style="font-size:0.85rem; color:var(--text-light); font-weight:600; margin:0 0 8px;">اختر المشروع:</p>
         ${projectsHtml}
 
-        <div id="voteMessage" style="display:none; border-radius:10px; padding:10px; text-align:center; font-size:0.85rem; margin-top:10px;"></div>
+        <div id="voteMessage" style="display:none; border-radius: 10px; padding:10px; text-align:center; font-size:0.85rem; margin-top:10px;"></div>
       </div>
 
       <div style="padding:0.4rem 1.2rem 1.2rem; display:flex; gap:8px; justify-content:center;">
-        <button id="confirmVoteBtn" style="background:var(--accent-teal); color:white; border:none; padding:9px 24px; border-radius:24px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
+        <button id="confirmVoteBtn" style="background:var(--accent-teal); color:white; border:none; padding:9px 24px; border-radius: 10px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
           <i class="fas fa-paper-plane"></i> تأكيد التصويت
         </button>
-        <button onclick="closeBottomSheet(this.closest('.modal-details'))" style="background:transparent; color:#0E9594; border:1px solid rgba(14,149,148,0.35); padding:9px 22px; border-radius:24px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
+        <button onclick="closeBottomSheet(this.closest('.modal-details'))" style="background:transparent; color:#0E9594; border:1px solid rgba(14,149,148,0.35); padding:9px 22px; border-radius: 10px; cursor:pointer; font-size:0.85rem; font-weight:600; font-family:inherit;">
           إغلاق
         </button>
       </div>
@@ -3711,7 +3926,7 @@ window.showVoteModal = function() {
   overlay.querySelectorAll('.vote-option').forEach(opt => {
     opt.addEventListener('click', function() {
       overlay.querySelectorAll('.vote-option').forEach(o => {
-        o.style.borderColor = 'var(--border-color)';
+        o.style.borderColor = 'rgba(22,50,79,0.06)';
         o.style.background = 'transparent';
       });
       this.style.borderColor = '#0E9594';
@@ -3819,7 +4034,7 @@ function showPointsModal(data) {
     let progressHtml = '';
     if (isMax) {
         progressHtml = `
-        <div style="background:rgba(201,151,28,0.08); border-radius:16px; padding:12px; text-align:center; margin-top:1rem;">
+        <div style="background:rgba(201,151,28,0.08); border-radius: 16px; padding:12px; text-align:center; margin-top:1rem;">
             <span style="font-size:0.85rem; color:#E8A33D; font-weight:600;"><i class="fas fa-crown"></i> وصلت لأعلى مستوى!</span>
         </div>`;
     } else {
@@ -3832,8 +4047,8 @@ function showPointsModal(data) {
                 <span><i class="fas ${badgeIcon}" style="color:${badgeColor};"></i> ${badgeName}</span>
                 <span><i class="fas ${nextIcon}" style="color:${nextColor};"></i> ${nextName}</span>
             </div>
-            <div style="background:rgba(0,0,0,0.06); border-radius:10px; height:8px; overflow:hidden;">
-                <div style="width:${filled}%; height:100%; background:var(--accent-teal); border-radius:10px; transition:width 0.6s ease;"></div>
+            <div style="background:rgba(0,0,0,0.06); border-radius: 10px; height:8px; overflow:hidden;">
+                <div style="width:${filled}%; height:100%; background:var(--accent-teal); border-radius: 10px; transition:width 0.6s ease;"></div>
             </div>
             <div style="text-align:center; font-size:0.75rem; color:#0E9594; font-weight:600; margin-top:6px;">
                 <i class="fas fa-bullseye"></i> تبقّى ${remaining} نقاط لتصبح ${nextName}
@@ -3842,7 +4057,8 @@ function showPointsModal(data) {
     }
 
     const modalHtml = `
-        <div style="background:white; border-radius:24px; width:90%; max-width:400px; margin:0 auto; box-shadow: 0 16px 32px rgba(0,0,0,0.2); overflow:hidden;">
+        <div class="bottom-sheet">
+            <div class="bottom-sheet-handle"></div>
             <div style="background:var(--primary-dark); padding:1.2rem; text-align:center;">
                 <h3 style="margin:0; color:white; font-size:1rem; display:flex; align-items:center; justify-content:center; gap:8px;">
                     نظام النقاط والمخالفات
@@ -3854,24 +4070,24 @@ function showPointsModal(data) {
                 <div style="text-align:center; margin-bottom:1.2rem;">
                     <div id="modalTotalPoints" style="font-size:2rem; font-weight:800; color:#16324F; line-height:1;">0</div>
                     <div style="font-size:0.85rem; color:#5C7489; margin-top:4px;">نقاط مشاركة</div>
-                    <div style="display:inline-flex; align-items:center; gap:6px; margin-top:10px; background:${badgeColor}1A; color:${badgeColor}; padding:5px 16px; border-radius:24px; font-size:0.85rem; font-weight:700;">
+                    <div style="display:inline-flex; align-items:center; gap:6px; margin-top:10px; background:${badgeColor}1A; color:${badgeColor}; padding:5px 16px; border-radius: 8px; font-size:0.85rem; font-weight:700;">
                         <i class="fas ${badgeIcon}"></i> ${badgeName}
                     </div>
                 </div>
 
                 <div style="display:flex; gap:10px; margin-bottom:0.5rem;">
-                    <div style="flex:1; background:rgba(29,158,117,0.08); border-radius:16px; padding:12px; text-align:center;">
+                    <div style="flex:1; background:rgba(29,158,117,0.08); border-radius: 16px; padding:12px; text-align:center;">
                         <div style="font-size:1.4rem; font-weight:700; color:#1D9E75;">${p.grade}</div>
                         <div style="font-size:0.75rem; color:#1D9E75; margin-top:2px;">درجة مكتسبة</div>
                     </div>
-                    <div style="flex:1; background:rgba(192,57,43,0.08); border-radius:16px; padding:12px; text-align:center;">
+                    <div style="flex:1; background:rgba(192,57,43,0.08); border-radius: 16px; padding:12px; text-align:center;">
                         <div style="font-size:1.4rem; font-weight:700; color:#C0392B;">${p.totalViolations}</div>
                         <div style="font-size:0.75rem; color:#C0392B; margin-top:2px;">مخالفة</div>
                     </div>
                 </div>
 
                 ${p.totalViolations > 0 ? `
-                <div style="background:rgba(192,57,43,0.06); border-radius:10px; padding:8px 12px; text-align:center; font-size:0.75rem; color:#C0392B;">
+                <div style="background:rgba(192,57,43,0.06); border-radius: 10px; padding:8px 12px; text-align:center; font-size:0.75rem; color:#C0392B;">
                     <i class="fas fa-circle-exclamation"></i> يُخصم ${p.violationDeduction} درجة من بند المشاركة
                 </div>` : ''}
 
@@ -3880,7 +4096,7 @@ function showPointsModal(data) {
             </div>
 
             <div style="padding:0.6rem 1.2rem 1.2rem; text-align:center;">
-                <button onclick="this.closest('.modal-details').remove()" style="background:transparent; color:#0E9594; border:1px solid rgba(14,149,148,0.35); padding:7px 24px; border-radius:24px; cursor:pointer; font-size:0.85rem; font-weight:600;">
+                <button onclick="closeBottomSheet(this.closest('.modal-details'))" style="background:transparent; color:#0E9594; border:1px solid rgba(14,149,148,0.35); padding:7px 24px; border-radius:10px; cursor:pointer; font-size:0.85rem; font-weight:600;">
                     إغلاق
                 </button>
             </div>
@@ -3888,11 +4104,11 @@ function showPointsModal(data) {
     `;
 
     const overlay = document.createElement('div');
-    overlay.className = 'modal-details';
-    overlay.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; z-index:10000; padding:1rem;';
+    overlay.className = 'modal-details bottom-sheet-overlay';
     overlay.innerHTML = modalHtml;
-    overlay.addEventListener('click', function(e) { if (e.target === overlay) overlay.remove(); });
+    overlay.addEventListener('click', function(e) { if (e.target === overlay) closeBottomSheet(overlay); });
     document.body.appendChild(overlay);
+    openBottomSheet(overlay);
     const modalTotalPointsEl = document.getElementById('modalTotalPoints');
     if (modalTotalPointsEl) animateNumber(modalTotalPointsEl, pts);
 }
@@ -3969,7 +4185,8 @@ function showGradeDetails(period, studentDetails) {
     });
     
   const detailsHtml = `
-        <div style="background: white; border-radius: 24px; width: 90%; max-width: 400px; margin: 0 auto; box-shadow: 0 16px 32px rgba(0,0,0,0.2); overflow: hidden;">
+        <div class="bottom-sheet">
+            <div class="bottom-sheet-handle"></div>
             <div style="background: var(--primary-dark); padding: 1rem 1.2rem;">
                 <h3 style="margin: 0; color: white; font-size: 1rem; display: flex; align-items: center; gap: 8px;">
                     <i class="fas fa-list-check" style="font-size: 1rem;"></i>
@@ -3980,25 +4197,21 @@ function showGradeDetails(period, studentDetails) {
                 ${itemsHtml}
             </div>
             <div style="padding: 0.6rem 1.2rem 1rem; text-align: center;">
-                <button onclick="this.closest('.modal-details').remove()" style="background: transparent; color: #0E9594; border: 1px solid rgba(14,149,148,0.35); padding: 7px 24px; border-radius: 24px; cursor: pointer; font-size: 0.85rem; font-weight: 600;">
+                <button onclick="closeBottomSheet(this.closest('.modal-details'))" style="background: transparent; color: #0E9594; border: 1px solid rgba(14,149,148,0.35); padding: 7px 24px; border-radius: 10px; cursor: pointer; font-size: 0.85rem; font-weight: 600;">
                     إغلاق
                 </button>
             </div>
         </div>
     `;
-    
+
     const overlay = document.createElement('div');
-    overlay.className = 'modal-details';
-    overlay.style.cssText = `
-        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(0,0,0,0.7); display: flex; align-items: center;
-        justify-content: center; z-index: 10001;
-    `;
+    overlay.className = 'modal-details bottom-sheet-overlay';
     overlay.innerHTML = detailsHtml;
     document.body.appendChild(overlay);
-    
+    openBottomSheet(overlay);
+
     overlay.addEventListener('click', (e) => {
-        if (e.target === overlay) overlay.remove();
+        if (e.target === overlay) closeBottomSheet(overlay);
     });
 }
 
