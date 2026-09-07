@@ -165,20 +165,37 @@
     }
     .header-content { position: relative; z-index: 2; max-width: 1100px; margin: 0 auto; display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; }
 
-    /* ١ — سطر الهوية */
-    .header-identity { display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 20px; }
-    .header-logo { display: flex; align-items: center; }
-    .header-logo img { height: 44px; width: auto; display: block; filter: brightness(0) invert(1); transition: transform 0.3s ease; }
+    /* ١ — سطر الهوية: الهوية يمينًا والشعار يسارًا */
+    .header-identity {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      width: 100%;
+      padding: 0 18px;
+      margin-bottom: 22px;
+    }
+    .header-logo { display: flex; align-items: center; flex-shrink: 0; }
+    .header-logo img { height: 48px; width: auto; display: block; filter: brightness(0) invert(1); transition: transform 0.3s ease; }
     @media (hover: hover) and (pointer: fine) {
     .header-logo img:hover { transform: scale(1.05); } }
-    .header-identity-divider { width: 1px; height: 30px; background: rgba(255, 255, 255, 0.25); flex-shrink: 0; }
-    .header-identity-text { display: flex; flex-direction: column; align-items: flex-start; line-height: 1.35; }
-    .header-identity-title { font-size: 0.9rem; font-weight: 700; color: #fff; }
-    .header-identity-sub { font-size: 0.7rem; font-weight: 400; color: #fff; opacity: 0.7; }
+    .header-identity-text { display: flex; flex-direction: column; align-items: flex-start; text-align: right; line-height: 1.35; }
+    .header-identity-title { font-size: 1.05rem; font-weight: 700; color: #fff; letter-spacing: 0.3px; }
+    .header-identity-sub { font-size: 0.72rem; font-weight: 400; color: #fff; opacity: 0.68; margin-top: 3px; }
 
-    /* ٢ — شارة اسم المدرسة */
-    .tech-header .header-school-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.6rem; font-weight: 400; padding: 5px 12px; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 10px; opacity: 0.6; letter-spacing: 0.5px; margin-bottom: 14px; }
+    /* شارة اسم المدرسة — جزء من كتلة الهوية */
+    .tech-header .header-school-badge { display: inline-flex; align-items: center; gap: 6px; font-size: 0.6rem; font-weight: 400; padding: 5px 12px; border: 1px solid rgba(255, 255, 255, 0.25); border-radius: 10px; opacity: 0.6; letter-spacing: 0.5px; margin-top: 9px; }
     .tech-header .header-school-badge i { font-size: 0.55rem; }
+
+    /* الجوال الضيق: الشعار في سطر مستقل فوق الهوية.
+       العتبة محسوبة من عرض المحتوى الفعلي (نص 154px + شعار 63px + فجوة 20px + حشو 68px):
+       الصف يتزاحم فعليًا دون 305px فقط، ويتسع بلا ضيق عند 320px فما فوق. */
+    @media (max-width: 304px) {
+      .header-identity { flex-direction: column; gap: 12px; padding: 0 12px; }
+      .header-logo { order: -1; }
+      .header-logo img { height: 42px; }
+      .header-identity-text { align-items: center; text-align: center; }
+    }
 
     /* ٣ — العنوان الكبير */
     .header-headline { font-size: 1.55rem; font-weight: 800; color: #fff; letter-spacing: 0.5px; line-height: 1.5; max-width: 92%; margin: 0 0 10px; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); }
@@ -1947,32 +1964,29 @@
 
     <!-- ١ — سطر الهوية -->
     <div class="header-identity">
-      <div class="header-logo">
-        <img src="images/logo.png" alt="شعار واجهة المعلم الرقمي">
-      </div>
-      <span class="header-identity-divider"></span>
       <div class="header-identity-text">
         <span class="header-identity-title">واجهة المعلم الرقمي</span>
         <span class="header-identity-sub">أ. محمد الغامدي · التقنية الرقمية</span>
+        <span class="header-school-badge"><i class="fas fa-school"></i>ثانوية الإمام النووي</span>
+      </div>
+      <div class="header-logo">
+        <img src="images/logo.png" alt="شعار واجهة المعلم الرقمي">
       </div>
     </div>
 
-    <!-- ٢ — شارة اسم المدرسة -->
-    <span class="header-school-badge"><i class="fas fa-school"></i>ثانوية الإمام النووي</span>
-
-    <!-- ٣ — العنوان الكبير -->
+    <!-- ٢ — العنوان الكبير -->
     <h1 class="header-headline">كل ما تحتاجه في مادة <span class="nowrap-unit">التقنية الرقمية</span></h1>
 
-    <!-- ٤ — سطر الشعار -->
+    <!-- ٣ — سطر الشعار -->
     <p class="header-tagline">جيل رقمي يبتكر الحلول ويصنع المستقبل</p>
 
-    <!-- ٥ — الزران -->
+    <!-- ٤ — الزران -->
     <div class="header-actions">
       <button type="button" class="header-btn-primary" data-scroll-target="grades-section">استعلم عن درجاتك</button>
       <button type="button" class="header-btn-secondary" data-scroll-target="library-section">تصفح المكتبة</button>
     </div>
 
-    <!-- ٦ — شريط التاريخ والوقت -->
+    <!-- ٥ — شريط التاريخ والوقت -->
     <div class="header-datetime" dir="rtl">
       <span class="header-dt-item"><i class="fas fa-moon"></i><span id="hijri-date"></span></span>
       <span class="header-dt-divider"></span>
