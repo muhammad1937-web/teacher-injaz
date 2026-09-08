@@ -244,23 +244,30 @@
     }
 
     /* ========================================= */
-    /*         لوحة الحالة الحيّة                */
+    /*     شارة حالة الخدمة داخل كل قسم          */
     /* ========================================= */
-    .status-strip {
-      max-width: 700px;
-      margin: 0 auto 28px;
-      padding: 0 1.2rem;
-      display: flex;
-      justify-content: center;
-      gap: 1.8rem;
-      flex-wrap: wrap;
+    .service-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: 999px;      /* كبسولة: استثناء مقصود من درجات الحواف الثلاث */
+      padding: 6px 14px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      margin: 12px auto 18px;
+      cursor: default;
+      pointer-events: none;
     }
-    .status-item { display: flex; align-items: center; gap: 8px; font-size: 0.78rem; color: var(--text-medium); }
-    .status-item i { color: var(--accent-teal); font-size: 0.85rem; }
-    .status-value { display: inline-flex; align-items: center; gap: 5px; font-weight: 600; }
-    .status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-    .status-dot-available { background: #1D9E75; }
-    .status-dot-closed { background: var(--text-light); }
+    /* لازم: display على الصنف يتغلب على سمة hidden وحدها */
+    .service-status[hidden] { display: none; }
+    .service-status-dot { width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+    /* النقطة أصغر من 12px، فتبقى دائرة — استثناء لا يُعمَّم */
+    .service-status-open { background: rgba(29, 158, 117, 0.1); color: #1D9E75; }
+    .service-status-open .service-status-dot { background: #1D9E75; }
+    .service-status-closed { background: rgba(22, 50, 79, 0.06); color: var(--text-light); }
+    .service-status-closed .service-status-dot { background: var(--text-light); }
+    /* حاوية لتمركز الشارة داخل الأقسام غير المتمركزة */
+    .service-status-wrap { display: flex; justify-content: center; }
 
     /* ========================================= */
     /*         شبكة خدمات الطالب                 */
@@ -2005,20 +2012,6 @@
   </div>
 </header>
 
-<!-- لوحة حالة حيّة -->
-<div class="status-strip fade-in" id="statusStrip">
-  <div class="status-item" id="statusGrades">
-    <i class="fas fa-clipboard-list"></i>
-    <span class="status-name">الاستعلام عن الدرجات</span>
-    <span class="status-value"><span class="status-dot status-dot-available"></span><span class="status-text">متاح</span></span>
-  </div>
-  <div class="status-item" id="statusAi">
-    <i class="fas fa-graduation-cap"></i>
-    <span class="status-name">المساعد الرقمي</span>
-    <span class="status-value"><span class="status-dot status-dot-available"></span><span class="status-text">جاهز</span></span>
-  </div>
-</div>
-
 <!-- شبكة خدمات الطالب -->
 <div class="services-grid fade-in">
   <button type="button" class="service-card" data-scroll-target="grades-section">
@@ -2165,6 +2158,13 @@
   <!-- وضع المنافسة (يظهر عند وجود مشاريع للتصويت) -->
   <div id="competition-mode" style="display: none;">
     <p class="voting-description">استعرض المشاريع المتنافسة، وادعم إبداع زملائك</p>
+
+    <div class="service-status-wrap">
+      <span class="service-status service-status-closed" id="voteStatusBadge" hidden>
+        <span class="service-status-dot"></span><span class="service-status-text"></span>
+      </span>
+    </div>
+
     <div class="projects-container">
       <button type="button" id="projectBtn1" class="project-btn" style="flex-direction: column;">
         <span style="display: flex; align-items: center; gap: 6px;"><i class="fas fa-file-powerpoint"></i> العرض التقديمي</span>
@@ -2305,7 +2305,13 @@
       <h3>الاستعلام عن الدرجات</h3>
     </div>
     <p class="grades-description">أدخل رقمك الخاص للاطلاع على تقدمك في مادة التقنية الرقمية</p>
-    
+
+    <div class="service-status-wrap">
+      <span class="service-status service-status-open" id="gradesStatusBadge">
+        <span class="service-status-dot"></span><span class="service-status-text">خدمة الاستعلام متاحة الآن</span>
+      </span>
+    </div>
+
     <div class="query-box">
       <div id="gradesClosedCard" class="closed-state-card" style="display:none;">
         <i class="fas fa-lock"></i>
@@ -2372,6 +2378,13 @@
 <div class="submit-project-section fade-in">
   <h3 class="submit-project-title">تسليم المشاريع</h3>
   <p class="submit-project-description">سلّم مشروعك التعليمي مباشرة من هنا، وسيصل للمعلم للمراجعة والتقييم.</p>
+
+  <div class="service-status-wrap">
+    <span class="service-status service-status-closed" id="submitStatusBadge" hidden>
+      <span class="service-status-dot"></span><span class="service-status-text"></span>
+    </span>
+  </div>
+
   <div class="inquiries-container">
     <button onclick="showUploadModal()" class="inquiry-btn primary" style="font-family:inherit;">
       <i class="fas fa-upload"></i> مشاريع الطلاب التعليمية
@@ -2872,19 +2885,12 @@ document.addEventListener('keydown', (e) => {
           queryBtn.style.opacity = '';
           queryBtn.style.cursor = '';
         }
-        const statusGrades = document.getElementById('statusGrades');
-        if (statusGrades) {
-          const dot = statusGrades.querySelector('.status-dot');
-          const text = statusGrades.querySelector('.status-text');
-          if (isClosed) {
-            dot.classList.remove('status-dot-available');
-            dot.classList.add('status-dot-closed');
-            text.textContent = 'مغلق';
-          } else {
-            dot.classList.remove('status-dot-closed');
-            dot.classList.add('status-dot-available');
-            text.textContent = 'متاح';
-          }
+        const gradesBadge = document.getElementById('gradesStatusBadge');
+        if (gradesBadge) {
+          gradesBadge.classList.toggle('service-status-closed', isClosed);
+          gradesBadge.classList.toggle('service-status-open', !isClosed);
+          gradesBadge.querySelector('.service-status-text').textContent =
+            isClosed ? 'خدمة الاستعلام مغلقة حاليًا' : 'خدمة الاستعلام متاحة الآن';
         }
       }
 
@@ -3342,6 +3348,35 @@ function renderHonorBody(applyStagger) {
 }
 
 setTimeout(loadHonorBoard, 150);
+
+// ============================================
+//   حالة قسمي التسليم والتصويت — طلب واحد
+// ============================================
+async function loadSectionStatus() {
+  const submitBadge = document.getElementById('submitStatusBadge');
+  const voteBadge = document.getElementById('voteStatusBadge');
+  if (!submitBadge && !voteBadge) return;
+
+  function apply(badge, isOpen, openText, closedText) {
+    if (!badge) return;
+    badge.classList.toggle('service-status-open', isOpen);
+    badge.classList.toggle('service-status-closed', !isOpen);
+    badge.querySelector('.service-status-text').textContent = isOpen ? openText : closedText;
+    badge.hidden = false;   // لا تظهر إلا بعد وصول الحالة الحقيقية
+  }
+
+  try {
+    const res = await fetch(`${VOTING_API}?action=sectionStatus&t=${Date.now()}`);
+    const data = await res.json();
+    if (data.status !== 'success') return;   // تبقى مخفية بلا حالة افتراضية
+    apply(submitBadge, data.submit === true, 'استقبال المشاريع مفتوح الآن', 'استقبال المشاريع مغلق حاليًا');
+    apply(voteBadge, data.vote === true, 'التصويت مفتوح الآن', 'التصويت مغلق حاليًا');
+  } catch (e) {
+    // فشل الاتصال: تبقى الشارتان مخفيتين — لا نعرض حالة قد تكون خاطئة
+  }
+}
+// تأخير يفرّق هذا الطلب عن طلب الصدارة وطلب حالة النظام
+setTimeout(loadSectionStatus, 600);
 let previousVotes = {};
 let updateIntervalVotes;
 
