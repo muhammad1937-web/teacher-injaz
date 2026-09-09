@@ -203,31 +203,17 @@
     }
     .header-meta-item.at-line-start::before { display: none; }
 
-    /* ٣ — العنوان الكبير */
-    .header-headline { font-size: 1.55rem; font-weight: 800; color: #fff; letter-spacing: 0.5px; line-height: 1.5; max-width: 92%; margin: 0 0 10px; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); }
+    /* ٣ — العنوان الرئيسي */
+    .header-headline { font-size: 1.55rem; font-weight: 800; color: #fff; letter-spacing: 0.5px; line-height: 1.4; max-width: 92%; margin: 0; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4); }
+    @media (min-width: 769px) { .header-headline { font-size: 2.1rem; } }
+
+    /* ٤ — النص الفرعي */
+    .header-subheadline { font-size: 0.88rem; font-weight: 500; color: #fff; opacity: 0.85; line-height: 1.5; max-width: 92%; margin: 8px 0 0; }
     /* يمنع بقاء "الرقمية" وحدها في سطر ثانٍ عند الالتفاف */
-    .header-headline .nowrap-unit { white-space: nowrap; }
-    @media (min-width: 769px) { .header-headline { font-size: 2.2rem; } }
+    .header-subheadline .nowrap-unit { white-space: nowrap; }
 
-    /* ٤ — سطر الشعار */
-    .header-tagline { font-size: 0.7rem; font-weight: 400; color: #fff; opacity: 0.52; letter-spacing: 0.5px; margin: 0 0 20px; }
-
-    /* ٥ — الزران */
-    .header-actions { display: flex; align-items: center; justify-content: center; gap: 10px; flex-wrap: wrap; }
-    .header-btn-primary, .header-btn-secondary {
-      font-family: inherit;
-      font-size: 0.82rem;
-      padding: 11px 20px;
-      border-radius: 10px;
-      color: #fff;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-    .header-btn-primary { background: var(--accent-teal); border: 1.5px solid transparent; font-weight: 700; }
-    .header-btn-secondary { background: transparent; border: 1.5px solid rgba(255, 255, 255, 0.35); font-weight: 600; }
-    @media (hover: hover) and (pointer: fine) {
-    .header-btn-primary:hover { transform: translateY(-2px); }
-    .header-btn-secondary:hover { background: rgba(255, 255, 255, 0.1); } }
+    /* ٥ — النص الوصفي */
+    .header-tagline { font-size: 0.7rem; font-weight: 400; color: #fff; opacity: 0.55; letter-spacing: 0.5px; line-height: 1.6; max-width: 92%; margin: 8px 0 0; }
 
     /* ٦ — شريط التاريخ والوقت */
     .header-datetime { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 16px; margin-top: 16px; }
@@ -235,10 +221,8 @@
     .header-dt-item i { font-size: 0.62rem; }
     .header-dt-divider { width: 1px; height: 11px; background: rgba(255, 255, 255, 0.2); flex-shrink: 0; }
 
-    /* الشاشات الضيقة جدًا: الزران فوق بعضهما، والوقت في سطر ثانٍ */
+    /* الشاشات الضيقة جدًا: الوقت في سطر ثانٍ */
     @media (max-width: 359px) {
-      .header-actions { flex-direction: column; width: 100%; gap: 8px; }
-      .header-btn-primary, .header-btn-secondary { width: 100%; }
       .header-datetime { gap: 10px; }
       .header-dt-divider:last-of-type { display: none; }
     }
@@ -400,9 +384,6 @@
       box-shadow: var(--shadow-soft);
       transition: var(--transition);
     }
-    .fame-bar-section::before { content: ''; position: absolute; top: 0; right: 5px; left: 5px; height: 5px; background: var(--gradient-accent); border-radius: 12px 0 0 0; transition: height 0.3s ease; }
-    @media (hover: hover) and (pointer: fine) {
-    .fame-bar-section:hover::before { height: 6px; } }
     @media (hover: hover) and (pointer: fine) {
     .fame-bar-section:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .fame-bar-title { display: flex; align-items: center; gap: 0.75rem; margin-bottom: 0.1rem; }
@@ -542,9 +523,6 @@
       overflow: hidden;
       transition: var(--transition);
     }
-    .library-section::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; transition: height 0.3s ease; }
-    @media (hover: hover) and (pointer: fine) {
-    .library-section:hover::before { height: 6px; } }
     @media (hover: hover) and (pointer: fine) {
     .library-section:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .library-title { margin: 0 0 1.2rem; text-align: center; }
@@ -645,9 +623,6 @@
     /*      قسم الذكاء الاصطناعي                 */
     /* ========================================= */
     .ai-assistant-container { max-width: 900px; margin: 3.5rem auto; padding: 1.9rem 2.25rem; background: var(--gradient-card); border-radius: 16px; box-shadow: var(--shadow-soft); position: relative; overflow: hidden; transition: var(--transition); }
-    .ai-assistant-container::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; transition: height 0.3s ease; }
-    @media (hover: hover) and (pointer: fine) {
-    .ai-assistant-container:hover::before { height: 6px; } }
     @media (hover: hover) and (pointer: fine) {
     .ai-assistant-container:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .ai-header { text-align: center; margin-bottom: 0.8rem; position: relative; display: flex; align-items: baseline; justify-content: center; gap: 1rem; }
@@ -702,7 +677,6 @@
       overflow: hidden;
       transition: var(--transition);
     }
-    .submit-project-section::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; }
     @media (hover: hover) and (pointer: fine) {
     .submit-project-section:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .submit-project-title { margin: 0 0 0.6rem; }
@@ -791,7 +765,7 @@
       backdrop-filter: blur(16px) saturate(180%);
       -webkit-backdrop-filter: blur(16px) saturate(180%);
       border: 1px solid rgba(255, 255, 255, 0.5);
-      border-radius: 999px;
+      border-radius: 16px;
       z-index: 998;
       box-shadow: 0 8px 24px rgba(22, 50, 79, 0.15);
       transform: translateZ(0);
@@ -847,9 +821,6 @@
     /* ==========   قسم مواضيع التصويت   ========== */
     /* ============================================ */
     .voting-section { max-width: 900px; margin: 4.2rem auto; padding: 1.9rem 2.25rem; border-radius: 16px; background: var(--gradient-card); box-shadow: var(--shadow-soft); text-align: center; position: relative; overflow: hidden; }
-    .voting-section::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; transition: height 0.3s ease; }
-    @media (hover: hover) and (pointer: fine) {
-    .voting-section:hover::before { height: 6px; } }
     @media (hover: hover) and (pointer: fine) {
     .voting-section:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .voting-header { display: flex; justify-content: center; align-items: center; margin-bottom: 0.8rem; }
@@ -957,9 +928,6 @@
     .project-viewer-frame { flex: 1; min-height: 0; }
     .project-viewer-frame iframe, .project-viewer-frame img { display: block; }
     .chat-section { max-width: 900px; margin: 4.2rem auto; padding: 1.9rem 2.25rem; border-radius: 16px; background: var(--gradient-card); text-align: center; box-shadow: var(--shadow-soft); position: relative; overflow: hidden; }
-    .chat-section::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; transition: height 0.3s ease; }
-    @media (hover: hover) and (pointer: fine) {
-    .chat-section:hover::before { height: 6px; } }
     @media (hover: hover) and (pointer: fine) {
     .chat-section:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .chat-header { display: flex; justify-content: center; align-items: center; margin-bottom: 0.8rem; }
@@ -977,32 +945,6 @@
     /* ============================================ */
     /* ==========   الفواصل الجديدة      ========== */
     /* ============================================ */
-.section-divider {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 2.8rem auto;
-  max-width: 80%;
-  height: 1px;
-  position: relative;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
-.section-divider.visible { opacity: 1; transform: translateY(0); }
-.divider-line {
-  flex: 1;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, var(--accent-teal), transparent);
-  opacity: 0.5;
-}
-.divider-icon {
-  font-size: 1.15rem;
-  color: var(--accent-teal);
-  opacity: 0.5;
-  margin: 0 14px;
-  letter-spacing: 6px;
-}
 
     /* ============================================ */
     /* ==========   العنوان الرئيسي المعدل   ========== */
@@ -1097,21 +1039,6 @@
       position: relative;
       overflow: hidden;
     }
-    .grades-query-section::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      right: 0;
-      left: 0;
-      height: 5px;
-      background: var(--gradient-accent);
-      border-radius: 2px 2px 0 0;
-      transition: height 0.3s ease;
-    }
-    @media (hover: hover) and (pointer: fine) {
-    .grades-query-section:hover::before {
-      height: 6px;
-    } }
     @media (hover: hover) and (pointer: fine) {
     .grades-query-section:hover {
       box-shadow: var(--shadow-soft);
@@ -1501,8 +1428,7 @@
       .voting-section { padding: 1.3rem 1rem 1.2rem; }
       .vote-btn { min-width: 180px; padding: 0.9rem 2rem; font-size: 1rem; }
       .chat-section { padding: 1.3rem 1rem 1.2rem; }
-      .section-divider { max-width: 90%; margin: 1.5rem auto; }
-      .info-toggle-btn { width: 28px; height: 28px; font-size: 0.85rem; }
+            .info-toggle-btn { width: 28px; height: 28px; font-size: 0.85rem; }
       .unified-student-info { width: 200px; top: -90px; padding: 0.7rem 1rem; }
       .fame-bar-section { padding: 0.9rem 0.8rem 0.75rem; }
       .back-to-top { bottom: 82px; left: 20px; width: 45px; height: 45px; font-size: 1.15rem; }
@@ -1515,8 +1441,7 @@
         .notification-bar { font-size: 0.85rem; padding: 7px 0; }
         .info-toggle-btn { width: 26px; height: 26px; font-size: 0.75rem; }
         .fame-bar-section { margin-bottom: 2rem; padding: 0.75rem 0.5rem 0.6rem; }
-        .section-divider { margin: 1rem auto; }
-        .main-title-icon { font-size: 1.4rem; }
+                .main-title-icon { font-size: 1.4rem; }
         .back-to-top { bottom: 77px; left: 15px; width: 40px; height: 40px; font-size: 1.15rem; }
       }
       @media (min-width: 481px) and (max-width: 768px) {
@@ -1903,9 +1828,6 @@
       overflow: hidden;
       transition: var(--transition);
     }
-    .honor-section::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 5px; background: var(--gradient-accent); border-radius: 2px 2px 0 0; transition: height 0.3s ease; }
-    @media (hover: hover) and (pointer: fine) {
-    .honor-section:hover::before { height: 6px; } }
     @media (hover: hover) and (pointer: fine) {
     .honor-section:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .honor-title { text-align:center; margin:0; }
@@ -2162,19 +2084,16 @@
       <span class="header-meta-item"><i class="fas fa-school"></i>ثانوية الإمام النووي</span>
     </div>
 
-    <!-- ٢ — العنوان الكبير -->
-    <h1 class="header-headline">كل ما تحتاجه في مادة <span class="nowrap-unit">التقنية الرقمية</span></h1>
+    <!-- ٣ — العنوان الرئيسي -->
+    <h1 class="header-headline">واجهة المعلم الرقمي</h1>
 
-    <!-- ٣ — سطر الشعار -->
+    <!-- ٤ — النص الفرعي -->
+    <p class="header-subheadline">كل ما تحتاجه في مادة <span class="nowrap-unit">التقنية الرقمية</span></p>
+
+    <!-- ٥ — النص الوصفي -->
     <p class="header-tagline">تابع درجاتك، تصفح المصادر، شارك مشاريعك، ونافس زملاءك</p>
 
-    <!-- ٤ — الزران -->
-    <div class="header-actions">
-      <button type="button" class="header-btn-primary" data-scroll-target="grades-section">استعلم عن درجاتك</button>
-      <button type="button" class="header-btn-secondary" data-scroll-target="library-section">تصفح المكتبة</button>
-    </div>
-
-    <!-- ٥ — شريط التاريخ والوقت -->
+    <!-- ٦ — شريط التاريخ والوقت -->
     <div class="header-datetime" dir="rtl">
       <span class="header-dt-item"><i class="fas fa-moon"></i><span id="hijri-date"></span></span>
       <span class="header-dt-divider"></span>
@@ -2272,14 +2191,6 @@
 </section>
 
 <!-- ============================================ -->
-<!-- ==========   الفاصل الأول        ========== -->
-<!-- ============================================ -->
-<div class="section-divider fade-in">
-  <div class="divider-line"></div>
-  <span class="divider-icon">· · ·</span>
-  <div class="divider-line"></div>
-</div>
-<!-- ============================================ -->
 <!-- ==========      لوحة الشرف       ========== -->
 <!-- ============================================ -->
 <section class="honor-section fade-in" id="honor-section" style="display:none;">
@@ -2293,11 +2204,6 @@
   <div class="honor-note">النقاط من مشاركات الطالب · الحضور بعدد الحصص</div>
 </section>
 
-<div class="section-divider fade-in" id="honorDivider" style="display:none;">
-  <div class="divider-line"></div>
-  <span class="divider-icon">· · ·</span>
-  <div class="divider-line"></div>
-</div>
 <!-- ============================================ -->
 <!-- ==========   قسم مواضيع التصويت   ========== -->
 <!-- ============================================ -->
@@ -2403,14 +2309,6 @@
 </div>
 </section>
 
-<!-- ============================================ -->
-<!-- ==========   الفاصل الثاني       ========== -->
-<!-- ============================================ -->
-<div class="section-divider fade-in">
-  <div class="divider-line"></div>
-  <span class="divider-icon">· · ·</span>
-  <div class="divider-line"></div>
-</div>
 
 <!-- ============================================ -->
 <!-- ==========   قسم ساحة النقاش   ========== -->
@@ -2436,14 +2334,6 @@
   </div>
 </section>
 
-<!-- ============================================ -->
-<!-- ==========   الفاصل الثالث      ========== -->
-<!-- ============================================ -->
-<div class="section-divider fade-in">
-  <div class="divider-line"></div>
-  <span class="divider-icon">· · ·</span>
-  <div class="divider-line"></div>
-</div>
 
 <!-- ========================================= -->
 <!--            مكتبة الطالب                   -->
@@ -2471,14 +2361,6 @@
   </div>
 </section>
 
-<!-- ============================================ -->
-<!-- ==========   الفاصل الخامس        ========== -->
-<!-- ============================================ -->
-<div class="section-divider fade-in">
-  <div class="divider-line"></div>
-  <span class="divider-icon">· · ·</span>
-  <div class="divider-line"></div>
-</div>
 
 <!-- ============================================ -->
 <!-- ==========   الاستعلام عن الدرجات   ========== -->
@@ -2514,14 +2396,6 @@
   </div>
 </section>
 
-<!-- ============================================ -->
-<!-- ==========   الفاصل السادس        ========== -->
-<!-- ============================================ -->
-<div class="section-divider fade-in">
-  <div class="divider-line"></div>
-  <span class="divider-icon">· · ·</span>
-  <div class="divider-line"></div>
-</div>
 
 <!-- قسم الذكاء الاصطناعي -->
 <div id="ai-assistant-section" class="ai-assistant-container fade-in">
@@ -2549,14 +2423,6 @@
     </div>
 </div>
 
-<!-- ============================================ -->
-<!-- ==========   الفاصل السابع       ========== -->
-<!-- ============================================ -->
-<div class="section-divider fade-in">
-  <div class="divider-line"></div>
-  <span class="divider-icon">· · ·</span>
-  <div class="divider-line"></div>
-</div>
 
 <!-- قسم تسليم المشاريع -->
 <div class="submit-project-section fade-in">
@@ -2749,7 +2615,8 @@
       const goToSection = function (btn) {
         hapticFeedback(8);
         const target = document.getElementById(btn.dataset.target);
-        if (target) target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (target) target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
       };
       navItems.forEach(btn => {
         btn.addEventListener('touchend', function (e) {
@@ -2980,7 +2847,7 @@ document.addEventListener('keydown', (e) => {
         btn.addEventListener('click', () => {
           const target = document.getElementById(btn.dataset.scrollTarget);
           if (!target) return;
-          target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+          target.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'center' });
         });
       });
     }
@@ -3013,18 +2880,6 @@ document.addEventListener('keydown', (e) => {
     setTimeout(syncHeaderMetaSeparators, 350);
     window.addEventListener('load', () => setTimeout(syncHeaderMetaSeparators, 350));
     
-    // الفواصل والعنوان الجديد
-    function initNewSections() {
-      const dividers = document.querySelectorAll('.section-divider');
-      const mainTitle = document.querySelector('.section-main-title');
-      const observerOptions = { threshold: 0.3, rootMargin: '0px 0px -50px 0px' };
-      const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('visible'); }); }, observerOptions);
-      dividers.forEach(divider => observer.observe(divider));
-      if(mainTitle) observer.observe(mainTitle);
-      if(mainTitle) { const titleIcon = mainTitle.querySelector('.main-title-icon'); if(titleIcon) { titleIcon.addEventListener('mouseenter', () => titleIcon.style.transform = 'scale(1.1) rotate(10deg)'); titleIcon.addEventListener('mouseleave', () => titleIcon.style.transform = 'scale(1) rotate(0deg)'); } }
-    }
-    initNewSections();
-
     // ============================================
     //      نظام الاستعلام عن الدرجات
     // ============================================
@@ -3376,7 +3231,6 @@ function renderHonorSkeleton() {
 
 async function loadHonorBoard() {
   const sec = document.getElementById('honor-section');
-  const div = document.getElementById('honorDivider');
   renderHonorSkeleton();
   sec.style.display = 'block';
   requestAnimationFrame(function () { sec.classList.add('visible'); });
@@ -3390,10 +3244,6 @@ async function loadHonorBoard() {
     }
     honorData = data;
     document.getElementById('honorSub').textContent = data.title;
-    div.style.display = 'flex';
-    requestAnimationFrame(function () {
-      div.classList.add('visible');
-    });
     renderHonorTabs();
     renderHonorBody(true);
   } catch (err) {
