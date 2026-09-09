@@ -580,6 +580,7 @@
     .library-card > *:first-child { margin-top: 0; }
     /* سهم الدخول في أسفل البطاقة */
     .library-card-go {
+      /* auto يدفعه إلى القاع؛ والحدّ الأدنى للفجوة يأتي من هامش العنصر فوقه */
       margin-top: auto;
       width: 30px;
       height: 30px;
@@ -613,8 +614,8 @@
     .library-card-1 .library-card-number { color: var(--tech-blue); }
     .library-card-2 .library-card-number { color: var(--accent-teal); }
     .library-card-3 .library-card-number { color: var(--gold-excellence); }
-    .library-card-title { font-size: 0.8rem; font-weight: 600; color: var(--text-dark); margin: 0; }
-    .library-card-note { font-size: 0.6rem; color: var(--text-light); margin: 4px 0 0; }
+    .library-card-title { font-size: 0.8rem; font-weight: 600; color: var(--text-dark); margin: 4px 0 8px; }
+    .library-card-note { font-size: 0.6rem; color: var(--text-light); margin: 4px 0 8px; }
     .library-card-disabled { cursor: not-allowed; opacity: 0.55; }
     @media (hover: hover) and (pointer: fine) {
     .library-card-disabled:hover { transform: none; box-shadow: var(--shadow-soft); border-color: transparent; } }
@@ -932,7 +933,7 @@
     .chat-section:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .chat-header { display: flex; justify-content: center; align-items: center; margin-bottom: 0.8rem; }
     .chat-title { display: flex; align-items: center; gap: 0.45rem; margin: 0; }
-    .chat-title i { color: var(--tech-blue); opacity: 0.9; transition: all 0.3s ease; }
+    .chat-title i { font-size: 2.2rem; color: var(--tech-blue); opacity: 0.9; transition: all 0.3s ease; }
     @media (hover: hover) and (pointer: fine) {
     .chat-title:hover i { opacity: 1; transform: scale(1.1) rotate(5deg); } }
     .chat-description { margin: 0 0 1.5rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
@@ -1566,9 +1567,13 @@
   font-size: 0.78rem;
   font-weight: 500;
   color: var(--text-medium);
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
   margin-bottom: 10px;
 }
+.voting-timer-label i { font-size: 0.7rem; color: var(--text-light); }
 
 .timer-capsule {
   display: inline-flex;
@@ -2010,7 +2015,6 @@
     /* أيقونة العنوان تتبع مقاسه فلا تنفرد بمقاس خاص */
     .fame-bar-title > i,
     .voting-title > i,
-    .chat-title > i,
     .ai-header > i {
       font-size: 1em;
     }
@@ -2114,16 +2118,16 @@
   </button>
   <button type="button" class="service-card" data-scroll-target="library-section">
     <i class="fas fa-book-open"></i>
-    <span class="service-name">مكتبتي</span>
+    <span class="service-name">المكتبة</span>
     <span class="service-desc">المصادر والمعلومات</span>
   </button>
   <button type="button" class="service-card" data-scroll-target="projects-section">
-    <i class="fas fa-diagram-project"></i>
-    <span class="service-name">المشاريع</span>
+    <i class="fas fa-trophy"></i>
+    <span class="service-name">المسابقات</span>
     <span class="service-desc">التصويت والمنافسة</span>
   </button>
   <button type="button" class="service-card" data-scroll-target="ai-assistant-section">
-    <i class="fas fa-graduation-cap"></i>
+    <i class="fas fa-wand-magic-sparkles"></i>
     <span class="service-name">المساعد الرقمي</span>
     <span class="service-desc">أسأل عن مفاهيم التقنية</span>
   </button>
@@ -2143,7 +2147,7 @@
 <!-- ============================================ -->
 <!-- ==========   قسم التميز المحسّن   ========== -->
 <!-- ============================================ -->
-<section class="fame-bar-section fade-in">
+<section class="fame-bar-section fade-in" id="fame-section">
   <div class="fame-bar-title">
     <span>صُناع المستقبل </span>
   </div>
@@ -2210,13 +2214,13 @@
 <section class="voting-section fade-in" id="projects-section">
   <div class="voting-header">
     <h3 class="voting-title">
-      <span>معرض المشاريع الطلابية</span>
+      <span>مسابقات الإبداع الرقمي</span>
     </h3>
   </div>
   
   <div class="voting-timer" id="votingTimer">
   <div class="voting-timer-label">
-    <span>ينتهي التصويت خلال</span>
+    <i class="fas fa-clock"></i><span>ينتهي التصويت خلال</span>
   </div>
   <div class="timer-capsule" id="timerCapsule">
     <div class="timer-unit-block">
@@ -2313,7 +2317,7 @@
 <!-- ============================================ -->
 <!-- ==========   قسم ساحة النقاش   ========== -->
 <!-- ============================================ -->
-<section class="chat-section fade-in">
+<section class="chat-section fade-in" id="chat-section">
   <div class="chat-header">
     <h3 class="chat-title">
       <i class="fab fa-telegram"></i>
@@ -2351,7 +2355,7 @@
       <span class="library-card-number">٢</span>
       <h3 class="library-card-title">الثاني ثانوي</h3>
       <p class="library-card-note">غير مطروحة هذا الفصل</p>
-      <span class="library-card-go" aria-hidden="true"><i class="fas fa-minus"></i></span>
+      <span class="library-card-go" aria-hidden="true"><i class="fas fa-lock"></i></span>
     </div>
     <div class="library-card library-card-3" data-url="https://sites.google.com/view/regf78/ut?authuser=1" data-title="الثالث ثانوي">
       <span class="library-card-number">٣</span>
@@ -2425,7 +2429,7 @@
 
 
 <!-- قسم تسليم المشاريع -->
-<div class="submit-project-section fade-in">
+<div class="submit-project-section fade-in" id="submit-section">
   <h3 class="submit-project-title">تسليم المشاريع</h3>
   <p class="submit-project-description">سلّم مشروعك التعليمي مباشرة من هنا، وسيصل للمعلم للمراجعة والتقييم.</p>
 
@@ -2449,20 +2453,20 @@
     <span>درجاتي</span>
   </button>
   <button type="button" class="bottom-nav-item" id="bottomNavHonor" data-target="honor-section" hidden>
-    <i class="fas fa-trophy"></i>
+    <i class="fas fa-ranking-star"></i>
     <span>الصدارة</span>
   </button>
-  <button type="button" class="bottom-nav-item" data-target="projects-section">
-    <i class="fas fa-check-to-slot"></i>
-    <span>المشاريع</span>
+  <button type="button" class="bottom-nav-item" data-target="fame-section">
+    <i class="fas fa-crown"></i>
+    <span>التميز</span>
   </button>
-  <button type="button" class="bottom-nav-item" data-target="library-section">
-    <i class="fas fa-book-open"></i>
-    <span>المكتبة</span>
+  <button type="button" class="bottom-nav-item" data-target="chat-section">
+    <i class="fas fa-users"></i>
+    <span>المجتمع</span>
   </button>
-  <button type="button" class="bottom-nav-item" data-target="ai-assistant-section">
-    <i class="fas fa-graduation-cap"></i>
-    <span>المساعد</span>
+  <button type="button" class="bottom-nav-item" data-target="submit-section">
+    <i class="fas fa-cloud-arrow-up"></i>
+    <span>المشروع</span>
   </button>
 </nav>
 
@@ -2626,7 +2630,7 @@
         btn.addEventListener('click', function () { goToSection(this); });
       });
 
-      const sectionIds = ['grades-section', 'honor-section', 'projects-section', 'library-section', 'ai-assistant-section'];
+      const sectionIds = ['grades-section', 'honor-section', 'fame-section', 'chat-section', 'submit-section'];
       const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
       const setActive = id => {
         navItems.forEach(btn => btn.classList.toggle('active', btn.dataset.target === id));
@@ -4005,7 +4009,7 @@ window.showVoteModal = function() {
 
   const projectsHtml = VOTING_PROJECTS.map((p, i) => `
     <div class="vote-option" data-project="${p.name}" style="display:flex; align-items:center; gap:10px; padding:12px; border:1px solid rgba(22,50,79,0.06); border-radius: 10px; margin-bottom:8px; cursor:pointer; transition:all 0.25s ease;">
-      <i class="fas ${p.icon}" style="color:${p.color}; font-size:1.15rem; width:22px; text-align:center;"></i>
+      <i class="fas ${p.icon}" style="color:var(--accent-teal); font-size:1.15rem; width:22px; text-align:center;"></i>
       <span style="font-size:0.85rem; font-weight:600; color:var(--primary-dark);">${p.name}</span>
     </div>
   `).join('');
