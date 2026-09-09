@@ -388,10 +388,11 @@
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 0.8rem;
+      /* الفجوة صفر: المسافات حول منصة التتويج تُضبط بهوامش صريحة أدناه */
+      gap: 0;
       max-width: 900px;
       margin: 1.5rem auto 2.5rem auto;
-      padding: 1.9rem 2.25rem 1.6rem;
+      padding: 1.425rem 2.25rem 1.2rem;
       border-radius: 16px;
       position: relative;
       overflow: hidden;
@@ -432,8 +433,13 @@
     }
 
     .students-container { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 0.5rem; }
+    /* المسافات حول منصة التتويج — قيم صريحة موحّدة بين وضعي التفعيل والاستراحة */
+    .fame-bar-section .fame-bar-title { margin-bottom: 16.8px; }
+    .fame-bar-section .honors-subtitle { margin-bottom: 0; }
+    .fame-bar-section .students-container,
+    .fame-bar-section #fame-inactive-mode { margin-top: 16px; margin-bottom: 14px; }
     /* منصة التتويج: الأول في الوسط مرفوعًا، والجانبيان بمحاذاة سفلية */
-    .students-list { display: flex; align-items: flex-end; justify-content: center; gap: 14px; width: 100%; flex-wrap: nowrap; padding: 0.5rem 0; overflow: visible; position: relative; }
+    .students-list { display: flex; align-items: flex-end; justify-content: center; gap: 14px; width: 100%; flex-wrap: nowrap; padding: 0; overflow: visible; position: relative; }
     .student-item { position: relative; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
     /* الترتيب من اليمين: الثاني، ثم الأول في الوسط، ثم الثالث */
     .student-item[data-index="1"] { order: 1; }
@@ -444,8 +450,8 @@
     .student-item[data-index="0"] .student-image { box-shadow: 0 0 0 4px rgba(232, 163, 61, 0.12); }
 
     /* وضع الاستراحة: نفس المنصة بأبعادها ومواضعها */
-    .fame-empty-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 0.5rem 0 0.2rem; text-align: center; }
-    .fame-empty-podium { padding: 0.5rem 0; }
+    .fame-empty-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 0; text-align: center; }
+    .fame-empty-podium { padding: 0; }
     .fame-empty-item { display: flex; flex-direction: column; align-items: center; }
     .fame-empty-first { margin-bottom: 22px; }
     .fame-empty-texts { max-width: 420px; }
@@ -1446,7 +1452,7 @@
       .section-divider { max-width: 90%; margin: 1.5rem auto; }
       .info-toggle-btn { width: 28px; height: 28px; font-size: 0.85rem; }
       .unified-student-info { width: 200px; top: -90px; padding: 0.7rem 1rem; }
-      .fame-bar-section { padding: 1.2rem 0.8rem 1rem; }
+      .fame-bar-section { padding: 0.9rem 0.8rem 0.75rem; }
       .back-to-top { bottom: 82px; left: 20px; width: 45px; height: 45px; font-size: 1.15rem; }
       .bottom-nav { display: flex; }
       body { padding-bottom: 62px; }
@@ -1456,7 +1462,7 @@
         .main-title-icon { font-size: 1.4rem; }
         .notification-bar { font-size: 0.85rem; padding: 7px 0; }
         .info-toggle-btn { width: 26px; height: 26px; font-size: 0.75rem; }
-        .fame-bar-section { margin-bottom: 2rem; padding: 1rem 0.5rem 0.8rem; gap: 0.5rem; }
+        .fame-bar-section { margin-bottom: 2rem; padding: 0.75rem 0.5rem 0.6rem; }
         .section-divider { margin: 1rem auto; }
         .main-title-icon { font-size: 1.4rem; }
         .back-to-top { bottom: 77px; left: 15px; width: 40px; height: 40px; font-size: 1.15rem; }
@@ -1575,59 +1581,68 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 0;
   margin: 0 auto 1.2rem;
 }
 
 .voting-timer-label {
-  font-size: 0.85rem;
-  color: var(--text-subtitle);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.voting-timer-label i {
-  color: var(--accent-teal);
-  animation: pulse 2s infinite;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--text-medium);
+  text-align: center;
+  margin-bottom: 10px;
 }
 
 .timer-capsule {
   display: inline-flex;
   align-items: flex-start;
   justify-content: center;
-  gap: 16px;
-  background: var(--primary-dark);
-  border-radius: 999px;
-  padding: 10px 20px;
-  transition: background-color 0.4s ease;
+  gap: 8px;
+  background: none;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
 }
-/* تدرّج الإلحاح بحسب الوقت المتبقي */
-.timer-capsule.timer-urgent-hour { background: #B8860B; }
-.timer-capsule.timer-urgent-final { background: var(--warning-red); }
 
-.timer-unit-block { display: flex; flex-direction: column; align-items: center; }
+.timer-unit-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(22, 50, 79, 0.03);
+  border-radius: 10px;
+  padding: 8px 12px;
+  min-width: 46px;
+  border: none;
+  box-shadow: none;
+}
 
 .timer-capsule .timer-value {
-  font-size: 1.05rem;
+  font-size: 1.3rem;
   font-weight: 700;
-  color: #fff;
+  color: var(--primary-dark);
   line-height: 1.2;
-  /* أرقام متساوية العرض حتى لا يهتز عرض الكبسولة كل ثانية */
+  /* أرقام متساوية العرض حتى لا يهتز عرض المربع كل ثانية */
   font-variant-numeric: tabular-nums;
   font-feature-settings: "tnum" 1;
+  transition: color 0.4s ease;
 }
 
 .timer-capsule .timer-unit {
-  font-size: 0.55rem;
-  color: #fff;
-  opacity: 0.6;
+  font-size: 0.6rem;
+  font-weight: 400;
+  color: var(--text-light);
   line-height: 1.3;
-  margin-top: 1px;
+  margin-top: 2px;
 }
 
+/* تدرّج الإلحاح على الأرقام وحدها — الخلفية تبقى محايدة */
+.timer-capsule.timer-urgent-hour .timer-value { color: #B8860B; }
+.timer-capsule.timer-urgent-final .timer-value { color: var(--warning-red); }
+
 @media (max-width: 359px) {
-  .timer-capsule { gap: 11px; padding: 9px 14px; }
+  .timer-capsule { gap: 6px; }
+  .timer-unit-block { padding: 8px 9px; }
 }
 
     /* ============================================ */
@@ -1701,7 +1716,8 @@
   object-fit: cover;
   margin: 0 auto 1rem;
   display: block;
-  box-shadow: 0 8px 20px rgba(var(--accent-teal-rgb), 0.35);
+  /* ظل محايد: الصورة عرضٌ لا عنصر تفاعلي، فلا توحي بالفيروزي القابل للنقر */
+  box-shadow: 0 4px 14px rgba(22, 50, 79, 0.1);
 }
 
 /* وسام الإنجاز */
@@ -2035,7 +2051,6 @@
     }
     .grades-query-section .grades-description,
     .honor-section .honor-sub,
-    .fame-bar-section .honors-subtitle,
     .voting-section .voting-description,
     .chat-section .chat-description,
     .ai-assistant-container .ai-description {
@@ -2141,15 +2156,15 @@
       <div class="student-item" data-index="0">
         <i class="fas fa-crown podium-crown"></i>
         <div class="student-image"><img src="images/hh.jpeg" alt="الطالب المتميز الأول"></div>
-        <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب"><i class="fas fa-plus"></i></button>
+        <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب"><i class="fas fa-circle-info"></i></button>
       </div>
       <div class="student-item" data-index="1">
         <div class="student-image"><img src="images/ee.png" alt="الطالب المتميز الثاني"></div>
-        <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب"><i class="fas fa-plus"></i></button>
+        <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب"><i class="fas fa-circle-info"></i></button>
       </div>
       <div class="student-item" data-index="2">
         <div class="student-image"><img src="images/hh.jpeg" alt="الطالب المتميز الثالث"></div>
-        <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب"><i class="fas fa-plus"></i></button>
+        <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب"><i class="fas fa-circle-info"></i></button>
       </div>
     </div>
     <div class="unified-student-info" id="unifiedStudentInfo">
@@ -2173,10 +2188,6 @@
       <div class="fame-empty-texts">
         <p class="fame-empty-title">منصة التميز تستعد لأبطال هذا الفصل</p>
         <p class="fame-empty-sub">سيُعلن عن المتميزين قريبًا</p>
-      </div>
-      <div style="display:flex; align-items:center; gap:8px; background:rgba(14,149,148,0.06); border-radius: 8px; padding:8px 20px;">
-        <i class="fas fa-clock soon-badge-icon" style="font-size:0.85rem; color:var(--accent-teal);"></i>
-        <span style="font-size:0.85rem; color:var(--accent-teal); font-weight:600;">قريباً</span>
       </div>
     </div>
   </div>
@@ -2221,7 +2232,6 @@
   
   <div class="voting-timer" id="votingTimer">
   <div class="voting-timer-label">
-    <i class="fas fa-hourglass-half"></i>
     <span>ينتهي التصويت خلال</span>
   </div>
   <div class="timer-capsule" id="timerCapsule">
