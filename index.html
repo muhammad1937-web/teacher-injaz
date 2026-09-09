@@ -409,9 +409,48 @@
     .honors-subtitle { margin: 0 0 0.8rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
     @media (hover: hover) and (pointer: fine) {
     .honors-subtitle:hover { color: var(--tech-blue); transform: none; background: transparent; border: none; box-shadow: none; } }
+    /* ========================================= */
+    /*   منصة التتويج — لغة بصرية واحدة للتميّز   */
+    /* ========================================= */
+    .podium-crown { font-size: 1.1rem; color: var(--gold-excellence); margin-bottom: 6px; line-height: 1; display: block; }
+    .podium-empty-slot {
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .podium-empty-first {
+      width: 95px; height: 95px;
+      border: 2px dashed rgba(232, 163, 61, 0.35);
+      background: rgba(232, 163, 61, 0.04);
+      box-shadow: 0 0 24px rgba(232, 163, 61, 0.15);
+    }
+    .podium-empty-side {
+      width: 78px; height: 78px;
+      border: 2px dashed rgba(22, 50, 79, 0.12);
+      background: rgba(22, 50, 79, 0.02);
+    }
+
     .students-container { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 0.5rem; }
-    .students-list { display: flex; align-items: center; justify-content: center; gap: 2.5rem; width: 100%; flex-wrap: nowrap; padding: 0.5rem 0; overflow: visible; position: relative; }
+    /* منصة التتويج: الأول في الوسط مرفوعًا، والجانبيان بمحاذاة سفلية */
+    .students-list { display: flex; align-items: flex-end; justify-content: center; gap: 14px; width: 100%; flex-wrap: nowrap; padding: 0.5rem 0; overflow: visible; position: relative; }
     .student-item { position: relative; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
+    /* الترتيب من اليمين: الثاني، ثم الأول في الوسط، ثم الثالث */
+    .student-item[data-index="1"] { order: 1; }
+    .student-item[data-index="0"] { order: 2; margin-bottom: 22px; }
+    .student-item[data-index="2"] { order: 3; }
+    .student-item[data-index="1"] .student-image,
+    .student-item[data-index="2"] .student-image { width: 78px; height: 78px; }
+    .student-item[data-index="0"] .student-image { box-shadow: 0 0 0 4px rgba(232, 163, 61, 0.12); }
+
+    /* وضع الاستراحة: نفس المنصة بأبعادها ومواضعها */
+    .fame-empty-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 0.5rem 0 0.2rem; text-align: center; }
+    .fame-empty-podium { padding: 0.5rem 0; }
+    .fame-empty-item { display: flex; flex-direction: column; align-items: center; }
+    .fame-empty-first { margin-bottom: 22px; }
+    .fame-empty-texts { max-width: 420px; }
+    .fame-empty-title { font-size: 0.95rem; font-weight: 700; color: var(--primary-dark); margin: 0; line-height: 1.4; }
+    .fame-empty-sub { font-size: 0.75rem; font-weight: 400; color: var(--text-light); margin: 5px 0 0; line-height: 1.4; }
 .student-image {
   position: relative;
   width: 95px;
@@ -758,37 +797,95 @@
     .voting-description { margin: 0 0 1.5rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
     @media (hover: hover) and (pointer: fine) {
     .voting-description:hover { color: var(--tech-blue); transform: none; background: transparent; border: none; box-shadow: none; } }
-    .projects-container { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; flex-wrap: wrap; }
-    .project-btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif; font-size: 1rem; font-weight: 600; padding: 0.9rem 1.5rem; border-radius: 16px; text-decoration: none; border: 2px solid transparent; cursor: pointer; transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); white-space: nowrap; min-width: 160px; background: rgba(255, 255, 255, 0.7); color: var(--text-medium); box-shadow: var(--shadow-soft); position: relative; overflow: hidden; text-align: center; flex: 1; }
-    .project-btn::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(var(--accent-teal-rgb), 0.05); opacity: 0; transition: opacity 0.3s ease; }
+    /* بطاقات المشاريع: معرض في صف واحد لا قائمة */
+    .projects-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 1.5rem;
+      align-items: stretch;
+    }
+    /* تحت 360px: بطاقتان في صف والثالثة بعرض كامل تحتهما */
+    @media (max-width: 359px) {
+      .projects-container { grid-template-columns: 1fr 1fr; }
+      .projects-container .project-btn:nth-child(3) { grid-column: 1 / -1; }
+    }
+    .project-btn {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-family: 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
+      padding: 16px 8px;
+      border-radius: 16px;
+      border: none;
+      background: var(--pure-white);
+      box-shadow: var(--shadow-soft);
+      cursor: pointer;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    }
     .project-btn { opacity: 0; }
     @media (prefers-reduced-motion: reduce) { .project-btn { opacity: 1; } }
-    .project-btn i { font-size: 1em; transition: all 0.3s ease; }
+    .project-btn i { font-size: 1.5rem; color: var(--accent-teal); transition: all 0.3s ease; }
+    .project-btn span { font-size: 0.78rem; font-weight: 600; color: var(--primary-dark); line-height: 1.3; }
+    .project-btn small {
+      display: inline-flex; align-items: center; justify-content: center; gap: 4px;
+      font-size: 0.62rem; color: var(--text-light); line-height: 1.3;
+    }
+    .project-btn small i { font-size: 0.62rem; color: var(--text-light); }
     @media (hover: hover) and (pointer: fine) {
-    .project-btn:hover { transform: translateY(-3px); box-shadow: var(--shadow-soft-lift); border-color: var(--accent-teal); background: rgba(255, 255, 255, 0.9); color: var(--primary-dark); } }
-    @media (hover: hover) and (pointer: fine) {
-    .project-btn:hover::before { opacity: 1; } }
-    @media (hover: hover) and (pointer: fine) {
-    .project-btn:hover i { transform: translateX(3px); } }
-    .project-btn:active { transform: translateY(-1px); box-shadow: var(--shadow-soft-lift); }
-    .project-btn span { font-weight: 600; color: var(--text-medium); text-shadow: 0 1px 1px rgba(255, 255, 255, 0.5); }
-    .project-btn:nth-child(1) { border-color: rgba(var(--tech-blue-rgb), 0.3); }
-    .project-btn:nth-child(1) i { color: var(--tech-blue); }
-    @media (hover: hover) and (pointer: fine) {
-    .project-btn:nth-child(1):hover { border-color: var(--tech-blue); background: linear-gradient(135deg, rgba(var(--tech-blue-rgb), 0.1), rgba(255, 255,255, 0.9)); } }
-    .project-btn:nth-child(2) { border-color: rgba(var(--accent-teal-rgb), 0.3); }
-    .project-btn:nth-child(2) i { color: var(--accent-teal); }
-    @media (hover: hover) and (pointer: fine) {
-    .project-btn:nth-child(2):hover { border-color: var(--accent-teal); background: linear-gradient(135deg, rgba(var(--accent-teal-rgb), 0.1), rgba(255, 255, 255, 0.9)); } }
-    .project-btn:nth-child(3) { border-color: rgba(var(--gold-excellence-rgb), 0.4); }
-    .project-btn:nth-child(3) i { color: var(--gold-excellence); }
-    @media (hover: hover) and (pointer: fine) {
-    .project-btn:nth-child(3):hover { border-color: var(--gold-excellence); background: linear-gradient(135deg, rgba(var(--gold-excellence-rgb), 0.12), rgba(255, 255, 255, 0.9)); } }
-    @media (hover: hover) and (pointer: fine) {
-    .project-btn:nth-child(3):hover i { color: var(--gold-excellence); } }
+    .project-btn:not(.project-btn-disabled):hover { transform: translateY(-3px); box-shadow: var(--shadow-soft-lift); } }
+    .project-btn:not(.project-btn-disabled):active { transform: translateY(-2px); box-shadow: var(--shadow-soft-lift); }
+    /* ========================================= */
+    /*   نتائج التصويت — نفس منصة التتويج        */
+    /* ========================================= */
+    @property --vote-pct {
+      syntax: '<number>';
+      inherits: false;
+      initial-value: 0;
+    }
+    .vote-podium { display: flex; align-items: flex-end; justify-content: center; gap: 14px; flex-wrap: nowrap; }
+    .vote-podium-item { display: flex; flex-direction: column; align-items: center; text-align: center; min-width: 0; }
+    .vote-podium-first { margin-bottom: 22px; }
+    .vote-ring {
+      --vote-pct: 0;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: conic-gradient(var(--ring-color) calc(var(--vote-pct) * 1%), rgba(22, 50, 79, 0.08) 0);
+      transition: --vote-pct 0.5s ease;
+    }
+    .vote-ring-first { width: 64px; height: 64px; --ring-color: var(--gold-excellence); }
+    .vote-ring-side { width: 54px; height: 54px; --ring-color: var(--accent-teal); }
+    /* الدائرة الداخلية البيضاء تصنع سماكة الحلقة ~5px */
+    .vote-ring-inner {
+      background: var(--pure-white);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: var(--primary-dark);
+    }
+    .vote-ring-first .vote-ring-inner { width: 54px; height: 54px; font-size: 0.95rem; }
+    .vote-ring-side .vote-ring-inner { width: 44px; height: 44px; font-size: 0.8rem; }
+    .vote-podium-name { font-size: 0.72rem; font-weight: 600; color: var(--primary-dark); margin-top: 8px; line-height: 1.3; }
+    .vote-podium-count { font-size: 0.62rem; color: var(--text-light); margin-top: 2px; line-height: 1.3; }
+    .vote-empty { text-align: center; padding: 1.5rem 1rem; color: var(--text-light); font-size: 0.85rem; }
+    .vote-empty i { display: block; font-size: 1.6rem; color: var(--text-light); opacity: 0.5; margin-bottom: 8px; }
+    @media (prefers-reduced-motion: reduce) {
+      .vote-ring { transition: none; }
+    }
+
     .project-btn-disabled { cursor: not-allowed; opacity: 0.55; }
     @media (hover: hover) and (pointer: fine) {
-    .project-btn-disabled:hover { transform: none !important; box-shadow: var(--shadow-soft-lift); border-color: inherit !important; background: rgba(255, 255, 255, 0.7) !important; color: var(--text-medium) !important; } }
+    .project-btn-disabled:hover { transform: none !important; box-shadow: var(--shadow-soft); } }
     @media (hover: hover) and (pointer: fine) {
     .project-btn-disabled:hover i { transform: none !important; } }
     .project-viewer-box { background: white; border-radius: 16px; width: 95%; max-width: 800px; height: 75vh; margin: 0 auto; box-shadow: var(--shadow-soft); overflow: hidden; display: flex; flex-direction: column; }
@@ -1347,25 +1444,17 @@
       .vote-btn { min-width: 180px; padding: 0.9rem 2rem; font-size: 1rem; }
       .chat-section { padding: 1.3rem 1rem 1.2rem; }
       .section-divider { max-width: 90%; margin: 1.5rem auto; }
-      .students-list { gap: 1.5rem; }
-      .student-image { width: 85px; height: 85px; }
       .info-toggle-btn { width: 28px; height: 28px; font-size: 0.85rem; }
       .unified-student-info { width: 200px; top: -90px; padding: 0.7rem 1rem; }
       .fame-bar-section { padding: 1.2rem 0.8rem 1rem; }
-      .projects-container { flex-direction: row !important; flex-wrap: wrap; justify-content: center; gap: 1.5rem; }
-      .project-btn { width: auto !important; max-width: none !important; min-width: 140px; padding: 0.8rem 1.2rem !important; flex: 0 0 auto; font-size: 0.85rem; margin: 0 !important; display: inline-flex !important; }
       .back-to-top { bottom: 82px; left: 20px; width: 45px; height: 45px; font-size: 1.15rem; }
       .bottom-nav { display: flex; }
       body { padding-bottom: 62px; }
 
       @media (max-width: 480px) {
-        .projects-container { flex-direction: row !important; flex-wrap: wrap; justify-content: center; gap: 1.2rem; }
-        .project-btn { min-width: 120px; padding: 0.7rem 1rem !important; font-size: 0.85rem; flex: 0 0 auto; }
         .vote-btn { min-width: 160px; padding: 0.8rem 1.5rem; font-size: 0.85rem; }
         .main-title-icon { font-size: 1.4rem; }
         .notification-bar { font-size: 0.85rem; padding: 7px 0; }
-        .students-list { gap: 1.2rem; }
-        .student-image { width: 75px; height: 75px; }
         .info-toggle-btn { width: 26px; height: 26px; font-size: 0.75rem; }
         .fame-bar-section { margin-bottom: 2rem; padding: 1rem 0.5rem 0.8rem; gap: 0.5rem; }
         .section-divider { margin: 1rem auto; }
@@ -1373,19 +1462,12 @@
         .back-to-top { bottom: 77px; left: 15px; width: 40px; height: 40px; font-size: 1.15rem; }
       }
       @media (min-width: 481px) and (max-width: 768px) {
-        .project-btn { min-width: 150px; padding: 0.8rem 1.2rem !important; }
         .vote-btn { min-width: 190px; padding: 0.9rem 2rem; }
       }
     }
     @media (min-width: 769px) and (max-width: 1024px) {
-      .students-list { gap: 2rem; }
-      .student-image { width: 110px; height: 110px; }
-      .projects-container { gap: 1.5rem; }
-      .project-btn { min-width: 150px; padding: 0.8rem 1.2rem; }
     }
     @media (min-width: 1025px) {
-      .projects-container { gap: 2rem; }
-      .project-btn { min-width: 160px; padding: 0.9rem 1.5rem; font-size: 1rem; }
     }
     /* ============================================ */
 /* ==========   CSS التصويت المتقدم   ========= */
@@ -1510,54 +1592,42 @@
   animation: pulse 2s infinite;
 }
 
-.timer-boxes {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
+.timer-capsule {
+  display: inline-flex;
+  align-items: flex-start;
   justify-content: center;
-}
-
-.timer-box {
+  gap: 16px;
   background: var(--primary-dark);
-  border-radius: 16px;
-  padding: 8px 12px;
-  text-align: center;
-  min-width: 58px;
-  box-shadow: var(--shadow-soft);
+  border-radius: 999px;
+  padding: 10px 20px;
+  transition: background-color 0.4s ease;
 }
+/* تدرّج الإلحاح بحسب الوقت المتبقي */
+.timer-capsule.timer-urgent-hour { background: #B8860B; }
+.timer-capsule.timer-urgent-final { background: var(--warning-red); }
 
-.timer-box .timer-value {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: white;
-  display: block;
+.timer-unit-block { display: flex; flex-direction: column; align-items: center; }
+
+.timer-capsule .timer-value {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
   line-height: 1.2;
+  /* أرقام متساوية العرض حتى لا يهتز عرض الكبسولة كل ثانية */
   font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
 }
 
-.timer-box .timer-unit {
-  font-size: 0.75rem;
-  color: rgba(255,255,255,0.75);
-  display: block;
-  margin-top: 2px;
+.timer-capsule .timer-unit {
+  font-size: 0.55rem;
+  color: #fff;
+  opacity: 0.6;
+  line-height: 1.3;
+  margin-top: 1px;
 }
 
-.timer-separator {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: var(--accent-teal);
-  margin-bottom: 14px;
-}
-
-@media (max-width: 480px) {
-  .timer-box {
-    min-width: 50px;
-    padding: 6px 10px;
-  }
-  .timer-box .timer-value {
-    font-size: 1.15rem;
-  }
+@media (max-width: 359px) {
+  .timer-capsule { gap: 11px; padding: 9px 14px; }
 }
 
     /* ============================================ */
@@ -2069,6 +2139,7 @@
   <div class="students-container" style="display: none;">
     <div class="students-list" id="studentsList">
       <div class="student-item" data-index="0">
+        <i class="fas fa-crown podium-crown"></i>
         <div class="student-image"><img src="images/hh.jpeg" alt="الطالب المتميز الأول"></div>
         <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب"><i class="fas fa-plus"></i></button>
       </div>
@@ -2089,9 +2160,20 @@
 
   <!-- وضع عدم التفعيل (يُفعّل يدوياً عند عدم وجود متميزين) -->
   <div id="fame-inactive-mode" style="display: block;">
-    <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding:0.8rem 1rem 0.2rem; gap:14px; text-align:center;">
-      <i class="fas fa-crown" style="font-size:36px; color:var(--gold-excellence); opacity:0.9; display:inline-block;"></i>
-      <p style="font-size:0.85rem; color:var(--text-medium); margin:0; line-height:1.6; max-width:420px;">لم يُعلن عن المتميزين لهذا الفصل بعد — المكان محفوظ لمن يصنع تميّزه، وربما تكون أنت.</p>
+    <div class="fame-empty-wrap">
+      <!-- نفس منصة التتويج بمواضع فارغة -->
+      <div class="students-list fame-empty-podium">
+        <div class="fame-empty-item fame-empty-side"><span class="podium-empty-slot podium-empty-side"></span></div>
+        <div class="fame-empty-item fame-empty-first">
+          <i class="fas fa-crown podium-crown"></i>
+          <span class="podium-empty-slot podium-empty-first"></span>
+        </div>
+        <div class="fame-empty-item fame-empty-side"><span class="podium-empty-slot podium-empty-side"></span></div>
+      </div>
+      <div class="fame-empty-texts">
+        <p class="fame-empty-title">منصة التميز تستعد لأبطال هذا الفصل</p>
+        <p class="fame-empty-sub">سيُعلن عن المتميزين قريبًا</p>
+      </div>
       <div style="display:flex; align-items:center; gap:8px; background:rgba(14,149,148,0.06); border-radius: 8px; padding:8px 20px;">
         <i class="fas fa-clock soon-badge-icon" style="font-size:0.85rem; color:var(--accent-teal);"></i>
         <span style="font-size:0.85rem; color:var(--accent-teal); font-weight:600;">قريباً</span>
@@ -2142,23 +2224,20 @@
     <i class="fas fa-hourglass-half"></i>
     <span>ينتهي التصويت خلال</span>
   </div>
-  <div class="timer-boxes">
-    <div class="timer-box">
+  <div class="timer-capsule" id="timerCapsule">
+    <div class="timer-unit-block">
       <span class="timer-value" id="t-days">00</span>
       <span class="timer-unit">يوم</span>
     </div>
-    <span class="timer-separator">:</span>
-    <div class="timer-box">
+    <div class="timer-unit-block">
       <span class="timer-value" id="t-hours">00</span>
       <span class="timer-unit">ساعة</span>
     </div>
-    <span class="timer-separator">:</span>
-    <div class="timer-box">
+    <div class="timer-unit-block">
       <span class="timer-value" id="t-minutes">00</span>
       <span class="timer-unit">دقيقة</span>
     </div>
-    <span class="timer-separator">:</span>
-    <div class="timer-box">
+    <div class="timer-unit-block">
       <span class="timer-value" id="t-seconds">00</span>
       <span class="timer-unit">ثانية</span>
     </div>
@@ -2177,17 +2256,20 @@
     </div>
 
     <div class="projects-container">
-      <button type="button" id="projectBtn1" class="project-btn" style="flex-direction: column;">
-        <span style="display: flex; align-items: center; gap: 6px;"><i class="fas fa-file-powerpoint"></i> العرض التقديمي</span>
-        <small style="font-size: 0.75rem; color: var(--text-light); margin-top: 4px; display: flex; align-items: center; gap: 4px;"><i class="fas fa-eye"></i> انقر للمشاهدة</small>
+      <button type="button" id="projectBtn1" class="project-btn">
+        <i class="fas fa-file-powerpoint"></i>
+        <span>العرض التقديمي</span>
+        <small><i class="fas fa-eye"></i> معاينة</small>
       </button>
-      <button type="button" id="projectBtn2" class="project-btn" style="flex-direction: column;">
-        <span style="display: flex; align-items: center; gap: 6px;"><i class="fas fa-palette"></i> التصميم الجرافيكي</span>
-        <small style="font-size: 0.75rem; color: var(--text-light); margin-top: 4px; display: flex; align-items: center; gap: 4px;"><i class="fas fa-eye" style="color: var(--accent-teal);"></i> انقر للمشاهدة</small>
+      <button type="button" id="projectBtn2" class="project-btn">
+        <i class="fas fa-palette"></i>
+        <span>التصميم الجرافيكي</span>
+        <small><i class="fas fa-eye"></i> معاينة</small>
       </button>
-      <button type="button" id="projectBtn3" class="project-btn" style="flex-direction: column;">
-        <span style="display: flex; align-items: center; gap: 6px;"><i class="fas fa-globe"></i> الموقع الإلكتروني</span>
-        <small style="font-size: 0.75rem; color: var(--text-light); margin-top: 4px; display: flex; align-items: center; gap: 4px;"><i class="fas fa-eye" style="color: var(--gold-excellence);"></i> انقر للمشاهدة</small>
+      <button type="button" id="projectBtn3" class="project-btn">
+        <i class="fas fa-globe"></i>
+        <span>الموقع الإلكتروني</span>
+        <small><i class="fas fa-eye"></i> معاينة</small>
       </button>
     </div>
     
@@ -3420,46 +3502,83 @@ function displayVotingResults(data) {
   const totalVotes = data.totalVotes || 0;
   const projectColors = ["#16324F", "#0E9594", "#E8A33D"];
   
-  let html = `<div class="votes-stats">`;
-  
-  data.projects.forEach((project, index) => {
-    const percentage = totalVotes > 0 ? (project.votes / totalVotes) * 100 : 0;
+  // لم يبدأ التصويت بعد: رسالة بدل ثلاث حلقات فارغة توحي بخلل
+  if (totalVotes <= 0) {
+    container.innerHTML = `
+      <div class="vote-empty">
+        <i class="fas fa-check-to-slot"></i>
+        <span>لم يبدأ التصويت بعد</span>
+      </div>`;
+    return;
+  }
+
+  const ranked = data.projects.map((project, index) => {
     let iconClass = "fa-file-powerpoint";
-    let iconColor = projectColors[index % projectColors.length];
-    
     if (project.name === " العرض التقديمي") iconClass = "fa-file-powerpoint";
     else if (project.name === "التصميم الجرافيكي") iconClass = "fa-palette";
     else if (project.name === "الموقع الإلكتروني") iconClass = "fa-globe";
-    
-    html += `
-      <div class="vote-stat-item" data-project-name="${project.name}" data-votes="${project.votes}">
-        <div class="stat-header">
-          <div class="stat-title">
-            <i class="fas ${iconClass}" style="color: ${iconColor}"></i>
-            <span>${project.name}</span>
-          </div>
-          <div class="stat-votes">
-            <i class="fas fa-check-to-slot"></i> <strong>${project.votes}</strong> صوت
-          </div>
+    return {
+      name: project.name,
+      votes: project.votes,
+      percentage: (project.votes / totalVotes) * 100,
+      iconClass,
+      index
+    };
+  }).sort((a, b) => b.votes - a.votes);
+
+  // التاج للأول في الترتيب فقط، ولو تعادل مع غيره في النسبة
+  const [first, second, third] = ranked;
+  // من اليمين: الثاني، ثم الأول في الوسط، ثم الثالث
+  const ordered = [second, first, third].filter(Boolean);
+
+  const slot = (p) => {
+    const isFirst = p === first;
+    const cls = isFirst ? 'first' : 'side';
+    const crown = isFirst ? '<i class="fas fa-crown podium-crown"></i>' : '';
+    return `
+      <div class="vote-podium-item ${isFirst ? 'vote-podium-first' : ''}" data-project-name="${p.name}" data-votes="${p.votes}">
+        ${crown}
+        <div class="vote-ring vote-ring-${cls}" data-pct="${p.percentage.toFixed(1)}">
+          <div class="vote-ring-inner">${p.percentage.toFixed(0)}%</div>
         </div>
-        <div class="progress-bar-container">
-          <div class="progress-fill" style="width: ${percentage}%; background: ${iconColor}"></div>
-        </div>
-        <div class="stat-percentage">
-          ${percentage.toFixed(1)}%
-        </div>
+        <div class="vote-podium-name">${p.name}</div>
+        <div class="vote-podium-count">${p.votes} ${voteWord(p.votes)}</div>
       </div>`;
-  });
-  
-  html += `</div>
+  };
+
+  container.innerHTML = `
+    <div class="vote-podium">${ordered.map(slot).join('')}</div>
     <div class="total-votes">
       <i class="fas fa-chart-simple"></i> إجمالي الأصوات: <strong>${totalVotes}</strong>
       <div class="last-updated">
         <i class="fas fa-clock"></i> آخر تحديث: ${new Date(data.lastUpdated).toLocaleTimeString('ar-SA')}
       </div>
     </div>`;
-  
-  container.innerHTML = html;
+
+  // ابدأ الحلقات من نسبتها السابقة ثم انتقل بنعومة إلى الجديدة
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  container.querySelectorAll('.vote-ring').forEach(ring => {
+    const name = ring.closest('.vote-podium-item').dataset.projectName;
+    const target = parseFloat(ring.dataset.pct) || 0;
+    const previous = previousRingPct[name];
+    if (reduced || previous === undefined) {
+      ring.style.setProperty('--vote-pct', target);
+    } else {
+      ring.style.setProperty('--vote-pct', previous);
+      requestAnimationFrame(() => requestAnimationFrame(() => {
+        ring.style.setProperty('--vote-pct', target);
+      }));
+    }
+    previousRingPct[name] = target;
+  });
+}
+const previousRingPct = {};
+// تمييز العدد في العربية: مفرد، مثنى، جمع قلة، ثم تمييز مفرد منصوب
+function voteWord(n) {
+  if (n === 1) return 'صوت';
+  if (n === 2) return 'صوتان';
+  if (n >= 3 && n <= 10) return 'أصوات';
+  return 'صوتًا';
 }
 
 function checkForUpdates(projects) {
@@ -3519,6 +3638,13 @@ function initVotingTimer() {
     document.getElementById('t-hours').textContent = toArabicDigits(String(hours).padStart(2, '0'));
     document.getElementById('t-minutes').textContent = toArabicDigits(String(minutes).padStart(2, '0'));
     document.getElementById('t-seconds').textContent = toArabicDigits(String(seconds).padStart(2, '0'));
+
+    // لون الكبسولة بحسب الوقت المتبقي — عرض فقط، بلا مساس بالحساب
+    const capsule = document.getElementById('timerCapsule');
+    if (capsule) {
+      capsule.classList.toggle('timer-urgent-final', remaining < 10 * 60 * 1000);
+      capsule.classList.toggle('timer-urgent-hour', remaining < 60 * 60 * 1000 && remaining >= 10 * 60 * 1000);
+    }
   }
 
   updateTimer();
@@ -3649,7 +3775,7 @@ function initProjectButtons() {
       c.btn.addEventListener('click', function () { openProjectViewer(c.project, c.title); });
     } else {
       c.btn.classList.add('project-btn-disabled');
-      if (small) small.innerHTML = 'لم يُرفع بعد';
+      if (small) small.innerHTML = 'غير متاح حاليًا';
     }
   });
 }
