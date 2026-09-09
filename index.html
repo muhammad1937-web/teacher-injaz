@@ -396,7 +396,8 @@
       border-radius: 16px;
       position: relative;
       overflow: hidden;
-      background: var(--gradient-card);
+      /* لمسة لونية خفيفة على القسم الحاوي: تظهر في وضعي التفعيل والاستراحة معًا */
+      background: rgba(22, 50, 79, 0.035);
       box-shadow: var(--shadow-soft);
       transition: var(--transition);
     }
@@ -1026,6 +1027,60 @@
     .vote-btn:hover i { transform: translateX(3px); } }
     .vote-btn:active { transform: translateY(-1px); box-shadow: var(--shadow-soft-lift); }
     .update-note { text-align: center; font-size: 0.85rem; color: var(--text-light); margin-top: 0.5rem; }
+
+    /* ========================================= */
+    /*  وضع المنافسة: القسم الوحيد بلون كامل      */
+    /*  اللون يقول "هنا شيء يحدث الآن"            */
+    /* ========================================= */
+    #competition-mode {
+      background: var(--primary-dark);
+      border-radius: 16px;
+      padding: 24px 16px;
+    }
+    /* النصوص العامة داخل القسم الداكن */
+    #competition-mode .voting-description { color: rgba(255, 255, 255, 0.7); }
+    @media (hover: hover) and (pointer: fine) {
+    #competition-mode .voting-description:hover { color: rgba(255, 255, 255, 0.7); } }
+    #competition-mode .voting-subtitle { color: #FFFFFF; }
+    #competition-mode .update-note { color: rgba(255, 255, 255, 0.6); }
+    #competition-mode .loading-results { color: rgba(255, 255, 255, 0.7); }
+
+    /* المؤقت على الخلفية الداكنة */
+    #competition-mode .voting-timer-label { color: rgba(255, 255, 255, 0.7); }
+    #competition-mode .timer-unit-block { background: rgba(255, 255, 255, 0.08); }
+    #competition-mode .timer-capsule .timer-value { color: #FFFFFF; }
+    #competition-mode .timer-capsule .timer-unit { color: rgba(255, 255, 255, 0.6); }
+    /* درجات إلحاح أفتح تناسب الداكن */
+    #competition-mode .timer-capsule.timer-urgent-hour .timer-value { color: #F0B44A; }
+    #competition-mode .timer-capsule.timer-urgent-final .timer-value { color: #FF6B5B; }
+
+    /* شارة حالة التصويت */
+    #competition-mode .service-status { background: rgba(255, 255, 255, 0.12); }
+    #competition-mode .service-status-open { color: #34D399; }
+    #competition-mode .service-status-open .service-status-dot { background: #34D399; }
+    #competition-mode .service-status-closed { color: rgba(255, 255, 255, 0.6); }
+    #competition-mode .service-status-closed .service-status-dot { background: rgba(255, 255, 255, 0.6); }
+
+    /* زر التصويت: فيروزي يبرز على الكحلي */
+    #competition-mode .vote-btn { background: var(--accent-teal); color: #FFFFFF; box-shadow: none; border: 1px solid rgba(255, 255, 255, 0.1); }
+    @media (hover: hover) and (pointer: fine) {
+    #competition-mode .vote-btn:hover { background: var(--ai-teal); box-shadow: none; } }
+    #competition-mode .vote-btn:active { box-shadow: none; }
+
+    /* حلقات النسبة: الجزء الفارغ يجب أن يُرى على الكحلي */
+    #competition-mode .vote-ring { background: conic-gradient(var(--ring-color) calc(var(--vote-pct) * 1%), rgba(255, 255, 255, 0.12) 0); }
+    #competition-mode .vote-podium-name { color: #FFFFFF; }
+    #competition-mode .vote-podium-count { color: rgba(255, 255, 255, 0.65); }
+    #competition-mode .vote-empty,
+    #competition-mode .vote-empty i { color: rgba(255, 255, 255, 0.7); }
+
+    /* سطرا الإجمالي وآخر تحديث */
+    #competition-mode .total-votes { color: rgba(255, 255, 255, 0.75); border-top-color: rgba(255, 255, 255, 0.15); }
+    #competition-mode .last-updated { color: rgba(255, 255, 255, 0.6); }
+
+    /* رسالة "تم تحديث النتائج" */
+    #competition-mode #liveVoteMessage { background: rgba(52, 211, 153, 0.12); color: #34D399; }
+    #competition-mode #liveVoteMessage i { color: #34D399; }
 
     @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.3); } }
 
@@ -1843,7 +1898,8 @@
       margin: 2.8rem auto;
       padding: 1.9rem 2.25rem;
       border-radius: 16px;
-      background: var(--gradient-card);
+      /* لمسة لونية خفيفة: قسما التميّز وحدهما — تُحسّ ولا تُلاحظ */
+      background: rgba(22, 50, 79, 0.035);
       box-shadow: var(--shadow-soft);
       position: relative;
       overflow: hidden;
@@ -2249,33 +2305,34 @@
     </h3>
   </div>
   
-  <div class="voting-timer" id="votingTimer">
-  <div class="voting-timer-label">
-    <span>ينتهي التصويت خلال</span>
-  </div>
-  <div class="timer-capsule" id="timerCapsule">
-    <div class="timer-unit-block">
-      <span class="timer-value" id="t-days">00</span>
-      <span class="timer-unit">يوم</span>
-    </div>
-    <div class="timer-unit-block">
-      <span class="timer-value" id="t-hours">00</span>
-      <span class="timer-unit">ساعة</span>
-    </div>
-    <div class="timer-unit-block">
-      <span class="timer-value" id="t-minutes">00</span>
-      <span class="timer-unit">دقيقة</span>
-    </div>
-    <div class="timer-unit-block">
-      <span class="timer-value" id="t-seconds">00</span>
-      <span class="timer-unit">ثانية</span>
-    </div>
-  </div>
-</div>
   
   
   <!-- وضع المنافسة (يظهر عند وجود مشاريع للتصويت) -->
   <div id="competition-mode" style="display: block;">
+    <div class="voting-timer" id="votingTimer">
+    <div class="voting-timer-label">
+      <span>ينتهي التصويت خلال</span>
+    </div>
+    <div class="timer-capsule" id="timerCapsule">
+      <div class="timer-unit-block">
+        <span class="timer-value" id="t-days">00</span>
+        <span class="timer-unit">يوم</span>
+      </div>
+      <div class="timer-unit-block">
+        <span class="timer-value" id="t-hours">00</span>
+        <span class="timer-unit">ساعة</span>
+      </div>
+      <div class="timer-unit-block">
+        <span class="timer-value" id="t-minutes">00</span>
+        <span class="timer-unit">دقيقة</span>
+      </div>
+      <div class="timer-unit-block">
+        <span class="timer-value" id="t-seconds">00</span>
+        <span class="timer-unit">ثانية</span>
+      </div>
+    </div>
+  </div>
+
     <p class="voting-description">استعرض المشاريع المتنافسة، وادعم إبداع زملائك</p>
 
     <div class="service-status-wrap">
