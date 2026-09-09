@@ -553,22 +553,76 @@
     @media (max-width: 299px) {
       .library-cards-row { grid-template-columns: repeat(2, 1fr); }
     }
+    /* لون كل مرحلة: يغذّي الشريط الجانبي والرقم وسهم الدخول */
+    .library-card-1 { --card-accent: var(--tech-blue); }
+    .library-card-2 { --card-accent: var(--accent-teal); }
+    .library-card-3 { --card-accent: var(--gold-excellence); }
     .library-card {
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;   /* في RTL: البداية = اليمين */
+      text-align: start;
+      min-height: 152px;
       background: var(--pure-white);
       border-radius: 16px;
-      padding: 14px 8px;
+      padding: 14px 14px 12px;
       /* حدّ شفاف: لا يظهر في وضع السكون، ويستقبل اللون الفيروزي عند الضغط بلا إزاحة */
       border: 1px solid transparent;
       box-shadow: var(--shadow-soft);
-      text-align: center;
       cursor: pointer;
       transition: var(--transition);
       -webkit-touch-callout: none;
     }
+    /* الشريط اللوني على حافة البداية */
+    .library-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      inset-inline-start: 0;
+      width: 6px;
+      background: var(--card-accent);
+    }
+    /* قبّة مائية باهتة تملأ أسفل البطاقة */
+    .library-card::after {
+      content: '';
+      position: absolute;
+      left: 50%;
+      bottom: -62%;
+      transform: translateX(-50%);
+      width: 145%;
+      aspect-ratio: 1;
+      border-radius: 50%;
+      background: rgba(22, 50, 79, 0.03);
+      pointer-events: none;
+    }
+    .library-card > * { position: relative; z-index: 1; }
     .library-card > *:first-child { margin-top: 0; }
-    .library-card > *:last-child { margin-bottom: 0; }
+    /* سهم الدخول في أسفل البطاقة */
+    .library-card-go {
+      margin-top: auto;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--pure-white);
+      border: 1px solid rgba(22, 50, 79, 0.12);
+      color: var(--card-accent);
+      font-size: 0.72rem;
+      transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    }
+    .library-card-disabled .library-card-go { color: var(--text-light); border-color: rgba(22, 50, 79, 0.1); }
+    @media (min-width: 768px) {
+      .library-card { min-height: 190px; padding: 18px 18px 16px; }
+      .library-card-go { width: 34px; height: 34px; font-size: 0.8rem; }
+    }
     @media (hover: hover) and (pointer: fine) {
-    .library-card:not(.library-card-disabled):hover { transform: translateY(-5px); box-shadow: var(--shadow-soft-lift); border-color: var(--accent-teal); } }
+    .library-card:not(.library-card-disabled):hover { transform: translateY(-5px); box-shadow: var(--shadow-soft-lift); border-color: var(--accent-teal); }
+    .library-card:not(.library-card-disabled):hover .library-card-go { background: var(--card-accent); border-color: var(--card-accent); color: var(--pure-white); } }
     @keyframes soonPulse {
       0%, 100% { transform: scale(1); opacity: 0.85; }
       50% { transform: scale(1.15); opacity: 1; }
@@ -1943,6 +1997,11 @@
       box-shadow: var(--shadow-soft-lift);
       transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
+    .library-card:not(.library-card-disabled):active .library-card-go {
+      background: var(--card-accent);
+      border-color: var(--card-accent);
+      color: var(--pure-white);
+    }
     .honor-row:active,
     .vote-stat-item:active {
       /* !important: .honor-row يحمل صنف stagger-item لنفس السبب أعلاه */
@@ -2396,15 +2455,18 @@
     <div class="library-card library-card-1" data-url="https://sites.google.com/view/dvdf55/ss?authuser=1" data-title="الأول ثانوي">
       <span class="library-card-number">١</span>
       <h3 class="library-card-title">الأول ثانوي</h3>
+      <span class="library-card-go" aria-hidden="true"><i class="fas fa-arrow-left"></i></span>
     </div>
     <div class="library-card library-card-2 library-card-disabled" data-title="الثاني ثانوي">
       <span class="library-card-number">٢</span>
       <h3 class="library-card-title">الثاني ثانوي</h3>
       <p class="library-card-note">غير مطروحة هذا الفصل</p>
+      <span class="library-card-go" aria-hidden="true"><i class="fas fa-minus"></i></span>
     </div>
     <div class="library-card library-card-3" data-url="https://sites.google.com/view/regf78/ut?authuser=1" data-title="الثالث ثانوي">
       <span class="library-card-number">٣</span>
       <h3 class="library-card-title">الثالث ثانوي</h3>
+      <span class="library-card-go" aria-hidden="true"><i class="fas fa-arrow-left"></i></span>
     </div>
   </div>
 </section>
