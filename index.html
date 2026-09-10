@@ -142,7 +142,9 @@
       background-repeat: no-repeat;
       color: white;
       text-align: center;
-      padding: calc(24px + env(safe-area-inset-top, 0px)) 1rem 30px;
+      /* لا تُضف الإزاحة الآمنة هنا: شريط الإشعارات فوق الترويسة يحملها
+         عن الصفحة كلها، وتكرارها يفتح فراغًا في وضع التطبيق المستقل */
+      padding: 24px 1rem 30px;
       position: relative;
       border-bottom-left-radius: 25px;
       border-bottom-right-radius: 25px;
