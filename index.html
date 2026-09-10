@@ -391,7 +391,7 @@
       gap: 0;
       max-width: 900px;
       margin: 1.5rem auto 2.5rem auto;
-      padding: 1.425rem 2.25rem 1.2rem;
+      padding: 1rem 2.25rem 0.84rem;
       border-radius: 16px;
       position: relative;
       overflow: hidden;
@@ -410,23 +410,21 @@
     /*   منصة التتويج — لغة بصرية واحدة للتميّز   */
     /* ========================================= */
     .podium-crown { font-size: 1.1rem; color: var(--gold-excellence); margin-bottom: 6px; line-height: 1; display: block; }
+    /* تيجان صُنّاع المستقبل وحدها — تاج منصة التصويت يبقى 1.1rem */
+    .fame-bar-section .podium-crown { font-size: 1rem; }
     .podium-empty-slot {
       border-radius: 50%;
       display: flex;
       align-items: center;
       justify-content: center;
+      /* دائرة ظلّية ممتلئة: وزن بصري بلا لغة "الحقل الفارغ" المنقّط */
+      width: 88px; height: 88px;
+      background: rgba(14, 149, 148, 0.06);
+      border: none;
+      box-shadow: none;
+      flex-shrink: 0;
     }
-    .podium-empty-first {
-      width: 95px; height: 95px;
-      border: 2px dashed rgba(232, 163, 61, 0.35);
-      background: rgba(232, 163, 61, 0.04);
-      box-shadow: 0 0 24px rgba(232, 163, 61, 0.15);
-    }
-    .podium-empty-side {
-      width: 78px; height: 78px;
-      border: 2px dashed rgba(22, 50, 79, 0.12);
-      background: rgba(22, 50, 79, 0.02);
-    }
+    .podium-empty-slot i { font-size: 1.6rem; color: rgba(14, 149, 148, 0.22); }
 
     .students-container { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 0.5rem; }
     /* المسافات حول منصة التتويج — قيم صريحة موحّدة بين وضعي التفعيل والاستراحة */
@@ -434,32 +432,31 @@
     .fame-bar-section .honors-subtitle { margin-bottom: 0; }
     .fame-bar-section .students-container,
     .fame-bar-section #fame-inactive-mode { margin-top: 16px; margin-bottom: 14px; }
-    /* منصة التتويج: الأول في الوسط مرفوعًا، والجانبيان بمحاذاة سفلية */
-    .students-list { display: flex; align-items: flex-end; justify-content: center; gap: 14px; width: 100%; flex-wrap: nowrap; padding: 0; overflow: visible; position: relative; }
-    .student-item { position: relative; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0.4rem; }
-    /* الترتيب من اليمين: الثاني، ثم الأول في الوسط، ثم الثالث */
+    /* صف متساوٍ: ثلاثة متميزين بلا ترتيب بينهم */
+    .students-list { display: flex; align-items: center; justify-content: center; gap: 14px; width: 100%; flex-wrap: nowrap; padding: 0; overflow: visible; position: relative; }
+    .student-item { position: relative; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0; }
+    /* الترتيب المرئي من اليمين: الثاني، الأول، الثالث — بلا أي تمييز بينها */
     .student-item[data-index="1"] { order: 1; }
-    .student-item[data-index="0"] { order: 2; margin-bottom: 22px; }
+    .student-item[data-index="0"] { order: 2; }
     .student-item[data-index="2"] { order: 3; }
-    .student-item[data-index="1"] .student-image,
-    .student-item[data-index="2"] .student-image { width: 78px; height: 78px; }
-    .student-item[data-index="0"] .student-image { box-shadow: 0 0 0 4px rgba(232, 163, 61, 0.12); }
 
     /* وضع الاستراحة: نفس المنصة بأبعادها ومواضعها */
     .fame-empty-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 0; text-align: center; }
     .fame-empty-podium { padding: 0; }
     .fame-empty-item { display: flex; flex-direction: column; align-items: center; }
-    .fame-empty-first { margin-bottom: 22px; }
     .fame-empty-texts { max-width: 420px; }
     .fame-empty-title { font-size: 0.95rem; font-weight: 700; color: var(--primary-dark); margin: 0; line-height: 1.4; }
     .fame-empty-sub { font-size: 0.75rem; font-weight: 400; color: var(--text-light); margin: 5px 0 0; line-height: 1.4; }
 .student-image {
   position: relative;
-  width: 95px;
-  height: 95px;
+  width: 88px;
+  height: 88px;
   border-radius: 50%;
   overflow: hidden;
-  box-shadow: var(--shadow-soft);
+  /* الصورة على طبيعتها: بلا حدّ ولا ظل ولا هالة */
+  border: none;
+  box-shadow: none;
+  flex-shrink: 0;
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -467,36 +464,40 @@
     @media (hover: hover) and (pointer: fine) {
 .student-image:hover {
   transform: scale(1.05);
-  box-shadow: var(--shadow-soft);
 } }
-    .student-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.4s ease; }
+    /* وجوه الطلاب في أعلى الصورة عادةً، فالمحاذاة العلوية تمنع قصّ الرأس */
+    .student-image img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: transform 0.4s ease; }
     @media (hover: hover) and (pointer: fine) {
     .student-image:hover img { transform: scale(1.1); } }
     @media (hover: hover) and (pointer: fine) {
     .student-item.active .student-image:hover { border-color: var(--gold-excellence); box-shadow: 0 0 0 4px rgba(var(--gold-excellence-rgb), 0.4), 0 10px 30px rgba(0, 0, 0, 0.3); transform: scale(1.1); } }
+    /* شارة على حافة الصورة السفلية: نصفها داخلها ونصفها خارجها */
     .info-toggle-btn {
-      width: 30px;
-      height: 30px;
-      border-radius: 10px;
-      background: var(--accent-teal);
-      color: white;
-      border: 2px solid white;
+      position: absolute;
+      bottom: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--pure-white);
+      color: var(--accent-teal);
+      border: 2px solid var(--pure-white);
       display: flex;
       align-items: center;
       justify-content: center;
       cursor: pointer;
-      font-size: 0.85rem;
-      font-weight: bold;
+      font-size: 0.7rem;
+      padding: 0;
       transition: all 0.3s ease;
-      box-shadow: var(--shadow-soft);
+      box-shadow: 0 2px 6px rgba(22, 50, 79, 0.15);
       z-index: 10;
-      margin-top: 0.2rem;
     }
     @media (hover: hover) and (pointer: fine) {
-    .info-toggle-btn:hover { background: var(--ai-teal); transform: scale(1.1); box-shadow: var(--shadow-soft-lift); } }
-    .student-item.active .info-toggle-btn { background: var(--gold-excellence); transform: rotate(45deg); box-shadow: var(--shadow-soft-lift); }
+    .info-toggle-btn:hover { transform: translateX(-50%) scale(1.12); box-shadow: 0 3px 9px rgba(22, 50, 79, 0.22); } }
+    .student-item.active .info-toggle-btn { color: var(--gold-excellence); box-shadow: 0 2px 8px rgba(232, 163, 61, 0.35); }
     @media (hover: hover) and (pointer: fine) {
-    .student-item.active .info-toggle-btn:hover { background: var(--ai-teal); transform: rotate(45deg) scale(1.1); box-shadow: var(--shadow-soft-lift); } }
+    .student-item.active .info-toggle-btn:hover { transform: translateX(-50%) scale(1.12); } }
     .unified-student-info {
       position: absolute;
       top: -100px;
@@ -1452,7 +1453,7 @@
       .chat-section { padding: 1.3rem 1rem 1.2rem; }
             .info-toggle-btn { width: 28px; height: 28px; font-size: 0.85rem; }
       .unified-student-info { width: 200px; top: -90px; padding: 0.7rem 1rem; }
-      .fame-bar-section { padding: 0.9rem 0.8rem 0.75rem; }
+      .fame-bar-section { padding: 0.63rem 0.8rem 0.525rem; }
       .back-to-top { bottom: 82px; left: 20px; width: 45px; height: 45px; font-size: 1.15rem; }
       .bottom-nav { display: flex; }
       /* موطئ الشريط: 12px إزاحة + 50px ارتفاع + منطقة الأمان + فسحة تنفّس */
@@ -1463,7 +1464,7 @@
         .main-title-icon { font-size: 1.4rem; }
         .notification-bar { font-size: 0.85rem; padding: 7px 0; }
         .info-toggle-btn { width: 26px; height: 26px; font-size: 0.75rem; }
-        .fame-bar-section { margin-bottom: 2rem; padding: 0.75rem 0.5rem 0.6rem; }
+        .fame-bar-section { margin-bottom: 2rem; padding: 0.525rem 0.5rem 0.42rem; }
                 .main-title-icon { font-size: 1.4rem; }
         .back-to-top { bottom: 77px; left: 15px; width: 40px; height: 40px; font-size: 1.15rem; }
       }
@@ -2180,10 +2181,12 @@
         <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب"><i class="fas fa-circle-info"></i></button>
       </div>
       <div class="student-item" data-index="1">
+        <i class="fas fa-crown podium-crown"></i>
         <div class="student-image"><img src="images/ee.png" alt="الطالب المتميز الثاني"></div>
         <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب"><i class="fas fa-circle-info"></i></button>
       </div>
       <div class="student-item" data-index="2">
+        <i class="fas fa-crown podium-crown"></i>
         <div class="student-image"><img src="images/hh.jpeg" alt="الطالب المتميز الثالث"></div>
         <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب"><i class="fas fa-circle-info"></i></button>
       </div>
@@ -2199,12 +2202,18 @@
     <div class="fame-empty-wrap">
       <!-- نفس منصة التتويج بمواضع فارغة -->
       <div class="students-list fame-empty-podium">
-        <div class="fame-empty-item fame-empty-side"><span class="podium-empty-slot podium-empty-side"></span></div>
-        <div class="fame-empty-item fame-empty-first">
+        <div class="fame-empty-item">
           <i class="fas fa-crown podium-crown"></i>
-          <span class="podium-empty-slot podium-empty-first"></span>
+          <span class="podium-empty-slot"><i class="fas fa-user"></i></span>
         </div>
-        <div class="fame-empty-item fame-empty-side"><span class="podium-empty-slot podium-empty-side"></span></div>
+        <div class="fame-empty-item">
+          <i class="fas fa-crown podium-crown"></i>
+          <span class="podium-empty-slot"><i class="fas fa-user"></i></span>
+        </div>
+        <div class="fame-empty-item">
+          <i class="fas fa-crown podium-crown"></i>
+          <span class="podium-empty-slot"><i class="fas fa-user"></i></span>
+        </div>
       </div>
       <div class="fame-empty-texts">
         <p class="fame-empty-title">منصة التميز تستعد لأبطال هذا الفصل</p>
