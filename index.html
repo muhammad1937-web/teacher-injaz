@@ -216,15 +216,28 @@
     .header-tagline { font-size: 0.7rem; font-weight: 400; color: #fff; opacity: 0.55; letter-spacing: 0.5px; line-height: 1.6; max-width: 92%; margin: 8px 0 0; }
 
     /* ٦ — شريط التاريخ والوقت */
-    .header-datetime { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 16px; margin-top: 16px; }
-    .header-dt-item { display: inline-flex; align-items: center; gap: 5px; font-size: 0.68rem; color: #fff; opacity: 0.62; }
-    .header-dt-item i { font-size: 0.62rem; }
-    .header-dt-divider { width: 1px; height: 11px; background: rgba(255, 255, 255, 0.2); flex-shrink: 0; }
+    .header-datetime { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+    /* قوالب زجاجية شفافة بدل الفواصل العمودية */
+    .header-dt-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.68rem;
+      color: rgba(255, 255, 255, 0.9);
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.07);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      white-space: nowrap;
+    }
+    .header-dt-item i { font-size: 0.62rem; color: #7FC4C3; }
 
     /* الشاشات الضيقة جدًا: الوقت في سطر ثانٍ */
     @media (max-width: 359px) {
-      .header-datetime { gap: 10px; }
-      .header-dt-divider:last-of-type { display: none; }
+      .header-datetime { gap: 6px; }
+      .header-dt-item { padding: 6px 8px; }
     }
 
     /* ========================================= */
@@ -2105,9 +2118,7 @@
     <!-- ٦ — شريط التاريخ والوقت -->
     <div class="header-datetime" dir="rtl">
       <span class="header-dt-item"><i class="fas fa-moon"></i><span id="hijri-date"></span></span>
-      <span class="header-dt-divider"></span>
       <span class="header-dt-item"><i class="fas fa-calendar-days"></i><span id="gregorian-date"></span></span>
-      <span class="header-dt-divider"></span>
       <span class="header-dt-item"><i class="fas fa-clock"></i><span id="live-time"></span></span>
     </div>
 
