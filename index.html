@@ -787,7 +787,8 @@
       -webkit-backdrop-filter: blur(16px) saturate(180%);
       border: 1px solid rgba(255, 255, 255, 0.5);
       border-radius: 16px;
-      z-index: 998;
+      /* أعلى من شريط البحث (1001-1003) وأدنى من النوافذ المنبثقة (10000+) */
+      z-index: 1006;
       box-shadow: 0 8px 24px rgba(22, 50, 79, 0.15);
       transform: translateZ(0);
       will-change: transform;
@@ -1454,7 +1455,8 @@
       .fame-bar-section { padding: 0.9rem 0.8rem 0.75rem; }
       .back-to-top { bottom: 82px; left: 20px; width: 45px; height: 45px; font-size: 1.15rem; }
       .bottom-nav { display: flex; }
-      body { padding-bottom: 62px; }
+      /* موطئ الشريط: 12px إزاحة + 50px ارتفاع + منطقة الأمان + فسحة تنفّس */
+      body { padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px)); }
 
       @media (max-width: 480px) {
         .vote-btn { min-width: 160px; padding: 0.8rem 1.5rem; font-size: 0.85rem; }
