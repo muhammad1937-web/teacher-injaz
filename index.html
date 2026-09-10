@@ -545,7 +545,8 @@
       min-height: 152px;
       background: var(--pure-white);
       border-radius: 16px;
-      padding: 14px 14px 12px;
+      /* الحشو السفلي يحجز منطقة القبّة: النصوص تقف فوق حافتها بلا ملامسة */
+      padding: 14px 14px 72px;   /* 60px للقبّة + 12px فجوة تحت النص */
       /* حدّ شفاف: لا يظهر في وضع السكون، ويستقبل اللون الفيروزي عند الضغط بلا إزاحة */
       border: 1px solid transparent;
       box-shadow: var(--shadow-soft);
@@ -563,25 +564,26 @@
       width: 6px;
       background: var(--card-accent);
     }
-    /* قبّة مائية باهتة تملأ أسفل البطاقة */
+    /* قبّة مائية باهتة: ارتفاعها ثابت فيبقى موضع حافتها معلومًا عند كل عرض */
     .library-card::after {
       content: '';
       position: absolute;
-      left: 50%;
-      bottom: -62%;
-      transform: translateX(-50%);
-      width: 145%;
-      aspect-ratio: 1;
-      border-radius: 50%;
+      left: -20%;
+      right: -20%;
+      bottom: 0;
+      height: 60px;
+      border-radius: 50% 50% 0 0 / 100% 100% 0 0;
       background: rgba(22, 50, 79, 0.03);
       pointer-events: none;
     }
     .library-card > * { position: relative; z-index: 1; }
     .library-card > *:first-child { margin-top: 0; }
-    /* سهم الدخول في أسفل البطاقة */
+    /* سهم الدخول مثبّت داخل القبّة */
     .library-card-go {
-      /* auto يدفعه إلى القاع؛ والحدّ الأدنى للفجوة يأتي من هامش العنصر فوقه */
-      margin-top: auto;
+      position: absolute;
+      inset-inline-start: 14px;
+      bottom: 12px;
+      z-index: 2;
       width: 30px;
       height: 30px;
       border-radius: 50%;
@@ -596,8 +598,9 @@
     }
     .library-card-disabled .library-card-go { color: var(--text-light); border-color: rgba(22, 50, 79, 0.1); }
     @media (min-width: 768px) {
-      .library-card { min-height: 190px; padding: 18px 18px 16px; }
-      .library-card-go { width: 34px; height: 34px; font-size: 0.8rem; }
+      .library-card { min-height: 190px; padding: 18px 18px 90px; }
+      .library-card::after { height: 76px; }
+      .library-card-go { width: 34px; height: 34px; font-size: 0.8rem; inset-inline-start: 18px; bottom: 14px; }
     }
     @media (hover: hover) and (pointer: fine) {
     .library-card:not(.library-card-disabled):hover { transform: translateY(-5px); box-shadow: var(--shadow-soft-lift); border-color: var(--accent-teal); }
@@ -614,7 +617,8 @@
     .library-card-1 .library-card-number { color: var(--tech-blue); }
     .library-card-2 .library-card-number { color: var(--accent-teal); }
     .library-card-3 .library-card-number { color: var(--gold-excellence); }
-    .library-card-title { font-size: 0.8rem; font-weight: 600; color: var(--text-dark); margin: 4px 0 8px; }
+    /* auto فوق الاسم يدفعه وما بعده إلى أسفل الكتلة، فيستقر فوق حافة القبّة */
+    .library-card-title { font-size: 0.8rem; font-weight: 600; color: var(--text-dark); margin: auto 0 8px; }
     .library-card-note { font-size: 0.6rem; color: var(--text-light); margin: 4px 0 8px; }
     .library-card-disabled { cursor: not-allowed; opacity: 0.55; }
     @media (hover: hover) and (pointer: fine) {
