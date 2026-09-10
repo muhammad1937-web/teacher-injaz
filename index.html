@@ -428,10 +428,9 @@
 
     .students-container { position: relative; width: 100%; display: flex; align-items: center; justify-content: center; margin-top: 0.5rem; }
     /* المسافات حول منصة التتويج — قيم صريحة موحّدة بين وضعي التفعيل والاستراحة */
-    .fame-bar-section .fame-bar-title { margin-bottom: 16.8px; }
-    .fame-bar-section .honors-subtitle { margin-bottom: 0; }
+    .fame-bar-section .fame-bar-title { margin-top: 14px; margin-bottom: 16.8px; }
     .fame-bar-section .students-container,
-    .fame-bar-section #fame-inactive-mode { margin-top: 16px; margin-bottom: 14px; }
+    .fame-bar-section #fame-inactive-mode { margin-top: 0; margin-bottom: 14px; }
     /* صف متساوٍ: ثلاثة متميزين بلا ترتيب بينهم */
     .students-list { display: flex; align-items: center; justify-content: center; gap: 14px; width: 100%; flex-wrap: nowrap; padding: 0; overflow: visible; position: relative; }
     .student-item { position: relative; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0; }
@@ -440,13 +439,42 @@
     .student-item[data-index="0"] { order: 2; }
     .student-item[data-index="2"] { order: 3; }
 
-    /* وضع الاستراحة: نفس المنصة بأبعادها ومواضعها */
-    .fame-empty-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; padding: 0; text-align: center; }
+    /* وضع الاستراحة: نفس الصف بأبعاده ومواضعه — الفجوة صفر والمسافات صريحة */
+    .fame-empty-wrap { display: flex; flex-direction: column; align-items: center; gap: 0; padding: 0; text-align: center; }
     .fame-empty-podium { padding: 0; }
     .fame-empty-item { display: flex; flex-direction: column; align-items: center; }
-    .fame-empty-texts { max-width: 420px; }
-    .fame-empty-title { font-size: 0.95rem; font-weight: 700; color: var(--primary-dark); margin: 0; line-height: 1.4; }
-    .fame-empty-sub { font-size: 0.75rem; font-weight: 400; color: var(--text-light); margin: 5px 0 0; line-height: 1.4; }
+
+    /* السطر المتغيّر تحت العنوان — نظير واحد في الوضعين */
+    .fame-lead {
+      /* عرض كامل في الوضعين: حاوية التفعيل كتلة وحاوية الاستراحة عمود مرن،
+         فبلا هذا يُقاس السطر بعرضين مختلفين ويختلف عدد أسطره بينهما */
+      width: 100%;
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-medium);
+      text-align: center;
+      line-height: 1.5;
+      margin: 0 0 16px;
+    }
+    /* الجملة الثابتة تحت الصف — نفسها في الوضعين */
+    .fame-quote-wrap { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: 18px; }
+    .fame-quote-rule {
+      width: 40px;
+      height: 1px;
+      margin-bottom: 12px;
+      /* يتلاشى عند طرفيه فيقرأ كعنصر تصميم لا كشرطة */
+      background: linear-gradient(90deg, transparent, var(--gold-excellence), transparent);
+    }
+    .fame-quote {
+      font-size: 0.72rem;
+      font-weight: 500;
+      font-style: italic;
+      color: var(--text-medium);
+      text-align: center;
+      max-width: 90%;
+      line-height: 1.8;
+      margin: 0;
+    }
 .student-image {
   position: relative;
   width: 88px;
@@ -2172,8 +2200,8 @@
   <div class="fame-bar-title">
     <span>صُناع المستقبل </span>
   </div>
-  <p class="honors-subtitle"> أسماء صنعت الفرق وتركت أثراً </p>
   <div class="students-container" style="display: block;">
+    <p class="fame-lead">تهانينا للطلاب المتميزين خلال الفصل الدراسي الأول</p>
     <div class="students-list" id="studentsList">
       <div class="student-item" data-index="0">
         <i class="fas fa-crown podium-crown"></i>
@@ -2191,6 +2219,10 @@
         <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب"><i class="fas fa-circle-info"></i></button>
       </div>
     </div>
+    <div class="fame-quote-wrap">
+      <span class="fame-quote-rule"></span>
+      <p class="fame-quote">كل تميّزٍ تبدأه اليوم قد يكون إنجازًا عظيمًا تفخر به غدًا.</p>
+    </div>
     <div class="unified-student-info" id="unifiedStudentInfo">
       <h4 id="studentName">اسم الطالب</h4>
       <p id="studentReason">سبب التميز</p>
@@ -2200,7 +2232,8 @@
   <!-- وضع عدم التفعيل (يُفعّل يدوياً عند عدم وجود متميزين) -->
   <div id="fame-inactive-mode" style="display: none;">
     <div class="fame-empty-wrap">
-      <!-- نفس منصة التتويج بمواضع فارغة -->
+      <p class="fame-lead">منصة التميز تستعد لأبطال هذا الفصل</p>
+      <!-- نفس الصف بمواضع ظلّية -->
       <div class="students-list fame-empty-podium">
         <div class="fame-empty-item">
           <i class="fas fa-crown podium-crown"></i>
@@ -2215,9 +2248,9 @@
           <span class="podium-empty-slot"><i class="fas fa-user"></i></span>
         </div>
       </div>
-      <div class="fame-empty-texts">
-        <p class="fame-empty-title">منصة التميز تستعد لأبطال هذا الفصل</p>
-        <p class="fame-empty-sub">سيُعلن عن المتميزين قريبًا</p>
+      <div class="fame-quote-wrap">
+        <span class="fame-quote-rule"></span>
+        <p class="fame-quote">كل تميّزٍ تبدأه اليوم قد يكون إنجازًا عظيمًا تفخر به غدًا.</p>
       </div>
     </div>
   </div>
