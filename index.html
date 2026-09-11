@@ -665,11 +665,27 @@
     .library-card-3 .library-card-number { color: var(--gold-excellence); }
     /* auto فوق الاسم يدفعه وما بعده إلى أسفل الكتلة، فيستقر فوق حافة القبّة */
     .library-card-title { font-size: 0.8rem; font-weight: 600; color: var(--text-dark); margin: auto 0 8px; }
-    /* سطر واحد: الهوامش السالبة تتيح له عرض البطاقة كاملًا بدل عرض المحتوى */
-    .library-card-note { font-size: 0.55rem; color: var(--text-light); margin: 4px -12px 8px; white-space: nowrap; }
-    /* تحت 360 بكسل البطاقة أضيق من أن تسع السطر، والالتفاف أهون من القصّ */
+    /* سطر واحد متمركز في المساحة الخالية: الهامش السالب عند البداية يقف
+       قبل الشريط اللوني بفسحة، وعند النهاية يتمدد — فيقع مركز النص في
+       منتصف ما بين الشريط والحافة المقابلة تمامًا */
+    .library-card-note {
+      font-size: 0.55rem;
+      color: var(--text-light);
+      margin-block: 4px 8px;
+      /* البداية تقف قبل الشريط بفسحة، والنهاية تتمدد — فيقع مركز النص
+         في منتصف المساحة الخالية تمامًا */
+      margin-inline-start: -6px;
+      margin-inline-end: -12px;
+      text-align: center;
+      white-space: nowrap;
+    }
+    /* البطاقة تضيق فيضيق معها أوسع مقاس يسعه السطر */
+    @media (max-width: 389px) {
+      .library-card-note { font-size: 0.48rem; }
+    }
+    /* تحت 360 بكسل لا يسعه أي مقاس مقروء، والالتفاف أهون من القصّ */
     @media (max-width: 359px) {
-      .library-card-note { white-space: normal; margin-inline: 0; }
+      .library-card-note { white-space: normal; margin-inline: 0; font-size: 0.55rem; }
     }
     .library-card-disabled { cursor: not-allowed; opacity: 0.55; }
     @media (hover: hover) and (pointer: fine) {
@@ -2489,9 +2505,9 @@
       <div class="dot"></div>
     </div>
   </div>
-  <div style="background: rgba(14,149,148,0.06); border-radius: 16px; padding: 10px 16px; margin-top: 14px; width: 100%; max-width: 450px; text-align: center; margin-left: auto; margin-right: auto;">
-      <p style="font-size: 0.85rem; color: var(--text-medium); margin: 0; line-height: 1.5;">
-        الإجابات مبنية على منهج المادة، وقد تحتاج <span style="white-space: nowrap;">لمراجعة المعلم للتأكد</span>
+  <div style="background: rgba(14,149,148,0.06); border-radius: 16px; padding: 10px 12px; margin-top: 14px; width: 100%; max-width: 450px; text-align: center; margin-left: auto; margin-right: auto;">
+      <p style="font-size: 0.6rem; color: var(--text-medium); margin: 0; line-height: 1.6; white-space: nowrap;">
+        الإجابات مبنية على منهج المادة، وقد تحتاج لمراجعة المعلم للتأكد
       </p>
     </div>
 </div>
