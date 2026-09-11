@@ -20,9 +20,6 @@
   <meta property="og:image" content="https://teacher-injaz.vercel.app/images/22tinted.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-  <!-- خط ميلانو لجملة الحكمة وحدها. media=print يمنعه من حجب أول رسم للصفحة،
-       ثم onload يفعّله عند وصوله — فيعمل عمل font-display: swap على ملف لا نملكه. -->
-  <link rel="stylesheet" href="https://www.fontstatic.com/f=milano" media="print" onload="this.media='all'" />
   <style>
     /* ========================================= */
     /*     متغيرات الألوان - الأفق الرقمي        */
@@ -462,18 +459,17 @@
     /* الجملة الثابتة تحت الصف — نفسها في الوضعين */
     .fame-quote-wrap { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: 18px; }
     .fame-quote-rule {
-      width: 100px;
-      max-width: 60%;
+      width: 160px;
+      max-width: 70%;
       height: 1px;
       margin-bottom: 12px;
       /* يتلاشى عند طرفيه فيقرأ كعنصر تصميم لا كشرطة */
       background: linear-gradient(90deg, transparent, var(--gold-excellence), transparent);
     }
     .fame-quote {
-      /* ميلانو لهذه الجملة وحدها؛ وخط الموقع كاملًا احتياطيًا إن تعذّر تحميله */
-      font-family: "milano", 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
-      font-size: 0.8rem;
+      font-size: 0.72rem;
       font-weight: 500;
+      font-style: italic;
       color: var(--text-medium);
       text-align: center;
       max-width: 90%;
@@ -669,7 +665,12 @@
     .library-card-3 .library-card-number { color: var(--gold-excellence); }
     /* auto فوق الاسم يدفعه وما بعده إلى أسفل الكتلة، فيستقر فوق حافة القبّة */
     .library-card-title { font-size: 0.8rem; font-weight: 600; color: var(--text-dark); margin: auto 0 8px; }
-    .library-card-note { font-size: 0.6rem; color: var(--text-light); margin: 4px 0 8px; }
+    /* سطر واحد: الهوامش السالبة تتيح له عرض البطاقة كاملًا بدل عرض المحتوى */
+    .library-card-note { font-size: 0.55rem; color: var(--text-light); margin: 4px -12px 8px; white-space: nowrap; }
+    /* تحت 360 بكسل البطاقة أضيق من أن تسع السطر، والالتفاف أهون من القصّ */
+    @media (max-width: 359px) {
+      .library-card-note { white-space: normal; margin-inline: 0; }
+    }
     .library-card-disabled { cursor: not-allowed; opacity: 0.55; }
     @media (hover: hover) and (pointer: fine) {
     .library-card-disabled:hover { transform: none; box-shadow: var(--shadow-soft); border-color: transparent; } }
@@ -988,7 +989,7 @@
     .chat-section:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .chat-header { display: flex; justify-content: center; align-items: center; margin-bottom: 0.8rem; }
     .chat-title { display: flex; align-items: center; gap: 0.45rem; margin: 0; }
-    .chat-title i { font-size: 2.2rem; color: var(--tech-blue); opacity: 0.9; transition: all 0.3s ease; }
+    .chat-title i { font-size: 1.7rem; color: var(--tech-blue); opacity: 0.9; transition: all 0.3s ease; }
     @media (hover: hover) and (pointer: fine) {
     .chat-title:hover i { opacity: 1; transform: scale(1.1) rotate(5deg); } }
     .chat-description { margin: 0 0 1.5rem 0; font-size: 1rem; color: var(--text-subtitle); font-weight: 400; text-align: center; line-height: 1.5; padding: 0; background: transparent; border: none; box-shadow: none; text-shadow: none; transition: color 0.3s ease; }
@@ -1011,7 +1012,7 @@
     /* ============================================ */
     /* ==========   بطاقة عرض نتائج التصويت   ========== */
     /* ============================================ */
-    .voting-subtitle { margin: 1.5rem 0 1rem; font-size: 1.15rem; color: var(--primary-dark); text-align: center; font-weight: 600; }
+    .voting-subtitle { margin: 1.5rem 0 1rem; font-size: 1.02rem; color: var(--primary-dark); text-align: center; font-weight: 600; }
    .vote-btn {
   display: inline-flex;
   align-items: center;
@@ -1487,7 +1488,8 @@
             .info-toggle-btn { width: 28px; height: 28px; font-size: 0.85rem; }
       .unified-student-info { width: 200px; top: -90px; padding: 0.7rem 1rem; }
       .fame-bar-section { padding: 0.63rem 0.8rem 0.525rem; }
-      .back-to-top { bottom: 82px; left: 20px; width: 45px; height: 45px; font-size: 1.15rem; }
+      /* يرتفع بمقدار منطقة الأمان كما يفعل الشريط السفلي، وإلا اختفى خلفه في وضع التطبيق */
+      .back-to-top { bottom: calc(82px + env(safe-area-inset-bottom, 0px)); left: 20px; width: 45px; height: 45px; font-size: 1.15rem; }
       .bottom-nav { display: flex; }
       /* موطئ الشريط: 12px إزاحة + 50px ارتفاع + منطقة الأمان + فسحة تنفّس */
       body { padding-bottom: calc(78px + env(safe-area-inset-bottom, 0px)); }
@@ -1499,7 +1501,7 @@
         .info-toggle-btn { width: 26px; height: 26px; font-size: 0.75rem; }
         .fame-bar-section { margin-bottom: 2rem; padding: 0.525rem 0.5rem 0.42rem; }
                 .main-title-icon { font-size: 1.4rem; }
-        .back-to-top { bottom: 77px; left: 15px; width: 40px; height: 40px; font-size: 1.15rem; }
+        .back-to-top { bottom: calc(77px + env(safe-area-inset-bottom, 0px)); left: 15px; width: 40px; height: 40px; font-size: 1.15rem; }
       }
       @media (min-width: 481px) and (max-width: 768px) {
         .vote-btn { min-width: 190px; padding: 0.9rem 2rem; }
@@ -1616,7 +1618,7 @@
   flex-direction: column;
   align-items: center;
   gap: 0;
-  margin: 0 auto 1.2rem;
+  margin: 14px auto 1.2rem;
 }
 
 .voting-timer-label {
@@ -2411,7 +2413,7 @@
 <!-- ========================================= -->
 <section class="library-section fade-in" id="library-section">
   <h3 class="library-title">مكتبة الطالب</h3>
-  <p class="library-subtitle">مصادر المادة مرتبة حسب الصف</p>
+  <p class="library-subtitle">تجد هنا جميع مصادر ومتطلبات التقنية الرقمية</p>
   <div class="library-cards-row">
     <div class="library-card library-card-1" data-url="https://sites.google.com/view/dvdf55/ss?authuser=1" data-title="الأول ثانوي">
       <span class="library-card-number">١</span>
@@ -2489,7 +2491,7 @@
   </div>
   <div style="background: rgba(14,149,148,0.06); border-radius: 16px; padding: 10px 16px; margin-top: 14px; width: 100%; max-width: 450px; text-align: center; margin-left: auto; margin-right: auto;">
       <p style="font-size: 0.85rem; color: var(--text-medium); margin: 0; line-height: 1.5;">
-        الإجابات مبنية على منهج المادة، وقد تحتاج لمراجعة المعلم للتأكد
+        الإجابات مبنية على منهج المادة، وقد تحتاج <span style="white-space: nowrap;">لمراجعة المعلم للتأكد</span>
       </p>
     </div>
 </div>
