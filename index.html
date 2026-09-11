@@ -892,9 +892,7 @@
     /* ============================================ */
     /* ==========   قسم مواضيع التصويت   ========== */
     /* ============================================ */
-    /* القسم ضعف ارتفاع غيره، والتدرّج نسبيّ لارتفاع العنصر — فيقطع مداه كاملًا
-       ويتجمّع طرفه الرمادي على مساحة واسعة. مدّ الرمادي بعيدًا فيبقى فاتحًا كبقية الأقسام. */
-    .voting-section { max-width: 900px; margin: 4.2rem auto; padding: 1.9rem 2.25rem; border-radius: 16px; background: linear-gradient(to bottom, var(--pure-white), #F7F9FA 1400px); box-shadow: var(--shadow-soft); text-align: center; position: relative; overflow: hidden; }
+    .voting-section { max-width: 900px; margin: 4.2rem auto; padding: 1.9rem 2.25rem; border-radius: 16px; background: var(--gradient-card); box-shadow: var(--shadow-soft); text-align: center; position: relative; overflow: hidden; }
     @media (hover: hover) and (pointer: fine) {
     .voting-section:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .voting-header { display: flex; justify-content: center; align-items: center; margin-bottom: 0.8rem; }
@@ -2003,7 +2001,10 @@
       margin: 2.8rem auto;
       padding: 1.9rem 2.25rem;
       border-radius: 16px;
-      background: var(--gradient-card);
+      /* أطول أقسام الصفحة عند امتلائه (نحو 790px مقابل 200-300 لغيره).
+         والتدرّج يُقاس نسبةً لارتفاع العنصر، فيقطع مداه كاملًا نحو طرفه
+         الرمادي على مساحة شاسعة. مدّ الرمادي بعيدًا فيبقى فاتحًا كبقيّتها. */
+      background: linear-gradient(to bottom, var(--pure-white), #F7F9FA 1600px);
       box-shadow: var(--shadow-soft);
       position: relative;
       overflow: hidden;
