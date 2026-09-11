@@ -1233,113 +1233,210 @@
       flex-direction: column;
       align-items: center;
       gap: 8px;
-      margin: 0.7rem 1.3rem 0.6rem;
+      margin: 0.7rem 1.3rem 0;
       padding: 10px 14px;
       background: rgba(var(--primary-dark-rgb), 0.04);
       border-radius: 16px;
       text-align: center;
     }
  .student-avatar {
-      width: 30px;
-      height: 30px;
-      border-radius: 10px;
-      background: rgba(var(--primary-dark-rgb), 0.07);
+      width: 46px;
+      height: 46px;
+      border-radius: 12px;
+      background: var(--accent-teal);
+      color: var(--pure-white);
+      font-size: 1.3rem;
+      font-weight: 700;
+      line-height: 1;
       display: flex;
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-    }
-    .student-avatar i {
-      font-size: 0.85rem;
-      color: var(--primary-dark);
-    }
-    .student-avatar i {
-      font-size: 1.15rem;
-      color: var(--primary-dark);
     }
     .student-name {
       font-size: 1rem;
       font-weight: 700;
       color: var(--primary-dark);
       margin: 0;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
    .student-details {
       font-size: 0.85rem;
       color: var(--text-medium);
       margin: 0;
     }
-   .grades-section-label {
-      font-size: 0.75rem;
-      color: var(--text-light);
-      font-weight: 600;
-      margin: 0 0 6px 0;
-      padding: 0 1.3rem;
-    }
-    .grades-grid {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 0;
-      flex-wrap: wrap;
-      padding: 0 1.3rem;
-    }
-    .grade-card {
-      flex: 1;
-      background: rgba(var(--primary-dark-rgb), 0.04);
-      border-radius: 16px;
-      padding: 11px 10px;
-      text-align: center;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      min-height: 118px;
-    }
-    .grade-card span:first-child {
-      font-size: 0.85rem;
-      color: var(--text-light);
-      display: block;
-      margin-bottom: 6px;
-    }
-    .grade-card .grade-value {
-      font-size: 1.4rem;
-      font-weight: 700;
-      color: var(--primary-dark);
-      margin-bottom: 8px;
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .grade-card .missing-icon {
-      font-size: 1.3rem;
-      color: var(--warning-red);
-      opacity: 0.75;
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .grade-card .grade-status { font-size: 0.75rem; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 4px; }
-    .grade-card .grade-status-complete { color: #1D9E75; }
-    .grade-card .grade-status-partial { color: #D98C1F; }
-    .grade-card .grade-status-missing { color: var(--warning-red); }
-  .final-result {
-      background: linear-gradient(135deg, rgba(14,149,148,0.08), rgba(22,50,79,0.05));
-      border-radius: 16px;
-      padding: 10px;
-      text-align: center;
-      margin: 0.6rem 1.3rem 0.6rem;
-    }
-    .rating-medallion { display: flex; flex-direction: row; flex-wrap: wrap; align-items: baseline; justify-content: center; gap: 8px; }
-    .medallion-score { font-size: 1.7rem; font-weight: 800; color: var(--primary-dark); display: inline-flex; align-items: baseline; gap: 4px; }
-    .medallion-score-unit { font-size: 0.5em; font-weight: 500; color: var(--text-light); }
-    .medallion-sep { font-size: 1rem; font-weight: 700; color: var(--text-light); }
-    .medallion-badge { font-size: 0.95rem; font-weight: 700; display: inline-flex; align-items: center; gap: 6px; }
-    .missing-message {
+   /* ========================================= */
+   /*   بطاقة نتيجة الطالب — النمط الموحّد      */
+   /* ========================================= */
+   /* تسمية مجموعة: خط رأسي قبل النص بدل الأيقونة */
+   .rc-label {
+     display: flex;
+     align-items: center;
+     gap: 8px;
+     margin: 20px 1.3rem 10px;
+     font-size: 0.72rem;
+     font-weight: 700;
+     color: var(--primary-dark);
+     letter-spacing: 0.5px;
+   }
+   .rc-label::before {
+     content: '';
+     width: 3px;
+     height: 14px;
+     border-radius: 2px;
+     background: var(--accent-teal);
+     flex-shrink: 0;
+   }
+
+   /* الفترتان في بطاقة واحدة بعمودين */
+   .rc-periods {
+     display: flex;
+     align-items: stretch;
+     margin: 0 1.3rem;
+     padding: 16px 12px;
+     background: var(--pure-white);
+     border: none;
+     border-radius: 16px;
+     box-shadow: var(--shadow-soft);
+   }
+   .rc-period {
+     flex: 1;
+     min-width: 0;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     text-align: center;
+   }
+   .rc-period-sep { width: 1px; background: rgba(22, 50, 79, 0.08); flex-shrink: 0; align-self: stretch; }
+   .rc-period-name { font-size: 0.7rem; color: var(--text-light); }
+   .rc-period-value {
+     font-size: 1.7rem;
+     font-weight: 800;
+     color: var(--primary-dark);
+     font-variant-numeric: tabular-nums;
+     line-height: 1.25;
+     margin-top: 2px;
+   }
+   .rc-period-value .missing-icon { font-size: 1.3rem; color: var(--warning-red); opacity: 0.75; }
+   .rc-period-status {
+     font-size: 0.62rem;
+     font-weight: 600;
+     display: flex;
+     align-items: center;
+     gap: 4px;
+     margin-top: 2px;
+   }
+   .rc-period-status.grade-status-complete { color: #1D9E75; }
+   .rc-period-status.grade-status-partial { color: #B8860B; }
+   .rc-period-status.grade-status-missing { color: var(--warning-red); }
+   /* زر التفاصيل: نص وسهم، بلا إطار ولا خلفية */
+   .rc-details-btn {
+     margin-top: 10px;
+     padding: 0;
+     background: none;
+     border: none;
+     color: var(--accent-teal);
+     font-family: inherit;
+     font-size: 0.68rem;
+     font-weight: 600;
+     cursor: pointer;
+     display: inline-flex;
+     align-items: center;
+     gap: 5px;
+   }
+   .rc-details-btn i { font-size: 0.62rem; }
+
+   /* الحضور: حلقة واحدة */
+   .rc-att { display: flex; flex-direction: column; align-items: center; margin: 0 1.3rem; }
+   .rc-att-ring {
+     width: 96px;
+     height: 96px;
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     flex-shrink: 0;
+     background: conic-gradient(var(--rc-att-color) calc(var(--rc-att-pct) * 1%), rgba(22, 50, 79, 0.08) 0);
+   }
+   /* الدائرة الداخلية البيضاء تصنع سماكة الحلقة 7px */
+   .rc-att-inner {
+     width: 82px;
+     height: 82px;
+     border-radius: 50%;
+     background: var(--pure-white);
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     font-size: 1.5rem;
+     font-weight: 800;
+     font-variant-numeric: tabular-nums;
+     color: var(--rc-att-color);
+   }
+   .rc-att-line { margin-top: 8px; font-size: 0.7rem; color: var(--text-light); text-align: center; }
+
+   /* الدرجة النهائية: صف أفقي */
+   .rc-final {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 18px;
+     margin: 0 1.3rem;
+     padding: 16px 20px;
+     background: rgba(22, 50, 79, 0.04);
+     border-radius: 16px;
+   }
+   .rc-final-col { display: flex; flex-direction: column; align-items: center; gap: 5px; min-width: 0; }
+   .rc-final-num {
+     font-size: 2.3rem;
+     font-weight: 800;
+     color: var(--primary-dark);
+     font-variant-numeric: tabular-nums;
+     line-height: 1;
+   }
+   .rc-final-cap { font-size: 0.62rem; color: var(--text-light); }
+   /* يتلاشى عند طرفيه كخط صُنّاع المستقبل */
+   .rc-final-sep {
+     width: 1px;
+     height: 44px;
+     flex-shrink: 0;
+     background: linear-gradient(180deg, transparent, rgba(22, 50, 79, 0.18), transparent);
+   }
+   .rc-rating {
+     border-radius: 999px;
+     padding: 5px 14px;
+     font-size: 0.8rem;
+     font-weight: 700;
+     white-space: nowrap;
+   }
+   /* "بحاجة للتحسين" أطول التقديرات: يضيق مقاسه على الشاشات الضيقة ولا يُقصّ */
+   @media (max-width: 359px) {
+     .rc-rating { font-size: 0.72rem; padding: 5px 10px; }
+     .rc-final { gap: 12px; padding: 16px 12px; }
+   }
+   .rc-pending {
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     gap: 6px;
+     margin: 0 1.3rem;
+     padding: 14px 16px;
+     background: rgba(22, 50, 79, 0.04);
+     border-radius: 16px;
+     color: #B8860B;
+     font-size: 0.8rem;
+     font-weight: 600;
+     text-align: center;
+   }
+
+  .missing-message {
       background: rgba(var(--warning-red-rgb), 0.1);
       border-radius: 16px;
       padding: 10px;
       text-align: center;
-      margin-bottom: 1.2rem;
+      margin: 14px 1.3rem 0;
       color: var(--warning-red);
       font-size: 0.85rem;
       display: flex;
@@ -1347,36 +1444,6 @@
       justify-content: center;
       gap: 8px;
     }
-  .attendance-section-label {
-  font-size: 0.75rem;
-  color: var(--text-light);
-  font-weight: 600;
-  margin: 0.85rem 0 6px 0;
-  padding: 0 1.3rem;
-}
-.attendance-box {
-  display: flex;
-  gap: 8px;
-  margin-bottom: 0;
-  flex-wrap: wrap;
-  padding: 0 1.3rem;
-}
-.attendance-item {
-  flex: 1;
-  border-radius: 16px;
-  padding: 10px 8px;
-  text-align: center;
-}
-.attendance-item i {
-  font-size: 1.15rem;
-  display: block;
-  margin-bottom: 3px;
-}
-.attendance-item span {
-  font-size: 1rem;
-  font-weight: 700;
-  display: block;
-}
 .attendance-item small {
   font-size: 0.75rem;
   opacity: 0.85;
@@ -3051,31 +3118,32 @@ document.addEventListener('keydown', (e) => {
         resultContainer.style.display = 'block';
         resultContainer.innerHTML = `
           <div class="skeleton skel-header" style="height:105px;"></div>
-          <div style="text-align:center; padding-top:8px; margin-bottom:14px;">
-            <div style="display:flex; align-items:center; justify-content:center; gap:8px; margin-bottom:8px;">
-              <span class="skeleton" style="width:34px; height:34px; border-radius:10px; flex-shrink:0;"></span>
+          <div style="text-align:center; padding-top:11px; margin-bottom:23px;">
+            <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:8px;">
+              <span class="skeleton" style="width:46px; height:46px; border-radius:12px; flex-shrink:0;"></span>
               <span class="skeleton skel-line" style="width:120px; height:15px;"></span>
             </div>
             <div class="skeleton skel-line" style="width:100px; height:11px; margin:0 auto;"></div>
           </div>
-          <div style="padding:0 1.3rem; margin-bottom:14px;">
-            <div class="skeleton skel-line" style="width:90px; height:13px; margin-bottom:10px;"></div>
-            <div style="display:flex; gap:10px;">
-              <div class="skeleton skel-box" style="flex:1; height:141px;"></div>
-              <div class="skeleton skel-box" style="flex:1; height:141px;"></div>
-            </div>
+          <div style="padding:20px 1.3rem 0;">
+            <div class="skeleton skel-line" style="width:60px; height:18px; margin-bottom:10px;"></div>
+            <div class="skeleton skel-box" style="width:100%; height:127px;"></div>
           </div>
-          <div style="padding:0 1.3rem; margin-bottom:14px;">
-            <div class="skeleton skel-line" style="width:70px; height:13px; margin-bottom:10px;"></div>
-            <div class="skeleton skel-box" style="width:100%; height:100px;"></div>
+          <div style="padding:20px 1.3rem 0;">
+            <div class="skeleton skel-line" style="width:50px; height:18px; margin-bottom:10px;"></div>
+            <div class="skeleton" style="width:96px; height:96px; border-radius:50%; margin:0 auto;"></div>
+            <div class="skeleton skel-line" style="width:110px; height:12px; margin:8px auto 0;"></div>
           </div>
-          <div style="padding:0 1.3rem; margin-bottom:14px;">
-            <div class="skeleton skel-line" style="width:90px; height:13px; margin-bottom:10px;"></div>
-            <div class="skeleton skel-box" style="width:100%; height:40px; margin-bottom:14px;"></div>
-            <div class="skeleton skel-box" style="width:100%; height:64px;"></div>
+          <div style="padding:20px 1.3rem 0;">
+            <div class="skeleton skel-line" style="width:110px; height:18px; margin-bottom:10px;"></div>
+            <div class="skeleton skel-box" style="width:100%; height:37px;"></div>
           </div>
-          <div style="padding:0 1.3rem 1.3rem; text-align:center;">
-            <div class="skeleton" style="width:90px; height:30px; border-radius: 10px; margin:0 auto;"></div>
+          <div style="padding:20px 1.3rem 0;">
+            <div class="skeleton skel-line" style="width:85px; height:18px; margin-bottom:10px;"></div>
+            <div class="skeleton skel-box" style="width:100%; height:90px;"></div>
+          </div>
+          <div style="padding:14px 1.3rem 0.3rem; text-align:center;">
+            <div class="skeleton" style="width:90px; height:31px; border-radius: 10px; margin:0 auto;"></div>
           </div>
         `;
         
@@ -3115,89 +3183,110 @@ document.addEventListener('keydown', (e) => {
         }
         function gradeStatusHtml(periodDetails) {
             return isPeriodComplete(periodDetails)
-                ? `<div class="grade-status grade-status-complete"><i class="fas fa-check-circle"></i> اكتمل الرصد</div>`
-                : `<div class="grade-status grade-status-partial"><i class="fas fa-hourglass-half"></i> بانتظار اكتمال الرصد</div>`;
+                ? `<div class="rc-period-status grade-status-complete"><i class="fas fa-check-circle"></i> اكتمل الرصد</div>`
+                : `<div class="rc-period-status grade-status-partial"><i class="fas fa-hourglass-half"></i> بانتظار اكتمال الرصد</div>`;
+        }
+        // عمود فترة واحد — لكل عمود زر تفاصيل يستدعي فترته وحدها
+        function periodColumnHtml(label, value, details, periodNo) {
+            const has = value !== null && value !== undefined && value !== '' && value !== 0;
+            const body = has
+                ? `<div class="rc-period-value">${value}</div>${gradeStatusHtml(details)}`
+                : `<div class="rc-period-value"><span class="missing-icon"><i class="fas fa-clock"></i></span></div>` +
+                  `<div class="rc-period-status grade-status-missing">بانتظار الرصد</div>`;
+            return `<div class="rc-period">
+                <div class="rc-period-name">${label}</div>
+                ${body}
+                <button class="details-btn rc-details-btn" data-period="${periodNo}" data-student-id="${student.id || ''}">
+                  التفاصيل <i class="fas fa-chevron-left"></i>
+                </button>
+              </div>`;
         }
 
-// الفترة الأولى
-if (student.period1 !== null && student.period1 !== undefined && student.period1 !== '' && student.period1 !== 0) {
-    period1Html = `<div class="grade-value">${student.period1}</div>${gradeStatusHtml(student.details && student.details.period1)}`;
-} else {
-    period1Html = `<div class="missing-icon"><i class="fas fa-clock"></i></div><div class="grade-status grade-status-missing">بانتظار الرصد</div>`;
-}
+        const periodsHtml = `
+          <div class="rc-periods">
+            ${periodColumnHtml('الفترة الأولى', student.period1, student.details && student.details.period1, 1)}
+            <div class="rc-period-sep"></div>
+            ${periodColumnHtml('الفترة الثانية', student.period2, student.details && student.details.period2, 2)}
+          </div>`;
 
-// الفترة الثانية
-if (student.period2 !== null && student.period2 !== undefined && student.period2 !== '' && student.period2 !== 0) {
-    period2Html = `<div class="grade-value">${student.period2}</div>${gradeStatusHtml(student.details && student.details.period2)}`;
-} else {
-    period2Html = `<div class="missing-icon"><i class="fas fa-clock"></i></div><div class="grade-status grade-status-missing">بانتظار الرصد</div>`;
-}
-        
-       let finalHtml = '';
-if (student.isComplete && student.finalScore) {
-  let ratingIcon = 'fa-medal';
-  let ratingColor = '#1D9E75';
- if (student.rating === 'ممتاز') { ratingIcon = 'fa-trophy'; ratingColor = '#E8A33D'; }
-  else if (student.rating === 'جيد جداً') { ratingIcon = 'fa-medal'; ratingColor = '#1D9E75'; }
-  else if (student.rating === 'جيد') { ratingIcon = 'fa-thumbs-up'; ratingColor = '#3498DB'; }
-  else if (student.rating === 'مقبول') { ratingIcon = 'fa-circle-exclamation'; ratingColor = '#D98C1F'; }
-  else { ratingIcon = 'fa-triangle-exclamation'; ratingColor = '#C0392B'; }
+        // الدرجة النهائية: رقم، خط متلاشٍ، ثم كبسولة التقدير
+        const RATING_COLORS = {
+          'ممتاز': '#1D9E75',
+          'جيد جداً': '#0E9594',
+          'جيد': '#E8A33D',
+          'مقبول': '#B8860B',
+          'بحاجة للتحسين': '#C0392B'
+        };
+        let finalHtml = '';
+        if (student.isComplete && student.finalScore) {
+          const ratingColor = RATING_COLORS[student.rating] || '#C0392B';
+          finalHtml = `
+            <div class="rc-final">
+              <div class="rc-final-col">
+                <span class="rc-final-num" id="finalScoreVal">0</span>
+                <span class="rc-final-cap">الدرجة</span>
+              </div>
+              <div class="rc-final-sep"></div>
+              <div class="rc-final-col">
+                <span class="rc-rating" style="color:${ratingColor}; background:${hexToRgba(ratingColor, 0.12)};">${student.rating}</span>
+                <span class="rc-final-cap">التقدير</span>
+              </div>
+            </div>`;
+        } else {
+          finalHtml = `
+            <div class="rc-pending">
+              <i class="fas fa-hourglass-half"></i>
+              <span>الدرجة النهائية بعد اكتمال رصد الفترتين</span>
+            </div>`;
+        }
 
-  finalHtml = `
-    <div class="rating-medallion">
-      <span class="medallion-score"><span id="finalScoreVal">0</span><span class="medallion-score-unit">درجة</span></span>
-      <span class="medallion-sep">·</span>
-      <span class="medallion-badge" style="color:${ratingColor};"><i class="fas ${ratingIcon}"></i> ${student.rating}</span>
-    </div>
-  `;
-} else {
-  finalHtml = `
-    <div class="rating-medallion">
-      <span class="medallion-badge" style="color:#D98C1F; font-size:0.8rem; white-space:nowrap;"><i class="fas fa-hourglass-half"></i> الدرجة النهائية بعد اكتمال رصد الفترتين</span>
-    </div>
-  `;
-}
-        
         const missingHtml = (!student.isComplete && student.missingMessage && student.missingMessage !== "لم تُرصد أي درجات حتى الآن")
           ? `<div class="missing-message">
                <i class="fas fa-clock"></i>
                <span>${student.missingMessage}</span>
              </div>`
           : '';
-let percentageColor = '#1D9E75';
-let percentageBg = 'rgba(29,158,117,0.08)';
-if (student.attendance) {
-  if (student.attendance.percentage < 75) { percentageColor = '#C0392B'; percentageBg = 'rgba(192,57,43,0.08)'; }
-  else if (student.attendance.percentage < 90) { percentageColor = '#D98C1F'; percentageBg = 'rgba(217,140,31,0.1)'; }
-}
-const attendanceHtml = student.attendance ? `
-  <p class="attendance-section-label"><i class="fas fa-calendar-days" style="margin-left: 5px;"></i>الحضور</p>
-  <div class="attendance-box">
-    <div class="attendance-item" style="background: rgba(29,158,117,0.08);">
-      <i class="fas fa-check-circle" style="color:#1D9E75;"></i>
-      <span style="color:#1D9E75;">${student.attendance.present}</span>
-      <small style="color:#1D9E75;">حضور</small>
-    </div>
-    <div class="attendance-item" style="background: rgba(192,57,43,0.08);">
-      <i class="fas fa-times-circle" style="color:#C0392B;"></i>
-      <span style="color:#C0392B;">${student.attendance.absent}</span>
-      <small style="color:#C0392B;">غياب</small>
-    </div>
-    <div class="attendance-item" style="background:${percentageBg};">
-      <i class="fas fa-calendar-check" style="color:${percentageColor};"></i>
-      <span style="color:${percentageColor};"><b id="attendancePctVal" style="font-weight:inherit;">0</b>%</span>
-      <small style="color:${percentageColor};">نسبة الحضور</small>
-    </div>
-  </div>
-` : '';
+
+        // الحضور: حلقة واحدة، ولونها يتبع الشريحة
+        let attendanceHtml = '';
+        if (student.attendance) {
+          const present = Number(student.attendance.present) || 0;
+          const absent = Number(student.attendance.absent) || 0;
+          const pct = Number(student.attendance.percentage) || 0;
+          const started = (present + absent) > 0;
+          let ringColor = '#1D9E75';
+          if (pct < 60) ringColor = '#C0392B';
+          else if (pct < 75) ringColor = '#B8860B';
+          else if (pct < 90) ringColor = '#0E9594';
+          const centre = started
+            ? `<b id="attendancePctVal" style="font-weight:inherit;">0</b>%`
+            : '—';
+          const line = started
+            ? `<span style="color:#1D9E75; font-weight:700;">${present}</span> حضور` +
+              ` <span style="color:var(--text-light);">·</span> ` +
+              `<span style="color:var(--warning-red); font-weight:700;">${absent}</span> غياب`
+            : 'لم يبدأ رصد الحضور';
+          attendanceHtml = `
+            <p class="rc-label">الحضور</p>
+            <div class="rc-att">
+              <div class="rc-att-ring" style="--rc-att-pct:${started ? pct : 0}; --rc-att-color:${started ? ringColor : 'rgba(22,50,79,0.22)'};">
+                <div class="rc-att-inner">${centre}</div>
+              </div>
+              <div class="rc-att-line">${line}</div>
+            </div>`;
+        }
+
         let pointsButtonHtml = '';
-if (student.points) {
-  pointsButtonHtml = `
-    <button class="points-btn points-btn-hover" data-student-id="${student.id || ''}" style="margin:4px 1.3rem 0; background:rgba(14,149,148,0.06); color:#0E9594; border:1px solid transparent; padding:11px; border-radius: 16px; cursor:pointer; font-size:0.85rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; width:calc(100% - 2.6rem); font-family:inherit;">
-      <i class="fas fa-award"></i> النقاط والمخالفات 
-    </button>
-  `;
-}
+        if (student.points) {
+          pointsButtonHtml = `
+            <button class="points-btn points-btn-hover" data-student-id="${student.id || ''}" style="margin:0 1.3rem; background:rgba(14,149,148,0.06); color:#0E9594; border:none; padding:11px; border-radius: 16px; cursor:pointer; font-size:0.8rem; font-weight:600; display:flex; align-items:center; justify-content:center; gap:8px; width:calc(100% - 2.6rem); font-family:inherit;">
+              <i class="fas fa-award"></i> عرض النقاط والمخالفات
+            </button>`;
+        }
+
+        // الحرف الأول من اسم الطالب — أول محرف فعلي بعد الفراغات
+        const initial = String(student.name || '').trim().charAt(0) || '؟';
+
 const cardHtml = `
 <div class="result-header">
     <div style="display:flex; flex-direction:row; align-items:center; padding:0.9rem 1.3rem; gap:12px; width:100%;">
@@ -3212,44 +3301,25 @@ const cardHtml = `
       </div>
     </div>
   </div>
-            
+
            <div class="student-info">
-              <div style="display:flex; align-items:center; justify-content:center; gap:8px;">
-                <div class="student-avatar">
-                  <i class="fas fa-user-graduate"></i>
-                </div>
+              <div style="display:flex; align-items:center; justify-content:center; gap:10px; max-width:100%; min-width:0;">
+                <div class="student-avatar">${initial}</div>
                 <p class="student-name">${student.name}</p>
               </div>
               <p class="student-details">${student.gradeLevel} | الفصل ${student.section}</p>
             </div>
-            
-           <p class="grades-section-label"><i class="fas fa-chart-simple" style="margin-left: 5px;"></i>الدرجات</p>
-           <div class="grades-grid">
-  <div class="grade-card">
-    <span>الفترة الأولى</span>
-    ${period1Html}
-    <button class="details-btn" data-period="1" data-student-id="${student.id || ''}" style="background: transparent; color: var(--accent-teal); border: 1px solid rgba(var(--accent-teal-rgb), 0.35); padding: 5px 14px; border-radius: 16px; cursor: pointer; font-size: 0.75rem; font-weight: 500; align-self: center;">
-      <i class="fas fa-eye"></i> التفاصيل
-    </button>
-  </div>
-  <div class="grade-card">
-    <span>الفترة الثانية</span>
-    ${period2Html}
-    <button class="details-btn" data-period="2" data-student-id="${student.id || ''}" style="background: transparent; color: var(--accent-teal); border: 1px solid rgba(var(--accent-teal-rgb), 0.35); padding: 5px 14px; border-radius: 16px; cursor: pointer; font-size: 0.75rem; font-weight: 500; align-self: center;">
-      <i class="fas fa-eye"></i> التفاصيل
-    </button>
-  </div>
-</div>
-            
+
+           <p class="rc-label">الدرجات</p>
+           ${periodsHtml}
             ${missingHtml}
             ${attendanceHtml}
-            <p class="attendance-section-label"><i class="fas fa-star" style="margin-left: 5px;"></i>رصيد الطالب</p>
+            <p class="rc-label">النقاط والمخالفات</p>
             ${pointsButtonHtml}
-            <div class="final-result">
-              ${finalHtml}
-            </div>
+            <p class="rc-label">الدرجة النهائية</p>
+            ${finalHtml}
 
-            <div style="padding: 0 1.3rem 0.3rem; text-align: center;">
+            <div style="padding: 14px 1.3rem 0.3rem; text-align: center;">
               <button id="resultCloseBtn" type="button" style="background: transparent; color: #0E9594; border: 1px solid rgba(14,149,148,0.35); padding: 7px 24px; border-radius: 10px; cursor: pointer; font-size: 0.85rem; font-weight: 600;">
                 إغلاق
               </button>
@@ -3270,7 +3340,7 @@ if (resultCloseBtn) {
 
 // ظهور بنود الدرجات بالتتابع، وعدّ الأرقام الكبيرة تصاعدياً
 setTimeout(() => {
-    staggerReveal(document.querySelectorAll('.grades-grid .grade-card'));
+    staggerReveal(document.querySelectorAll('.rc-periods .rc-period'));
     const finalScoreEl = document.getElementById('finalScoreVal');
     if (finalScoreEl && student.isComplete && student.finalScore) {
         animateNumber(finalScoreEl, parseFloat(student.finalScore));
@@ -4435,6 +4505,11 @@ function showGradeDetails(period, studentDetails) {
 }
 
 // ربط أزرار التفاصيل بعد عرض البطاقة
+function hexToRgba(hex, alpha) {
+  const h = hex.replace('#', '');
+  const n = parseInt(h.length === 3 ? h.split('').map(c => c + c).join('') : h, 16);
+  return `rgba(${(n >> 16) & 255}, ${(n >> 8) & 255}, ${n & 255}, ${alpha})`;
+}
 function bindDetailsButtons(studentDetailsData) {
     // تخزين البيانات في متغير عام أو في نطاق الدالة
     window.currentStudentDetails = studentDetailsData;
