@@ -572,7 +572,7 @@
     .library-section:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .library-title { margin: 0 0 1.2rem; text-align: center; }
     /* شبكة ثابتة بثلاثة أعمدة: الثلاثة في صف واحد فوق 300 بكسل */
-    .library-cards-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; align-items: stretch; }
+    .library-cards-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; align-items: stretch; }
     @media (max-width: 299px) {
       .library-cards-row { grid-template-columns: repeat(2, 1fr); }
     }
@@ -892,7 +892,9 @@
     /* ============================================ */
     /* ==========   قسم مواضيع التصويت   ========== */
     /* ============================================ */
-    .voting-section { max-width: 900px; margin: 4.2rem auto; padding: 1.9rem 2.25rem; border-radius: 16px; background: var(--gradient-card); box-shadow: var(--shadow-soft); text-align: center; position: relative; overflow: hidden; }
+    /* القسم ضعف ارتفاع غيره، والتدرّج نسبيّ لارتفاع العنصر — فيقطع مداه كاملًا
+       ويتجمّع طرفه الرمادي على مساحة واسعة. مدّ الرمادي بعيدًا فيبقى فاتحًا كبقية الأقسام. */
+    .voting-section { max-width: 900px; margin: 4.2rem auto; padding: 1.9rem 2.25rem; border-radius: 16px; background: linear-gradient(to bottom, var(--pure-white), #F7F9FA 1400px); box-shadow: var(--shadow-soft); text-align: center; position: relative; overflow: hidden; }
     @media (hover: hover) and (pointer: fine) {
     .voting-section:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
     .voting-header { display: flex; justify-content: center; align-items: center; margin-bottom: 0.8rem; }
@@ -1238,19 +1240,27 @@
       border-radius: 16px;
       text-align: center;
     }
- .student-avatar {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      background: var(--accent-teal);
-      color: var(--pure-white);
-      font-size: 1.05rem;
-      font-weight: 700;
-      line-height: 1;
+ /* صف الاسم: حشو متساوٍ على الجهتين فيبقى الاسم في المنتصف تمامًا،
+       والأيقونة مثبّتة في حشو جهة البداية خارج التدفق فلا تزيحه أبدًا */
+ .student-name-row {
+      position: relative;
+      width: 100%;
       display: flex;
       align-items: center;
       justify-content: center;
-      flex-shrink: 0;
+      padding-inline: 24px;
+      box-sizing: border-box;
+    }
+ .student-avatar {
+      position: absolute;
+      inset-inline-start: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 16px;
+      text-align: center;
+      font-size: 0.95rem;
+      color: var(--accent-teal);
+      line-height: 1;
     }
     .student-name {
       font-size: 1rem;
@@ -1362,9 +1372,20 @@
      margin: 0 1.3rem;
    }
    .rc-att-stats { display: flex; flex-direction: column; gap: 12px; min-width: 0; }
-   .rc-att-stat { display: flex; align-items: baseline; gap: 6px; }
-   .rc-att-num { font-size: 1.3rem; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1; }
-   .rc-att-cap { font-size: 0.68rem; color: var(--text-light); }
+   .rc-att-stat { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+   .rc-att-num {
+     font-size: 1.1rem;
+     font-weight: 800;
+     font-variant-numeric: tabular-nums;
+     line-height: 1;
+     padding: 5px 10px;
+     border-radius: 10px;
+     min-width: 34px;
+     text-align: center;
+   }
+   .rc-att-present { color: #1D9E75; background: rgba(29, 158, 117, 0.1); }
+   .rc-att-absent { color: var(--warning-red); background: rgba(192, 57, 43, 0.1); }
+   .rc-att-cap { font-size: 0.68rem; color: var(--text-light); white-space: nowrap; }
    .rc-att-ring {
      width: 96px;
      height: 96px;
@@ -2510,7 +2531,7 @@
 <!-- ========================================= -->
 <section class="library-section fade-in" id="library-section">
   <h3 class="library-title">مكتبة الطالب</h3>
-  <p class="library-subtitle">تجد هنا جميع مصادر ومتطلبات التقنية الرقمية</p>
+  <p class="library-subtitle">هنا جميع مصادر ومتطلبات التقنية الرقمية</p>
   <div class="library-cards-row">
     <div class="library-card library-card-1" data-url="https://sites.google.com/view/dvdf55/ss?authuser=1" data-title="الأول ثانوي">
       <span class="library-card-number">١</span>
@@ -2520,7 +2541,7 @@
     <div class="library-card library-card-2 library-card-disabled" data-title="الثاني ثانوي">
       <span class="library-card-number">٢</span>
       <h3 class="library-card-title">الثاني ثانوي</h3>
-      <p class="library-card-note">تُدرس الفصل الثاني</p>
+      <p class="library-card-note">تُطرح الفصل الثاني</p>
       <span class="library-card-go" aria-hidden="true"><i class="fas fa-lock"></i></span>
     </div>
     <div class="library-card library-card-3" data-url="https://sites.google.com/view/regf78/ut?authuser=1" data-title="الثالث ثانوي">
@@ -3132,9 +3153,9 @@ document.addEventListener('keydown', (e) => {
         resultContainer.style.display = 'block';
         resultContainer.innerHTML = `
           <div class="skeleton skel-header" style="height:105px;"></div>
-          <div style="text-align:center; padding-top:11px; margin-bottom:15px;">
+          <div style="text-align:center; padding-top:11px; margin-bottom:36px;">
             <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:8px;">
-              <span class="skeleton" style="width:46px; height:46px; border-radius:12px; flex-shrink:0;"></span>
+              <span class="skeleton" style="width:15px; height:15px; border-radius:4px; flex-shrink:0;"></span>
               <span class="skeleton skel-line" style="width:120px; height:15px;"></span>
             </div>
             <div class="skeleton skel-line" style="width:100px; height:11px; margin:0 auto;"></div>
@@ -3282,8 +3303,8 @@ document.addEventListener('keydown', (e) => {
             : '—';
           const side = started
             ? `<div class="rc-att-stats">
-                 <div class="rc-att-stat"><span class="rc-att-num" style="color:#1D9E75;">${present}</span><span class="rc-att-cap">حضور</span></div>
-                 <div class="rc-att-stat"><span class="rc-att-num" style="color:var(--warning-red);">${absent}</span><span class="rc-att-cap">غياب</span></div>
+                 <div class="rc-att-stat"><span class="rc-att-cap">حصص الحضور</span><span class="rc-att-num rc-att-present">${present}</span></div>
+                 <div class="rc-att-stat"><span class="rc-att-cap">حصص الغياب</span><span class="rc-att-num rc-att-absent">${absent}</span></div>
                </div>`
             : `<div class="rc-att-empty">لم يبدأ رصد الحضور</div>`;
           attendanceHtml = `
@@ -3305,9 +3326,6 @@ document.addEventListener('keydown', (e) => {
             </button>`;
         }
 
-        // الحرف الأول من اسم الطالب — أول محرف فعلي بعد الفراغات
-        const initial = String(student.name || '').trim().charAt(0) || '؟';
-
 const cardHtml = `
 <div class="result-header">
     <div style="display:flex; flex-direction:row; align-items:center; padding:0.9rem 1.3rem; gap:12px; width:100%;">
@@ -3324,8 +3342,8 @@ const cardHtml = `
   </div>
 
            <div class="student-info">
-              <div style="display:flex; align-items:center; justify-content:center; gap:9px; max-width:100%; min-width:0;">
-                <div class="student-avatar">${initial}</div>
+              <div class="student-name-row">
+                <i class="fas fa-user-graduate student-avatar" aria-hidden="true"></i>
                 <p class="student-name">${student.name}</p>
               </div>
               <p class="student-details">${student.gradeLevel} | الفصل ${student.section}</p>
