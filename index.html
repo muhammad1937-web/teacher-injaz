@@ -457,12 +457,12 @@
       margin: 0 0 16px;
     }
     /* الجملة الثابتة تحت الصف — نفسها في الوضعين */
-    .fame-quote-wrap { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: 18px; }
+    .fame-quote-wrap { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: 24px; }
     .fame-quote-rule {
       width: 160px;
       max-width: 70%;
       height: 1px;
-      margin-bottom: 12px;
+      margin-top: 12px;
       /* يتلاشى عند طرفيه فيقرأ كعنصر تصميم لا كشرطة */
       background: linear-gradient(90deg, transparent, var(--gold-excellence), transparent);
     }
@@ -669,23 +669,22 @@
        قبل الشريط اللوني بفسحة، وعند النهاية يتمدد — فيقع مركز النص في
        منتصف ما بين الشريط والحافة المقابلة تمامًا */
     .library-card-note {
-      font-size: 0.55rem;
+      font-size: 0.62rem;
       color: var(--text-light);
       margin-block: 4px 8px;
-      /* البداية تقف قبل الشريط بفسحة، والنهاية تتمدد — فيقع مركز النص
-         في منتصف المساحة الخالية تمامًا */
-      margin-inline-start: -6px;
+      /* يبدأ من حيث يبدأ اسم المرحلة، ويتمدد في الجهة الخالية من الشريط */
+      margin-inline-start: 0;
       margin-inline-end: -12px;
-      text-align: center;
+      text-align: start;
       white-space: nowrap;
     }
     /* البطاقة تضيق فيضيق معها أوسع مقاس يسعه السطر */
     @media (max-width: 389px) {
-      .library-card-note { font-size: 0.48rem; }
+      .library-card-note { font-size: 0.55rem; }
     }
     /* تحت 360 بكسل لا يسعه أي مقاس مقروء، والالتفاف أهون من القصّ */
     @media (max-width: 359px) {
-      .library-card-note { white-space: normal; margin-inline: 0; font-size: 0.55rem; }
+      .library-card-note { white-space: normal; margin-inline: 0; font-size: 0.6rem; }
     }
     .library-card-disabled { cursor: not-allowed; opacity: 0.55; }
     @media (hover: hover) and (pointer: fine) {
@@ -1240,12 +1239,12 @@
       text-align: center;
     }
  .student-avatar {
-      width: 46px;
-      height: 46px;
-      border-radius: 12px;
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
       background: var(--accent-teal);
       color: var(--pure-white);
-      font-size: 1.3rem;
+      font-size: 1.05rem;
       font-weight: 700;
       line-height: 1;
       display: flex;
@@ -1271,6 +1270,10 @@
    /* ========================================= */
    /*   بطاقة نتيجة الطالب — النمط الموحّد      */
    /* ========================================= */
+   /* سطر الترويسة الثاني: مقاس يسع النص كاملًا بلا قصّ */
+   .rc-hdr-sub { font-size: 0.7rem; }
+   @media (max-width: 359px) { .rc-hdr-sub { font-size: 0.55rem; } }
+
    /* تسمية مجموعة: خط رأسي قبل النص بدل الأيقونة */
    .rc-label {
      display: flex;
@@ -1335,9 +1338,10 @@
    /* زر التفاصيل: نص وسهم، بلا إطار ولا خلفية */
    .rc-details-btn {
      margin-top: 10px;
-     padding: 0;
-     background: none;
+     padding: 6px 14px;
+     background: rgba(14, 149, 148, 0.08);
      border: none;
+     border-radius: 999px;
      color: var(--accent-teal);
      font-family: inherit;
      font-size: 0.68rem;
@@ -2320,8 +2324,8 @@
       </div>
     </div>
     <div class="fame-quote-wrap">
-      <span class="fame-quote-rule"></span>
       <p class="fame-quote">كل تميّزٍ تبدأه اليوم قد يكون إنجازًا عظيمًا تفخر به غدًا.</p>
+      <span class="fame-quote-rule"></span>
     </div>
     <div class="unified-student-info" id="unifiedStudentInfo">
       <h4 id="studentName">اسم الطالب</h4>
@@ -2349,8 +2353,8 @@
         </div>
       </div>
       <div class="fame-quote-wrap">
-        <span class="fame-quote-rule"></span>
         <p class="fame-quote">كل تميّزٍ تبدأه اليوم قد يكون إنجازًا عظيمًا تفخر به غدًا.</p>
+        <span class="fame-quote-rule"></span>
       </div>
     </div>
   </div>
@@ -2376,7 +2380,7 @@
 <section class="voting-section fade-in" id="projects-section">
   <div class="voting-header">
     <h3 class="voting-title">
-      <span>مسابقات الإبداع الرقمي</span>
+      <span>مسابقة الإبداع الرقمي</span>
     </h3>
   </div>
   
@@ -2516,7 +2520,7 @@
     <div class="library-card library-card-2 library-card-disabled" data-title="الثاني ثانوي">
       <span class="library-card-number">٢</span>
       <h3 class="library-card-title">الثاني ثانوي</h3>
-      <p class="library-card-note">غير مطروحة هذا الفصل</p>
+      <p class="library-card-note">تُدرس الفصل الثاني</p>
       <span class="library-card-go" aria-hidden="true"><i class="fas fa-lock"></i></span>
     </div>
     <div class="library-card library-card-3" data-url="https://sites.google.com/view/regf78/ut?authuser=1" data-title="الثالث ثانوي">
@@ -2583,7 +2587,7 @@
     </div>
   </div>
   <div style="background: rgba(14,149,148,0.06); border-radius: 16px; padding: 10px 12px; margin-top: 14px; width: 100%; max-width: 450px; text-align: center; margin-left: auto; margin-right: auto;">
-      <p style="font-size: 0.6rem; color: var(--text-medium); margin: 0; line-height: 1.6; white-space: nowrap;">
+      <p style="font-size: 0.75rem; color: var(--text-medium); margin: 0; line-height: 1.6;">
         الإجابات مبنية على منهج المادة، وقد تحتاج لمراجعة المعلم للتأكد
       </p>
     </div>
@@ -3128,7 +3132,7 @@ document.addEventListener('keydown', (e) => {
         resultContainer.style.display = 'block';
         resultContainer.innerHTML = `
           <div class="skeleton skel-header" style="height:105px;"></div>
-          <div style="text-align:center; padding-top:11px; margin-bottom:17px;">
+          <div style="text-align:center; padding-top:11px; margin-bottom:15px;">
             <div style="display:flex; align-items:center; justify-content:center; gap:10px; margin-bottom:8px;">
               <span class="skeleton" style="width:46px; height:46px; border-radius:12px; flex-shrink:0;"></span>
               <span class="skeleton skel-line" style="width:120px; height:15px;"></span>
@@ -3142,11 +3146,11 @@ document.addEventListener('keydown', (e) => {
           <div style="padding:20px 1.3rem 0;">
             <div class="skeleton skel-line" style="width:50px; height:18px; margin-bottom:10px;"></div>
             <div style="display:flex; align-items:center; justify-content:center; gap:18px;">
-              <div class="skeleton" style="width:96px; height:96px; border-radius:50%; flex-shrink:0;"></div>
               <div style="display:flex; flex-direction:column; gap:12px;">
                 <div class="skeleton skel-line" style="width:62px; height:21px;"></div>
                 <div class="skeleton skel-line" style="width:62px; height:21px;"></div>
               </div>
+              <div class="skeleton" style="width:96px; height:96px; border-radius:50%; flex-shrink:0;"></div>
             </div>
           </div>
           <div style="padding:20px 1.3rem 0;">
@@ -3285,11 +3289,11 @@ document.addEventListener('keydown', (e) => {
           attendanceHtml = `
             <p class="rc-label">الحضور</p>
             <div class="rc-att">
+              ${side}
+              <div class="rc-final-sep"></div>
               <div class="rc-att-ring" style="--rc-att-pct:${started ? pct : 0}; --rc-att-color:${started ? ringColor : 'rgba(22,50,79,0.22)'};">
                 <div class="rc-att-inner">${centre}</div>
               </div>
-              <div class="rc-final-sep"></div>
-              ${side}
             </div>`;
         }
 
@@ -3313,14 +3317,14 @@ const cardHtml = `
       <div style="width:1px; height:45px; background:rgba(255,255,255,0.2); flex-shrink:0;"></div>
       <div style="flex:1; min-width:0; text-align:right;">
         <h4 style="font-size:1rem; font-weight:700; color:white; margin:0 0 8px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${settings.schoolName || 'المدرسة'}</h4>
-        <p style="font-size:0.85rem; color:rgba(255,255,255,0.85); margin:0 0 2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${settings.subject || 'التقنية الرقمية'} | ${settings.semester || ''} ${settings.academicYear || ''}</p>
+        <p class="rc-hdr-sub" style="color:rgba(255,255,255,0.85); margin:0 0 2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;">${settings.subject || 'التقنية الرقمية'} | ${settings.semester || ''} ${settings.academicYear || ''}</p>
         <p style="font-size:0.75rem; color:rgba(255,255,255,0.75); margin:0; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;"><i class="fas fa-user" style="margin-left:5px;"></i>${settings.teacherName || 'أ.محمد حمدان الغامدي'}</p>
       </div>
     </div>
   </div>
 
            <div class="student-info">
-              <div style="display:flex; align-items:center; justify-content:center; gap:10px; max-width:100%; min-width:0;">
+              <div style="display:flex; align-items:center; justify-content:center; gap:9px; max-width:100%; min-width:0;">
                 <div class="student-avatar">${initial}</div>
                 <p class="student-name">${student.name}</p>
               </div>
