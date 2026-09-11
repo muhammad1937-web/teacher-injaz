@@ -20,6 +20,9 @@
   <meta property="og:image" content="https://teacher-injaz.vercel.app/images/22tinted.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- خط ميلانو لجملة الحكمة وحدها. media=print يمنعه من حجب أول رسم للصفحة،
+       ثم onload يفعّله عند وصوله — فيعمل عمل font-display: swap على ملف لا نملكه. -->
+  <link rel="stylesheet" href="https://www.fontstatic.com/f=milano" media="print" onload="this.media='all'" />
   <style>
     /* ========================================= */
     /*     متغيرات الألوان - الأفق الرقمي        */
@@ -459,16 +462,18 @@
     /* الجملة الثابتة تحت الصف — نفسها في الوضعين */
     .fame-quote-wrap { display: flex; flex-direction: column; align-items: center; width: 100%; margin-top: 18px; }
     .fame-quote-rule {
-      width: 40px;
+      width: 100px;
+      max-width: 60%;
       height: 1px;
       margin-bottom: 12px;
       /* يتلاشى عند طرفيه فيقرأ كعنصر تصميم لا كشرطة */
       background: linear-gradient(90deg, transparent, var(--gold-excellence), transparent);
     }
     .fame-quote {
-      font-size: 0.72rem;
+      /* ميلانو لهذه الجملة وحدها؛ وخط الموقع كاملًا احتياطيًا إن تعذّر تحميله */
+      font-family: "milano", 'IBM Plex Sans Arabic', 'Tajawal', sans-serif;
+      font-size: 0.8rem;
       font-weight: 500;
-      font-style: italic;
       color: var(--text-medium);
       text-align: center;
       max-width: 90%;
