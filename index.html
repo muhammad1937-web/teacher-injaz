@@ -2,8 +2,8 @@
 <html lang="ar" dir="rtl">
 <!--
   ╔══════════════════════════════════════════════════════════════════╗
-  ║  لوحة التحكّم اليدوي  ←  السطر 2254                               ║
-  ║  كل ما تحتاج تغييره يدويًا موجود هناك في مكان واحد:              ║
+  ║  لوحة التحكّم اليدوي: ابحث في الملف عن  SITE_CONTROL              ║
+  ║  (أول نتيجة). كل ما تحتاج تغييره يدويًا هناك في مكان واحد:        ║
   ║  وضع القسمين · بطاقات المكتبة · صور الطلاب · روابط المشاريع      ║
   ╚══════════════════════════════════════════════════════════════════╝
 -->
@@ -441,10 +441,8 @@
     /* صف متساوٍ: ثلاثة متميزين بلا ترتيب بينهم */
     .students-list { display: flex; align-items: center; justify-content: center; gap: 14px; width: 100%; flex-wrap: nowrap; padding: 0; overflow: visible; position: relative; }
     .student-item { position: relative; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 0; }
-    /* الترتيب المرئي من اليمين: الثاني، الأول، الثالث — بلا أي تمييز بينها */
-    .student-item[data-index="1"] { order: 1; }
-    .student-item[data-index="0"] { order: 2; }
-    .student-item[data-index="2"] { order: 3; }
+    /* الترتيب المرئي من اليمين هو ترتيب اللوحة نفسه: الأول ثم الثاني ثم الثالث.
+       (كانت هنا قواعد order مقلوبة من تصميم المنصّة القديم، وقد زالت معه.) */
 
     /* وضع الاستراحة: نفس الصف بأبعاده ومواضعه — الفجوة صفر والمسافات صريحة */
     .fame-empty-wrap { display: flex; flex-direction: column; align-items: center; gap: 0; padding: 0; text-align: center; }
@@ -2282,9 +2280,16 @@ window.SITE_CONTROL = {
 
 
   /* ───────────── ٣ ─ الطلاب المتميزون ─────────────
-     لتغيير صورة طالب: ارفع صورتك إلى مجلد images باسم student1.jpg
+     الترتيب هنا هو ترتيبهم على الشاشة من اليمين: الأول ثم الثاني ثم الثالث.
+
+     لتغيير صورة: ارفع صورتك إلى مجلد images باسم student1.jpg
      (أو student2.jpg أو student3.jpg) فتحلّ محلّ القديمة دون لمس هذا السطر.
-     ⚠ الامتداد يجب أن يكون jpg تمامًا.
+     والامتداد لا يهمّ — jpg أو png أو jpeg أو webp، كلها مقبولة.
+     أو ارفعها بأي اسم تشاء واكتب اسمها هنا، مثل: 'images/ahmad.png'
+
+     ⚠ احذف الصورة القديمة عند رفع الجديدة. فلو بقي student1.jpg
+       ورفعت student1.png، ستظهر القديمة لأنها تُجرَّب أولًا.
+
      الاسم والسبب يظهران في نافذة المعلومات عند الضغط على زر (i). */
 
   students: [
@@ -2686,19 +2691,45 @@ window.SITE_CONTROL = {
   });
 
   // ───── ٣ ─ صور الطلاب المتميزين
-  // لا نغيّر الصورة إلا بعد التأكد من وجود الملف الجديد، فلا تظهر صورة مكسورة أبدًا.
+  // الامتداد المكتوب ترجيح لا شرط: يُجرَّب أولًا ثم بقيّة الامتدادات الشائعة.
+  // ولا تُستبدل الصورة إلا بعد التأكد من تحميل الملف، فلا تظهر صورة مكسورة أبدًا.
+  const PHOTO_EXTS = ['jpg', 'png', 'jpeg', 'webp'];
+
+  function photoCandidates(photo) {
+    const p = String(photo).trim();
+    const dot = p.lastIndexOf('.');
+    const slash = Math.max(p.lastIndexOf('/'), p.lastIndexOf('\\'));
+    const hasExt = dot > slash && dot < p.length - 1;
+    const base = hasExt ? p.slice(0, dot) : p;
+    const written = hasExt ? p.slice(dot + 1).toLowerCase() : '';
+    // المكتوب أولًا فلا تأخير حين يصيب، ثم الباقي بلا تكرار
+    return [written].concat(PHOTO_EXTS)
+      .filter((e, n, a) => e && a.indexOf(e) === n)
+      .map(e => base + '.' + e);
+  }
+
+  function loadFirstThatExists(list, done) {
+    (function attempt(n) {
+      if (n >= list.length) return;              // لا شيء صالح: تبقى الصورة الحالية
+      const probe = new Image();
+      probe.onload  = () => done(list[n]);
+      probe.onerror = () => attempt(n + 1);
+      probe.src = list[n];
+    })(0);
+  }
+
   step(() => {
     (C.students || []).forEach((s, i) => {
       const img = document.querySelector('.student-item[data-index="' + i + '"] img');
       if (!img) return;
       if (s.name) img.alt = s.name;
-      if (!s.photo || s.photo === img.getAttribute('src')) return;
-      const probe = new Image();
-      probe.onload = () => {
-        img.src = s.photo;
-        if (window.studentsModalData && window.studentsModalData[i]) window.studentsModalData[i].imgSrc = s.photo;
-      };
-      probe.src = s.photo;
+      if (!s.photo) return;
+      const current = img.getAttribute('src');
+      loadFirstThatExists(photoCandidates(s.photo), function (src) {
+        if (src === current) return;
+        img.src = src;
+        if (window.studentsModalData && window.studentsModalData[i]) window.studentsModalData[i].imgSrc = src;
+      });
     });
   });
 })();
