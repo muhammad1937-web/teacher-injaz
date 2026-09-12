@@ -2031,8 +2031,12 @@
     .honor-cols { display:grid; grid-template-columns:1fr; gap:14px; animation: honorFadeIn 0.35s ease; }
     @keyframes honorFadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
     .honor-col { border-radius: 16px; overflow:hidden; background:var(--pure-white); box-shadow: var(--shadow-soft); }
-    .honor-col-head { background:rgba(22, 50, 79, 0.04); border-bottom:1px solid var(--border-color); padding:10px 15px; font-size:0.9rem; font-weight:700; color:var(--accent-teal); }
-    .honor-col-head.pts { color:#B87A20; }
+    /* الشريط رمادي موحّد للعمودين — فهما زوج واحد — واللون يميّزهما في النص والحدّ.
+       الحدّ لون مركَّز لا يبهت مع تدرّج خلفية القسم تحته، بخلاف الخلفية المخفّفة. */
+    .honor-col-head { background:rgba(22, 50, 79, 0.07); border-bottom:2px solid #1D9E75; padding:10px 15px; font-size:0.9rem; font-weight:700; color:#1D9E75; }
+    /* الأخضر نفسه المستعمل في مربّع الترتيب ونسبة الحضور، فالعمود يتّسق مع عنوانه.
+       والذهبي هنا أغمق من ذهبي المربّع الممتلئ لأنه نصّ على خلفية فاتحة. */
+    .honor-col-head.pts { color:#C8901F; border-bottom-color:#C8901F; }
     .honor-col-body { padding:10px; }
     .honor-row { display:flex; align-items:center; gap:10px; padding:10px 14px; margin-bottom:8px; background:var(--pure-white); border-radius: 10px; box-shadow: var(--shadow-soft); transition:all 0.3s ease; }
     .honor-row:last-child { margin-bottom:0; }
@@ -2053,7 +2057,8 @@
     .honor-val-unit { font-size:0.65rem; font-weight:400; color:var(--text-light); white-space:nowrap; }
     .honor-empty { padding:2rem 1rem; text-align:center; color:var(--text-light); font-size:0.85rem; line-height:1.8; animation: honorFadeIn 0.35s ease; }
     .honor-empty i { display:block; font-size:1.4rem; margin-bottom:0.6rem; color:var(--text-light); opacity:0.7; }
-    .honor-note { text-align:center; font-size:0.78rem; color:var(--text-subtitle); background:var(--light-bg); border-radius: 10px; padding:10px; margin-top:14px; }
+    /* شفافية لا لون ثابت: خلفية القسم تتدرّج تحتها، واللون الثابت كان يذوب فيها. */
+    .honor-note { text-align:center; font-size:0.78rem; color:var(--text-subtitle); background:rgba(22, 50, 79, 0.07); border-radius: 10px; padding:10px; margin-top:14px; }
 
     /* ========================================= */
     /*   استجابة اللمس: انكماش عند الضغط          */
@@ -2276,7 +2281,7 @@ window.SITE_CONTROL = {
     { grade: 'الثاني ثانوي', url: '' },
     { grade: 'الثالث ثانوي', url: 'https://sites.google.com/view/regf78/ut?authuser=1' }
   ],
-  libraryLockedNote: 'غير مفعلة هذا الفصل',   // الجملة التي تظهر في البطاقة المقفلة
+  libraryLockedNote: 'تُطرح الفصل الثاني',   // الجملة التي تظهر في البطاقة المقفلة
 
 
   /* ───────────── ٣ ─ الطلاب المتميزون ─────────────
@@ -2617,7 +2622,7 @@ window.SITE_CONTROL = {
     <div class="library-card library-card-2 library-card-disabled" data-title="الثاني ثانوي">
       <span class="library-card-number">٢</span>
       <h3 class="library-card-title">الثاني ثانوي</h3>
-      <p class="library-card-note">غير مفعلة هذا الفصل</p>
+      <p class="library-card-note">تُطرح الفصل الثاني</p>
       <span class="library-card-go" aria-hidden="true"><i class="fas fa-lock"></i></span>
     </div>
     <div class="library-card library-card-3" data-url="https://sites.google.com/view/regf78/ut?authuser=1" data-title="الثالث ثانوي">
@@ -3616,10 +3621,11 @@ function renderHonorSkeleton() {
     '<span class="skeleton skel-line" style="width:40%; height:8px; margin-top:6px;"></span></span>' +
     '<span class="honor-val"><span class="skeleton skel-line" style="width:26px; height:16px;"></span>' +
     '<span class="skeleton skel-line" style="width:20px; height:8px; margin-top:4px;"></span></span></div>';
-  const skelCol = function (title) {
-    return '<div class="honor-col"><div class="honor-col-head">' + title + '</div><div class="honor-col-body">' + skelRow.repeat(3) + '</div></div>';
+  // العمود يولد بلونه النهائي: بدونه يظهر عمود النقاط أخضر لحظةً ثم يقفز إلى الذهبي
+  const skelCol = function (title, cls) {
+    return '<div class="honor-col"><div class="honor-col-head' + (cls ? ' ' + cls : '') + '">' + title + '</div><div class="honor-col-body">' + skelRow.repeat(3) + '</div></div>';
   };
-  document.getElementById('honorBody').innerHTML = '<div class="honor-cols">' + skelCol('متصدرو النقاط') + skelCol('متصدرو الحضور') + '</div>';
+  document.getElementById('honorBody').innerHTML = '<div class="honor-cols">' + skelCol('متصدرو النقاط', 'pts') + skelCol('متصدرو الحضور') + '</div>';
 }
 
 async function loadHonorBoard() {
