@@ -1,5 +1,12 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  لوحة التحكّم اليدوي  ←  السطر 2254                               ║
+  ║  كل ما تحتاج تغييره يدويًا موجود هناك في مكان واحد:              ║
+  ║  وضع القسمين · بطاقات المكتبة · صور الطلاب · روابط المشاريع      ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover" />
@@ -2241,6 +2248,69 @@
 </head>
 <body>
 
+<!--
+╔════════════════════════════════════════════════════════════════════════════╗
+║                                                                            ║
+║                        لوحــة التحكّــم اليــدوي                            ║
+║                                                                            ║
+║   كل ما تحتاج تغييره بيدك موجود هنا. لا حاجة لفتح أي مكان آخر في الملف.    ║
+║   غيّر القيمة بين علامتَي التنصيص ' ' فقط، ولا تحذف الفواصل.               ║
+║                                                                            ║
+╚════════════════════════════════════════════════════════════════════════════╝
+-->
+<script>
+window.SITE_CONTROL = {
+
+  /* ───────────── ١ ─ وضع القسمين ─────────────
+     القيمة كلمة واحدة:  'مفعل'  أو  'استراحة'
+     (قسم الصدارة الرقمية ليس هنا — يتحكّم به الشيت من خانة حالة_لوحة_الشرف) */
+
+  fameMode:    'مفعل',      // صُنّاع المستقبل
+  contestMode: 'مفعل',      // مسابقة الإبداع الرقمي
+
+
+  /* ───────────── ٢ ─ مكتبة الطالب ─────────────
+     رابط مكتوب  = البطاقة مفتوحة (سهم دخول)
+     رابط فارغ '' = البطاقة مقفلة تلقائيًا (قفل + جملة الإقفال + تختفي من البحث) */
+
+  library: [
+    { grade: 'الأول ثانوي',  url: 'https://sites.google.com/view/dvdf55/ss?authuser=1' },
+    { grade: 'الثاني ثانوي', url: '' },
+    { grade: 'الثالث ثانوي', url: 'https://sites.google.com/view/regf78/ut?authuser=1' }
+  ],
+  libraryLockedNote: 'تُطرح الفصل الثاني',   // الجملة التي تظهر في البطاقة المقفلة
+
+
+  /* ───────────── ٣ ─ الطلاب المتميزون ─────────────
+     لتغيير صورة طالب: ارفع صورتك إلى مجلد images باسم student1.jpg
+     (أو student2.jpg أو student3.jpg) فتحلّ محلّ القديمة دون لمس هذا السطر.
+     ⚠ الامتداد يجب أن يكون jpg تمامًا.
+     الاسم والسبب يظهران في نافذة المعلومات عند الضغط على زر (i). */
+
+  students: [
+    { photo: 'images/student1.jpg', name: 'الطالب المتميز الأول',  reason: 'التميز في مشروع الوحدة الأولى وإبداع في التصميم' },
+    { photo: 'images/student2.jpg', name: 'الطالب المتميز الثاني', reason: 'تفوق في الاختبارات العملية وابتكار حلول تقنية' },
+    { photo: 'images/student3.jpg', name: 'الطالب المتميز الثالث', reason: 'مشاركة فعالة في الأنشطة الصفية ودعم الزملاء' }
+  ],
+
+
+  /* ───────────── ٤ ─ المشاريع المتنافسة ─────────────
+     رابط مكتوب  = الزر يعمل
+     رابط فارغ '' = الزر معطّل ويكتب «غير متاح حاليًا»
+     نوع الملف يُستنتج من الرابط تلقائيًا، فلا تكتب شيئًا في viewAs.
+     وإن أخطأ الاستنتاج في حالة نادرة، اكتب في viewAs واحدة من:
+     'عرض' أو 'ملف' أو 'صورة' أو 'إطار' أو 'تبويب' */
+
+  projects: [
+    { name: 'العرض التقديمي',    url: '', viewAs: '' },
+    { name: 'التصميم الجرافيكي', url: '', viewAs: '' },
+    { name: 'الموقع الإلكتروني', url: '', viewAs: '' }
+  ]
+
+};
+</script>
+<!-- ══════════════════ نهاية لوحة التحكّم اليدوي ══════════════════ -->
+
 <!-- === شريط الإشعارات === -->
 <div class="notification-bar fade-in">
   <div class="notification-container">
@@ -2326,7 +2396,7 @@
   <div class="fame-bar-title">
     <span>صُناع المستقبل </span>
   </div>
-  <div class="students-container" style="display: block;">
+  <div class="students-container" id="fame-active-mode" style="display: block;">
     <p class="fame-lead">تهانينا للطلاب المتميزين خلال الفصل الدراسي الأول</p>
     <div class="students-list" id="studentsList">
       <div class="student-item" data-index="0">
@@ -2552,6 +2622,87 @@
     </div>
   </div>
 </section>
+
+<!-- ════════════════════════════════════════════════════════════════════════
+     مُطبِّق لوحة التحكّم اليدوي
+     يقرأ SITE_CONTROL أعلى الملف ويطبّقه على الأقسام الثلاثة السابقة.
+     لا تعدّل هنا — التعديل كله في اللوحة أعلى الملف.
+
+     أمان: كل خطوة مستقلة داخل try، وإن فشلت بقي ما هو مكتوب في HTML كما هو.
+     ════════════════════════════════════════════════════════════════════════ -->
+<script>
+(function applySiteControl() {
+  const C = window.SITE_CONTROL;
+  if (!C) return;
+  const step = fn => { try { fn(); } catch (e) { console.warn('لوحة التحكّم:', e); } };
+
+  // كلمة الوضع: أي صيغة فيها «استراح» تعني الاستراحة، وما عداها تفعيل
+  const isRest = v => typeof v === 'string' && v.indexOf('استراح') !== -1;
+  const setMode = (activeId, restId, value) => {
+    const a = document.getElementById(activeId), r = document.getElementById(restId);
+    if (!a || !r) return;
+    const rest = isRest(value);
+    a.style.display = rest ? 'none' : 'block';
+    r.style.display = rest ? 'block' : 'none';
+  };
+
+  // ───── ١ ─ وضع القسمين
+  step(() => setMode('fame-active-mode', 'fame-inactive-mode', C.fameMode));
+  step(() => setMode('competition-mode', 'intermission-mode', C.contestMode));
+
+  // ───── ٢ ─ بطاقات المكتبة
+  step(() => {
+    (C.library || []).forEach((item, i) => {
+      const card = document.querySelector('.library-card-' + (i + 1));
+      if (!card) return;
+      const titleEl = card.querySelector('.library-card-title');
+      const goIcon = card.querySelector('.library-card-go i');
+      const open = !!(item.url && item.url.trim());
+
+      if (item.grade) {
+        if (titleEl) titleEl.textContent = item.grade;
+        card.dataset.title = item.grade;
+      }
+
+      card.classList.toggle('library-card-disabled', !open);
+      if (open) card.dataset.url = item.url.trim();
+      else card.removeAttribute('data-url');
+
+      if (goIcon) goIcon.className = open ? 'fas fa-arrow-left' : 'fas fa-lock';
+
+      // جملة الإقفال: تُنشأ عند الحاجة وتُحذف عند الفتح
+      let note = card.querySelector('.library-card-note');
+      if (open) {
+        if (note) note.remove();
+      } else {
+        if (!note) {
+          note = document.createElement('p');
+          note.className = 'library-card-note';
+          card.insertBefore(note, card.querySelector('.library-card-go'));
+        }
+        note.textContent = C.libraryLockedNote || '';
+      }
+    });
+  });
+
+  // ───── ٣ ─ صور الطلاب المتميزين
+  // لا نغيّر الصورة إلا بعد التأكد من وجود الملف الجديد، فلا تظهر صورة مكسورة أبدًا.
+  step(() => {
+    (C.students || []).forEach((s, i) => {
+      const img = document.querySelector('.student-item[data-index="' + i + '"] img');
+      if (!img) return;
+      if (s.name) img.alt = s.name;
+      if (!s.photo || s.photo === img.getAttribute('src')) return;
+      const probe = new Image();
+      probe.onload = () => {
+        img.src = s.photo;
+        if (window.studentsModalData && window.studentsModalData[i]) window.studentsModalData[i].imgSrc = s.photo;
+      };
+      probe.src = s.photo;
+    });
+  });
+})();
+</script>
 
 
 <!-- ============================================ -->
@@ -2961,12 +3112,24 @@ const modalStudentImage = document.getElementById('modalStudentImage');
 const modalStudentName = document.getElementById('modalStudentName');
 const modalStudentReason = document.getElementById('modalStudentReason');
 
-// بيانات الطلاب (نفس البيانات الموجودة)
-const studentsModalData = [
-  { name: "الطالب المتميز الأول", reason: "التميز في مشروع الوحدة الأولى وإبداع في التصميم", imgSrc: "images/hh.jpeg" },
-  { name: "الطالب المتميز الثاني", reason: "تفوق في الاختبارات العملية وابتكار حلول تقنية", imgSrc: "images/ee.png" },
-  { name: "الطالب المتميز الثالث", reason: "مشاركة فعالة في الأنشطة الصفية ودعم الزملاء", imgSrc: "images/hh.jpeg" }
+// بيانات الطلاب — مصدرها الوحيد لوحة التحكّم أعلى الملف (SITE_CONTROL.students).
+// الصورة تُقرأ من الصف نفسه، فلا تختلف صورة النافذة عن صورة الصف أبدًا.
+const STUDENT_FALLBACK = [
+  { name: 'الطالب المتميز الأول',  reason: 'التميز في مشروع الوحدة الأولى وإبداع في التصميم' },
+  { name: 'الطالب المتميز الثاني', reason: 'تفوق في الاختبارات العملية وابتكار حلول تقنية' },
+  { name: 'الطالب المتميز الثالث', reason: 'مشاركة فعالة في الأنشطة الصفية ودعم الزملاء' }
 ];
+const studentsModalData = [0, 1, 2].map(function (i) {
+  const sc = window.SITE_CONTROL && window.SITE_CONTROL.students;
+  const cfg = (Array.isArray(sc) && sc[i]) || {};
+  const rowImg = document.querySelector('.student-item[data-index="' + i + '"] img');
+  return {
+    name:   cfg.name   || STUDENT_FALLBACK[i].name,
+    reason: cfg.reason || STUDENT_FALLBACK[i].reason,
+    imgSrc: (rowImg && rowImg.getAttribute('src')) || cfg.photo || ''
+  };
+});
+window.studentsModalData = studentsModalData;
 
 // فتح النافذة عند النقر على علامة +
 function openModal(studentIndex) {
@@ -3787,20 +3950,58 @@ initVotingTimer();
 // ============================================
 
 
-const VOTING_PROJECTS = [
-  { name: 'العرض التقديمي', icon: 'fa-file-powerpoint', color: '#16324F' },
-  { name: 'التصميم الجرافيكي', icon: 'fa-palette', color: '#0E9594' },
-  { name: 'الموقع الإلكتروني', icon: 'fa-globe', color: '#E8A33D' }
+// الأسماء مصدرها الوحيد لوحة التحكّم أعلى الملف (SITE_CONTROL.projects).
+// الأيقونة واللون ثابتان لأنهما جزء من التصميم لا من المحتوى.
+const PROJECT_STYLE = [
+  { icon: 'fa-file-powerpoint', color: '#16324F' },
+  { icon: 'fa-palette',         color: '#0E9594' },
+  { icon: 'fa-globe',           color: '#E8A33D' }
 ];
+const PROJECT_FALLBACK_NAMES = ['العرض التقديمي', 'التصميم الجرافيكي', 'الموقع الإلكتروني'];
+
+function projectConfig(i) {
+  const c = (window.SITE_CONTROL && window.SITE_CONTROL.projects && window.SITE_CONTROL.projects[i]) || {};
+  return {
+    name:   (c.name && c.name.trim()) || PROJECT_FALLBACK_NAMES[i],
+    url:    (c.url  && c.url.trim())  || '',
+    viewAs: (c.viewAs && c.viewAs.trim()) || ''
+  };
+}
+
+const VOTING_PROJECTS = PROJECT_STYLE.map(function (s, i) {
+  return { name: projectConfig(i).name, icon: s.icon, color: s.color };
+});
 
 let selectedProject = null;
 
 // ============================================
 //      نافذة عرض المشاريع الموحّدة (competition-mode)
 // ============================================
-const PROJECT_1 = { url: '', type: 'pdf'   };  // العرض التقديمي
-const PROJECT_2 = { url: '', type: 'image' };  // التصميم الجرافيكي
-const PROJECT_3 = { url: '', type: 'site'  };  // الموقع الإلكتروني
+// روابط المشاريع مصدرها لوحة التحكّم أعلى الملف. رابط فارغ = الزر معطّل.
+const PROJECTS = [0, 1, 2].map(projectConfig);
+
+/* استنتاج طريقة العرض من الرابط نفسه.
+   القاعدة الحاكمة: لا نُضمِّن إلا ما نثق بأنه يقبل التضمين.
+   وكل ما عداه يُفتح في تبويب جديد — لا إطار مكسور ولا شاشة فارغة. */
+const VIEW_ALIASES = {
+  'عرض': 'slides', 'ملف': 'pdf', 'صورة': 'image', 'إطار': 'iframe', 'اطار': 'iframe', 'تبويب': 'tab',
+  'slides': 'slides', 'pdf': 'pdf', 'image': 'image', 'iframe': 'iframe', 'tab': 'tab'
+};
+
+function detectViewMode(url, viewAs) {
+  if (viewAs && VIEW_ALIASES[viewAs]) return VIEW_ALIASES[viewAs];   // التجاوز اليدوي أولًا
+  if (!url) return 'tab';
+  const u = url.trim();
+
+  if (/\.pptx?(\?|#|$)/i.test(u)) return 'pptx';                      // يحتاج تحميلًا
+  if (/docs\.google\.com\/presentation\//i.test(u)) return 'slides';
+  if (/docs\.google\.com\/(document|spreadsheets)\//i.test(u)) return 'pdf';
+  if (/\.(png|jpe?g|gif|webp|bmp|svg)(\?|#|$)/i.test(u)) return 'image';
+  if (/\.pdf(\?|#|$)/i.test(u)) return 'pdf';
+  if (/drive\.google\.com\//i.test(u) && extractDriveFileId(u)) return 'pdf';  // معاينة درايف تقبل أغلب الأنواع
+
+  return 'tab';   // موقع خارجي أو رابط غير معروف: الأأمن فتحه في تبويب
+}
 
 function extractDriveFileId(url) {
   if (!url) return null;
@@ -3814,7 +4015,15 @@ function extractDriveFileId(url) {
 function openProjectViewer(project, title) {
   if (!project || !project.url) return;
 
-  const isPptx = /\.pptx(\?|$)/i.test(project.url);
+  const mode = detectViewMode(project.url, project.viewAs);
+
+  // الوضع الآمن: ما لا نثق بتضمينه يُفتح في تبويب جديد ولا تُفتح النافذة أصلًا
+  if (mode === 'tab') {
+    window.open(project.url, '_blank', 'noopener');
+    return;
+  }
+
+  const isPptx = mode === 'pptx';
   const driveId = extractDriveFileId(project.url);
   let frameHtml = '';
 
@@ -3827,16 +4036,16 @@ function openProjectViewer(project, title) {
           <i class="fas fa-download"></i> تحميل الملف
         </a>
       </div>`;
-  } else if (project.type === 'image') {
+  } else if (mode === 'image') {
     const imgSrc = driveId ? `https://drive.google.com/thumbnail?id=${driveId}&sz=w1200` : project.url;
     frameHtml = `
       <div id="projectImageWrap" style="display:flex; align-items:center; justify-content:center; height:100%; background:rgba(0,0,0,0.03);">
         <img id="projectImageEl" src="${imgSrc}" alt="${title}" style="max-width:100%; max-height:100%; object-fit:contain;">
       </div>`;
-  } else if (project.type === 'slides') {
+  } else if (mode === 'slides') {
     const embedSrc = driveId ? `https://docs.google.com/presentation/d/${driveId}/embed` : project.url;
     frameHtml = `<iframe src="${embedSrc}" style="width:100%; height:100%; border:none;" allowfullscreen></iframe>`;
-  } else if (project.type === 'pdf') {
+  } else if (mode === 'pdf') {
     const embedSrc = driveId ? `https://drive.google.com/file/d/${driveId}/preview` : project.url;
     frameHtml = `<iframe src="${embedSrc}" style="width:100%; height:100%; border:none;" allow="autoplay"></iframe>`;
   } else {
@@ -3880,32 +4089,36 @@ function openProjectViewer(project, title) {
   overlay.querySelector('#closeProjectViewer').addEventListener('click', closeViewer);
   document.addEventListener('keydown', escHandler);
 
-  if (project.type === 'image' && !isPptx) {
+  // تعذّر عرض الصورة: لا نترك إطارًا فارغًا — نعرض مخرجًا واضحًا إلى الرابط نفسه
+  if (mode === 'image') {
     const imgEl = overlay.querySelector('#projectImageEl');
     imgEl.addEventListener('error', function () {
       const wrap = document.getElementById('projectImageWrap');
       if (!wrap) return;
       wrap.innerHTML =
-        '<div style="display:flex; flex-direction:column; align-items:center; gap:10px; color:var(--text-light);">' +
+        '<div style="display:flex; flex-direction:column; align-items:center; gap:14px; color:var(--text-light); text-align:center; padding:1rem;">' +
         '<i class="fas fa-image" style="font-size:2rem; opacity:0.5;"></i>' +
-        '<span style="font-size:0.85rem;">تعذّر عرض الصورة</span></div>';
+        '<span style="font-size:0.85rem;">تعذّر عرض الصورة هنا</span>' +
+        '<a href="' + project.url + '" target="_blank" rel="noopener" style="background:var(--accent-teal); color:#fff; padding:9px 22px; border-radius:10px; text-decoration:none; font-size:0.85rem; font-weight:600; display:inline-flex; align-items:center; gap:6px;">' +
+        '<i class="fas fa-arrow-up-right-from-square"></i> افتح في تبويب جديد</a></div>';
     });
   }
 }
 
 function initProjectButtons() {
-  const configs = [
-    { btn: document.getElementById('projectBtn1'), project: PROJECT_1, title: 'العرض التقديمي' },
-    { btn: document.getElementById('projectBtn2'), project: PROJECT_2, title: 'التصميم الجرافيكي' },
-    { btn: document.getElementById('projectBtn3'), project: PROJECT_3, title: 'الموقع الإلكتروني' }
-  ];
-  configs.forEach(function (c) {
-    if (!c.btn) return;
-    const small = c.btn.querySelector('small');
-    if (c.project.url) {
-      c.btn.addEventListener('click', function () { openProjectViewer(c.project, c.title); });
+  PROJECTS.forEach(function (p, i) {
+    const btn = document.getElementById('projectBtn' + (i + 1));
+    if (!btn) return;
+
+    // الاسم يُكتب مرة واحدة في اللوحة ويسري على الزر ونافذة التصويت وشاشة المعاينة
+    const label = btn.querySelector('span');
+    if (label) label.textContent = p.name;
+
+    const small = btn.querySelector('small');
+    if (p.url) {
+      btn.addEventListener('click', function () { openProjectViewer(p, p.name); });
     } else {
-      c.btn.classList.add('project-btn-disabled');
+      btn.classList.add('project-btn-disabled');
       if (small) small.innerHTML = 'غير متاح حاليًا';
     }
   });
