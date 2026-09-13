@@ -101,16 +101,78 @@ const SYSTEM_PROMPT = `أنت "المساعد الرقمي" في موقع أ. م
 • حين تكتب كودًا، اكتبه في أسطر منفصلة بلا أي علامات تحديد مثل \`\`\` أو ~~~، فالموقع يعرضها كما هي ولا يحوّلها. ووضّح الكود بسطر بعده.
 • لا تستخدم رموزًا تعبيرية. واكتب نصًا عاديًا بلا رموز تنسيق: لا نجمتين ** حول الكلمات، ولا رموز عناوين #، لأن الموقع يعرضها كما هي فتشوّش القراءة. للتمييز، اذكر المصطلح في بداية الجملة أو ضعه بين قوسين.`;
 
+// ═══════════════════════════════════════════════════════════════════
+//   حرّاس المسار — يعملون قبل الوصول إلى OpenAI
+//   المسار مفتوح على الإنترنت، ويمكن مناداته دون المرور بالموقع.
+//   فأي تحقّق في الصفحة اقتراح، والتحقّق هنا وحده هو القانون.
+// ═══════════════════════════════════════════════════════════════════
+
+const ALLOWED_HOSTS = ['teacher-injaz.vercel.app', 'localhost', '127.0.0.1'];
+const MAX_CHARS = 500;          // مطابق لحدّ الحقل في الصفحة
+const MAX_PER_HOUR = 20;        // لكل عنوان، نافذة متحرّكة
+const WINDOW_MS = 60 * 60 * 1000;
+
+// عدّاد في الذاكرة. خوادم فيرسل مؤقتة، فقد يُصفَّر عند إعادة التشغيل
+// أو ينقسم بين نسختين — فهو رادع تقريبي لا حاجز صارم.
+const hits = new Map();
+
+function hostOf(value) {
+  if (!value) return null;
+  try { return new URL(value).host; } catch { return null; }
+}
+
+function isAllowedOrigin(req) {
+  const host = hostOf(req.headers.origin) || hostOf(req.headers.referer);
+  if (!host) return false;                       // نداء مباشر بلا مصدر
+  return ALLOWED_HOSTS.some(h => host === h || host.startsWith(h + ':'));
+}
+
+function clientKey(req) {
+  const fwd = req.headers['x-forwarded-for'];
+  return (Array.isArray(fwd) ? fwd[0] : (fwd || '')).split(',')[0].trim()
+      || req.socket?.remoteAddress || 'unknown';
+}
+
+function overRateLimit(key) {
+  const now = Date.now();
+  const fresh = (hits.get(key) || []).filter(t => now - t < WINDOW_MS);
+  if (fresh.length >= MAX_PER_HOUR) { hits.set(key, fresh); return true; }
+  fresh.push(now);
+  hits.set(key, fresh);
+  if (hits.size > 5000) {                        // تنظيف دوري يمنع تضخّم الذاكرة
+    for (const [k, v] of hits) if (!v.some(t => now - t < WINDOW_MS)) hits.delete(k);
+  }
+  return false;
+}
+
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method Not Allowed' });
   }
 
+  if (!isAllowedOrigin(req)) {
+    return res.status(403).json({ error: 'Forbidden' });
+  }
+
+  if (overRateLimit(clientKey(req))) {
+    return res.status(429).json({
+      error: 'Too Many Requests',
+      message: 'وصلت إلى حدّ الأسئلة لهذه الساعة. جرّب بعد قليل.'
+    });
+  }
+
   try {
     const userMessageText = req.body?.contents?.[0]?.parts?.[0]?.text;
 
-    if (!userMessageText) {
+    if (!userMessageText || typeof userMessageText !== 'string' || !userMessageText.trim()) {
       return res.status(400).json({ error: 'Invalid message format in request body' });
+    }
+
+    if (userMessageText.length > MAX_CHARS) {
+      return res.status(413).json({
+        error: 'Message too long',
+        message: 'سؤالك طويل. اختصره في ' + MAX_CHARS + ' حرف أو أقل.'
+      });
     }
 
     const completion = await openai.chat.completions.create({
