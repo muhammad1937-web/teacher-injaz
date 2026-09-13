@@ -1251,20 +1251,9 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      /* 20px يكفي لاحتواء الأيقونة (16px) ويكسب الاسم 8 بكسل */
-      padding-inline: 20px;
+      /* الحشو كان يفسح للأيقونة الملغاة. بزواله يكسب الاسم 40 بكسل */
+      padding-inline: 0;
       box-sizing: border-box;
-    }
- .student-avatar {
-      position: absolute;
-      inset-inline-start: 0;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 16px;
-      text-align: center;
-      font-size: 0.95rem;
-      color: var(--accent-teal);
-      line-height: 1;
     }
     /* الاسم الرباعي يتجاوز عرض الجوال، وقصّه يعني أن الطالب لا يرى اسمه كاملًا.
        فيلتفّ إلى سطر ثانٍ بدل أن يُقصّ، مع سقف سطرين يمنع أي اسم شاذّ من تمديد
@@ -3571,7 +3560,6 @@ const cardHtml = `
 
            <div class="student-info">
               <div class="student-name-row">
-                <i class="fas fa-user-graduate student-avatar" aria-hidden="true"></i>
                 <p class="student-name">${student.name}</p>
               </div>
               <p class="student-details">${student.gradeLevel} | الفصل ${student.section}</p>
