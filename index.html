@@ -1251,7 +1251,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding-inline: 24px;
+      /* 20px يكفي لاحتواء الأيقونة (16px) ويكسب الاسم 8 بكسل */
+      padding-inline: 20px;
       box-sizing: border-box;
     }
  .student-avatar {
@@ -1265,15 +1266,23 @@
       color: var(--accent-teal);
       line-height: 1;
     }
+    /* الاسم الرباعي يتجاوز عرض الجوال، وقصّه يعني أن الطالب لا يرى اسمه كاملًا.
+       فيلتفّ إلى سطر ثانٍ بدل أن يُقصّ، مع سقف سطرين يمنع أي اسم شاذّ من تمديد
+       البطاقة. text-wrap: balance يوزّع الكلمتين على السطرين توزيعًا متّزنًا. */
     .student-name {
       font-size: 1rem;
       font-weight: 700;
       color: var(--primary-dark);
       margin: 0;
       min-width: 0;
+      line-height: 1.35;
+      overflow-wrap: anywhere;
+      text-wrap: balance;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
       overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
     }
    .student-details {
       font-size: 0.85rem;
@@ -1285,7 +1294,8 @@
    /* ========================================= */
    /* سطر الترويسة الثاني: مقاس يسع النص كاملًا بلا قصّ */
    .rc-hdr-sub { font-size: 0.7rem; }
-   @media (max-width: 359px) { .rc-hdr-sub { font-size: 0.55rem; } }
+   /* 0.55rem كان يقصّ السنة بثلاثة بكسلات على شاشة 320 */
+   @media (max-width: 359px) { .rc-hdr-sub { font-size: 0.52rem; } }
 
    /* تسمية مجموعة: خط رأسي قبل النص بدل الأيقونة */
    .rc-label {
