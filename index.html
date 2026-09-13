@@ -2031,12 +2031,12 @@
     .honor-cols { display:grid; grid-template-columns:1fr; gap:14px; animation: honorFadeIn 0.35s ease; }
     @keyframes honorFadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
     .honor-col { border-radius: 16px; overflow:hidden; background:var(--pure-white); box-shadow: var(--shadow-soft); }
-    /* الشريط رمادي موحّد للعمودين — فهما زوج واحد — واللون يميّزهما في النص والحدّ.
-       الحدّ لون مركَّز لا يبهت مع تدرّج خلفية القسم تحته، بخلاف الخلفية المخفّفة. */
-    .honor-col-head { background:rgba(22, 50, 79, 0.07); border-bottom:2px solid #1D9E75; padding:10px 15px; font-size:0.9rem; font-weight:700; color:#1D9E75; }
+    /* الشريط رمادي موحّد للعمودين — فهما زوج واحد — واللون يميّزهما في النص وحده.
+       بلا حدّ سفلي: الرمادي عند 7% يرسم حافّته بنفسه فلا حاجة لخطّ فوقه. */
+    .honor-col-head { background:rgba(22, 50, 79, 0.07); padding:10px 15px; font-size:0.9rem; font-weight:700; color:#1D9E75; }
     /* الأخضر نفسه المستعمل في مربّع الترتيب ونسبة الحضور، فالعمود يتّسق مع عنوانه.
        والذهبي هنا أغمق من ذهبي المربّع الممتلئ لأنه نصّ على خلفية فاتحة. */
-    .honor-col-head.pts { color:#C8901F; border-bottom-color:#C8901F; }
+    .honor-col-head.pts { color:#C8901F; }
     .honor-col-body { padding:10px; }
     .honor-row { display:flex; align-items:center; gap:10px; padding:10px 14px; margin-bottom:8px; background:var(--pure-white); border-radius: 10px; box-shadow: var(--shadow-soft); transition:all 0.3s ease; }
     .honor-row:last-child { margin-bottom:0; }
