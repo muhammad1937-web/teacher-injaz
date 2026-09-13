@@ -143,7 +143,7 @@
     /*      الهيدر الجديد - مع خلفية صورة      */
     /* ========================================= */
 .tech-header {
-      background-image: url('images/22.png');
+      background-image: url('images/22.jpg');
       background-size: cover;
       background-position: center center;
       background-repeat: no-repeat;
@@ -2411,17 +2411,17 @@ window.SITE_CONTROL = {
     <div class="students-list" id="studentsList">
       <div class="student-item" data-index="0">
         <i class="fas fa-crown podium-crown"></i>
-        <div class="student-image"><img src="images/hh.jpeg" alt="الطالب المتميز الأول"></div>
+        <div class="student-image"><span class="podium-empty-slot"><i class="fas fa-user"></i></span></div>
         <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب"><i class="fas fa-circle-info"></i></button>
       </div>
       <div class="student-item" data-index="1">
         <i class="fas fa-crown podium-crown"></i>
-        <div class="student-image"><img src="images/ee.png" alt="الطالب المتميز الثاني"></div>
+        <div class="student-image"><span class="podium-empty-slot"><i class="fas fa-user"></i></span></div>
         <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب"><i class="fas fa-circle-info"></i></button>
       </div>
       <div class="student-item" data-index="2">
         <i class="fas fa-crown podium-crown"></i>
-        <div class="student-image"><img src="images/hh.jpeg" alt="الطالب المتميز الثالث"></div>
+        <div class="student-image"><span class="podium-empty-slot"><i class="fas fa-user"></i></span></div>
         <button class="info-toggle-btn" aria-label="إظهار معلومات الطالب"><i class="fas fa-circle-info"></i></button>
       </div>
     </div>
@@ -2723,15 +2723,20 @@ window.SITE_CONTROL = {
     })(0);
   }
 
+  // الصورة لا تُكتب في HTML إطلاقًا: الافتراضي شكل ظلّي محايد، ولا يُستبدل
+  // إلا بصورة تأكّد تحميلها. فلا تظهر صورة قديمة ولا مكسورة في أي حال.
   step(() => {
     (C.students || []).forEach((s, i) => {
-      const img = document.querySelector('.student-item[data-index="' + i + '"] img');
-      if (!img) return;
-      if (s.name) img.alt = s.name;
-      if (!s.photo) return;
-      const current = img.getAttribute('src');
+      const wrap = document.querySelector('.student-item[data-index="' + i + '"] .student-image');
+      if (!wrap || !s.photo) return;
       loadFirstThatExists(photoCandidates(s.photo), function (src) {
-        if (src === current) return;
+        let img = wrap.querySelector('img');
+        if (!img) {
+          img = document.createElement('img');
+          img.alt = s.name || 'الطالب المتميز';
+          wrap.innerHTML = '';
+          wrap.appendChild(img);
+        }
         img.src = src;
         if (window.studentsModalData && window.studentsModalData[i]) window.studentsModalData[i].imgSrc = src;
       });
@@ -3106,7 +3111,12 @@ window.SITE_CONTROL = {
         aiTypingIndicator.style.display = 'flex';
         try {
           const response = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: message }] }] }) });
-          if (!response.ok) throw new Error('فشل في الاتصال بالخدمة');
+          if (!response.ok) {
+            // الخادم يشرح سبب الرفض بالعربية (حدّ الأسئلة أو طول السؤال)
+            const info = await response.json().catch(() => null);
+            if (info && info.message) { addMessage(info.message, 'ai'); return; }
+            throw new Error('فشل في الاتصال بالخدمة');
+          }
           const data = await response.json();
           if (data.candidates && data.candidates[0].content.parts[0].text) addMessage(data.candidates[0].content.parts[0].text, 'ai');
           else throw new Error('لم يتم الحصول على إجابة');
@@ -3162,7 +3172,8 @@ const studentsModalData = [0, 1, 2].map(function (i) {
   return {
     name:   cfg.name   || STUDENT_FALLBACK[i].name,
     reason: cfg.reason || STUDENT_FALLBACK[i].reason,
-    imgSrc: (rowImg && rowImg.getAttribute('src')) || cfg.photo || ''
+    // لا نرث مسارًا لم يُثبت وجوده: الصورة تُملأ لاحقًا حين تُحمَّل فعلًا
+    imgSrc: (rowImg && rowImg.getAttribute('src')) || ''
   };
 });
 window.studentsModalData = studentsModalData;
@@ -3170,7 +3181,14 @@ window.studentsModalData = studentsModalData;
 // فتح النافذة عند النقر على علامة +
 function openModal(studentIndex) {
   const student = studentsModalData[studentIndex];
-  modalStudentImage.src = student.imgSrc;
+  // بلا صورة مؤكَّدة: نخفي عنصر الصورة بدل عرض مربّع مكسور
+  if (student.imgSrc) {
+    modalStudentImage.src = student.imgSrc;
+    modalStudentImage.hidden = false;
+  } else {
+    modalStudentImage.removeAttribute('src');
+    modalStudentImage.hidden = true;
+  }
   modalStudentName.textContent = student.name;
   modalStudentReason.textContent = student.reason;
   modal.classList.add('active');
@@ -3931,12 +3949,28 @@ function checkForUpdates(projects) {
   }
 }
 
-function startAutoUpdateVotes() {
+function votingIsActive() {
   const comp = document.getElementById('competition-mode');
-  if (comp && comp.style.display === 'none') return; // القسم مخفٍ حاليًا (وضع الاستراحة)، فلا داعي لجلب النتائج
+  return !(comp && comp.style.display === 'none');   // وضع الاستراحة: لا استطلاع إطلاقًا
+}
+
+function stopAutoUpdateVotes() {
+  if (updateIntervalVotes) { clearInterval(updateIntervalVotes); updateIntervalVotes = null; }
+}
+
+function startAutoUpdateVotes() {
+  if (!votingIsActive()) return;
+  stopAutoUpdateVotes();          // يمنع اجتماع مؤقّتين بعد العودة إلى الصفحة
   fetchVotingResults();
   updateIntervalVotes = setInterval(fetchVotingResults, 30000);
 }
+
+// جوال في الجيب لا ينظر إليه أحد: لا داعي لمناداة الخادم كل نصف دقيقة.
+// عند العودة نجلب فورًا ثم نستأنف، فلا يرى الطالب نتيجة قديمة.
+document.addEventListener('visibilitychange', function () {
+  if (document.hidden) stopAutoUpdateVotes();
+  else startAutoUpdateVotes();
+});
 
 setTimeout(startAutoUpdateVotes, 450);
 // ============================================
