@@ -402,7 +402,13 @@
       border-radius: 16px;
       position: relative;
       overflow: hidden;
-      background: var(--gradient-card);
+      /* قسم تكريم، والذهبي عندنا لون التميّز لا زخرفة: التاج وشارة «مبدع»
+         والخطّ تحت الحكمة. فأثره الباهت هنا يقول شيئًا لا يزيّن فقط.
+         والحافة تجمع الذهب مركَّزًا فلا يبدو ممدّدًا كورق قديم.
+         ونهاية التدرّج بمسافة صريحة لا نسبة، فلا يشتدّ اللون حين يقصر
+         القسم في وضع الاستراحة أو يطول بعد رفع صور الطلاب. */
+      background: linear-gradient(to bottom, #FFFFFF, #FDF9F1 300px);
+      border: 1px solid rgba(232, 163, 61, 0.22);
       box-shadow: var(--shadow-soft);
       transition: var(--transition);
     }
@@ -2030,12 +2036,15 @@
     .honor-cols { display:grid; grid-template-columns:1fr; gap:14px; animation: honorFadeIn 0.35s ease; }
     @keyframes honorFadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
     .honor-col { border-radius: 16px; overflow:hidden; background:var(--pure-white); box-shadow: var(--shadow-soft); }
-    /* الشريط رمادي موحّد للعمودين — فهما زوج واحد — واللون يميّزهما في النص وحده.
-       بلا حدّ سفلي: الرمادي عند 7% يرسم حافّته بنفسه فلا حاجة لخطّ فوقه. */
-    .honor-col-head { background:rgba(22, 50, 79, 0.07); padding:10px 15px; font-size:0.9rem; font-weight:700; color:#1D9E75; }
-    /* الأخضر نفسه المستعمل في مربّع الترتيب ونسبة الحضور، فالعمود يتّسق مع عنوانه.
-       والذهبي هنا أغمق من ذهبي المربّع الممتلئ لأنه نصّ على خلفية فاتحة. */
-    .honor-col-head.pts { color:#C8901F; }
+    /* الكحلي لون نصّ عالي التباين ولون خلفية ثقيل، فوضعناه حيث يخدم.
+       وبلا شريط رمادي تذهب العين إلى أسماء الطلاب لا إلى العناوين. */
+    .honor-col-head { background:transparent; padding:10px 15px; font-size:0.9rem; font-weight:700;
+      color:var(--primary-dark); display:flex; align-items:center; gap:9px; }
+    /* النقطة تحمل لون العمود الذي كان في النص: ذهبي للنقاط وأخضر للحضور.
+       لون مركَّز في 8 بكسلات يُقرأ أوضح من نصّ ملوّن ممدَّد. */
+    .honor-col-head::before { content:''; width:8px; height:8px; border-radius:50%;
+      background:#1D9E75; flex-shrink:0; }
+    .honor-col-head.pts::before { background:var(--gold-excellence); }
     .honor-col-body { padding:10px; }
     .honor-row { display:flex; align-items:center; gap:10px; padding:10px 14px; margin-bottom:8px; background:var(--pure-white); border-radius: 10px; box-shadow: var(--shadow-soft); transition:all 0.3s ease; }
     .honor-row:last-child { margin-bottom:0; }
@@ -2056,8 +2065,11 @@
     .honor-val-unit { font-size:0.65rem; font-weight:400; color:var(--text-light); white-space:nowrap; }
     .honor-empty { padding:2rem 1rem; text-align:center; color:var(--text-light); font-size:0.85rem; line-height:1.8; animation: honorFadeIn 0.35s ease; }
     .honor-empty i { display:block; font-size:1.4rem; margin-bottom:0.6rem; color:var(--text-light); opacity:0.7; }
-    /* شفافية لا لون ثابت: خلفية القسم تتدرّج تحتها، واللون الثابت كان يذوب فيها. */
-    .honor-note { text-align:center; font-size:0.78rem; color:var(--text-subtitle); background:rgba(22, 50, 79, 0.07); border-radius: 10px; padding:10px; margin-top:14px; }
+    /* حاشية تشرح ما فوقها. القالب صار يتيمًا بعد أن خلت الرؤوس من خلفيتها،
+       فيجذب العين إلى أقلّ نصّ أهمية. والخطّ يفصل دون أن يعلن. */
+    .honor-note { text-align:center; font-size:0.78rem; color:var(--text-subtitle);
+      background:transparent; border-top:1px solid rgba(22, 50, 79, 0.10);
+      border-radius:0; padding:12px 10px 2px; margin-top:18px; }
 
     /* ========================================= */
     /*   استجابة اللمس: انكماش عند الضغط          */
