@@ -500,7 +500,6 @@
   transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-    .student-item.active .student-image { border-color: var(--gold-excellence); box-shadow: 0 0 0 3px rgba(var(--gold-excellence-rgb), 0.3), 0 8px 25px rgba(0, 0, 0, 0.25); transform: scale(1.05); }
     @media (hover: hover) and (pointer: fine) {
 .student-image:hover {
   transform: scale(1.05);
@@ -509,8 +508,6 @@
     .student-image img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; transition: transform 0.4s ease; }
     @media (hover: hover) and (pointer: fine) {
     .student-image:hover img { transform: scale(1.1); } }
-    @media (hover: hover) and (pointer: fine) {
-    .student-item.active .student-image:hover { border-color: var(--gold-excellence); box-shadow: 0 0 0 4px rgba(var(--gold-excellence-rgb), 0.4), 0 10px 30px rgba(0, 0, 0, 0.3); transform: scale(1.1); } }
     /* شارة على حافة الصورة السفلية: نصفها داخلها ونصفها خارجها */
     .info-toggle-btn {
       position: absolute;
@@ -535,30 +532,6 @@
     }
     @media (hover: hover) and (pointer: fine) {
     .info-toggle-btn:hover { transform: translateX(-50%) scale(1.12); box-shadow: 0 3px 9px rgba(22, 50, 79, 0.22); } }
-    .student-item.active .info-toggle-btn { color: var(--gold-excellence); box-shadow: 0 2px 8px rgba(232, 163, 61, 0.35); }
-    @media (hover: hover) and (pointer: fine) {
-    .student-item.active .info-toggle-btn:hover { transform: translateX(-50%) scale(1.12); } }
-    .unified-student-info {
-      position: absolute;
-      top: -100px;
-      left: 50%;
-      transform: translateX(-50%) translateY(10px);
-      background: var(--primary-dark);
-      color: white;
-      padding: 0.9rem 1.1rem;
-      border-radius: 16px;
-      width: 240px;
-      text-align: center;
-      box-shadow: var(--shadow-soft);
-      z-index: 1005;
-      opacity: 0;
-      visibility: hidden;
-      transition: opacity 0.4s ease, visibility 0.4s ease, transform 0.4s ease;
-      pointer-events: none;
-    }
-    .unified-student-info.active { opacity: 1; visibility: visible; transform: translateX(-50%) translateY(-7px); pointer-events: auto; }
-    .unified-student-info h4 { margin: 0 0 0.4rem 0; font-size: 1rem; font-weight: 600; color: white; }
-    .unified-student-info p { margin: 0; font-size: 0.85rem; opacity: 0.9; line-height: 1.4; color: rgba(255, 255, 255, 0.95); }
 
     /* ========================================= */
     /*          تأثير الظهور للبطاقات            */
@@ -1612,7 +1585,6 @@
       .vote-btn { min-width: 180px; padding: 0.9rem 2rem; font-size: 1rem; }
       .chat-section { padding: 1.3rem 1rem 1.2rem; }
             .info-toggle-btn { width: 28px; height: 28px; font-size: 0.85rem; }
-      .unified-student-info { width: 200px; top: -90px; padding: 0.7rem 1rem; }
       .fame-bar-section { padding: 0.63rem 0.8rem 0.525rem; }
       /* يرتفع بمقدار منطقة الأمان كما يفعل الشريط السفلي، وإلا اختفى خلفه في وضع التطبيق */
       .back-to-top { bottom: calc(82px + env(safe-area-inset-bottom, 0px)); left: 20px; width: 45px; height: 45px; font-size: 1.15rem; }
@@ -1885,6 +1857,8 @@
   /* ظل محايد: الصورة عرضٌ لا عنصر تفاعلي، فلا توحي بالفيروزي القابل للنقر */
   box-shadow: 0 4px 14px rgba(22, 50, 79, 0.1);
 }
+/* بلا صورة مؤكَّدة نُخفي العنصر: display أعلاه يتغلّب على hidden لولا هذا السطر */
+.modal-image[hidden] { display: none; }
 
 /* وسام الإنجاز */
 .modal-badge {
@@ -2439,10 +2413,6 @@ window.SITE_CONTROL = {
     <div class="fame-quote-wrap">
       <p class="fame-quote">كل تميّزٍ تبدأه اليوم قد يكون إنجازًا عظيمًا تفخر به غدًا.</p>
       <span class="fame-quote-rule"></span>
-    </div>
-    <div class="unified-student-info" id="unifiedStudentInfo">
-      <h4 id="studentName">اسم الطالب</h4>
-      <p id="studentReason">سبب التميز</p>
     </div>
   </div>
 
