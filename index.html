@@ -1859,6 +1859,20 @@
 }
 /* بلا صورة مؤكَّدة نُخفي العنصر: display أعلاه يتغلّب على hidden لولا هذا السطر */
 .modal-image[hidden] { display: none; }
+/* بديل الصورة: الشكل المحايد نفسه الظاهر في القسم، بمقاس النافذة */
+.modal-empty-photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(14, 149, 148, 0.06);
+  box-shadow: 0 4px 14px rgba(22, 50, 79, 0.1);
+}
+.modal-empty-photo i { font-size: 2.2rem; color: rgba(14, 149, 148, 0.22); }
+.modal-empty-photo[hidden] { display: none; }
 
 /* وسام الإنجاز */
 .modal-badge {
@@ -3136,6 +3150,7 @@ window.SITE_CONTROL = {
 const modal = document.getElementById('studentModal');
 const modalCloseBtn = document.getElementById('modalCloseBtn');
 const modalStudentImage = document.getElementById('modalStudentImage');
+const modalEmptyPhoto = document.getElementById('modalEmptyPhoto');
 const modalStudentName = document.getElementById('modalStudentName');
 const modalStudentReason = document.getElementById('modalStudentReason');
 
@@ -3162,13 +3177,15 @@ window.studentsModalData = studentsModalData;
 // فتح النافذة عند النقر على علامة +
 function openModal(studentIndex) {
   const student = studentsModalData[studentIndex];
-  // بلا صورة مؤكَّدة: نخفي عنصر الصورة بدل عرض مربّع مكسور
+  // بلا صورة مؤكَّدة: نعرض الشكل المحايد نفسه الظاهر في القسم بدل نصٍّ بديل خام
   if (student.imgSrc) {
     modalStudentImage.src = student.imgSrc;
     modalStudentImage.hidden = false;
+    if (modalEmptyPhoto) modalEmptyPhoto.hidden = true;
   } else {
     modalStudentImage.removeAttribute('src');
     modalStudentImage.hidden = true;
+    if (modalEmptyPhoto) modalEmptyPhoto.hidden = false;
   }
   modalStudentName.textContent = student.name;
   modalStudentReason.textContent = student.reason;
@@ -5011,8 +5028,9 @@ window.showToast = showToast;
       <i class="fas fa-times"></i>
     </button>
     
-    <img id="modalStudentImage" class="modal-image" src="" alt="صورة الطالب المتميز">
-    
+    <span id="modalEmptyPhoto" class="modal-empty-photo" aria-hidden="true"><i class="fas fa-user"></i></span>
+    <img id="modalStudentImage" class="modal-image" src="" alt="صورة الطالب المتميز" hidden>
+
     <div class="modal-badge">
       <i class="fas fa-trophy"></i> متميز هذا الشهر
     </div>
