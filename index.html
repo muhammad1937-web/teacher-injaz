@@ -317,8 +317,20 @@
       box-shadow: var(--shadow-soft-lift);
       transition: transform 0.15s ease, box-shadow 0.15s ease;
     }
-    /* 4px هامش + 4px فجوة = 8px بين الأيقونة والعنوان */
-    .service-card i { font-size: 1.25rem; color: var(--accent-teal); margin-bottom: 4px; line-height: 1; }
+    /* 4px هامش + 4px فجوة = 8px بين المربّع والعنوان، كما كان قبل إضافته */
+    .service-icon-tile {
+      width: 40px;
+      height: 40px;
+      /* 13px يردّد انحناء البطاقة (16px) بمقياس أصغر فيبدو من عائلتها */
+      border-radius: 13px;
+      background: rgba(14, 149, 148, 0.10);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 4px;
+      flex-shrink: 0;
+    }
+    .service-card i { font-size: 1.25rem; color: var(--accent-teal); line-height: 1; }
     .service-name { font-size: 0.85rem; font-weight: 700; color: var(--primary-dark); line-height: 1.3; }
     .service-desc { font-size: 0.66rem; font-weight: 400; color: var(--text-light); line-height: 1.35; }
 
@@ -411,6 +423,19 @@
       border: 1px solid rgba(232, 163, 61, 0.22);
       box-shadow: var(--shadow-soft);
       transition: var(--transition);
+    }
+    /* حافة علوية ذهبية تذوب عند الطرفين، فلا تثقل الزاويتين المستديرتين */
+    .fame-bar-section::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 3px;
+      background: linear-gradient(to left,
+        rgba(232, 163, 61, 0) 0%,
+        var(--gold-excellence) 25%,
+        #F0C27B 50%,
+        var(--gold-excellence) 75%,
+        rgba(232, 163, 61, 0) 100%);
     }
     @media (hover: hover) and (pointer: fine) {
     .fame-bar-section:hover { box-shadow: var(--shadow-soft-lift); transform: translateY(-2px); } }
@@ -2088,7 +2113,6 @@
     .ai-send-btn:active,
     .clear-chat-btn:active,
     .project-btn:not(.project-btn-disabled):active,
-    .info-toggle-btn:active,
     .modal-close:active,
     .back-to-top:active,
     .honor-tab:active,
@@ -2104,6 +2128,8 @@
       transform: scale(0.97) !important;
       transition: transform 0.12s ease;
     }
+    /* info-toggle-btn مستثنى عمدًا: توسيطه يقوم على translateX(-50%)،
+       و scale وحده يمحوه فينزلق الزرّ نصف عرضه جانبًا عند أخفّ لمسة. */
     .library-card:not(.library-card-disabled):active {
       transform: translateY(-2px);
       border-color: var(--accent-teal);
@@ -2280,7 +2306,7 @@ window.SITE_CONTROL = {
     { grade: 'الثاني ثانوي', url: '' },
     { grade: 'الثالث ثانوي', url: 'https://sites.google.com/view/regf78/ut?authuser=1' }
   ],
-  libraryLockedNote: 'تُطرح الفصل الثاني',   // الجملة التي تظهر في البطاقة المقفلة
+  libraryLockedNote: 'تُطرح الفصل القادم',   // الجملة التي تظهر في البطاقة المقفلة
 
 
   /* ───────────── ٣ ─ الطلاب المتميزون ─────────────
@@ -2366,22 +2392,22 @@ window.SITE_CONTROL = {
 <!-- شبكة خدمات الطالب -->
 <div class="services-grid fade-in">
   <button type="button" class="service-card" data-scroll-target="grades-section">
-    <i class="fas fa-clipboard-list"></i>
+    <span class="service-icon-tile"><i class="fas fa-clipboard-list"></i></span>
     <span class="service-name">درجاتي</span>
     <span class="service-desc">تابع تقدم مستواك</span>
   </button>
   <button type="button" class="service-card" data-scroll-target="library-section">
-    <i class="fas fa-book-open"></i>
+    <span class="service-icon-tile"><i class="fas fa-book-open"></i></span>
     <span class="service-name">المكتبة</span>
     <span class="service-desc">المصادر والمعلومات</span>
   </button>
   <button type="button" class="service-card" data-scroll-target="projects-section">
-    <i class="fas fa-trophy"></i>
+    <span class="service-icon-tile"><i class="fas fa-trophy"></i></span>
     <span class="service-name">المسابقات</span>
     <span class="service-desc">التصويت والمنافسة</span>
   </button>
   <button type="button" class="service-card" data-scroll-target="ai-assistant-section">
-    <i class="fas fa-wand-magic-sparkles"></i>
+    <span class="service-icon-tile"><i class="fas fa-wand-magic-sparkles"></i></span>
     <span class="service-name">المساعد الرقمي</span>
     <span class="service-desc">أسأل عن مفاهيم التقنية</span>
   </button>
