@@ -222,7 +222,9 @@
     .header-subheadline .nowrap-unit { white-space: nowrap; }
 
     /* ٥ — النص الوصفي */
-    .header-tagline { font-size: 0.7rem; font-weight: 400; color: #fff; opacity: 0.55; letter-spacing: 0.5px; line-height: 1.6; max-width: 92%; margin: 8px 0 0; }
+    /* 0.75 لا 0.55: أصغر نصّ في الترويسة وفوق صورة متفاوتة، فتباينه كان 3.79
+       دون الحدّ 4.5. الشفافية وحدها ترفعه بلا تحريك بكسل واحد. */
+    .header-tagline { font-size: 0.7rem; font-weight: 400; color: #fff; opacity: 0.75; letter-spacing: 0.5px; line-height: 1.6; max-width: 92%; margin: 8px 0 0; }
 
     /* ٦ — شريط التاريخ والوقت */
     .header-datetime { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
@@ -660,7 +662,7 @@
       .library-card-go { width: 34px; height: 34px; font-size: 0.8rem; inset-inline-start: 18px; bottom: 40px; }
     }
     @media (hover: hover) and (pointer: fine) {
-    .library-card:not(.library-card-disabled):hover { transform: translateY(-5px); box-shadow: var(--shadow-soft-lift); border-color: var(--accent-teal); }
+    .library-card:not(.library-card-disabled):hover { transform: translateY(-5px); box-shadow: var(--shadow-soft-lift); border-color: var(--card-accent); }
     .library-card:not(.library-card-disabled):hover .library-card-go { background: var(--card-accent); border-color: var(--card-accent); color: var(--pure-white); } }
     @keyframes soonPulse {
       0%, 100% { transform: scale(1); opacity: 0.85; }
@@ -2134,7 +2136,8 @@
        و scale وحده يمحوه فينزلق الزرّ نصف عرضه جانبًا عند أخفّ لمسة. */
     .library-card:not(.library-card-disabled):active {
       transform: translateY(-2px);
-      border-color: var(--accent-teal);
+      /* لون البطاقة نفسها لا الفيروزي الثابت: الرقم والسهم يتبعانه أصلًا */
+      border-color: var(--card-accent);
       box-shadow: var(--shadow-soft-lift);
       transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
     }
