@@ -18,6 +18,12 @@ const SYSTEM_PROMPT = `أنت "المساعد الرقمي" في موقع أ. م
 • إن وصف الطالب مشكلة في كوده ولم يرسله، اطلب الكود أولًا ولا تخمّن السبب.
 • إن كان السؤال ناقصا، اسأل سؤالًا واحدًا يوضّحه ثم أجب.
 
+═══ استمرارية المحادثة ═══
+
+• ستصلك الرسائل السابقة في المحادثة. استخدمها لفهم السياق: فإن قال الطالب "أعطني مثالًا آخر" أو "وضّح أكثر" أو "لم أفهم"، فهو يقصد آخر موضوع تحدثتما فيه.
+• لا تعد شرح ما شرحته قبل قليل إلا إن طلب الطالب ذلك صراحة. أضف جديدًا أو وضّح من زاوية أخرى.
+• إن انتقل الطالب إلى موضوع جديد تمامًا، اتركْ ما قبله ولا تربط بينهما قسرًا.
+
 ═══ المنهج الذي تدرّسه المدرسة ═══
 
 【أول ثانوي — الفصل الأول】
@@ -102,35 +108,36 @@ const SYSTEM_PROMPT = `أنت "المساعد الرقمي" في موقع أ. م
 • لا تستخدم رموزًا تعبيرية. واكتب نصًا عاديًا بلا رموز تنسيق: لا نجمتين ** حول الكلمات، ولا رموز عناوين #، لأن الموقع يعرضها كما هي فتشوّش القراءة. للتمييز، اذكر المصطلح في بداية الجملة أو ضعه بين قوسين.`;
 
 // ═══════════════════════════════════════════════════════════════════
-//   حرّاس المسار — يعملون قبل الوصول إلى OpenAI
-//   المسار مفتوح على الإنترنت، ويمكن مناداته دون المرور بالموقع.
-//   فأي تحقّق في الصفحة اقتراح، والتحقّق هنا وحده هو القانون.
+//  حمايات الخدمة
+//  المفتاح يبقى على الخادم ولا يصل المتصفّح إطلاقًا. ما دون ذلك يمنع
+//  استنزاف الرصيد: الرصيد يُشحن يدويًّا، فكل طلب زائد تكلفة حقيقية.
 // ═══════════════════════════════════════════════════════════════════
 
 const ALLOWED_HOSTS = ['teacher-injaz.vercel.app', 'localhost', '127.0.0.1'];
 const MAX_CHARS = 500;          // مطابق لحدّ الحقل في الصفحة
-const MAX_PER_HOUR = 20;        // لكل عنوان، نافذة متحرّكة
+const MAX_PER_HOUR = 30;        // لكل عنوان، نافذة متحرّكة. رُفع من 20 لأن
+                                // المحادثة صارت متعدّدة الأدوار
 const WINDOW_MS = 60 * 60 * 1000;
 
-// عدّاد في الذاكرة. خوادم فيرسل مؤقتة، فقد يُصفَّر عند إعادة التشغيل
-// أو ينقسم بين نسختين — فهو رادع تقريبي لا حاجز صارم.
+// أقصى عدد رسائل سابقة تُرسل مع السؤال (أربع مبادلات: سؤال وجواب × 4)
+const MAX_HISTORY = 8;
+
 const hits = new Map();
 
 function hostOf(value) {
-  if (!value) return null;
-  try { return new URL(value).host; } catch { return null; }
+  if (!value) return '';
+  try { return new URL(value).host; } catch (e) { return String(value); }
 }
 
 function isAllowedOrigin(req) {
   const host = hostOf(req.headers.origin) || hostOf(req.headers.referer);
-  if (!host) return false;                       // نداء مباشر بلا مصدر
+  if (!host) return false;
   return ALLOWED_HOSTS.some(h => host === h || host.startsWith(h + ':'));
 }
 
 function clientKey(req) {
   const fwd = req.headers['x-forwarded-for'];
-  return (Array.isArray(fwd) ? fwd[0] : (fwd || '')).split(',')[0].trim()
-      || req.socket?.remoteAddress || 'unknown';
+  return (typeof fwd === 'string' ? fwd.split(',')[0].trim() : '') || 'unknown';
 }
 
 function overRateLimit(key) {
@@ -139,7 +146,7 @@ function overRateLimit(key) {
   if (fresh.length >= MAX_PER_HOUR) { hits.set(key, fresh); return true; }
   fresh.push(now);
   hits.set(key, fresh);
-  if (hits.size > 5000) {                        // تنظيف دوري يمنع تضخّم الذاكرة
+  if (hits.size > 5000) {
     for (const [k, v] of hits) if (!v.some(t => now - t < WINDOW_MS)) hits.delete(k);
   }
   return false;
@@ -157,28 +164,57 @@ export default async function handler(req, res) {
   if (overRateLimit(clientKey(req))) {
     return res.status(429).json({
       error: 'Too Many Requests',
-      message: 'وصلت إلى حدّ الأسئلة لهذه الساعة. جرّب بعد قليل.'
+      message: 'وصلت إلى حدّ الأسئلة لهذه الساعة. انتظر قليلًا ثم أعد المحاولة.'
     });
   }
 
   try {
-    const userMessageText = req.body?.contents?.[0]?.parts?.[0]?.text;
+    const contents = req.body?.contents;
 
-    if (!userMessageText || typeof userMessageText !== 'string' || !userMessageText.trim()) {
+    if (!Array.isArray(contents) || contents.length === 0) {
       return res.status(400).json({ error: 'Invalid message format in request body' });
     }
 
-    if (userMessageText.length > MAX_CHARS) {
+    // تحويل سجل المحادثة إلى صيغة OpenAI.
+    // نأخذ آخر MAX_HISTORY رسالة فقط، ونتجاهل الفارغ.
+    const history = [];
+    for (const turn of contents.slice(-MAX_HISTORY)) {
+      const text = turn?.parts?.[0]?.text;
+      if (typeof text !== 'string' || text.trim() === '') continue;
+      history.push({
+        role: turn.role === 'model' || turn.role === 'assistant' ? 'assistant' : 'user',
+        content: text
+      });
+    }
+
+    if (history.length === 0) {
+      return res.status(400).json({ error: 'Invalid message format in request body' });
+    }
+
+    // آخر رسالة يجب أن تكون من الطالب
+    const last = history[history.length - 1];
+    if (last.role !== 'user') {
+      return res.status(400).json({ error: 'Last message must be from user' });
+    }
+
+    // الحدّ يُطبَّق على سؤال الطالب الجديد، لا على السجل المرافق له
+    if (last.content.length > MAX_CHARS) {
       return res.status(413).json({
-        error: 'Message too long',
+        error: 'Payload Too Large',
         message: 'سؤالك طويل. اختصره في ' + MAX_CHARS + ' حرف أو أقل.'
       });
+    }
+
+    // سقف احتياطي لرسائل السجل: الصفحة ترسل ما عرضته، لكن الطلب قد يأتي
+    // من غيرها، فلا نمرّر نصًّا ضخمًا إلى النموذج ونحن ندفع بالحرف.
+    for (const m of history) {
+      if (m.content.length > MAX_CHARS * 4) m.content = m.content.slice(0, MAX_CHARS * 4);
     }
 
     const completion = await openai.chat.completions.create({
       messages: [
         { role: 'system', content: SYSTEM_PROMPT },
-        { role: 'user', content: userMessageText }
+        ...history
       ],
       model: 'gpt-5.6-luna',
       max_completion_tokens: 1000,
@@ -202,7 +238,7 @@ export default async function handler(req, res) {
 
   } catch (error) {
     console.error('Error from OpenAI API:', error);
-    const errorMessage = error instanceof Error ? error.message : 'An unknown error occurred';
-    return res.status(500).json({ error: 'Failed to get response from AI', details: errorMessage });
+    // لا نُعيد تفاصيل الخطأ إلى المتصفّح: قد تكشف عن الخدمة أو الإعداد
+    return res.status(500).json({ error: 'Failed to get response from AI' });
   }
 }
