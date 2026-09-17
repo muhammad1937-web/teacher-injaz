@@ -3124,7 +3124,15 @@ window.SITE_CONTROL = {
       const CHAT_WELCOME = 'مرحبًا بك! أنا المساعد الرقمي في موقع أ. محمد الغامدي. اسألني عن أي درس أو مفهوم في التقنية الرقمية.';
       const AI_LABEL = 'المساعد:';
       const AI_LABEL_ROW_INNER_HTML = `<span class="ai-avatar-icon"><i class="fas fa-graduation-cap"></i></span><strong>${AI_LABEL}</strong>`;
+      // سجل المحادثة: بلا هذا يصل كل سؤال وحده، فلا يفهم المساعد
+      // معنى «أعطني مثالًا آخر». يُرسل منه آخر MAX_HISTORY رسالة.
+      // الخادم يقصّ عند نفس العدد، والقصّ هنا يوفّر النقل لا أكثر.
+      const MAX_HISTORY = 8;
+      let history = [];
       function clearConversation() {
+        // يُمسح السجل مع الشاشة: لو بقي، لرأى الطالب محادثة فارغة
+        // بينما المساعد ما زال يتذكّر — ويُحسب عليك في الرصيد.
+        history = [];
         aiMessages.innerHTML = `<div class="message ai-message"><div class="ai-label-row">${AI_LABEL_ROW_INNER_HTML}</div><div class="ai-reply-text">${CHAT_WELCOME}</div></div>`;
       }
       async function sendMessage() {
@@ -3135,17 +3143,28 @@ window.SITE_CONTROL = {
         aiInput.value = '';
         aiSendBtn.disabled = true;
         aiTypingIndicator.style.display = 'flex';
+        // السؤال الجديد آخر السجل دائمًا، وهذا ما يشترطه الخادم
+        const turns = history.concat([{ role: 'user', text: message }]).slice(-MAX_HISTORY);
+        // القصّ قد يبدأ السجل بردٍّ بلا سؤاله، فيقرأ المساعد كلامًا
+        // لا يعرف سببه. نبدأ من سؤال الطالب دائمًا.
+        while (turns.length > 1 && turns[0].role === 'model') turns.shift();
         try {
-          const response = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: [{ parts: [{ text: message }] }] }) });
+          const response = await fetch(API_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ contents: turns.map(t => ({ role: t.role, parts: [{ text: t.text }] })) }) });
           if (!response.ok) {
-            // الخادم يشرح سبب الرفض بالعربية (حدّ الأسئلة أو طول السؤال)
+            // الخادم يشرح سبب الرفض بالعربية (حدّ الأسئلة أو طول السؤال).
+            // لا يُضاف السؤال إلى السجل: لم يصل المساعد فلا سياق له.
             const info = await response.json().catch(() => null);
             if (info && info.message) { addMessage(info.message, 'ai'); return; }
             throw new Error('فشل في الاتصال بالخدمة');
           }
           const data = await response.json();
-          if (data.candidates && data.candidates[0].content.parts[0].text) addMessage(data.candidates[0].content.parts[0].text, 'ai');
-          else throw new Error('لم يتم الحصول على إجابة');
+          const reply = data.candidates && data.candidates[0].content.parts[0].text;
+          if (!reply) throw new Error('لم يتم الحصول على إجابة');
+          // لا يُسجَّل السؤال إلا مع جوابه، فلا يبقى في السجل سؤال معلّق
+          history.push({ role: 'user', text: message });
+          history.push({ role: 'model', text: reply });
+          if (history.length > MAX_HISTORY) history = history.slice(-MAX_HISTORY);
+          addMessage(reply, 'ai');
         } catch (error) { addMessage(`عذراً، حدث خطأ: ${error.message}`, 'ai'); }
         finally { aiTypingIndicator.style.display = 'none'; aiSendBtn.disabled = false; aiInput.focus(); }
       }
