@@ -884,7 +884,9 @@
     /* ========================================= */
     .site-footer { background: var(--pure-white); color: var(--text-medium); padding: 2rem 1.5rem; text-align: center; margin-top: 3rem; border-top: 1px solid var(--border-color); }
     .footer-content { max-width: 1200px; margin: 0 auto; }
-    .footer-links { margin-bottom: 18px; display: flex; justify-content: center; align-items: center; gap: 2rem; flex-wrap: wrap; }
+    /* فجوتان لا واحدة: 2rem بين الروابط أفقيًّا كما كانت، و14px بين السطرين
+       عند الالتفاف. القيمة الموحّدة كانت تُملي 32px رأسيًّا فتُبعثر التذييل. */
+    .footer-links { margin-bottom: 18px; display: flex; justify-content: center; align-items: center; gap: 14px 2rem; flex-wrap: wrap; }
     .footer-link { color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 1rem; transition: var(--transition); display: flex; align-items: center; gap: 0.5rem; }
     @media (hover: hover) and (pointer: fine) {
     .footer-link:hover { color: var(--accent-teal); transform: translateY(-2px); } }
@@ -2887,6 +2889,7 @@ window.SITE_CONTROL = {
     <div class="footer-links">
       <a href="mailto:mfh713623@gmail.com" class="footer-link"><i class="fas fa-envelope"></i> البريد الإلكتروني</a>
       <button type="button" class="footer-link" id="shareSiteBtn" style="background:none; border:none; cursor:pointer; font-family:inherit; padding:0; margin:0;"><i class="fas fa-share-nodes"></i> مشاركة الموقع</button>
+      <button type="button" class="footer-link" id="reloadSiteBtn" style="background:none; border:none; cursor:pointer; font-family:inherit; padding:0; margin:0;"><i class="fas fa-rotate-right"></i> تحديث الصفحة</button>
     </div>
     <div class="footer-copyright">
       <span class="footer-brand">
@@ -3014,6 +3017,18 @@ window.SITE_CONTROL = {
         } catch (err) {
           showToast('تعذّر نسخ الرابط', 'error');
         }
+      });
+    })();
+
+    // زر تحديث الصفحة في التذييل
+    // حين يُضاف الموقع إلى الشاشة الرئيسية لا يبقى شريط عنوان ولا زر تحديث،
+    // ونافذة التطبيق تعيش أيامًا في الخلفية فقد تتجمّد. هذا بديلهما.
+    (function initReloadButton() {
+      const btn = document.getElementById('reloadSiteBtn');
+      if (!btn) return;
+      btn.addEventListener('click', function () {
+        hapticFeedback(10);
+        window.location.reload();
       });
     })();
 
