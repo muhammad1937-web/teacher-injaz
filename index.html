@@ -4825,7 +4825,12 @@ function showGradeDetails(period, studentDetails) {
     
    items.forEach(item => {
         const score = periodData[item.key];
-        const isScored = (score !== null && score !== undefined);
+                // بند المهام صيغة SUMIFS تُعيد صفرًا لا فراغًا حين لا يوجد رصد في سجل_المهام،
+        // فيُعامل الصفر فيه كـ"لم يُرصد بعد" لا كدرجة صفر
+        const isScored = item.key === 'tasks'
+            ? (score !== null && score !== undefined && Number(score) > 0)
+            : (score !== null && score !== undefined);
+
         const earned = isScored ? score : 0;
         const percentage = isScored ? (earned / item.max) * 100 : 0;
         
