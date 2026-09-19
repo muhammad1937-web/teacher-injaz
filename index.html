@@ -886,7 +886,9 @@
     .footer-content { max-width: 1200px; margin: 0 auto; }
     /* فجوتان لا واحدة: 2rem بين الروابط أفقيًّا كما كانت، و14px بين السطرين
        عند الالتفاف. القيمة الموحّدة كانت تُملي 32px رأسيًّا فتُبعثر التذييل. */
-    .footer-links { margin-bottom: 18px; display: flex; justify-content: center; align-items: center; gap: 14px 1.5rem; flex-wrap: wrap; }
+    /* 2rem أفقيًّا هو أقصى ما يحتمله 320px قبل أن ينكسر الصفّ، و14px رأسيًّا
+       لأن القيمة الموحّدة كانت تُملي 32px بين السطرين فتُبعثر التذييل */
+    .footer-links { margin-bottom: 18px; display: flex; justify-content: center; align-items: center; gap: 14px 2rem; flex-wrap: wrap; }
     .footer-link { color: var(--text-dark); text-decoration: none; font-weight: 600; font-size: 1rem; transition: var(--transition); display: flex; align-items: center; gap: 0.5rem; }
     @media (hover: hover) and (pointer: fine) {
     .footer-link:hover { color: var(--accent-teal); transform: translateY(-2px); } }
@@ -894,10 +896,13 @@
     .footer-copyright { font-size: 0.85rem; display: flex; flex-direction: column; align-items: center; }
     .footer-brand { display: block; text-align: center; }
     .footer-brand-logo { display: block; height: 34px; width: 34px; border-radius: 10px; margin: 0 auto 10px; }
-    .footer-motto { display: block; text-align: center; font-size: 0.72rem; font-weight: 500; color: var(--accent-teal); margin-bottom: 8px; }
+    /* رُفع من 0.72rem ليقارب حقوق النشر تحته بدل أن يقلّ عنه بوضوح؛
+       الفيروزي هو ما يميّزه، فهذه رسالة الموقع وتلك تفصيل قانوني */
+    .footer-motto { display: block; text-align: center; font-size: 0.8rem; font-weight: 500; color: var(--accent-teal); margin-bottom: 8px; }
     /* كتلة مستقلّة لا نصًّا سائبًا داخل footer-brand: كان يلتفّ حول الشعار
        والحكمة فيختلط بهما متى طال نصّ أو قصر. و balance يوزّع السطرين. */
-    .footer-rights { display: block; text-align: center; text-wrap: balance; }
+    /* 13px لا 13.6: بعرضه السابق كان ينقصه 4px ليسع سطرًا واحدًا على 320px */
+    .footer-rights { display: block; text-align: center; text-wrap: balance; font-size: 0.8125rem; }
     /* الاسم لا يُقطع: كان يترك «الغامدي» وحدها في سطر على أكثر الشاشات */
     .footer-owner { white-space: nowrap; }
     .footer-visits { margin-top: 14px; display: flex; align-items: center; justify-content: center; gap: 8px; color: var(--text-light); font-size: 0.7rem; }
